@@ -60,9 +60,9 @@
         <field name="code">Övrigt</field>
         <field name="parent_id" ref="hr_payroll.ALW"/>
     </record>
-    <record id="hr_payroll_head_preskatt" model="hr.salary.rule.category">
+    <record id="hr_payroll_head_pretax" model="hr.salary.rule.category">
         <field name="name">Preleminär skatt</field>
-        <field name="code">PRESKATT</field>
+        <field name="code">PRETAX</field>
         <field name="parent_id" ref="hr_payroll.DED"/>
     </record>
     <record id="hr_payroll_head_car_deduct" model="hr.salary.rule.category">
@@ -77,21 +77,13 @@
     </record>
 
 <!-- HR SALARY RULES-->
-    <record id="hr_payroll_rules_maj" model="hr.salary.rule">
-        <field name="category_id" ref="hr_payroll_head_salary"/> 
-        <field name="name">Worker Salary. Premium pay of 108%</field>
-        <field name="code">SALARY</field>
-        <field name="condition_select">none</field>
-        <field name="amount_select">code</field>
-        <field name="amount_python_compute">result = contract.wage * 1.08</field>
-    </record>
     <record id="hr_payroll_rules_employee" model="hr.salary.rule">
         <field name="category_id" ref="hr_payroll_head_salary"/> 
         <field name="name">Employee Salary</field>
         <field name="code">SALARY</field>
         <field name="condition_select">none</field>
         <field name="amount_select">code</field>
-        <field name="amount_python_compute">result = contract.wage * 1</field>
+        <field name="amount_python_compute">result = contract.wage</field>
         <field name="appears_on_payslip" eval="True"/>
     </record>
     <record id="hr_payroll_rules_sa_rule" model="hr.salary.rule">
@@ -100,27 +92,27 @@
         <field name="code">SA</field>
         <field name="sequence">41</field>
         <field name="condition_select">none</field>
-        <field name="amount_select">percentage</field>
-        <field name="condition_select">python</field>
+        <field name="amount_select">code</field>
+        <field name="condition_select">none</field>
         <field name="appears_on_payslip" eval="True"/>
-        <field name="condition_python">result = (((employee.marital=='single') or (employee.marital=='married' and employee.spouse_fiscal_status=='with income')) and (employee.resident_bool!=True))</field>
+        <field name="amount_python">result = -contract.sa_deduction</field>
         <field name="register_id" ref="contrib_register_skv"/>
    </record>
-   <record id="hr_payroll_rules_preskatt" model="hr.salary.rule">
-        <field name="category_id" ref="hr_payroll_head_preskatt"/> 
+   <record id="hr_payroll_rules_pretax" model="hr.salary.rule">
+        <field name="category_id" ref="hr_payroll_head_pretax"/> 
         <field name="name">Preleminär skatt</field>
-        <field name="code">PRESKATT</field>
+        <field name="code">PRETAX</field>
         <field name="sequence">120</field>
-        <field name="amount_select">percentage</field>
         <field name="condition_select">none</field>
-        <field name="amount_percentage_base">SALARY</field>
-        <field name="amount_percentage">-32.00</field>
+        <field name="amount_select">code</field>
+        <field name="amount_python_compute">result = -contract.pre_tax_amount</field>
         <field name="appears_on_payslip" eval="True"/>
+
     </record>
     <record id="hr_payroll_rules_parent_company_car" model="hr.salary.rule">
         <field name="category_id" ref="hr_payroll_head_car_deduct"/>
-        <field name="name">Company car</field>
-        <field name="parent_rule_id" ref="hr_payroll_rules_employee"/>
+        <field name="name">Company car, fringe benefit</field>
+        <field name="parent_rule_id" ref="hr_payroll_head_misc"/>
         <field name="code">CAR 1</field>
         <field name="sequence">15</field>
         <field name="condition_select">python</field>
@@ -140,6 +132,8 @@
         <field name="amount_python_compute">result = -contract.car_company_amount</field>
         <field name="appears_on_payslip" eval="True"/>
     </record>
+    
+    <!--
     <record id="hr_payroll_rules_reim_travel" model="hr.salary.rule">
         <field name="category_id" ref="hr_payroll.DED"/>
         <field name="name">Reimbursement of travel expenses</field>
@@ -191,6 +185,6 @@
         <field name="condition_python">result = bool(contract.retained_net_amount)</field>
         <field name="amount_python_compute">result = -contract.retained_net_amount</field>
     </record>
-
+   -->
     </data>
 </openerp>

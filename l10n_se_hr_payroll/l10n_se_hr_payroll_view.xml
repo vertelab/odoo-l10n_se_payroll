@@ -13,6 +13,8 @@
                     <field name="travel_reimbursement_amount"/>
 -->
                     <field name="prel_tax_amount"/>
+                    <field name="wage_tax_base"/>
+
                     <field name="prel_tax_tabel" placeholder="SKATTETABELL 31/Kolumn 1/Ingen jämkning"/>
                     <field name="prel_tax_url" widget="url" readonly="True"/>
                     

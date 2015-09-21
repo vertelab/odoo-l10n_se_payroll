@@ -34,6 +34,12 @@ class hr_contract(models.Model):
     _inherit = 'hr.contract'
 
     prel_tax_amount      = fields.Float(string="Prel skatt kr", digits_compute=dp.get_precision('Payroll'),help="Ange preleminär skatt i kronor" )
+    
+    def _wage_tax_base(self):
+        self.wage_tax_base = (self.wage - self.aws_amount) + self.ded_amount 
+        
+    wage_tax_base        = fields.Float(string="Lönunderlag", compute=_wage_tax_base,digits_compute=dp.get_precision('Payroll'),help="Uträknat löneunderlag för beräkning av preleminär skatt" )
+    
     prel_tax_tabel       = fields.Char(string="Prel skatt info", help="Ange skattetabell/kolumn/ev jämkning som ligger till grund för angivet preleminärskatteavdrag")
     prel_tax_url         = fields.Char(string="Skattetabeller SKV", default="http://www.skatteverket.se/privat/skatter/arbeteinkomst/vadblirskattenskattetabellermm/skattetabeller/",readonly=True, help="Ange skattetabell/kolumn/ev jämkning som ligger till grund för angivet preleminärskatteavdrag")
     car_company_amount     = fields.Float('Bruttolöneavdrag för bil', digits_compute=dp.get_precision('Payroll'), help="Bruttolöneavdraget för företagsbil, dvs företagets kostnad för företagsbilen")
@@ -42,12 +48,50 @@ class hr_contract(models.Model):
     vacation_days = fields.Float(string='Semesterdagar', digits_compute=dp.get_precision('Payroll'), help="Sparad semester i dagar",) 
     office_fund = fields.Float(string='Office fund', digits_compute=dp.get_precision('Payroll'), help="Fund for personal office supplies",) 
 
+    def _get_param(self,param,value):
+        if not self.env['ir.config_parameter'].get_param(param):
+            self.env['ir.config_parameter'].set_param(param,value)
+        return self.env['ir.config_parameter'].get_param(param)
 
-#~ 
-#~ class hr_employee(models.Model):
-    #~ _inherit = 'hr.employee'
+    @api.one
+    def _sa_deduction(self):
+        if self.employee_id.age <= 26:
+            self.sa_deduction = self._get_param('sa.26',25.46)
+        if self.employee_id.age > 26 and self.employee_id.age <= 65:
+            self.sa_deduction = self._get_param('sa.26-65',31.42)
+        if self.employee_id.age > 65 and self.employee_id.age <= 77:
+            self.sa_deduction = self._get_param('sa.66-77',10.21)
+        if self.employee_id.age > 77:
+            self.sa_deduction = self._get_param('sa.78',0)             
+    sa_deduction = fields.Float(compute=_sa_deduction)
 
-    
+# Skapa semesterdagar månad för månad 12,85% (?) som en logg. I loggen skall aktuell månadslön lagras för semesterlönberäkning
+# Förbruka semester LIFO  
+# Semsterintjänandeperioden == april - mars, LIFO förra intjänandeåret. Får ej använda aktuellt intjänande år (== ej betald semester)
+
+    @api.one
+    def _compute_sheet(self):
+        slip_id = self.env['hr.payslip'].create()
+        for line in self.env['hr.payslip'].get_payslip_lines(self.id, slip_id):
+            if line.aws:
+                pass
+#        self.aws_amount = 
+#        self.awf_amount = 
+#        self.ded_amount = 
+        return True
+    aws_amount = fields.Float(string="Skattepliktiga förmåner", compute=_compute_sheet,digits_compute=dp.get_precision('Payroll'),help="Skattepliktiga förmånsvärden och andra tillägg")
+    awf_amount = fields.Float(string="Skattefria ersättningar", compute=_compute_sheet,digits_compute=dp.get_precision('Payroll'),help="Skattefria ersättningar")
+    ded_amount = fields.Float(string="Bruttolöneavdrag", compute=_compute_sheet,digits_compute=dp.get_precision('Payroll'),help="Avdrag från bruttolönen")
+
+
+
+class hr_employee(models.Model):
+    _inherit = 'hr.employee'
+
+    @api.one
+    def _age(self):
+       self.age=date.today().year - self.birthdate.year 
+    age = fields.Integer(string="Age", compute=_age, help="Age to calculate social security deduction")
     
 
 
