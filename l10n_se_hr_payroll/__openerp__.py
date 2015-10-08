@@ -22,7 +22,7 @@
     'name': 'Swedish - Payroll',
     'category': 'Localization',
     'author': 'Vertel AB',
-    'depends': ['hr_payroll','l10n_se'],
+    'depends': ['hr_payroll',],
     'version': '1.0',
     'description': """
 Swedish Payroll Rules.
