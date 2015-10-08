@@ -18,12 +18,16 @@
                     <field name="prel_tax_tabel" placeholder="SKATTETABELL 31/Kolumn 1/Ingen jämkning"/>
                     <field name="prel_tax_url" widget="url" readonly="True"/>
                     
+<!--
                     <field name="car_company_amount"/>
                     <field name="car_employee_deduction"/>
                     <field name="car_deduction_url" widget="url" readonly="True" />
+-->
 
                     <field name="vacation_days"/>
+<!--
                     <field name="office_fund"/>
+-->
                     
                  </xpath>
             </data>

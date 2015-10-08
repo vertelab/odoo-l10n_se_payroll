@@ -42,7 +42,7 @@ Swedish Payroll Rules.
     'website': 'https://www.odoo.com/page/accounting',
     'data':[
         'l10n_se_hr_payroll_view.xml',
-        'l10n_se_hr_payroll_data.xml',
+        #'l10n_se_hr_payroll_data.xml',
         #~ 'data/hr.salary.rule.csv',
     ],
     'installable': True
