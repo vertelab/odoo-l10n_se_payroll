@@ -28,6 +28,10 @@ import logging
 _logger = logging.getLogger(__name__)
 
 
+from openerp.tools import DEFAULT_SERVER_DATE_FORMAT, DEFAULT_SERVER_DATETIME_FORMAT
+from datetime import timedelta, date, datetime
+
+
 import openerp.addons.decimal_precision as dp
 
 class hr_contract(models.Model):
@@ -52,6 +56,16 @@ class hr_contract(models.Model):
             self.env['ir.config_parameter'].set_param(param,value)
         return self.env['ir.config_parameter'].get_param(param)
 
+    def logthis(self,message):
+		#
+        #from openerp.osv import osv
+        _logger.error(message)
+        #raise Warning(message)
+        #raise osv.except_osv(_('Can not remove root user!'), _('You can not remove the admin user'))
+        
+	def evalthis(self,code,variables):
+		from openerp.tools.safe_eval import safe_eval as eval
+		eval(code,variables,mode='exec',nocopy=True)
 
 # Skapa semesterdagar månad för månad 12,85% (?) som en logg. I loggen skall aktuell månadslön lagras för semesterlönberäkning
 # Förbruka semester LIFO  
@@ -73,14 +87,16 @@ class hr_contract(models.Model):
     #~ awf_amount = fields.Float(string="Skattefria ersättningar", compute=_compute_sheet,digits_compute=dp.get_precision('Payroll'),help="Skattefria ersättningar")
     #~ ded_amount = fields.Float(string="Bruttolöneavdrag", compute=_compute_sheet,digits_compute=dp.get_precision('Payroll'),help="Avdrag från bruttolönen")
 
-
+    def logthis(self,message):
+        _logger.error(message)
 
 class hr_employee(models.Model):
     _inherit = 'hr.employee'
 
     @api.one
     def _age(self):
-       self.age=date.today().year - self.birthdate.year 
+        #raise Warning('birthday %s today  year s' % (date.today().year))
+        self.age= -1 if not self.birthday else date.today().year - datetime.strptime(self.birthday, DEFAULT_SERVER_DATE_FORMAT).year 
     age = fields.Integer(string="Age", compute=_age, help="Age to calculate social security deduction")
     
 #~ class smart_salary_simulator_payslip(model.TransientModel):
