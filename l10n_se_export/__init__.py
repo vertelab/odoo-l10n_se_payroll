@@ -18,37 +18,6 @@
 # along with this program. If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
-{
-    'name': 'Swedish - Payroll',
-    'category': 'Localization',
-    'author': 'Vertel AB',
-    'depends': ['hr_payroll',],
-    'version': '1.0',
-    'description': """
-Swedish Payroll Rules.
-======================
-
-    * Employee Details
-    * Employee Contracts
-    * Allowances/Deductions
-    * Allow to configure Basic/Gross/Net Salary
-    * Employee Payslip
-    * Monthly Payroll Register
-    * Integrated with Holiday Management
-    """,
-
-    'auto_install': False,
-#    'demo': ['l10n_se_hr_payroll_demo.xml'],
-    'website': 'https://www.odoo.com/page/accounting',
-    'data':[
-        'l10n_se_hr_payroll_view.xml',
-        #'l10n_se_hr_payroll_data.xml',
-        #~ 'data/hr.salary.rule.csv',
-    ],
-	'demo':[
-		#~ 'l10n_se_hr_payroll_demo.xml'
-	],
-    'installable': True
-}
+import l10n_se_export
 
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:

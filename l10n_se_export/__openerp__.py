@@ -19,35 +19,19 @@
 #
 ##############################################################################
 {
-    'name': 'Swedish - Payroll',
+    'name': 'Swedish - Export',
     'category': 'Localization',
     'author': 'Vertel AB',
-    'depends': ['hr_payroll',],
-    'version': '1.0',
+    'depends': ['l10n_se'],
+    'version': '0.1',
     'description': """
-Swedish Payroll Rules.
-======================
-
-    * Employee Details
-    * Employee Contracts
-    * Allowances/Deductions
-    * Allow to configure Basic/Gross/Net Salary
-    * Employee Payslip
-    * Monthly Payroll Register
-    * Integrated with Holiday Management
     """,
 
     'auto_install': False,
-#    'demo': ['l10n_se_hr_payroll_demo.xml'],
-    'website': 'https://www.odoo.com/page/accounting',
-    'data':[
-        'l10n_se_hr_payroll_view.xml',
-        #'l10n_se_hr_payroll_data.xml',
-        #~ 'data/hr.salary.rule.csv',
+    'demo': [],
+    'website': 'http://vertel.se',
+    'data':['l10n_se_export.xml',
     ],
-	'demo':[
-		#~ 'l10n_se_hr_payroll_demo.xml'
-	],
     'installable': True
 }
 

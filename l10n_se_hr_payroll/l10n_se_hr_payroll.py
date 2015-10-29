@@ -24,9 +24,9 @@ from openerp import models, fields, api, _
 from openerp import http
 from openerp.http import request
 from openerp import tools
+
 import logging
 _logger = logging.getLogger(__name__)
-
 
 import openerp.addons.decimal_precision as dp
 
@@ -73,7 +73,16 @@ class hr_contract(models.Model):
     #~ awf_amount = fields.Float(string="Skattefria ersättningar", compute=_compute_sheet,digits_compute=dp.get_precision('Payroll'),help="Skattefria ersättningar")
     #~ ded_amount = fields.Float(string="Bruttolöneavdrag", compute=_compute_sheet,digits_compute=dp.get_precision('Payroll'),help="Avdrag från bruttolönen")
 
-
+    def logthis(self,message):
+		#
+        #from openerp.osv import osv
+        _logger.error(message)
+        #raise Warning(message)
+        #raise osv.except_osv(_('Can not remove root user!'), _('You can not remove the admin user'))
+        
+	def evalthis(self,code,variables):
+		from openerp.tools.safe_eval import safe_eval as eval
+		eval(code,variables,mode='exec',nocopy=True)
 
 class hr_employee(models.Model):
     _inherit = 'hr.employee'
