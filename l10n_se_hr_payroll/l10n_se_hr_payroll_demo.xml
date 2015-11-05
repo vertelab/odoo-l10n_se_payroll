@@ -1,40 +1,95 @@
 <?xml version="1.0" encoding="utf-8"?>
 <openerp>
-    <data>
-
-        <!-- Employee Contract -->
-        <record id="hr_payroll.hr_contract_firstcontract1" model="hr.contract">
-            <field name="name">Developer's Contract (Belgium payroll C.P. 218)</field>
-            <field name="struct_id" ref="hr_payroll_salary_structure_employee"/>
-            <field eval="2500.0" name="wage"/>
-            <field eval="6.0" name="meal_voucher_amount"/>
-            <field eval="1.09" name="meal_voucher_employee_deduction"/>
-            <field eval="250.0" name="car_company_amount"/>
-            <field eval="110" name="car_employee_deduction"/>
-            <field eval="50.0" name="additional_net_amount"/>
-            <field name="working_hours" ref="resource.timesheet_group1"/>
-        </record>
-
-        <record id="hr_payroll.hr_employee_payroll" model="hr.employee">
-            <field name="marital">single</field>
-        </record>
-
-        <record id="res_partner_onss" model="res.partner">
-            <field name="street">54 Rue Jean Baptiste Colette BP </field>
-            <field name="city">Attiches</field>
-            <field name="zip">59551</field>
-            <field name="country_id" ref="base.fr"/>
-            <field name="email">onss@yourcompany.example.com</field>
-        </record>
-        <record id="res_partner_pp" model="res.partner">
-            <field name="street">Shanghai Branch</field>
-            <field name="street2">Anshun Road 83, Room 1603 - </field>
-            <field name="city">Shanghai</field>
-            <field name="zip">200052</field>
-            <field name="country_id" ref="base.cn"/>
-            <field name="email">fiscal@yourcompany.example.com</field>
-        </record>
-    
-    </data>
+  <data>
+    <record id="base.res_partner-AW" model="res.partner">
+      <!--
+           <field name="last_reconciliation_date"></field>
+      -->
+      <field name="company_id" ref="base.main_company" />
+      <!-- OK
+           <field model="account.account" name="name" search="[('code','=','1510')]" use="name"/>
+      -->
+      <field name="name">Anders Wallenquist</field>
+      <field name="notify_email">always</field>
+      <field name="street">Furugatan 4B</field>
+      <field name="tz_offset">+0100</field>
+      <field name="city">Linköping</field>
+      <field name="active">True</field>
+      <field name="tz">Europe/Stockholm</field>
+      <field name="zip">582 45</field>
+      <field name="type">contact</field>
+      <field name="is_company">False</field>
+      <field name="lang">sv_SE</field>
+      <!--
+           <field name="property_account_receivable" search="[('model','=','account.account'),('code','=','1510')]" />
+           <field name="property_account_payable" search="[('model','=','account.account'),('code','=','2441')]" />
+      -->
+      <!--
+           <field name="property_account_receivable" search="[('code','=','1510')]" />
+           <field name="property_account_payable" search="[('code','=','2441')]" />
+      -->
+    </record>
+    <!--
+         ///
+    -->
+    <record id="base.res_partner-LY" model="res.partner">
+      <field name="company_id" ref="base.main_company" />
+      <field name="name">Leif Ydreborn</field>
+      <field name="notify_email">always</field>
+      <field name="street">Ulriksdal</field>
+      <field name="tz_offset">+0100</field>
+      <field name="city">Linghem</field>
+      <field name="active">True</field>
+      <field name="tz">Europe/Stockholm</field>
+      <field name="zip">585 62</field>
+      <field name="type">contact</field>
+      <field name="is_company">False</field>
+      <field name="lang">sv_SE</field>
+    </record>
+    <!--
+         =============================================================================
+    -->
+    <record id="hr.hr_employee-AW" model="hr.employee">
+      <field name="address_id" ref="base.main_partner" />
+      <field name="manager">True</field>
+      <!--
+           <field name="display_name">Anders Wallenquist (ans)</field>
+      -->
+      <!--
+           <field name="contract_id" ref="hr_contract.hr_contract-AW"/>
+      -->
+      <field name="company_id" ref="base.main_company" />
+      <field name="birthday">1993-10-08</field>
+      <field name="name">Anders Wallenquist (ans)</field>
+      <field name="name_related">Anders Wallenquist (ans)</field>
+      <field name="ssnid">False</field>
+      <field name="leave_date_from">False</field>
+      <field name="address_home_id" ref="base.res_partner-AW" />
+    </record>
+    <!--
+         ==============================================================================
+         <record id="hr.hr_employee-7f6fa9c4-7e24-11e5-a6a2-52540087a7b7-2" model="hr.employee">
+    -->
+    <record id="hr.hr_employee-LY" model="hr.employee">
+      <field name="address_id" ref="base.main_partner" />
+      <!--
+           <field name="contract_id" ref="hr_contract.hr_contract-LY"/>
+      -->
+      <field name="company_id" ref="base.main_company" />
+      <field name="birthday">1958-06-12</field>
+      <field name="leave_date_to">False</field>
+      <!--
+           <field name="job_id" ref="hr.hr_job-7f6fa9c4-7e24-11e5-a6a2-52540087a7b7-1"/>
+      -->
+      <field name="name">Leif Ydreborn (ans)</field>
+      <field name="name_related">Leif Ydreborn (ans)</field>
+      <field name="address_home_id" ref="base.res_partner-LY" />
+    </record>
+    <!--
+         ================
+    -->
+    <record id="hr.hr_employee-AW" model="hr.employee">
+      <field name="coach_id" ref="hr.hr_employee-LY" />
+    </record>
+  </data>
 </openerp>
-

@@ -1,190 +1,54 @@
 <?xml version="1.0" encoding="utf-8"?>
 <openerp>
-    <data>
-
-<!-- CONTRIBUTION REGISTERS -->
-    <record id="res_partner_skv" model="res.partner">
-        <field name="name">Skatteverket</field>
-        <field name="supplier">1</field>
-        <field eval="0" name="customer"/>
+  <data>
+    <record id="hr_salary_rule_category-BAS" model="hr.salary.rule.category">
+      <field name="code">BAS</field>
+      <field name="name">Basic</field>
     </record>
-    <record id="contrib_register_skv" model="hr.contribution.register">
-        <field name="name">Skatteverket</field>
-        <field name="partner_id" ref="res_partner_skv"/>
+    <record id="hr_salary_rule_category-BRUAVG" model="hr.salary.rule.category">
+      <field name="code">BRUAVG</field>
+      <field name="name">Brutto avdrag</field>
     </record>
-    <record id="res_partner_af" model="res.partner">
-        <field name="name">Arbetsförmedlingen</field>
-        <field name="supplier">1</field>
-        <field eval="0" name="customer"/>
-    </record>
-    <record id="contrib_register_af" model="hr.contribution.register">
-        <field name="name">Arbetsförmedlingen</field>
-        <field name="partner_id" ref="res_partner_af"/>
-    </record>
-    <record id="res_partner_fk" model="res.partner">
-        <field name="name">Försäkringskassan</field>
-        <field name="supplier">1</field>
-        <field eval="0" name="customer"/>
-    </record>
-    <record id="contrib_register_fk" model="hr.contribution.register">
-        <field name="name">Försäkringskassan</field>
-        <field name="partner_id" ref="res_partner_af"/>
-    </record>
-    <record id="res_partner_bv" model="res.partner">
-        <field name="name">Bolagsverket</field>
-        <field name="supplier">1</field>
-        <field eval="0" name="customer"/>
-    </record>
-    <record id="contrib_register_bv" model="hr.contribution.register">
-        <field name="name">Bolagsverket</field>
-        <field name="partner_id" ref="res_partner_bv"/>
+<!--
+    =====
+-->
+    <record id="hr_salary_rule-sjk" model="hr.salary.rule">
+      <field name="category_id" ref="hr_salary_rule_category-BRUAVG"/>
+      <field name="code">sjk</field>
+      <field name="name">Sjukavdrag</field>
+      <field name="sequence">100</field>
+      <field name="appears_on_payslip">True</field>
+      <field name="condition_select">none</field>
+      <field name="amount_select">code</field>
+      <field name="amount_python_compute">
+result_qty = inputs.sjkdag.amount
+# result_rate = 150
+result = -contract.wage / 20</field>
+      <field name="quantity">1.0</field>
     </record>
 
+<!--
+    =====
+-->
+    <record id="hr_rule_input-sjkdag" model="hr.rule.input">
+      <field name="code">sjkdag</field>
+      <field name="name">Sjukfrånvaro (antal dagar)</field>
+      <field name="input_id" ref="hr_salary_rule-sjk"/>
+    </record>
+<!--
+    <record id="hr.rule.input-resmil" model="hr.rule.input">
+      <field name="code">resmil</field>
+      <field name="display_name">Skattefri reseersättning (ange antal mil)</field>
+      <field name="name">Skattefri reseersättning (ange antal mil)</field>
+      <field name="input_id" ref="hr_payroll.res"/>
+    </record>
+    <record id="hr.rule.input-plustim" model="hr.rule.input">
+      <field name="code">plustim</field>
+      <field name="display_name">Övertid (antal timmar)</field>
+      <field name="name">Övertid (antal timmar)</field>
+      <field name="input_id" ref="hr_payroll.ötid"/>
+    </record>
+-->
 
-<!-- HR SALARY RULE CATEGORIES-->
-    <record id="hr_payroll_head_salary" model="hr.salary.rule.category">
-        <field name="name">Gross</field>
-        <field name="code">BRUT</field>
-    </record>
-    <record id="hr_payroll.COMP" model="hr.salary.rule.category">
-        <field name="name">Company Part</field>
-        <field name="code">COMP. PART</field>
-    </record>
-    <record id="hr_payroll_head_sa" model="hr.salary.rule.category">
-        <field name="name">Sociala avgifter</field>
-        <field name="code">SA</field>
-        <field name="parent_id" ref="hr_payroll.ALW"/>
-    </record>
-    <record id="hr_payroll_head_misc" model="hr.salary.rule.category">
-        <field name="name">Övrigt skattegrundande</field>
-        <field name="code">Övrigt</field>
-        <field name="parent_id" ref="hr_payroll.ALW"/>
-    </record>
-    <record id="hr_payroll_head_pretax" model="hr.salary.rule.category">
-        <field name="name">Preleminär skatt</field>
-        <field name="code">PRETAX</field>
-        <field name="parent_id" ref="hr_payroll.DED"/>
-    </record>
-    <record id="hr_payroll_head_car_deduct" model="hr.salary.rule.category">
-        <field name="name">Bilförmån</field>
-        <field name="code">BIL</field>
-        <field name="parent_id" ref="hr_payroll.DED"/>
-    </record>
-    <record id="hr_payroll_head_div_net" model="hr.salary.rule.category">
-        <field name="name">Övr Net</field>
-        <field name="code">ÖVR NET</field>
-        <field name="parent_id" ref="hr_payroll.DED"/>
-    </record>
-
-<!-- HR SALARY RULES-->
-    <record id="hr_payroll_rules_employee" model="hr.salary.rule">
-        <field name="category_id" ref="hr_payroll_head_salary"/> 
-        <field name="name">Employee Salary</field>
-        <field name="code">SALARY</field>
-        <field name="condition_select">none</field>
-        <field name="amount_select">code</field>
-        <field name="amount_python_compute">result = contract.wage</field>
-        <field name="appears_on_payslip" eval="True"/>
-    </record>
-    <record id="hr_payroll_rules_sa_rule" model="hr.salary.rule">
-        <field name="category_id" ref="hr_payroll_head_sa"/> 
-        <field name="name">Sociala avgifter</field>
-        <field name="code">SA</field>
-        <field name="sequence">41</field>
-        <field name="condition_select">none</field>
-        <field name="amount_select">code</field>
-        <field name="condition_select">none</field>
-        <field name="appears_on_payslip" eval="True"/>
-        <field name="amount_python">result = -contract.sa_deduction</field>
-        <field name="register_id" ref="contrib_register_skv"/>
-   </record>
-   <record id="hr_payroll_rules_pretax" model="hr.salary.rule">
-        <field name="category_id" ref="hr_payroll_head_pretax"/> 
-        <field name="name">Preleminär skatt</field>
-        <field name="code">PRETAX</field>
-        <field name="sequence">120</field>
-        <field name="condition_select">none</field>
-        <field name="amount_select">code</field>
-        <field name="amount_python_compute">result = -contract.pre_tax_amount</field>
-        <field name="appears_on_payslip" eval="True"/>
-
-    </record>
-    <record id="hr_payroll_rules_parent_company_car" model="hr.salary.rule">
-        <field name="category_id" ref="hr_payroll_head_car_deduct"/>
-        <field name="name">Company car, fringe benefit</field>
-        <field name="parent_rule_id" ref="hr_payroll_head_misc"/>
-        <field name="code">CAR 1</field>
-        <field name="sequence">15</field>
-        <field name="condition_select">python</field>
-        <field name="condition_python">result = bool(contract.car_employee_deduction)</field>
-        <field name="amount_select">code</field>
-        <field name="amount_python_compute">result = contract.car_employee_deduction</field>
-    </record>
-    <record id="hr_payroll_rules_company_car_emp" model="hr.salary.rule">
-        <field name="category_id" ref="hr_payroll_head_car_deduct"/>
-        <field name="name">Company car, Company part</field>
-        <field name="parent_rule_id" ref="hr_payroll_rules_parent_company_car"/>
-        <field name="code">CAR 3</field>
-        <field name="sequence">160</field>
-        <field name="condition_select">python</field>
-        <field name="condition_python">result = bool(contract.car_company_amount)</field>
-        <field name="amount_select">code</field>
-        <field name="amount_python_compute">result = -contract.car_company_amount</field>
-        <field name="appears_on_payslip" eval="True"/>
-    </record>
-    
-    <!--
-    <record id="hr_payroll_rules_reim_travel" model="hr.salary.rule">
-        <field name="category_id" ref="hr_payroll.DED"/>
-        <field name="name">Reimbursement of travel expenses</field>
-        <field name="code">Tr.E</field>
-        <field name="amount_select">code</field>
-        <field name="sequence">65</field>
-        <field name="condition_select">python</field>
-        <field name="condition_python">result = bool(contract.travel_reimbursement_amount)</field>
-        <field name="amount_python_compute">result = contract.travel_reimbursement_amount</field>
-    </record>
-    <record id="hr_payroll_rules_miscextax" model="hr.salary.rule">
-        <field name="category_id" ref="hr_payroll.DED"/>
-        <field name="name">Övriga skattefria ersättningar</field>
-        <field name="code">ÖVREXSKATT</field>
-        <field name="amount_select">code</field>
-        <field name="sequence">165</field>
-        <field name="condition_select">python</field>
-        <field name="condition_python">result = bool(contract.misc_onss_deduction)</field>
-        <field name="amount_python_compute">result = -contract.misc_onss_deduction</field>
-    </record>
-    <record id="hr_payroll_rules_insurance" model="hr.salary.rule">
-        <field name="category_id" ref="hr_payroll.DED"/>
-        <field name="name">Försäkringar</field>
-        <field name="code">Ins</field>
-        <field name="amount_select">code</field>
-        <field name="sequence">165</field>
-        <field name="condition_select">python</field>
-        <field name="condition_python">result = bool(contract.insurance_employee_deduction)</field>
-        <field name="amount_python_compute">result = -contract.insurance_employee_deduction</field>
-    </record>
-
-    <record id="hr_payroll_rules_suppl_net" model="hr.salary.rule">
-        <field name="category_id" ref="hr_payroll_head_div_net"/>
-        <field name="name">Net Supplement</field>
-        <field name="code">Net.S</field>
-        <field name="amount_select">code</field>
-        <field name="sequence">185</field>
-        <field name="condition_select">python</field>
-        <field name="condition_python">result = bool(contract.additional_net_amount)</field>
-        <field name="amount_python_compute">result = contract.additional_net_amount</field>
-    </record>
-    <record id="hr_payroll_rules_retained_net" model="hr.salary.rule">
-        <field name="category_id" ref="hr_payroll_head_div_net"/>
-        <field name="name">Net retained</field>
-        <field name="code">Net.R</field>
-        <field name="amount_select">code</field>
-        <field name="sequence">190</field>
-        <field name="condition_select">python</field>
-        <field name="condition_python">result = bool(contract.retained_net_amount)</field>
-        <field name="amount_python_compute">result = -contract.retained_net_amount</field>
-    </record>
-   -->
-    </data>
+  </data>
 </openerp>

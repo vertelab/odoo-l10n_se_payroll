@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+  <data>
+    <record id="hr_salary_rule_category-DUMMY" model="hr.salary.rule.category">
+      <field name="code">DUMMY</field>
+      <field name="name">Slask</field>
+      <field name="note">Används när sumering inte är relevant</field>
+    </record>
+    <record id="hr_salary_rule_category-SKV" model="hr.salary.rule.category">
+      <field name="code">SKV</field>
+      <field name="name">Summa skatter</field>
+      <field name="note">Används för att summera all skatt</field>
+    </record>
+    <record id="hr_salary_rule_category-BAS" model="hr.salary.rule.category">
+      <field name="code">BAS</field>
+      <field name="name">Bas</field>
+      <field name="note">Grundlön</field>
+    </record>
+    <record id="hr_salary_rule_category-BRUTIL" model="hr.salary.rule.category">
+      <field name="code">BRUTIL</field>
+      <field name="name">Brutto tillägg</field>
+      <field name="note">Övertid</field>
+    </record>
+    <record id="hr_salary_rule_category-BRUAVG" model="hr.salary.rule.category">
+      <field name="code">BRUAVG</field>
+      <field name="name">Brutto avdrag</field>
+      <field name="note">Sjukfrånvaro</field>
+    </record>
+    <record id="hr_salary_rule_category-BRUTTO" model="hr.salary.rule.category">
+      <field name="code">BRUTTO</field>
+      <field name="name">Brutto</field>
+      <field name="note">Grundlön minus brutto-avdrag plus brutto-tillägg</field>
+    </record>
+    <record id="hr_salary_rule_category-NETTIL" model="hr.salary.rule.category">
+      <field name="code">NETTIL</field>
+      <field name="name">Netto tillägg</field>
+      <field name="note">Reseräkning</field>
+    </record>
+    <record id="hr_salary_rule_category-NETAVG" model="hr.salary.rule.category">
+      <field name="code">NETAVG</field>
+      <field name="name">Netto avdrag</field>
+      <field name="note">Källskatt, Fackavgift</field>
+    </record>
+    <record id="hr_salary_rule_category-SUMMA" model="hr.salary.rule.category">
+      <field name="code">SUMMA</field>
+      <field name="name">Summa</field>
+      <field name="note">Bruttolön minus netto-avdrag plus netto-tillägg</field>
+    </record>
+<!--
+    <record id="hr_salary_rule_category-NETTO" model="hr.salary.rule.category">
+      <field name="code">NETTO</field>
+      <field name="name">Netto</field>
+      <field name="note">Använd summa</field>
+    </record>
+-->
+  </data>
+</openerp>

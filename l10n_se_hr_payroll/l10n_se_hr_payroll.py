@@ -64,9 +64,10 @@ class hr_contract(models.Model):
         #raise Warning(message)
         #raise osv.except_osv(_('Can not remove root user!'), _('You can not remove the admin user'))
         
-	def evalthis(self,code,variables):
-		from openerp.tools.safe_eval import safe_eval as eval
-		eval(code,variables,mode='exec',nocopy=True)
+    def evalthis(self,code,variables):
+        #~ _logger.error(code)
+        from openerp.tools.safe_eval import safe_eval as eval
+        eval(code,variables,mode='exec',nocopy=True)
 
 # Skapa semesterdagar månad för månad 12,85% (?) som en logg. I loggen skall aktuell månadslön lagras för semesterlönberäkning
 # Förbruka semester LIFO  

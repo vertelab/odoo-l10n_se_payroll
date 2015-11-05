@@ -38,15 +38,19 @@ Swedish Payroll Rules.
     """,
 
     'auto_install': False,
-#    'demo': ['l10n_se_hr_payroll_demo.xml'],
     'website': 'https://www.odoo.com/page/accounting',
     'data':[
         'l10n_se_hr_payroll_view.xml',
+        'l10n_se_hr_salary_rule_category_data.xml',
+        'l10n_se_hr_salary_rule_data.xml',
+        'l10n_se_hr_payroll_stucture_simple_data.xml',
+        #~ 'l10n_se_hr_payroll_data.xml',
+		'l10n_se_hr_payroll_demo.xml', # ska flyttas
         #'l10n_se_hr_payroll_data.xml',
         #~ 'data/hr.salary.rule.csv',
     ],
 	'demo':[
-		#~ 'l10n_se_hr_payroll_demo.xml'
+		#~ 'l10n_se_hr_payroll_demo.xml',
 	],
     'installable': True
 }
