@@ -22,7 +22,8 @@
     'name': 'Swedish - Payroll',
     'category': 'Localization',
     'author': 'Vertel AB',
-    'depends': ['hr_payroll',],
+    #~ 'depends': ['hr_payroll', 'hr_payroll_account',],
+    'depends': ['hr_payroll_account',],
     'version': '1.0',
     'description': """
 Swedish Payroll Rules.
@@ -41,11 +42,11 @@ Swedish Payroll Rules.
     'website': 'https://www.odoo.com/page/accounting',
     'data':[
         'l10n_se_hr_payroll_view.xml',
-        'l10n_se_hr_salary_rule_category_data.xml',
-        'l10n_se_hr_salary_rule_data.xml',
-        'l10n_se_hr_payroll_stucture_simple_data.xml',
+        'l10n_se_hr_salary_rule_category_data.xml', # hr.salary.rule.category # Leif
+        'l10n_se_hr_salary_rule_data.xml', # hr.salary.rule, hr.rule.input # Leif
+        'l10n_se_hr_payroll_stucture_simple_data.xml', # Leif
         #~ 'l10n_se_hr_payroll_data.xml',
-		'l10n_se_hr_payroll_demo.xml', # ska flyttas
+		'l10n_se_hr_payroll_demo.xml', # Leif ska flyttas
         #'l10n_se_hr_payroll_data.xml',
         #~ 'data/hr.salary.rule.csv',
     ],

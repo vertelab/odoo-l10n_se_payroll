@@ -1,8 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
 <openerp>
     <data>
+<!--
+          <data>
+    <record id="hr_salary_rule-TEST" model="hr.salary.rule">
+      <field name="account_tax_id" eval="88"/>
+    </record>
+  </data>
+-->
+<!--
+<field name="company_id" ref="base.main_company"/>
+      <field name="sequence">503</field>
+-->
+<!--
+    <record id="hr_salary_rule-san" model="hr.salary.rule">
+        <field name="account_debit" search="[('code', '=', '7511')]"/>
+    </record>
+-->
+
 
 <!-- HR SALARY RULES-->
+<!--
     <record id="l10n_be_hr_payroll.hr_payroll_rules_onss_rule" model="hr.salary.rule">
         <field name="account_debit" search="[('code', 'like', '4540%')]"/>
    </record>
@@ -21,5 +39,6 @@
     <record id="l10n_be_hr_payroll.hr_payroll_rules_retained_net" model="hr.salary.rule">
         <field name="account_debit" search="[('code', 'like', '4552%')]"/>
     </record>
+-->
     </data>
 </openerp>

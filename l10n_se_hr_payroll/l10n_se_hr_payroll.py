@@ -68,6 +68,9 @@ class hr_contract(models.Model):
         #~ _logger.error(code)
         from openerp.tools.safe_eval import safe_eval as eval
         eval(code,variables,mode='exec',nocopy=True)
+        
+    #~ def get_account_install(self, code): # Leif Robin
+        #~ return self.env['account.account'].search([('code','=',code)], limit=1)[0]
 
 # Skapa semesterdagar månad för månad 12,85% (?) som en logg. I loggen skall aktuell månadslön lagras för semesterlönberäkning
 # Förbruka semester LIFO  
@@ -100,6 +103,14 @@ class hr_contract(models.Model):
 		from openerp.tools.safe_eval import safe_eval as eval
 		eval(code,variables,mode='exec',nocopy=True)
 
+    def is_rule(self,rules,code):
+        return rules.dict.get(code, False)
+        #~ try:
+            #~ rules.dict[code]
+            #~ return True
+        #~ except:
+            #~ return False
+            
 class hr_employee(models.Model):
     _inherit = 'hr.employee'
 

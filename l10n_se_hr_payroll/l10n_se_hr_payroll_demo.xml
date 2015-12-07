@@ -91,5 +91,118 @@
     <record id="hr.hr_employee-AW" model="hr.employee">
       <field name="coach_id" ref="hr.hr_employee-LY" />
     </record>
+    <!--
+         ==================================================================   
+    -->
+    <!--
+         <record id="account.account_journal-2a69a7d4-5ac2-11e5-89ef-525400e1f872-9" model="account.journal">
+         <field eval="[(4, ref('account.account_journal-2a69a7d4-5ac2-11e5-89ef-525400e1f872-9'))]" name="groups_id"/>
+         <field name="code">LU</field>
+         <field eval="[(4, ref('account.account_journal-2a69a7d4-5ac2-11e5-89ef-525400e1f872-9'))]" name="account_control_ids"/>
+         <field name="with_last_closing_balance">True</field>
+         <field name="user_id" ref="base.user_root"/>
+         <field name="centralisation">False</field>
+         <field name="company_id" ref="base.main_company"/>
+         <field name="type">bank</field>
+         <field name="default_debit_account_id" ref="account.account_account-2a69a7d4-5ac2-11e5-89ef-525400e1f872-936"/>
+         <field name="default_credit_account_id" ref="account.account_account-2a69a7d4-5ac2-11e5-89ef-525400e1f872-1284"/>
+         <field eval="[(4, ref('account.account_journal-2a69a7d4-5ac2-11e5-89ef-525400e1f872-9'))]" name="type_control_ids"/>
+         <field name="sequence_id" ref="base.ir_sequence-2a69a7d4-5ac2-11e5-89ef-525400e1f872-33"/>
+         <field name="allow_date">False</field>
+         <field name="display_name">Löneutbetalning (SEK)</field>
+         <field name="update_posted">False</field>
+         <field name="name">Löneutbetalning</field>
+         <field name="cash_control">False</field>
+         <field name="entry_posted">False</field>
+         <field name="group_invoice_lines">False</field>
+         </record>
+    -->
+    <record id="account_journal-lon-DEMO" model="account.journal">
+      <field name="name">Löneutbetalning DEMO</field>
+      <field name="code">Lön DEMO</field>
+      <field name="type">general</field>
+      <field name="default_debit_account_id" search="[('code', '=', '1932')]" />
+      <field name="default_credit_account_id" search="[('code', '=', '1932')]" />
+      <!--
+           <field name="company_id" ref="base.main_company"/>
+           <field name="user_id" ref="base.user_root"/>
+           <field eval="[(4, ref('account.account_journal-2a69a7d4-5ac2-11e5-89ef-525400e1f872-9'))]" name="groups_id"/>
+           <field eval="[(4, ref('account.account_journal-2a69a7d4-5ac2-11e5-89ef-525400e1f872-9'))]" name="account_control_ids"/>
+           <field name="with_last_closing_balance">True</field>
+           <field name="centralisation">False</field>
+           <field eval="[(4, ref('account.account_journal-2a69a7d4-5ac2-11e5-89ef-525400e1f872-9'))]" name="type_control_ids"/>
+           <field name="sequence_id" ref="base.ir_sequence-2a69a7d4-5ac2-11e5-89ef-525400e1f872-33"/>
+           <field name="allow_date">False</field>
+           <field name="update_posted">False</field>
+           <field name="cash_control">False</field>
+           <field name="entry_posted">False</field>
+           <field name="group_invoice_lines">False</field>
+      -->
+    </record>
+    <!--
+         =========================================
+    -->
+    <!--
+         <record id="hr_contract.hr_contract-2a69a7d4-5ac2-11e5-89ef-525400e1f872-1" model="hr.contract">
+         <field name="trial_date_end">False</field>
+         <field name="visa_no">False</field>
+         <field name="date_end">False</field>
+         <field name="struct_id" ref="hr_payroll.hr_payroll_structure-2a69a7d4-5ac2-11e5-89ef-525400e1f872-7"/>
+         <field name="vacation_days">0.0</field>
+         <field name="prel_tax_url">http://www.skatteverket.se/privat/skatter/arbeteinkomst/vadblirskattenskattetabellermm/skattetabeller/</field>
+         <field name="employee_id" ref="hr.hr_employee-2a69a7d4-5ac2-11e5-89ef-525400e1f872-2"/>
+         <field name="display_name">Leif (löneavtal)</field>
+         <field name="job_id" ref="hr.hr_job-2a69a7d4-5ac2-11e5-89ef-525400e1f872-1"/>
+         <field name="wage">10000.0</field>
+         <field name="date_start">2013-07-14</field>
+         <field name="journal_id" ref="account.account_journal-2a69a7d4-5ac2-11e5-89ef-525400e1f872-9"/>
+         <field name="prel_tax_amount">3123.0</field>
+         <field name="prel_tax_tabel">False</field>
+         <field name="visa_expire">False</field>
+         <field name="schedule_pay">monthly</field>
+         <field name="advantages">False</field>
+         <field name="type_id" ref="hr_contract.hr_contract_type_emp"/>
+         <field name="trial_date_start">False</field>
+         <field name="name">Leif (löneavtal)</field>
+         <field name="notes">False</field>
+         <field name="wage_tax_base">0.0</field>
+         <field name="permit_no">False</field>
+         </record>
+    -->
+    <record id="hr_contract-LY" model="hr.contract">
+      <field name="name">Leif (löneavtal NYA)</field>
+      <field name="type_id" ref="hr_contract.hr_contract_type_emp" />
+      <!--
+           Ska kollas ???
+      -->
+      <!--
+           <field name="struct_id" ref="hr_payroll_structure-gl"/>
+      -->
+      <field name="struct_id" ref="hr_payroll_structure-fl" />
+      <field name="employee_id" ref="hr.hr_employee-LY" />
+      <field name="journal_id" ref="account_journal-lon-DEMO" />
+      <!-- MÅSTE SÄTTAS
+           <field name="journal_id" eval="[ref('account_journal-lon-DEMO')]"/>
+      -->
+      <field name="date_start">2013-07-14</field>
+      <field name="wage">47000.0</field>
+      <field name="prel_tax_amount">14910.0</field>
+      <field name="prel_tax_url">http://www.skatteverket.se/privat/skatter/arbeteinkomst/vadblirskattenskattetabellermm/skattetabeller/</field>
+      <field name="prel_tax_tabel">False</field>
+      <!--
+           <field name="trial_date_end">False</field>
+           <field name="visa_no">False</field>
+           <field name="date_end">False</field>
+           <field name="vacation_days">0.0</field>
+           <field name="job_id" ref="hr.hr_job-2a69a7d4-5ac2-11e5-89ef-525400e1f872-1"/>
+           <field name="visa_expire">False</field>
+           <field name="schedule_pay">monthly</field>
+           <field name="advantages">False</field>
+           <field name="trial_date_start">False</field>
+           <field name="notes">False</field>
+           <field name="wage_tax_base">0.0</field>
+           <field name="permit_no">False</field>
+      -->
+    </record>
   </data>
 </openerp>

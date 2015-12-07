@@ -19,13 +19,13 @@
 #
 ##############################################################################
 {
-    'name': 'Belgium - Payroll with Accounting',
+    'name': 'Sweden - Payroll with Accounting',
     'category': 'Localization',
-    'author': 'OpenERP SA',
-    'depends': ['l10n_be_hr_payroll', 'hr_payroll_account', 'l10n_be'],
+    'author': 'Vertel AB',
+    'depends': ['l10n_se_hr_payroll', 'hr_payroll_account', 'l10n_se'],
     'version': '1.0',
     'description': """
-Accounting Data for Belgian Payroll Rules.
+Accounting Data for Swedish Payroll Rules.
 ==========================================
     """,
 
@@ -33,9 +33,9 @@ Accounting Data for Belgian Payroll Rules.
     'website': 'https://www.odoo.com/page/accounting',
     'demo': [],
     'data':[
-        'l10n_be_wizard.yml',
-        'l10n_be_hr_payroll_account_data.xml',
-        'data/hr.salary.rule.csv',
+        'l10n_se_wizard.yml', # Leif
+        #~ 'l10n_se_hr_payroll_account_data.xml',
+        #~ 'data/hr.salary.rule.csv', # Leif
     ],
     'installable': True
 }

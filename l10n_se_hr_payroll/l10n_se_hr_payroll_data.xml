@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <openerp>
   <data>
+<!--
     <record id="hr_salary_rule_category-BAS" model="hr.salary.rule.category">
       <field name="code">BAS</field>
       <field name="name">Basic</field>
@@ -9,9 +10,11 @@
       <field name="code">BRUAVG</field>
       <field name="name">Brutto avdrag</field>
     </record>
+-->
 <!--
     =====
 -->
+<!--
     <record id="hr_salary_rule-sjk" model="hr.salary.rule">
       <field name="category_id" ref="hr_salary_rule_category-BRUAVG"/>
       <field name="code">sjk</field>
@@ -26,15 +29,18 @@ result_qty = inputs.sjkdag.amount
 result = -contract.wage / 20</field>
       <field name="quantity">1.0</field>
     </record>
+-->
 
 <!--
     =====
 -->
+<!--
     <record id="hr_rule_input-sjkdag" model="hr.rule.input">
       <field name="code">sjkdag</field>
       <field name="name">Sjukfrånvaro (antal dagar)</field>
       <field name="input_id" ref="hr_salary_rule-sjk"/>
     </record>
+-->
 <!--
     <record id="hr.rule.input-resmil" model="hr.rule.input">
       <field name="code">resmil</field>
