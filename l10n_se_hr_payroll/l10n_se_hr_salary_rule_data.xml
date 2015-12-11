@@ -142,7 +142,39 @@ if age > 77:
       <field name="quantity">1</field>
     </record>
     <!--
-         ===== CHILD
+         ===== CHILD SAU
+    -->
+    <record id="hr_salary_rule-sau" model="hr.salary.rule">
+      <field name="parent_rule_id" ref="hr_salary_rule-sa" />
+      <field name="category_id" ref="hr_salary_rule_category-SKV" />
+      <field name="code">sau</field>
+      <field name="name">Sociala avgifter ungdom 25,46%</field>
+      <field name="sequence">500</field>
+      <field name="appears_on_payslip">True</field>
+      <field name="condition_select">python</field>
+      <field name="condition_python">result = rules.dict.get('AGEU', False)</field>
+      <field name="amount_select">percentage</field>
+      <field name="amount_percentage_base">categories.BRUTTO</field>
+      <field name="amount_percentage">25.46</field>
+      <field name="quantity">1</field>
+      <field name="account_debit" search="[('code', '=', '7560')]" />
+      <field name="account_tax_id" search="[('code', '=', 'AvgAldersp')]" />
+    </record>
+    <record id="hr_salary_rule-sau-mot" model="hr.salary.rule">
+      <field name="parent_rule_id" ref="hr_salary_rule-sau" />
+      <field name="category_id" ref="hr_salary_rule_category-SKV" />
+      <field name="code">(sau)</field>
+      <field name="name">Avräkning lagstadgade sociala avgifter</field>
+      <field name="sequence">500</field>
+      <field name="appears_on_payslip" eval="False"/>
+      <field name="condition_select">none</field>
+      <field name="amount_select">code</field>
+      <field name="amount_python_compute">result = rules.dict.get('sau').amount_percentage * categories.BRUTTO / 100</field>
+      <field name="quantity">1</field>
+      <field name="account_credit" search="[('code', '=', '2731')]" />
+    </record>
+    <!--
+         ===== CHILD SAN
     -->
     <record id="hr_salary_rule-san" model="hr.salary.rule">
       <field name="parent_rule_id" ref="hr_salary_rule-sa" />
@@ -170,11 +202,42 @@ if age > 77:
       <field name="condition_select">none</field>
 <!--
       <field name="condition_select">python</field>
-      <field name="condition_python">result = rules.dict.get('AGEN', False)</field>
+      <field name="condition_python">result = False</field>
 -->
+      <field name="amount_select">code</field>
+      <field name="amount_python_compute">result = rules.dict.get('san').amount_percentage * categories.BRUTTO / 100</field>
+      <field name="quantity">1</field>
+      <field name="account_credit" search="[('code', '=', '2731')]" />
+    </record>
+    <!--
+         ===== CHILD SAP
+    -->
+    <record id="hr_salary_rule-sap" model="hr.salary.rule">
+      <field name="parent_rule_id" ref="hr_salary_rule-sa" />
+      <field name="category_id" ref="hr_salary_rule_category-SKV" />
+      <field name="code">sap</field>
+      <field name="name">Sociala avgifter pensionär 10,21%</field>
+      <field name="sequence">500</field>
+      <field name="appears_on_payslip">True</field>
+      <field name="condition_select">python</field>
+      <field name="condition_python">result = rules.dict.get('AGEP', False)</field>
       <field name="amount_select">percentage</field>
       <field name="amount_percentage_base">categories.BRUTTO</field>
-      <field name="amount_percentage">31.42</field>
+      <field name="amount_percentage">10.21</field>
+      <field name="quantity">1</field>
+      <field name="account_debit" search="[('code', '=', '7521')]" />
+      <field name="account_tax_id" search="[('code', '=', 'AvgAlderspSkLon')]" />
+    </record>
+    <record id="hr_salary_rule-sap-mot" model="hr.salary.rule">
+      <field name="parent_rule_id" ref="hr_salary_rule-sap" />
+      <field name="category_id" ref="hr_salary_rule_category-SKV" />
+      <field name="code">(sap)</field>
+      <field name="name">Avräkning lagstadgade sociala avgifter</field>
+      <field name="sequence">500</field>
+      <field name="appears_on_payslip">True</field>
+      <field name="condition_select">none</field>
+      <field name="amount_select">code</field>
+      <field name="amount_python_compute">result = rules.dict.get('san').amount_percentage * categories.BRUTTO / 100</field>
       <field name="quantity">1</field>
       <field name="account_credit" search="[('code', '=', '2731')]" />
     </record>
@@ -201,11 +264,26 @@ if age > 77:
       <field name="code">prej</field>
       <field name="name">Preliminärskatt,jämkad</field>
       <field name="sequence">590</field>
-      <field name="appears_on_payslip">True</field>
+      <field name="appears_on_payslip" eval="True"/>
       <field name="condition_select">none</field>
       <field name="amount_select">code</field>
       <field name="amount_python_compute">result = -contract.prel_tax_amount</field>
       <field name="account_debit" search="[('code', '=', '2710')]" />
+<!--
+      <field name="account_tax_id" search="[('code', '=', 'SkAvdrLon')]" />
+-->
+      <field name="quantity">1</field>
+    </record>
+    <record id="hr_salary_rule-prej-tax" model="hr.salary.rule">
+      <field name="parent_rule_id" ref="hr_salary_rule-prej" />
+      <field name="category_id" ref="hr_salary_rule_category-DUMMY" />
+      <field name="code">(prej-tax)</field>
+      <field name="name">Preliminärskatt skattedeklaration</field>
+      <field name="sequence">590</field>
+      <field name="appears_on_payslip" eval="True"/>
+      <field name="condition_select">none</field>
+      <field name="amount_select">code</field>
+      <field name="amount_python_compute">result = contract.prel_tax_amount</field>
       <field name="account_tax_id" search="[('code', '=', 'SkAvdrLon')]" />
       <field name="quantity">1</field>
     </record>
