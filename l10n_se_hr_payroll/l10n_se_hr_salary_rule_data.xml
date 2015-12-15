@@ -107,10 +107,10 @@ if age > 77:
       <field name="code">bl</field>
       <field name="name">Bruttolön</field>
       <field name="sequence">300</field>
-      <field name="appears_on_payslip">True</field>
+      <field name="appears_on_payslip" eval="False"/>
       <field name="condition_select">none</field>
       <field name="amount_select">code</field>
-      <field name="amount_python_compute">result = categories.BAS + categories.BRUAVG + categories.BRUTIL</field>
+      <field name="amount_python_compute">result = categories.BAS - categories.BRUAVG + categories.BRUTIL</field>
       <field name="quantity">1</field>
     </record>
     <!--
@@ -124,7 +124,7 @@ if age > 77:
       <field name="appears_on_payslip">True</field>
       <field name="condition_select">none</field>
       <field name="amount_select">code</field>
-      <field name="amount_python_compute">result = categories.BRUTTO + categories.NETAVG + categories.NETTIL</field>
+      <field name="amount_python_compute">result = categories.BRUTTO - categories.NETAVG + categories.NETTIL</field>
       <field name="quantity">1</field>
     </record>
     <!--
@@ -198,7 +198,7 @@ if age > 77:
       <field name="code">(san)</field>
       <field name="name">Avräkning lagstadgade sociala avgifter</field>
       <field name="sequence">500</field>
-      <field name="appears_on_payslip">True</field>
+      <field name="appears_on_payslip" eval="False"/>
       <field name="condition_select">none</field>
 <!--
       <field name="condition_select">python</field>
@@ -249,7 +249,7 @@ if age > 77:
       <field name="code">pre</field>
       <field name="name">Preliminärskatt</field>
       <field name="sequence">590</field>
-      <field name="appears_on_payslip">True</field>
+      <field name="appears_on_payslip" eval="False"/>
       <field name="condition_select">none</field>
       <field name="amount_select">code</field>
       <field name="amount_python_compute">result = 0</field>
@@ -262,18 +262,17 @@ if age > 77:
       <field name="parent_rule_id" ref="hr_salary_rule-pre" />
       <field name="category_id" ref="hr_salary_rule_category-NETAVG" />
       <field name="code">prej</field>
-      <field name="name">Preliminärskatt,jämkad</field>
+      <field name="name">Preliminärskatt (jämkad)</field>
       <field name="sequence">590</field>
       <field name="appears_on_payslip" eval="True"/>
       <field name="condition_select">none</field>
       <field name="amount_select">code</field>
-      <field name="amount_python_compute">result = -contract.prel_tax_amount</field>
-      <field name="account_debit" search="[('code', '=', '2710')]" />
-<!--
+      <field name="amount_python_compute">result = contract.prel_tax_amount</field>
+      <field name="account_credit" search="[('code', '=', '2710')]" />
       <field name="account_tax_id" search="[('code', '=', 'SkAvdrLon')]" />
--->
       <field name="quantity">1</field>
     </record>
+<!--
     <record id="hr_salary_rule-prej-tax" model="hr.salary.rule">
       <field name="parent_rule_id" ref="hr_salary_rule-prej" />
       <field name="category_id" ref="hr_salary_rule_category-DUMMY" />
@@ -287,6 +286,7 @@ if age > 77:
       <field name="account_tax_id" search="[('code', '=', 'SkAvdrLon')]" />
       <field name="quantity">1</field>
     </record>
+-->
     <!--
          =====
          <record id="hr_salary_rule-" model="hr.salary.rule">
@@ -304,18 +304,42 @@ if age > 77:
     <!--
          =====
     -->
-    <record id="hr_salary_rule-sjk" model="hr.salary.rule">
-      <field name="category_id" ref="hr_salary_rule_category-BRUAVG" />
-      <field name="code">sjk</field>
-      <field name="name">Sjukavdrag</field>
+    <record id="hr_salary_rule-kval" model="hr.salary.rule">
+      <field name="category_id" ref="hr_salary_rule_category-BRUTIL" />
+      <field name="code">kval</field>
+      <field name="name">Kvalificerad övertid</field>
       <field name="sequence">100</field>
       <field name="appears_on_payslip">True</field>
       <field name="condition_select">none</field>
       <field name="amount_select">code</field>
       <field name="amount_python_compute">
-        result_qty = inputs.sjkdag.amount
-        # result_rate = 150
-        result = -contract.wage / 20
+result_qty = inputs.kvaltim.amount
+# result_rate = 150
+result = 2 * contract.wage / 160
+      </field>
+      <field name="quantity">1</field>
+    </record>
+    <!-- /// -->
+    <record id="hr_rule_input-kvaltim" model="hr.rule.input">
+      <field name="code">kvaltim</field>
+      <field name="name">Kvalificerad övertid (antal timmar)</field>
+      <field name="input_id" ref="hr_salary_rule-kval" />
+    </record>
+    <!--
+         =====
+    -->
+    <record id="hr_salary_rule-sjk" model="hr.salary.rule">
+      <field name="category_id" ref="hr_salary_rule_category-BRUAVG" />
+      <field name="code">sjk</field>
+      <field name="name">Sjukavdrag</field>
+      <field name="sequence">200</field>
+      <field name="appears_on_payslip">True</field>
+      <field name="condition_select">none</field>
+      <field name="amount_select">code</field>
+      <field name="amount_python_compute">
+result_qty = inputs.sjkdag.amount
+# result_rate = 150
+result = contract.wage / 20
       </field>
       <field name="quantity">1</field>
     </record>
@@ -324,6 +348,32 @@ if age > 77:
       <field name="code">sjkdag</field>
       <field name="name">Sjukfrånvaro (antal dagar)</field>
       <field name="input_id" ref="hr_salary_rule-sjk" />
+    </record>
+    <!--
+         =====
+categories.BRUTTO - categories.NETAVG + categories.NETTIL
+    -->
+    <record id="hr_salary_rule-resmil" model="hr.salary.rule">
+      <field name="category_id" ref="hr_salary_rule_category-NETTIL" />
+      <field name="code">resmil</field>
+      <field name="name">Milersättning</field>
+      <field name="sequence">700</field>
+      <field name="appears_on_payslip">True</field>
+      <field name="condition_select">none</field>
+      <field name="amount_select">code</field>
+      <field name="amount_python_compute">
+result_qty = inputs.resmil.amount
+# result_rate = 150
+result = 18.5
+      </field>
+      <field name="account_debit" search="[('code', '=', '5841')]" />
+      <field name="quantity">1</field>
+    </record>
+    <!-- /// -->
+    <record id="hr_rule_input-resmil" model="hr.rule.input">
+      <field name="code">resmil</field>
+      <field name="name">Milersättning (antal mil)</field>
+      <field name="input_id" ref="hr_salary_rule-resmil" />
     </record>
     <!--
          =====
@@ -366,7 +416,7 @@ if age > 77:
       <field name="code">blfl</field>
       <field name="name">Lön företagsledare (åldersberoende)</field>
       <field name="sequence">400</field>
-      <field name="appears_on_payslip">True</field>
+      <field name="appears_on_payslip" eval="False"/>
       <field name="condition_select">none</field>
       <field name="quantity">1</field>
     </record>
@@ -374,9 +424,9 @@ if age > 77:
     <field name="parent_rule_id" ref="hr_salary_rule-blfl" />
     <field name="category_id" ref="hr_salary_rule_category-DUMMY" />
     <field name="code">blflu</field>
-    <field name="name">Företagsledare ungdom</field>
+    <field name="name">Bruttolön företagsledare (ungdom)</field>
     <field name="sequence">400</field>
-    <field name="appears_on_payslip" eval="False" />
+    <field name="appears_on_payslip" eval="True" />
     <field name="condition_select">python</field>
     <field name="condition_python">result = rules.dict.get('AGEU', False)</field>
     <field name="amount_select">code</field>
@@ -389,9 +439,9 @@ if age > 77:
     <field name="parent_rule_id" ref="hr_salary_rule-blfl" />
     <field name="category_id" ref="hr_salary_rule_category-DUMMY" />
     <field name="code">blfln</field>
-    <field name="name">Företagsledare normal</field>
+    <field name="name">Bruttolön företagsledare</field>
     <field name="sequence">400</field>
-    <field name="appears_on_payslip" eval="False" />
+    <field name="appears_on_payslip" eval="True" />
     <field name="condition_select">python</field>
     <field name="condition_python">result = rules.dict.get('AGEN', False)</field>
     <field name="amount_select">code</field>
@@ -404,9 +454,9 @@ if age > 77:
     <field name="parent_rule_id" ref="hr_salary_rule-blfl" />
     <field name="category_id" ref="hr_salary_rule_category-DUMMY" />
     <field name="code">blflp</field>
-    <field name="name">Företagsledare pensinär</field>
+    <field name="name">Bruttolön företagsledare (pensinär)</field>
     <field name="sequence">400</field>
-    <field name="appears_on_payslip" eval="False" />
+    <field name="appears_on_payslip" eval="True" />
     <field name="condition_select">python</field>
     <field name="condition_python">result = rules.dict.get('AGEP', False)</field>
     <field name="amount_select">code</field>
@@ -419,9 +469,9 @@ if age > 77:
     <field name="parent_rule_id" ref="hr_salary_rule-blfl" />
     <field name="category_id" ref="hr_salary_rule_category-DUMMY" />
     <field name="code">blflpx</field>
-    <field name="name">Företagsledare pensinär (avgiftsbefriad)</field>
+    <field name="name">Bruttolön företagsledare (avgiftsbefriad)</field>
     <field name="sequence">400</field>
-    <field name="appears_on_payslip" eval="False" />
+    <field name="appears_on_payslip" eval="True" />
     <field name="condition_select">python</field>
     <field name="condition_python">result = rules.dict.get('AGEPX', False)</field>
     <field name="amount_select">code</field>
