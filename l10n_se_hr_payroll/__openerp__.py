@@ -45,6 +45,7 @@ Swedish Payroll Rules.
         'l10n_se_hr_salary_rule_category_data.xml', # hr.salary.rule.category # Leif
         'l10n_se_hr_salary_rule_data.xml', # hr.salary.rule, hr.rule.input # Leif
         'l10n_se_hr_payroll_stucture_simple_data.xml', # Leif
+        'l10n_se_hr_payroll_payslip_report.xml', # Leif
         #~ 'l10n_se_hr_payroll_data.xml',
 		'l10n_se_hr_payroll_demo.xml', # Leif ska flyttas
         #'l10n_se_hr_payroll_data.xml',

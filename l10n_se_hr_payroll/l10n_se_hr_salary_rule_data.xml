@@ -366,7 +366,10 @@ result_qty = inputs.resmil.amount
 # result_rate = 150
 result = 18.5
       </field>
-      <field name="account_debit" search="[('code', '=', '5841')]" />
+<!--
+      <field name="account_debit" search="[('code', '=', '5841')]" /> Finns inte i bas2015
+-->
+      <field name="account_debit" search="[('code', '=', '5800')]" />
       <field name="quantity">1</field>
     </record>
     <!-- /// -->
@@ -418,8 +421,27 @@ result = 18.5
       <field name="sequence">400</field>
       <field name="appears_on_payslip" eval="False"/>
       <field name="condition_select">none</field>
+      <field name="amount_select">code</field>
+      <field name="amount_python_compute">result = categories.BRUTTO</field>
+      <field name="account_debit" search="[('code', '=', '7292')]" />
+      <field name="account_credit" search="[('code', '=', '2920')]" />
       <field name="quantity">1</field>
     </record>
+  <record id="hr_salary_rule-blflsem" model="hr.salary.rule">
+    <field name="parent_rule_id" ref="hr_salary_rule-blfl" />
+    <field name="category_id" ref="hr_salary_rule_category-DUMMY" />
+    <field name="code">blflsum</field>
+    <field name="name">Bruttolön företagsledare (ungdom)</field>
+    <field name="sequence">400</field>
+    <field name="appears_on_payslip" eval="True" />
+    <field name="condition_select">python</field>
+    <field name="condition_python">result = rules.dict.get('AGEU', False)</field>
+    <field name="amount_select">code</field>
+    <field name="amount_python_compute">result = categories.BRUTTO</field>
+    <field name="account_debit" search="[('code', '=', '7223')]" />
+    <field name="account_tax_id" search="[('code', '=', 'UlagAvgAldersp')]" />
+    <field name="quantity">1</field>
+  </record>
   <record id="hr_salary_rule-blflu" model="hr.salary.rule">
     <field name="parent_rule_id" ref="hr_salary_rule-blfl" />
     <field name="category_id" ref="hr_salary_rule_category-DUMMY" />

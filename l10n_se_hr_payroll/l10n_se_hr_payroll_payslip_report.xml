@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+  <data>
+    <report id="l10n_se_hr_payroll.payslip" model="hr.payslip" string="Paysplip SE" report_type="qweb-pdf" name="l10n_se_hr_payroll.payslip_report" file="l10n_se_hr_payroll.payslip_report" attachment_use="True" attachment="('payslip_'+(object.number.replace('/','') or ''))+'.pdf'" />
+    
+    <template id="payslip_report">
+      <t t-call="report.html_container">
+        <t t-foreach="docs" t-as="o">
+<!--
+            <t t-call="l10n_se_hr_payroll.payslip_document"/>
+-->
+          <t t-raw="translate_doc(o.id, doc_model, 'employee_id.address_home_id.lang', 'l10n_se_hr_payroll.payslip_document')" />
+        </t>
+      </t>
+    </template>
+    
+    <template id="payslip_document">
+<!--
+      <t t-call="report.html_container">
+        <t t-foreach="docs" t-as="o">
+-->
+          <t t-call="report.external_layout">
+            <div class="page">
+              <h2>Pay Slip LEIF 10</h2>
+              <p t-field="o.name" />
+              <table class="table table-condensed table-bordered">
+                <tr>
+                  <td>
+                    <strong>Name</strong>
+                  </td>
+                  <td>
+                    <span t-field="o.employee_id" />
+                  </td>
+                  <td>
+                    <strong>Designation</strong>
+                  </td>
+                  <td>
+                    <span t-field="o.employee_id.job_id" />
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <strong>Address</strong>
+                  </td>
+                  <td colspan="3">
+                    <div t-field="o.employee_id.address_home_id" t-field-options='{"widget": "contact", "fields": ["address", "name", "phone", "fax"], "no_marker": true}' />
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <strong>Email</strong>
+                  </td>
+                  <td>
+                    <span t-field="o.employee_id.work_email" />
+                  </td>
+                  <td>
+                    <strong>Identification No</strong>
+                  </td>
+                  <td>
+                    <span t-field="o.employee_id.job_id" />
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <strong>Reference</strong>
+                  </td>
+                  <td>
+                    <span t-field="o.number" />
+                  </td>
+                  <td>
+                    <strong>Bank Account</strong>
+                  </td>
+                  <td>
+                    <span t-field="o.employee_id.otherid" />
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <strong>Date From</strong>
+                  </td>
+                  <td>
+                    <span t-field="o.date_from" />
+                  </td>
+                  <td>
+                    <strong>Date To</strong>
+                  </td>
+                  <td>
+                    <span t-field="o.date_to" />
+                  </td>
+                </tr>
+              </table>
+              <table class="table table-condensed">
+                <thead>
+                  <tr>
+                    <th>Category</th>
+                    <th>Code</th>
+                    <th>Name</th>
+                    <th>Quantity</th>
+                    <th>Rate</th>
+                    <th>Leif</th>
+                    <th>Amount</th>
+                    <th>Total</th>
+                  </tr>
+                </thead>
+                <tbody>
+<!--
+                  <tr t-foreach="get_payslip_lines(o.line_ids)" t-as="p">
+-->
+                  <tr t-foreach="o.line_ids" t-as="p">
+                    <td>
+                      <span t-field="p.category_id.code" />
+                    </td>
+                    <td>
+                      <span t-field="p.code" />
+                    </td>
+                    <td>
+                      <span t-field="p.name" />
+                    </td>
+                    <td>
+                      <span t-field="p.quantity" />
+                    </td>
+                    <td  style="color: red; text-align: right;" >
+<!--
+                      <span style="color: red;" t-field="p.rate" />
+-->
+                      <span t-esc="'%2.2f' % p.rate" />
+                    </td>
+                    <td>
+                      <span t-if="p.category_id.code == 'BRUAVG'" >LY</span>
+<!--
+                      <span t-if="p.quantity != 1 || p.rate != 100" t-esc="'%s'%(p.quantity * p.rate)" />
+-->
+                      <t t-if="not p.quantity == 1 or not p.rate == 100">
+                       <span t-esc="'%2.2f'%(p.quantity * p.rate)" />
+                      </t>
+                    </td>
+                    <td>
+<!--
+                      <span t-esc="formatLang(p.amount, currency_obj=o.company_id.currency_id)" />
+-->
+                      <span t-field="p.amount" />
+                    </td>
+                    <td>
+<!--
+                      <span t-esc="formatLang(p.total, currency_obj=o.company_id.currency_id)" />
+-->
+<!--
+                      <span t-field="p.total" />
+-->
+<span t-field="p.total" t-field-options='{"widget": "monetary", "display_currency": "p.company_id.currency_id"}'/> 
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+              <p class="text-right">
+                <strong>Authorized signature</strong>
+              </p>
+            </div>
+          </t>
+<!--
+        </t>
+      </t>
+-->
+    </template>
+  </data>
+</openerp>

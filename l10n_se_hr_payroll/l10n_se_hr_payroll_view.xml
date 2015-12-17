@@ -52,25 +52,25 @@
 
 
        <report
-            id="l10n_se_hr_payroll.payslip"
+            id="l10n_se_hr_payroll.payslip_2"
             model="hr.payslip"
             string="Paysplip"
             report_type="qweb-pdf"
-            name="l10n_se_hr_payroll.payslip_report"
-            file="l10n_se_hr_payroll.payslip_report"
+            name="l10n_se_hr_payroll.payslip_2_report"
+            file="l10n_se_hr_payroll.payslip_2_report"
             attachment_use="True"
             attachment="('payslip_'+(object.number.replace('/','') or ''))+'.pdf'"
         />
            
-       <template id="payslip_report">
+       <template id="payslip_2_report">
             <t t-call="report.html_container">
                 <t t-foreach="doc_ids" t-as="doc_id">
-                    <t t-raw="translate_doc(doc_id, doc_model, 'employee_id.address_home_id.lang', 'l10n_se_hr_payroll.payslip_document')"/>
+                    <t t-raw="translate_doc(doc_id, doc_model, 'employee_id.address_home_id.lang', 'l10n_se_hr_payroll.payslip_2_document')"/>
                 </t>
             </t>
         </template> 
 
-        <template id="payslip_document">
+        <template id="payslip_2_document">
             <t t-call="report.external_layout">
                 <div class="page">
                     <div class="oe_structure"/>
