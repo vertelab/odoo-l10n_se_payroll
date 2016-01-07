@@ -6,6 +6,16 @@
       <field name="name">System</field>
       <field name="note">Används till regler som är verktyg</field>
     </record>
+    <record id="hr_salary_rule_category-PARENT" model="hr.salary.rule.category">
+      <field name="code">PARENT</field>
+      <field name="name">Grupp</field>
+      <field name="note">Används för en regel som inhåller själva reglerna</field>
+    </record>
+    <record id="hr_salary_rule_category-HANDLER" model="hr.salary.rule.category">
+      <field name="code">HANDLER</field>
+      <field name="name">Tillämpning</field>
+      <field name="note">Används när en 'category' ska bearbetas</field>
+    </record>
     <record id="hr_salary_rule_category-DUMMY" model="hr.salary.rule.category">
       <field name="code">DUMMY</field>
       <field name="name">Slask</field>
@@ -13,7 +23,7 @@
     </record>
     <record id="hr_salary_rule_category-SKV" model="hr.salary.rule.category">
       <field name="code">SKV</field>
-      <field name="name">Summa skatter</field>
+      <field name="name">Skatter</field>
       <field name="note">Används för att summera all skatt</field>
     </record>
     <record id="hr_salary_rule_category-BAS" model="hr.salary.rule.category">

@@ -5,21 +5,13 @@
     <template id="payslip_report">
       <t t-call="report.html_container">
         <t t-foreach="docs" t-as="o">
-          <!--
-               <t t-call="l10n_se_hr_payroll.payslip_document"/>
-          -->
           <t t-raw="translate_doc(o.id, doc_model, 'employee_id.address_home_id.lang', 'l10n_se_hr_payroll.payslip_document')" />
         </t>
       </t>
     </template>
     <template id="payslip_document">
-      <!--
-           <t t-call="report.html_container">
-           <t t-foreach="docs" t-as="o">
-      -->
       <t t-call="report.external_layout">
         <div class="page">
-          <h2>Pay Slip LEIF 10</h2>
           <p t-field="o.name" />
           <table class="table table-condensed table-bordered">
             <tr>
@@ -87,28 +79,30 @@
               </td>
             </tr>
           </table>
+          <!--
+               SALARY LINES
+          -->
           <table class="table table-condensed">
             <thead>
               <tr>
-                <th>Category</th>
+                <!--
+                     <th>Category</th>
+                -->
                 <th>Code</th>
                 <th>Name</th>
-                <th>Quantity</th>
-                <th>Rate</th>
-                <th>Leif</th>
-                <th>Amount</th>
-                <th>Total</th>
+                <th style="text-align: right;">Quantity</th>
+                <th style="text-align: right;">Amount</th>
+                <th style="text-align: center;">Total</th>
               </tr>
             </thead>
             <tbody>
-              <!--
-                   <tr t-foreach="get_payslip_lines(o.line_ids)" t-as="p">
-              -->
               <t t-foreach="o.line_ids" t-as="p">
                 <tr t-att-style="'background: #eee;' if p.code == 'sum' or p.code.startswith('bl') else ''">
-                  <td>
-                    <span t-field="p.category_id.code" />
-                  </td>
+                  <!--
+                       <td>
+                       <span t-field="p.category_id.code" />
+                       </td>
+                  -->
                   <td>
                     <span t-field="p.code" />
                   </td>
@@ -116,56 +110,27 @@
                     <span t-field="p.name" />
                   </td>
                   <td style="text-align: right;">
-                    <span t-field="p.quantity" />
-                  </td>
-                  <td style="text-align: right;">
-                    <!--
-                         <span style="color: red;" t-field="p.rate" />
-                    -->
-                    <span t-esc="'%2.2f' % p.rate" />
-                  </td>
-                  <td style="text-align: right;">
-                    <span t-if="p.category_id.code == 'BRUAVG'">LY</span>
-                    <!--
-                         <span t-if="p.quantity != 1 || p.rate != 100" t-esc="'%s'%(p.quantity * p.rate)" />
-                    -->
-                    <t t-if="not p.quantity == 1 or not p.rate == 100">
-                      <span t-esc="'%2.2f'%(p.quantity * p.rate)" />
+                    <t t-if="not p.quantity == 1 and not p.rate == 100">
+                      <span t-esc="'%2.2f' % (p.quantity * p.rate / 100)" />
                     </t>
-                    <t t-if="not p.rate == 100">%</t>
+                    <t t-if="not (not p.quantity == 1 and not p.rate == 100)">
+                      <t t-if="not p.quantity == 1">
+                        <!--
+                             <span t-esc="locale.format('%2.2f' % p.quantity)" />
+                        -->
+                        <span t-esc="'%2.2f' % p.quantity" />
+                      </t>
+                      <t t-if="not p.rate == 100">
+                        <span t-esc="'%2.2f%s' % (p.rate,'%')" />
+                      </t>
+                    </t>
                   </td>
                   <td style="text-align: right;">
-                    <!--
-                         <span t-esc="formatLang(p.amount, currency_obj=o.company_id.currency_id)" />
-                    -->
-                    <!--
-                         <t t-if="p.category_id.code == 'BRUAVG' or p.category_id.code == 'NETAVG'">-&nbsp;</t>
-                    -->
                     <t t-if="not p.quantity == 1 or not p.rate == 100">
-                      <!--
-                           <t t-if="p.category_id.code == 'BRUAVG' or p.category_id.code == 'NETAVG'">
-                           -
-                           </t>
-                      -->
-                      <!--
-                           <span t-esc="' %s kr' % p.amount" t-if="p.category_id.code == 'BRUAVG' or p.category_id.code == 'NETAVG'"/>
-                      -->
-                      <!--
-                           <span t-esc="'%s%2.2f kr' % ( '- ' if p.category_id.code == 'BRUAVG' or p.category_id.code == 'NETAVG' else '', p.amount)" />
-                      -->
                       <span t-raw="'%s%2.2f' % ( '-&amp;nbsp;' if p.category_id.code == 'BRUAVG' or p.category_id.code == 'NETAVG' else '', p.amount)" />
-                      <!--
-                           <span t-field="p.amount" />
-                      -->
                     </t>
                   </td>
                   <td style="text-align: right;">
-                    <!--
-                         <span t-esc="formatLang(p.total, currency_obj=o.company_id.currency_id)" />
-                    -->
-                    <!--
-                         <span t-field="p.total" />
-                    -->
                     <b t-if="p.code == 'sum'">
                       <span t-field="p.total" t-field-options='{"widget": "monetary", "display_currency": "p.company_id.currency_id"}' />
                     </b>
