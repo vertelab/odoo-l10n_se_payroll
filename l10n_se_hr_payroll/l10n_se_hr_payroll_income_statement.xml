@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+  <data>
+    <report id="l10n_se_hr_payroll.income_statement" model="hr.payslip" string="Income Statement" report_type="qweb-pdf" name="l10n_se_hr_payroll.income_statement_report" file="l10n_se_hr_payroll.income_statement_report" attachment_use="True" attachment="('income_statement_'+(object.number.replace('/','') or ''))+'.pdf'" />
+    <template id="income_statement_report">
+      <t t-call="report.html_container">
+        <t t-foreach="docs" t-as="o">
+          <t t-raw="translate_doc(o.id, doc_model, 'employee_id.address_home_id.lang', 'l10n_se_hr_payroll.income_statement_document')" />
+        </t>
+      </t>
+    </template>
+    <template id="income_statement_document">
+      <t t-call="report.external_layout">
+        <div class="page">
+          <p t-field="o.name" />
+          <table class="table table-condensed table-bordered">
+            <tr>
+              <td>
+                <strong>Name</strong>
+              </td>
+              <td>
+                <span t-field="o.employee_id" />
+              </td>
+              <td>
+                <strong>Designation</strong>
+              </td>
+              <td>
+                <span t-field="o.employee_id.job_id" />
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <strong>Address</strong>
+              </td>
+              <td colspan="3">
+                <div t-field="o.employee_id.address_home_id" t-field-options='{"widget": "contact", "fields": ["address", "name", "phone", "fax"], "no_marker": true}' />
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <strong>Email</strong>
+              </td>
+              <td>
+                <span t-field="o.employee_id.work_email" />
+              </td>
+              <td>
+                <strong>Identification No</strong>
+              </td>
+              <td>
+                <span t-field="o.employee_id.job_id" />
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <strong>Reference</strong>
+              </td>
+              <td>
+                <span t-field="o.number" />
+              </td>
+              <td>
+                <strong>Bank Account</strong>
+              </td>
+              <td>
+                <span t-field="o.employee_id.otherid" />
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <strong>Date From</strong>
+              </td>
+              <td>
+                <span t-field="o.date_from" />
+              </td>
+              <td>
+                <strong>Date To</strong>
+              </td>
+              <td>
+                <span t-field="o.date_to" />
+              </td>
+            </tr>
+          </table>
+          <!--
+               SALARY LINES
+          -->
+          <table class="table table-condensed">
+            <thead>
+              <tr>
+                <!--
+                     <th>Category</th>
+                -->
+                <th>Code</th>
+                <th>Name</th>
+                <th style="text-align: right;">Quantity</th>
+                <th style="text-align: right;">Amount</th>
+                <th style="text-align: center;">Total</th>
+              </tr>
+            </thead>
+            <tbody>
+              <t t-foreach="o.line_ids" t-as="p">
+                <tr t-att-style="'background: #eee;' if p.code == 'sum' or p.code.startswith('bl') else ''">
+                  <!--
+                       <td>
+                       <span t-field="p.category_id.code" />
+                       </td>
+                  -->
+                  <td>
+                    <span t-field="p.code" />
+                  </td>
+                  <td>
+                    <span t-field="p.name" />
+                  </td>
+                  <td style="text-align: right;">
+                    <t t-if="not p.quantity == 1 and not p.rate == 100">
+                      <span t-esc="'%2.2f' % (p.quantity * p.rate / 100)" />
+                    </t>
+                    <t t-if="not (not p.quantity == 1 and not p.rate == 100)">
+                      <t t-if="not p.quantity == 1">
+                        <!--
+                             <span t-esc="locale.format('%2.2f' % p.quantity)" />
+                        -->
+                        <span t-esc="'%2.2f' % p.quantity" />
+                      </t>
+                      <t t-if="not p.rate == 100">
+                        <span t-esc="'%2.2f%s' % (p.rate,'%')" />
+                      </t>
+                    </t>
+                  </td>
+                  <td style="text-align: right;">
+                    <t t-if="not p.quantity == 1 or not p.rate == 100">
+                      <span t-raw="'%s%2.2f' % ( '-&amp;nbsp;' if p.category_id.code == 'BRUAVG' or p.category_id.code == 'NETAVG' else '', p.amount)" />
+                    </t>
+                  </td>
+                  <td style="text-align: right;">
+                    <b t-if="p.code == 'sum'">
+                      <span t-field="p.total" t-field-options='{"widget": "monetary", "display_currency": "p.company_id.currency_id"}' />
+                    </b>
+                    <t t-if="not p.code == 'sum'">
+                      <t t-if="p.category_id.code == 'BRUAVG' or p.category_id.code == 'NETAVG'">-</t>
+                      <span t-field="p.total" t-field-options='{"widget": "monetary", "display_currency": "p.company_id.currency_id"}' />
+                    </t>
+                  </td>
+                </tr>
+              </t>
+            </tbody>
+          </table>
+          <!--
+               <p class="text-right">
+               <strong>Authorized signature</strong>
+               </p>
+          -->
+        </div>
+      </t>
+    </template>
+  </data>
+</openerp>

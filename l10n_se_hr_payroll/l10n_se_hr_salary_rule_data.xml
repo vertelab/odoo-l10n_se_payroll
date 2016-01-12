@@ -157,9 +157,12 @@ if age > 77:
       <field name="amount_percentage_base">categories.BRUTTO</field>
       <field name="amount_percentage">25.46</field>
       <field name="quantity">1</field>
+<!--
       <field name="account_debit" search="[('code', '=', '7560')]" />
       <field name="account_tax_id" search="[('code', '=', 'AvgAldersp')]" />
+-->
     </record>
+<!--
     <record id="hr_salary_rule-sau-mot" model="hr.salary.rule">
       <field name="parent_rule_id" ref="hr_salary_rule-sau" />
       <field name="category_id" ref="hr_salary_rule_category-SKV" />
@@ -173,6 +176,7 @@ if age > 77:
       <field name="quantity">1</field>
       <field name="account_credit" search="[('code', '=', '2731')]" />
     </record>
+-->
     <!--
          ===== CHILD SAN
     -->
@@ -189,8 +193,10 @@ if age > 77:
       <field name="amount_percentage_base">categories.BRUTTO</field>
       <field name="amount_percentage">31.42</field>
       <field name="quantity">1</field>
+<!--
       <field name="account_debit" search="[('code', '=', '7511')]" />
       <field name="account_tax_id" search="[('code', '=', 'AvgHel')]" />
+-->
     </record>
     <record id="hr_salary_rule-san-mot" model="hr.salary.rule">
       <field name="parent_rule_id" ref="hr_salary_rule-san" />
@@ -207,7 +213,9 @@ if age > 77:
       <field name="amount_select">code</field>
       <field name="amount_python_compute">result = rules.dict.get('san').amount_percentage * categories.BRUTTO / 100</field>
       <field name="quantity">1</field>
+<!--
       <field name="account_credit" search="[('code', '=', '2731')]" />
+-->
     </record>
     <!--
          ===== CHILD SAP
@@ -225,8 +233,10 @@ if age > 77:
       <field name="amount_percentage_base">categories.BRUTTO</field>
       <field name="amount_percentage">10.21</field>
       <field name="quantity">1</field>
+<!--
       <field name="account_debit" search="[('code', '=', '7521')]" />
       <field name="account_tax_id" search="[('code', '=', 'AvgAlderspSkLon')]" />
+-->
     </record>
     <record id="hr_salary_rule-sap-mot" model="hr.salary.rule">
       <field name="parent_rule_id" ref="hr_salary_rule-sap" />
@@ -239,7 +249,9 @@ if age > 77:
       <field name="amount_select">code</field>
       <field name="amount_python_compute">result = rules.dict.get('san').amount_percentage * categories.BRUTTO / 100</field>
       <field name="quantity">1</field>
+<!--
       <field name="account_credit" search="[('code', '=', '2731')]" />
+-->
     </record>
     <!--
          =====
@@ -268,8 +280,10 @@ if age > 77:
       <field name="condition_select">none</field>
       <field name="amount_select">code</field>
       <field name="amount_python_compute">result = contract.prel_tax_amount</field>
+<!--
       <field name="account_credit" search="[('code', '=', '2710')]" />
       <field name="account_tax_id" search="[('code', '=', 'SkAvdrLon')]" />
+-->
       <field name="quantity">1</field>
     </record>
 <!--
@@ -368,8 +382,8 @@ result = 18.5
       </field>
 <!--
       <field name="account_debit" search="[('code', '=', '5841')]" /> Finns inte i bas2015
--->
       <field name="account_debit" search="[('code', '=', '5800')]" />
+-->
       <field name="quantity">1</field>
     </record>
     <!-- /// -->
@@ -423,8 +437,10 @@ result = 18.5
       <field name="condition_select">none</field>
       <field name="amount_select">code</field>
       <field name="amount_python_compute">result = categories.BRUTTO</field>
+<!--
       <field name="account_debit" search="[('code', '=', '7292')]" />
       <field name="account_credit" search="[('code', '=', '2920')]" />
+-->
       <field name="quantity">1</field>
     </record>
   <record id="hr_salary_rule-blflsem" model="hr.salary.rule">
@@ -438,8 +454,10 @@ result = 18.5
     <field name="condition_python">result = rules.dict.get('AGEU', False)</field>
     <field name="amount_select">code</field>
     <field name="amount_python_compute">result = categories.BRUTTO</field>
+<!--
     <field name="account_debit" search="[('code', '=', '7223')]" />
     <field name="account_tax_id" search="[('code', '=', 'UlagAvgAldersp')]" />
+-->
     <field name="quantity">1</field>
   </record>
   <record id="hr_salary_rule-blflu" model="hr.salary.rule">
@@ -453,8 +471,10 @@ result = 18.5
     <field name="condition_python">result = rules.dict.get('AGEU', False)</field>
     <field name="amount_select">code</field>
     <field name="amount_python_compute">result = categories.BRUTTO</field>
+<!--
     <field name="account_debit" search="[('code', '=', '7223')]" />
     <field name="account_tax_id" search="[('code', '=', 'UlagAvgAldersp')]" />
+-->
     <field name="quantity">1</field>
   </record>
   <record id="hr_salary_rule-blfln" model="hr.salary.rule">
@@ -468,8 +488,10 @@ result = 18.5
     <field name="condition_python">result = rules.dict.get('AGEN', False)</field>
     <field name="amount_select">code</field>
     <field name="amount_python_compute">result = categories.BRUTTO</field>
+<!--
     <field name="account_debit" search="[('code', '=', '7221')]" />
     <field name="account_tax_id" search="[('code', '=', 'UlagAvgHel')]" />
+-->
     <field name="quantity">1</field>
   </record>
   <record id="hr_salary_rule-blflp" model="hr.salary.rule">
@@ -483,8 +505,10 @@ result = 18.5
     <field name="condition_python">result = rules.dict.get('AGEP', False)</field>
     <field name="amount_select">code</field>
     <field name="amount_python_compute">result = categories.BRUTTO</field>
+<!--
     <field name="account_debit" search="[('code', '=', '7224')]" />
     <field name="account_tax_id" search="[('code', '=', 'UlagAvgAlderspSkLon')]" />
+-->
     <field name="quantity">1</field>
   </record>
   <record id="hr_salary_rule-blflpx" model="hr.salary.rule">
@@ -498,7 +522,9 @@ result = 18.5
     <field name="condition_python">result = rules.dict.get('AGEPX', False)</field>
     <field name="amount_select">code</field>
     <field name="amount_python_compute">result = categories.BRUTTO</field>
+<!--
     <field name="account_debit" search="[('code', '=', '7225')]" />
+-->
     <field name="quantity">1</field>
   </record>
 
