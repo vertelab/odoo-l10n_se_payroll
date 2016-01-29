@@ -162,7 +162,6 @@ if age > 77:
       <field name="account_tax_id" search="[('code', '=', 'AvgAldersp')]" />
 -->
     </record>
-<!--
     <record id="hr_salary_rule-sau-mot" model="hr.salary.rule">
       <field name="parent_rule_id" ref="hr_salary_rule-sau" />
       <field name="category_id" ref="hr_salary_rule_category-SKV" />
@@ -174,9 +173,7 @@ if age > 77:
       <field name="amount_select">code</field>
       <field name="amount_python_compute">result = rules.dict.get('sau').amount_percentage * categories.BRUTTO / 100</field>
       <field name="quantity">1</field>
-      <field name="account_credit" search="[('code', '=', '2731')]" />
     </record>
--->
     <!--
          ===== CHILD SAN
     -->
@@ -206,16 +203,24 @@ if age > 77:
       <field name="sequence">490</field>
       <field name="appears_on_payslip" eval="False"/>
       <field name="condition_select">none</field>
-<!--
-      <field name="condition_select">python</field>
-      <field name="condition_python">result = False</field>
--->
       <field name="amount_select">code</field>
       <field name="amount_python_compute">result = rules.dict.get('san').amount_percentage * categories.BRUTTO / 100</field>
       <field name="quantity">1</field>
+    </record>
 <!--
-      <field name="account_credit" search="[('code', '=', '2731')]" />
+    NY
 -->
+    <record id="hr_salary_rule-san-mot-SKV" model="hr.salary.rule">
+      <field name="parent_rule_id" ref="hr_salary_rule-san-mot" />
+      <field name="category_id" ref="hr_salary_rule_category-SKV" />
+      <field name="code">(san-skv)</field>
+      <field name="name">Skattekonto, sociala avgifter</field>
+      <field name="sequence">490</field>
+      <field name="appears_on_payslip" eval="False"/>
+      <field name="condition_select">none</field>
+      <field name="amount_select">code</field>
+      <field name="amount_python_compute">result = rules.dict.get('san').amount_percentage * categories.BRUTTO / 100</field>
+      <field name="quantity">1</field>
     </record>
     <!--
          ===== CHILD SAP

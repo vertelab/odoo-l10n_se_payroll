@@ -89,7 +89,7 @@
        <report
             id="l10n_se_hr_payroll.payslip_2"
             model="hr.payslip"
-            string="Paysplip"
+            string="Payslip"
             report_type="qweb-pdf"
             name="l10n_se_hr_payroll.payslip_2_report"
             file="l10n_se_hr_payroll.payslip_2_report"

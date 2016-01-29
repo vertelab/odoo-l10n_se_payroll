@@ -118,11 +118,11 @@
          </record>
     -->
     <record id="account_journal-lon-DEMO" model="account.journal">
-      <field name="name">Löneutbetalning DEMO</field>
-      <field name="code">Lön DEMO</field>
+      <field name="name">Lön till bokföringen (DEMO)</field>
+      <field name="code">Lönskuld</field>
       <field name="type">general</field>
-      <field name="default_debit_account_id" search="[('code', '=', '1932')]" />
-      <field name="default_credit_account_id" search="[('code', '=', '1932')]" />
+      <field name="default_debit_account_id" search="[('code', '=', '2821')]" />
+      <field name="default_credit_account_id" search="[('code', '=', '2821')]" />
       <!--
            <field name="company_id" ref="base.main_company"/>
            <field name="user_id" ref="base.user_root"/>
