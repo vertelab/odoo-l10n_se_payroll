@@ -1,0 +1,24 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<openerp>
+    <data>
+
+        
+  
+        <record model="ir.ui.view" id="edit_holiday_status_form">
+            <field name="name">hr.holidays.status.inherit.form</field>
+            <field name="model">hr.holidays.status</field>
+            <field name="inherit_id" ref="hr_holidays.edit_holiday_status_form" />
+            <field name="arch" type="xml">
+                <field name="active" position="after">
+                    <field name="date_earning_start"/>
+                    <field name="date_earning_end"/>                    
+                </field>
+            </field>
+        </record>
+
+
+
+        
+
+    </data>
+</openerp>

@@ -49,47 +49,47 @@ class hr_holidays_status(models.Model):
         holidays = self.env['hr.holidays.status'].search([('date_earning_start','>',fields.Date.today()),('date_earning_end','<',fields.Date.today())]) 
         return holidays[0] if len(holidays)>0 else None
         
-    date_earing_start = fields.Date(string='Earning year starts')
-    date_earing_end = fields.Date(string='Earning year ends')
+    date_earning_start = fields.Date(string='Earning year starts')
+    date_earning_end = fields.Date(string='Earning year ends')
     
-    @api.one
-    def get_days(self,employee_id):
+    #~ @api.one
+    #~ def get_days(self,employee_id):
         
         
-        result = dict((id, dict(max_leaves=0, leaves_taken=0, remaining_leaves=0,
-                                virtual_remaining_leaves=0)) for id in ids)
-        holiday_ids = self.env['hr.holidays'].search([('employee_id', '=', employee_id),
-                                                                ('state', 'in', ['confirm', 'validate1', 'validate']),
-                                                                ('holiday_status_id', 'in', ids)
-                                                                ])
+        #~ result = dict((id, dict(max_leaves=0, leaves_taken=0, remaining_leaves=0,
+                                #~ virtual_remaining_leaves=0)) for id in ids)
+        #~ holiday_ids = self.env['hr.holidays'].search([('employee_id', '=', employee_id),
+                                                                #~ ('state', 'in', ['confirm', 'validate1', 'validate']),
+                                                                #~ ('holiday_status_id', 'in', ids)
+                                                                #~ ])
                                                                 
-        for holiday in self.pool['hr.holidays'].browse(cr, uid, holiday_ids, context=context):
-            status_dict = result[holiday.holiday_status_id.id]
-            if holiday.type == 'add':
-                status_dict['virtual_remaining_leaves'] += holiday.number_of_days_temp
-                if holiday.state == 'validate':
-                    status_dict['max_leaves'] += holiday.number_of_days_temp
-                    status_dict['remaining_leaves'] += holiday.number_of_days_temp
-            elif holiday.type == 'remove':  # number of days is negative
-                status_dict['virtual_remaining_leaves'] -= holiday.number_of_days_temp
-                if holiday.state == 'validate':
-                    status_dict['leaves_taken'] += holiday.number_of_days_temp
-                    status_dict['remaining_leaves'] -= holiday.number_of_days_temp
-        return result
+        #~ for holiday in self.pool['hr.holidays'].browse(cr, uid, holiday_ids, context=context):
+            #~ status_dict = result[holiday.holiday_status_id.id]
+            #~ if holiday.type == 'add':
+                #~ status_dict['virtual_remaining_leaves'] += holiday.number_of_days_temp
+                #~ if holiday.state == 'validate':
+                    #~ status_dict['max_leaves'] += holiday.number_of_days_temp
+                    #~ status_dict['remaining_leaves'] += holiday.number_of_days_temp
+            #~ elif holiday.type == 'remove':  # number of days is negative
+                #~ status_dict['virtual_remaining_leaves'] -= holiday.number_of_days_temp
+                #~ if holiday.state == 'validate':
+                    #~ status_dict['leaves_taken'] += holiday.number_of_days_temp
+                    #~ status_dict['remaining_leaves'] -= holiday.number_of_days_temp
+        #~ return result
 
-    def _user_left_days(self, cr, uid, ids, name, args, context=None):
-        employee_id = False
-        if context and 'employee_id' in context:
-            employee_id = context['employee_id']
-        else:
-            employee_ids = self.pool.get('hr.employee').search(cr, uid, [('user_id', '=', uid)], context=context)
-            if employee_ids:
-                employee_id = employee_ids[0]
-        if employee_id:
-            res = self.get_days(cr, uid, ids, employee_id, context=context)
-        else:
-            res = dict((res_id, {'leaves_taken': 0, 'remaining_leaves': 0, 'max_leaves': 0}) for res_id in ids)
-        return res
+    #~ def _user_left_days(self, cr, uid, ids, name, args, context=None):
+        #~ employee_id = False
+        #~ if context and 'employee_id' in context:
+            #~ employee_id = context['employee_id']
+        #~ else:
+            #~ employee_ids = self.pool.get('hr.employee').search(cr, uid, [('user_id', '=', uid)], context=context)
+            #~ if employee_ids:
+                #~ employee_id = employee_ids[0]
+        #~ if employee_id:
+            #~ res = self.get_days(cr, uid, ids, employee_id, context=context)
+        #~ else:
+            #~ res = dict((res_id, {'leaves_taken': 0, 'remaining_leaves': 0, 'max_leaves': 0}) for res_id in ids)
+        #~ return res
 
         #~ 'max_leaves': fields.function(_user_left_days, string='Maximum Allowed', help='This value is given by the sum of all holidays requests with a positive value.', multi='user_left_days'),
         #~ 'leaves_taken': fields.function(_user_left_days, string='Leaves Already Taken', help='This value is given by the sum of all holidays requests with a negative value.', multi='user_left_days'),
@@ -144,15 +144,7 @@ class hr_holidays_earning(models.Model):
 class hr_employee(models.Model):
     _inherit = 'hr.employee'
 
-    @api.one
-    def _age(self):
-        #raise Warning('birthday %s today  year s' % (date.today().year))
-        self.age= -1 if not self.birthday else date.today().year - datetime.strptime(self.birthday, DEFAULT_SERVER_DATE_FORMAT).year 
-    age = fields.Integer(string="Age", compute=_age, help="Age to calculate social security deduction")
-    #~ def _income_statement_count(self):
-        #~ self.income_statement_count = len(set([i.year for i in self.env['hr.employee.income_statement'].search([('employee_id','=',self.id)])]))
-    #~ income_statement_count = fields.Integer(compute="_income_statement_count")
-
+    holidays_earning_ids = fields.Many2many(string='Holiday Earnings',comodel_name="hr.holidays.earning")
 
 
 

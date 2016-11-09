@@ -119,49 +119,51 @@ class hr_employee(models.Model):
         #raise Warning('birthday %s today  year s' % (date.today().year))
         self.age= -1 if not self.birthday else date.today().year - datetime.strptime(self.birthday, DEFAULT_SERVER_DATE_FORMAT).year 
     age = fields.Integer(string="Age", compute=_age, help="Age to calculate social security deduction")
-    #~ def _income_statement_count(self):
-        #~ self.income_statement_count = len(set([i.year for i in self.env['hr.employee.income_statement'].search([('employee_id','=',self.id)])]))
-    #~ income_statement_count = fields.Integer(compute="_income_statement_count")
+    
+    @api.one
+    def _income_statement_count(self):
+        self.income_statement_count = len(set([i.year for i in self.env['hr.employee.income_statement'].search([('employee_id','=',self.id)])]))
+    income_statement_count = fields.Integer(compute="_income_statement_count")
 
 
-#~ class hr_employee_income_statement(models.Model):
-    #~ _name = 'hr.employee.income_statement'
-    #~ _order = 'year, area_no_id'
+class hr_employee_income_statement(models.Model):
+    _name = 'hr.employee.income_statement'
+    _order = 'year, area_no_id'
 
-    #~ employee_id = fields.Many2one('hr.employee',required=True)
-    #~ year = fields.Selection([('2014','2014'),('2015','2015'),('2016','2016'),('2017','2017')],string="Year",required=True)
-    #~ area_no_id = fields.Many2one('hr.income_statement.area_no',required=True)
-    #~ amount = fields.Float(string="Amount")
-    #~ checked = fields.Boolean(string="Checked")
-    #~ code = fields.Char(string="code")
-    #~ @api.one
-    #~ def _value(self):
-        #~ if self.area_no_id.type == 'amount':
-            #~ self.value = '%4.2f' % self.amount
-        #~ elif self.area_no_id.type == 'checkbox':
-            #~ self.value = 'X' if self.checked else ''
-        #~ elif self.area_no_id.type == "text":
-            #~ self.value = self.code
-        #~ elif self.area_no_id.type == "rule" and self.area_no_id.salary_rule_id:
-            #~ self.value = self.area_no_id.salary_rule_id.name
-    #~ value = fields.Char(string="Value",compute="_value")
+    employee_id = fields.Many2one('hr.employee',required=True)
+    year = fields.Selection([('2014','2014'),('2015','2015'),('2016','2016'),('2017','2017')],string="Year",required=True)
+    area_no_id = fields.Many2one('hr.income_statement.area_no',required=True)
+    amount = fields.Float(string="Amount")
+    checked = fields.Boolean(string="Checked")
+    code = fields.Char(string="code")
+    @api.one
+    def _value(self):
+        if self.area_no_id.type == 'amount':
+            self.value = '%4.2f' % self.amount
+        elif self.area_no_id.type == 'checkbox':
+            self.value = 'X' if self.checked else ''
+        elif self.area_no_id.type == "text":
+            self.value = self.code
+        elif self.area_no_id.type == "rule" and self.area_no_id.salary_rule_id:
+            self.value = self.area_no_id.salary_rule_id.name
+    value = fields.Char(string="Value",compute="_value")
     
-#~ class hr_income_statement_area_no(models.Model):
-    #~ _name = 'hr.income_statement.area_no'
-    #~ _description = "Area numbers in the Income Statement form"
+class hr_income_statement_area_no(models.Model):
+    _name = 'hr.income_statement.area_no'
+    _description = "Area numbers in the Income Statement form"
     
-    #~ @api.multi
-    #~ def name_get(self):
-        #~ result = []
-        #~ for i in self:
-            #~ result.append((i.id, "(%s) %s" % (i.area_no, i.name)))
-        #~ return result
+    @api.multi
+    def name_get(self):
+        result = []
+        for i in self:
+            result.append((i.id, "(%s) %s" % (i.area_no, i.name)))
+        return result
     
-    #~ name = fields.Char(string="Name",required=True)
-    #~ area_no = fields.Char('Area no',required=True)
-    #~ type = fields.Selection([('code','Code'),('amount','Amount'),('checkbox','Checkbox'),('rule','Rule')],string="Type",required=True)
-    #~ salary_rule_id =fields.Many2one('hr.salary.rule', 'Rule',)
-    #~ element_name = fields.Char(string="Element name",help="Name in XML-file")
+    name = fields.Char(string="Name",required=True)
+    area_no = fields.Char('Area no',required=True)
+    type = fields.Selection([('code','Code'),('amount','Amount'),('checkbox','Checkbox'),('rule','Rule')],string="Type",required=True)
+    salary_rule_id =fields.Many2one('hr.salary.rule', 'Rule',)
+    element_name = fields.Char(string="Element name",help="Name in XML-file")
 
 
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
