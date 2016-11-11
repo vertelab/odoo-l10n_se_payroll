@@ -52,65 +52,15 @@ class hr_holidays_status(models.Model):
     date_earning_start = fields.Date(string='Earning year starts')
     date_earning_end = fields.Date(string='Earning year ends')
     
-    #~ @api.one
-    #~ def get_days(self,employee_id):
+    
+    @api.one
+    def earn_leaves_days(self,leaves):
         
-        
-        #~ result = dict((id, dict(max_leaves=0, leaves_taken=0, remaining_leaves=0,
-                                #~ virtual_remaining_leaves=0)) for id in ids)
-        #~ holiday_ids = self.env['hr.holidays'].search([('employee_id', '=', employee_id),
-                                                                #~ ('state', 'in', ['confirm', 'validate1', 'validate']),
-                                                                #~ ('holiday_status_id', 'in', ids)
-                                                                #~ ])
-                                                                
-        #~ for holiday in self.pool['hr.holidays'].browse(cr, uid, holiday_ids, context=context):
-            #~ status_dict = result[holiday.holiday_status_id.id]
-            #~ if holiday.type == 'add':
-                #~ status_dict['virtual_remaining_leaves'] += holiday.number_of_days_temp
-                #~ if holiday.state == 'validate':
-                    #~ status_dict['max_leaves'] += holiday.number_of_days_temp
-                    #~ status_dict['remaining_leaves'] += holiday.number_of_days_temp
-            #~ elif holiday.type == 'remove':  # number of days is negative
-                #~ status_dict['virtual_remaining_leaves'] -= holiday.number_of_days_temp
-                #~ if holiday.state == 'validate':
-                    #~ status_dict['leaves_taken'] += holiday.number_of_days_temp
-                    #~ status_dict['remaining_leaves'] -= holiday.number_of_days_temp
-        #~ return result
-
-    #~ def _user_left_days(self, cr, uid, ids, name, args, context=None):
-        #~ employee_id = False
-        #~ if context and 'employee_id' in context:
-            #~ employee_id = context['employee_id']
-        #~ else:
-            #~ employee_ids = self.pool.get('hr.employee').search(cr, uid, [('user_id', '=', uid)], context=context)
-            #~ if employee_ids:
-                #~ employee_id = employee_ids[0]
-        #~ if employee_id:
-            #~ res = self.get_days(cr, uid, ids, employee_id, context=context)
-        #~ else:
-            #~ res = dict((res_id, {'leaves_taken': 0, 'remaining_leaves': 0, 'max_leaves': 0}) for res_id in ids)
-        #~ return res
-
-        #~ 'max_leaves': fields.function(_user_left_days, string='Maximum Allowed', help='This value is given by the sum of all holidays requests with a positive value.', multi='user_left_days'),
-        #~ 'leaves_taken': fields.function(_user_left_days, string='Leaves Already Taken', help='This value is given by the sum of all holidays requests with a negative value.', multi='user_left_days'),
-        #~ 'remaining_leaves': fields.function(_user_left_days, string='Remaining Leaves', help='Maximum Leaves Allowed - Leaves Already Taken', multi='user_left_days'),
-        #~ 'virtual_remaining_leaves': fields.function(_user_left_days, string='Virtual Remaining Leaves', help='Maximum Leaves Allowed - Leaves Already Taken - Leaves Waiting Approval', multi='user_left_days'),
-
-
-    def name_get(self, cr, uid, ids, context=None):
-        if context is None:
-            context = {}
-        if not context.get('employee_id',False):
-            # leave counts is based on employee_id, would be inaccurate if not based on correct employee
-            return super(hr_holidays_status, self).name_get(cr, uid, ids, context=context)
-
-        res = []
-        for record in self.browse(cr, uid, ids, context=context):
-            name = record.name
-            if not record.limit:
-                name = name + ('  (%g/%g)' % (record.leaves_taken or 0.0, record.max_leaves or 0.0))
-            res.append((record.id, name))
-        return res
+        for employee in self.env['hr.employee'].search([]):
+            earning_days = self.env['hr.payslip'].get_leaves_earnings_days(employee,leaves.date_earning_start,leaves.date_earning_end)
+            if earning_days['employed_days'] - earning_days['absens_days'] > 0:
+                pass
+ 
 
 class hr_holidays_earning(models.Model):
     _name = "hr.holidays.earning"
@@ -146,7 +96,14 @@ class hr_employee(models.Model):
 
     holidays_earning_ids = fields.Many2many(string='Holiday Earnings',comodel_name="hr.holidays.earning")
 
-
-
+class hr_payslip(models.Model):
+    _inherit = 'hr.payslip'
+    
+    @api.model
+    def get_leaves_earnings_days(self,employee,date_from,date_to):
+        for slip in self.env['hr.payslip'].search([('employee_id','=',employee.id),('date_from','>=',date_from),('date_to','<=',date_to)]):
+            employed_days += slip.worked_days_line_ids.filtered(lambda l: l.code == 'WORK100').number_of_days if slip.worked_days_line_ids.filtered(lambda l: l.code == 'WORK100')
+            absent_days += sum(a.number_of_days for a in slip.worked_days_line_ids.filtered(lambda l: l.code != 'WORK100')])
+        return {'employed_days' : employed_days, 'absent_days': absent_days}
 
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
