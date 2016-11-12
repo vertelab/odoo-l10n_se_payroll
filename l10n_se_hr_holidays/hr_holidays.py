@@ -55,11 +55,15 @@ class hr_holidays_status(models.Model):
     
     @api.one
     def earn_leaves_days(self,leaves):
-        
         for employee in self.env['hr.employee'].search([]):
             earning_days = self.env['hr.payslip'].get_leaves_earnings_days(employee,leaves.date_earning_start,leaves.date_earning_end)
             if earning_days['employed_days'] - earning_days['absens_days'] > 0:
-                pass
+				leaves.create({
+						'name': '%s earned days' % leaves.name,
+						'employee_id': employee.id,
+						'holiday_status_id': leaves.id,
+						'number_of_days_temp': round(((earning_days['employed_days'] - earning_days['absens_days']) * employee.get_leaves_days(leaves.date_earning_start,leaves.date_earning_end) / 365) + 0.5,0),
+				})
  
 
 class hr_holidays_earning(models.Model):
@@ -95,15 +99,22 @@ class hr_employee(models.Model):
     _inherit = 'hr.employee'
 
     holidays_earning_ids = fields.Many2many(string='Holiday Earnings',comodel_name="hr.holidays.earning")
+    
+    @api.model
+    def get_leaves_days(self,date_from,date_to):
+		return 25.0
+		#employee.contract_ids.filtered(lambda c: c.date_end == None or c.date_end > leaves.date_earning_start).leaves_days
 
 class hr_payslip(models.Model):
     _inherit = 'hr.payslip'
     
     @api.model
     def get_leaves_earnings_days(self,employee,date_from,date_to):
+		employed_days = worked_days = absent_days = 0
         for slip in self.env['hr.payslip'].search([('employee_id','=',employee.id),('date_from','>=',date_from),('date_to','<=',date_to)]):
-            employed_days += slip.worked_days_line_ids.filtered(lambda l: l.code == 'WORK100').number_of_days if slip.worked_days_line_ids.filtered(lambda l: l.code == 'WORK100')
+			employed_days += (fields.Date.from_string(slip.date_to) - fields.Date.from_string(slip.date_from)).days
+            worked_days += slip.worked_days_line_ids.filtered(lambda l: l.code == 'WORK100').number_of_days if slip.worked_days_line_ids.filtered(lambda l: l.code == 'WORK100')
             absent_days += sum(a.number_of_days for a in slip.worked_days_line_ids.filtered(lambda l: l.code != 'WORK100')])
-        return {'employed_days' : employed_days, 'absent_days': absent_days}
+        return {'employed_days' : employed_days, 'absent_days': absent_days, 'worked_days': worked_days}
 
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
