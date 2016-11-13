@@ -54,17 +54,25 @@ class hr_holidays_status(models.Model):
     
     
     @api.one
-    def earn_leaves_days(self,leaves):
+    def earn_leaves_days(self):
         for employee in self.env['hr.employee'].search([]):
-            earning_days = self.env['hr.payslip'].get_leaves_earnings_days(employee,leaves.date_earning_start,leaves.date_earning_end)
-            if earning_days['employed_days'] - earning_days['absens_days'] > 0:
-				leaves.create({
-						'name': '%s earned days' % leaves.name,
+            earning_days = self.env['hr.payslip'].get_leaves_earnings_days(employee,self.date_earning_start,self.date_earning_end)
+            if earning_days['employed_days'] - earning_days['absent_days'] > 0:
+                holiday = self.env['hr.holidays'].create({
+						'name': '%s earned days' % self.name,
 						'employee_id': employee.id,
-						'holiday_status_id': leaves.id,
-						'number_of_days_temp': round(((earning_days['employed_days'] - earning_days['absens_days']) * employee.get_leaves_days(leaves.date_earning_start,leaves.date_earning_end) / 365) + 0.5,0),
+						'holiday_status_id': self.id,
+                        'type': 'add',
+                        'state': 'validate',
+						'number_of_days_temp': round(((earning_days['employed_days'] - earning_days['absent_days']) * employee.get_leaves_days(self.date_earning_start,self.date_earning_end) / 365) + 0.5,0),
 				})
- 
+                self.env['mail.message'].create({
+                    'body': _("Earn days %s: %s (%s)" % (earning_days,holiday.number_of_days_temp,employee.get_leaves_days(self.date_earning_start,self.date_earning_end))),
+                    'subject': "Calculation",
+                    'author_id': self.env['res.users'].browse(self.env.uid).partner_id.id,
+                    'res_id': holiday.id,
+                    'model': holiday._name,
+                    'type': 'notification',})
 
 class hr_holidays_earning(models.Model):
     _name = "hr.holidays.earning"
@@ -102,7 +110,7 @@ class hr_employee(models.Model):
     
     @api.model
     def get_leaves_days(self,date_from,date_to):
-		return 25.0
+		return self.contract_id.vacation_days
 		#employee.contract_ids.filtered(lambda c: c.date_end == None or c.date_end > leaves.date_earning_start).leaves_days
 
 class hr_payslip(models.Model):
@@ -110,11 +118,11 @@ class hr_payslip(models.Model):
     
     @api.model
     def get_leaves_earnings_days(self,employee,date_from,date_to):
-		employed_days = worked_days = absent_days = 0
+        employed_days = worked_days = absent_days = 0
         for slip in self.env['hr.payslip'].search([('employee_id','=',employee.id),('date_from','>=',date_from),('date_to','<=',date_to)]):
-			employed_days += (fields.Date.from_string(slip.date_to) - fields.Date.from_string(slip.date_from)).days
-            worked_days += slip.worked_days_line_ids.filtered(lambda l: l.code == 'WORK100').number_of_days if slip.worked_days_line_ids.filtered(lambda l: l.code == 'WORK100')
-            absent_days += sum(a.number_of_days for a in slip.worked_days_line_ids.filtered(lambda l: l.code != 'WORK100')])
+            employed_days += (fields.Date.from_string(slip.date_to) - fields.Date.from_string(slip.date_from)).days
+            worked_days += slip.worked_days_line_ids.filtered(lambda l: l.code == 'WORK100').number_of_days if slip.worked_days_line_ids.filtered(lambda l: l.code == 'WORK100') else 0.0
+            absent_days += sum(a.number_of_days for a in slip.worked_days_line_ids.filtered(lambda l: l.code != 'WORK100'))
         return {'employed_days' : employed_days, 'absent_days': absent_days, 'worked_days': worked_days}
 
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
