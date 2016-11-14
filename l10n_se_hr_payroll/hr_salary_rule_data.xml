@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <openerp>
-  <data>
+  <data noupdate="1">
     <record id="hr_salary_rule-AGE" model="hr.salary.rule">
       <field name="category_id" ref="hr_salary_rule_category-SYSTEM" />
       <field name="code">AGE</field>
@@ -351,31 +351,7 @@ result = 2 * contract.wage / 160
       <field name="name">Kvalificerad övertid (antal timmar)</field>
       <field name="input_id" ref="hr_salary_rule-kval" />
     </record>
-    <!--
-         =====
-    -->
-    <record id="hr_salary_rule-sjk" model="hr.salary.rule">
-      <field name="category_id" ref="hr_salary_rule_category-BRUAVG" />
-      <field name="code">sjk</field>
-      <field name="salary_art">141</field>
-      <field name="name">Sjukavdrag</field>
-      <field name="sequence">210</field>
-      <field name="appears_on_payslip">True</field>
-      <field name="condition_select">none</field>
-      <field name="amount_select">code</field>
-      <field name="amount_python_compute">
-result_qty = inputs.sjkdag.amount
-# result_rate = 150
-result = contract.wage / 20
-      </field>
-      <field name="quantity">1</field>
-    </record>
-    <!-- /// -->
-    <record id="hr_rule_input-sjkdag" model="hr.rule.input">
-      <field name="code">sjkdag</field>
-      <field name="name">Sjukfrånvaro (antal dagar)</field>
-      <field name="input_id" ref="hr_salary_rule-sjk" />
-    </record>
+    
     <!--
          =====
 categories.BRUTTO - categories.NETAVG + categories.NETTIL
