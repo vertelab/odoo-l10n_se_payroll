@@ -5,35 +5,30 @@
             <field name="name">hr.contract.form.inherit</field>
             <field name="model">hr.contract</field>
             <field name="priority">20</field>
-            <field name="inherit_id" ref="hr_contract.hr_contract_view_form"/>
+            <field name="inherit_id" ref="hr_contract.hr_contract_view_form" />
             <field name="arch" type="xml">
-            <data>
-                 <xpath expr="//field[@name='struct_id']" position="after">
-<!--
-                    <field name="travel_reimbursement_amount"/>
--->
-                    <field name="prel_tax_amount"/>
-                    <field name="wage_tax_base"/>
-
-                    <field name="prel_tax_tabel" placeholder="SKATTETABELL 31/Kolumn 1/Ingen jämkning"/>
-                    <field name="prel_tax_url" widget="url" readonly="True"/>
-                    
-<!--
-                    <field name="car_company_amount"/>
-                    <field name="car_employee_deduction"/>
-                    <field name="car_deduction_url" widget="url" readonly="True" />
--->
-
-                    <field name="vacation_days"/>
-<!--
-                    <field name="office_fund"/>
--->
-                    
-                 </xpath>
-            </data>
+                <data>
+                    <xpath expr="//field[@name='struct_id']" position="after">
+                        <!--
+                             <field name="travel_reimbursement_amount"/>
+                        -->
+                        <field name="prel_tax_amount" />
+                        <field name="wage_tax_base" />
+                        <field name="prel_tax_tabel" placeholder="SKATTETABELL 31/Kolumn 1/Ingen jämkning" />
+                        <field name="prel_tax_url" widget="url" readonly="True" />
+                        <!--
+                             <field name="car_company_amount"/>
+                             <field name="car_employee_deduction"/>
+                             <field name="car_deduction_url" widget="url" readonly="True" />
+                        -->
+                        <field name="vacation_days" />
+                        <!--
+                             <field name="office_fund"/>
+                        -->
+                    </xpath>
+                </data>
             </field>
         </record>
-
         <record id="l10n_se_hr_payroll.act_hr_employee_income_statement_list" model="ir.actions.act_window">
             <field name="res_model">hr.employee.income_statement</field>
             <field name="name">Income Statement</field>
@@ -41,294 +36,299 @@
             <field name="view_mode">tree,form</field>
             <field name="context">{'search_default_employee_id': [active_id], 'default_employee_id': active_id}</field>
         </record>
-
-
         <record id="hr_employee_form" model="ir.ui.view">
             <field name="name">hr.employee.inherit.form</field>
             <field name="model">hr.employee</field>
-            <field name="inherit_id" ref="hr.view_employee_form"/>
+            <field name="inherit_id" ref="hr.view_employee_form" />
             <field name="priority">30</field>
             <field name="arch" type="xml">
-            <data>
-                <xpath expr="//field[@name='place_of_birth']" position="after">
-                    <field name="age"/> 
-                </xpath>
-                <xpath expr="//div[@name='button_box']" position="inside">
-                        <button name="%(l10n_se_hr_payroll.act_hr_employee_income_statement_list)d"  
-                            class="oe_stat_button" 
-                            icon="fa-money" 
-                            type="action" 
-                            groups="base.group_hr_user">
-                            <field name="income_statement_count" widget="statinfo" string="Income Statement"/>
+                <data>
+                    <xpath expr="//field[@name='place_of_birth']" position="after">
+                        <field name="age" />
+                    </xpath>
+                    <xpath expr="//div[@name='button_box']" position="inside">
+                        <button name="%(l10n_se_hr_payroll.act_hr_employee_income_statement_list)d" class="oe_stat_button" icon="fa-money" type="action" groups="base.group_hr_user">
+                            <field name="income_statement_count" widget="statinfo" string="Income Statement" />
                         </button>
-                    </xpath>                
-            </data>
+                    </xpath>
+                </data>
             </field>
         </record>
-
-
         <record id="hr_employee_income_statement" model="ir.ui.view">
             <field name="name">hr.employee.income_statement.tree</field>
             <field name="model">hr.employee.income_statement</field>
             <field name="priority">30</field>
             <field name="arch" type="xml">
-
-                <tree string="Employee Income Statement" >
-                <field name="year"/>
-                <field name="area_no_id"/>
-                <field name="value"/>
+                <tree string="Employee Income Statement">
+                    <field name="year" />
+                    <field name="area_no_id" />
+                    <field name="value" />
                 </tree>
-
             </field>
         </record>
-
-
-
-
-
-       <report
-            id="l10n_se_hr_payroll.payslip_2"
-            model="hr.payslip"
-            string="Payslip"
-            report_type="qweb-pdf"
-            name="l10n_se_hr_payroll.payslip_2_report"
-            file="l10n_se_hr_payroll.payslip_2_report"
-            attachment_use="True"
-            attachment="('payslip_'+(object.number.replace('/','') or ''))+'.pdf'"
-        />
-           
-       <template id="payslip_2_report">
+        <report id="l10n_se_hr_payroll.payslip_2" model="hr.payslip" string="Payslip" report_type="qweb-pdf" name="l10n_se_hr_payroll.payslip_2_report" file="l10n_se_hr_payroll.payslip_2_report" attachment_use="True" attachment="('payslip_'+(object.number.replace('/','') or ''))+'.pdf'" />
+        <template id="payslip_2_report">
             <t t-call="report.html_container">
                 <t t-foreach="doc_ids" t-as="doc_id">
-                    <t t-raw="translate_doc(doc_id, doc_model, 'employee_id.address_home_id.lang', 'l10n_se_hr_payroll.payslip_2_document')"/>
+                    <t t-raw="translate_doc(doc_id, doc_model, 'employee_id.address_home_id.lang', 'l10n_se_hr_payroll.payslip_2_document')" />
                 </t>
             </t>
-        </template> 
-
+        </template>
         <template id="payslip_2_document">
             <t t-call="report.external_layout">
-                <div class="page">
-                    <div class="oe_structure"/>
+                <div class="container">
                     <div class="row">
-                        <div class="col-xs-6">
-                       <section class="para_large">
-          <div class="container">
-            <div class="row">
-              <div class="col-md-12 mb16 mt16">
-
-                <h1>Lönespecifikation</h1>
-<table class="table table-bordered table-responsive">
-	
-	<tr >
-		<td rowspan="2" width="20%" >
-			Löntagare<br/>
-		</td>
-		<td colspan="3" width="60%" >
-			<sup>Namn</sup><br/>
-            <span t-field="o.employee_id.name"/>
-
-		</td>
-		<td width="20%" style="border: 1px solid #000000; padding: 0.1cm">
-			<sup>Personnummer</sup><br/>
-            <span t-field="o.employee_id.identification_id"/>
-
-		</td>
-	</tr>
-	<tr >
-		<td colspan="3" width="60%" >
-			<sup>Adress</sup><br/>
-            <span t-field="o.employee_id.address_home_id.street"/>, <span t-field="o.employee_id.address_home_id.zip"/>
-                        <span t-field="o.employee_id.address_home_id.city"/>            
-		</td>
-		<td width="20%" style="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000; padding-top: 0cm; padding-bottom: 0.1cm; padding-left: 0.1cm; padding-right: 0.1cm">
-			<sup>Kontonummer</sup><br/>
-            <span t-field="o.employee_id.bank_account_id.acc_number"/> 
-		</td>
-	</tr>
-	<tr >
-		<td rowspan="2" width="20%" >
-			<sup>Arbetsgivare</sup><br/>
-		</td>
-		<td colspan="3" width="60%" >
-			<sup>Företag</sup><br/>
-             <span t-field="o.employee_id.company_id.name"/> 
-            
-		</td>
-		<td width="20%" style="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000; padding-top: 0cm; padding-bottom: 0.1cm; padding-left: 0.1cm; padding-right: 0.1cm">
-			<sup>Organisationsnummer</sup><br/>
-             <span t-field="o.employee_id.company_id.company_registry"/> 
-
-		</td>
-	</tr>
-	<tr >
-		<td colspan="3" width="60%" >
-			<sup>Adress</sup><br/>
-            <span t-field="o.employee_id.company_id.street"/>, <span t-field="o.employee_id.company_id.zip"/>
-                        <span t-field="o.employee_id.company_id.city"/>        
-		</td>
-		<td width="20%" style="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000; padding-top: 0cm; padding-bottom: 0.1cm; padding-left: 0.1cm; padding-right: 0.1cm">
-			<sup>Telefon</sup><br/>
-            <span t-field="o.employee_id.company_id.partner_id.phone"/> 
-		</td>
-	</tr>
-	<tr >
-		<td width="20%" >
-			<sup>Period</sup><br/>
-		</td>
-		<td colspan="2" width="40%" >
-			<sup>Löneperiod</sup><br/>
-            <span t-field="o.name"/> <span t-field="o.number"/> 
-
-		</td>
-		<td colspan="2" width="40%" style="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000; padding-top: 0cm; padding-bottom: 0.1cm; padding-left: 0.1cm; padding-right: 0.1cm">
-			<sup>Utbetalningsdag</sup><br/>
-            ????
-		</td>
-	</tr>
-	<tr >
-		<td width="20%" >
-			<sup>Specifikation</sup><br/>
-		</td>
-		<td colspan="2" width="40%" >
-			<small>Skattepliktiga ersättningar och avdrag</small><br/>
-			<table>
-				<tr >
-					<td width="5%" ><b>Antal</b></td>
-					<td width="10%" ><b>Kod</b></td>
-					<td width="40%" ><b>Beskrivning</b></td>
-					<td width="5%" ><b>%</b></td>
-					<td width="20%" ><b>a pris</b></td>
-					<td width="20%" ><b>Summa</b></td>
-				</tr>
-				<tr t-foreach="o.line_ids" t-as="line">
-					<td><span t-field="line.quantity"/></td>
-					<td><span t-field="line.code"/></td>
-					<td><span t-field="line.name"/></td>
-					<td><span t-field="line.rate"/></td>
-					<td><span t-field="line.amount"/></td>
-					<td><span t-field="line.total"/></td>
-				</tr>
-			</table>
-		</td>
-		<td colspan="2" width="40%" >
-			<sup>Skattefria ersättningar och avdrag</sup><br/>
-			<p><br/>
-
-			</p>
-			<p><br/>
-
-			</p>
-		</td>
-	</tr>
-	<tr >
-		<td width="20%" >
-			<sup>Avgifter</sup><br/>
-		</td>
-		<td width="20%" >
-			<p><br/>
-
-			</p>
-		</td>
-		<td width="20%" >
-			<p><br/>
-
-			</p>
-		</td>
-		<td width="20%" >
-			<sup>Arbetsgivaravgift</sup><br/>
-		</td>
-		<td width="20%" >
-			<p><br/>
-
-			</p>
-		</td>
-	</tr>
-	<tr >
-		<td width="20%" >
-			<sup>Saldon</sup><br/>
-		</td>
-		<td width="20%" >
-			<sup>Kvarvarande semester</sup><br/>
-            <span t-field="o.contract_id.vacation_days"/> 
-		</td>
-		<td width="20%" >
-			<p><br/>
-
-			</p>
-		</td>
-		<td width="20%" >
-			<p><br/>
-
-			</p>
-		</td>
-		<td width="20%" >
-			<p><br/>
-
-			</p>
-		</td>
-	</tr>
-	<tr >
-		<td width="20%" >
-			<sup>Meddelande</sup><br/>
-		</td>
-		<td colspan="4" width="80%">
-			<p><br/>
-
-			</p>
-			<p><br/>
-
-			</p>
-			<p><br/>
-
-			</p>
-			<p><br/>
-
-			</p>
-			<p><br/>
-
-			</p>
-			<p><br/>
-
-			</p>
-			<p><br/>
-
-			</p>
-		</td>
-	</tr>
-	<tr >
-		<td width="20%" >
-			<sup>Utbetalning</sup><br/>
-		</td>
-		<td width="20%" >
-			<sup>Skattepliktig lön</sup><br/>
-		</td>
-		<td width="20%" >
-			<sup>Preleminärskatt</sup><br/>
-		</td>
-		<td width="20%" >
-			<sup>Skattefri lön</sup><br/>
-		</td>
-		<td width="20%" >
-			<sup>Nettolön att erhålla</sup><br/>
-		</td>
-	</tr>
-</table>
-
-
-               
-              </div>
-            </div>
-          </div>
-        </section>
-
+                        <div class="col-md-12 mb16 mt16">
+                            <h1>Lönespecifikation</h1>
+                            <table class="table table-bordered table-responsive">
+                                <tr>
+                                    <td rowspan="2" width="20%">
+                                        Löntagare
+                                        <br />
+                                    </td>
+                                    <td colspan="3" width="60%">
+                                        <sup>Namn</sup>
+                                        <br />
+                                        <span t-field="o.employee_id.name" />
+                                    </td>
+                                    <td width="20%" style="border: 1px solid #000000; padding: 0.1cm">
+                                        <sup>Personnummer</sup>
+                                        <br />
+                                        <span t-field="o.employee_id.identification_id" />
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="3" width="60%">
+                                        <sup>Adress</sup>
+                                        <br />
+                                        <span t-field="o.employee_id.address_home_id.street" />
+                                        ,
+                                        <span t-field="o.employee_id.address_home_id.zip" />
+                                        <span t-field="o.employee_id.address_home_id.city" />
+                                    </td>
+                                    <td width="20%" style="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000; padding-top: 0cm; padding-bottom: 0.1cm; padding-left: 0.1cm; padding-right: 0.1cm">
+                                        <sup>Kontonummer</sup>
+                                        <br />
+                                        <span t-field="o.employee_id.bank_account_id.acc_number" />
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td rowspan="2" width="20%">
+                                        <sup>Arbetsgivare</sup>
+                                        <br />
+                                    </td>
+                                    <td colspan="3" width="60%">
+                                        <sup>Företag</sup>
+                                        <br />
+                                        <span t-field="o.employee_id.company_id.name" />
+                                    </td>
+                                    <td width="20%" style="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000; padding-top: 0cm; padding-bottom: 0.1cm; padding-left: 0.1cm; padding-right: 0.1cm">
+                                        <sup>Organisationsnummer</sup>
+                                        <br />
+                                        <span t-field="o.employee_id.company_id.company_registry" />
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="3" width="60%">
+                                        <sup>Adress</sup>
+                                        <br />
+                                        <span t-field="o.employee_id.company_id.street" />
+                                        ,
+                                        <span t-field="o.employee_id.company_id.zip" />
+                                        <span t-field="o.employee_id.company_id.city" />
+                                    </td>
+                                    <td width="20%" style="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000; padding-top: 0cm; padding-bottom: 0.1cm; padding-left: 0.1cm; padding-right: 0.1cm">
+                                        <sup>Telefon</sup>
+                                        <br />
+                                        <span t-field="o.employee_id.company_id.partner_id.phone" />
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td width="20%">
+                                        <sup>Period</sup>
+                                        <br />
+                                    </td>
+                                    <td colspan="2" width="40%">
+                                        <sup>Löneperiod</sup>
+                                        <br />
+                                        <span t-field="o.name" />
+                                        <span t-field="o.number" />
+                                    </td>
+                                    <td colspan="2" width="40%" style="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000; padding-top: 0cm; padding-bottom: 0.1cm; padding-left: 0.1cm; padding-right: 0.1cm">
+                                        <sup>Utbetalningsdag</sup>
+                                        <br />
+                                        ????
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td width="20%">
+                                        <sup>Specifikation</sup>
+                                        <br />
+                                    </td>
+                                    <td colspan="2" width="40%">
+                                        <small>Skattepliktiga ersättningar och avdrag</small>
+                                        <br />
+                                        <table>
+                                            <tr>
+                                                <td width="5%">
+                                                    <b>Antal</b>
+                                                </td>
+                                                <td width="10%">
+                                                    <b>Kod</b>
+                                                </td>
+                                                <td width="40%">
+                                                    <b>Beskrivning</b>
+                                                </td>
+                                                <td width="5%">
+                                                    <b>%</b>
+                                                </td>
+                                                <td width="20%">
+                                                    <b>a pris</b>
+                                                </td>
+                                                <td width="20%">
+                                                    <b>Summa</b>
+                                                </td>
+                                            </tr>
+                                            <tr t-foreach="o.line_ids" t-as="line">
+                                                <td>
+                                                    <span t-field="line.quantity" />
+                                                </td>
+                                                <td>
+                                                    <span t-field="line.code" />
+                                                </td>
+                                                <td>
+                                                    <span t-field="line.name" />
+                                                </td>
+                                                <td>
+                                                    <span t-field="line.rate" />
+                                                </td>
+                                                <td>
+                                                    <span t-field="line.amount" />
+                                                </td>
+                                                <td>
+                                                    <span t-field="line.total" />
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                    <td colspan="2" width="40%">
+                                        <sup>Skattefria ersättningar och avdrag</sup>
+                                        <br />
+                                        <p>
+                                            <br />
+                                        </p>
+                                        <p>
+                                            <br />
+                                        </p>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td width="20%">
+                                        <sup>Avgifter</sup>
+                                        <br />
+                                    </td>
+                                    <td width="20%">
+                                        <p>
+                                            <br />
+                                        </p>
+                                    </td>
+                                    <td width="20%">
+                                        <p>
+                                            <br />
+                                        </p>
+                                    </td>
+                                    <td width="20%">
+                                        <sup>Arbetsgivaravgift</sup>
+                                        <br />
+                                    </td>
+                                    <td width="20%">
+                                        <p>
+                                            <br />
+                                        </p>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td width="20%">
+                                        <sup>Saldon</sup>
+                                        <br />
+                                    </td>
+                                    <td width="20%">
+                                        <sup>Kvarvarande semester</sup>
+                                        <br />
+                                        <span t-field="o.contract_id.vacation_days" />
+                                    </td>
+                                    <td width="20%">
+                                        <p>
+                                            <br />
+                                        </p>
+                                    </td>
+                                    <td width="20%">
+                                        <p>
+                                            <br />
+                                        </p>
+                                    </td>
+                                    <td width="20%">
+                                        <p>
+                                            <br />
+                                        </p>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td width="20%">
+                                        <sup>Meddelande</sup>
+                                        <br />
+                                    </td>
+                                    <td colspan="4" width="80%">
+                                        <p>
+                                            <br />
+                                        </p>
+                                        <p>
+                                            <br />
+                                        </p>
+                                        <p>
+                                            <br />
+                                        </p>
+                                        <p>
+                                            <br />
+                                        </p>
+                                        <p>
+                                            <br />
+                                        </p>
+                                        <p>
+                                            <br />
+                                        </p>
+                                        <p>
+                                            <br />
+                                        </p>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td width="20%">
+                                        <sup>Utbetalning</sup>
+                                        <br />
+                                    </td>
+                                    <td width="20%">
+                                        <sup>Skattepliktig lön</sup>
+                                        <br />
+                                    </td>
+                                    <td width="20%">
+                                        <sup>Preleminärskatt</sup>
+                                        <br />
+                                    </td>
+                                    <td width="20%">
+                                        <sup>Skattefri lön</sup>
+                                        <br />
+                                    </td>
+                                    <td width="20%">
+                                        <sup>Nettolön att erhålla</sup>
+                                        <br />
+                                    </td>
+                                </tr>
+                            </table>
                         </div>
                     </div>
-                    <div class="oe_structure"/>
                 </div>
             </t>
         </template>
-
-        
-        
     </data>
 </openerp>

@@ -39,18 +39,18 @@ class hr_contract(models.Model):
     _inherit = 'hr.contract'
 
     prel_tax_amount      = fields.Float(string="Prel skatt kr", digits_compute=dp.get_precision('Payroll'),help="Ange preleminär skatt i kronor" )
-    
+
     def _wage_tax_base(self):
-        self.wage_tax_base = (self.wage - self.aws_amount) + self.ded_amount 
-        
+        self.wage_tax_base = (self.wage - self.aws_amount) + self.ded_amount
+
     wage_tax_base        = fields.Float(string="Lönunderlag",digits_compute=dp.get_precision('Payroll'),help="Uträknat löneunderlag för beräkning av preleminär skatt" )
     prel_tax_tabel       = fields.Char(string="Prel skatt info", help="Ange skattetabell/kolumn/ev jämkning som ligger till grund för angivet preleminärskatteavdrag")
     prel_tax_url         = fields.Char(string="Skattetabeller SKV", default="http://www.skatteverket.se/privat/skatter/arbeteinkomst/vadblirskattenskattetabellermm/skattetabeller/",readonly=True, help="Ange skattetabell/kolumn/ev jämkning som ligger till grund för angivet preleminärskatteavdrag")
     #~ car_company_amount     = fields.Float('Bruttolöneavdrag för bil', digits_compute=dp.get_precision('Payroll'), help="Bruttolöneavdraget för företagsbil, dvs företagets kostnad för företagsbilen")
-    #~ car_employee_deduction = fields.Float(string='Förmånsvärde för bil', digits_compute=dp.get_precision('Payroll'), help="Beräknat förmånsvärde för bil från skatteverket",) 
-    #~ car_deduction_url      = fields.Char(string='Förmånsvärdesberäkning SKV', default="http://www.skatteverket.se/privat/skatter/biltrafik/bilformansberakning", readonly=True,help="Beräknat förmånsvärde för bil från skatteverket") 
-    vacation_days = fields.Float(string='Semesterdagar', digits_compute=dp.get_precision('Payroll'), help="Sparad semester i dagar",) 
-    #~ office_fund = fields.Float(string='Office fund', digits_compute=dp.get_precision('Payroll'), help="Fund for personal office supplies",) 
+    #~ car_employee_deduction = fields.Float(string='Förmånsvärde för bil', digits_compute=dp.get_precision('Payroll'), help="Beräknat förmånsvärde för bil från skatteverket",)
+    #~ car_deduction_url      = fields.Char(string='Förmånsvärdesberäkning SKV', default="http://www.skatteverket.se/privat/skatter/biltrafik/bilformansberakning", readonly=True,help="Beräknat förmånsvärde för bil från skatteverket")
+    vacation_days = fields.Float(string='Semesterdagar', digits_compute=dp.get_precision('Payroll'), help="Sparad semester i dagar",)
+    #~ office_fund = fields.Float(string='Office fund', digits_compute=dp.get_precision('Payroll'), help="Fund for personal office supplies",)
 
     def _get_param(self,param,value):
         if not self.env['ir.config_parameter'].get_param(param):
@@ -58,22 +58,22 @@ class hr_contract(models.Model):
         return self.env['ir.config_parameter'].get_param(param)
 
     def logthis(self,message):
-		#
+        #
         #from openerp.osv import osv
         _logger.error(message)
         #raise Warning(message)
         #raise osv.except_osv(_('Can not remove root user!'), _('You can not remove the admin user'))
-        
+
     def evalthis(self,code,variables):
         #~ _logger.error(code)
         from openerp.tools.safe_eval import safe_eval as eval
         eval(code,variables,mode='exec',nocopy=True)
-        
+
     #~ def get_account_install(self, code): # Leif Robin
         #~ return self.env['account.account'].search([('code','=',code)], limit=1)[0]
 
 # Skapa semesterdagar månad för månad 12,85% (?) som en logg. I loggen skall aktuell månadslön lagras för semesterlönberäkning
-# Förbruka semester LIFO  
+# Förbruka semester LIFO
 # Semsterintjänandeperioden == april - mars, LIFO förra intjänandeåret. Får ej använda aktuellt intjänande år (== ej betald semester)
 
 
@@ -93,15 +93,15 @@ class hr_contract(models.Model):
     #~ ded_amount = fields.Float(string="Bruttolöneavdrag", compute=_compute_sheet,digits_compute=dp.get_precision('Payroll'),help="Avdrag från bruttolönen")
 
     def logthis(self,message):
-		#
+        #
         #from openerp.osv import osv
         _logger.error(message)
         #raise Warning(message)
         #raise osv.except_osv(_('Can not remove root user!'), _('You can not remove the admin user'))
-        
-	def evalthis(self,code,variables):
-		from openerp.tools.safe_eval import safe_eval as eval
-		eval(code,variables,mode='exec',nocopy=True)
+
+    def evalthis(self,code,variables):
+        from openerp.tools.safe_eval import safe_eval as eval
+        eval(code,variables,mode='exec',nocopy=True)
 
     def is_rule(self,rules,code):
         return rules.dict.get(code, False)
@@ -110,16 +110,16 @@ class hr_contract(models.Model):
             #~ return True
         #~ except:
             #~ return False
-            
+
 class hr_employee(models.Model):
     _inherit = 'hr.employee'
 
     @api.one
     def _age(self):
         #raise Warning('birthday %s today  year s' % (date.today().year))
-        self.age= -1 if not self.birthday else date.today().year - datetime.strptime(self.birthday, DEFAULT_SERVER_DATE_FORMAT).year 
+        self.age= -1 if not self.birthday else date.today().year - datetime.strptime(self.birthday, DEFAULT_SERVER_DATE_FORMAT).year
     age = fields.Integer(string="Age", compute=_age, help="Age to calculate social security deduction")
-    
+
     @api.one
     def _income_statement_count(self):
         self.income_statement_count = len(set([i.year for i in self.env['hr.employee.income_statement'].search([('employee_id','=',self.id)])]))
@@ -147,23 +147,27 @@ class hr_employee_income_statement(models.Model):
         elif self.area_no_id.type == "rule" and self.area_no_id.salary_rule_id:
             self.value = self.area_no_id.salary_rule_id.name
     value = fields.Char(string="Value",compute="_value")
-    
+
 class hr_income_statement_area_no(models.Model):
     _name = 'hr.income_statement.area_no'
     _description = "Area numbers in the Income Statement form"
-    
+
     @api.multi
     def name_get(self):
         result = []
         for i in self:
             result.append((i.id, "(%s) %s" % (i.area_no, i.name)))
         return result
-    
+
     name = fields.Char(string="Name",required=True)
     area_no = fields.Char('Area no',required=True)
     type = fields.Selection([('code','Code'),('amount','Amount'),('checkbox','Checkbox'),('rule','Rule')],string="Type",required=True)
     salary_rule_id =fields.Many2one('hr.salary.rule', 'Rule',)
     element_name = fields.Char(string="Element name",help="Name in XML-file")
 
+class hr_salary_rule(models.Model):
+    _inherit = 'hr.salary.rule'
+
+    salary_art = fields.Char(string='Salary art')
 
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:

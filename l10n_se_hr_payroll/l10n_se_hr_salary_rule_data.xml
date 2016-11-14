@@ -91,6 +91,7 @@ if age > 77:
     <record id="hr_salary_rule-gl" model="hr.salary.rule">
       <field name="category_id" ref="hr_salary_rule_category-BAS" />
       <field name="code">gl</field>
+      <field name="salary_art">101</field>
       <field name="name">Grundlön</field>
       <field name="sequence">10</field>
       <field name="appears_on_payslip">True</field>
@@ -107,7 +108,7 @@ if age > 77:
       <field name="code">bl</field>
       <field name="name">Bruttolön</field>
       <field name="sequence">300</field>
-      <field name="appears_on_payslip" eval="False"/>
+      <field name="appears_on_payslip" eval="True"/>
       <field name="condition_select">none</field>
       <field name="amount_select">code</field>
       <field name="amount_python_compute">result = categories.BAS - categories.BRUAVG + categories.BRUTIL</field>
@@ -148,6 +149,7 @@ if age > 77:
       <field name="parent_rule_id" ref="hr_salary_rule-sa" />
       <field name="category_id" ref="hr_salary_rule_category-SKV" />
       <field name="code">sau</field>
+      <field name="salary_art">s110</field>
       <field name="name">Sociala avgifter ungdom 25,46%</field>
       <field name="sequence">490</field>
       <field name="appears_on_payslip">True</field>
@@ -181,6 +183,7 @@ if age > 77:
       <field name="parent_rule_id" ref="hr_salary_rule-sa" />
       <field name="category_id" ref="hr_salary_rule_category-SKV" />
       <field name="code">san</field>
+      <field name="salary_art">s110</field>
       <field name="name">Sociala avgifter 31,42%</field>
       <field name="sequence">490</field>
       <field name="appears_on_payslip">True</field>
@@ -229,6 +232,7 @@ if age > 77:
       <field name="parent_rule_id" ref="hr_salary_rule-sa" />
       <field name="category_id" ref="hr_salary_rule_category-SKV" />
       <field name="code">sap</field>
+      <field name="salary_art">s110</field>
       <field name="name">Sociala avgifter pensionär 10,21%</field>
       <field name="sequence">490</field>
       <field name="appears_on_payslip">True</field>
@@ -247,6 +251,7 @@ if age > 77:
       <field name="parent_rule_id" ref="hr_salary_rule-sap" />
       <field name="category_id" ref="hr_salary_rule_category-SKV" />
       <field name="code">(sap)</field>
+      <field name="salary_art">s110</field>
       <field name="name">Avräkning lagstadgade sociala avgifter</field>
       <field name="sequence">490</field>
       <field name="appears_on_payslip">True</field>
@@ -279,6 +284,7 @@ if age > 77:
       <field name="parent_rule_id" ref="hr_salary_rule-pre" />
       <field name="category_id" ref="hr_salary_rule_category-NETAVG" />
       <field name="code">prej</field>
+      <field name="salary_art">s100</field>
       <field name="name">Preliminärskatt (jämkad)</field>
       <field name="sequence">690</field>
       <field name="appears_on_payslip" eval="True"/>
@@ -326,6 +332,7 @@ if age > 77:
     <record id="hr_salary_rule-kval" model="hr.salary.rule">
       <field name="category_id" ref="hr_salary_rule_category-BRUTIL" />
       <field name="code">kval</field>
+      <field name="salary_art">111</field>
       <field name="name">Kvalificerad övertid</field>
       <field name="sequence">115</field>
       <field name="appears_on_payslip">True</field>
@@ -350,6 +357,7 @@ result = 2 * contract.wage / 160
     <record id="hr_salary_rule-sjk" model="hr.salary.rule">
       <field name="category_id" ref="hr_salary_rule_category-BRUAVG" />
       <field name="code">sjk</field>
+      <field name="salary_art">141</field>
       <field name="name">Sjukavdrag</field>
       <field name="sequence">210</field>
       <field name="appears_on_payslip">True</field>
@@ -375,6 +383,7 @@ categories.BRUTTO - categories.NETAVG + categories.NETTIL
     <record id="hr_salary_rule-resmil" model="hr.salary.rule">
       <field name="category_id" ref="hr_salary_rule_category-NETTIL" />
       <field name="code">resmil</field>
+      <field name="salary_art">730</field>
       <field name="name">Milersättning</field>
       <field name="sequence">510</field>
       <field name="appears_on_payslip">True</field>
@@ -452,9 +461,10 @@ result = 18.5
     <field name="parent_rule_id" ref="hr_salary_rule-blfl" />
     <field name="category_id" ref="hr_salary_rule_category-HANDLER" />
     <field name="code">blflsum</field>
+    <field name="salary_art">101</field>
     <field name="name">Bruttolön företagsledare (ungdom)</field>
     <field name="sequence">400</field>
-    <field name="appears_on_payslip" eval="True" />
+    <field name="appears_on_payslip" eval="False" />
     <field name="condition_select">python</field>
     <field name="condition_python">result = rules.dict.get('AGEU', False)</field>
     <field name="amount_select">code</field>
@@ -469,9 +479,10 @@ result = 18.5
     <field name="parent_rule_id" ref="hr_salary_rule-blfl" />
     <field name="category_id" ref="hr_salary_rule_category-HANDLER" />
     <field name="code">blflu</field>
+    <field name="salary_art">101</field>
     <field name="name">Bruttolön företagsledare (ungdom)</field>
     <field name="sequence">400</field>
-    <field name="appears_on_payslip" eval="True" />
+    <field name="appears_on_payslip" eval="False" />
     <field name="condition_select">python</field>
     <field name="condition_python">result = rules.dict.get('AGEU', False)</field>
     <field name="amount_select">code</field>
@@ -486,9 +497,10 @@ result = 18.5
     <field name="parent_rule_id" ref="hr_salary_rule-blfl" />
     <field name="category_id" ref="hr_salary_rule_category-HANDLER" />
     <field name="code">blfln</field>
+    <field name="salary_art">101</field>
     <field name="name">Bruttolön företagsledare</field>
     <field name="sequence">400</field>
-    <field name="appears_on_payslip" eval="True" />
+    <field name="appears_on_payslip" eval="False" />
     <field name="condition_select">python</field>
     <field name="condition_python">result = rules.dict.get('AGEN', False)</field>
     <field name="amount_select">code</field>
@@ -503,9 +515,10 @@ result = 18.5
     <field name="parent_rule_id" ref="hr_salary_rule-blfl" />
     <field name="category_id" ref="hr_salary_rule_category-HANDLER" />
     <field name="code">blflp</field>
+    <field name="salary_art">101</field>
     <field name="name">Bruttolön företagsledare (pensinär)</field>
     <field name="sequence">400</field>
-    <field name="appears_on_payslip" eval="True" />
+    <field name="appears_on_payslip" eval="False" />
     <field name="condition_select">python</field>
     <field name="condition_python">result = rules.dict.get('AGEP', False)</field>
     <field name="amount_select">code</field>
@@ -520,9 +533,10 @@ result = 18.5
     <field name="parent_rule_id" ref="hr_salary_rule-blfl" />
     <field name="category_id" ref="hr_salary_rule_category-HANDLER" />
     <field name="code">blflpx</field>
+    <field name="salary_art">101</field>
     <field name="name">Bruttolön företagsledare (avgiftsbefriad)</field>
     <field name="sequence">400</field>
-    <field name="appears_on_payslip" eval="True" />
+    <field name="appears_on_payslip" eval="False" />
     <field name="condition_select">python</field>
     <field name="condition_python">result = rules.dict.get('AGEPX', False)</field>
     <field name="amount_select">code</field>
@@ -536,22 +550,24 @@ result = 18.5
     <record id="hr_salary_rule-bltj" model="hr.salary.rule">
       <field name="category_id" ref="hr_salary_rule_category-HANDLER" />
       <field name="code">bltj</field>
+      <field name="salary_art">101</field>
       <field name="name">Lön tjänsteman (åldersberoende)</field>
       <field name="sequence">400</field>
-      <field name="appears_on_payslip">True</field>
+      <field name="appears_on_payslip">False</field>
       <field name="condition_select">none</field>
       <field name="quantity">1</field>
     </record>
-  
+
     <record id="hr_salary_rule-blkl" model="hr.salary.rule">
       <field name="category_id" ref="hr_salary_rule_category-HANDLER" />
       <field name="code">blkl</field>
+      <field name="salary_art">200</field>
       <field name="name">Lön kollektivanställd (åldersberoende)</field>
       <field name="sequence">400</field>
-      <field name="appears_on_payslip">True</field>
+      <field name="appears_on_payslip">False</field>
       <field name="condition_select">none</field>
       <field name="quantity">1</field>
     </record>
-  
+
   </data>
 </openerp>
