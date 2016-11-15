@@ -3,7 +3,12 @@
   <data>
     <template id="payslip_document" inherit_id="l10n_se_hr_payroll.payslip_document">
       <xpath expr="//div[@id='holidays']" position="inside">
-        <div t-value="o.holidays_ids" />
+          <div t-foreach="o.holidays_ids" t-as="h">
+            <span t-field="h.name"/>
+            <span t-field="h.max_leaves"/>
+            <span t-field="h.leaves_taken"/>
+            <span t-field="h.remaning_leaves"/>
+          </div>
       </xpath>
     </template>
   </data>
