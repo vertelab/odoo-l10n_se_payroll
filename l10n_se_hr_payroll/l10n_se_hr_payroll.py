@@ -51,6 +51,8 @@ class hr_contract(models.Model):
     #~ car_deduction_url      = fields.Char(string='Förmånsvärdesberäkning SKV', default="http://www.skatteverket.se/privat/skatter/biltrafik/bilformansberakning", readonly=True,help="Beräknat förmånsvärde för bil från skatteverket")
     vacation_days = fields.Float(string='Semesterdagar', digits_compute=dp.get_precision('Payroll'), help="Sparad semester i dagar",)
     #~ office_fund = fields.Float(string='Office fund', digits_compute=dp.get_precision('Payroll'), help="Fund for personal office supplies",)
+    benefit_ids = fields.One2many(comodel_name="hr.contract.benefit",inverse_name='contract_id')
+
 
     def _get_param(self,param,value):
         if not self.env['ir.config_parameter'].get_param(param):
@@ -58,11 +60,7 @@ class hr_contract(models.Model):
         return self.env['ir.config_parameter'].get_param(param)
 
     def logthis(self,message):
-        #
-        #from openerp.osv import osv
         _logger.error(message)
-        #raise Warning(message)
-        #raise osv.except_osv(_('Can not remove root user!'), _('You can not remove the admin user'))
 
     def evalthis(self,code,variables):
         #~ _logger.error(code)
@@ -72,9 +70,6 @@ class hr_contract(models.Model):
     #~ def get_account_install(self, code): # Leif Robin
         #~ return self.env['account.account'].search([('code','=',code)], limit=1)[0]
 
-# Skapa semesterdagar månad för månad 12,85% (?) som en logg. I loggen skall aktuell månadslön lagras för semesterlönberäkning
-# Förbruka semester LIFO
-# Semsterintjänandeperioden == april - mars, LIFO förra intjänandeåret. Får ej använda aktuellt intjänande år (== ej betald semester)
 
 
     #~ def _compute_sheet(self):
@@ -92,16 +87,8 @@ class hr_contract(models.Model):
     #~ awf_amount = fields.Float(string="Skattefria ersättningar", compute=_compute_sheet,digits_compute=dp.get_precision('Payroll'),help="Skattefria ersättningar")
     #~ ded_amount = fields.Float(string="Bruttolöneavdrag", compute=_compute_sheet,digits_compute=dp.get_precision('Payroll'),help="Avdrag från bruttolönen")
 
-    def logthis(self,message):
-        #
-        #from openerp.osv import osv
-        _logger.error(message)
-        #raise Warning(message)
-        #raise osv.except_osv(_('Can not remove root user!'), _('You can not remove the admin user'))
-
-    def evalthis(self,code,variables):
-        from openerp.tools.safe_eval import safe_eval as eval
-        eval(code,variables,mode='exec',nocopy=True)
+    def raisethis(self,message):
+        raise Warning(message)
 
     def is_rule(self,rules,code):
         return rules.dict.get(code, False)
@@ -110,6 +97,14 @@ class hr_contract(models.Model):
             #~ return True
         #~ except:
             #~ return False
+
+class hr_contract_benefit(models.Model):
+    _name = 'hr.contract.benefit'
+
+    contract_id = fields.Many2one(comodel_name="hr.contract")
+    name = fields.Char(string="Code")
+    desc = fields.Char(string="Description")
+    value = fields.Float(string="Value",digits_compute=dp.get_precision('Payroll'),)
 
 class hr_employee(models.Model):
     _inherit = 'hr.employee'
@@ -168,6 +163,6 @@ class hr_income_statement_area_no(models.Model):
 class hr_salary_rule(models.Model):
     _inherit = 'hr.salary.rule'
 
-    salary_art = fields.Char(string='Salary art')
+    salary_art = fields.Char(string='Salary art',help="Code to interchange payslip rows with other systems")
 
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:

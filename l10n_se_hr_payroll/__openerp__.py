@@ -46,8 +46,10 @@ Swedish Payroll Rules.
         'hr_salary_rule_category_data.xml',
         'hr_salary_rule_data.xml',
         'hr_salary_rule_data_sick.xml',
+        'hr_salary_rule_data_car.xml',
         # last
         'hr_payroll_stucture_simple_data.xml',
+        'security/ir.model.access.csv',
 
     ],
 	'demo':[
