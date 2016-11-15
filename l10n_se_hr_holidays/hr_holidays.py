@@ -2,7 +2,7 @@
 ##############################################################################
 #
 # OpenERP, Open Source Management Solution, third party addon
-# Copyright (C) 2004-2015 Vertel AB (<http://vertel.se>).
+# Copyright (C) 2004-2016 Vertel AB (<http://vertel.se>).
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU Affero General Public License as
@@ -29,9 +29,6 @@ class hr_holidays(models.Model):
 
     earning_id = fields.Many2one(comodel_name='hr.holidays.earning')
     
-
-
-
 class hr_holidays_status(models.Model):
     _inherit = "hr.holidays.status"
 

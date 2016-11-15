@@ -26,6 +26,20 @@
       <field name="date_earning_start" eval="time.strftime(str(DateTime.today().year + 1) + '-04-01')" />
       <field name="date_earning_end" eval="time.strftime(str(DateTime.today().year + 2) + '-03-31')" />
     </record>
+    <!-- Sick leave -->    
+    <record model="hr.holidays.status" id="sick_leave_qualify">
+      <field name="name" eval="'Sick Leave Qualify Period" />
+      <field name="color_name">red</field>
+    </record>
+    <record model="hr.holidays.status" id="sick_leave_214">
+      <field name="name" eval="'Sick Leave day 2-14 (80%)" />
+      <field name="color_name">red</field>
+    </record>
+    <record model="hr.holidays.status" id="sick_leave_100">
+      <field name="name" eval="'Sick Leave 100%" />
+      <field name="color_name">red</field>
+    </record>
+    
     <!-- server action -->
     <record model="ir.actions.server" id="earn_leaves_dayes">
       <field name="name">Earn Leaves Days</field>

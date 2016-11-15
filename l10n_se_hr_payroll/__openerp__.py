@@ -22,9 +22,8 @@
     'name': 'Swedish - Payroll',
     'category': 'Localization',
     'author': 'Vertel AB',
-    #~ 'depends': ['hr_payroll', 'hr_payroll_account',],
-    'depends': ['hr_payroll',],
-    'version': '1.0',
+    'depends': ['hr_payroll','hr_holidays'],
+    'version': '1.1',
     'description': """
 Swedish Payroll Rules.
 ======================
@@ -39,20 +38,20 @@ Swedish Payroll Rules.
     """,
 
     'auto_install': False,
-    'website': 'https://www.odoo.com/page/accounting',
-    'data':[
-        'l10n_se_hr_payroll_view.xml',
-        'l10n_se_hr_salary_rule_category_data.xml', # hr.salary.rule.category # Leif
-        'l10n_se_hr_salary_rule_data.xml', # hr.salary.rule, hr.rule.input # Leif
-        'l10n_se_hr_payroll_stucture_simple_data.xml', # Leif
-        'l10n_se_hr_payroll_payslip_report.xml', # Leif
-        #~ 'l10n_se_hr_payroll_data.xml',
-		'l10n_se_hr_payroll_demo.xml', # Leif ska flyttas
-        #'l10n_se_hr_payroll_data.xml',
-        #~ 'data/hr.salary.rule.csv',
+    'website': 'http://www.vertel.se',
+    'data':[        
+        'hr_payroll_view.xml',
+        'hr_payroll_payslip_report.xml',
+        #
+        'hr_salary_rule_category_data.xml',
+        'hr_salary_rule_data.xml',
+        'hr_salary_rule_data_sick.xml',
+        # last
+        'hr_payroll_stucture_simple_data.xml',
+
     ],
 	'demo':[
-		#~ 'l10n_se_hr_payroll_demo.xml',
+		'hr_payroll_demo.xml',
 	],
     'installable': True
 }
