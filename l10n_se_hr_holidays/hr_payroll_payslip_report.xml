@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+  <data>
+    <template id="payslip_document" inherit_id="l10n_se_hr_payslip.payslip_document">
+      <xpath expr="//div[@id='holidays']" position="inside">
+        <div t-value="o.holidays_ids" />
+      </xpath>
+    </template>
+  </data>
+</openerp>
