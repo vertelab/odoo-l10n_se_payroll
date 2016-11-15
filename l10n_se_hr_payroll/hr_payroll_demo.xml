@@ -92,7 +92,7 @@
       <field name="coach_id" ref="hr.hr_employee-LY" />
     </record>
     <!--
-         ==================================================================   
+         ==================================================================
     -->
     <!--
          <record id="account.account_journal-2a69a7d4-5ac2-11e5-89ef-525400e1f872-9" model="account.journal">
