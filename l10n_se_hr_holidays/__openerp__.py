@@ -46,6 +46,7 @@ Swedish Holidays Rules
         'hr_employee_view.xml',
         'hr_holidays_view.xml',
         'hr_holidays_data.xml',
+        'hr_payroll_payslip_report.xml',
     ],
 	'demo':[
 	],
