@@ -13,12 +13,14 @@
             <t t-call="report.external_layout">
                 <div class="page">
                     <h2 t-field="o.name" />
-                    <table>
-                            <td>
-                                <p>Utbetalare:</p>
-                                <table class="table table-bordered">
+                    <div class="oe_structure oe_empty" />
+                    <div class="container">
+                        <div class="col-md-6" style="padding-left: 0px;">
+                            <h3>Utbetalare:</h3>
+                            <table class="table table-bordered table-responsive">
+                                <tbody>
                                     <tr>
-                                        <td>
+                                        <td>​
                                             <strong>Company</strong>
                                             <p t-field="o.company_id" />
                                         </td>
@@ -32,18 +34,16 @@
                                     <tr>
                                         <td>
                                             <strong>Address</strong>
-                                            <p>
-                                                <t t-esc="o.company_id.street if o.company_id.street else ''" />
-                                                <t t-esc="', %s' %(o.company_id.zip if o.company_id.zip else '')" />
-                                                <t t-esc="'  %s' %(o.company_id.city if o.company_id.city else '')" />
-                                            </p>
+                                            <p t-field="o.company_id.partner_id" t-field-options='{"widget": "contact", "fields": ["address", "name", "phone", "fax"], "no_marker": true}' />
                                         </td>
                                     </tr>
-                                </table>
-                            </td>
-                            <td>
-                                <p>Mottagare:</p>
-                                <table class="table table-bordered">
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="col-md-6" style="padding-right: 0px;">
+                            <h3>Mottagare:</h3>
+                            <table class="table table-bordered table-responsive">
+                                <tbody>
                                     <tr>
                                         <td>
                                             <strong>Name</strong>
@@ -62,18 +62,17 @@
                                             <p t-field="o.employee_id.address_home_id" t-field-options='{"widget": "contact", "fields": ["address", "name", "phone", "fax"], "no_marker": true}' />
                                         </td>
                                     </tr>
-                                </table>
-                            </td>
-                    </table>
-                    <table class="table table-condensed">
-                        <thead>
-                            <tr>
-                                <th>Designation</th>
-                                <th>Email</th>
-                                <th>Bank Account</th>
-                            </tr>
-                        </thead>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <table class="table table-bordered table-responsive">
                         <tbody>
+                            <tr>
+                                <td><strong>Designation</strong></td>
+                                <td><strong>Email</strong></td>
+                                <td><strong>Bank Account</strong></td>
+                            </tr>
                             <tr>
                                 <td>
                                     <p t-field="o.employee_id.job_id" />
@@ -87,16 +86,14 @@
                             </tr>
                         </tbody>
                     </table>
-                    <table class="table table-condensed">
-                        <thead>
-                            <tr>
-                                <th>Lönepreiod</th>
-                                <th>Prel skatt info</th>
-                                <th>Arbetsschema</th>
-                                <th>Anst.id</th>
-                            </tr>
-                        </thead>
+                    <table class="table table-bordered table-responsive">
                         <tbody>
+                            <tr>
+                                <td><strong>Lönepreiod</strong></td>
+                                <td><strong>Prel skatt info</strong></td>
+                                <td><strong>Arbetsschema</strong></td>
+                                <td><strong>Anst.id</strong></td>
+                            </tr>
                             <tr>
                                 <td>
                                     <p><t t-esc="o.date_from" /> - <t t-esc="o.date_to" /></p>
@@ -138,7 +135,11 @@
                                          </td>
                                     -->
                                     <td>
-                                        <span><t t-esc="p.code"/> / <t t-esc="p.salary_rule_id.salary_art"/></span>
+                                        <span>
+                                            <t t-esc="p.code" />
+                                            /
+                                            <t t-esc="p.salary_rule_id.salary_art" />
+                                        </span>
                                     </td>
                                     <td>
                                         <span t-field="p.name" />
