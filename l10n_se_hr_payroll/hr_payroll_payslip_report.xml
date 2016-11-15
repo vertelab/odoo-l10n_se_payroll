@@ -333,6 +333,11 @@
                          <strong>Authorized signature</strong>
                          </p>
                     -->
+                    
+                    <div id="salary_accumulators"/>
+                    <div id="tax_accumulators"/>
+                    <div id="tax_balance"/>
+                    <div id="time_balance"/>
                 </div>
             </t>
         </template>
