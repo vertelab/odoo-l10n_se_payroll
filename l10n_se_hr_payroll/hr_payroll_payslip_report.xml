@@ -13,53 +13,57 @@
             <t t-call="report.external_layout">
                 <div class="page">
                     <h2 t-field="o.name" />
-                    <div class="oe_structure oe_empty" />
                     <div class="container">
-                        <div class="col-md-6" style="padding-left: 0px;">
+                        <div class="col-md-6 col-sm-6 col-xs-6" style="padding-left: 0px;">
                             <h3>Utbetalare:</h3>
                             <table class="table table-bordered table-responsive">
                                 <tbody>
                                     <tr>
-                                        <td>​
-                                            <strong>Company</strong>
-                                            <p t-field="o.company_id" />
+                                        <td>
+                                            <p><strong>Company</strong></p>
+                                            <span t-field="o.company_id" />
                                         </td>
                                     </tr>
                                     <tr>
                                         <td>
-                                            <strong>Reg.nr</strong>
-                                            <p t-field="o.company_id.company_registry" />
+                                            <p><strong>Reg.nr</strong></p>
+                                            <span t-field="o.company_id.company_registry" />
                                         </td>
                                     </tr>
                                     <tr>
                                         <td>
-                                            <strong>Address</strong>
-                                            <p t-field="o.company_id.partner_id" t-field-options='{"widget": "contact", "fields": ["address", "name", "phone", "fax"], "no_marker": true}' />
+                                            <p><strong>Address</strong></p>
+                                            <span t-field="o.company_id.partner_id" t-field-options='{"widget": "contact", "fields": ["address", "name", "phone", "fax"], "no_marker": true}' />
                                         </td>
                                     </tr>
                                 </tbody>
                             </table>
                         </div>
-                        <div class="col-md-6" style="padding-right: 0px;">
+                        <div class="col-md-6 col-sm-6 col-xs-6" style="padding-right: 0px;">
                             <h3>Mottagare:</h3>
                             <table class="table table-bordered table-responsive">
                                 <tbody>
                                     <tr>
                                         <td>
-                                            <strong>Name</strong>
-                                            <p t-field="o.employee_id" />
+                                            <p><strong>Name</strong></p>
+                                            <span t-field="o.employee_id" />
                                         </td>
                                     </tr>
                                     <tr>
                                         <td>
-                                            <strong>Identification No</strong>
-                                            <p t-field="o.employee_id.identification_id" />
+                                            <p><strong>Identification No</strong></p>
+                                            <t t-if="o.employee_id.identification_id">
+                                                <span t-field="o.employee_id.identification_id" />
+                                            </t>
+                                            <t t-if="not o.employee_id.identification_id">
+                                                <br/>
+                                            </t>
                                         </td>
                                     </tr>
                                     <tr>
                                         <td>
-                                            <strong>Address</strong>
-                                            <p t-field="o.employee_id.address_home_id" t-field-options='{"widget": "contact", "fields": ["address", "name", "phone", "fax"], "no_marker": true}' />
+                                            <p><strong>Address</strong></p>
+                                            <span t-field="o.employee_id.address_home_id" t-field-options='{"widget": "contact", "fields": ["address", "name", "phone", "fax"], "no_marker": true}' />
                                         </td>
                                     </tr>
                                 </tbody>
@@ -69,19 +73,25 @@
                     <table class="table table-bordered table-responsive">
                         <tbody>
                             <tr>
-                                <td><strong>Designation</strong></td>
-                                <td><strong>Email</strong></td>
-                                <td><strong>Bank Account</strong></td>
+                                <td>
+                                    <strong>Designation</strong>
+                                </td>
+                                <td>
+                                    <strong>Email</strong>
+                                </td>
+                                <td>
+                                    <strong>Bank Account</strong>
+                                </td>
                             </tr>
                             <tr>
                                 <td>
-                                    <p t-field="o.employee_id.job_id" />
+                                    <span t-field="o.employee_id.job_id" />
                                 </td>
                                 <td>
-                                    <p t-field="o.employee_id.work_email" />
+                                    <span t-field="o.employee_id.work_email" />
                                 </td>
                                 <td>
-                                    <p t-field="o.employee_id.otherid" />
+                                    <span t-field="o.employee_id.otherid" />
                                 </td>
                             </tr>
                         </tbody>
@@ -89,23 +99,35 @@
                     <table class="table table-bordered table-responsive">
                         <tbody>
                             <tr>
-                                <td><strong>Lönepreiod</strong></td>
-                                <td><strong>Prel skatt info</strong></td>
-                                <td><strong>Arbetsschema</strong></td>
-                                <td><strong>Anst.id</strong></td>
+                                <td>
+                                    <strong>Lönepreiod</strong>
+                                </td>
+                                <td>
+                                    <strong>Prel skatt info</strong>
+                                </td>
+                                <td>
+                                    <strong>Arbetsschema</strong>
+                                </td>
+                                <td>
+                                    <strong>Anst.id</strong>
+                                </td>
                             </tr>
                             <tr>
                                 <td>
-                                    <p><t t-esc="o.date_from" /> - <t t-esc="o.date_to" /></p>
+                                    <span>
+                                        <t t-esc="o.date_from" />
+                                        -
+                                        <t t-esc="o.date_to" />
+                                    </span>
                                 </td>
                                 <td>
-                                    <p t-field="o.contract_id.prel_tax_tabel" />
+                                    <span t-field="o.contract_id.prel_tax_tabel" />
                                 </td>
                                 <td>
-                                    <p t-field="o.contract_id.working_hours" />
+                                    <span t-field="o.contract_id.working_hours" />
                                 </td>
                                 <td>
-                                    <p t-field="o.contract_id.name" />
+                                    <span t-field="o.contract_id.name" />
                                 </td>
                             </tr>
                         </tbody>
@@ -119,7 +141,8 @@
                                 <!--
                                      <th>Category</th>
                                 -->
-                                <th>Code / Löneart</th>
+                                <th>Löneart</th>
+                                <th>Code</th>
                                 <th>Name</th>
                                 <th style="text-align: right;">Quantity</th>
                                 <th style="text-align: right;">Amount</th>
@@ -136,9 +159,12 @@
                                     -->
                                     <td>
                                         <span>
+                                            <t t-esc="'%4s' %p.salary_rule_id.salary_art if p.salary_rule_id.salary_art else ''" />
+                                        </span>
+                                    </td>
+                                    <td>
+                                        <span>
                                             <t t-esc="p.code" />
-                                            /
-                                            <t t-esc="p.salary_rule_id.salary_art" />
                                         </span>
                                     </td>
                                     <td>
@@ -178,14 +204,11 @@
                             </t>
                         </tbody>
                     </table>
-                    <table class="table table-condensed">
-                        <tr>
-                            <td>
-                                <strong>Semesterdagar</strong>
-                                <p t-field="o.contract_id.vacation_days" />
-                            </td>
-                        </tr>
-                    </table>
+                    <div id="time_balance" class="col-md-3 col-sm-3 col-xs-3" />
+                    <div id="tax_balance" class="col-md-3 col-sm-3 col-xs-3"/>
+                    <div id="tax_accumulators" class="col-md-3 col-sm-3 col-xs-3"/>
+                    <div id="salary_accumulators" class="col-md-3 col-sm-3 col-xs-3"/>
+                    <div id="holidays"/>
                     <!--
                          <p class="text-right">
                          <strong>Authorized signature</strong>
