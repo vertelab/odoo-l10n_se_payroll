@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+  <data>
+        <!-- server action -->
+    <record model="ir.actions.server" id="test_attendance">
+      <field name="name">Test Attendans</field>
+      <field name="state">code</field>
+      <field name="condition" eval="True" />
+      <field name="model_id" ref="hr.model_hr_employee" />
+      <field name="code">
+for o in object.browse(context.get('active_ids', [])):
+    o.test_attendance()
+      </field>
+    </record>
+    <record model="ir.values" id="actions_test_attendance">
+      <field name="name">Test Attendans</field>
+      <field name="model">hr.employee</field>
+      <field name="key2">client_action_multi</field>
+      <field name="value" eval="'ir.actions.server,%d' % test_attendance" />
+    </record>
+  </data>
+</openerp>

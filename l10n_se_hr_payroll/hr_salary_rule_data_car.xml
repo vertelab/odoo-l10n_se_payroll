@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+  <data noupdate="1">
+    <!--
+         =====
+    -->
+    <record id="hr_salary_rule-car" model="hr.salary.rule">
+      <field name="category_id" ref="hr_salary_rule_category-BRUAVG" />
+      <field name="code">car</field>
+      <field name="salary_art">141</field>
+      <field name="name">Bilkostnad</field>
+      <field name="sequence">210</field>
+      <field name="appears_on_payslip">True</field>
+      <field name="condition_select">none</field>
+      <field name="amount_select">code</field>
+      <field name="amount_python_compute">result = contract.benefit_ids.filtered(lambda b: b.name == 'car').value or 0.0</field>
+      <field name="quantity">1</field>
+      <field name="note">Företagets verkliga bilkostnad, t ex leasingavgift minus halv moms</field>
+    </record>
+    <record id="hr_salary_rule-car-deduct" model="hr.salary.rule">
+      <field name="category_id" ref="hr_salary_rule_category-NETAVG" />
+      <field name="code">carded</field>
+      <field name="salary_art">141</field>
+      <field name="name">Tjänstebilavdrag</field>
+      <field name="sequence">690</field>
+      <field name="appears_on_payslip">True</field>
+      <field name="condition_select">none</field>
+      <field name="amount_select">code</field>
+      <field name="amount_python_compute">result = contract.benefit_ids.filtered(lambda b: b.name == 'carded').value or 0.0</field>
+      <field name="quantity">1</field>
+      <field name="note">Förmånsvärdesberäkning SKV http://www.skatteverket.se/privat/skatter/arbeteochinkomst/formaner/bilarochbilforman</field>
+    </record>
+  </data>
+</openerp>

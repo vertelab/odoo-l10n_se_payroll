@@ -25,6 +25,8 @@ from openerp import http
 from openerp.http import request
 from openerp import tools
 
+
+
 import logging
 _logger = logging.getLogger(__name__)
 
@@ -119,6 +121,36 @@ class hr_employee(models.Model):
     def _income_statement_count(self):
         self.income_statement_count = len(set([i.year for i in self.env['hr.employee.income_statement'].search([('employee_id','=',self.id)])]))
     income_statement_count = fields.Integer(compute="_income_statement_count")
+
+    @api.one
+    def test_attendance(self):
+        import datetime
+        from datetime import timedelta 
+        
+        
+        raise Warning(self.env['resource.resource'].generate_resources([3],self.contract_id.working_hours.id))       
+        for day in range(365):
+            #~ raise Warning(datetime.datetime(2016, 1, 1) + timedelta(days=254))
+            res = self.env['resource.calendar'].schedule_days_get_date(1,day_date=datetime.datetime(2016, 1, 1) + timedelta(days=256),resource_id = self.contract_id.working_hours.id)
+            raise Warning(res)
+                
+                #~ self.get_working_hours += self.env['resource.calendar'].get_working_hours(self.employee_id.contract_ids[0].working_hours.id,
+                    #~ datetime.strptime(start.name, tools.DEFAULT_SERVER_DATETIME_FORMAT),
+                    #~ datetime.strptime(end.name, tools.DEFAULT_SERVER_DATETIME_FORMAT))
+
+   
+    #~ def schedule_days_get_date(self, cr, uid, id, days, day_date=None, compute_leaves=False,
+                               #~ resource_id=None, default_interval=None, context=None):
+        #~ """ Wrapper on _schedule_days: return the beginning/ending datetime of
+        #~ a days scheduling. """
+        #~ res = self._schedule_days(cr, uid, id, days, day_date, compute_leaves, resource_id, default_interval, context)
+        #~ return res and res[-1][1] or False   
+   
+            
+        #~ self.income_statement_count = len(set([i.year for i in self.env['hr.employee.income_statement'].search([('employee_id','=',self.id)])]))
+    #~ income_statement_count = fields.Integer(compute="_income_statement_count")
+  #def generate_resources(self, cr, uid, user_ids, calendar_id, context=None):
+   
 
 
 class hr_employee_income_statement(models.Model):
