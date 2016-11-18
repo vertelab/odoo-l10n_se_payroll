@@ -25,7 +25,7 @@ from openerp import http
 from openerp.http import request
 from openerp import tools
 
-
+import random
 
 import logging
 _logger = logging.getLogger(__name__)
@@ -128,11 +128,18 @@ class hr_employee(models.Model):
         from datetime import timedelta 
         
         
-        raise Warning(self.env['resource.resource'].generate_resources([3],self.contract_id.working_hours.id))       
-        for day in range(365):
-            #~ raise Warning(datetime.datetime(2016, 1, 1) + timedelta(days=254))
-            res = self.env['resource.calendar'].schedule_days_get_date(1,day_date=datetime.datetime(2016, 1, 1) + timedelta(days=256),resource_id = self.contract_id.working_hours.id)
-            raise Warning(res)
+        #~ raise Warning(self.contract_id.working_hours.attendance_ids.mapped('dayofweek','hour_from'))
+        self.env['hr.attendance'].search([('employee_id','=',self.id)]).unlink()
+        hours_from={a.dayofweek: a.hour_from for a in self.contract_id.working_hours.attendance_ids}
+        hours_to={a.dayofweek: a.hour_to for a in self.contract_id.working_hours.attendance_ids}
+        date = datetime.datetime(2016, 1, 1)
+        for day in range(32):
+            date += timedelta(days=1)
+            _logger.error('date %s start %s end %s' % (date,hours_from.get(str(date.weekday()),None),hours_to.get(str(date.weekday()),None)))
+            if hours_from.get(str(date.weekday()),None):
+                _logger.error(date + timedelta(minutes=hours_from[str(date.weekday())] * 60 + random.randint(-60,60)))
+                self.with_context({'action_date': (date + timedelta(minutes=hours_from[str(date.weekday())] * 60 + random.randint(-60,60))).strftime('%Y-%m-%d %H:%M:%S')}).attendance_action_change()
+                self.with_context({'action_date': (date + timedelta(minutes=hours_to[str(date.weekday())] * 60 + random.randint(-60,60))).strftime('%Y-%m-%d %H:%M:%S')}).attendance_action_change()
                 
                 #~ self.get_working_hours += self.env['resource.calendar'].get_working_hours(self.employee_id.contract_ids[0].working_hours.id,
                     #~ datetime.strptime(start.name, tools.DEFAULT_SERVER_DATETIME_FORMAT),
@@ -153,44 +160,44 @@ class hr_employee(models.Model):
    
 
 
-class hr_employee_income_statement(models.Model):
-    _name = 'hr.employee.income_statement'
-    _order = 'year, area_no_id'
+#~ class hr_employee_income_statement(models.Model):
+    #~ _name = 'hr.employee.income_statement'
+    #~ _order = 'year, area_no_id'
 
-    employee_id = fields.Many2one('hr.employee',required=True)
-    year = fields.Selection([('2014','2014'),('2015','2015'),('2016','2016'),('2017','2017')],string="Year",required=True)
-    area_no_id = fields.Many2one('hr.income_statement.area_no',required=True)
-    amount = fields.Float(string="Amount")
-    checked = fields.Boolean(string="Checked")
-    code = fields.Char(string="code")
-    @api.one
-    def _value(self):
-        if self.area_no_id.type == 'amount':
-            self.value = '%4.2f' % self.amount
-        elif self.area_no_id.type == 'checkbox':
-            self.value = 'X' if self.checked else ''
-        elif self.area_no_id.type == "text":
-            self.value = self.code
-        elif self.area_no_id.type == "rule" and self.area_no_id.salary_rule_id:
-            self.value = self.area_no_id.salary_rule_id.name
-    value = fields.Char(string="Value",compute="_value")
+    #~ employee_id = fields.Many2one('hr.employee',required=True)
+    #~ year = fields.Selection([('2014','2014'),('2015','2015'),('2016','2016'),('2017','2017')],string="Year",required=True)
+    #~ area_no_id = fields.Many2one('hr.income_statement.area_no',required=True)
+    #~ amount = fields.Float(string="Amount")
+    #~ checked = fields.Boolean(string="Checked")
+    #~ code = fields.Char(string="code")
+    #~ @api.one
+    #~ def _value(self):
+        #~ if self.area_no_id.type == 'amount':
+            #~ self.value = '%4.2f' % self.amount
+        #~ elif self.area_no_id.type == 'checkbox':
+            #~ self.value = 'X' if self.checked else ''
+        #~ elif self.area_no_id.type == "text":
+            #~ self.value = self.code
+        #~ elif self.area_no_id.type == "rule" and self.area_no_id.salary_rule_id:
+            #~ self.value = self.area_no_id.salary_rule_id.name
+    #~ value = fields.Char(string="Value",compute="_value")
 
-class hr_income_statement_area_no(models.Model):
-    _name = 'hr.income_statement.area_no'
-    _description = "Area numbers in the Income Statement form"
+#~ class hr_income_statement_area_no(models.Model):
+    #~ _name = 'hr.income_statement.area_no'
+    #~ _description = "Area numbers in the Income Statement form"
 
-    @api.multi
-    def name_get(self):
-        result = []
-        for i in self:
-            result.append((i.id, "(%s) %s" % (i.area_no, i.name)))
-        return result
+    #~ @api.multi
+    #~ def name_get(self):
+        #~ result = []
+        #~ for i in self:
+            #~ result.append((i.id, "(%s) %s" % (i.area_no, i.name)))
+        #~ return result
 
-    name = fields.Char(string="Name",required=True)
-    area_no = fields.Char('Area no',required=True)
-    type = fields.Selection([('code','Code'),('amount','Amount'),('checkbox','Checkbox'),('rule','Rule')],string="Type",required=True)
-    salary_rule_id =fields.Many2one('hr.salary.rule', 'Rule',)
-    element_name = fields.Char(string="Element name",help="Name in XML-file")
+    #~ name = fields.Char(string="Name",required=True)
+    #~ area_no = fields.Char('Area no',required=True)
+    #~ type = fields.Selection([('code','Code'),('amount','Amount'),('checkbox','Checkbox'),('rule','Rule')],string="Type",required=True)
+    #~ salary_rule_id =fields.Many2one('hr.salary.rule', 'Rule',)
+    #~ element_name = fields.Char(string="Element name",help="Name in XML-file")
 
 class hr_salary_rule(models.Model):
     _inherit = 'hr.salary.rule'
