@@ -131,18 +131,20 @@ class hr_employee(models.Model):
         #~ raise Warning(self.contract_id.working_hours.attendance_ids.mapped('dayofweek','hour_from'))
         self.env['hr.attendance'].search([('employee_id','=',self.id)]).unlink()
         self.env['hr.holidays'].search([('employee_id','=',self.id)]).unlink()
+        self.env['hr.payslip'].search([('employee_id','=',self.id)]).unlink()
         
         hours_from={a.dayofweek: a.hour_from for a in self.contract_id.working_hours.attendance_ids}
         hours_to={a.dayofweek: a.hour_to for a in self.contract_id.working_hours.attendance_ids}
-        date = datetime.datetime(2016, 1, 1)
+        
         self.env['hr.holidays'].create({
                 'employee_id': self.id,
-                'date_from': '2016-07-04',
-                'date_to': '2016-07-27',
+                'date_from': datetime.datetime(2016,7,1).strftime('%Y-%m-%d'),
+                'date_to': datetime.datetime(2016,7,24).strftime('%Y-%m-%d'),
                 'status': 'validate',
                 'type': 'remove',
                 'holiday_status_id': 15, 
             })
+        date = datetime.datetime(2016, 1, 1)
         for day in range(365):
             date += timedelta(days=1)
             _logger.error('date %s start %s end %s' % (date,hours_from.get(str(date.weekday()),None),hours_to.get(str(date.weekday()),None)))
