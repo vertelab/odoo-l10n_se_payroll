@@ -130,21 +130,40 @@ class hr_employee(models.Model):
         
         #~ raise Warning(self.contract_id.working_hours.attendance_ids.mapped('dayofweek','hour_from'))
         self.env['hr.attendance'].search([('employee_id','=',self.id)]).unlink()
+        self.env['hr.holidays'].search([('employee_id','=',self.id)]).write({'state':'draft'})
         self.env['hr.holidays'].search([('employee_id','=',self.id)]).unlink()
+        
+        self.env['hr.payslip'].search([('employee_id','=',self.id)]).write({'state': 'draft'})
         self.env['hr.payslip'].search([('employee_id','=',self.id)]).unlink()
         
-        hours_from={a.dayofweek: a.hour_from for a in self.contract_id.working_hours.attendance_ids}
+        hours_from={a.dayofweek: a.hour_from for a in self.contract_id.working_hours.attendance_ids.sorted(key=lambda r: r.dayofweek,r.hour_from)}
         hours_to={a.dayofweek: a.hour_to for a in self.contract_id.working_hours.attendance_ids}
+        _logger.warn(' from %s to %s ' % (hours_from,hours_to))
+        
+        year = datetime.datetime.now().year
         
         self.env['hr.holidays'].create({
                 'employee_id': self.id,
-                'date_from': datetime.datetime(2016,7,1).strftime('%Y-%m-%d'),
-                'date_to': datetime.datetime(2016,7,24).strftime('%Y-%m-%d'),
-                'status': 'validate',
+                'date_from': datetime.datetime(year,7,1).strftime('%Y-%m-%d'),
+                'date_to': datetime.datetime(year,7,24).strftime('%Y-%m-%d'),
+                'state': 'validate',
                 'type': 'remove',
-                'holiday_status_id': 15, 
+                'holiday_status_id': self.env.ref('l10n_se_hr_holidays.holiday_status_cl1').id, 
+                    'number_of_days': 25.0,
             })
-        date = datetime.datetime(2016, 1, 1)
+        for i in range(3):
+            date = datetime.datetime(year,2,random.randint(1,28))
+            self.env['hr.holidays'].create({
+                    'employee_id': self.id,
+                    'date_from': date.strftime('%Y-%m-%d'),
+                    'date_to': (date + timedelta(hours=20)).strftime('%Y-%m-%d %H:%M'),
+                    'state': 'validate',
+                    'type': 'remove',
+                    'holiday_status_id': self.env.ref('l10n_se_hr_payroll.sick_leave_qualify').id, 
+                    'number_of_days': 1.0,
+                })
+        
+        date = datetime.datetime(year, 1, 1)
         for day in range(365):
             date += timedelta(days=1)
             _logger.error('date %s start %s end %s' % (date,hours_from.get(str(date.weekday()),None),hours_to.get(str(date.weekday()),None)))
