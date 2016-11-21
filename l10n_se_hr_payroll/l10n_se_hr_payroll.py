@@ -130,13 +130,23 @@ class hr_employee(models.Model):
         
         #~ raise Warning(self.contract_id.working_hours.attendance_ids.mapped('dayofweek','hour_from'))
         self.env['hr.attendance'].search([('employee_id','=',self.id)]).unlink()
+        self.env['hr.holidays'].search([('employee_id','=',self.id)]).unlink()
+        
         hours_from={a.dayofweek: a.hour_from for a in self.contract_id.working_hours.attendance_ids}
         hours_to={a.dayofweek: a.hour_to for a in self.contract_id.working_hours.attendance_ids}
         date = datetime.datetime(2016, 1, 1)
-        for day in range(32):
+        self.env['hr.holidays'].create({
+                'employee_id': self.id,
+                'date_from': '2016-07-04',
+                'date_to': '2016-07-27',
+                'status': 'validate',
+                'type': 'remove',
+                'holiday_status_id': 15, 
+            })
+        for day in range(365):
             date += timedelta(days=1)
             _logger.error('date %s start %s end %s' % (date,hours_from.get(str(date.weekday()),None),hours_to.get(str(date.weekday()),None)))
-            if hours_from.get(str(date.weekday()),None):
+            if hours_from.get(str(date.weekday()),None) and not self.env['hr.holidays'].search([('date_from','>=',(date + timedelta(minutes=hours_from[str(date.weekday())])).strftime('%Y-%m-%d %H:%M:%S')),('date_to','<=',(date + timedelta(minutes=hours_from[str(date.weekday())])).strftime('%Y-%m-%d %H:%M:%S'))]):
                 _logger.error(date + timedelta(minutes=hours_from[str(date.weekday())] * 60 + random.randint(-60,60)))
                 self.with_context({'action_date': (date + timedelta(minutes=hours_from[str(date.weekday())] * 60 + random.randint(-60,60))).strftime('%Y-%m-%d %H:%M:%S')}).attendance_action_change()
                 self.with_context({'action_date': (date + timedelta(minutes=hours_to[str(date.weekday())] * 60 + random.randint(-60,60))).strftime('%Y-%m-%d %H:%M:%S')}).attendance_action_change()
