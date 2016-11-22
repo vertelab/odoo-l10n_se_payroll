@@ -53,8 +53,8 @@ class hr_contract(models.Model):
     #~ car_deduction_url      = fields.Char(string='Förmånsvärdesberäkning SKV', default="http://www.skatteverket.se/privat/skatter/biltrafik/bilformansberakning", readonly=True,help="Beräknat förmånsvärde för bil från skatteverket")
     vacation_days = fields.Float(string='Semesterdagar', digits_compute=dp.get_precision('Payroll'), help="Sparad semester i dagar",)
     #~ office_fund = fields.Float(string='Office fund', digits_compute=dp.get_precision('Payroll'), help="Fund for personal office supplies",)
-    benefit_ids = fields.One2many(comodel_name="hr.contract.benefit",inverse_name='contract_id')
 
+        
 
     def _get_param(self,param,value):
         if not self.env['ir.config_parameter'].get_param(param):
@@ -100,13 +100,6 @@ class hr_contract(models.Model):
         #~ except:
             #~ return False
 
-class hr_contract_benefit(models.Model):
-    _name = 'hr.contract.benefit'
-
-    contract_id = fields.Many2one(comodel_name="hr.contract")
-    name = fields.Char(string="Code")
-    desc = fields.Char(string="Description")
-    value = fields.Float(string="Value",digits_compute=dp.get_precision('Payroll'),)
 
 class hr_employee(models.Model):
     _inherit = 'hr.employee'
@@ -235,5 +228,18 @@ class hr_salary_rule(models.Model):
     _inherit = 'hr.salary.rule'
 
     salary_art = fields.Char(string='Salary art',help="Code to interchange payslip rows with other systems")
+
+class hr_payslip(models.Model):
+    _inherit = 'hr.payslip'
+
+    @api.multi
+    def sick_leave_qualify(self):
+        return sum(self[0].worked_days_line_ids.filtered(lambda l: l.code == self.env.ref('l10n_se_hr_payroll.sick_leave_qualify').name).mapped('number_of_days'))
+    @api.multi
+    def sick_leave_214(self):
+        return sum(self[0].worked_days_line_ids.filtered(lambda l: l.code == self.env.ref('l10n_se_hr_payroll.sick_leave_214').name).mapped('number_of_days'))
+    @api.multi
+    def sick_leave_100(self):
+        return sum(self[0].worked_days_line_ids.filtered(lambda l: l.code == self.env.ref('l10n_se_hr_payroll.sick_leave_100').name).mapped('number_of_days'))
 
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:

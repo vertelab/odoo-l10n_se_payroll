@@ -46,18 +46,57 @@ result = contract.wage / 20
       <field name="category_id" ref="hr_salary_rule_category-BRUAVG" />
       <field name="code">sjk-kar</field>
       <field name="name">Karensdagar</field>
-      <field name="sequence">1</field>
+      <field name="sequence">10</field>
       <field name="appears_on_payslip" eval="True" />
       <field name="condition_select">python</field>
       <field name="condition_python">
-result = False
-age = employee.age
-if age >= 0 and age &lt; 26:
-    result = True
+            return payslip.sick_leave_qualify() > 0.0
       </field>
-      <field name="quantity">1</field>
+      <field name="amount_select">code</field>
+      <field name="amount_python_compute">
+result_qty = payslip.sick_leave_qualify()
+# result_rate = 150
+result = contract.wage / 20
+      </field>
     </record>
     
+    <record id="hr_salary_rule-sjk-214" model="hr.salary.rule">
+      <field name="parent_rule_id" ref="hr_salary_rule-sjk" />
+      <field name="category_id" ref="hr_salary_rule_category-BRUAVG" />
+      <field name="code">sjk-214</field>
+      <field name="name">Sjuk dag 2-14</field>
+      <field name="sequence">20</field>
+      <field name="appears_on_payslip" eval="True" />
+      <field name="condition_select">python</field>
+      <field name="condition_python">
+            return payslip.sick_leave_214() > 0.0
+      </field>
+      <field name="amount_select">code</field>
+      <field name="amount_python_compute">
+result_qty = payslip.sick_leave_214()
+result_rate = 80
+result = contract.wage / 20
+      </field>
+    </record>
+    <record id="hr_salary_rule-sjk-100" model="hr.salary.rule">
+      <field name="parent_rule_id" ref="hr_salary_rule-sjk" />
+      <field name="category_id" ref="hr_salary_rule_category-BRUAVG" />
+      <field name="code">sjk-100</field>
+      <field name="name">Sjuk 100%</field>
+      <field name="sequence">30</field>
+      <field name="appears_on_payslip" eval="True" />
+      <field name="condition_select">python</field>
+      <field name="condition_python">
+            return payslip.sick_leave_100() > 0.0
+      </field>
+      <field name="amount_select">code</field>
+      <field name="amount_python_compute">
+result_qty = payslip.sick_leave_100()
+#result_rate = 80
+result = 0.0
+      </field>
+    </record>
+        
     <!-- /// -->
     <record id="hr_rule_input-sjkdag" model="hr.rule.input">
       <field name="code">sjkdag</field>
