@@ -19,7 +19,7 @@
 #
 ##############################################################################
 from openerp.modules.registry import RegistryManager
-import openerp.exceptions
+from openerp.exceptions import except_orm, Warning, RedirectWarning
 from openerp import models, fields, api, _
 from openerp import http
 from openerp.http import request
@@ -136,7 +136,8 @@ class hr_employee(models.Model):
         self.env['hr.payslip'].search([('employee_id','=',self.id)]).write({'state': 'draft'})
         self.env['hr.payslip'].search([('employee_id','=',self.id)]).unlink()
         
-        hours_from={a.dayofweek: a.hour_from for a in self.contract_id.working_hours.attendance_ids.sorted(key=lambda r: r.dayofweek,r.hour_from)}
+        hours_from = {a[0]: a[1] for a in reversed(self.contract_id.working_hours.attendance_ids.sorted(key=lambda a: a.hour_from).mapped(lambda a: (a.dayofweek,a.hour_from)))}
+        #~ hours_from={a.dayofweek: a.hour_from for a in self.contract_id.working_hours.attendance_ids.sorted(key=lambda r: r.dayofweek,r.hour_from)}
         hours_to={a.dayofweek: a.hour_to for a in self.contract_id.working_hours.attendance_ids}
         _logger.warn(' from %s to %s ' % (hours_from,hours_to))
         
@@ -169,8 +170,8 @@ class hr_employee(models.Model):
             _logger.error('date %s start %s end %s' % (date,hours_from.get(str(date.weekday()),None),hours_to.get(str(date.weekday()),None)))
             if hours_from.get(str(date.weekday()),None) and not self.env['hr.holidays'].search([('date_from','>=',(date + timedelta(minutes=hours_from[str(date.weekday())])).strftime('%Y-%m-%d %H:%M:%S')),('date_to','<=',(date + timedelta(minutes=hours_from[str(date.weekday())])).strftime('%Y-%m-%d %H:%M:%S'))]):
                 _logger.error(date + timedelta(minutes=hours_from[str(date.weekday())] * 60 + random.randint(-60,60)))
-                self.with_context({'action_date': (date + timedelta(minutes=hours_from[str(date.weekday())] * 60 + random.randint(-60,60))).strftime('%Y-%m-%d %H:%M:%S')}).attendance_action_change()
-                self.with_context({'action_date': (date + timedelta(minutes=hours_to[str(date.weekday())] * 60 + random.randint(-60,60))).strftime('%Y-%m-%d %H:%M:%S')}).attendance_action_change()
+                self.with_context({'action_date': (date + timedelta(minutes=(hours_from[str(date.weekday())] * 60 + random.randint(-60,60)))).strftime('%Y-%m-%d %H:%M:%S')}).attendance_action_change()
+                self.with_context({'action_date': (date + timedelta(minutes=(hours_to[str(date.weekday())] * 60 + random.randint(-60,60)))).strftime('%Y-%m-%d %H:%M:%S')}).attendance_action_change()
                 
                 #~ self.get_working_hours += self.env['resource.calendar'].get_working_hours(self.employee_id.contract_ids[0].working_hours.id,
                     #~ datetime.strptime(start.name, tools.DEFAULT_SERVER_DATETIME_FORMAT),
