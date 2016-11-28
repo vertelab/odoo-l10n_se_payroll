@@ -22,7 +22,7 @@
     'name': 'Swedish - Payroll',
     'category': 'Localization',
     'author': 'Vertel AB',
-    'depends': ['hr_payroll','hr_holidays','hr_payroll_benefit'],
+    'depends': ['hr_payroll','hr_holidays','hr_payroll_benefits'],
     'version': '1.2',
     'description': """
 Swedish Payroll Rules.
@@ -39,7 +39,7 @@ Swedish Payroll Rules.
 
     'auto_install': False,
     'website': 'http://www.vertel.se',
-    'data':[        
+    'data':[
         'hr_payroll_view.xml',
         'hr_payroll_payslip_report.xml',
         #
@@ -53,9 +53,9 @@ Swedish Payroll Rules.
         'security/ir.model.access.csv',
 
     ],
-	'demo':[
-		'hr_payroll_demo.xml',
-	],
+    'demo':[
+        'hr_payroll_demo.xml',
+    ],
     'installable': True
 }
 
