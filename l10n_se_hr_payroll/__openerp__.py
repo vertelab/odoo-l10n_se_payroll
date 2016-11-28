@@ -50,7 +50,6 @@ Swedish Payroll Rules.
         # last
         'hr_payroll_stucture_simple_data.xml',
         'hr_payroll_data.xml',
-        'security/ir.model.access.csv',
 
     ],
     'demo':[
