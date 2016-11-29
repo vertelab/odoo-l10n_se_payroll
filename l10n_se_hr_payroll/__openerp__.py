@@ -39,7 +39,7 @@ Swedish Payroll Rules.
 
     'auto_install': False,
     'website': 'http://www.vertel.se',
-    'data':[        
+    'data':[
         'hr_payroll_view.xml',
         'hr_payroll_payslip_report.xml',
         #
@@ -50,12 +50,11 @@ Swedish Payroll Rules.
         # last
         'hr_payroll_stucture_simple_data.xml',
         'hr_payroll_data.xml',
-        'security/ir.model.access.csv',
 
     ],
-	'demo':[
-		'hr_payroll_demo.xml',
-	],
+    'demo':[
+        'hr_payroll_demo.xml',
+    ],
     'installable': True
 }
 
