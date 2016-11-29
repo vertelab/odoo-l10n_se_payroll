@@ -2,6 +2,7 @@
 <openerp>
   <data>
         <!-- server action -->
+<!--
     <record model="ir.actions.server" id="test_attendance">
       <field name="name">Test Attendans</field>
       <field name="state">code</field>
@@ -18,5 +19,6 @@ for o in object.browse(context.get('active_ids', [])):
       <field name="key2">client_action_multi</field>
       <field name="value" eval="'ir.actions.server,%d' % test_attendance" />
     </record>
+-->
   </data>
 </openerp>
