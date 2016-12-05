@@ -54,7 +54,7 @@ class hr_contract(models.Model):
     vacation_days = fields.Float(string='Semesterdagar', digits_compute=dp.get_precision('Payroll'), help="Sparad semester i dagar",)
     #~ office_fund = fields.Float(string='Office fund', digits_compute=dp.get_precision('Payroll'), help="Fund for personal office supplies",)
 
-        
+
 
     def _get_param(self,param,value):
         if not self.env['ir.config_parameter'].get_param(param):
@@ -171,5 +171,15 @@ class hr_payslip(models.Model):
     @api.multi
     def sick_leave_100(self):
         return sum(self[0].worked_days_line_ids.filtered(lambda l: l.code == self.env.ref('l10n_se_hr_payroll.sick_leave_100').name).mapped('number_of_days'))
+
+    @api.model
+    def get_slip_line(self, code):
+        return self.line_ids.filtered(lambda l: l.code == code).mapped(lambda v: {'name': v.name, 'total': v.total})
+
+    @api.model
+    def get_slip_line_acc(self, code):
+        year = datetime.now().year
+        start_date = datetime(year, 1, 1)
+        return sum(self.env['hr.payslip'].search([('employee_id', '=', self.employee_id.id), ('date_from', '>=', start_date.strftime('%Y-%m-%d')), ('date_to', '<=', self.date_to)]).mapped('line_ids').filtered(lambda l: l.code == code).mapped('total'))
 
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:

@@ -1,15 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
 <openerp>
-  <data>
-    <template id="payslip_document" inherit_id="l10n_se_hr_payroll.payslip_document">
-      <xpath expr="//div[@id='holidays']" position="inside">
-          <div t-foreach="o.holiday_ids" t-as="h">
-            <span t-field="h.name"/>
-            <span t-field="h.max_leaves"/>
-            <span t-field="h.leaves_taken"/>
-            <span t-field="h.remaining_leaves"/>
-          </div>
-      </xpath>
-    </template>
-  </data>
+    <data>
+        <template id="payslip_document" inherit_id="l10n_se_hr_payroll.payslip_document">
+            <xpath expr="//div[@id='holidays']" position="inside">
+                <div t-if="o.get_legal_leaves_consumed()" class="col-md-6 col-sm-6 col-xs-6" style="padding: 0px;">
+                    <table class="table table-bordered table-responsive">
+                        <tbody>
+                            <tr>
+                                <td><strong>Årets semester</strong></td>
+                            </tr>
+                            <tr>
+                                <td><span><t t-esc="o.get_legal_leaves_consumed()" /> dag(ar)</span>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div t-if="len(o.get_legal_leaves()) &gt; 0" class="col-md-6 col-sm-6 col-xs-6" style="padding: 0px;">
+                    <table class="table table-bordered table-responsive">
+                        <tbody>
+                            <tr>
+                                <td><strong>Sparad semester</strong></td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <t t-foreach="o.get_legal_leaves()" t-as="h">
+                                        <span t-field="h.name" />: <span><t t-esc="h.remaining_leaves" /> dag(ar)</span>
+                                    </t>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </xpath>
+        </template>
+    </data>
 </openerp>
