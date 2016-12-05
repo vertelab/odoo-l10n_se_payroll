@@ -143,6 +143,6 @@ class hr_payslip(models.Model):
     def get_legal_leaves_consumed(self):
         year = datetime.datetime.now().year
         start_date = datetime.datetime(year, 1, 1)
-        return sum(self.env['hr.holidays'].search([('employee_id', '=', self.employee_id.id), ('date_from', '>=', start_date.strftime('%Y-%m-%d')), ('date_to', '<=', self.date_to), ('holiday_status_id', 'not in', self.legal_non_vacation()), ('type', '=', 'remove'), ('state', '=', 'validate')]).mapped('number_of_days'))
+        return abs(sum(self.env['hr.holidays'].search([('employee_id', '=', self.employee_id.id), ('date_from', '>=', start_date.strftime('%Y-%m-%d')), ('date_to', '<=', self.date_to), ('holiday_status_id', 'not in', self.legal_non_vacation()), ('type', '=', 'remove'), ('state', '=', 'validate')]).mapped('number_of_days')))
 
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:

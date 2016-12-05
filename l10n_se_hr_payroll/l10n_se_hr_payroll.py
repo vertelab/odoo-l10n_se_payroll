@@ -68,7 +68,7 @@ class hr_contract(models.Model):
         #~ _logger.error(code)
         from openerp.tools.safe_eval import safe_eval as eval
         eval(code,variables,mode='exec',nocopy=True)
-    
+
     @api.model
     def sick_leave_qualify(self, worked_days):
         line = worked_days.dict.get(self.env.ref('l10n_se_hr_payroll.sick_leave_qualify').name)
@@ -81,7 +81,7 @@ class hr_contract(models.Model):
     def sick_leave_100(self, worked_days):
         line = worked_days.dict.get(self.env.ref('l10n_se_hr_payroll.sick_leave_100').name)
         return line and line.number_of_days or 0.0
-    
+
     #~ def get_account_install(self, code): # Leif Robin
         #~ return self.env['account.account'].search([('code','=',code)], limit=1)[0]
 
@@ -172,13 +172,12 @@ class hr_salary_rule(models.Model):
 
     salary_art = fields.Char(string='Salary art',help="Code to interchange payslip rows with other systems")
 
-#~ class hr_payslip(models.Model):
-    #~ _inherit = 'hr.payslip'
-    
+class hr_payslip(models.Model):
+    _inherit = 'hr.payslip'
 
     @api.model
     def get_slip_line(self, code):
-        return self.line_ids.filtered(lambda l: l.code == code).mapped(lambda v: {'name': v.name, 'total': v.total})
+        return self.line_ids.filtered(lambda l: l.code == code).mapped(lambda v: {'name': v.name, 'quantity': v.quantity, 'rate': v.rate, 'amount': v.amount, 'total': v.total})
 
     @api.model
     def get_slip_line_acc(self, code):

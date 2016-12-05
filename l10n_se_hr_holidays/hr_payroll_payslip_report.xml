@@ -10,7 +10,7 @@
                                 <td><strong>Årets semester</strong></td>
                             </tr>
                             <tr>
-                                <td><span><t t-esc="o.get_legal_leaves_consumed()" /> dag(ar)</span>
+                                <td><span class="pull-right"><t t-esc="o.get_legal_leaves_consumed()"/> dag(ar)</span>
                                 </td>
                             </tr>
                         </tbody>
@@ -25,7 +25,7 @@
                             <tr>
                                 <td>
                                     <t t-foreach="o.get_legal_leaves()" t-as="h">
-                                        <span t-field="h.name" />: <span><t t-esc="h.remaining_leaves" /> dag(ar)</span>
+                                        <span class="pull-left"><t t-esc="h.name"/>:</span><span class="pull-right"><t t-esc="h.remaining_leaves" /></span>
                                     </t>
                                 </td>
                             </tr>

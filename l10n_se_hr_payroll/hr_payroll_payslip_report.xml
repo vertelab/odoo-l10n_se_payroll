@@ -150,7 +150,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <t t-foreach="o.line_ids.filtered(lambda l: l.code != 'bl' and l.code != 'blkl' and l.code != 'san')" t-as="p">
+                            <t t-foreach="o.line_ids.filtered(lambda l: l.appears_on_payslip == True)" t-as="p">
                                 <tr t-att-style="'background: #eee;' if p.code == 'sum' else ''">
                                     <!--
                                          <td>
@@ -205,16 +205,7 @@
                         </tbody>
                     </table>
                     <div class="col-md-6 col-sm-6 col-xs-6" style="padding: 0px; margin-top: 20px;">
-                        <table class="table table-bordered table-responsive">
-                            <tbody>
-                                <tr>
-                                    <td><strong>Tidssaldon</strong></td>
-                                </tr>
-                                <tr>
-                                    <td><span class="pull-left">Komptid</span><span class="pull-right"><t t-esc="o.compensary_leave" /> dag(ar)</span></td>
-                                </tr>
-                            </tbody>
-                        </table>
+                        <table id="tidssaldon"/>
                     </div>
                     <div class="col-md-6 col-sm-6 col-xs-6" style="padding: 0px; margin-top: 20px;">
                         <table class="table table-bordered table-responsive">
