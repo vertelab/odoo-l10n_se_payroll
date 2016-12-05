@@ -16,7 +16,6 @@
       <field name="code">bas2015</field>
       <field name="name">Bas för löneavtal (Ska ej användas i avtal)</field>
       <field name="company_id" ref="base.main_company" />
-      <field name="parent_id" ref="" />
       <field eval="[(6,0,[ref('hr_salary_rule-AGE'), ref('hr_salary_rule-sum'), ref('hr_salary_rule-pre'), ref('hr_salary_rule-sa'), ref('hr_salary_rule-bl'), ref('hr_salary_rule-gl'), ref('hr_salary_rule-kval'), ref('hr_salary_rule-sjk'), ref('hr_salary_rule-resmil')])]" name="rule_ids" />
 <!--
       <field eval="[(6,0,[ref('hr_salary_rule-AGE'), ref('hr_salary_rule-sum'), ref('hr_salary_rule-pre'), ref('hr_salary_rule-bl'), ref('hr_salary_rule-gl')])]" name="rule_ids" />

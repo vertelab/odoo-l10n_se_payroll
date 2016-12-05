@@ -117,28 +117,7 @@
          <field name="group_invoice_lines">False</field>
          </record>
     -->
-    <record id="account_journal-lon-DEMO" model="account.journal">
-      <field name="name">Lön till bokföringen (DEMO)</field>
-      <field name="code">Lönskuld</field>
-      <field name="type">general</field>
-      <field name="default_debit_account_id" search="[('code', '=', '2821')]" />
-      <field name="default_credit_account_id" search="[('code', '=', '2821')]" />
-      <!--
-           <field name="company_id" ref="base.main_company"/>
-           <field name="user_id" ref="base.user_root"/>
-           <field eval="[(4, ref('account.account_journal-2a69a7d4-5ac2-11e5-89ef-525400e1f872-9'))]" name="groups_id"/>
-           <field eval="[(4, ref('account.account_journal-2a69a7d4-5ac2-11e5-89ef-525400e1f872-9'))]" name="account_control_ids"/>
-           <field name="with_last_closing_balance">True</field>
-           <field name="centralisation">False</field>
-           <field eval="[(4, ref('account.account_journal-2a69a7d4-5ac2-11e5-89ef-525400e1f872-9'))]" name="type_control_ids"/>
-           <field name="sequence_id" ref="base.ir_sequence-2a69a7d4-5ac2-11e5-89ef-525400e1f872-33"/>
-           <field name="allow_date">False</field>
-           <field name="update_posted">False</field>
-           <field name="cash_control">False</field>
-           <field name="entry_posted">False</field>
-           <field name="group_invoice_lines">False</field>
-      -->
-    </record>
+    
     <!--
          =========================================
     -->
@@ -180,7 +159,6 @@
       -->
       <field name="struct_id" ref="hr_payroll_structure-fl" />
       <field name="employee_id" ref="hr.hr_employee-LY" />
-      <field name="journal_id" ref="account_journal-lon-DEMO" />
       <!-- MÅSTE SÄTTAS
            <field name="journal_id" eval="[ref('account_journal-lon-DEMO')]"/>
       -->
