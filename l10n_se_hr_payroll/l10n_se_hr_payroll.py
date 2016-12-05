@@ -68,7 +68,20 @@ class hr_contract(models.Model):
         #~ _logger.error(code)
         from openerp.tools.safe_eval import safe_eval as eval
         eval(code,variables,mode='exec',nocopy=True)
-
+    
+    @api.model
+    def sick_leave_qualify(self, worked_days):
+        line = worked_days.dict.get(self.env.ref('l10n_se_hr_payroll.sick_leave_qualify').name)
+        return line and line.number_of_days or 0.0
+    @api.model
+    def sick_leave_214(self, worked_days):
+        line = worked_days.dict.get(self.env.ref('l10n_se_hr_payroll.sick_leave_214').name)
+        return line and line.number_of_days or 0.0
+    @api.model
+    def sick_leave_100(self, worked_days):
+        line = worked_days.dict.get(self.env.ref('l10n_se_hr_payroll.sick_leave_100').name)
+        return line and line.number_of_days or 0.0
+    
     #~ def get_account_install(self, code): # Leif Robin
         #~ return self.env['account.account'].search([('code','=',code)], limit=1)[0]
 
@@ -159,18 +172,9 @@ class hr_salary_rule(models.Model):
 
     salary_art = fields.Char(string='Salary art',help="Code to interchange payslip rows with other systems")
 
-class hr_payslip(models.Model):
-    _inherit = 'hr.payslip'
-
-    @api.multi
-    def sick_leave_qualify(self):
-        return sum(self[0].worked_days_line_ids.filtered(lambda l: l.code == self.env.ref('l10n_se_hr_payroll.sick_leave_qualify').name).mapped('number_of_days'))
-    @api.multi
-    def sick_leave_214(self):
-        return sum(self[0].worked_days_line_ids.filtered(lambda l: l.code == self.env.ref('l10n_se_hr_payroll.sick_leave_214').name).mapped('number_of_days'))
-    @api.multi
-    def sick_leave_100(self):
-        return sum(self[0].worked_days_line_ids.filtered(lambda l: l.code == self.env.ref('l10n_se_hr_payroll.sick_leave_100').name).mapped('number_of_days'))
+#~ class hr_payslip(models.Model):
+    #~ _inherit = 'hr.payslip'
+    
 
     @api.model
     def get_slip_line(self, code):
