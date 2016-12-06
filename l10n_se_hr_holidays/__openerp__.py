@@ -22,7 +22,7 @@
     'name': 'Swedish - Holidays',
     'category': 'Localization',
     'author': 'Vertel AB',
-    'depends': ['hr_holidays','hr_payroll',],
+    'depends': ['hr_holidays','hr_payroll'],
     'version': '1.0',
     'licence': 'AGPL-3',
     'summary': 'Swedish Holidays Rules',
@@ -34,10 +34,10 @@ Swedish Holidays Rules
 * Add hr.holiday.earning to hr.employee
 * Add holiday year to hr.holiday
 
-* hr.holiday.earning can be used for flextime and normal leaves days 
+* hr.holiday.earning can be used for flextime and normal leaves days
 * Holiday earning rules can add days to an employees hr.holidays.earning
   from hr.payslip
- 
+
 
     """,
     'auto_install': False,
@@ -48,8 +48,8 @@ Swedish Holidays Rules
         'hr_holidays_data.xml',
         'hr_payroll_payslip_report.xml',
     ],
-	'demo':[
-	],
+    'demo':[
+    ],
     'installable': True
 }
 
