@@ -26,7 +26,7 @@
                                 <td>
                                     <span style="font-size: 0.7em;">Sparad semester</span>
                                     <br />
-                                    <t t-if="len(o.get_legal_leaves()) &gt; 0" t-foreach="o.get_legal_leaves()" t-as="h">
+                                    <t t-foreach="o.get_legal_leaves()" t-as="h">
                                         <span class="pull-left">
                                             <t t-esc="h.name" />
                                             :
