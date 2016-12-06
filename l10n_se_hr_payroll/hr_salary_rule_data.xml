@@ -97,7 +97,7 @@ if age > 77:
       <field name="appears_on_payslip">True</field>
       <field name="condition_select">none</field>
       <field name="amount_select">code</field>
-      <field name="amount_python_compute">result = contract.wage</field>
+      <field name="amount_python_compute">result = contract.wage + categories.BASIC</field>
       <field name="quantity">1</field>
     </record>
     <!--
@@ -111,7 +111,7 @@ if age > 77:
       <field name="appears_on_payslip" eval="True"/>
       <field name="condition_select">none</field>
       <field name="amount_select">code</field>
-      <field name="amount_python_compute">result = categories.BAS - categories.BRUAVG + categories.BRUTIL</field>
+      <field name="amount_python_compute">result = categories.BAS - categories.BRUAVG - categories.DED + categories.BRUTIL + categories.ALW</field>
       <field name="quantity">1</field>
     </record>
     <!--

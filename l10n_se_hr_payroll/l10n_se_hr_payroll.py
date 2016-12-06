@@ -71,6 +71,7 @@ class hr_contract(models.Model):
 
     @api.model
     def sick_leave_qualify(self, worked_days):
+        _logger.error(worked_days.WORK100)
         line = worked_days.dict.get(self.env.ref('l10n_se_hr_payroll.sick_leave_qualify').name)
         return line and line.number_of_days or 0.0
     @api.model
