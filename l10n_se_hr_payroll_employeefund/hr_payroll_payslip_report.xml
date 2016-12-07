@@ -1,11 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <openerp>
-  <data>
-    <template id="payslip_document" inherit_id="l10n_se_hr_payroll.payslip_document">
-      <xpath expr="//div[@id='salary_balance']" position="inside">
-        <div t-value="o.employee_fund_name" />
-        <div t-value="o.employee_fund_balance" />
-      </xpath>
-    </template>
-  </data>
+    <data>
+        <template id="payslip_document" inherit_id="l10n_se_hr_payroll.payslip_document">
+            <xpath expr="//td[@id='salary_balance']" position="replace">
+                <td id="salary_balance">
+                    <span style="font-size: 0.7em;">Anställd fond</span><br/>
+                    <span class="pull-left" t-field="o.contract_id.employee_fund_name"/>
+                    <span class="pull-right" t-field="o.contract_id.employee_fund_balance" />
+                </td>
+            </xpath>
+        </template>
+    </data>
 </openerp>

@@ -76,21 +76,20 @@
                             </tbody>
                         </table>
                     </div>
-                    <div class="col-md-12 col-sm-12 col-xs-12" style="padding: 0px;">
+                    <div id="footer_table_div" class="col-md-12 col-sm-12 col-xs-12" style="padding: 0px;">
                         <table class="table table-sm table-bordered table-responsive" style="margin: 0px;">
                             <tbody>
-                                <tr>
-                                    <td class="col-md-6 col-sm-6 col-xs-6">
-                                        <span id="tidssaldon"/>
-                                    </td>
-                                    <td class="col-md-6 col-sm-6 col-xs-6">
+                                <tr id="table_row_one">
+                                    <td id="tidssaldon"/>
+                                    <td id="salary_balance"/>
+                                    <td>
                                         <span style="font-size: 0.7em;">Arbetsgivaravgift</span><br/>
                                         <span class="pull-right">
                                             <t t-esc="o.get_slip_line_acc('san')" />
                                         </span>
                                     </td>
                                 </tr>
-                                <tr>
+                                <tr id="table_row_two">
                                     <td id="salary_accumulators" class="col-md-6 col-sm-6 col-xs-6">
                                         <span style="font-size: 0.7em;">Ackumulerad</span><br/>
                                         <span class="pull-left">Bruttolön</span><span class="pull-right"><t t-esc="o.get_slip_line_acc('bl')" /></span><br/>
@@ -103,6 +102,7 @@
                                         <span class="pull-left">Skatt tabell</span><span class="pull-right"><t t-esc="o.contract_id.prel_tax_tabel" /></span><br/>
                                         <span class="pull-left">Preliminärskatt</span><span class="pull-right"><t t-esc="o.contract_id.prel_tax_amount" /></span>
                                     </td>
+                                    <td/>
                                 </tr>
                             </tbody>
                         </table>
@@ -128,23 +128,20 @@
                                 </tr>
                             </tbody>
                         </table>
-                        <table class="table table-sm table-responsive" style="margin: 0px;">
+                        <table id="overall" class="table table-sm table-responsive" style="margin: 0px;">
                             <tbody>
                                 <tr style="background: #eee;">
                                     <td><span style="font-size: 0.7em;">Arbetad tid</span></td>
                                     <td><span style="font-size: 0.7em;">Övertid</span></td>
                                     <td><span style="font-size: 0.7em;">Frånvaro</span></td>
-                                    <td><span style="font-size: 0.7em;">Flextid</span></td>
                                 </tr>
                                 <tr style="background: #eee;">
-                                    <td><t t-esc="o.schema_number_of_hours if o.contract_id.type_id.work_time == 'schema' else 0"/></td>
+                                    <td><t t-esc="o.worked_days_line_ids.filtered(lambda l: l.code == 'WORK100').mapped('number_of_hours')[0] or 0"/></td>
+                                    <td><t t-esc="o.get_slip_line('kval')[0]['quantity'] or 0"/></td>
                                     <td>0</td>
-                                    <td>0</td>
-                                    <td><t t-esc="o.schema_number_of_hours if o.contract_id.type_id.work_time == 'flex' else 0"/></td>
                                 </tr>
                             </tbody>
                         </table>
-                        <div id="salary_balance"/>
                     </div>
                 </div>
             </t>
