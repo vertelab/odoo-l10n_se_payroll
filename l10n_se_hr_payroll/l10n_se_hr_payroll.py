@@ -178,12 +178,12 @@ class hr_payslip(models.Model):
 
     @api.model
     def get_slip_line(self, code):
-        return self.line_ids.filtered(lambda l: l.code == code).mapped(lambda v: {'name': v.name, 'quantity': v.quantity, 'rate': v.rate, 'amount': v.amount, 'total': v.total})
+        return self.details_by_salary_rule_category.filtered(lambda l: l.code == code).mapped(lambda v: {'name': v.name, 'quantity': v.quantity, 'rate': v.rate, 'amount': v.amount, 'total': v.total})
 
     @api.model
     def get_slip_line_acc(self, code):
         year = datetime.now().year
         start_date = datetime(year, 1, 1)
-        return sum(self.env['hr.payslip'].search([('employee_id', '=', self.employee_id.id), ('date_from', '>=', start_date.strftime('%Y-%m-%d')), ('date_to', '<=', self.date_to)]).mapped('line_ids').filtered(lambda l: l.code == code).mapped('total'))
+        return sum(self.env['hr.payslip'].search([('employee_id', '=', self.employee_id.id), ('date_from', '>=', start_date.strftime('%Y-%m-%d')), ('date_to', '<=', self.date_to)]).mapped('details_by_salary_rule_category').filtered(lambda l: l.code == code).mapped('total'))
 
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
