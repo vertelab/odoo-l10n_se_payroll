@@ -9,6 +9,9 @@
                     <span class="pull-right" t-field="o.contract_id.employee_fund_balance" />
                 </td>
             </xpath>
+            <xpath expr="//span[@id='forman']" position="replace">
+                <span id="forman" class="pull-left">Förmån</span><span class="pull-right"><t t-esc="o.get_slip_line_acc('forman') or 0" /></span><br/>
+            </xpath>
         </template>
     </data>
 </openerp>

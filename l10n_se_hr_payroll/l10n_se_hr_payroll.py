@@ -70,17 +70,8 @@ class hr_contract(models.Model):
         eval(code,variables,mode='exec',nocopy=True)
 
     @api.model
-    def sick_leave_qualify(self, worked_days):
-        _logger.error(worked_days.WORK100)
-        line = worked_days.dict.get(self.env.ref('l10n_se_hr_payroll.sick_leave_qualify').name)
-        return line and line.number_of_days or 0.0
-    @api.model
-    def sick_leave_214(self, worked_days):
-        line = worked_days.dict.get(self.env.ref('l10n_se_hr_payroll.sick_leave_214').name)
-        return line and line.number_of_days or 0.0
-    @api.model
-    def sick_leave_100(self, worked_days):
-        line = worked_days.dict.get(self.env.ref('l10n_se_hr_payroll.sick_leave_100').name)
+    def get_leave_days(self, rule_id, worked_days):
+        line = worked_days.dict.get(self.env.ref(rule_id).name)
         return line and line.number_of_days or 0.0
 
     #~ def get_account_install(self, code): # Leif Robin

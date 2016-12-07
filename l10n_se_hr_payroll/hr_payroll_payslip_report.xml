@@ -29,7 +29,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <t t-foreach="o.line_ids.filtered(lambda l: l.appears_on_payslip == True)" t-as="p">
+                                <t t-foreach="o.line_ids" t-as="p">
                                     <tr t-att-style="'background: #eee;' if p.code == 'sum' else ''">
                                         <td>
                                             <span>
@@ -92,7 +92,7 @@
                                     <td id="salary_accumulators">
                                         <span style="font-size: 0.7em;">Ackumulerad</span><br/>
                                         <span class="pull-left">Bruttolön</span><span class="pull-right"><t t-esc="o.get_slip_line_acc('bl') or 0" /></span><br/>
-                                        <span class="pull-left">Förmån</span><span class="pull-right"></span><br/>
+                                        <span id="forman"/>
                                         <span class="pull-left">Preliminärskatt</span><span class="pull-right"><t t-esc="o.get_slip_line_acc('(san-skv)') or 0" /></span>
                                     </td>
                                     <td>
