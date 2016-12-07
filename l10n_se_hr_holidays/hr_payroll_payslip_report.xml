@@ -2,45 +2,40 @@
 <openerp>
     <data>
         <template id="payslip_document" inherit_id="l10n_se_hr_payroll.payslip_document">
-            <xpath expr="//div[@id='holidays']" position="inside">
-                <div class="col-md-6 col-sm-6 col-xs-6" style="padding: 0px;">
-                    <table class="table table-bordered table-responsive">
-                        <tbody>
-                            <tr>
-                                <td>
-                                    <span style="font-size: 0.7em;">Årets semester</span>
-                                    <br />
-                                    <span class="pull-right">
-                                        <t t-esc="o.get_legal_leaves_consumed()" />
-                                        dag(ar)
-                                    </span>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-                <div class="col-md-6 col-sm-6 col-xs-6" style="padding: 0px;">
-                    <table class="table table-bordered table-responsive">
-                        <tbody>
-                            <tr>
-                                <td>
-                                    <span style="font-size: 0.7em;">Sparad semester</span>
-                                    <br />
-                                    <t t-foreach="o.get_legal_leaves()" t-as="h">
-                                        <span class="pull-left">
+            <xpath expr="//table[@id='holidays']" position="replace">
+                <table id="holidays" class="table table-sm table-responsive" style="margin: 0px;">
+                    <tbody>
+                        <tr>
+                            <td>
+                                <span style="font-size: 0.7em;">Årets semester</span>
+                            </td>
+                            <td>
+                                <span style="font-size: 0.7em;">Sparad semester</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="col-md-1 col-sm-1 col-xs-1">
+                                <span>
+                                    <span style="font-size: 0.7em;">Betalda</span><br/>
+                                    <t t-esc="o.get_legal_leaves_consumed()" />
+                                </span>
+                            </td>
+                            <t t-if="len(o.get_legal_leaves()) &gt; 0">
+                                <t t-foreach="o.get_legal_leaves()" t-as="h">
+                                    <td class="col-md-1 col-sm-1 col-xs-1">
+                                        <span style="font-size: 0.7em;">
                                             <t t-esc="h.name" />
-                                            :
                                         </span>
-                                        <span class="pull-right">
+                                        <br/>
+                                        <span>
                                             <t t-esc="h.remaining_leaves" />
-                                            dag(ar)
                                         </span>
-                                    </t>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
+                                    </td>
+                                </t>
+                            </t>
+                        </tr>
+                    </tbody>
+                </table>
             </xpath>
         </template>
     </data>

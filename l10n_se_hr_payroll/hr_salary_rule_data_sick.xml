@@ -3,7 +3,7 @@
   <data noupdate="0"> <!-- TODO: no update -->
 
 
-    <!-- Sick leave -->    
+    <!-- Sick leave -->
     <record model="hr.holidays.status" id="sick_leave_qualify">
       <field name="name" eval="'Sick Leave Qualify Period'" />
       <field name="color_name">red</field>
@@ -19,7 +19,7 @@
       <field name="limit" eval="True"/>
       <field name="color_name">red</field>
     </record>
-    
+
     <!--
          =====
     -->
@@ -29,7 +29,7 @@
       <field name="salary_art">141</field>
       <field name="name">Sjukavdrag</field>
       <field name="sequence">210</field>
-      <field name="appears_on_payslip">True</field>
+      <field name="appears_on_payslip" eval="False"/>
       <field name="condition_select">none</field>
       <field name="amount_select">code</field>
       <field name="amount_python_compute">
@@ -39,8 +39,8 @@ result = contract.wage / 20
       </field>
       <field name="quantity">1</field>
     </record>
-    
-    
+
+
     <record id="hr_salary_rule-sjk-qualify" model="hr.salary.rule">
       <field name="parent_rule_id" ref="hr_salary_rule-sjk" />
       <field name="category_id" ref="hr_salary_rule_category-BRUAVG" />
@@ -57,7 +57,7 @@ result_qty = contract.sick_leave_qualify(worked_days)
 result = contract.wage / 20
       </field>
     </record>
-    
+
     <record id="hr_salary_rule-sjk-214" model="hr.salary.rule">
       <field name="parent_rule_id" ref="hr_salary_rule-sjk" />
       <field name="category_id" ref="hr_salary_rule_category-BRUAVG" />
@@ -90,7 +90,7 @@ result_qty = contract.sick_leave_100(worked_days)
 result = 0.0
       </field>
     </record>
-        
+
     <!-- /// -->
     <record id="hr_rule_input-sjkdag" model="hr.rule.input">
       <field name="code">sjkdag</field>

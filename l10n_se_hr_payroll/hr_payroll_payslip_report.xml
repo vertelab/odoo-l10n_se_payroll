@@ -77,35 +77,75 @@
                         </table>
                     </div>
                     <div class="col-md-12 col-sm-12 col-xs-12" style="padding: 0px;">
-                        <table class="table table-bordered table-responsive" style="margin: 0px;">
+                        <table class="table table-sm table-bordered table-responsive" style="margin: 0px;">
                             <tbody>
                                 <tr>
-                                    <td id="tidssaldon" class="col-md-6 col-sm-6 col-xs-6"/>
-                                    <td class="col-md-6 col-sm-6 col-xs-6"><span style="font-size: 0.7em;">Arbetsgivaravgift</span><br/><span class="pull-right"><t t-esc="o.get_slip_line_acc('san')" /></span></td>
+                                    <td class="col-md-6 col-sm-6 col-xs-6">
+                                        <span id="tidssaldon"/>
+                                    </td>
+                                    <td class="col-md-6 col-sm-6 col-xs-6">
+                                        <span style="font-size: 0.7em;">Arbetsgivaravgift</span><br/>
+                                        <span class="pull-right">
+                                            <t t-esc="o.get_slip_line_acc('san')" />
+                                        </span>
+                                    </td>
                                 </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                    <div id="salary_accumulators" class="col-md-12 col-sm-12 col-xs-12" style="padding: 0px;">
-                        <table class="table table-bordered table-responsive" style="margin: 0px;">
-                            <tbody>
                                 <tr>
-                                    <td class="col-md-6 col-sm-6 col-xs-6"><span style="font-size: 0.7em;">Ackumulerad</span><br/>
+                                    <td id="salary_accumulators" class="col-md-6 col-sm-6 col-xs-6">
+                                        <span style="font-size: 0.7em;">Ackumulerad</span><br/>
                                         <span class="pull-left">Bruttolön</span><span class="pull-right"><t t-esc="o.get_slip_line_acc('bl')" /></span><br/>
                                         <span class="pull-left">Förmån</span><span class="pull-right"></span><br/>
-                                        <span class="pull-left">Skatt</span><span class="pull-right"><t t-esc="o.get_slip_line_acc('(san-skv)')" /></span>
+                                        <span class="pull-left">Preliminärskatt</span><span class="pull-right"><t t-esc="o.get_slip_line_acc('(san-skv)')" /></span>
                                     </td>
                                     <td class="col-md-6 col-sm-6 col-xs-6">
                                         <span style="font-size: 0.7em;">Skatt beräknad på</span><br/>
                                         <span class="pull-left">Belopp</span><span class="pull-right"><t t-esc="o.contract_id.wage_tax_base" /></span><br/>
                                         <span class="pull-left">Skatt tabell</span><span class="pull-right"><t t-esc="o.contract_id.prel_tax_tabel" /></span><br/>
-                                        <span class="pull-left">Prel skatt</span><span class="pull-right"><t t-esc="o.contract_id.prel_tax_amount" /></span>
+                                        <span class="pull-left">Preliminärskatt</span><span class="pull-right"><t t-esc="o.contract_id.prel_tax_amount" /></span>
                                     </td>
                                 </tr>
                             </tbody>
                         </table>
+                        <table id="holidays" class="table table-sm table-responsive" style="margin: 0px;">
+                            <tbody>
+                                <tr>
+                                    <td class="col-md-1 col-sm-1 col-xs-1">
+                                        <span style="font-size: 0.7em;">Årets semester</span>
+                                    </td>
+                                    <td class="col-md-11 col-sm-11 col-xs-11">
+                                        <span style="font-size: 0.7em;">Sparad semester</span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="col-md-1 col-sm-1 col-xs-1">
+                                        <span style="font-size: 0.7em;">Betalda</span><br/>
+                                        <span>0</span>
+                                    </td>
+                                    <td class="col-md-11 col-sm-11 col-xs-11">
+                                        <br/>
+                                        <span>0</span>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <table class="table table-sm table-responsive" style="margin: 0px;">
+                            <tbody>
+                                <tr style="background: #eee;">
+                                    <td><span style="font-size: 0.7em;">Arbetad tid</span></td>
+                                    <td><span style="font-size: 0.7em;">Övertid</span></td>
+                                    <td><span style="font-size: 0.7em;">Frånvaro</span></td>
+                                    <td><span style="font-size: 0.7em;">Flextid</span></td>
+                                </tr>
+                                <tr style="background: #eee;">
+                                    <td><t t-esc="o.schema_number_of_hours if o.contract_id.type_id.work_time == 'schema' else 0"/></td>
+                                    <td>0</td>
+                                    <td>0</td>
+                                    <td><t t-esc="o.schema_number_of_hours if o.contract_id.type_id.work_time == 'flex' else 0"/></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <div id="salary_balance"/>
                     </div>
-                    <div id="holidays"/>
                 </div>
             </t>
         </template>

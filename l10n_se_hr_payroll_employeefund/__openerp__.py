@@ -37,11 +37,6 @@ Swedish Payroll Employee Fund.
         #
         'hr_salary_rule_category_data.xml',
         'hr_salary_rule_data.xml',
-
-        # last
-        'hr_payroll_stucture_simple_data.xml',
-        'hr_payroll_data.xml',
-
     ],
     'demo':[
         'hr_payroll_demo.xml',

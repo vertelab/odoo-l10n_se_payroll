@@ -186,7 +186,7 @@ if age > 77:
       <field name="salary_art">s110</field>
       <field name="name">Sociala avgifter 31,42%</field>
       <field name="sequence">490</field>
-      <field name="appears_on_payslip" eval="True"/>
+      <field name="appears_on_payslip" eval="False"/>
       <field name="condition_select">python</field>
       <field name="condition_python">result = rules.dict.get('AGEN', False)</field>
       <field name="amount_select">percentage</field>
