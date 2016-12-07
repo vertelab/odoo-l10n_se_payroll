@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+  <data noupdate="1">
+
+    <record id="hr_salary_rule-forman" model="hr.salary.rule">
+      <field name="category_id" ref="hr_salary_rule_category-BAS" />
+      <field name="code">forman</field>
+      <field name="salary_art">666</field>
+      <field name="name">Förmån</field>
+      <field name="sequence">10</field>
+      <field name="appears_on_payslip">True</field>
+      <field name="condition_select">none</field>
+      <field name="amount_select">code</field>
+      <field name="amount_python_compute">result = worked_days.WORK100.payslip_id.get_employeefund_addition()</field>
+      <field name="quantity">1</field>
+    </record>
+
+  </data>
+</openerp>
