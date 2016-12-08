@@ -39,7 +39,7 @@
                     <field name="parent_rule_id"/>
                     <field name="child_ids"/>
                     <filter string="Appears On Payslip" name="appears_on_payslip" domain="[('appears_on_payslip','=',True)]"/>
-                    <filter string="No Parent Rule" name="parent_rule_id" domain="[('parent_rule_id','=',False)]"/>
+                    <filter string="Hide Children Rules" name="parent_rule_id" domain="[('parent_rule_id','=',False)]"/>
                 </field>
             </field>
         </record>
