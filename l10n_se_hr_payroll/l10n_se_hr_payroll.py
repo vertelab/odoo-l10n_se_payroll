@@ -70,17 +70,8 @@ class hr_contract(models.Model):
         eval(code,variables,mode='exec',nocopy=True)
 
     @api.model
-    def sick_leave_qualify(self, worked_days):
-        _logger.error(worked_days.WORK100)
-        line = worked_days.dict.get(self.env.ref('l10n_se_hr_payroll.sick_leave_qualify').name)
-        return line and line.number_of_days or 0.0
-    @api.model
-    def sick_leave_214(self, worked_days):
-        line = worked_days.dict.get(self.env.ref('l10n_se_hr_payroll.sick_leave_214').name)
-        return line and line.number_of_days or 0.0
-    @api.model
-    def sick_leave_100(self, worked_days):
-        line = worked_days.dict.get(self.env.ref('l10n_se_hr_payroll.sick_leave_100').name)
+    def get_leave_days(self, rule_id, worked_days):
+        line = worked_days.dict.get(self.env.ref(rule_id).name)
         return line and line.number_of_days or 0.0
 
     #~ def get_account_install(self, code): # Leif Robin
@@ -178,12 +169,12 @@ class hr_payslip(models.Model):
 
     @api.model
     def get_slip_line(self, code):
-        return self.line_ids.filtered(lambda l: l.code == code).mapped(lambda v: {'name': v.name, 'quantity': v.quantity, 'rate': v.rate, 'amount': v.amount, 'total': v.total})
+        return self.details_by_salary_rule_category.filtered(lambda l: l.code == code).mapped(lambda v: {'name': v.name, 'quantity': v.quantity, 'rate': v.rate, 'amount': v.amount, 'total': v.total})
 
     @api.model
     def get_slip_line_acc(self, code):
         year = datetime.now().year
         start_date = datetime(year, 1, 1)
-        return sum(self.env['hr.payslip'].search([('employee_id', '=', self.employee_id.id), ('date_from', '>=', start_date.strftime('%Y-%m-%d')), ('date_to', '<=', self.date_to)]).mapped('line_ids').filtered(lambda l: l.code == code).mapped('total'))
+        return sum(self.env['hr.payslip'].search([('employee_id', '=', self.employee_id.id), ('date_from', '>=', start_date.strftime('%Y-%m-%d')), ('date_to', '<=', self.date_to)]).mapped('details_by_salary_rule_category').filtered(lambda l: l.code == code).mapped('total'))
 
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:

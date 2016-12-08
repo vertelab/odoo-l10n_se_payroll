@@ -19,38 +19,20 @@
 #
 ##############################################################################
 {
-    'name': 'Swedish - Holidays',
+    'name': 'Swedish - Flex100 Payslip',
     'category': 'Localization',
     'author': 'Vertel AB',
-    'depends': ['hr_holidays_sequence','hr_payroll','l10n_se_hr_payroll'],
-    'version': '1.0',
-    'licence': 'AGPL-3',
-    'summary': 'Swedish Holidays Rules',
+    'depends': ['l10n_se_hr_payroll','hr_payroll_flex100'],
+    'version': '1.1',
     'description': """
-Swedish Holidays Rules
-======================
-
-* Add holidays earning rules to payroll (hr.holiday)
-* Add hr.holiday.earning to hr.employee
-* Add holiday year to hr.holiday
-
-* hr.holiday.earning can be used for flextime and normal leaves days
-* Holiday earning rules can add days to an employees hr.holidays.earning
-  from hr.payslip
-
-
+Swedish Payslip additions for Flex100
     """,
-    'auto_install': False,
-    'website': 'http://vertel.se',
-    'data':[
-        'hr_employee_view.xml',
-        'hr_holidays_view.xml',
-        'hr_holidays_data.xml',
+    'website': 'http://www.vertel.se',
+    'data':[        
         'hr_payroll_payslip_report.xml',
     ],
-    'demo':[
-    ],
-    'installable': True
+    'auto_install': True,
+    'installable': True,
 }
 
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:

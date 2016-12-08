@@ -22,16 +22,17 @@
                                 <tr>
                                     <th>Löneart</th>
                                     <th>Kod</th>
-                                    <th>Namn</th>
-                                    <th style="text-align: right;">Kvantitet</th>
-                                    <th style="text-align: right;">Antal</th>
-                                    <th style="text-align: center;">Total</th>
+                                    <th>Benämning</th>
+                                    <th style="text-align: center;">Kvantitet</th>
+                                    <th style="text-align: center;">Procent</th>
+                                    <th style="text-align: center;">A-pris</th>
+                                    <th style="text-align: right;">Belopp</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <t t-foreach="o.line_ids.filtered(lambda l: l.appears_on_payslip == True)" t-as="p">
-                                    <tr t-att-style="'background: #eee;' if p.code == 'sum' else ''">
-                                        <td>
+                                <t t-foreach="o.line_ids" t-as="p">
+                                    <tr t-att-style="'background: #eee;' if p.code == 'net' else ''">
+                                        <td style="border-right: 1px solid black;">
                                             <span>
                                                 <t t-esc="'%4s' %p.salary_rule_id.salary_art if p.salary_rule_id.salary_art else ''" />
                                             </span>
@@ -44,7 +45,21 @@
                                         <td>
                                             <span t-field="p.name" />
                                         </td>
-                                        <td style="text-align: right;">
+                                        <td style="text-align: center;">
+                                            <t t-if="p.code != 'net'">
+                                                <span t-esc="p.quantity"/>
+                                            </t>
+<!--
+                                            <t t-if="not p.quantity == 1 or not p.rate == 100">
+                                                <span t-raw="'%s%2.2f' % ( '-&amp;nbsp;' if p.category_id.code == 'BRUAVG' or p.category_id.code == 'NETAVG' else '', p.amount)" />
+                                            </t>
+-->
+                                        </td>
+                                        <td style="text-align: center;">
+                                            <t t-if="p.code != 'net'">
+                                                <span t-esc="int(p.rate) if (p.rate).is_integer() else p.rate" /> %
+                                            </t>
+<!--
                                             <t t-if="not p.quantity == 1 and not p.rate == 100">
                                                 <span t-esc="'%2.2f' % (p.quantity * p.rate / 100)" />
                                             </t>
@@ -56,19 +71,20 @@
                                                     <span t-esc="'%2.2f%s' % (p.rate,'%')" />
                                                 </t>
                                             </t>
+-->
                                         </td>
-                                        <td style="text-align: right;">
-                                            <t t-if="not p.quantity == 1 or not p.rate == 100">
-                                                <span t-raw="'%s%2.2f' % ( '-&amp;nbsp;' if p.category_id.code == 'BRUAVG' or p.category_id.code == 'NETAVG' else '', p.amount)" />
+                                        <td style="text-align: center;">
+                                            <t t-if="p.code != 'net'">
+                                                <span t-esc="p.amount if p.quantity != 1.0 else ''" />
                                             </t>
                                         </td>
-                                        <td style="text-align: right;">
-                                            <b t-if="p.code == 'sum'">
-                                                <span t-field="p.total" t-field-options='{"widget": "monetary", "display_currency": "p.company_id.currency_id"}' />
+                                        <td style="text-align: right; border-left: 1px solid black;">
+                                            <b t-if="p.code == 'net'">
+                                                <span t-field="p.total"/>
                                             </b>
-                                            <t t-if="not p.code == 'sum'">
+                                            <t t-if="not p.code == 'net'">
                                                 <t t-if="p.category_id.code == 'BRUAVG' or p.category_id.code == 'NETAVG'">-</t>
-                                                <span t-field="p.total" t-field-options='{"widget": "monetary", "display_currency": "p.company_id.currency_id"}' />
+                                                <span t-field="p.total"/>
                                             </t>
                                         </td>
                                     </tr>
@@ -76,75 +92,69 @@
                             </tbody>
                         </table>
                     </div>
-                    <div class="col-md-12 col-sm-12 col-xs-12" style="padding: 0px;">
-                        <table class="table table-sm table-bordered table-responsive" style="margin: 0px;">
+                    <div id="footer_table_div" class="col-md-12 col-sm-12 col-xs-12" style="padding: 0px;">
+                        <table class="table table-sm table-responsive" style="margin: 0px; border-collapse: collapse;">
                             <tbody>
-                                <tr>
-                                    <td class="col-md-6 col-sm-6 col-xs-6">
-                                        <span id="tidssaldon"/>
-                                    </td>
-                                    <td class="col-md-6 col-sm-6 col-xs-6">
+                                <tr id="table_row_one">
+                                    <td id="tidssaldon"/>
+                                    <td id="salary_balance"/>
+                                    <td>
                                         <span style="font-size: 0.7em;">Arbetsgivaravgift</span><br/>
-                                        <span class="pull-right">
-                                            <t t-esc="o.get_slip_line_acc('san')" />
-                                        </span>
+                                        <span class="pull-left">Enlig avtal</span>
+                                        <span class="pull-right"><t t-esc="o.get_slip_line_acc('san')" /></span>
                                     </td>
                                 </tr>
-                                <tr>
-                                    <td id="salary_accumulators" class="col-md-6 col-sm-6 col-xs-6">
+                                <tr id="table_row_two">
+                                    <td id="salary_accumulators">
                                         <span style="font-size: 0.7em;">Ackumulerad</span><br/>
-                                        <span class="pull-left">Bruttolön</span><span class="pull-right"><t t-esc="o.get_slip_line_acc('bl')" /></span><br/>
-                                        <span class="pull-left">Förmån</span><span class="pull-right"></span><br/>
-                                        <span class="pull-left">Preliminärskatt</span><span class="pull-right"><t t-esc="o.get_slip_line_acc('(san-skv)')" /></span>
+                                        <span class="pull-left">Bruttolön</span><span class="pull-right"><t t-esc="o.get_slip_line_acc('bl') or 0" /></span><br/>
+                                        <span id="forman"/>
+                                        <span class="pull-left">Preliminärskatt</span><span class="pull-right"><t t-esc="o.get_slip_line_acc('(san-skv)') or 0" /></span>
                                     </td>
-                                    <td class="col-md-6 col-sm-6 col-xs-6">
+                                    <td>
                                         <span style="font-size: 0.7em;">Skatt beräknad på</span><br/>
                                         <span class="pull-left">Belopp</span><span class="pull-right"><t t-esc="o.contract_id.wage_tax_base" /></span><br/>
                                         <span class="pull-left">Skatt tabell</span><span class="pull-right"><t t-esc="o.contract_id.prel_tax_tabel" /></span><br/>
                                         <span class="pull-left">Preliminärskatt</span><span class="pull-right"><t t-esc="o.contract_id.prel_tax_amount" /></span>
                                     </td>
+                                    <td>
+                                        <span style="font-size: 0.7em;">Löneperiod</span><br/>
+                                        <span class="pull-left">Bruttolön</span><span class="pull-right"><t t-esc="o.get_slip_line('bl')[0]['total'] if len(o.get_slip_line('bl')) &gt; 0 else 0" /></span><br/>
+                                        <span class="pull-left">Skattavdrag</span><span class="pull-right"><t t-esc="o.get_slip_line('(san-skv)')[0]['total'] if len(o.get_slip_line('(san-skv)')) &gt; 0 else 0" /></span><br/>
+                                    </td>
                                 </tr>
                             </tbody>
                         </table>
-                        <table id="holidays" class="table table-sm table-responsive" style="margin: 0px;">
+                        <table id="holidays" class="table table-sm table-responsive" style="margin: 0px; border-collapse: collapse;">
                             <tbody>
                                 <tr>
-                                    <td class="col-md-1 col-sm-1 col-xs-1">
-                                        <span style="font-size: 0.7em;">Årets semester</span>
-                                    </td>
-                                    <td class="col-md-11 col-sm-11 col-xs-11">
-                                        <span style="font-size: 0.7em;">Sparad semester</span>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="col-md-1 col-sm-1 col-xs-1">
+                                    <td>
+                                        <span style="font-size: 0.7em;">Årets semester</span><br/>
                                         <span style="font-size: 0.7em;">Betalda</span><br/>
                                         <span>0</span>
                                     </td>
-                                    <td class="col-md-11 col-sm-11 col-xs-11">
+                                    <td>
+                                        <span style="font-size: 0.7em;">Sparad semester</span><br/>
                                         <br/>
                                         <span>0</span>
                                     </td>
                                 </tr>
                             </tbody>
                         </table>
-                        <table class="table table-sm table-responsive" style="margin: 0px;">
+                        <table id="overall" class="table table-sm table-responsive" style="margin: 0px; border-collapse: collapse;">
                             <tbody>
                                 <tr style="background: #eee;">
                                     <td><span style="font-size: 0.7em;">Arbetad tid</span></td>
                                     <td><span style="font-size: 0.7em;">Övertid</span></td>
                                     <td><span style="font-size: 0.7em;">Frånvaro</span></td>
-                                    <td><span style="font-size: 0.7em;">Flextid</span></td>
                                 </tr>
                                 <tr style="background: #eee;">
-                                    <td><t t-esc="o.schema_number_of_hours if o.contract_id.type_id.work_time == 'schema' else 0"/></td>
+                                    <td><t t-esc="o.worked_days_line_ids.filtered(lambda l: l.code == 'WORK100').mapped('number_of_hours')[0] or 0"/></td>
+                                    <td><t t-esc="o.get_slip_line('kval')[0]['quantity'] or 0"/></td>
                                     <td>0</td>
-                                    <td>0</td>
-                                    <td><t t-esc="o.schema_number_of_hours if o.contract_id.type_id.work_time == 'flex' else 0"/></td>
                                 </tr>
                             </tbody>
                         </table>
-                        <div id="salary_balance"/>
                     </div>
                 </div>
             </t>
