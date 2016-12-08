@@ -37,14 +37,18 @@
                 <field name="condition_range_min" position="after">
                     <field name="appears_on_payslip"/>
                     <field name="parent_rule_id"/>
-                    <filter string="Appears On Payslip" name="appears_on_payslip" domain="[('appears_on_payslip','=',1)]"/>
-                    <filter string="Has Parent Rule" name="parent_rule_id" domain="[('parent_rule_id','=',False)]"/>
+                    <field name="child_ids"/>
+                    <filter string="Appears On Payslip" name="appears_on_payslip" domain="[('appears_on_payslip','=',True)]"/>
+                    <filter string="No Parent Rule" name="parent_rule_id" domain="[('parent_rule_id','=',False)]"/>
                 </field>
             </field>
         </record>
 
-        <record id="hr_payroll.action_view_hr_payroll_structure_tree" model="ir.actions.act_window">
+        <record id="hr_payroll.action_salary_rule_form" model="ir.actions.act_window">
             <field name="domain">[]</field>
+<!--
+            <field name="context">{"search_default_parent_rule_id":1}</field>
+-->
         </record>
 
     <record id="hr_contract_form_inherit" model="ir.ui.view">
