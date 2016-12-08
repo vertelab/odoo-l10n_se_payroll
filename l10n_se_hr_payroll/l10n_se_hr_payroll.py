@@ -124,10 +124,10 @@ class hr_employee(models.Model):
         self.age= -1 if not self.birthday else date.today().year - datetime.strptime(self.birthday, DEFAULT_SERVER_DATE_FORMAT).year
     age = fields.Integer(string="Age", compute=_age, help="Age to calculate social security deduction")
 
-    @api.one
-    def _income_statement_count(self):
-        self.income_statement_count = len(set([i.year for i in self.env['hr.employee.income_statement'].search([('employee_id','=',self.id)])]))
-    income_statement_count = fields.Integer(compute="_income_statement_count")
+    #~ @api.one
+    #~ def _income_statement_count(self):
+        #~ self.income_statement_count = len(set([i.year for i in self.env['hr.employee.income_statement'].search([('employee_id','=',self.id)])]))
+    #~ income_statement_count = fields.Integer(compute="_income_statement_count")
 
 #~ class hr_employee_income_statement(models.Model):
     #~ _name = 'hr.employee.income_statement'
