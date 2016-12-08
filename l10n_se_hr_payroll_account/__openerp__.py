@@ -35,6 +35,7 @@ Accounting Data for Swedish Payroll Rules.
     'data':[
         #~ 'l10n_se_wizard.yml', # Leif
         'l10n_se_hr_salary_rule_data.xml',
+        'l10n_se_hr_payroll_account_view.xml',
         # 'l10n_se_hr_payroll_account_data.xml',
         # 'data/hr.salary.rule.csv', # Leif
     ],

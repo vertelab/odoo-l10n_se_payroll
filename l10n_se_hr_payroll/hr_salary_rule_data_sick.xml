@@ -145,7 +145,7 @@ result = contract.wage / 20
     <record id="hr_salary_rule-forald-ledig-165" model="hr.salary.rule">
       <field name="parent_rule_id" ref="hr_salary_rule-sjk" />
       <field name="category_id" ref="hr_salary_rule_category-BRUAVG" />
-      <field name="code">fpe_165</field>
+      <field name="code">fpe</field>
       <field name="name">Föräld ledig 165</field>
       <field name="salary_art">165</field>
       <field name="sequence">50</field>
@@ -163,7 +163,7 @@ result = contract.wage / 20
     <record id="hr_salary_rule-forald-ledig-168" model="hr.salary.rule">
       <field name="parent_rule_id" ref="hr_salary_rule-sjk" />
       <field name="category_id" ref="hr_salary_rule_category-BRUAVG" />
-      <field name="code">fpe_168</field>
+      <field name="code">fpe_kol</field>
       <field name="name">Föräld ledig 168</field>
       <field name="salary_art">168</field>
       <field name="sequence">60</field>
