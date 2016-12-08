@@ -119,9 +119,10 @@ if age > 77:
     -->
     <record id="hr_salary_rule-sum" model="hr.salary.rule">
       <field name="category_id" ref="hr_salary_rule_category-SUMMA" />
-      <field name="code">sum</field>
-      <field name="name">Summa</field>
+      <field name="code">NET</field>
+      <field name="name">Nettolön</field>
       <field name="sequence">900</field>
+      <field name="salary_art">s116</field>
       <field name="appears_on_payslip" eval="True"/>
       <field name="condition_select">none</field>
       <field name="amount_select">code</field>
@@ -368,7 +369,7 @@ categories.BRUTTO - categories.NETAVG + categories.NETTIL
       <field name="amount_python_compute">
 result_qty = inputs.resmil.amount
 # result_rate = 150
-result = 18.5
+result = 0.0 if result_qty == 0 else 18.5
       </field>
 <!--
       <field name="account_debit" search="[('code', '=', '5841')]" /> Finns inte i bas2015

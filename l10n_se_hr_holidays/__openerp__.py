@@ -22,7 +22,7 @@
     'name': 'Swedish - Holidays',
     'category': 'Localization',
     'author': 'Vertel AB',
-    'depends': ['hr_holidays','hr_payroll','l10n_se_hr_payroll'],
+    'depends': ['hr_holidays_sequence','hr_payroll','l10n_se_hr_payroll'],
     'version': '1.0',
     'licence': 'AGPL-3',
     'summary': 'Swedish Holidays Rules',
