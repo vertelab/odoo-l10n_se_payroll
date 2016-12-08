@@ -119,7 +119,7 @@ if age > 77:
     -->
     <record id="hr_salary_rule-sum" model="hr.salary.rule">
       <field name="category_id" ref="hr_salary_rule_category-SUMMA" />
-      <field name="code">NET</field>
+      <field name="code">net</field>
       <field name="name">Nettolön</field>
       <field name="sequence">900</field>
       <field name="salary_art">s116</field>
