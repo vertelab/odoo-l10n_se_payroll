@@ -1,0 +1,190 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* l10n_se_hr_holidays
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 8.0-20161208\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2016-12-09 07:38+0000\n"
+"PO-Revision-Date: 2016-12-09 08:51+0100\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: \n"
+"Language: sv\n"
+"X-Generator: Poedit 1.8.7.1\n"
+
+#. module: l10n_se_hr_holidays
+#: field:hr.holidays.status,holidays_allowed:0
+msgid "Allowed"
+msgstr "Tillåten"
+
+#. module: l10n_se_hr_holidays
+#: view:website:l10n_se_hr_payroll.payslip_document
+msgid "Betalda"
+msgstr "Betalda"
+
+#. module: l10n_se_hr_holidays
+#: field:hr.holidays.earning,create_uid:0
+msgid "Created by"
+msgstr "Skapad av"
+
+#. module: l10n_se_hr_holidays
+#: field:hr.holidays.earning,create_date:0
+msgid "Created on"
+msgstr "Skapad på"
+
+#. module: l10n_se_hr_holidays
+#: field:hr.holidays.earning,display_name:0
+msgid "Display Name"
+msgstr "Display Name"
+
+#. module: l10n_se_hr_holidays
+#: model:ir.actions.server,name:l10n_se_hr_holidays.earn_leaves_dayes
+msgid "Earn Leaves Days"
+msgstr "Tjänad semester dagar"
+
+#. module: l10n_se_hr_holidays
+#: code:addons/l10n_se_hr_holidays/hr_holidays.py:69
+#, python-format
+msgid "Earn days %s: %s (%s)"
+msgstr "Tjänad dagar %s: %s (%s)"
+
+#. module: l10n_se_hr_holidays
+#: field:hr.holidays.status,payslip_condition:0
+msgid "Earning Condition"
+msgstr "Tjänar skick"
+
+#. module: l10n_se_hr_holidays
+#: field:hr.holidays.status,payslip_rule:0
+msgid "Earning Rule"
+msgstr "Tjänar regel"
+
+#. module: l10n_se_hr_holidays
+#: field:hr.holidays,earning_id:0
+msgid "Earning id"
+msgstr "Tjänar id"
+
+#. module: l10n_se_hr_holidays
+#: field:hr.holidays.status,date_earning_end:0
+msgid "Earning year ends"
+msgstr "Tjänar när året tar slut"
+
+#. module: l10n_se_hr_holidays
+#: field:hr.holidays.status,date_earning_start:0
+msgid "Earning year starts"
+msgstr "Tjänar när året tar slut"
+
+#. module: l10n_se_hr_holidays
+#: model:ir.model,name:l10n_se_hr_holidays.model_hr_employee
+msgid "Employee"
+msgstr "Anställd"
+
+#. module: l10n_se_hr_holidays
+#: field:hr.holidays.earning,employee_id:0
+msgid "Employee id"
+msgstr "Anställd id"
+
+#. module: l10n_se_hr_holidays
+#: field:hr.employee,holidays_earning_ids:0
+msgid "Holiday Earnings"
+msgstr "Semester tjänar"
+
+#. module: l10n_se_hr_holidays
+#: field:hr.holidays.earning,holiday_status_id:0
+msgid "Holiday status id"
+msgstr "Semester status id"
+
+#. module: l10n_se_hr_holidays
+#: model:ir.model,name:l10n_se_hr_holidays.model_hr_holidays
+msgid "Holidays"
+msgstr "Semester"
+
+#. module: l10n_se_hr_holidays
+#: model:ir.model,name:l10n_se_hr_holidays.model_hr_holidays_status
+msgid "Holidays Status"
+msgstr "Semester status"
+
+#. module: l10n_se_hr_holidays
+#: field:hr.holidays.earning,id:0
+msgid "ID"
+msgstr "ID"
+
+#. module: l10n_se_hr_holidays
+#: field:hr.holidays.earning,__last_update:0
+msgid "Last Modified on"
+msgstr "Senast ändrad på"
+
+#. module: l10n_se_hr_holidays
+#: field:hr.holidays.earning,write_uid:0
+msgid "Last Updated by"
+msgstr "Senast ändrad av"
+
+#. module: l10n_se_hr_holidays
+#: field:hr.holidays.earning,write_date:0
+msgid "Last Updated on"
+msgstr "Senast uppdaterad på"
+
+#. module: l10n_se_hr_holidays
+#: view:hr.employee:l10n_se_hr_holidays.hr_employee_form
+msgid "Leaves"
+msgstr "Semester"
+
+#. module: l10n_se_hr_holidays
+#: field:hr.holidays.earning,leaves_take:0
+msgid "Leaves Take"
+msgstr "Semester tog"
+
+#. module: l10n_se_hr_holidays
+#: model:hr.holidays.status,name:l10n_se_hr_holidays.holiday_status_cl1
+msgid "Legal Leaves 2016"
+msgstr "Sem 2016"
+
+#. module: l10n_se_hr_holidays
+#: model:hr.holidays.status,name:l10n_se_hr_holidays.holiday_status_cl2
+msgid "Legal Leaves 2017"
+msgstr "Sem 2017"
+
+#. module: l10n_se_hr_holidays
+#: model:hr.holidays.status,name:l10n_se_hr_holidays.holiday_status_cl3
+msgid "Legal Leaves 2018"
+msgstr "Sem 2018"
+
+#. module: l10n_se_hr_holidays
+#: field:hr.holidays.earning,max_leaves:0
+msgid "Max Leaves"
+msgstr "Max semester dagar"
+
+#. module: l10n_se_hr_holidays
+#: model:ir.model,name:l10n_se_hr_holidays.model_hr_payslip
+msgid "Pay Slip"
+msgstr "Lönespecifikation "
+
+#. module: l10n_se_hr_holidays
+#: help:hr.holidays.status,payslip_condition:0
+#: help:hr.holidays.status,payslip_rule:0
+msgid "Python Code"
+msgstr "Python kod"
+
+#. module: l10n_se_hr_holidays
+#: field:hr.holidays.earning,remaining_leaves:0
+msgid "Remaining Leaves"
+msgstr "Semester kvar"
+
+#. module: l10n_se_hr_holidays
+#: view:website:l10n_se_hr_payroll.payslip_document
+msgid "Sparad semester"
+msgstr "Sparad semester"
+
+#. module: l10n_se_hr_holidays
+#: field:hr.holidays.earning,virtual_remaining_leaves:0
+msgid "Virtual remaining Leaves"
+msgstr "Virtuell semester kvar"
+
+#. module: l10n_se_hr_holidays
+#: view:website:l10n_se_hr_payroll.payslip_document
+msgid "Årets semester"
+msgstr "Årets semester"
