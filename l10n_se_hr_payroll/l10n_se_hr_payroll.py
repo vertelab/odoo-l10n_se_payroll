@@ -177,4 +177,8 @@ class hr_payslip(models.Model):
         start_date = datetime(year, 1, 1)
         return sum(self.env['hr.payslip'].search([('employee_id', '=', self.employee_id.id), ('date_from', '>=', start_date.strftime('%Y-%m-%d')), ('date_to', '<=', self.date_to)]).mapped('details_by_salary_rule_category').filtered(lambda l: l.code == code).mapped('total'))
 
+class hr_payslip(models.Model):
+    _inherit = 'hr.payslip'
+
+
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
