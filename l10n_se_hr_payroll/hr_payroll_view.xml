@@ -29,6 +29,28 @@
             </field>
         </record>
 
+        <record id="view_hr_rule_filter" model="ir.ui.view">
+            <field name="name">hr.salary.rule.select.inherit.l10n_se.payroll</field>
+            <field name="model">hr.salary.rule</field>
+            <field name="inherit_id" ref="hr_payroll.view_hr_rule_filter"/>
+            <field name="arch" type="xml">
+                <field name="condition_range_min" position="after">
+                    <field name="appears_on_payslip"/>
+                    <field name="parent_rule_id"/>
+                    <field name="child_ids"/>
+                    <filter string="Appears On Payslip" name="appears_on_payslip" domain="[('appears_on_payslip','=',True)]"/>
+                    <filter string="Hide Children Rules" name="parent_rule_id" domain="[('parent_rule_id','=',False)]"/>
+                </field>
+            </field>
+        </record>
+
+        <record id="hr_payroll.action_salary_rule_form" model="ir.actions.act_window">
+            <field name="domain">[]</field>
+<!--
+            <field name="context">{"search_default_parent_rule_id":1}</field>
+-->
+        </record>
+
     <record id="hr_contract_form_inherit" model="ir.ui.view">
       <field name="name">hr.contract.form.inherit</field>
       <field name="model">hr.contract</field>
