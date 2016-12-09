@@ -16,5 +16,12 @@
             <field name="key2">client_action_multi</field>
             <field name="value" eval="'ir.actions.server,%d' % action_generate_payslip_csv"/>
         </record>
+        <record id="glabels_ag_report" model="ir.actions.report.xml">
+            <field name="name">Arbetsgivardeklaration</field>
+            <field name="model">hr.payslip.run</field>
+            <field name="report_name">arbetsgivardeklaration</field>
+            <field name="report_type">glabels</field>
+            <field name="glabels_template" type="base64" file="l10n_se_hr_payslip_run/ag.glabels" />
+        </record>
     </data>
 </openerp>

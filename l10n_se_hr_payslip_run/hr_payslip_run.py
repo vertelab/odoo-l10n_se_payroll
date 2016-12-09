@@ -57,25 +57,56 @@ class hr_payslip_run(models.Model):
         return True
 
     @api.one
+    def _company_id(self):
+        self.company_id = self.env['res.company'].browse(self.env['res.users'].browse(self._uid)._get_company())
+    company_id = fields.Char(compute="_company_id")
+
+    # fields match Arbetsgivardeklaration document from Swelon.se
+    @api.one
     def _nbr_employee(self):
         self.nbr_employee = len(self.slip_ids)
     nbr_employee = fields.Integer(compute="_nbr_employee")
+
     @api.one
-    def _taxable_salary(self):
+    def _taxable_salary(self): #50
         self.taxable_salary = sum([s.get_slip_line('bl')[0]['total'] for s in self.slip_ids if s.get_slip_line('bl')])
-    taxable_salary = fields.Float(compute="_taxable_salary")
+    taxable_salary = fields.Integer(compute="_taxable_salary")
+
     @api.one
-    def _total_tax(self):
+    def _social_normal_fees(self): #55 & 56
+        self.fully_social_normal_fees = sum([s.get_slip_line('san')[0]['amount'] for s in self.slip_ids if s.get_slip_line('san')])
+        self.social_normal_fees = sum([s.get_slip_line('san')[0]['total'] for s in self.slip_ids if s.get_slip_line('san')])
+    fully_social_normal_fees = fields.Integer(compute="_social_normal_fees")
+    social_normal_fees = fields.Integer(compute="_social_normal_fees")
+
+    @api.one
+    def _social_youth_fees(self): #57 & 58
+        self.fully_social_youth_fees = sum([s.get_slip_line('sau')[0]['amount'] for s in self.slip_ids if s.get_slip_line('sau')])
+        self.social_youth_fees = sum([s.get_slip_line('sau')[0]['total'] for s in self.slip_ids if s.get_slip_line('sau')])
+    fully_social_youth_fees = fields.Integer(compute="_social_youth_fees")
+    social_youth_fees = fields.Integer(compute="_social_youth_fees")
+
+    @api.one
+    def _social_retired_fees(self): #59 & 60
+        self.fully_social_retired_fees = sum([s.get_slip_line('sap')[0]['amount'] for s in self.slip_ids if s.get_slip_line('sap')])
+        self.social_retired_fees = sum([s.get_slip_line('sap')[0]['total'] for s in self.slip_ids if s.get_slip_line('sap')])
+    fully_social_retired_fees = fields.Integer(compute="_social_retired_fees")
+    social_retired_fees = fields.Integer(compute="_social_retired_fees")
+
+    @api.one
+    def _total_tax(self): #82/88
         self.total_tax = sum([s.get_slip_line('pre')[0]['total'] for s in self.slip_ids if s.get_slip_line('pre')])
-    total_taxable = fields.Float(compute="_total_tax")
+    total_taxable = fields.Integer(compute="_total_tax")
+
     @api.one
-    def _general_payroll_tax(self):
+    def _general_payroll_tax(self): #70/78
         self.general_payroll_tax = sum([s.get_slip_line('sa')[0]['total'] for s in self.slip_ids if s.get_slip_line('sa')])
-    general_payroll_tax = fields.Float(compute="_general_payroll_tax")
+    general_payroll_tax = fields.Integer(compute="_general_payroll_tax")
+
     @api.one
-    def _net_salary(self):
+    def _net_salary(self): #81
         self.net_salary = sum([s.get_slip_line('net')[0]['total'] for s in self.slip_ids if s.get_slip_line('net')])
-    net_salary = fields.Float(compute="_net_salary")
+    net_salary = fields.Integer(compute="_net_salary")
 
 class hr_payslip(models.Model):
     _inherit = 'hr.payslip'

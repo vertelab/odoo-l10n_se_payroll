@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <openerp>
-  <data>
+  <data noupdate="1">
     <!--
          <record id="hr_payroll.hr_payroll_structure-2a69a7d4-5ac2-11e5-89ef-525400e1f872-2" model="hr.payroll.structure">
          <field name="code">Vertel standard</field>

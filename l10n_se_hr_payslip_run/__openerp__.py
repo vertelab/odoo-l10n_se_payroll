@@ -35,7 +35,7 @@ Generate a csv file for all selected employee payslip
     'auto_install': False,
     'website': 'http://vertel.se',
     'data':[
-        'hr_payslip_run_view.xml',
+        'hr_payslip_run_data.xml',
     ],
     'demo':[
     ],
