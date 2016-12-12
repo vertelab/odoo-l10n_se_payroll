@@ -30,7 +30,7 @@
       <field name="name">Sjukavdrag</field>
       <field name="sequence">210</field>
       <field name="appears_on_payslip" eval="False"/>
-      <field name="condition_select">fix</field>
+      <field name="amount_select">fix</field>
       <field name="amount_fix">0.0</field>
       <field name="quantity">1</field>
     </record>
