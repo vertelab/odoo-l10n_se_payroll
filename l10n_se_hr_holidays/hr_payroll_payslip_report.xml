@@ -3,18 +3,11 @@
     <data>
         <template id="payslip_document" inherit_id="l10n_se_hr_payroll.payslip_document">
             <xpath expr="//table[@id='holidays']" position="replace">
-                <table id="holidays" class="table table-sm table-responsive" style="margin: 0px;">
+                <table id="holidays" class="table table-sm table-responsive" style="margin: 0px; border-collapse: collapse;">
                     <tbody>
                         <tr>
                             <td>
-                                <span style="font-size: 0.7em;">Årets semester</span>
-                            </td>
-                            <td>
-                                <span style="font-size: 0.7em;">Sparad semester</span>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="col-md-1 col-sm-1 col-xs-1">
+                                <span style="font-size: 0.7em;">Årets semester</span><br/>
                                 <span>
                                     <span style="font-size: 0.7em;">Betalda</span><br/>
                                     <t t-esc="o.get_legal_leaves_consumed()" />
@@ -22,7 +15,9 @@
                             </td>
                             <t t-if="len(o.get_legal_leaves()) &gt; 0">
                                 <t t-foreach="o.get_legal_leaves()" t-as="h">
-                                    <td class="col-md-1 col-sm-1 col-xs-1">
+                                    <td>
+                                        <span t-if="h_first" style="font-size: 0.7em;">Sparad semester<br/></span>
+                                        <span t-if="not h_first" style="font-size: 0.7em;"><br/></span>
                                         <span style="font-size: 0.7em;">
                                             <t t-esc="h.name" />
                                         </span>
@@ -32,6 +27,13 @@
                                         </span>
                                     </td>
                                 </t>
+                            </t>
+                            <t t-if="len(o.get_legal_leaves()) == 0">
+                                <td>
+                                    <span style="font-size: 0.7em;">Sparad semester</span><br/>
+                                    <span style="font-size: 0.7em;"><br/></span>
+                                    <span>0</span>
+                                </td>
                             </t>
                         </tr>
                     </tbody>

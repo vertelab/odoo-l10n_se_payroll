@@ -19,34 +19,23 @@
 #
 ##############################################################################
 {
-    'name': 'Swedish - Holidays',
+    'name': 'HR Payslip Run',
     'category': 'Localization',
     'author': 'Vertel AB',
-    'depends': ['hr_holidays_sequence','hr_payroll','l10n_se_hr_payroll'],
+    'depends': ['hr_payroll'],
     'version': '1.0',
     'licence': 'AGPL-3',
-    'summary': 'Swedish Holidays Rules',
+    'summary': 'HR Payslip Run',
     'description': """
-Swedish Holidays Rules
-======================
-
-* Add holidays earning rules to payroll (hr.holiday)
-* Add hr.holiday.earning to hr.employee
-* Add holiday year to hr.holiday
-
-* hr.holiday.earning can be used for flextime and normal leaves days
-* Holiday earning rules can add days to an employees hr.holidays.earning
-  from hr.payslip
-
+HR Payslip Run
+==============
+Generate a csv file for all selected employee payslip
 
     """,
     'auto_install': False,
     'website': 'http://vertel.se',
     'data':[
-        'hr_employee_view.xml',
-        'hr_holidays_view.xml',
-        'hr_holidays_data.xml',
-        'hr_payroll_payslip_report.xml',
+        'hr_payslip_run_data.xml',
     ],
     'demo':[
     ],

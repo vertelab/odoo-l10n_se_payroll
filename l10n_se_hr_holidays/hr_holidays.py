@@ -137,7 +137,7 @@ class hr_payslip(models.Model):
 
     @api.model
     def get_legal_leaves(self):
-        return self.with_context({'employee_id' : self.employee_id.id}).holiday_ids.filtered(lambda h: h.remaining_leaves > 0 and h.id not in self.legal_non_vacation())
+        return self.with_context({'employee_id' : self.employee_id.id}).holiday_ids.filtered(lambda h: h.remaining_leaves > 0 and h.id not in self.legal_non_vacation()).sorted(key=lambda h: h.sequence)
 
     @api.model
     def get_legal_leaves_consumed(self):

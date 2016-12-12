@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data noupdate="1">
+        <record model="ir.actions.server" id="action_generate_payslip_csv">
+            <field name="name">Generate Payslip CSV</field>
+            <field name="state">code</field>
+            <field name="condition" eval="True" />
+            <field name="model_id" ref="l10n_se_hr_payslip_run.model_hr_payslip_run" />
+            <field name="code">for o in object.browse(context.get('active_ids', [])):
+    o.generate_csv()
+            </field>
+        </record>
+        <record model="ir.values" id="action_generate_payslip_csv_menu">
+            <field name="name">Generate Payslip CSV</field>
+            <field name="model">hr.payslip.run</field>
+            <field name="key2">client_action_multi</field>
+            <field name="value" eval="'ir.actions.server,%d' % action_generate_payslip_csv"/>
+        </record>
+        <record id="glabels_ag_report" model="ir.actions.report.xml">
+            <field name="name">Arbetsgivardeklaration</field>
+            <field name="model">hr.payslip.run</field>
+            <field name="report_name">arbetsgivardeklaration</field>
+            <field name="report_type">glabels</field>
+            <field name="glabels_template" type="base64" file="l10n_se_hr_payslip_run/ag.glabels" />
+        </record>
+    </data>
+</openerp>

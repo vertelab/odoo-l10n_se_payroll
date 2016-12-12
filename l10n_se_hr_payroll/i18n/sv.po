@@ -1,0 +1,415 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* l10n_se_hr_payroll
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 8.0-20161208\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2016-12-09 07:29+0000\n"
+"PO-Revision-Date: 2016-12-09 08:35+0100\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: sv\n"
+"X-Generator: Poedit 1.8.7.1\n"
+
+#. module: l10n_se_hr_payroll
+#: view:website:l10n_se_hr_payroll.payslip_document
+msgid "A-pris"
+msgstr "A-pris"
+
+#. module: l10n_se_hr_payroll
+#: view:website:l10n_se_hr_payroll.payslip_document
+msgid "Ackumulerad"
+msgstr "Ackumulerad"
+
+#. module: l10n_se_hr_payroll
+#: view:website:l10n_se_hr_payroll.payslip_2_document
+msgid "Adress"
+msgstr "Adress"
+
+#. module: l10n_se_hr_payroll
+#: field:hr.employee,age:0
+msgid "Age"
+msgstr "Ålder"
+
+#. module: l10n_se_hr_payroll
+#: help:hr.employee,age:0
+msgid "Age to calculate social security deduction"
+msgstr "Ålder för att beräkna socialförsäkrings avdrag"
+
+#. module: l10n_se_hr_payroll
+#: help:hr.contract,prel_tax_amount:0
+msgid "Ange preleminär skatt i kronor"
+msgstr "Ange preleminär skatt i kronor"
+
+#. module: l10n_se_hr_payroll
+#: help:hr.contract,prel_tax_tabel:0 help:hr.contract,prel_tax_url:0
+msgid "Ange skattetabell/kolumn/ev jämkning som ligger till grund för angivet preleminärskatteavdrag"
+msgstr "Ange skattetabell/kolumn/ev jämkning som ligger till grund för angivet preleminärskatteavdrag"
+
+#. module: l10n_se_hr_payroll
+#: view:website:l10n_se_hr_payroll.payslip_2_document
+msgid "Antal"
+msgstr "Antal"
+
+#. module: l10n_se_hr_payroll
+#: view:hr.salary.rule:l10n_se_hr_payroll.view_hr_rule_filter
+msgid "Appears On Payslip"
+msgstr "Visas på lönebesked "
+
+#. module: l10n_se_hr_payroll
+#: view:website:l10n_se_hr_payroll.payslip_document
+msgid "Arbetad tid"
+msgstr "Arbetad tid"
+
+#. module: l10n_se_hr_payroll
+#: view:website:l10n_se_hr_payroll.payslip_2_document
+#: view:website:l10n_se_hr_payroll.payslip_document
+msgid "Arbetsgivaravgift"
+msgstr "Arbetsgivaravgift"
+
+#. module: l10n_se_hr_payroll
+#: view:website:l10n_se_hr_payroll.payslip_2_document
+msgid "Arbetsgivare"
+msgstr "Arbetsgivare"
+
+#. module: l10n_se_hr_payroll
+#: view:website:l10n_se_hr_payroll.payslip_2_document
+msgid "Avgifter"
+msgstr "Avgifter"
+
+#. module: l10n_se_hr_payroll
+#: view:website:l10n_se_hr_payroll.payslip_document
+msgid "Belopp"
+msgstr "Belopp"
+
+#. module: l10n_se_hr_payroll
+#: view:website:l10n_se_hr_payroll.payslip_document
+msgid "Benämning"
+msgstr "Benämning"
+
+#. module: l10n_se_hr_payroll
+#: view:website:l10n_se_hr_payroll.payslip_2_document
+msgid "Beskrivning"
+msgstr "Beskrivning"
+
+#. module: l10n_se_hr_payroll
+#: view:website:l10n_se_hr_payroll.payslip_document
+msgid "Betalda"
+msgstr "Betalda"
+
+#. module: l10n_se_hr_payroll
+#: view:website:l10n_se_hr_payroll.payslip_document
+msgid "Bruttolön"
+msgstr "Bruttolön"
+
+#. module: l10n_se_hr_payroll
+#: help:hr.salary.rule,salary_art:0
+msgid "Code to interchange payslip rows with other systems"
+msgstr "Kod för att byta lönebesked rader med andra system"
+
+#. module: l10n_se_hr_payroll
+#: model:ir.model,name:l10n_se_hr_payroll.model_hr_contract
+msgid "Contract"
+msgstr "Kontrakt"
+
+#. module: l10n_se_hr_payroll
+#: model:ir.model,name:l10n_se_hr_payroll.model_hr_employee
+msgid "Employee"
+msgstr "Anställd"
+
+#. module: l10n_se_hr_payroll
+#: view:website:l10n_se_hr_payroll.payslip_document
+msgid "Enlig avtal"
+msgstr "Enlig avtal"
+
+#. module: l10n_se_hr_payroll
+#: view:website:l10n_se_hr_payroll.payslip_document
+msgid "Frånvaro"
+msgstr "Frånvaro"
+
+#. module: l10n_se_hr_payroll
+#: view:website:l10n_se_hr_payroll.payslip_2_document
+msgid "Företag"
+msgstr "Företag"
+
+#. module: l10n_se_hr_payroll
+#: model:hr.holidays.status,name:l10n_se_hr_payroll.forald_ledig_165
+msgid "Föräld ledig 165"
+msgstr "Föräld ledig 165"
+
+#. module: l10n_se_hr_payroll
+#: model:hr.holidays.status,name:l10n_se_hr_payroll.forald_ledig_168
+msgid "Föräld ledig 168"
+msgstr "Föräld ledig 168"
+
+#. module: l10n_se_hr_payroll
+#: view:hr.salary.rule:l10n_se_hr_payroll.view_hr_rule_filter
+msgid "Hide Children Rules"
+msgstr "Dölj barn regler"
+
+#. module: l10n_se_hr_payroll
+#: view:website:l10n_se_hr_payroll.payslip_2_document
+#: view:website:l10n_se_hr_payroll.payslip_document
+msgid "Kod"
+msgstr "Kod"
+
+#. module: l10n_se_hr_payroll
+#: view:website:l10n_se_hr_payroll.payslip_2_document
+msgid "Kontonummer"
+msgstr "Kontonummer"
+
+#. module: l10n_se_hr_payroll
+#: view:website:l10n_se_hr_payroll.payslip_document
+msgid "Kvantitet"
+msgstr "Kvantitet"
+
+#. module: l10n_se_hr_payroll
+#: view:website:l10n_se_hr_payroll.payslip_2_document
+msgid "Kvarvarande semester"
+msgstr "Kvarvarande semester"
+
+#. module: l10n_se_hr_payroll
+#: view:website:l10n_se_hr_payroll.payslip_document
+msgid "Löneart"
+msgstr "Löneart"
+
+#. module: l10n_se_hr_payroll
+#: view:website:l10n_se_hr_payroll.payslip_2_document
+#: view:website:l10n_se_hr_payroll.payslip_document
+msgid "Löneperiod"
+msgstr "Löneperiod"
+
+#. module: l10n_se_hr_payroll
+#: view:website:l10n_se_hr_payroll.payslip_2_document
+msgid "Lönespecifikation"
+msgstr "Lönespecifikation"
+
+#. module: l10n_se_hr_payroll
+#: view:website:l10n_se_hr_payroll.payslip_2_document
+msgid "Löntagare"
+msgstr "Löntagare"
+
+#. module: l10n_se_hr_payroll
+#: field:hr.contract,wage_tax_base:0
+msgid "Lönunderlag"
+msgstr "Lönunderlag"
+
+#. module: l10n_se_hr_payroll
+#: view:website:l10n_se_hr_payroll.payslip_2_document
+msgid "Meddelande"
+msgstr "Meddelande"
+
+#. module: l10n_se_hr_payroll
+#: view:website:l10n_se_hr_payroll.payslip_2_document
+msgid "Namn"
+msgstr "Namn"
+
+#. module: l10n_se_hr_payroll
+#: view:website:l10n_se_hr_payroll.payslip_2_document
+msgid "Nettolön att erhålla"
+msgstr "Nettolön att erhålla"
+
+#. module: l10n_se_hr_payroll
+#: view:website:l10n_se_hr_payroll.payslip_2_document
+msgid "Organisationsnummer"
+msgstr "Organisationsnummer"
+
+#. module: l10n_se_hr_payroll
+#: model:hr.holidays.status,name:l10n_se_hr_payroll.pappaledig_166
+msgid "Pappaledig 166"
+msgstr "Pappaledig 166"
+
+#. module: l10n_se_hr_payroll
+#: model:ir.model,name:l10n_se_hr_payroll.model_hr_payslip
+msgid "Pay Slip"
+msgstr "Lönespecifikation "
+
+#. module: l10n_se_hr_payroll
+#: model:ir.actions.report.xml,name:l10n_se_hr_payroll.payslip_2
+msgid "Payslip"
+msgstr "Lönespecifikation "
+
+#. module: l10n_se_hr_payroll
+#: model:ir.actions.report.xml,name:l10n_se_hr_payroll.payslip
+msgid "Payslip SE"
+msgstr "Lönespecifikation  SE"
+
+#. module: l10n_se_hr_payroll
+#: view:website:l10n_se_hr_payroll.payslip_2_document
+msgid "Period"
+msgstr "Period"
+
+#. module: l10n_se_hr_payroll
+#: view:website:l10n_se_hr_payroll.payslip_2_document
+msgid "Personnummer"
+msgstr "Personnummer"
+
+#. module: l10n_se_hr_payroll
+#: field:hr.contract,prel_tax_tabel:0
+msgid "Prel skatt info"
+msgstr "Prel skatt info"
+
+#. module: l10n_se_hr_payroll
+#: field:hr.contract,prel_tax_amount:0
+msgid "Prel skatt kr"
+msgstr "Prel skatt kr"
+
+#. module: l10n_se_hr_payroll
+#: view:website:l10n_se_hr_payroll.payslip_2_document
+msgid "Preleminärskatt"
+msgstr "Preleminärskatt"
+
+#. module: l10n_se_hr_payroll
+#: view:website:l10n_se_hr_payroll.payslip_document
+msgid "Preliminärskatt"
+msgstr "Preliminärskatt"
+
+#. module: l10n_se_hr_payroll
+#: view:website:l10n_se_hr_payroll.payslip_document
+msgid "Procent"
+msgstr "Procent"
+
+#. module: l10n_se_hr_payroll
+#: view:hr.contract:l10n_se_hr_payroll.hr_contract_form_inherit
+msgid "SKATTETABELL 31/Kolumn 1/Ingen jämkning"
+msgstr "SKATTETABELL 31/Kolumn 1/Ingen jämkning"
+
+#. module: l10n_se_hr_payroll
+#: field:hr.salary.rule,salary_art:0
+msgid "Salary art"
+msgstr "Salary art"
+
+#. module: l10n_se_hr_payroll
+#: view:website:l10n_se_hr_payroll.payslip_2_document
+msgid "Saldon"
+msgstr "Saldon"
+
+#. module: l10n_se_hr_payroll
+#: field:hr.contract,vacation_days:0
+msgid "Semesterdagar"
+msgstr "Semesterdagar"
+
+#. module: l10n_se_hr_payroll
+#: model:hr.holidays.status,name:l10n_se_hr_payroll.sick_leave_100
+msgid "Sick Leave 100%"
+msgstr "Sick Leave 100%"
+
+#. module: l10n_se_hr_payroll
+#: model:hr.holidays.status,name:l10n_se_hr_payroll.sick_leave_qualify
+msgid "Sick Leave Qualify Period"
+msgstr "Sick Leave Qualify Period"
+
+#. module: l10n_se_hr_payroll
+#: model:hr.holidays.status,name:l10n_se_hr_payroll.sick_leave_214
+msgid "Sick Leave day 2-14 (80%)"
+msgstr "Sick Leave day 2-14 (80%)"
+
+#. module: l10n_se_hr_payroll
+#: view:website:l10n_se_hr_payroll.payslip_document
+msgid "Skatt beräknad på"
+msgstr "Skatt beräknad på"
+
+#. module: l10n_se_hr_payroll
+#: view:website:l10n_se_hr_payroll.payslip_document
+msgid "Skatt tabell"
+msgstr "Skatt tabell"
+
+#. module: l10n_se_hr_payroll
+#: view:website:l10n_se_hr_payroll.payslip_document
+msgid "Skattavdrag"
+msgstr "Skattavdrag"
+
+#. module: l10n_se_hr_payroll
+#: view:website:l10n_se_hr_payroll.payslip_2_document
+msgid "Skattefri lön"
+msgstr "Skattefri lön"
+
+#. module: l10n_se_hr_payroll
+#: view:website:l10n_se_hr_payroll.payslip_2_document
+msgid "Skattefria ersättningar och avdrag"
+msgstr "Skattefria ersättningar och avdrag"
+
+#. module: l10n_se_hr_payroll
+#: view:website:l10n_se_hr_payroll.payslip_2_document
+msgid "Skattepliktig lön"
+msgstr "Skattepliktig lön"
+
+#. module: l10n_se_hr_payroll
+#: view:website:l10n_se_hr_payroll.payslip_2_document
+msgid "Skattepliktiga ersättningar och avdrag"
+msgstr "Skattepliktiga ersättningar och avdrag"
+
+#. module: l10n_se_hr_payroll
+#: field:hr.contract,prel_tax_url:0
+msgid "Skattetabeller SKV"
+msgstr "Skattetabeller SKV"
+
+#. module: l10n_se_hr_payroll
+#: view:website:l10n_se_hr_payroll.payslip_document
+msgid "Sparad semester"
+msgstr "Sparad semester"
+
+#. module: l10n_se_hr_payroll
+#: help:hr.contract,vacation_days:0
+msgid "Sparad semester i dagar"
+msgstr "Sparad semester i dagar"
+
+#. module: l10n_se_hr_payroll
+#: view:website:l10n_se_hr_payroll.payslip_2_document
+msgid "Specifikation"
+msgstr "Specifikation"
+
+#. module: l10n_se_hr_payroll
+#: view:website:l10n_se_hr_payroll.payslip_2_document
+msgid "Summa"
+msgstr "Summa"
+
+#. module: l10n_se_hr_payroll
+#: view:website:l10n_se_hr_payroll.payslip_2_document
+msgid "Telefon"
+msgstr "Telefon"
+
+#. module: l10n_se_hr_payroll
+#: model:hr.holidays.status,name:l10n_se_hr_payroll.tjanstledig_191
+msgid "Tjänstledig 191"
+msgstr "Tjänstledig 191"
+
+#. module: l10n_se_hr_payroll
+#: view:website:l10n_se_hr_payroll.payslip_2_document
+msgid "Utbetalning"
+msgstr "Utbetalning"
+
+#. module: l10n_se_hr_payroll
+#: view:website:l10n_se_hr_payroll.payslip_2_document
+msgid "Utbetalningsdag"
+msgstr "Utbetalningsdag"
+
+#. module: l10n_se_hr_payroll
+#: help:hr.contract,wage_tax_base:0
+msgid "Uträknat löneunderlag för beräkning av preleminär skatt"
+msgstr "Uträknat löneunderlag för beräkning av preleminär skatt"
+
+#. module: l10n_se_hr_payroll
+#: model:hr.holidays.status,name:l10n_se_hr_payroll.vab_160
+msgid "Vård av barn 160"
+msgstr "Vård av barn 160"
+
+#. module: l10n_se_hr_payroll
+#: view:website:l10n_se_hr_payroll.payslip_2_document
+msgid "a pris"
+msgstr "a pris"
+
+#. module: l10n_se_hr_payroll
+#: view:website:l10n_se_hr_payroll.payslip_document
+msgid "Årets semester"
+msgstr "Årets semester"
+
+#. module: l10n_se_hr_payroll
+#: view:website:l10n_se_hr_payroll.payslip_document
+msgid "Övertid"
+msgstr "Övertid"

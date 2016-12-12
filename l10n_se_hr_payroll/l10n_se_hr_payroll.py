@@ -115,10 +115,10 @@ class hr_employee(models.Model):
         self.age= -1 if not self.birthday else date.today().year - datetime.strptime(self.birthday, DEFAULT_SERVER_DATE_FORMAT).year
     age = fields.Integer(string="Age", compute=_age, help="Age to calculate social security deduction")
 
-    @api.one
-    def _income_statement_count(self):
-        self.income_statement_count = len(set([i.year for i in self.env['hr.employee.income_statement'].search([('employee_id','=',self.id)])]))
-    income_statement_count = fields.Integer(compute="_income_statement_count")
+    #~ @api.one
+    #~ def _income_statement_count(self):
+        #~ self.income_statement_count = len(set([i.year for i in self.env['hr.employee.income_statement'].search([('employee_id','=',self.id)])]))
+    #~ income_statement_count = fields.Integer(compute="_income_statement_count")
 
 #~ class hr_employee_income_statement(models.Model):
     #~ _name = 'hr.employee.income_statement'
@@ -176,5 +176,9 @@ class hr_payslip(models.Model):
         year = datetime.now().year
         start_date = datetime(year, 1, 1)
         return sum(self.env['hr.payslip'].search([('employee_id', '=', self.employee_id.id), ('date_from', '>=', start_date.strftime('%Y-%m-%d')), ('date_to', '<=', self.date_to)]).mapped('details_by_salary_rule_category').filtered(lambda l: l.code == code).mapped('total'))
+
+class hr_payslip(models.Model):
+    _inherit = 'hr.payslip'
+
 
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
