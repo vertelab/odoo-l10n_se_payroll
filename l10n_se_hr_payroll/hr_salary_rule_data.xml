@@ -364,12 +364,13 @@ categories.BRUTTO - categories.NETAVG + categories.NETTIL
       <field name="name">Milersättning</field>
       <field name="sequence">510</field>
       <field name="appears_on_payslip" eval="True"/>
-      <field name="condition_select">none</field>
+      <field name="condition_select">python</field>
+      <field name="condition_python">result = inputs.resmil.amount != 0</field>
       <field name="amount_select">code</field>
       <field name="amount_python_compute">
 result_qty = inputs.resmil.amount
 # result_rate = 150
-result = 0.0 if result_qty == 0 else 18.5
+result = 18.5
       </field>
 <!--
       <field name="account_debit" search="[('code', '=', '5841')]" /> Finns inte i bas2015
@@ -383,6 +384,86 @@ result = 0.0 if result_qty == 0 else 18.5
       <field name="name">Milersättning (antal mil)</field>
       <field name="input_id" ref="hr_salary_rule-resmil" />
     </record>
+    
+    <!-- Traktamente -->
+    
+    <record id="hr_salary_rule_traktamente_domestic" model="hr.salary.rule">
+      <field name="category_id" ref="hr_salary_rule_category-NETTIL" />
+      <field name="code">traktin</field>
+      <field name="salary_art">771</field>
+      <field name="name">Traktamente inrikes</field>
+      <field name="sequence">510</field>
+      <field name="appears_on_payslip" eval="True"/>
+      <field name="condition_select">python</field>
+      <field name="condition_python">result = inputs.traktin.amount != 0</field>
+      <field name="amount_select">code</field>
+      <field name="amount_python_compute">
+result_qty = inputs.traktin.amount
+result = 0.0 if result_qty == 0 else 220
+      </field>
+      <field name="quantity">1</field>
+    </record>
+    
+    <record id="hr_rule_input_traktamente_domestic" model="hr.rule.input">
+      <field name="code">traktin</field>
+      <field name="name">Traktamente inrikes (antal dagar)</field>
+      <field name="input_id" ref="hr_salary_rule_traktamente_domestic" />
+    </record>
+    
+    <record id="hr_salary_rule_traktamente_foreign" model="hr.salary.rule">
+      <field name="category_id" ref="hr_salary_rule_category-NETTIL" />
+      <field name="code">traktut</field>
+      <field name="salary_art">780</field>
+      <field name="name">Traktamente utrikes</field>
+      <field name="sequence">510</field>
+      <field name="appears_on_payslip" eval="True"/>
+      <field name="condition_select">python</field>
+      <field name="condition_python">result = inputs.traktuta.amount != 0 and inputs.traktutb.amount != 0</field>
+      <field name="amount_select">code</field>
+      <field name="amount_python_compute">
+result_qty = inputs.traktuta.amount
+result = 0.0 if result_qty == 0 or inputs.traktinb.amount == 0 else inputs.traktutb.amount
+      </field>
+      <field name="quantity">1</field>
+    </record>
+    
+    <record id="hr_rule_input_traktamente_foreign_amount" model="hr.rule.input">
+      <field name="code">traktuta</field>
+      <field name="name">Traktamente utrikes (antal dagar)</field>
+      <field name="input_id" ref="hr_salary_rule_traktamente_foreign" />
+    </record>
+    
+    <record id="hr_rule_input_traktamente_foreign_value" model="hr.rule.input">
+      <field name="code">traktutb</field>
+      <field name="name">Traktamente utrikes (belopp/dag)</field>
+      <field name="input_id" ref="hr_salary_rule_traktamente_foreign" />
+    </record>
+    
+    <!-- Utlägg -->
+    
+    <record id="hr_salary_rule_expenses" model="hr.salary.rule">
+      <field name="category_id" ref="hr_salary_rule_category-NETTIL" />
+      <field name="code">utlagg</field>
+      <field name="salary_art">730</field>
+      <field name="name">Utlägg</field>
+      <field name="sequence">510</field>
+      <field name="appears_on_payslip" eval="True"/>
+      <field name="condition_select">python</field>
+      <field name="condition_python">result = inputs.utlagg.amount != 0</field>
+      <field name="amount_select">code</field>
+      <field name="amount_python_compute">
+result_qty = 0.0 if inputs.utlagg.amount == 0 else 1.0
+result = inputs.utlagg.amount
+      </field>
+      <field name="quantity">1</field>
+    </record>
+    
+    <record id="hr_rule_input_expenses" model="hr.rule.input">
+      <field name="code">utlagg</field>
+      <field name="name">Utlägg (belopp)</field>
+      <field name="input_id" ref="hr_salary_rule_expenses" />
+    </record>
+    
     <!--
          =====
     -->
