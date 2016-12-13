@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+  <data noupdate="1">
+
+    <record id="hr_salary_rule-flexjust" model="hr.salary.rule">
+      <field name="category_id" ref="l10n_se_hr_payroll.hr_salary_rule_category-BRUAVG" />
+      <field name="code">flex-just</field>
+      <field name="salary_art"></field>
+      <field name="name">FLex Justification</field>
+      <field name="sequence">300</field>
+      <field name="appears_on_payslip">True</field>
+      <field name="condition_select">python</field>
+      <field name="condition_python">result = contract.type.work_type == 'flex' and worked_days.WORK100.payslip_id.schema_number_of_hours &gt; worked_days.WORK100.payslip_id.flex_working_hours</field>
+      <field name="amount_select">code</field>
+      <field name="amount_python_compute">
+result_rate = 100.0 - (worked_days.WORK100.payslip_id.percent_number_of_days * 100.0)
+result = contract.wage
+</field>
+      <field name="quantity">1</field>
+      <field name="note">Flex Justification</field>
+    </record>
+
+  </data>
+
+</openerp>
