@@ -70,10 +70,6 @@
                  <field name="car_company_amount"/>
                  <field name="car_employee_deduction"/>
                  <field name="car_deduction_url" widget="url" readonly="True" />
-            -->
-            <field name="vacation_days" />
-            <strong><field name="employee_fund_name" class="oe_inline" nolabel="1"/></strong><field name="employee_fund_balance" class="oe_inline" nolabel="1"></field>
-            <!--
                  <field name="office_fund"/>
             -->
           </xpath>
