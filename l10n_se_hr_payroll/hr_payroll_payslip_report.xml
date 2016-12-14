@@ -100,8 +100,18 @@
                                     <td id="salary_balance"/>
                                     <td>
                                         <span style="font-size: 0.7em;">Arbetsgivaravgift</span><br/>
-                                        <span class="pull-left">Enlig avtal</span>
-                                        <span class="pull-right"><t t-esc="o.get_slip_line_acc('san')" /></span>
+                                        <t t-if="len(o.get_slip_line('san')) &gt; 0">
+                                            <span class="pull-left"><t t-esc="o.get_slip_line('san')[0]['name']" /></span>
+                                            <span class="pull-right"><t t-esc="o.get_slip_line_acc('san')" /></span>
+                                        </t>
+                                        <t t-if="len(o.get_slip_line('sau')) &gt; 0">
+                                            <span class="pull-left"><t t-esc="o.get_slip_line('sau')[0]['name']" /></span>
+                                            <span class="pull-right"><t t-esc="o.get_slip_line_acc('sau')" /></span>
+                                        </t>
+                                        <t t-if="len(o.get_slip_line('sap')) &gt; 0">
+                                            <span class="pull-left"><t t-esc="o.get_slip_line('sap')[0]['name']" /></span>
+                                            <span class="pull-right"><t t-esc="o.get_slip_line_acc('sap')" /></span>
+                                        </t>
                                     </td>
                                 </tr>
                                 <tr id="table_row_two">
@@ -150,7 +160,7 @@
                                 </tr>
                                 <tr style="background: #eee;">
                                     <td><t t-esc="o.worked_days_line_ids.filtered(lambda l: l.code == 'WORK100').mapped('number_of_hours')[0] or 0"/></td>
-                                    <td><t t-esc="o.get_slip_line('kval')[0]['quantity'] or 0"/></td>
+                                    <td><t t-esc="o.get_slip_line('kval') and o.get_slip_line('kval')[0]['quantity'] or 0"/></td>
                                     <td>0</td>
                                 </tr>
                             </tbody>
