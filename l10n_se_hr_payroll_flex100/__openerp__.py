@@ -28,8 +28,9 @@
 Swedish Payslip additions for Flex100
     """,
     'website': 'http://www.vertel.se',
-    'data':[        
+    'data':[
         'hr_payroll_payslip_report.xml',
+        'hr_salary_rule_data.xml',
     ],
     'auto_install': True,
     'installable': True,

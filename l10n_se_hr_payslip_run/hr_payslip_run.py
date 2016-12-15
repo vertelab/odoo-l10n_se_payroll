@@ -41,7 +41,7 @@ class hr_payslip_run(models.Model):
         for slip in self.slip_ids.sorted(key=lambda s: s.employee_id.contract_id.name):
             if not labelwriter:
                 columns = ['Anst nr', 'Name']
-                labelwriter = csv.DictWriter(temp, columns + ['%s\n%s' %(r.name.replace(u'ö', 'o').replace(u'å', 'a').replace(u'ä', 'a').encode('ascii', 'ignore'), r.salary_art) for r in rules if r.salary_art])
+                labelwriter = csv.DictWriter(temp, columns + ['%s\n%s\na-pris | st | procent | total' %(r.name.replace(u'ö', 'o').replace(u'å', 'a').replace(u'ä', 'a').encode('ascii', 'ignore'), r.salary_art) for r in rules if r.salary_art])
                 labelwriter.writeheader()
             labelwriter.writerow(slip.get_payslip_run_row(rules))
         temp.seek(0)
@@ -55,7 +55,7 @@ class hr_payslip_run(models.Model):
         })
         temp.close()
         return True
-
+#~ \na-pris | st | procent | total
     @api.one
     def _company_id(self):
         self.company_id = self.env['res.company'].browse(self.env['res.users'].browse(self._uid)._get_company())
@@ -119,7 +119,8 @@ class hr_payslip(models.Model):
         }
         for r in rules:
             if r.salary_art and self.get_slip_line(r.code):
-                rec['%s\n%s' %(r.name.replace(u'ö', 'o').replace(u'å', 'a').replace(u'ä', 'a').encode('ascii', 'ignore'), r.salary_art)] = self.get_slip_line(r.code)[0]['total']
+                vals = self.get_slip_line(r.code)[0]
+                rec['%s\n%s\na-pris | st | procent | total' %(r.name.replace(u'ö', 'o').replace(u'å', 'a').replace(u'ä', 'a').encode('ascii', 'ignore'), r.salary_art)] = '%s | %s | %s%% | %s' %(vals['amount'], vals['quantity'], vals['rate'], vals['total'])
         return rec
 
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
