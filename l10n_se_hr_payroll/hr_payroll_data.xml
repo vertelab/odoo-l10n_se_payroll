@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <openerp>
-  <data>
+    <data>
         <!-- server action -->
 <!--
     <record model="ir.actions.server" id="test_attendance">
@@ -20,5 +20,16 @@ for o in object.browse(context.get('active_ids', [])):
       <field name="value" eval="'ir.actions.server,%d' % test_attendance" />
     </record>
 -->
-  </data>
+        <record id="payslip_papper_format" model="report.paperformat">
+            <field name="name">Payslip Swedish Papper Format</field>
+            <field name="formate">A4</field>
+            <field name="orientation">Portrait</field>
+            <field name="margin_top">40</field>
+            <field name="margin_bottom">80</field>
+            <field name="margin_left">7</field>
+            <field name="margin_right">7</field>
+            <field name="header_spacing">35</field>
+            <field name="dpi">90</field>
+        </record>
+    </data>
 </openerp>

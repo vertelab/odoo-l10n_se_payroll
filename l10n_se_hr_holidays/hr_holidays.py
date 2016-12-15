@@ -30,6 +30,7 @@ class hr_holidays(models.Model):
     _inherit = "hr.holidays"
 
     earning_id = fields.Many2one(comodel_name='hr.holidays.earning')
+    slip_id = fields.Many2one(comodel_name='hr.payslip')
 
 class hr_holidays_status(models.Model):
     _inherit = "hr.holidays.status"
@@ -115,6 +116,17 @@ class hr_employee(models.Model):
 class hr_payslip(models.Model):
     _inherit = 'hr.payslip'
 
+    @api.one
+    def _holiday_ids(self):
+        self.holiday_ids = self.env['hr.holidays'].search([('state','=','validate'),('employee_id','=',self.employee_id.id),('type','=','remove')]).filtered(lambda h: h.date_from[:10] <= self.date_to and h.date_from[:10] >= self.date_from)
+    holiday_ids = fields.One2many(comodel_name='hr.holidays', inverse_name='slip_id', compute='_holiday_ids')
+
+    @api.one
+    def _holiday_status_ids(self):
+        self.holiday_status_ids = self.env['hr.holidays.status'].search([('active','=',True),('limit','=',False)])
+        self.holiday_status_ids += self.env['hr.holidays.status'].search([('id','in',[self.env.ref('l10n_se_hr_payroll.sick_leave_qualify').id,self.env.ref('l10n_se_hr_payroll.sick_leave_214').id,self.env.ref('l10n_se_hr_payroll.sick_leave_100').id])])
+    holiday_status_ids = fields.Many2many(comodel_name="hr.holidays.status",compute="_holiday_status_ids")
+
     def legal_non_vacation(self):
         return [
             self.env.ref('hr_holidays.holiday_status_comp').id,
@@ -137,7 +149,7 @@ class hr_payslip(models.Model):
 
     @api.model
     def get_legal_leaves(self):
-        return self.with_context({'employee_id' : self.employee_id.id}).holiday_ids.filtered(lambda h: h.remaining_leaves > 0 and h.id not in self.legal_non_vacation()).sorted(key=lambda h: h.sequence)
+        return self.with_context({'employee_id' : self.employee_id.id}).holiday_status_ids.filtered(lambda h: h.remaining_leaves > 0 and h.id not in self.legal_non_vacation()).sorted(key=lambda h: h.sequence)
 
     @api.model
     def get_legal_leaves_consumed(self):
