@@ -54,8 +54,35 @@ class hr_payslip_run(models.Model):
             'datas_fname': self.name.replace(' ', '_') + '.csv',
         })
         temp.close()
+
+        temp = tempfile.NamedTemporaryFile(mode='w+t',suffix='_holidays.csv')
+        labelwriter = None
+        for slip in self.slip_ids.sorted(key=lambda s: s.employee_id.contract_id.name):
+            if not labelwriter:
+                columns = ['Anst nr', 'Namn', 'Franvarotyp', 'Datum', 'Antal dagar']
+                labelwriter = csv.DictWriter(temp, columns)
+                labelwriter.writeheader()
+            for holiday in slip.holiday_ids:
+                labelwriter.writerow({
+                    'Anst nr': slip.employee_id.contract_id.name.encode('utf-8') if slip.employee_id.contract_id else 'N/A',
+                    'Namn': slip.employee_id.name.encode('utf-8'),
+                    'Franvarotyp': holiday.holiday_status_id.name.encode('utf-8'),
+                    'Datum': '%s - %s' %(holiday.date_from, holiday.date_to),
+                    'Antal dagar': holiday.number_of_days_temp,
+                })
+        temp.seek(0)
+        self.env['ir.attachment'].create({
+            'name': self.name.replace(' ', '_') + '_holidays.csv',
+            'res_name': self.name,
+            'res_model': self._name,
+            'res_id': self.id,
+            'datas': base64.encodestring(temp.read()),
+            'datas_fname': self.name.replace(' ', '_') + '_holidays.csv',
+        })
+        temp.close()
+
         return True
-#~ \na-pris | st | procent | total
+
     @api.one
     def _company_id(self):
         self.company_id = self.env['res.company'].browse(self.env['res.users'].browse(self._uid)._get_company())
