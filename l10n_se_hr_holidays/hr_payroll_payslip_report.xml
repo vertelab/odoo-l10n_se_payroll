@@ -7,7 +7,7 @@
                     <table id="holidays_table" class="table table-condensed">
                         <thead>
                             <tr>
-                                <th>Frånvaro typ</th>
+                                <th>Frånvarotyp</th>
                                 <th style="text-align: center;">Datum</th>
                                 <th style="text-align: right;">Antal dagar</th>
                             </tr>
@@ -38,8 +38,8 @@
                                     <t t-esc="o.get_legal_leaves_consumed()" />
                                 </span>
                             </td>
-                            <t t-if="len(o.get_legal_leaves()) &gt; 0">
-                                <t t-foreach="o.get_legal_leaves()" t-as="h">
+                            <t t-if="len(o.get_legal_leaves_status()) &gt; 0">
+                                <t t-foreach="o.get_legal_leaves_status()" t-as="h">
                                     <td>
                                         <span t-if="h_first" style="font-size: 0.7em;">Sparad semester<br/></span>
                                         <span t-if="not h_first" style="font-size: 0.7em;"><br/></span>
@@ -53,7 +53,7 @@
                                     </td>
                                 </t>
                             </t>
-                            <t t-if="len(o.get_legal_leaves()) == 0">
+                            <t t-if="len(o.get_legal_leaves_status()) == 0">
                                 <td>
                                     <span style="font-size: 0.7em;">Sparad semester</span><br/>
                                     <span style="font-size: 0.7em;"><br/></span>

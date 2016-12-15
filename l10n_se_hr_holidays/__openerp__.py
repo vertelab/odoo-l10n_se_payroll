@@ -22,7 +22,7 @@
     'name': 'Swedish - Holidays',
     'category': 'Localization',
     'author': 'Vertel AB',
-    'depends': ['hr_holidays_sequence','hr_payroll','l10n_se_hr_payroll'],
+    'depends': ['hr_holidays_sequence','l10n_se_hr_payroll'],
     'version': '1.0',
     'licence': 'AGPL-3',
     'summary': 'Swedish Holidays Rules',
@@ -46,6 +46,7 @@ Swedish Holidays Rules
         'hr_employee_view.xml',
         'hr_holidays_view.xml',
         'hr_holidays_data.xml',
+        'hr_salary_rule_data_holiday.xml',
         'hr_payroll_payslip_report.xml',
     ],
     'demo':[

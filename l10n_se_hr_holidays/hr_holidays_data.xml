@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <openerp>
-  <data noupdate="0">
+  <data noupdate="1">
     <!-- Casual leave -->
     <record model="hr.holidays.status" id="hr_holidays.holiday_status_cl">
       <field name="name" eval="'Legal Leaves '+str(DateTime.today().year - 1)" />
@@ -25,6 +25,10 @@
       <field name="color_name">black</field>
       <field name="date_earning_start" eval="time.strftime(str(DateTime.today().year + 1) + '-04-01')" />
       <field name="date_earning_end" eval="time.strftime(str(DateTime.today().year + 2) + '-03-31')" />
+    </record>
+    <record model="hr.holidays.status" id="hr_holidays.holiday_status_unpaid">
+      <field name="name">Legal Leaves unpaid</field>
+      <field name="color_name">black</field>
     </record>
 
     <!-- server action -->
