@@ -97,7 +97,7 @@ if age > 77:
       <field name="appears_on_payslip" eval="True"/>
       <field name="condition_select">none</field>
       <field name="amount_select">code</field>
-      <field name="amount_python_compute">result = contract.wage + categories.BASIC</field>
+      <field name="amount_python_compute">result = contract.wage</field>
       <field name="quantity">1</field>
     </record>
     <!--
@@ -111,7 +111,7 @@ if age > 77:
       <field name="appears_on_payslip" eval="False"/>
       <field name="condition_select">none</field>
       <field name="amount_select">code</field>
-      <field name="amount_python_compute">result = categories.BAS - categories.BRUAVG - categories.DED + categories.BRUTIL + categories.ALW</field>
+      <field name="amount_python_compute">result = categories.BAS - categories.BRUAVG + categories.BRUTIL</field>
       <field name="quantity">1</field>
     </record>
     <!--
@@ -341,6 +341,7 @@ if age > 77:
       <field name="condition_python">result = inputs.kvaltim.amount != 0</field>
       <field name="amount_select">code</field>
       <field name="amount_python_compute">
+#ML/72*100/APR
 result_qty = inputs.kvaltim.amount
 # result_rate = 150
 result = 2 * contract.wage / 160
@@ -352,6 +353,47 @@ result = 2 * contract.wage / 160
       <field name="code">kvaltim</field>
       <field name="name">Kvalificerad övertid (antal timmar)</field>
       <field name="input_id" ref="hr_salary_rule-kval" />
+    </record>
+
+    <!-- retroaktiv lön bruttotillägg -->
+    <record id="hr_salary_rule-retroactive-til" model="hr.salary.rule">
+      <field name="category_id" ref="hr_salary_rule_category-BRUTIL" />
+      <field name="code">retro_akt</field>
+      <field name="salary_art">170</field>
+      <field name="name">Retroaktiv lön (bruttotillägg)</field>
+      <field name="sequence">115</field>
+      <field name="appears_on_payslip" eval="True"/>
+      <field name="condition_select">python</field>
+      <field name="condition_python">result = inputs.retroakt.amount != 0</field>
+      <field name="amount_select">code</field>
+      <field name="amount_python_compute">
+result_rate = 100
+result = inputs.retroakt.amount
+      </field>
+      <field name="quantity">1</field>
+    </record>
+    <record id="hr_rule_input-retroakt-til" model="hr.rule.input">
+      <field name="code">retroakt</field>
+      <field name="name">Retroaktiv lön (i kronor)</field>
+      <field name="input_id" ref="hr_salary_rule-retroactive-til" />
+    </record>
+
+    <!-- retroaktiv lön nettoavdrag -->
+    <record id="hr_salary_rule-retroactive-avg" model="hr.salary.rule">
+      <field name="category_id" ref="hr_salary_rule_category-NETAVG" />
+      <field name="code">retro_skatte</field>
+      <field name="salary_art">s100</field>
+      <field name="name">Retroaktiv lön (skatt)</field>
+      <field name="sequence">115</field>
+      <field name="appears_on_payslip" eval="True"/>
+      <field name="condition_select">python</field>
+      <field name="condition_python">result = inputs.retroakt.amount != 0</field>
+      <field name="amount_select">code</field>
+      <field name="amount_python_compute">
+result_rate = 30
+result = inputs.retroakt.amount
+      </field>
+      <field name="quantity">1</field>
     </record>
 
     <!--
@@ -625,6 +667,19 @@ result = inputs.utlagg.amount
       <field name="sequence">400</field>
       <field name="appears_on_payslip" eval="False"/>
       <field name="condition_select">none</field>
+      <field name="quantity">1</field>
+    </record>
+
+    <record id="hr_salary_rule-forman" model="hr.salary.rule">
+      <field name="category_id" ref="hr_salary_rule_category-BAS" />
+      <field name="code">forman</field>
+      <field name="salary_art">666</field>
+      <field name="name">Förmån</field>
+      <field name="sequence">10</field>
+      <field name="appears_on_payslip">True</field>
+      <field name="condition_select">none</field>
+      <field name="amount_select">code</field>
+      <field name="amount_python_compute">result = worked_days.WORK100.payslip_id.get_employeefund_addition()</field>
       <field name="quantity">1</field>
     </record>
 

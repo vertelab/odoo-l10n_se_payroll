@@ -6,27 +6,31 @@
     -->
     <record id="hr_salary_rule-car" model="hr.salary.rule">
       <field name="category_id" ref="hr_salary_rule_category-BRUAVG" />
-      <field name="code">car</field>
-      <field name="salary_art">141</field>
+      <field name="parent_rule_id" ref="hr_salary_rule-forman" />
+      <field name="code">car_cost</field>
+      <field name="salary_art">700</field>
       <field name="name">Bilkostnad</field>
       <field name="sequence">210</field>
-      <field name="appears_on_payslip">True</field>
-      <field name="condition_select">none</field>
+      <field name="appears_on_payslip" eval="True"/>
+      <field name="condition_select">python</field>
+      <field name="condition_python">result = contract.benefit_ids.filtered(lambda b: b.name == 'car_cost')</field>
       <field name="amount_select">code</field>
-      <field name="amount_python_compute">result = contract.benefit_ids.filtered(lambda b: b.name == 'car').value or 0.0</field>
+      <field name="amount_python_compute">result = contract.benefit_ids.filtered(lambda b: b.name == 'car_cost').value or 0.0</field>
       <field name="quantity">1</field>
       <field name="note">Företagets verkliga bilkostnad, t ex leasingavgift minus halv moms</field>
     </record>
     <record id="hr_salary_rule-car-deduct" model="hr.salary.rule">
       <field name="category_id" ref="hr_salary_rule_category-NETAVG" />
-      <field name="code">carded</field>
-      <field name="salary_art">141</field>
+      <field name="parent_rule_id" ref="hr_salary_rule-forman" />
+      <field name="code">car_adv</field>
+      <field name="salary_art">711</field>
       <field name="name">Tjänstebilavdrag</field>
       <field name="sequence">690</field>
-      <field name="appears_on_payslip">True</field>
-      <field name="condition_select">none</field>
+      <field name="appears_on_payslip" eval="True"/>
+      <field name="condition_select">python</field>
+      <field name="condition_python">result = contract.benefit_ids.filtered(lambda b: b.name == 'car_adv')</field>
       <field name="amount_select">code</field>
-      <field name="amount_python_compute">result = contract.benefit_ids.filtered(lambda b: b.name == 'carded').value or 0.0</field>
+      <field name="amount_python_compute">result = contract.benefit_ids.filtered(lambda b: b.name == 'car_adv').value or 0.0</field>
       <field name="quantity">1</field>
       <field name="note">Förmånsvärdesberäkning SKV http://www.skatteverket.se/privat/skatter/arbeteochinkomst/formaner/bilarochbilforman</field>
     </record>

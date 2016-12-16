@@ -9,6 +9,11 @@
       <field name="color_name">red</field>
       <field name="limit" eval="True"/>
     </record>
+    <record model="hr.holidays.status" id="sick_leave_214_100">
+      <field name="name" eval="'Sick Leave day 2-14 (100% deduction)'" />
+      <field name="color_name">red</field>
+      <field name="limit" eval="True"/>
+    </record>
     <record model="hr.holidays.status" id="sick_leave_214">
       <field name="name" eval="'Sick Leave day 2-14 (80%)'" />
       <field name="color_name">red</field>
@@ -49,17 +54,37 @@
       <field name="condition_python">result = contract.get_leave_days('l10n_se_hr_payroll.sick_leave_qualify', worked_days) &gt; 0.0</field>
       <field name="amount_select">code</field>
       <field name="amount_python_compute">
+#(ML*12)/(52*VA)
 result_qty = contract.get_leave_days('l10n_se_hr_payroll.sick_leave_qualify', worked_days)
 # result_rate = 150
 result = contract.wage / 20
       </field>
     </record>
 
+
+    <record id="hr_salary_rule-sjk-214-100" model="hr.salary.rule">
+      <field name="parent_rule_id" ref="hr_salary_rule-sjk" />
+      <field name="category_id" ref="hr_salary_rule_category-BRUAVG" />
+      <field name="code">sjk_214_100</field>
+      <field name="name">Sjuk dag 2-14 100% avdrag</field>
+      <field name="salary_art">141</field>
+      <field name="sequence">20</field>
+      <field name="appears_on_payslip" eval="True" />
+      <field name="condition_select">python</field>
+      <field name="condition_python">result = contract.get_leave_days('l10n_se_hr_payroll.sick_leave_214_100', worked_days) &gt; 0.0</field>
+      <field name="amount_select">code</field>
+      <field name="amount_python_compute">
+#(ML*12)/(52*VA)
+result_qty = contract.get_leave_days('l10n_se_hr_payroll.sick_leave_214_100', worked_days)
+result_rate = 100
+result = contract.wage / 20
+      </field>
+    </record>
     <record id="hr_salary_rule-sjk-214" model="hr.salary.rule">
       <field name="parent_rule_id" ref="hr_salary_rule-sjk" />
       <field name="category_id" ref="hr_salary_rule_category-BRUAVG" />
       <field name="code">sjk_214</field>
-      <field name="name">Sjuk dag 2-14</field>
+      <field name="name">Sjuk dag 2-14 80%</field>
       <field name="salary_art">142</field>
       <field name="sequence">20</field>
       <field name="appears_on_payslip" eval="True" />
@@ -67,6 +92,7 @@ result = contract.wage / 20
       <field name="condition_python">result = contract.get_leave_days('l10n_se_hr_payroll.sick_leave_214', worked_days) &gt; 0.0</field>
       <field name="amount_select">code</field>
       <field name="amount_python_compute">
+#0,80*(ML*12)/(52*VA)
 result_qty = contract.get_leave_days('l10n_se_hr_payroll.sick_leave_214', worked_days)
 result_rate = 20
 result = contract.wage / 20
@@ -77,15 +103,15 @@ result = contract.wage / 20
       <field name="category_id" ref="hr_salary_rule_category-BRUAVG" />
       <field name="code">sjk_100</field>
       <field name="name">Sjuk 100%</field>
-      <field name="salary_art">141</field>
+      <field name="salary_art">146</field>
       <field name="sequence">30</field>
       <field name="appears_on_payslip" eval="True" />
       <field name="condition_select">python</field>
       <field name="condition_python">result = contract.get_leave_days('hr_holidays.holiday_status_sl', worked_days) &gt; 0.0</field>
       <field name="amount_select">code</field>
       <field name="amount_python_compute">
+#(ML*12)/(52*VA)
 result_qty = contract.get_leave_days('hr_holidays.holiday_status_sl', worked_days)
-#result_rate = 80
 result = contract.wage / 20
       </field>
     </record>
@@ -143,6 +169,7 @@ result = contract.wage / 20
       <field name="condition_python">result = contract.get_leave_days('l10n_se_hr_payroll.vab_160', worked_days) > 0.0</field>
       <field name="amount_select">code</field>
       <field name="amount_python_compute">
+#(ML*12)/(52*VA)
 result_qty = contract.get_leave_days('l10n_se_hr_payroll.vab_160', worked_days)
 result_rate = 100
 result = contract.wage / 20
@@ -158,9 +185,10 @@ result = contract.wage / 20
       <field name="sequence">50</field>
       <field name="appears_on_payslip" eval="True" />
       <field name="condition_select">python</field>
-      <field name="condition_python">result = contract.get_leave_days('l10n_se_hr_payroll.forald_ledig_165', worked_days) > 0.0</field>
+      <field name="condition_python">result = contract.get_leave_days('l10n_se_hr_payroll.forald_ledig_165', worked_days) &gt; 0.0</field>
       <field name="amount_select">code</field>
       <field name="amount_python_compute">
+#ML*12/365
 result_qty = contract.get_leave_days('l10n_se_hr_payroll.forald_ledig_165', worked_days)
 result_rate = 100
 result = contract.wage / 20
@@ -176,9 +204,10 @@ result = contract.wage / 20
       <field name="sequence">60</field>
       <field name="appears_on_payslip" eval="True" />
       <field name="condition_select">python</field>
-      <field name="condition_python">result = contract.get_leave_days('l10n_se_hr_payroll.forald_ledig_168', worked_days) > 0.0</field>
+      <field name="condition_python">result = contract.get_leave_days('l10n_se_hr_payroll.forald_ledig_168', worked_days) &gt; 0.0</field>
       <field name="amount_select">code</field>
       <field name="amount_python_compute">
+#ML/21*(VAD/VADI)
 result_qty = contract.get_leave_days('l10n_se_hr_payroll.forald_ledig_168', worked_days)
 result_rate = 100
 result = contract.wage / 20
@@ -194,7 +223,7 @@ result = contract.wage / 20
       <field name="sequence">70</field>
       <field name="appears_on_payslip" eval="True" />
       <field name="condition_select">python</field>
-      <field name="condition_python">result = contract.get_leave_days('l10n_se_hr_payroll.pappaledig_166', worked_days) > 0.0</field>
+      <field name="condition_python">result = contract.get_leave_days('l10n_se_hr_payroll.pappaledig_166', worked_days) &gt; 0.0</field>
       <field name="amount_select">code</field>
       <field name="amount_python_compute">
 result_qty = contract.get_leave_days('l10n_se_hr_payroll.pappaledig_166', worked_days)

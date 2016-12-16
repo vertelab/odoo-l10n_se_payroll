@@ -133,6 +133,7 @@ class hr_payslip(models.Model):
             self.env.ref('hr_holidays.holiday_status_unpaid').id,
             self.env.ref('l10n_se_hr_holidays.holiday_status_cl3').id,
             self.env.ref('l10n_se_hr_payroll.sick_leave_214').id,
+            self.env.ref('l10n_se_hr_payroll.sick_leave_214_100').id,
             self.env.ref('l10n_se_hr_payroll.sick_leave_qualify').id,
             self.env.ref('l10n_se_hr_payroll.vab_160').id,
             self.env.ref('l10n_se_hr_payroll.forald_ledig_165').id,

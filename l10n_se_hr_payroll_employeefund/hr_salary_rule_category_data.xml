@@ -2,10 +2,6 @@
 <openerp>
   <data noupdate="1">
 
-    <record id="hr_salary_rule_category-FORMAN" model="hr.salary.rule.category">
-      <field name="code">FÖRMÅN</field>
-      <field name="name">Förmån</field>
-      <field name="note">Utgivna förmåner</field>
-    </record>
+
   </data>
 </openerp>
