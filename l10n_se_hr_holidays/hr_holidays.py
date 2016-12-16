@@ -138,8 +138,8 @@ class hr_payslip(models.Model):
             self.env.ref('l10n_se_hr_payroll.forald_ledig_165').id,
             self.env.ref('l10n_se_hr_payroll.forald_ledig_168').id,
             self.env.ref('l10n_se_hr_payroll.pappaledig_166').id,
-            self.env.ref('l10n_se_hr_holidays.holiday_status_leave_of_absence').id,
-            self.env.ref('l10n_se_hr_holidays.holiday_status_leave_of_absence_5').id,
+            self.env.ref('l10n_se_hr_payroll.holiday_status_leave_of_absence').id,
+            self.env.ref('l10n_se_hr_payroll.holiday_status_leave_of_absence_5').id,
             ]
 
     @api.model
