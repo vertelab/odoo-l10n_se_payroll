@@ -8,13 +8,13 @@
       <field name="code">sem_bet</field>
       <field name="salary_art">550</field>
       <field name="name">Uttag betalda semesterdagar</field>
-      <field name="sequence">510</field>
+      <field name="sequence">240</field>
       <field name="appears_on_payslip" eval="True"/>
       <field name="condition_select">python</field>
-      <field name="condition_python">result = len(worked_days.WORK100.payslip_id.get_legal_leaves) &gt; 0</field>
+      <field name="condition_python">result = len(worked_days.WORK100.payslip_id.get_legal_leaves()) &gt; 0</field>
       <field name="amount_select">code</field>
       <field name="amount_python_compute">
-result_qty = sum(worked_days.WORK100.payslip_id.get_legal_leaves.mapped('number_of_days_temp'))
+result_qty = sum(worked_days.WORK100.payslip_id.get_legal_leaves().mapped('number_of_days_temp'))
 result = 0.0
       </field>
       <field name="quantity">1</field>
@@ -25,14 +25,14 @@ result = 0.0
       <field name="code">sem_til</field>
       <field name="salary_art">122</field>
       <field name="name">Semestertillägg 0,8%</field>
-      <field name="sequence">510</field>
+      <field name="sequence">240</field>
       <field name="appears_on_payslip" eval="True"/>
       <field name="condition_select">python</field>
-      <field name="condition_python">result = len(worked_days.WORK100.payslip_id.get_legal_leaves) &gt; 0</field>
+      <field name="condition_python">result = len(worked_days.WORK100.payslip_id.get_legal_leaves()) &gt; 0</field>
       <field name="amount_select">code</field>
       <field name="amount_python_compute">
 #(ML*0,008)*(VAD/VADI)
-result_qty = sum(worked_days.WORK100.payslip_id.get_legal_leaves.mapped('number_of_days_temp'))
+result_qty = sum(worked_days.WORK100.payslip_id.get_legal_leaves().mapped('number_of_days_temp'))
 result = contract.wage * 0.008
       </field>
       <field name="quantity">1</field>
@@ -43,7 +43,7 @@ result = contract.wage * 0.008
       <field name="code">sem_obet</field>
       <field name="salary_art">221</field>
       <field name="name">Semesteravdrag 4,6%</field>
-      <field name="sequence">510</field>
+      <field name="sequence">240</field>
       <field name="appears_on_payslip" eval="True"/>
       <field name="condition_select">python</field>
       <field name="condition_python">result = worked_days.WORK100.payslip_id.leave_number_of_days('l10n_se_hr_holidays.holiday_status_unpaid') &gt; 0.0</field>

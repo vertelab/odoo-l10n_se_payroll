@@ -25,7 +25,7 @@
       <field name="code">car_adv</field>
       <field name="salary_art">711</field>
       <field name="name">Tjänstebilavdrag</field>
-      <field name="sequence">690</field>
+      <field name="sequence">710</field>
       <field name="appears_on_payslip" eval="True"/>
       <field name="condition_select">python</field>
       <field name="condition_python">result = contract.benefit_ids.filtered(lambda b: b.name == 'car_adv')</field>

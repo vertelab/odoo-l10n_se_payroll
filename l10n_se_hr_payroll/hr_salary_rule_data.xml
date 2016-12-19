@@ -384,7 +384,7 @@ result = inputs.retroakt.amount
       <field name="code">retro_skatte</field>
       <field name="salary_art">s100</field>
       <field name="name">Retroaktiv lön (skatt)</field>
-      <field name="sequence">115</field>
+      <field name="sequence">700</field>
       <field name="appears_on_payslip" eval="True"/>
       <field name="condition_select">python</field>
       <field name="condition_python">result = inputs.retroakt.amount != 0</field>
@@ -405,7 +405,7 @@ categories.BRUTTO - categories.NETAVG + categories.NETTIL
       <field name="code">resmil</field>
       <field name="salary_art">730</field>
       <field name="name">Milersättning</field>
-      <field name="sequence">510</field>
+      <field name="sequence">710</field>
       <field name="appears_on_payslip" eval="True"/>
       <field name="condition_select">python</field>
       <field name="condition_python">result = inputs.resmil.amount != 0</field>
@@ -435,7 +435,7 @@ result = 18.5
       <field name="code">traktin</field>
       <field name="salary_art">771</field>
       <field name="name">Traktamente inrikes</field>
-      <field name="sequence">510</field>
+      <field name="sequence">710</field>
       <field name="appears_on_payslip" eval="True"/>
       <field name="condition_select">python</field>
       <field name="condition_python">result = inputs.traktin.amount != 0</field>
@@ -458,7 +458,7 @@ result = 0.0 if result_qty == 0 else 220
       <field name="code">traktut</field>
       <field name="salary_art">780</field>
       <field name="name">Traktamente utrikes</field>
-      <field name="sequence">510</field>
+      <field name="sequence">710</field>
       <field name="appears_on_payslip" eval="True"/>
       <field name="condition_select">python</field>
       <field name="condition_python">result = inputs.traktuta.amount != 0 and inputs.traktutb.amount != 0</field>
@@ -489,7 +489,7 @@ result = 0.0 if result_qty == 0 or inputs.traktinb.amount == 0 else inputs.trakt
       <field name="code">utlagg</field>
       <field name="salary_art">730</field>
       <field name="name">Utlägg</field>
-      <field name="sequence">510</field>
+      <field name="sequence">710</field>
       <field name="appears_on_payslip" eval="True"/>
       <field name="condition_select">python</field>
       <field name="condition_python">result = inputs.utlagg.amount != 0</field>
@@ -676,7 +676,7 @@ result = inputs.utlagg.amount
       <field name="salary_art">666</field>
       <field name="name">Förmån</field>
       <field name="sequence">10</field>
-      <field name="appears_on_payslip">True</field>
+      <field name="appears_on_payslip" eval="True"/>
       <field name="condition_select">none</field>
       <field name="amount_select">code</field>
       <field name="amount_python_compute">result = worked_days.WORK100.payslip_id.get_employeefund_addition()</field>

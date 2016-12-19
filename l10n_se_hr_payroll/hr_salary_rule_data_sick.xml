@@ -35,8 +35,8 @@
       <field name="name">Sjukavdrag</field>
       <field name="sequence">210</field>
       <field name="appears_on_payslip" eval="False"/>
-      <field name="condition_select">python</field>
-      <field name="condition_python">result = inputs.sjkdag.amount != 0</field>
+      <field name="condition_select">none</field>
+      <field name="condition_python"></field>
       <field name="amount_select">fix</field>
       <field name="amount_fix">0.0</field>
       <field name="quantity">1</field>
@@ -237,7 +237,7 @@ result = contract.wage / 20
       <field name="code">pem</field>
       <field name="salary_art">191</field>
       <field name="name">Tjänstledigt &lt; 5 dgr</field>
-      <field name="sequence">510</field>
+      <field name="sequence">230</field>
       <field name="appears_on_payslip" eval="True"/>
       <field name="condition_select">python</field>
       <field name="condition_python">result = contract.get_leave_days('l10n_se_hr_payroll.holiday_status_leave_of_absence', worked_days) &gt; 0.0</field>
@@ -255,7 +255,7 @@ result = contract.wage / 21
       <field name="code">pem_5</field>
       <field name="salary_art">192</field>
       <field name="name">Tjänstledigt &gt; 5 dgr</field>
-      <field name="sequence">510</field>
+      <field name="sequence">230</field>
       <field name="appears_on_payslip" eval="True"/>
       <field name="condition_select">python</field>
       <field name="condition_python">result = contract.get_leave_days('l10n_se_hr_payroll.holiday_status_leave_of_absence_5', worked_days) &gt; 0.0</field>
