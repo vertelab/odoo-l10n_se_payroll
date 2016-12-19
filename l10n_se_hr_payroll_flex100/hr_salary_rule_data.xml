@@ -20,7 +20,6 @@ result = contract.wage
     </record>
 
     <record id="hr_salary_rule_compensary_monetary" model="hr.salary.rule">
-      <field name="parent_rule_id" ref="l10n_se_hr_payroll.hr_salary_rule_category-BRUTIL" />
       <field name="category_id" ref="l10n_se_hr_payroll.hr_salary_rule_category-BRUTIL" />
       <field name="code">komp_peng</field>
       <field name="salary_art">103</field>
