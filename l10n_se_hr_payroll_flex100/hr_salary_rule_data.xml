@@ -3,7 +3,6 @@
   <data noupdate="1">
 
     <record id="hr_salary_rule-flexjust" model="hr.salary.rule">
-      <field name="parent_rule_id" ref="l10n_se_hr_payroll.hr_salary_rule-just" />
       <field name="category_id" ref="l10n_se_hr_payroll.hr_salary_rule_category-BRUAVG" />
       <field name="code">flex-just</field>
       <field name="salary_art"></field>

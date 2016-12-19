@@ -30,7 +30,6 @@ result = contract.wage * 0.92</field>
 -->
 
     <record id="hr_salary_rule-schemajust" model="hr.salary.rule">
-      <field name="parent_rule_id" ref="l10n_se_hr_payroll.hr_salary_rule-just" />
       <field name="category_id" ref="l10n_se_hr_payroll.hr_salary_rule_category-BRUAVG" />
       <field name="code">schema-just</field>
       <field name="salary_art">141</field>
