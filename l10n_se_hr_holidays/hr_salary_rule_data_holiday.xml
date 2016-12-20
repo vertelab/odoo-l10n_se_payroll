@@ -81,7 +81,7 @@ result = contract.wage / 160
     </record>
 
     <record id="l10n_se_hr_payroll.hr_payroll_structure-gl" model="hr.payroll.structure">
-      <field name="rule_ids" eval="[(4, ref('hr_salary_rule_legal_leave_pay')), (4, ref('hr_salary_rule_legal_leave_addition')), (4, ref('hr_salary_rule_legal_leave_deduction'), ref('hr_salary_rule_compensary_monetary'))]" />
+      <field name="rule_ids" eval="[(4, ref('l10n_se_hr_holidays.hr_salary_rule_legal_leave_pay')), (4, ref('l10n_se_hr_holidays.hr_salary_rule_legal_leave_addition')), (4, ref('l10n_se_hr_holidays.hr_salary_rule_legal_leave_deduction'), ref('l10n_se_hr_holidays.hr_salary_rule_compensary_monetary'))]" />
     </record>
 
   </data>
