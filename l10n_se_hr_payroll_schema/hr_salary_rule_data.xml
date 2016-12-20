@@ -5,7 +5,7 @@
     <record id="hr_salary_rule-schemajust" model="hr.salary.rule">
       <field name="category_id" ref="l10n_se_hr_payroll.hr_salary_rule_category-BRUAVG" />
       <field name="code">schema-just</field>
-      <field name="salary_art">141</field>
+      <field name="salary_art"></field>
       <field name="name">Schema Justification</field>
       <field name="sequence">220</field>
       <field name="appears_on_payslip">True</field>
