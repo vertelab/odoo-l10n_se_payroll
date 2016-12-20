@@ -19,40 +19,20 @@
 #
 ##############################################################################
 {
-    'name': 'Swedish - Holidays',
+    'name': 'Swedish - Schema Benefits',
     'category': 'Localization',
     'author': 'Vertel AB',
-    'depends': ['hr_holidays_sequence','l10n_se_hr_payroll'],
-    'version': '1.0',
-    'licence': 'AGPL-3',
-    'summary': 'Swedish Holidays Rules',
+    'depends': ['l10n_se_hr_payroll','hr_payroll_schema'],
+    'version': '1.1',
     'description': """
-Swedish Holidays Rules
-======================
-
-* Add holidays earning rules to payroll (hr.holiday)
-* Add hr.holiday.earning to hr.employee
-* Add holiday year to hr.holiday
-
-* hr.holiday.earning can be used for flextime and normal leaves days
-* Holiday earning rules can add days to an employees hr.holidays.earning
-  from hr.payslip
-
-
+Swedish Payslip additions for Benefits
     """,
-    'auto_install': False,
-    'website': 'http://vertel.se',
+    'website': 'http://www.vertel.se',
     'data':[
-        'hr_employee_view.xml',
-        'hr_holidays_view.xml',
-        'hr_holidays_data.xml',
-        'hr_salary_rule_data_holiday.xml',
-        'hr_payroll_payslip_report.xml',
-        'hr_salary_rule_data_sick.xml',
+        'hr_salary_rule_data.xml',
     ],
-    'demo':[
-    ],
-    'installable': True
+    'auto_install': True,
+    'installable': True,
 }
 
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:

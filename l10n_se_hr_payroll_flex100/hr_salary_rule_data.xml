@@ -19,28 +19,34 @@ result = contract.wage
       <field name="note">Flex Justification</field>
     </record>
 
-    <record id="hr_salary_rule_compensary_monetary" model="hr.salary.rule">
-      <field name="category_id" ref="l10n_se_hr_payroll.hr_salary_rule_category-BRUTIL" />
-      <field name="code">komp_peng</field>
-      <field name="salary_art">103</field>
-      <field name="name">Komptid i pengar</field>
-      <field name="sequence">250</field>
-      <field name="appears_on_payslip" eval="True"/>
+    <record id="hr_salary_rule-nechour-flex" model="hr.salary.rule">
+      <field name="category_id" ref="hr_payroll.BASIC" />
+      <field name="code">nec-hour-flex</field>
+      <field name="salary_art">141</field>
+      <field name="name">Hour wage When Necessary (flex)</field>
+      <field name="sequence">300</field>
+      <field name="appears_on_payslip">True</field>
       <field name="condition_select">python</field>
-      <field name="condition_python">result = inputs.komp_peng.amount != 0</field>
+      <field name="condition_python">result = contract.type_id.work_time == 'flex'</field>
       <field name="amount_select">code</field>
       <field name="amount_python_compute">
-#(ML/AVTID)*(100/APR)
-result_qty = inputs.komp_peng.amount
-result = contract.wage / 160
-      </field>
+result_qty = worked_days.WORK100.payslip_id.flex_working_hours
+result = contract.wage</field>
       <field name="quantity">1</field>
+      <field name="note">Calculate hourly wage using benefit nec_hour</field>
     </record>
 
-    <record id="hr_rule_input_compensary_monetary" model="hr.rule.input">
-      <field name="code">komp_peng</field>
-      <field name="name">Komptid i pengar (tim)</field>
-      <field name="input_id" ref="hr_salary_rule_compensary_monetary" />
+    <record id="l10n_se_hr_payroll.hr_payroll_structure-kl" model="hr.payroll.structure">
+      <field eval="[(4, ref('hr_salary_rule-flexjust'))]" name="rule_ids" />
+    </record>
+
+    <!-- timanställd-flex -->
+    <record id="hr_payroll_structure-tim-flex" model="hr.payroll.structure">
+      <field name="code">bas2017-tim-flex</field>
+      <field name="name">Timanställd (flex)</field>
+      <field name="company_id" ref="base.main_company" />
+      <field name="parent_id" ref="l10n_se_hr_payroll.hr_payroll_structure-gl" />
+      <field eval="[(4, ref('hr_salary_rule-nechour-flex'))]" name="rule_ids" />
     </record>
 
   </data>

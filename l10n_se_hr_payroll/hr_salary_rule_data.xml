@@ -487,7 +487,7 @@ result = 0.0 if result_qty == 0 or inputs.traktinb.amount == 0 else inputs.trakt
     <record id="hr_salary_rule_expenses" model="hr.salary.rule">
       <field name="category_id" ref="hr_salary_rule_category-NETTIL" />
       <field name="code">utlagg</field>
-      <field name="salary_art">730</field>
+      <field name="salary_art">793</field>
       <field name="name">Utlägg</field>
       <field name="sequence">710</field>
       <field name="appears_on_payslip" eval="True"/>
