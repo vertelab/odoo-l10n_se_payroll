@@ -267,5 +267,9 @@ result = contract.wage *12/365
       <field name="quantity">1</field>
     </record>
 
+    <record id="l10n_se_hr_payroll.hr_payroll_structure-gl" model="hr.payroll.structure">
+      <field name="rule_ids" eval="[(4, ref('hr_salary_rule-sjk'))]" />
+    </record>
+
   </data>
 </openerp>
