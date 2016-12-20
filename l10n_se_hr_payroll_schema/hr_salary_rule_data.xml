@@ -20,7 +20,6 @@ result = contract.wage
     </record>
 
     <record id="hr_salary_rule-schemahour" model="hr.salary.rule">
-      <field name="parent_rule_id" ref="l10n_se_hr_payroll.hr_salary_rule-gl"/>
       <field name="category_id" ref="l10n_se_hr_payroll.hr_salary_rule_category-BAS" />
       <field name="code">schema-hour</field>
       <field name="salary_art">300</field>
@@ -55,15 +54,9 @@ result = categories.BRUTTO * 0.3 if not contract.prel_tax_amount else contract.p
       <field name="quantity">1</field>
     </record>
 
-    <!-- timanställd-schema -->
-    <record id="hr_payroll_structure-tim-schema" model="hr.payroll.structure">
-      <field name="code">bas2017-tim-schema</field>
-      <field name="name">Timanställd (schema)</field>
-      <field name="company_id" ref="base.main_company" />
-      <field name="parent_id" ref="l10n_se_hr_payroll.hr_payroll_structure-gl" />
+    <record id="l10n_se_hr_payroll.hr_payroll_structure-tim" model="hr.payroll.structure">
       <field eval="[(4, ref('hr_salary_rule-schemahour'))]" name="rule_ids" />
     </record>
 
   </data>
-
 </openerp>
