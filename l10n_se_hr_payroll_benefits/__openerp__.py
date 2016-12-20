@@ -2,7 +2,7 @@
 ##############################################################################
 #
 # OpenERP, Open Source Management Solution, third party addon
-# Copyright (C) 2004-2015 Vertel AB (<http://vertel.se>).
+# Copyright (C) 2004-2016 Vertel AB (<http://vertel.se>).
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU Affero General Public License as
@@ -19,41 +19,20 @@
 #
 ##############################################################################
 {
-    'name': 'Swedish - Payroll',
+    'name': 'Swedish - Schema Benefits',
     'category': 'Localization',
     'author': 'Vertel AB',
-    'depends': ['hr_payroll','hr_holidays','hr_payroll_benefits', 'report'],
-    'version': '1.2',
+    'depends': ['l10n_se_hr_payroll','hr_payroll_schema'],
+    'version': '1.1',
     'description': """
-Swedish Payroll Rules.
-======================
-
-    * Employee Details
-    * Employee Contracts
-    * Allowances/Deductions
-    * Allow to configure Basic/Gross/Net Salary
-    * Employee Payslip
-    * Monthly Payroll Register
-    * Integrated with Holiday Management
+Swedish Payslip additions for Benefits
     """,
-
-    'auto_install': False,
     'website': 'http://www.vertel.se',
     'data':[
-        'hr_payroll_view.xml',
-        'hr_payroll_payslip_report.xml',
-        #
-        'hr_salary_rule_category_data.xml',
         'hr_salary_rule_data.xml',
-        # last
-        'hr_payroll_stucture_simple_data.xml',
-        'hr_payroll_data.xml',
-
     ],
-    'demo':[
-        'hr_payroll_demo.xml',
-    ],
-    'installable': True
+    'auto_install': True,
+    'installable': True,
 }
 
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:

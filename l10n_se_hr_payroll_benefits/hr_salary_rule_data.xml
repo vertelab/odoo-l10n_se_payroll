@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <openerp>
   <data noupdate="1">
-    <!--
-         =====
-    -->
+
     <record id="hr_salary_rule-car" model="hr.salary.rule">
       <field name="category_id" ref="hr_salary_rule_category-BRUAVG" />
       <field name="parent_rule_id" ref="hr_salary_rule-forman" />
@@ -34,5 +32,7 @@
       <field name="quantity">1</field>
       <field name="note">Förmånsvärdesberäkning SKV http://www.skatteverket.se/privat/skatter/arbeteochinkomst/formaner/bilarochbilforman</field>
     </record>
+
   </data>
+
 </openerp>
