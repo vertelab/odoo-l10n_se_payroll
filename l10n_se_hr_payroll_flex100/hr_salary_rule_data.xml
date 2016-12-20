@@ -19,11 +19,12 @@ result = contract.wage
       <field name="note">Flex Justification</field>
     </record>
 
-    <record id="hr_salary_rule-nechour-flex" model="hr.salary.rule">
+    <record id="hr_salary_rule-flexhour" model="hr.salary.rule">
+      <field name="parent_rule_id" ref="l10n_se_hr_payroll.hr_salary_rule-gl"/>
       <field name="category_id" ref="hr_payroll.BASIC" />
-      <field name="code">nec-hour-flex</field>
-      <field name="salary_art">141</field>
-      <field name="name">Hour wage When Necessary (flex)</field>
+      <field name="code">flex-hour</field>
+      <field name="salary_art">300</field>
+      <field name="name">Flex Hour Salary</field>
       <field name="sequence">300</field>
       <field name="appears_on_payslip">True</field>
       <field name="condition_select">python</field>
