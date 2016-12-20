@@ -41,13 +41,14 @@ Swedish Payroll Rules.
     'website': 'http://www.vertel.se',
     'data':[
         'hr_payroll_view.xml',
+        'hr_payroll_data.xml',
         'hr_payroll_payslip_report.xml',
         #
         'hr_salary_rule_category_data.xml',
         'hr_salary_rule_data.xml',
         # last
         'hr_payroll_stucture_simple_data.xml',
-        'hr_payroll_data.xml',
+
 
     ],
     'demo':[
