@@ -26,9 +26,40 @@ import csv
 import os
 import tempfile
 import base64
-
+import odoorpc
+from openerp.tools.safe_eval import safe_eval as eval
 import logging
 _logger = logging.getLogger(__name__)
+
+class base_synchro(models.TransientModel):
+    _inherit = 'base.synchro'
+    
+    base_sync_object_ids = fields.Many2many(comodel_name='base.synchro.obj', string='Create sync lines for')
+    
+    @api.one
+    def create_base_sync_lines(self):
+        server = odoorpc.ODOO(self.server_url.server_url, port=self.server_url.server_port)
+        server.login(self.server_url.server_db, self.server_url.login, self.server_url.password)
+        remote_model_data = server.env['ir.model.data']
+        for sync_obj in self.base_sync_object_ids:
+            _logger.warn(sync_obj)
+            domain = eval(sync_obj.domain)
+            _logger.warn(domain)
+            ids = self.pool.get(sync_obj.model_id.model).search(self._cr, self.env.user.id, domain, context=self.env.context)
+            _logger.warn(ids)
+            for external_id in self.env['ir.model.data'].search([('model', '=', sync_obj.model_id.model), ('res_id', 'in', ids)]):
+                id = remote_model_data.search([('model', '=', sync_obj.model_id.model), ('name', '=', external_id.name), ('module', '=', external_id.module)])
+                _logger.warn(id)
+                if id:
+                    remote_id = remote_model_data.browse(id).res_id
+                    _logger.warn(remote_id)
+                    if not self.env['base.synchro.obj.line'].search([('remote_id', '=', remote_id), ('local_id', '=', external_id.res_id), ('obj_id', '=', sync_obj.id)]):
+                        self.env['base.synchro.obj.line'].create({
+                            'remote_id': remote_id,
+                            'local_id': external_id.res_id,
+                            'obj_id': sync_obj.id,
+                            'name': '1900-01-01 00:00:00',
+                        })
 
 class hr_payslip_run(models.Model):
     _inherit = 'hr.payslip.run'
