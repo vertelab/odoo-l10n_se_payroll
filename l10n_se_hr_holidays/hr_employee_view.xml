@@ -1,34 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <openerp>
   <data>
-    <record id="hr_employee_form" model="ir.ui.view">
-      <field name="name">hr.employee.inherit.holiday.form</field>
-      <field name="model">hr.employee</field>
-      <field name="inherit_id" ref="hr_holidays.view_employee_form_leave_inherit" />
-      <!--
-           <field name="priority">30</field>
-      -->
-      <field name="arch" type="xml">
-        <data>
-<!--
-          <field name="remaining_leaves" position="replace" />
--->
-			<group string="Leaves" position="replace">
-            <field name="holidays_earning_ids">
-              <tree editable="bottom">
-                <field name="holiday_status_id" />
-                <field name="max_leaves" />
-                <field name="leaves_take" />
-                <field name="remaining_leaves" />
-<!--
-                <field name="virtual_remaining_leaves" />
--->
-              </tree>
-            </field>
-          </group>
-        </data>
-      </field>
-    </record>
   </data>
 </openerp>
 

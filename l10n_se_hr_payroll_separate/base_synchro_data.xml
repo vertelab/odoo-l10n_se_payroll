@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <openerp>
-  <data noupdate="1">
-      <!-- Server -->
+  <data noupdate="0">
+    <!-- Server -->
     <record id="server" model="base.synchro.server">
       <field name="name">Time recording Server</field>
       <field name="login">admin</field>
@@ -33,42 +33,72 @@
       <field name="whitelist" eval="False" />
       <field name="avoid_ids" eval="[(0,0,{'name':'company_id'}),(0,0,{'name':'contract_id'}),(0,0,{'name':'remaining_leaves'}),(0,0,{'name':'user_id'}),(0,0,{'name':'slip_ids'})]" />
     </record>
-    <record id="employee" model="base.synchro.obj">
-      <field name="name">hr.holiday.status</field>
+    <record id="holidays_status" model="base.synchro.obj">
+      <field name="name">hr.holidays.status</field>
       <field name="active" eval="True" />
       <field name="sequence">15</field>
       <field name="server_id" ref="l10n_se_hr_payroll_separate.server" />
-      <field name="model_id" ref="hr.model_hr_holiday_status" />
+      <field name="model_id" ref="hr_holidays.model_hr_holidays_status" />
+      <field name="action">d</field>
+      <field name="domain">[]</field>
+      <field name="whitelist" eval="False" />
+    </record>
+    <!-- Other resources -->
+    <record id="schema" model="base.synchro.obj">
+      <field name="name">resource.calendar</field>
+      <field name="sequence">30</field>
+      <field name="active" eval="True" />
+      <field name="server_id" ref="l10n_se_hr_payroll_separate.server" />
+      <field name="model_id" ref="resource.model_resource_calendar" />
+      <field name="action">d</field>
+      <field name="domain">[]</field>
+      <field name="whitelist" eval="False" />
+    </record>    
+    <record id="calendar_attendance" model="base.synchro.obj">
+      <field name="name">resource.calendar_attendance</field>
+      <field name="sequence">31</field>
+      <field name="active" eval="True" />
+      <field name="server_id" ref="l10n_se_hr_payroll_separate.server" />
+      <field name="model_id" ref="resource.model_resource_calendar_attendance" />
+      <field name="action">d</field>
+      <field name="domain">[]</field>
+      <field name="whitelist" eval="False" />
+    </record>    
+    <record id="calendar_leaves" model="base.synchro.obj">
+      <field name="name">resource.calendar_leaves</field>
+      <field name="sequence">32</field>
+      <field name="active" eval="True" />
+      <field name="server_id" ref="l10n_se_hr_payroll_separate.server" />
+      <field name="model_id" ref="resource.model_resource_calendar_leaves" />
       <field name="action">d</field>
       <field name="domain">[]</field>
       <field name="whitelist" eval="False" />
     </record>
     <!-- transactional data -->
-    <record id="employee" model="base.synchro.obj">
+    <record id="holidays" model="base.synchro.obj">
       <field name="name">hr.holidays</field>
-      <field name="sequence">20</field>
+      <field name="sequence">91</field>
       <field name="active" eval="True" />
       <field name="server_id" ref="l10n_se_hr_payroll_separate.server" />
-      <field name="model_id" ref="hr.model_hr_holidays" />
+      <field name="model_id" ref="hr_holidays.model_hr_holidays" />
       <field name="action">d</field>
       <field name="domain">[]</field>
       <field name="whitelist" eval="True" />
       <field name="avoid_ids" eval="[(0,0,{'name':'name'}),(0,0,{'name':'employee_id'}),(0,0,{'name':'date_from'}),(0,0,{'name':'date_to'}),(0,0,{'name':'holiday_status_id'}),(0,0,{'name':'number_of_days'}),(0,0,{'name':'number_of_days_temp'}),(0,0,{'name':'type'}),(0,0,{'name':'holiday_type'}),(0,0,{'name':'state'})]" />
     </record>
-    <record id="employee" model="base.synchro.obj">
+    <record id="attendance" model="base.synchro.obj">
       <field name="name">hr.attendance</field>
-      <field name="sequence">25</field>
+      <field name="sequence">92</field>
       <field name="active" eval="True" />
       <field name="server_id" ref="l10n_se_hr_payroll_separate.server" />
-      <field name="model_id" ref="hr.model_hr_attendance" />
+      <field name="model_id" ref="hr_attendance.model_hr_attendance" />
       <field name="action">d</field>
       <field name="domain">[]</field>
       <field name="whitelist" eval="True" />
       <field name="avoid_ids" eval="[(0,0,{'name':'name'}),(0,0,{'name':'employee_id'}),(0,0,{'name':'action'}),]" />
     </record>
-    
     <!-- Cron -->
-    s
     
+
   </data>
 </openerp>

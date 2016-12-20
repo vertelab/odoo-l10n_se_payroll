@@ -73,39 +73,39 @@ class hr_holidays_status(models.Model):
                     'model': holiday._name,
                     'type': 'notification',})
 
-class hr_holidays_earning(models.Model):
-    _name = "hr.holidays.earning"
+#~ class hr_holidays_earning(models.Model):
+    #~ _name = "hr.holidays.earning"
 
-    employee_id = fields.Many2one(comodel_name='hr.employee')
-    holiday_status_id = fields.Many2one(comodel_name='hr.holidays.status')
+    #~ employee_id = fields.Many2one(comodel_name='hr.employee')
+    #~ holiday_status_id = fields.Many2one(comodel_name='hr.holidays.status')
 
-    @api.one
-    def get_holidays_ids(self):
-        return self.env['hr.holidays'].search([('employee_id', '=', self.employee_id),('state', 'in', ['confirm', 'validate1', 'validate']),('holiday_status_id', '=', self.holiday_status_id.id)])
-    @api.one
-    def get_payslips_ids(self):
-        return self.env['hr.payslip'].search([('employee_id', '=', self.employee_id),('state', 'in', ['confirm', 'validate1', 'validate'])])
+    #~ @api.one
+    #~ def get_holidays_ids(self):
+        #~ return self.env['hr.holidays'].search([('employee_id', '=', self.employee_id),('state', 'in', ['confirm', 'validate1', 'validate']),('holiday_status_id', '=', self.holiday_status_id.id)])
+    #~ @api.one
+    #~ def get_payslips_ids(self):
+        #~ return self.env['hr.payslip'].search([('employee_id', '=', self.employee_id),('state', 'in', ['confirm', 'validate1', 'validate'])])
 
-    @api.model
-    def earn_leaves(self,payslip):
-        return 1.0
+    #~ @api.model
+    #~ def earn_leaves(self,payslip):
+        #~ return 1.0
 
-    @api.one
-    def _calc_leaves(self):
-        self.leaves_taken = sum([h.number_of_days_temp for h in self.get_holidays_ids()])
-        self.max_leaves = sum([self.earn_leaves(p) for p in self.get_payslips_ids()])
-        self.remaining_leaves = self.max_leaves - leaves_taken
-        self.virtual_remaining_leaves = 0.0
-    max_leaves = fields.Float(string='Max Leaves',compute="_calc_leaves")
-    leaves_take  = fields.Float(string='Leaves Take',compute="_calc_leaves")
-    remaining_leaves  = fields.Float(string='Remaining Leaves',compute="_calc_leaves")
-    virtual_remaining_leaves  = fields.Float(string='Virtual remaining Leaves',compute="_calc_leaves")
+    #~ @api.one
+    #~ def _calc_leaves(self):
+        #~ self.leaves_taken = sum([h.number_of_days_temp for h in self.get_holidays_ids()])
+        #~ self.max_leaves = sum([self.earn_leaves(p) for p in self.get_payslips_ids()])
+        #~ self.remaining_leaves = self.max_leaves - leaves_taken
+        #~ self.virtual_remaining_leaves = 0.0
+    #~ max_leaves = fields.Float(string='Max Leaves',compute="_calc_leaves")
+    #~ leaves_take  = fields.Float(string='Leaves Take',compute="_calc_leaves")
+    #~ remaining_leaves  = fields.Float(string='Remaining Leaves',compute="_calc_leaves")
+    #~ virtual_remaining_leaves  = fields.Float(string='Virtual remaining Leaves',compute="_calc_leaves")
 
 
 class hr_employee(models.Model):
     _inherit = 'hr.employee'
 
-    holidays_earning_ids = fields.Many2many(string='Holiday Earnings',comodel_name="hr.holidays.earning")
+    #holidays_earning_ids = fields.Many2many(string='Holiday Earnings',comodel_name="hr.holidays.earning")
 
     @api.model
     def get_leaves_days(self,date_from,date_to):
