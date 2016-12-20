@@ -30,7 +30,7 @@
     -->
 
     <record id="hr_salary_rule-sjk" model="hr.salary.rule">
-      <field name="category_id" ref="hr_salary_rule_category-BRUAVG" />
+      <field name="category_id" ref="l10n_se_hr_payroll.hr_salary_rule_category-BRUAVG" />
       <field name="code">sjk</field>
       <field name="name">Sjukavdrag</field>
       <field name="sequence">210</field>
@@ -43,7 +43,7 @@
 
     <record id="hr_salary_rule-sjk-qualify" model="hr.salary.rule">
       <field name="parent_rule_id" ref="hr_salary_rule-sjk" />
-      <field name="category_id" ref="hr_salary_rule_category-BRUAVG" />
+      <field name="category_id" ref="l10n_se_hr_payroll.hr_salary_rule_category-BRUAVG" />
       <field name="code">sjk_kar</field>
       <field name="name">Karensdagar</field>
       <field name="salary_art">140</field>
@@ -63,7 +63,7 @@ result = contract.wage / 20
 
     <record id="hr_salary_rule-sjk-214-100" model="hr.salary.rule">
       <field name="parent_rule_id" ref="hr_salary_rule-sjk" />
-      <field name="category_id" ref="hr_salary_rule_category-BRUAVG" />
+      <field name="category_id" ref="l10n_se_hr_payroll.hr_salary_rule_category-BRUAVG" />
       <field name="code">sjk_214_100</field>
       <field name="name">Sjuk dag 2-14 100% avdrag</field>
       <field name="salary_art">141</field>
@@ -81,7 +81,7 @@ result = contract.wage / 20
     </record>
     <record id="hr_salary_rule-sjk-214" model="hr.salary.rule">
       <field name="parent_rule_id" ref="hr_salary_rule-sjk" />
-      <field name="category_id" ref="hr_salary_rule_category-BRUAVG" />
+      <field name="category_id" ref="l10n_se_hr_payroll.hr_salary_rule_category-BRUAVG" />
       <field name="code">sjk_214</field>
       <field name="name">Sjuk dag 2-14 80%</field>
       <field name="salary_art">142</field>
@@ -99,7 +99,7 @@ result = contract.wage / 20
     </record>
     <record id="hr_salary_rule-sjk-100" model="hr.salary.rule">
       <field name="parent_rule_id" ref="hr_salary_rule-sjk" />
-      <field name="category_id" ref="hr_salary_rule_category-BRUAVG" />
+      <field name="category_id" ref="l10n_se_hr_payroll.hr_salary_rule_category-BRUAVG" />
       <field name="code">sjk_100</field>
       <field name="name">Sjuk 100%</field>
       <field name="salary_art">146</field>
@@ -158,7 +158,7 @@ result = contract.wage / 20
 
     <record id="hr_salary_rule-vab-160" model="hr.salary.rule">
       <field name="parent_rule_id" ref="hr_salary_rule-sjk" />
-      <field name="category_id" ref="hr_salary_rule_category-BRUAVG" />
+      <field name="category_id" ref="l10n_se_hr_payroll.hr_salary_rule_category-BRUAVG" />
       <field name="code">vab</field>
       <field name="name">Vård av barn</field>
       <field name="salary_art">160</field>
@@ -177,7 +177,7 @@ result = contract.wage / 20
 
     <record id="hr_salary_rule-forald-ledig-165" model="hr.salary.rule">
       <field name="parent_rule_id" ref="hr_salary_rule-sjk" />
-      <field name="category_id" ref="hr_salary_rule_category-BRUAVG" />
+      <field name="category_id" ref="l10n_se_hr_payroll.hr_salary_rule_category-BRUAVG" />
       <field name="code">fpe</field>
       <field name="name">Föräld ledig 165</field>
       <field name="salary_art">165</field>
@@ -196,7 +196,7 @@ result = contract.wage / 20
 
     <record id="hr_salary_rule-forald-ledig-168" model="hr.salary.rule">
       <field name="parent_rule_id" ref="hr_salary_rule-sjk" />
-      <field name="category_id" ref="hr_salary_rule_category-BRUAVG" />
+      <field name="category_id" ref="l10n_se_hr_payroll.hr_salary_rule_category-BRUAVG" />
       <field name="code">fpe_kol</field>
       <field name="name">Föräld ledig 168</field>
       <field name="salary_art">168</field>
@@ -215,7 +215,7 @@ result = contract.wage / 20
 
     <record id="hr_salary_rule-pappa-ledig-166" model="hr.salary.rule">
       <field name="parent_rule_id" ref="hr_salary_rule-sjk" />
-      <field name="category_id" ref="hr_salary_rule_category-BRUAVG" />
+      <field name="category_id" ref="l10n_se_hr_payroll.hr_salary_rule_category-BRUAVG" />
       <field name="code">pap</field>
       <field name="name">Pappaledig 166</field>
       <field name="salary_art">166</field>

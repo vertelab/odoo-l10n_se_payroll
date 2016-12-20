@@ -3,7 +3,7 @@
   <data noupdate="1">
 
     <record id="hr_salary_rule-car" model="hr.salary.rule">
-      <field name="category_id" ref="hr_salary_rule_category-BRUAVG" />
+      <field name="category_id" ref="l10n_se_hr_payroll.hr_salary_rule_category-BRUAVG" />
       <field name="parent_rule_id" ref="hr_salary_rule-forman" />
       <field name="code">car_cost</field>
       <field name="salary_art">700</field>
@@ -18,7 +18,7 @@
       <field name="note">Företagets verkliga bilkostnad, t ex leasingavgift minus halv moms</field>
     </record>
     <record id="hr_salary_rule-car-deduct" model="hr.salary.rule">
-      <field name="category_id" ref="hr_salary_rule_category-NETAVG" />
+      <field name="category_id" ref="l10n_se_hr_payroll.hr_salary_rule_category-NETAVG" />
       <field name="parent_rule_id" ref="hr_salary_rule-forman" />
       <field name="code">car_adv</field>
       <field name="salary_art">711</field>
