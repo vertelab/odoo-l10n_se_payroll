@@ -21,7 +21,7 @@ result = contract.wage
 
     <record id="hr_salary_rule-flexhour" model="hr.salary.rule">
       <field name="parent_rule_id" ref="l10n_se_hr_payroll.hr_salary_rule-gl"/>
-      <field name="category_id" ref="hr_payroll.BASIC" />
+      <field name="category_id" ref="l10n_se_hr_payroll.hr_salary_rule_category-BAS" />
       <field name="code">flex-hour</field>
       <field name="salary_art">300</field>
       <field name="name">Flex Hour Salary</field>
