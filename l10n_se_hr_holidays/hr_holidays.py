@@ -37,7 +37,24 @@ class hr_holidays_status(models.Model):
     payslip_rule = fields.Text(string='Earning Rule',help="Python Code")
     payslip_condition = fields.Text(string='Earning Condition',help="Python Code")
     legal_leave = fields.Boolean(string='Legal Leave', default=False, help='If checked, it will be included in legal leaves calculation')
-
+    
+    @api.one
+    def init_records(self):
+        self.env.ref('hr_holidays.holiday_status_cl').write({
+            'name': 'Legal Leaves '+str(DateTime.today().year - 1),
+            'legal_leave': True,
+            'limit': False,
+            'date_earning_start': time.strftime(str(DateTime.today().year - 2) + '-04-01'),
+            'date_earning_end': time.strftime(str(DateTime.today().year - 1) + '-03-31'),
+        })
+        self.env.ref('hr_holidays.holiday_status_unpaid').write({
+            'name': 'Legal Leaves unpaid',
+            'legal_leave': False,
+            'limit': True,
+        })
+    
+    
+    
     @api.one
     def _holidays_allowed(self):
         holidays_allowed = not (self.date_earing_start and self.date_earing_end) or fields.Date.today() > self.date_earing_end
