@@ -19,11 +19,6 @@
       <field name="color_name">red</field>
       <field name="limit" eval="True"/>
     </record>
-    <record model="hr.holidays.status" id="hr_holidays.holiday_status_sl">
-      <field name="name" eval="'Sick Leave 100%'" />
-      <field name="limit" eval="True"/>
-      <field name="color_name">red</field>
-    </record>
 
     <!--
          =====

@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <openerp>
+    <data noupdate="0">
+        <function model="hr.salary.rule" name="init_records" />
+    </data>
   <data noupdate="1">
     <record id="hr_salary_rule-AGE" model="hr.salary.rule">
       <field name="category_id" ref="hr_salary_rule_category-SYSTEM" />
