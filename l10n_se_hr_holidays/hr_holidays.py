@@ -21,7 +21,7 @@
 import openerp.exceptions
 from openerp import models, fields, api, _
 import datetime
-from datetime import timedelta
+from datetime import timedelta, date
 
 import logging
 _logger = logging.getLogger(__name__)
@@ -38,16 +38,17 @@ class hr_holidays_status(models.Model):
     payslip_condition = fields.Text(string='Earning Condition',help="Python Code")
     legal_leave = fields.Boolean(string='Legal Leave', default=False, help='If checked, it will be included in legal leaves calculation')
     
-    @api.one
-    def init_records(self):
-        self.env.ref('hr_holidays.holiday_status_cl').write({
-            'name': 'Legal Leaves '+str(DateTime.today().year - 1),
+    def init_records(self,cr,uid, context=None):
+        holiday_status_cl = self.pool.get('ir.model.data').get_object_reference(cr, uid, 'hr_holidays', 'holiday_status_cl')
+        self.pool.get('hr.holidays.status').write(cr,uid,holiday_status_cl[1],{
+            'name': 'Legal Leaves '+ str(fields.Date.from_string(fields.Datetime.now()).year - 1),
             'legal_leave': True,
             'limit': False,
-            'date_earning_start': time.strftime(str(DateTime.today().year - 2) + '-04-01'),
-            'date_earning_end': time.strftime(str(DateTime.today().year - 1) + '-03-31'),
+            'date_earning_start': fields.Date.to_string(date(date.today().year - 2,4,1 )),
+            'date_earning_end':   fields.Date.to_string(date(date.today().year - 1,3,31)),
         })
-        self.env.ref('hr_holidays.holiday_status_unpaid').write({
+        holiday_status_unpaid = self.pool.get('ir.model.data').get_object_reference(cr, uid, 'hr_holidays', 'holiday_status_unpaid')
+        self.pool.get('hr.holidays.status').write(cr,uid,holiday_status_cl[1],{
             'name': 'Legal Leaves unpaid',
             'legal_leave': False,
             'limit': True,
