@@ -31,7 +31,7 @@
       <field name="action">d</field>
       <field name="domain">[]</field>
       <field name="whitelist" eval="False" />
-      <field name="avoid_ids" eval="[(0,0,{'name':'company_id'}),(0,0,{'name':'contract_id'}),(0,0,{'name':'remaining_leaves'}),(0,0,{'name':'user_id'}),(0,0,{'name':'slip_ids'})]" />
+      <field name="avoid_ids" eval="[(0,0,{'name':'company_id'}),(0,0,{'name':'remaining_leaves'}),(0,0,{'name':'user_id'}),(0,0,{'name':'slip_ids'})]" />
     </record>
     <record id="holidays_status" model="base.synchro.obj">
       <field name="name">hr.holidays.status</field>
@@ -42,6 +42,7 @@
       <field name="action">d</field>
       <field name="domain">[]</field>
       <field name="whitelist" eval="False" />
+    </record>
     </record>
     <!-- Other resources -->
     <record id="schema" model="base.synchro.obj">
