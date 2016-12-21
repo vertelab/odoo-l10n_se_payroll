@@ -43,6 +43,16 @@
       <field name="domain">[]</field>
       <field name="whitelist" eval="False" />
     </record>
+    <record id="contracts" model="base.synchro.obj">
+      <field name="name">hr.contract</field>
+      <field name="active" eval="True" />
+      <field name="sequence">15</field>
+      <field name="server_id" ref="l10n_se_hr_payroll_separate.server" />
+      <field name="model_id" ref="hr_contract.model_hr_contract" />
+      <field name="action">d</field>
+      <field name="domain">[]</field>
+      <field name="whitelist" eval="True" />
+      <field name="avoid_ids" eval="[(0,0,{'name':'employee_id'}),(0,0,{'name':'name'}),(0,0,{'name':'job_id'}),(0,0,{'name':'type_id'}),(0,0,{'name':'date_start'}),(0,0,{'name':'date_end'}),(0,0,{'name':'trial_date_start'}),(0,0,{'name':'trial_date_end'}),(0,0,{'name':'working_hours'})]" />
     </record>
     <!-- Other resources -->
     <record id="schema" model="base.synchro.obj">
