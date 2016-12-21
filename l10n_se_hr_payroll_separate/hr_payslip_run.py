@@ -26,8 +26,13 @@ import csv
 import os
 import tempfile
 import base64
-import odoorpc
 from openerp.tools.safe_eval import safe_eval as eval
+
+try:
+    import odoorpc
+except:
+    pass
+
 import logging
 _logger = logging.getLogger(__name__)
 

@@ -57,7 +57,7 @@ class hr_holidays_status(models.Model):
     
     @api.one
     def _holidays_allowed(self):
-        holidays_allowed = not (self.date_earing_start and self.date_earing_end) or fields.Date.today() > self.date_earing_end
+        holidays_allowed = not (self.date_earning_start and self.date_earning_end) or fields.Date.today() > self.date_earning_end
     holidays_allowed = fields.Boolean(string="Allowed",compute='_holidays_allowed')
 
     @api.model
