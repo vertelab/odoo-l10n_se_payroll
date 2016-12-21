@@ -27,7 +27,7 @@ result = contract.wage
       <field name="sequence">30</field>
       <field name="appears_on_payslip" eval="True"/>
       <field name="condition_select">python</field>
-      <field name="condition_python">result = contract.type_id.work_time == 'schema_hour'</field>
+      <field name="condition_python">result = contract.type_id.work_time == 'schema'</field>
       <field name="amount_select">code</field>
       <field name="amount_python_compute">
 result_qty = worked_days.WORK100.payslip_id.attendance_working_hours
@@ -46,7 +46,7 @@ result = contract.wage / 160
       <field name="sequence">690</field>
       <field name="appears_on_payslip" eval="True"/>
       <field name="condition_select">python</field>
-      <field name="condition_python">result = contract.type_id.work_time == 'schema_hour'</field>
+      <field name="condition_python">result = contract.type_id.work_time == 'schema'</field>
       <field name="amount_select">code</field>
       <field name="amount_python_compute">
 result = categories.BRUTTO * 0.3 if not contract.prel_tax_amount else contract.prel_tax_amount
@@ -59,7 +59,7 @@ result = categories.BRUTTO * 0.3 if not contract.prel_tax_amount else contract.p
     </record>
 
     <record id="l10n_se_hr_payroll.hr_payroll_structure-tim" model="hr.payroll.structure">
-      <field eval="[(4, ref('hr_salary_rule-schemahour'))]" name="rule_ids" />
+      <field eval="[(4, ref('hr_salary_rule-schemahour')), (4, ref('hr_salary_rule-prej-tim'))]" name="rule_ids" />
     </record>
 
   </data>
