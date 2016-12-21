@@ -117,7 +117,7 @@
          <field name="group_invoice_lines">False</field>
          </record>
     -->
-    
+
     <!--
          =========================================
     -->
@@ -157,7 +157,7 @@
       <!--
            <field name="struct_id" ref="hr_payroll_structure-gl"/>
       -->
-      <field name="struct_id" ref="hr_payroll_structure-fl" />
+      <field name="struct_id" ref="l10n_se_hr_payroll.hr_payroll_structure-fl" />
       <field name="employee_id" ref="hr.hr_employee-LY" />
       <!-- MÅSTE SÄTTAS
            <field name="journal_id" eval="[ref('account_journal-lon-DEMO')]"/>

@@ -36,7 +36,7 @@ class hr_holidays_status(models.Model):
 
     payslip_rule = fields.Text(string='Earning Rule',help="Python Code")
     payslip_condition = fields.Text(string='Earning Condition',help="Python Code")
-
+    legal_leave = fields.Boolean(string='Legal Leave', default=False, help='If checked, it will be included in legal leaves calculation')
 
     @api.one
     def _holidays_allowed(self):
@@ -126,23 +126,6 @@ class hr_payslip(models.Model):
         self.holiday_status_ids += self.env['hr.holidays.status'].search([('id','in',[self.env.ref('l10n_se_hr_holidays.sick_leave_qualify').id,self.env.ref('l10n_se_hr_holidays.sick_leave_214').id,self.env.ref('hr_holidays.holiday_status_sl').id])])
     holiday_status_ids = fields.Many2many(comodel_name="hr.holidays.status",compute="_holiday_status_ids")
 
-    def legal_non_vacation(self):
-        return [
-            self.env.ref('hr_holidays.holiday_status_comp').id,
-            self.env.ref('hr_holidays.holiday_status_sl').id,
-            self.env.ref('hr_holidays.holiday_status_unpaid').id,
-            self.env.ref('l10n_se_hr_holidays.holiday_status_cl3').id,
-            self.env.ref('l10n_se_hr_holidays.sick_leave_214').id,
-            self.env.ref('l10n_se_hr_holidays.sick_leave_214_100').id,
-            self.env.ref('l10n_se_hr_holidays.sick_leave_qualify').id,
-            self.env.ref('l10n_se_hr_holidays.vab_160').id,
-            self.env.ref('l10n_se_hr_holidays.forald_ledig_165').id,
-            self.env.ref('l10n_se_hr_holidays.forald_ledig_168').id,
-            self.env.ref('l10n_se_hr_holidays.pappaledig_166').id,
-            self.env.ref('l10n_se_hr_holidays.holiday_status_leave_of_absence').id,
-            self.env.ref('l10n_se_hr_holidays.holiday_status_leave_of_absence_5').id,
-            ]
-
     @api.model
     def get_leaves_earnings_days(self,employee,date_from,date_to):
         employed_days = worked_days = absent_days = 0
@@ -154,11 +137,11 @@ class hr_payslip(models.Model):
 
     @api.model
     def get_legal_leaves_status(self):
-        return self.with_context({'employee_id' : self.employee_id.id}).holiday_status_ids.filtered(lambda h: h.remaining_leaves > 0 and h.id not in self.legal_non_vacation()).sorted(key=lambda h: h.sequence)
+        return self.with_context({'employee_id' : self.employee_id.id}).holiday_status_ids.filtered(lambda h: h.remaining_leaves > 0 and h.id not in [self.env.ref('hr_holidays.holiday_status_comp').id]).sorted(key=lambda h: h.sequence)
 
     @api.model
     def get_legal_leaves(self):
-        return self.holiday_ids.filtered(lambda h: h.holiday_status_id.id not in self.legal_non_vacation())
+        return self.holiday_ids.filtered(lambda h: h.holiday_status_id.legal_leave == True)
 
     @api.multi
     def leave_number_of_days(self, holiday_status_ref):
@@ -168,6 +151,6 @@ class hr_payslip(models.Model):
     def get_legal_leaves_consumed(self):
         year = datetime.datetime.now().year
         start_date = datetime.datetime(year, 1, 1)
-        return abs(sum(self.env['hr.holidays'].search([('employee_id', '=', self.employee_id.id), ('date_from', '>=', start_date.strftime('%Y-%m-%d')), ('date_to', '<=', self.date_to), ('holiday_status_id', 'not in', self.legal_non_vacation()), ('type', '=', 'remove'), ('state', '=', 'validate')]).mapped('number_of_days')))
+        return abs(sum(self.env['hr.holidays'].search([('employee_id', '=', self.employee_id.id), ('date_from', '>=', start_date.strftime('%Y-%m-%d')), ('date_to', '<=', self.date_to), ('type', '=', 'remove'), ('state', '=', 'validate')]).filtered(lambda h: h.holiday_status_id.legal_leave == True).mapped('number_of_days')))
 
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
