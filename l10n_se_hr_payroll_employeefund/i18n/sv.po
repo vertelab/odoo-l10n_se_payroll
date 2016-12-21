@@ -19,7 +19,7 @@ msgstr ""
 #. module: l10n_se_hr_payroll_employeefund
 #: view:website:l10n_se_hr_payroll.payslip_document
 msgid "Anställd fond"
-msgstr "Anställd fond"
+msgstr "Anställds fond"
 
 #. module: l10n_se_hr_payroll_employeefund
 #: view:website:l10n_se_hr_payroll.payslip_document

@@ -140,17 +140,17 @@ msgstr "Företag"
 #. module: l10n_se_hr_payroll
 #: model:hr.holidays.status,name:l10n_se_hr_payroll.forald_ledig_165
 msgid "Föräld ledig 165"
-msgstr "Föräld ledig 165"
+msgstr "Föräldraledig 165"
 
 #. module: l10n_se_hr_payroll
 #: model:hr.holidays.status,name:l10n_se_hr_payroll.forald_ledig_168
 msgid "Föräld ledig 168"
-msgstr "Föräld ledig 168"
+msgstr "Föräldraledig 168"
 
 #. module: l10n_se_hr_payroll
 #: view:hr.salary.rule:l10n_se_hr_payroll.view_hr_rule_filter
 msgid "Hide Children Rules"
-msgstr "Dölj barn regler"
+msgstr "Dölj underregler"
 
 #. module: l10n_se_hr_payroll
 #: view:website:l10n_se_hr_payroll.payslip_2_document
@@ -197,7 +197,7 @@ msgstr "Löntagare"
 #. module: l10n_se_hr_payroll
 #: field:hr.contract,wage_tax_base:0
 msgid "Lönunderlag"
-msgstr "Lönunderlag"
+msgstr "Löneunderlag"
 
 #. module: l10n_se_hr_payroll
 #: view:website:l10n_se_hr_payroll.payslip_2_document
@@ -227,17 +227,17 @@ msgstr "Pappaledig 166"
 #. module: l10n_se_hr_payroll
 #: model:ir.model,name:l10n_se_hr_payroll.model_hr_payslip
 msgid "Pay Slip"
-msgstr "Lönespecifikation "
+msgstr "Lönespecifikation"
 
 #. module: l10n_se_hr_payroll
 #: model:ir.actions.report.xml,name:l10n_se_hr_payroll.payslip_2
 msgid "Payslip"
-msgstr "Lönespecifikation "
+msgstr "Lönespecifikation"
 
 #. module: l10n_se_hr_payroll
 #: model:ir.actions.report.xml,name:l10n_se_hr_payroll.payslip
 msgid "Payslip SE"
-msgstr "Lönespecifikation  SE"
+msgstr "Lönespecifikation SE"
 
 #. module: l10n_se_hr_payroll
 #: view:website:l10n_se_hr_payroll.payslip_2_document
@@ -282,7 +282,7 @@ msgstr "SKATTETABELL 31/Kolumn 1/Ingen jämkning"
 #. module: l10n_se_hr_payroll
 #: field:hr.salary.rule,salary_art:0
 msgid "Salary art"
-msgstr "Salary art"
+msgstr "Löneart"
 
 #. module: l10n_se_hr_payroll
 #: view:website:l10n_se_hr_payroll.payslip_2_document
@@ -297,17 +297,17 @@ msgstr "Semesterdagar"
 #. module: l10n_se_hr_payroll
 #: model:hr.holidays.status,name:l10n_se_hr_payroll.sick_leave_100
 msgid "Sick Leave 100%"
-msgstr "Sick Leave 100%"
+msgstr "Sjukdom 100%"
 
 #. module: l10n_se_hr_payroll
 #: model:hr.holidays.status,name:l10n_se_hr_payroll.sick_leave_qualify
 msgid "Sick Leave Qualify Period"
-msgstr "Sick Leave Qualify Period"
+msgstr "Karensdag"
 
 #. module: l10n_se_hr_payroll
 #: model:hr.holidays.status,name:l10n_se_hr_payroll.sick_leave_214
 msgid "Sick Leave day 2-14 (80%)"
-msgstr "Sick Leave day 2-14 (80%)"
+msgstr "Sjukdom dag 2-14 (80%)"
 
 #. module: l10n_se_hr_payroll
 #: view:website:l10n_se_hr_payroll.payslip_document
@@ -317,12 +317,12 @@ msgstr "Skatt beräknad på"
 #. module: l10n_se_hr_payroll
 #: view:website:l10n_se_hr_payroll.payslip_document
 msgid "Skatt tabell"
-msgstr "Skatt tabell"
+msgstr "Skattetabell"
 
 #. module: l10n_se_hr_payroll
 #: view:website:l10n_se_hr_payroll.payslip_document
 msgid "Skattavdrag"
-msgstr "Skattavdrag"
+msgstr "Skatteavdrag"
 
 #. module: l10n_se_hr_payroll
 #: view:website:l10n_se_hr_payroll.payslip_2_document
@@ -377,7 +377,7 @@ msgstr "Telefon"
 #. module: l10n_se_hr_payroll
 #: model:hr.holidays.status,name:l10n_se_hr_payroll.tjanstledig_191
 msgid "Tjänstledig 191"
-msgstr "Tjänstledig 191"
+msgstr "Tjänsteledig 191"
 
 #. module: l10n_se_hr_payroll
 #: view:website:l10n_se_hr_payroll.payslip_2_document

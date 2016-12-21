@@ -22,7 +22,7 @@
     'name': 'HR Payroll Separate',
     'category': 'Localization',
     'author': 'Vertel AB',
-    'depends': ['l10n_se_hr_payroll','base_synchro','l10n_se_hr_holidays'],
+    'depends': ['l10n_se_hr_payroll','base_synchro','l10n_se_hr_holidays','hr_attendance'],
     'version': '1.0',
     'licence': 'AGPL-3',
     'summary': 'Run Payroll separate',
