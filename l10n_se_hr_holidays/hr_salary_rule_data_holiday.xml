@@ -46,11 +46,11 @@ result = contract.wage * 0.008
       <field name="sequence">240</field>
       <field name="appears_on_payslip" eval="True"/>
       <field name="condition_select">python</field>
-      <field name="condition_python">result = worked_days.WORK100.payslip_id.leave_number_of_days('l10n_se_hr_holidays.holiday_status_unpaid') &gt; 0.0</field>
+      <field name="condition_python">result = worked_days.WORK100.payslip_id.leave_number_of_days('hr_holidays.holiday_status_unpaid') &gt; 0.0</field>
       <field name="amount_select">code</field>
       <field name="amount_python_compute">
 #(ML*0,046)*(VAD/VADI)
-result_qty = worked_days.WORK100.payslip_id.leave_number_of_days('l10n_se_hr_holidays.holiday_status_unpaid')
+result_qty = worked_days.WORK100.payslip_id.leave_number_of_days('hr_holidays.holiday_status_unpaid')
 result = contract.wage * 0.046
       </field>
       <field name="quantity">1</field>
@@ -81,7 +81,7 @@ result = contract.wage / 160
     </record>
 
     <record id="l10n_se_hr_payroll.hr_payroll_structure-gl" model="hr.payroll.structure">
-      <field name="rule_ids" eval="[(4, ref('hr_salary_rule_legal_leave_pay')), (4, ref('hr_salary_rule_legal_leave_addition')), (4, ref('hr_salary_rule_legal_leave_deduction'), ref('hr_salary_rule_compensary_monetary'))]" />
+      <field name="rule_ids" eval="[(4, ref('l10n_se_hr_holidays.hr_salary_rule_legal_leave_pay')), (4, ref('l10n_se_hr_holidays.hr_salary_rule_legal_leave_addition')), (4, ref('l10n_se_hr_holidays.hr_salary_rule_legal_leave_deduction'), ref('l10n_se_hr_holidays.hr_salary_rule_compensary_monetary'))]" />
     </record>
 
   </data>

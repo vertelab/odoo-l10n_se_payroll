@@ -5,24 +5,32 @@
     <record model="hr.holidays.status" id="hr_holidays.holiday_status_cl">
       <field name="name" eval="'Legal Leaves '+str(DateTime.today().year - 1)" />
       <field name="color_name">black</field>
+      <field name="legal_leave" eval="True"/>
+      <field name="limit" eval="False"/>
       <field name="date_earning_start" eval="time.strftime(str(DateTime.today().year - 2) + '-04-01')" />
       <field name="date_earning_end" eval="time.strftime(str(DateTime.today().year - 1) + '-03-31')" />
     </record>
     <record model="hr.holidays.status" id="holiday_status_cl1">
       <field name="name" eval="'Legal Leaves '+str(DateTime.today().year)" />
       <field name="color_name">black</field>
+      <field name="legal_leave" eval="True"/>
+      <field name="limit" eval="False"/>
       <field name="date_earning_start" eval="time.strftime(str(DateTime.today().year - 1) + '-04-01')" />
       <field name="date_earning_end" eval="time.strftime(str(DateTime.today().year) + '-03-31')" />
     </record>
     <record model="hr.holidays.status" id="holiday_status_cl2">
       <field name="name" eval="'Legal Leaves '+str(DateTime.today().year + 1)" />
       <field name="color_name">black</field>
+      <field name="legal_leave" eval="True"/>
+      <field name="limit" eval="False"/>
       <field name="date_earning_start" eval="time.strftime(str(DateTime.today().year) + '-04-01')" />
       <field name="date_earning_end" eval="time.strftime(str(DateTime.today().year + 1) + '-03-31')" />
     </record>
     <record model="hr.holidays.status" id="holiday_status_cl3">
       <field name="name" eval="'Legal Leaves '+str(DateTime.today().year + 2)" />
       <field name="color_name">black</field>
+      <field name="legal_leave" eval="True"/>
+      <field name="limit" eval="False"/>
       <field name="date_earning_start" eval="time.strftime(str(DateTime.today().year + 1) + '-04-01')" />
       <field name="date_earning_end" eval="time.strftime(str(DateTime.today().year + 2) + '-03-31')" />
     </record>

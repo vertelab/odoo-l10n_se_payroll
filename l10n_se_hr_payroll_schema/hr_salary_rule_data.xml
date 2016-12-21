@@ -5,7 +5,7 @@
     <record id="hr_salary_rule-schemajust" model="hr.salary.rule">
       <field name="category_id" ref="l10n_se_hr_payroll.hr_salary_rule_category-BRUAVG" />
       <field name="code">schema-just</field>
-      <field name="salary_art">141</field>
+      <field name="salary_art"></field>
       <field name="name">Schema Justification</field>
       <field name="sequence">220</field>
       <field name="appears_on_payslip">True</field>
@@ -52,6 +52,10 @@ result = contract.wage / 160
 result = categories.BRUTTO * 0.3 if not contract.prel_tax_amount else contract.prel_tax_amount
 </field>
       <field name="quantity">1</field>
+    </record>
+
+    <record id="l10n_se_hr_payroll.hr_payroll_structure-gl" model="hr.payroll.structure">
+        <field eval="[(4, ref('hr_salary_rule-schemajust'))]" name="rule_ids" />
     </record>
 
     <record id="l10n_se_hr_payroll.hr_payroll_structure-tim" model="hr.payroll.structure">

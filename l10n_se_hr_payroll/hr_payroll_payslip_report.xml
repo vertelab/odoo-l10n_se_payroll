@@ -175,7 +175,7 @@
                                     <span style="font-size: 0.7em;">Ackumulerad</span><br/>
                                     <span class="pull-left">Bruttolön</span><span class="pull-right"><t t-esc="o.get_slip_line_acc('bl') or 0" /></span><br/>
                                     <span id="forman"/>
-                                    <span class="pull-left">Preliminärskatt</span><span class="pull-right"><t t-esc="o.get_slip_line_acc('pre') or 0" /></span><br/>
+                                    <span class="pull-left">Preliminärskatt</span><span class="pull-right"><t t-esc="o.get_slip_line_acc('prej') or 0" /></span><br/>
                                     <t t-if="len(o.get_slip_line('san')) &gt; 0">
                                         <span class="pull-left"><t t-esc="o.get_slip_line('san')[0]['name']" /></span>
                                         <span class="pull-right"><t t-esc="o.get_slip_line_acc('san')" /></span>
@@ -193,7 +193,7 @@
                                     <span style="font-size: 0.7em;">Skatt beräknad på</span><br/>
                                     <span class="pull-left">Belopp</span><span class="pull-right"><t t-esc="o.contract_id.wage_tax_base" /></span><br/>
                                     <span class="pull-left">Skatt tabell</span><span class="pull-right"><t t-esc="o.contract_id.prel_tax_tabel" /></span><br/>
-                                    <span class="pull-left">Preliminärskatt</span><span class="pull-right"><t t-esc="o.get_slip_line('pre')[0]['total'] or 0" /></span><br/>
+                                    <span class="pull-left">Preliminärskatt</span><span class="pull-right"><t t-esc="o.get_slip_line('prej')[0]['total'] or 0" /></span><br/>
                                     <t t-if="len(o.get_slip_line('san')) &gt; 0">
                                         <span class="pull-left"><t t-esc="o.get_slip_line('san')[0]['name']" /></span>
                                         <span class="pull-right"><t t-esc="o.get_slip_line('san')[0]['total']" /></span>
@@ -209,8 +209,7 @@
                                 </td>
                                 <td>
                                     <span style="font-size: 0.7em;">Löneperiod</span><br/>
-                                    <span class="pull-left">Bruttolön</span><span class="pull-right"><t t-esc="o.get_slip_line('bl')[0]['total'] if len(o.get_slip_line('bl')) &gt; 0 else 0" /></span><br/>
-                                    <span class="pull-left">Skattavdrag</span><span class="pull-right"><t t-esc="o.get_slip_line('pre')[0]['total'] if len(o.get_slip_line('pre')) &gt; 0 else 0" /></span><br/>
+                                    <span class="pull-left">Bruttolön</span><span class="pull-right"><t t-esc="o.get_slip_line('bl')[0]['total'] if len(o.get_slip_line('bl')) &gt; 0 else 0" /></span><br/><br/><br/>
                                 </td>
                             </tr>
                         </tbody>
