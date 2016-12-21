@@ -41,7 +41,7 @@ Run payroll in another database synked with Odoo
     ],
     'demo':[
     ],
-    'external_dependencies': {'python': ['odoorpc']}
+    'external_dependencies': {'python': ['odoorpc']},
     'installable': True
 }
 
