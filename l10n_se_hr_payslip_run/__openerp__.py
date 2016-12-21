@@ -22,7 +22,7 @@
     'name': 'HR Payslip Run',
     'category': 'Localization',
     'author': 'Vertel AB',
-    'depends': ['hr_payroll'],
+    'depends': ['hr_payroll', 'report_glabels'],
     'version': '1.0',
     'licence': 'AGPL-3',
     'summary': 'HR Payslip Run',
