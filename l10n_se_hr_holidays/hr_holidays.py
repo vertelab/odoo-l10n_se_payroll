@@ -123,7 +123,7 @@ class hr_payslip(models.Model):
     @api.one
     def _holiday_status_ids(self):
         self.holiday_status_ids = self.env['hr.holidays.status'].search([('active','=',True),('limit','=',False)])
-        self.holiday_status_ids += self.env['hr.holidays.status'].search([('id','in',[self.env.ref('l10n_se_hr_payroll.sick_leave_qualify').id,self.env.ref('l10n_se_hr_payroll.sick_leave_214').id,self.env.ref('l10n_se_hr_payroll.sick_leave_100').id])])
+        self.holiday_status_ids += self.env['hr.holidays.status'].search([('id','in',[self.env.ref('l10n_se_hr_holidays.sick_leave_qualify').id,self.env.ref('l10n_se_hr_holidays.sick_leave_214').id,self.env.ref('hr_holidays.holiday_status_sl').id])])
     holiday_status_ids = fields.Many2many(comodel_name="hr.holidays.status",compute="_holiday_status_ids")
 
     def legal_non_vacation(self):
@@ -132,15 +132,15 @@ class hr_payslip(models.Model):
             self.env.ref('hr_holidays.holiday_status_sl').id,
             self.env.ref('hr_holidays.holiday_status_unpaid').id,
             self.env.ref('l10n_se_hr_holidays.holiday_status_cl3').id,
-            self.env.ref('l10n_se_hr_payroll.sick_leave_214').id,
-            self.env.ref('l10n_se_hr_payroll.sick_leave_214_100').id,
-            self.env.ref('l10n_se_hr_payroll.sick_leave_qualify').id,
-            self.env.ref('l10n_se_hr_payroll.vab_160').id,
-            self.env.ref('l10n_se_hr_payroll.forald_ledig_165').id,
-            self.env.ref('l10n_se_hr_payroll.forald_ledig_168').id,
-            self.env.ref('l10n_se_hr_payroll.pappaledig_166').id,
-            self.env.ref('l10n_se_hr_payroll.holiday_status_leave_of_absence').id,
-            self.env.ref('l10n_se_hr_payroll.holiday_status_leave_of_absence_5').id,
+            self.env.ref('l10n_se_hr_holidays.sick_leave_214').id,
+            self.env.ref('l10n_se_hr_holidays.sick_leave_214_100').id,
+            self.env.ref('l10n_se_hr_holidays.sick_leave_qualify').id,
+            self.env.ref('l10n_se_hr_holidays.vab_160').id,
+            self.env.ref('l10n_se_hr_holidays.forald_ledig_165').id,
+            self.env.ref('l10n_se_hr_holidays.forald_ledig_168').id,
+            self.env.ref('l10n_se_hr_holidays.pappaledig_166').id,
+            self.env.ref('l10n_se_hr_holidays.holiday_status_leave_of_absence').id,
+            self.env.ref('l10n_se_hr_holidays.holiday_status_leave_of_absence_5').id,
             ]
 
     @api.model
@@ -162,7 +162,7 @@ class hr_payslip(models.Model):
 
     @api.multi
     def leave_number_of_days(self, holiday_status_ref):
-        return sum(self.worked_days_line_ids.filtered(lambda w: w.holiday_status_id == self.env.ref(holiday_status_ref)).mapped('number_of_days'))
+        return sum(self.worked_days_line_ids.filtered(lambda w: w.code == self.env.ref(holiday_status_ref).name).mapped('number_of_days'))
 
     @api.model
     def get_legal_leaves_consumed(self):
