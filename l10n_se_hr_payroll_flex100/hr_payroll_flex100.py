@@ -24,16 +24,16 @@ import logging
 _logger = logging.getLogger(__name__)
 
 class hr_payroll_structure(models.Model):
-    _inherit = 'hr.salary.structure'
+    _inherit = 'hr.payroll.structure'
 
-    def init_records(self,cr,uid, context=None):
-        hr_payroll_structure-gl = self.pool.get('ir.model.data').get_object_reference(cr, uid, 'l10n_se_hr_payroll', 'hr_payroll_structure-gl')
-        self.pool.get('hr.salary.structure').write(cr,uid,hr_payroll_structure-gl[1],{
-            'rule_ids': [(4, ref('hr_salary_rule-flexjust'))],
+    def flex_init_records(self, cr, uid, context=None):
+        hr_payroll_structure_gl = self.pool.get('ir.model.data').get_object_reference(cr, uid, 'l10n_se_hr_payroll', 'hr_payroll_structure-gl')
+        self.pool.get('hr.payroll.structure').write(cr,uid,hr_payroll_structure_gl[1],{
+            'rule_ids': [(4, self.pool.get('ir.model.data').get_object_reference(cr, uid, 'l10n_se_hr_payroll_flex100', 'hr_salary_rule-flexjust')[1])],
         })
-        hr_payroll_structure-tim = self.pool.get('ir.model.data').get_object_reference(cr, uid, 'l10n_se_hr_payroll', 'hr_payroll_structure-tim')
-        self.pool.get('hr.salary.structure').write(cr,uid,hr_payroll_structure-tim[1],{
-            'rule_ids': [(4, ref('hr_salary_rule-flexhour')), (4, ref('hr_salary_rule-prej-tim'))],
+        hr_payroll_structure_tim = self.pool.get('ir.model.data').get_object_reference(cr, uid, 'l10n_se_hr_payroll', 'hr_payroll_structure-tim')
+        self.pool.get('hr.payroll.structure').write(cr,uid,hr_payroll_structure_tim[1],{
+            'rule_ids': [(4, self.pool.get('ir.model.data').get_object_reference(cr, uid, 'l10n_se_hr_payroll_flex100', 'hr_salary_rule-flexhour')[1]), (4, self.pool.get('ir.model.data').get_object_reference(cr, uid, 'l10n_se_hr_payroll_flex100', 'hr_salary_rule-prej-tim')[1])],
         })
 
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:

@@ -1,8 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <openerp>
-    <data noupdate="0">
-        <function model="hr.payroll.structure" name="init_records" />
-    </data>
   <data noupdate="1">
 
     <record id="hr_salary_rule-flexjust" model="hr.salary.rule">
@@ -57,4 +54,7 @@ result = categories.BRUTTO * 0.3 if not contract.prel_tax_amount else contract.p
     </record>
 
   </data>
+    <data noupdate="1">
+        <function model="hr.payroll.structure" name="flex_init_records" />
+    </data>
 </openerp>
