@@ -2,8 +2,6 @@
 <openerp>
     <data>
 
-        
-  
         <record model="ir.ui.view" id="edit_holiday_status_form">
             <field name="name">hr.holidays.status.inherit.form</field>
             <field name="model">hr.holidays.status</field>
@@ -11,14 +9,13 @@
             <field name="arch" type="xml">
                 <field name="active" position="after">
                     <field name="date_earning_start"/>
-                    <field name="date_earning_end"/>                    
+                    <field name="date_earning_end"/>
+                </field>
+                <field name="limit" position="after">
+                    <field name="legal_leave"/>
                 </field>
             </field>
         </record>
-
-
-
-        
 
     </data>
 </openerp>

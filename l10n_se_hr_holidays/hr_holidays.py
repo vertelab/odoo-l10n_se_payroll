@@ -37,7 +37,7 @@ class hr_holidays_status(models.Model):
     payslip_rule = fields.Text(string='Earning Rule',help="Python Code")
     payslip_condition = fields.Text(string='Earning Condition',help="Python Code")
     legal_leave = fields.Boolean(string='Legal Leave', default=False, help='If checked, it will be included in legal leaves calculation')
-    
+
     def init_records(self,cr,uid, context=None):
         holiday_status_cl = self.pool.get('ir.model.data').get_object_reference(cr, uid, 'hr_holidays', 'holiday_status_cl')
         self.pool.get('hr.holidays.status').write(cr,uid,holiday_status_cl[1],{
@@ -48,14 +48,19 @@ class hr_holidays_status(models.Model):
             'date_earning_end':   fields.Date.to_string(date(date.today().year - 1,3,31)),
         })
         holiday_status_unpaid = self.pool.get('ir.model.data').get_object_reference(cr, uid, 'hr_holidays', 'holiday_status_unpaid')
-        self.pool.get('hr.holidays.status').write(cr,uid,holiday_status_cl[1],{
+        self.pool.get('hr.holidays.status').write(cr,uid,holiday_status_unpaid[1],{
             'name': 'Legal Leaves unpaid',
             'legal_leave': False,
             'limit': True,
         })
-    
-    
-    
+        holiday_status_sl = self.pool.get('ir.model.data').get_object_reference(cr, uid, 'hr_holidays', 'holiday_status_sl')
+        self.pool.get('hr.holidays.status').write(cr,uid,holiday_status_sl[1],{
+            'name': 'Sick Leave 100%',
+            'legal_leave': False,
+            'limit': True,
+            'color_name': 'red',
+        })
+
     @api.one
     def _holidays_allowed(self):
         holidays_allowed = not (self.date_earning_start and self.date_earning_end) or fields.Date.today() > self.date_earning_end

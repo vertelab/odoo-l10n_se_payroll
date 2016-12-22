@@ -30,12 +30,27 @@ import random
 import logging
 _logger = logging.getLogger(__name__)
 
-
-
 from openerp.tools import DEFAULT_SERVER_DATE_FORMAT, DEFAULT_SERVER_DATETIME_FORMAT
 from datetime import timedelta, date, datetime
 
 import openerp.addons.decimal_precision as dp
+
+class hr_salary_rule(models.Model):
+    _inherit = 'hr.salary.rule'
+
+    def init_records(self,cr,uid, context=None):
+        hr_rule_basic = self.pool.get('ir.model.data').get_object_reference(cr, uid, 'hr_payroll', 'hr_rule_basic')
+        self.pool.get('hr.salary.rule').write(cr,uid,hr_rule_basic[1],{
+            'active': False,
+        })
+        hr_rule_taxable = self.pool.get('ir.model.data').get_object_reference(cr, uid, 'hr_payroll', 'hr_rule_taxable')
+        self.pool.get('hr.salary.rule').write(cr,uid,hr_rule_taxable[1],{
+            'active': False,
+        })
+        hr_rule_net = self.pool.get('ir.model.data').get_object_reference(cr, uid, 'hr_payroll', 'hr_rule_net')
+        self.pool.get('hr.salary.rule').write(cr,uid,hr_rule_net[1],{
+            'active': False,
+        })
 
 class hr_contract(models.Model):
     _inherit = 'hr.contract'
