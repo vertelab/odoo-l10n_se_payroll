@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <openerp>
-  <data noupdate="0">
+  <data noupdate="1">
     <!-- Server -->
     <record id="server" model="base.synchro.server">
       <field name="name">Time recording Server</field>
@@ -10,6 +10,8 @@
       <field name="server_url">localhost</field>
       <field name="server_db">My Database</field>
     </record>
+      </data>
+      <data noupdate="0">
     <!-- Static data -->
     <record id="department" model="base.synchro.obj">
       <field name="name">hr.department</field>
@@ -43,6 +45,16 @@
       <field name="domain">[]</field>
       <field name="whitelist" eval="False" />
     </record>
+     <record id="contract_types" model="base.synchro.obj">
+      <field name="name">hr.contract.type</field>
+      <field name="active" eval="True" />
+      <field name="sequence">0</field>
+      <field name="server_id" ref="l10n_se_hr_payroll_separate.server" />
+      <field name="model_id" ref="hr_contract.model_hr_contract_type" />
+      <field name="action">d</field>
+      <field name="domain">[]</field>
+      <field name="whitelist" eval="False" />
+    </record>
     <record id="contracts" model="base.synchro.obj">
       <field name="name">hr.contract</field>
       <field name="active" eval="True" />
@@ -53,6 +65,7 @@
       <field name="domain">[]</field>
       <field name="whitelist" eval="True" />
       <field name="avoid_ids" eval="[(0,0,{'name':'employee_id'}),(0,0,{'name':'name'}),(0,0,{'name':'job_id'}),(0,0,{'name':'type_id'}),(0,0,{'name':'date_start'}),(0,0,{'name':'date_end'}),(0,0,{'name':'trial_date_start'}),(0,0,{'name':'trial_date_end'}),(0,0,{'name':'working_hours'})]" />
+      <field name="placeholder_ids" eval="[(0,0,{'name':'wage', 'type': 'float', 'float': 0.0})]" />
     </record>
     <!-- Other resources -->
     <record id="schema" model="base.synchro.obj">
