@@ -115,6 +115,34 @@
       </field>
     </record>
 -->
+
+
+
+        <record id="payroll_hr_employee_view_form" model="ir.ui.view">
+            <field name="name">payroll.hr.employee.view.form</field>
+            <field name="model">hr.employee</field>
+            <field name="inherit_id" ref="hr_payroll.payroll_hr_employee_view_form"/>
+            <field name="arch" type="xml">
+                <data>
+                    <button name="%(hr_payroll.act_hr_employee_payslip_list)d" position="replace">
+                           <button name="%(hr_payroll.act_hr_employee_payslip_list)d"  
+                            class="oe_stat_button" 
+                            icon="fa-money" 
+                            type="action" 
+                            groups="base.group_hr_manager">
+                            <field name="payslip_count" widget="statinfo" string="Payslips"/>
+                        </button>
+                    </button>
+                </data>
+            </field>
+        </record>
+
+
+
+
+
+
+
     <report id="l10n_se_hr_payroll.payslip_2" model="hr.payslip" string="Payslip" report_type="qweb-pdf" name="l10n_se_hr_payroll.payslip_2_report" file="l10n_se_hr_payroll.payslip_2_report" attachment_use="True" attachment="('payslip_'+(object.number.replace('/','') or ''))+'.pdf'" />
     <template id="payslip_2_report">
       <t t-call="report.html_container">
