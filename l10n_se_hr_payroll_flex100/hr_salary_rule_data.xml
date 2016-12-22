@@ -37,7 +37,6 @@ result = contract.wage</field>
     </record>
 
     <record id="hr_salary_rule-prej-tim" model="hr.salary.rule">
-      <field name="parent_rule_id" ref="l10n_se_hr_payroll.hr_salary_rule-pre" />
       <field name="category_id" ref="l10n_se_hr_payroll.hr_salary_rule_category-NETAVG" />
       <field name="code">prej-tim</field>
       <field name="salary_art">s100</field>
@@ -53,14 +52,8 @@ result = categories.BRUTTO * 0.3 if not contract.prel_tax_amount else contract.p
       <field name="quantity">1</field>
     </record>
 
-    <record id="l10n_se_hr_payroll.hr_payroll_structure-gl" model="hr.payroll.structure">
-      <field eval="[(4, ref('hr_salary_rule-flexjust'))]" name="rule_ids" />
-    </record>
-
-    <record id="l10n_se_hr_payroll.hr_payroll_structure-tim" model="hr.payroll.structure">
-      <field eval="[(4, ref('hr_salary_rule-flexhour')), (4, ref('hr_salary_rule-prej-tim'))]" name="rule_ids" />
-    </record>
-
   </data>
-
+    <data noupdate="1">
+        <function model="hr.payroll.structure" name="flex_init_records" />
+    </data>
 </openerp>
