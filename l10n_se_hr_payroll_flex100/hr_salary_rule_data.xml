@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <openerp>
+    <data noupdate="0">
+        <function model="hr.payroll.structure" name="init_records" />
+    </data>
   <data noupdate="1">
 
     <record id="hr_salary_rule-flexjust" model="hr.salary.rule">
@@ -53,14 +56,5 @@ result = categories.BRUTTO * 0.3 if not contract.prel_tax_amount else contract.p
       <field name="quantity">1</field>
     </record>
 
-    <record id="l10n_se_hr_payroll.hr_payroll_structure-gl" model="hr.payroll.structure">
-      <field eval="[(4, ref('hr_salary_rule-flexjust'))]" name="rule_ids" />
-    </record>
-
-    <record id="l10n_se_hr_payroll.hr_payroll_structure-tim" model="hr.payroll.structure">
-      <field eval="[(4, ref('hr_salary_rule-flexhour')), (4, ref('hr_salary_rule-prej-tim'))]" name="rule_ids" />
-    </record>
-
   </data>
-
 </openerp>
