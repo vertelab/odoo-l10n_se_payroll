@@ -62,9 +62,13 @@ class hr_holidays_status(models.Model):
         })
 
     @api.one
+    @api.depends('date_earning_start','date_earning_end','limit')
     def _holidays_allowed(self):
-        holidays_allowed = not (self.date_earning_start and self.date_earning_end) or fields.Date.today() > self.date_earning_end
-    holidays_allowed = fields.Boolean(string="Allowed",compute='_holidays_allowed')
+        if self.limit == False:
+            self.holidays_allowed = not (self.date_earning_start and self.date_earning_end) or fields.Date.today() > self.date_earning_end
+        else:
+            self.holidays_allowed = True
+    holidays_allowed = fields.Boolean(string="Allowed",compute='_holidays_allowed',store=True)
 
     @api.model
     def get_earning_holiday(self):
