@@ -21,17 +21,6 @@
       <field name="inherit_id" ref="hr_holidays.edit_holiday_new" />
       <field name="arch" type="xml">
         <field name="holiday_status_id" position="attributes">
-          <attribute name="context">{'employee_id':employee_id}</attribute>
-          <attribute name="domain">[('holidays_allowed','=',True)]</attribute>
-        </field>
-      </field>
-    </record>
-    <record model="ir.ui.view" id="edit_holiday_new">
-      <field name="name">Leave Request</field>
-      <field name="model">hr.holidays</field>
-      <field name="inherit_id" ref="hr_holidays.edit_holiday_new" />
-      <field name="arch" type="xml">
-        <field name="holiday_status_id" position="attributes">
           <attribute name="context">{'employee_id':employee_id,'search_default_allowed':1}</attribute>
           <attribute name="domain">[('holidays_allowed','=',True)]</attribute>
         </field>
@@ -43,6 +32,7 @@
       <field name="inherit_id" ref="hr_holidays.view_holidays_status_filter" />
       <field name="arch" type="xml">
         <search position="inside">
+            <field name="holidays_allowed"/>
           <filter name="allowed" string="Allowed" domain="[('holidays_allowed', '=', True)]" help="Allowed legal leaves (after earning year)" />
         </search>
       </field>
