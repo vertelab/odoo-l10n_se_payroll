@@ -10,7 +10,7 @@
       <field name="sequence">220</field>
       <field name="appears_on_payslip">True</field>
       <field name="condition_select">python</field>
-      <field name="condition_python">result = contract.type_id.work_time == 'flex' and result = contract.type_id.work_time == 'flex' and worked_days.WORK100.payslip_id.flex_working_days &lt; worked_days.WORK100.number_of_days</field>
+      <field name="condition_python">result = contract.type_id.work_time == 'flex' and worked_days.WORK100.payslip_id.flex_working_days &lt; worked_days.WORK100.number_of_days</field>
       <field name="amount_select">code</field>
       <field name="amount_python_compute">result_rate = 100 - (worked_days.WORK100.payslip_id.flex_working_days / worked_days.WORK100.number_of_days * 100)
 result = contract.wage
