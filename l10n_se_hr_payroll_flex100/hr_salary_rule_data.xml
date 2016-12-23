@@ -31,7 +31,7 @@ result = contract.wage
       <field name="amount_select">code</field>
       <field name="amount_python_compute">
 result_qty = worked_days.WORK100.payslip_id.flex_working_hours
-result = contract.wage</field>
+result = contract.wage / 160</field>
       <field name="quantity">1</field>
       <field name="note">Flex Hour Salary</field>
     </record>
