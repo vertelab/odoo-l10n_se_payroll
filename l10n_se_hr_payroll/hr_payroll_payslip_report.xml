@@ -193,7 +193,14 @@
                                     <span style="font-size: 0.7em;">Skatt beräknad på</span><br/>
                                     <span class="pull-left">Belopp</span><span class="pull-right"><t t-esc="o.contract_id.wage_tax_base" /></span><br/>
                                     <span class="pull-left">Skatt tabell</span><span class="pull-right"><t t-esc="o.contract_id.prel_tax_tabel" /></span><br/>
-                                    <span class="pull-left">Preliminärskatt</span><span class="pull-right"><t t-esc="o.get_slip_line('prej')[0]['total'] or 0" /></span><br/>
+                                    <span class="pull-left">Preliminärskatt</span><span class="pull-right">
+                                        <t t-if="len(o.get_slip_line('prej')) &gt; 0">
+                                            <t t-esc="o.get_slip_line('prej')[0]['total'] or 0" />
+                                        </t>
+                                        <t t-if="len(o.get_slip_line('prej-tim')) &gt; 0">
+                                            <t t-esc="o.get_slip_line('prej-tim')[0]['total'] or 0" />
+                                        </t>
+                                    </span><br/>
                                     <t t-if="len(o.get_slip_line('san')) &gt; 0">
                                         <span class="pull-left"><t t-esc="o.get_slip_line('san')[0]['name']" /></span>
                                         <span class="pull-right"><t t-esc="o.get_slip_line('san')[0]['total']" /></span>
