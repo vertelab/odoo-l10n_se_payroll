@@ -30,7 +30,7 @@ result = contract.wage
       <field name="condition_python">result = contract.type_id.work_time == 'schema'</field>
       <field name="amount_select">code</field>
       <field name="amount_python_compute">
-result_qty = worked_days.WORK100.payslip_id.attendance_working_hours
+result_qty = worked_days.WORK100.payslip_id.schema_number_of_hours
 result = contract.wage / 160
     </field>
       <field name="quantity">1</field>
