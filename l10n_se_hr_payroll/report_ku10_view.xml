@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+  <data>
+
+    <record id="hr_contract_form_inherit_ku10" model="ir.ui.view">
+      <field name="name">hr.contract.form.inherit.ku10</field>
+      <field name="model">hr.contract</field>
+      <field name="priority">20</field>
+      <field name="inherit_id" ref="hr_payroll.hr_contract_form_inherit" />
+      <field name="arch" type="xml">
+        <data>
+            <field name="schedule_pay" position="after">
+                <field name="partner_close_company" />
+            </field>
+        </data>
+      </field>
+    </record>
+    
+    <report string="KU10" id="action_ku10" model="hr.employee"
+                            report_type="glabels" name="l10n_se_hr_payroll.report_ku10" />
+
+    <record id="action_ku10" model="ir.actions.report.xml">
+        <field name="glabels_template" type="base64" file="l10n_se_hr_payroll/ku10.glabels" />
+    </record>
+    
+    
+  </data>
+</openerp>

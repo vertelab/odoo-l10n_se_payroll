@@ -44,6 +44,7 @@ Swedish Payroll Rules.
         'hr_payroll_view.xml',
         'hr_payroll_data.xml',
         'hr_payroll_payslip_report.xml',
+        'report_ku10_view.xml',
         #
         'hr_salary_rule_category_data.xml',
         'hr_salary_rule_data.xml',
