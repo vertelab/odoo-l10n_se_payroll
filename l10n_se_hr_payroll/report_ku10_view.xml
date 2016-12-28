@@ -16,13 +16,44 @@
       </field>
     </record>
     
-    <report string="KU10" id="action_ku10" model="hr.employee"
+    <report string="KU10" id="action_ku10" model="report_ku10.employee"
                             report_type="glabels" name="l10n_se_hr_payroll.report_ku10" />
 
     <record id="action_ku10" model="ir.actions.report.xml">
         <field name="glabels_template" type="base64" file="l10n_se_hr_payroll/ku10.glabels" />
     </record>
     
+    <record id="act_KU10_form" model="ir.ui.view">
+      <field name="name">ku10.print_by_action.form</field>
+      <field name="model">report_ku10.form</field>
+      <field name="arch" type="xml">
+        <form string="KU10" version="7.0">
+          <group>
+            <field name="year" />
+            <field name="c210"  />
+            <field name="c205" />
+            <!--
+                 <field name="csv_fields" />
+            -->
+          </group>
+          <footer>
+            <button icon="gtk-print" name="to_print" string="_Print" type="object" default_focus="1" class="oe_highlight" />
+            or
+            <button special="cancel" string="Close" type="object" class="oe_link" />
+          </footer>
+        </form>
+      </field>
+    </record>
+    <record id="action_scribus_print_by_action_wizard" model="ir.actions.act_window">
+      <field name="name">Print KU10</field>
+      <field name="type">ir.actions.act_window</field>
+      <field name="res_model">hr.employee</field>
+      <field name="view_type">form</field>
+      <field name="view_mode">form</field>
+      <field name="target">new</field>
+    </record>
+    <act_window name="KU10-report" res_model="report_ku10.form" src_model="hr.employee" view_mode="form" target="new" key2="client_action_multi" id="action_ku10_print_by_action_window" />
+
     
   </data>
 </openerp>
