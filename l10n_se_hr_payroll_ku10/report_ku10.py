@@ -44,10 +44,12 @@ class hr_employee(models.Model):
 
     @api.multi
     def check_benefit(self,code):
-        return 'X' if self.contract_id and self.contract_id.benefit_ids and self.contract_id.benefit_ids.filtered(lambda b: b.name == code) else ' '
+        #~ if code == '043':
+            #~ raise Warning(self,code,'X' if self.contract_id and self.contract_id.benefit_ids and self.contract_id.benefit_ids.filtered(lambda b: b.display_name == code) else 'Y')
+        return 'X' if self.contract_id and self.contract_id.benefit_ids and self.contract_id.benefit_ids.filtered(lambda b: b.display_name == code) else ' '
     @api.multi
     def get_benefit_desc(self,code):
-        return self.contract_id.benefit_ids.filtered(lambda b: b.name == code).mapped('desc')[0] if self.contract_id and self.contract_id.benefit_ids and self.contract_id.benefit_ids.filtered(lambda b: b.name == code) else ' '
+        return self.contract_id.benefit_ids.filtered(lambda b: b.display_name == code).mapped('desc')[0] if self.contract_id and self.contract_id.benefit_ids and self.contract_id.benefit_ids.filtered(lambda b: b.display_name == code) else ' '
 
         
 class report_ku10_form(models.TransientModel):
@@ -114,12 +116,13 @@ class report_ku10_form(models.TransientModel):
                 #~ # Förmåner mm
                 'c012': sum(e.slip_ids.filtered(lambda s: s.date_from >= date_from and s.date_from < date_to).mapped(lambda s: s.get_slip_line_total('formon'))),
                 'c041': e.check_benefit('041'),
-                'c042': 'X' if e.contract_id and e.contract_id.benefit_ids and e.contract_id.benefit_ids.filtered(lambda b: b.name == '042') else ' ',
-                'c043': 'X' if e.contract_id and e.contract_id.benefit_ids and e.contract_id.benefit_ids.filtered(lambda b: b.name == '043') else ' ',
-                'c044': 'X' if e.contract_id and e.contract_id.benefit_ids and e.contract_id.benefit_ids.filtered(lambda b: b.name == '044') else ' ',
-                'c045': 'X' if e.contract_id and e.contract_id.benefit_ids and e.contract_id.benefit_ids.filtered(lambda b: b.name == '045') else ' ',
-                'c047': 'X' if e.contract_id and e.contract_id.benefit_ids and e.contract_id.benefit_ids.filtered(lambda b: b.name == '047') else ' ',
-                'c049': 'X' if e.contract_id and e.contract_id.benefit_ids and e.contract_id.benefit_ids.filtered(lambda b: b.name == '049') else ' ',
+                'c042': e.check_benefit('042'),
+                'c043': e.check_benefit('043'),
+                'c044': e.check_benefit('044'),
+                'c045': e.check_benefit('045'),
+                'c047': e.check_benefit('047'),
+                'c048': e.check_benefit('048'),
+                'c049': e.check_benefit('049'),
                 'c065': e.get_benefit_desc('047'),
                 'c013': sum(e.slip_ids.filtered(lambda s: s.date_from >= date_from and s.date_from < date_to).mapped(lambda s: s.get_slip_line_total('013'))),
                 'c018': sum(e.slip_ids.filtered(lambda s: s.date_from >= date_from and s.date_from < date_to).mapped(lambda s: s.get_slip_line_total('018'))),
@@ -129,7 +132,7 @@ class report_ku10_form(models.TransientModel):
                 'c017': sum(e.slip_ids.filtered(lambda s: s.date_from >= date_from and s.date_from < date_to).mapped(lambda s: s.get_slip_line_total('017'))),
             }).id)
 
-        report = self.env['ir.actions.report.xml'].search([('report_name','=','l10n_se_hr_payroll.report_ku10')])[0]
+        report = self.env['ir.actions.report.xml'].search([('report_name','=','l10n_se_hr_payroll_ku10.report_ku10')])[0]
         data = {
                 'model': 'report_ku10.employee',
                 'ids': ids,
@@ -140,7 +143,7 @@ class report_ku10_form(models.TransientModel):
                 }
         res =  {
                 'type': 'ir.actions.report.xml',
-                'report_name': 'l10n_se_hr_payroll.report_ku10',
+                'report_name': 'l10n_se_hr_payroll_ku10.report_ku10',
                 'datas': data,
                 'context': self.env.context
                 }

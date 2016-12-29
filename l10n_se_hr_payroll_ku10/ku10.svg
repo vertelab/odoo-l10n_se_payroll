@@ -28,8 +28,8 @@
      id="namedview3717"
      showgrid="true"
      inkscape:zoom="1.0062799"
-     inkscape:cx="375.04929"
-     inkscape:cy="574.27357"
+     inkscape:cx="133.0689"
+     inkscape:cy="494.77283"
      inkscape:window-x="51"
      inkscape:window-y="24"
      inkscape:window-maximized="1"
@@ -49,7 +49,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title />
+        <dc:title></dc:title>
         <cc:license
            rdf:resource="http://creativecommons.org/licenses/by-sa/3.0/" />
       </cc:Work>
@@ -443,12 +443,10 @@
      id="text3742-88-62-9-8-4"
      y="768.6908"
      x="44.258968"
-     style="font-style:normal;font-variant:normal;font-weight:300;font-stretch:normal;font-size:11.30100012px;line-height:125%;font-family:Ubuntu;-inkscape-font-specification:'Ubuntu, Light';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;"
+     style="font-style:normal;font-variant:normal;font-weight:300;font-stretch:normal;font-size:10px;line-height:125%;font-family:Ubuntu;-inkscape-font-specification:'Ubuntu, Light';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;"
      xml:space="preserve"><tspan
        sodipodi:role="line"
-       id="tspan5265">Specifikation av annan</tspan><tspan
-       sodipodi:role="line"
-       id="tspan5267">förmån i ruta 047</tspan></text>
+       id="tspan3513">Specifikation av annan</tspan></text>
   <text
      sodipodi:linespacing="125%"
      id="text3742-88-62-7-9-8"
@@ -1273,14 +1271,14 @@
   <text
      sodipodi:linespacing="125%"
      id="text3742-88-62-1-5-5"
-     y="805.28235"
+     y="811.28235"
      x="42.291496"
-     style="font-style:normal;font-variant:normal;font-weight:300;font-stretch:normal;font-size:10px;line-height:125%;font-family:Ubuntu;-inkscape-font-specification:'Ubuntu, Light';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;"
+     style="font-style:normal;font-variant:normal;font-weight:300;font-stretch:normal;font-size:10px;line-height:125%;font-family:Ubuntu;-inkscape-font-specification:'Ubuntu, Light';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
      xml:space="preserve"><tspan
        sodipodi:role="line"
-       id="tspan5271">Skattepliktig bilförmån utom</tspan><tspan
-       sodipodi:role="line"
-       id="tspan5273">drivmedel</tspan></text>
+       id="tspan3538"
+       x="42.291496"
+       y="811.28235">Skattepliktig bilförmån utom</tspan></text>
   <text
      sodipodi:linespacing="125%"
      id="text3742-88-62-7-2-3-1"
@@ -1590,29 +1588,31 @@
      sodipodi:linespacing="125%"
      id="text3742-88-62-00-4-2"
      y="702.6908"
-     x="70.872307"
-     style="font-style:normal;font-variant:normal;font-weight:300;font-stretch:normal;font-size:11.30100012px;line-height:125%;font-family:Ubuntu;-inkscape-font-specification:'Ubuntu, Light';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;"
+     x="72.872307"
+     style="font-style:normal;font-variant:normal;font-weight:300;font-stretch:normal;font-size:10px;line-height:125%;font-family:Ubuntu;-inkscape-font-specification:'Ubuntu, Light';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;"
      xml:space="preserve"><tspan
        sodipodi:role="line"
-       id="tspan5211">Ränta</tspan></text>
+       id="tspan5211"
+       x="72.872307"
+       y="702.6908">Ränta</tspan></text>
   <text
      sodipodi:linespacing="125%"
      id="text3742-88-62-00-4-1-0"
-     y="667.58423"
-     x="194.6981"
-     style="font-style:normal;font-variant:normal;font-weight:300;font-stretch:normal;font-size:10.68794823px;line-height:125%;font-family:Ubuntu;-inkscape-font-specification:'Ubuntu, Light';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+     y="702.64899"
+     x="185.17198"
+     style="font-style:normal;font-variant:normal;font-weight:300;font-stretch:normal;font-size:9.99999982px;line-height:125%;font-family:Ubuntu;-inkscape-font-specification:'Ubuntu, Light';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;"
      xml:space="preserve"
-     transform="scale(0.95003981,1.0525875)"><tspan
+     transform="scale(0.99938921,1.0006112)"><tspan
        sodipodi:role="line"
        id="tspan5215"
-       x="194.6981"
-       y="667.58423">Parkering</tspan></text>
+       x="185.17198"
+       y="702.64899">Parkering</tspan></text>
   <text
      sodipodi:linespacing="125%"
      id="text3742-88-62-00-4-0-3"
      y="700.6908"
      x="264.87231"
-     style="font-style:normal;font-variant:normal;font-weight:300;font-stretch:normal;font-size:11.30100012px;line-height:125%;font-family:Ubuntu;-inkscape-font-specification:'Ubuntu, Light';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;"
+     style="font-style:normal;font-variant:normal;font-weight:300;font-stretch:normal;font-size:10px;line-height:125%;font-family:Ubuntu;-inkscape-font-specification:'Ubuntu, Light';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;"
      xml:space="preserve"><tspan
        sodipodi:role="line"
        id="tspan5219">Annan förmån</tspan></text>
@@ -1992,4 +1992,26 @@
        y="268.004"
        x="43.577881"
        sodipodi:role="line">Person-/organisationsnummer</tspan></text>
+  <text
+     sodipodi:linespacing="125%"
+     id="text3742-88-62-9-8-4-9"
+     y="782.6908"
+     x="43.738968"
+     style="font-style:normal;font-variant:normal;font-weight:300;font-stretch:normal;font-size:10px;line-height:125%;font-family:Ubuntu;-inkscape-font-specification:'Ubuntu, Light';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+     xml:space="preserve"><tspan
+       sodipodi:role="line"
+       id="tspan3511"
+       x="43.738968"
+       y="782.6908">förmån i ruta 047</tspan></text>
+  <text
+     sodipodi:linespacing="125%"
+     id="text3742-88-62-1-5-5-8"
+     y="823.28235"
+     x="42.081497"
+     style="font-style:normal;font-variant:normal;font-weight:300;font-stretch:normal;font-size:10px;line-height:125%;font-family:Ubuntu;-inkscape-font-specification:'Ubuntu, Light';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+     xml:space="preserve"><tspan
+       sodipodi:role="line"
+       id="tspan3536"
+       x="42.081497"
+       y="823.28235">drivmedel</tspan></text>
 </svg>

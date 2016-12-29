@@ -29,6 +29,30 @@ Swedish Payroll Rules.
 ======================
 
     * KU10 
+    
+Formaner (benefit codes)
+========================
+    * 041	Bostad småhus
+    * 042	Kost	
+    * 043	Bostad ej småhus	
+    * 044	Ranta	
+    * 045	Parkering
+    * 047	Annan forman t ex Dagstidning
+    * 013	ange kod för formansbil
+    * 017	Betalt för bilforman
+    * 021   RUT
+    * 022   ROT
+    
+Kostnadsersattningar (salary rules/input fields)
+================================================
+    * 050 Bilersattning enligt schablon
+    * 051 Traktamente inom riket
+    * 052 Traktamente utom riket
+    * 055 Resekostnader
+    * 056 Logi
+    * 053 Tjansteresa inrikes langre an tre manader
+    * 054 Tjansteresa utrikes langre an tre manader
+    
     """,
 
     'auto_install': False,
