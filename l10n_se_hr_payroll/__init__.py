@@ -2,7 +2,7 @@
 ##############################################################################
 #
 # OpenERP, Open Source Management Solution, third party addon
-# Copyright (C) 2004-2015 Vertel AB (<http://vertel.se>).
+# Copyright (C) 2004-2016 Vertel AB (<http://vertel.se>).
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU Affero General Public License as
@@ -19,5 +19,4 @@
 #
 ##############################################################################
 import l10n_se_hr_payroll
-import report_ku10
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:

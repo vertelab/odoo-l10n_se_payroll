@@ -2,7 +2,7 @@
 ##############################################################################
 #
 # OpenERP, Open Source Management Solution, third party addon
-# Copyright (C) 2004-2015 Vertel AB (<http://vertel.se>).
+# Copyright (C) 2004-2016 Vertel AB (<http://vertel.se>).
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU Affero General Public License as
@@ -22,7 +22,7 @@
     'name': 'Swedish - Payroll',
     'category': 'Localization',
     'author': 'Vertel AB',
-    'depends': ['hr_payroll','hr_holidays','hr_payroll_benefits', 'report_glabels'],
+    'depends': ['hr_payroll'],
     'version': '1.2',
     'description': """
 Swedish Payroll Rules.
@@ -44,7 +44,6 @@ Swedish Payroll Rules.
         'hr_payroll_view.xml',
         'hr_payroll_data.xml',
         'hr_payroll_payslip_report.xml',
-        'report_ku10_view.xml',
         #
         'hr_salary_rule_category_data.xml',
         'hr_salary_rule_data.xml',
