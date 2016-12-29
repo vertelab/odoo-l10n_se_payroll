@@ -36,7 +36,7 @@ Run payroll in another database synked with Odoo
     'auto_install': False,
     'website': 'http://vertel.se',
     'data':[
-        'base_syncro_data.xml',
+        'base_synchro_data.xml',
     ],
     'demo':[
     ],

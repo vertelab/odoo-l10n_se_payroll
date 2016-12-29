@@ -2,9 +2,11 @@
 <openerp>
     <data>
         <report id="l10n_se_hr_payroll.payslip" model="hr.payslip" string="Payslip SE" report_type="qweb-pdf" name="l10n_se_hr_payroll.payslip_report" file="l10n_se_hr_payroll.payslip_report" attachment_use="True" attachment="('payslip_'+(object.number.replace('/','') if object.number else ''))+'.pdf'"/>
+<!--
         <record id="l10n_se_hr_payroll.payslip" model="ir.actions.report.xml">
             <field name="paperformat_id" ref="l10n_se_hr_payroll.payslip_papper_format"/>
         </record>
+-->
         <template id="payslip_report">
             <t t-call="report.html_container">
                 <t t-foreach="docs" t-as="o">
