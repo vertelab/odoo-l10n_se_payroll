@@ -35,19 +35,16 @@
       <field name="whitelist" eval="False" />
       <field name="avoid_ids" eval="[(0,0,{'name':'company_id'}),(0,0,{'name':'remaining_leaves'}),(0,0,{'name':'user_id'}),(0,0,{'name':'slip_ids'})]" />
     </record>
-<<<<<<< HEAD
-    <record id="holiday_status" model="base.synchro.obj">
-      <field name="name">hr.holiday.status</field>
-=======
+
+ 
     <record id="holidays_status" model="base.synchro.obj">
       <field name="name">hr.holidays.status</field>
->>>>>>> 107e45bfaa707ab23f72391771972bfe729e7934
+
       <field name="active" eval="True" />
       <field name="sequence">15</field>
       <field name="server_id" ref="l10n_se_hr_payroll_separate.server" />
       <field name="model_id" ref="hr_holidays.model_hr_holidays_status" />
-<<<<<<< HEAD
-=======
+
       <field name="action">d</field>
       <field name="domain">[]</field>
       <field name="whitelist" eval="False" />
@@ -101,7 +98,6 @@
       <field name="active" eval="True" />
       <field name="server_id" ref="l10n_se_hr_payroll_separate.server" />
       <field name="model_id" ref="resource.model_resource_calendar_leaves" />
->>>>>>> 107e45bfaa707ab23f72391771972bfe729e7934
       <field name="action">d</field>
       <field name="domain">[]</field>
       <field name="whitelist" eval="False" />
@@ -130,10 +126,7 @@
       <field name="avoid_ids" eval="[(0,0,{'name':'name'}),(0,0,{'name':'employee_id'}),(0,0,{'name':'action'}),]" />
     </record>
     <!-- Cron -->
-<<<<<<< HEAD
-    
-=======
->>>>>>> 107e45bfaa707ab23f72391771972bfe729e7934
+
     
 
   </data>

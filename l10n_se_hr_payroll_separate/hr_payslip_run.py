@@ -46,7 +46,7 @@ class hr_attendance(models.Model):
             Previous (if exists) must be of opposite action.
             Next (if exists) must be of opposite action.
         """
-        return True
+        return False
         for att in self.browse(cr, uid, ids, context=context):
             # search and browse for first previous and first next records
             prev_att_ids = self.search(cr, uid, [('employee_id', '=', att.employee_id.id), ('name', '<', att.name), ('action', 'in', ('sign_in', 'sign_out'))], limit=1, order='name DESC')
@@ -61,13 +61,65 @@ class hr_attendance(models.Model):
             if (not prev_atts) and (not next_atts) and att.action != 'sign_in': # first attendance must be sign_in
                 return False
         return True
-    _constraints = [(lambda f: True, 'Error ! Sign in (resp. Sign out) must follow Sign out (resp. Sign in)', ['action'])]
-    _constraints = []
-    def _auto_init(self, cr, context=None):
         
+    
+    _constraints = [(_altern_si_so, 'Error ! Sign in (resp. Sign out) must follow Sign out (resp. Sign in)', ['action'])]
+    #~ _constraints = [(lambda f: True, 'Error ! Sign in (resp. Sign out) must follow Sign out (resp. Sign in)', ['action'])]
+    #~ _constraints = []
+    def _auto_init(self, cr, context=None):
         self._constraints = [(lambda f: True, 'Error ! Sign in (resp. Sign out) must follow Sign out (resp. Sign in)', ['action'])]
-        raise Warning(self._constraints)
+        #raise Warning(self._constraints)
         super(hr_attendance, self)._auto_init(cr, context)
+        
+        
+    @api.multi
+    def _validate_fields(self, field_names):
+        return True
+        field_names = set(field_names)
+
+        # old-style constraint methods
+        trans = self.env['ir.translation']
+        cr, uid, context = self.env.args
+        ids = self.ids
+        errors = []
+        raise Warning(self._constraints)
+        for fun, msg, names in self._constraints:
+            try:
+                # validation must be context-independent; call ``fun`` without context
+                valid = names and not (set(names) & field_names)
+                valid = valid or fun(self._model, cr, uid, ids)
+                extra_error = None
+            except Exception, e:
+                _logger.debug('Exception while validating constraint', exc_info=True)
+                valid = False
+                extra_error = tools.ustr(e)
+            if not valid:
+                if callable(msg):
+                    res_msg = msg(self._model, cr, uid, ids, context=context)
+                    if isinstance(res_msg, tuple):
+                        template, params = res_msg
+                        res_msg = template % params
+                else:
+                    res_msg = trans._get_source(self._name, 'constraint', self.env.lang, msg)
+                if extra_error:
+                    res_msg += "\n\n%s\n%s" % (_('Error details:'), extra_error)
+                errors.append(
+                    _("Field(s) `%s` failed against a constraint: %s") %
+                        (', '.join(names), res_msg)
+                )
+        if errors:
+            raise ValidationError('\n'.join(errors))
+
+        # new-style constraint methods
+        for check in self._constraint_methods:
+            if set(check._constrains) & field_names:
+                try:
+                    check(self)
+                except ValidationError, e:
+                    raise
+                except Exception, e:
+                    raise ValidationError("Error while validating constraint\n\n%s" % tools.ustr(e))
+
 
 class base_synchro(models.TransientModel):
     _inherit = 'base.synchro'
