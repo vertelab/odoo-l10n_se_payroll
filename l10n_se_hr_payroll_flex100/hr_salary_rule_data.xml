@@ -10,39 +10,50 @@
       <field name="sequence">220</field>
       <field name="appears_on_payslip">True</field>
       <field name="condition_select">python</field>
-      <field name="condition_python">result = contract.type_id.work_time == 'flex' and worked_days.WORK100.payslip_id.schema_number_of_hours &gt; worked_days.WORK100.payslip_id.flex_working_hours</field>
+      <field name="condition_python">result = contract.type_id.work_time == 'flex' and worked_days.WORK100.payslip_id.flex_working_days &lt; worked_days.WORK100.number_of_days</field>
       <field name="amount_select">code</field>
-      <field name="amount_python_compute">result_rate = 100.0 - (worked_days.WORK100.payslip_id.percent_number_of_days * 100.0)
+      <field name="amount_python_compute">result_rate = 100 - (worked_days.WORK100.payslip_id.flex_working_days / worked_days.WORK100.number_of_days * 100)
 result = contract.wage
 </field>
       <field name="quantity">1</field>
       <field name="note">Flex Justification</field>
     </record>
 
-    <record id="hr_salary_rule_compensary_monetary" model="hr.salary.rule">
-      <field name="category_id" ref="l10n_se_hr_payroll.hr_salary_rule_category-BRUTIL" />
-      <field name="code">komp_peng</field>
-      <field name="salary_art">103</field>
-      <field name="name">Komptid i pengar</field>
-      <field name="sequence">250</field>
-      <field name="appears_on_payslip" eval="True"/>
+    <record id="hr_salary_rule-flexhour" model="hr.salary.rule">
+      <field name="category_id" ref="l10n_se_hr_payroll.hr_salary_rule_category-BAS" />
+      <field name="code">flex-hour</field>
+      <field name="salary_art">300</field>
+      <field name="name">Flex Hour Salary</field>
+      <field name="sequence">300</field>
+      <field name="appears_on_payslip">True</field>
       <field name="condition_select">python</field>
-      <field name="condition_python">result = inputs.komp_peng.amount != 0</field>
+      <field name="condition_python">result = contract.type_id.work_time == 'flex'</field>
       <field name="amount_select">code</field>
       <field name="amount_python_compute">
-#(ML/AVTID)*(100/APR)
-result_qty = inputs.komp_peng.amount
-result = contract.wage / 160
-      </field>
+result_qty = worked_days.WORK100.payslip_id.flex_working_hours
+result = contract.wage / 160</field>
+      <field name="quantity">1</field>
+      <field name="note">Flex Hour Salary</field>
+    </record>
+
+    <record id="hr_salary_rule-prej-tim" model="hr.salary.rule">
+      <field name="category_id" ref="l10n_se_hr_payroll.hr_salary_rule_category-NETAVG" />
+      <field name="code">prej-tim</field>
+      <field name="salary_art">s100</field>
+      <field name="name">Preliminärskatt (Timlön)</field>
+      <field name="sequence">690</field>
+      <field name="appears_on_payslip" eval="True"/>
+      <field name="condition_select">python</field>
+      <field name="condition_python">result = contract.type_id.work_time == 'flex'</field>
+      <field name="amount_select">code</field>
+      <field name="amount_python_compute">
+result = categories.BRUTTO * 0.3 if not contract.prel_tax_amount else contract.prel_tax_amount
+</field>
       <field name="quantity">1</field>
     </record>
 
-    <record id="hr_rule_input_compensary_monetary" model="hr.rule.input">
-      <field name="code">komp_peng</field>
-      <field name="name">Komptid i pengar (tim)</field>
-      <field name="input_id" ref="hr_salary_rule_compensary_monetary" />
-    </record>
-
   </data>
-
+    <data noupdate="1">
+        <function model="hr.payroll.structure" name="flex_init_records" />
+    </data>
 </openerp>

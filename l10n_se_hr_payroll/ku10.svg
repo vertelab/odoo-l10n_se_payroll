@@ -23,14 +23,14 @@
      guidetolerance="10"
      inkscape:pageopacity="0"
      inkscape:pageshadow="2"
-     inkscape:window-width="2001"
+     inkscape:window-width="1997"
      inkscape:window-height="1128"
      id="namedview3717"
      showgrid="true"
-     inkscape:zoom="1.1113779"
-     inkscape:cx="490.18659"
-     inkscape:cy="552.93095"
-     inkscape:window-x="47"
+     inkscape:zoom="1.0062799"
+     inkscape:cx="375.04929"
+     inkscape:cy="574.27357"
+     inkscape:window-x="51"
      inkscape:window-y="24"
      inkscape:window-maximized="1"
      inkscape:current-layer="svg2"
@@ -49,7 +49,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
         <cc:license
            rdf:resource="http://creativecommons.org/licenses/by-sa/3.0/" />
       </cc:Work>
@@ -70,31 +70,6 @@
       </cc:License>
     </rdf:RDF>
   </metadata>
-  <path
-     inkscape:connector-curvature="0"
-     id="path3402"
-     style="fill:none;stroke:#000000;stroke-width:0.625;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:10;stroke-dasharray:none;stroke-opacity:1"
-     d="m 429.73482,72.0199 106.18625,0 0,41.25 -106.18625,0 0,-41.25 z" />
-  <path
-     inkscape:connector-curvature="0"
-     id="path3404"
-     style="fill:none;stroke:#000000;stroke-width:0.625;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:10;stroke-dasharray:none;stroke-opacity:1"
-     d="m 543.42107,72.0199 159.6875,0 0,41.25 -159.6875,0 0,-41.25 z" />
-  <path
-     inkscape:connector-curvature="0"
-     id="path3406"
-     style="fill:none;stroke:#000000;stroke-width:0.625;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:10;stroke-dasharray:none;stroke-opacity:1"
-     d="m 231.07457,237.00383 119.8775,0 0,30 -119.8775,0 0,-30 z" />
-  <path
-     inkscape:connector-curvature="0"
-     id="path3408"
-     style="fill:none;stroke:#000000;stroke-width:0.625;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:10;stroke-dasharray:none;stroke-opacity:1"
-     d="m 231.07457,275.14123 119.8775,0 0,30 -119.8775,0 0,-30 z" />
-  <path
-     inkscape:connector-curvature="0"
-     id="path3410"
-     style="fill:none;stroke:#000000;stroke-width:0.625;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:10;stroke-dasharray:none;stroke-opacity:1"
-     d="m 231.07457,311.27875 119.8775,0 0,30 -119.8775,0 0,-30 z" />
   <text
      id="text3484"
      style="font-variant:normal;font-weight:normal;font-size:7.5px;font-family:TeXGyreHeros;-inkscape-font-specification:TeXGyreHeros-Regular;writing-mode:lr-tb;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none"
@@ -103,16 +78,6 @@
     <tspan
        id="tspan3486"
        x="88.536064 119.80357 138.56107" />
-  </text>
-  <text
-     id="text3488"
-     style="font-variant:normal;font-weight:bold;font-size:10px;font-family:TeXGyreHeros;-inkscape-font-specification:TeXGyreHeros-Bold;writing-mode:lr-tb;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none"
-     x="215.12135"
-     y="246.2724">
-    <tspan
-       id="tspan3490"
-       y="246.2724"
-       x="215.12135">05</tspan>
   </text>
   <text
      id="text3496"
@@ -124,384 +89,1907 @@
        x="528.85858 534.41858" />
   </text>
   <text
-     id="text3504"
-     style="font-variant:normal;font-weight:bold;font-size:10px;font-family:TeXGyreHeros;-inkscape-font-specification:TeXGyreHeros-Bold;writing-mode:lr-tb;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none"
-     x="215.06636"
-     y="321.2724">
-    <tspan
-       id="tspan3506"
-       y="321.2724"
-       x="215.06636">07</tspan>
-  </text>
-  <text
      sodipodi:linespacing="125%"
      id="text3738"
-     y="66.090271"
-     x="429.8941"
+     y="30.998697"
+     x="674.63531"
      style="font-style:normal;font-variant:normal;font-weight:300;font-stretch:normal;font-size:21.89971161px;line-height:125%;font-family:Ubuntu;-inkscape-font-specification:'Ubuntu Light';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
      xml:space="preserve"><tspan
-       y="66.090271"
-       x="429.8941"
+       y="30.998697"
+       x="674.63531"
        id="tspan3740"
-       sodipodi:role="line">Mervärdesskattedeklaration</tspan></text>
-  <text
-     sodipodi:linespacing="125%"
-     id="text3742"
-     y="253.43542"
-     x="49.649284"
-     style="font-style:normal;font-variant:normal;font-weight:300;font-stretch:normal;font-size:11.3009634px;line-height:125%;font-family:Ubuntu;-inkscape-font-specification:'Ubuntu Light';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-     xml:space="preserve"><tspan
-       y="253.43542"
-       x="49.649284"
-       id="tspan3744"
-       sodipodi:role="line">Momspliktig försäljning</tspan><tspan
-       id="tspan3746"
-       y="267.56161"
-       x="49.649284"
-       sodipodi:role="line">som inte ingår i ruta 06,</tspan><tspan
-       id="tspan3748"
-       y="281.68784"
-       x="49.649284"
-       sodipodi:role="line">07 eller 08</tspan></text>
-  <text
-     id="text3488-5"
-     style="font-variant:normal;font-weight:bold;font-size:10px;font-family:TeXGyreHeros;-inkscape-font-specification:TeXGyreHeros-Bold;writing-mode:lr-tb;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none"
-     x="215.11136"
-     y="284.74539">
-    <tspan
-       id="tspan3490-6"
-       y="284.74539"
-       x="215.11136">06</tspan>
-  </text>
-  <text
-     sodipodi:linespacing="125%"
-     id="text3742-1"
-     y="297.435"
-     x="49.276352"
-     style="font-style:normal;font-variant:normal;font-weight:300;font-stretch:normal;font-size:11.3009634px;line-height:125%;font-family:Ubuntu;-inkscape-font-specification:'Ubuntu Light';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-     xml:space="preserve"><tspan
-       id="tspan3748-9"
-       y="297.435"
-       x="49.276352"
-       sodipodi:role="line">Momspliktiga uttag</tspan></text>
-  <text
-     sodipodi:linespacing="125%"
-     id="text3742-8"
-     y="322.03326"
-     x="49.875305"
-     style="font-style:normal;font-variant:normal;font-weight:300;font-stretch:normal;font-size:11.3009634px;line-height:125%;font-family:Ubuntu;-inkscape-font-specification:'Ubuntu Light';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-     xml:space="preserve"><tspan
-       y="322.03326"
-       x="49.875305"
-       id="tspan3744-4"
-       sodipodi:role="line">Beskattningsunderlag vid</tspan><tspan
-       id="tspan3748-1"
-       y="336.15945"
-       x="49.875305"
-       sodipodi:role="line">vinstmarginalbeskattning</tspan></text>
-  <text
-     sodipodi:linespacing="125%"
-     id="text3742-0"
-     y="356.09552"
-     x="49.649284"
-     style="font-style:normal;font-variant:normal;font-weight:300;font-stretch:normal;font-size:11.3009634px;line-height:125%;font-family:Ubuntu;-inkscape-font-specification:'Ubuntu Light';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-     xml:space="preserve"><tspan
-       id="tspan3748-4"
-       y="356.09552"
-       x="49.649284"
-       sodipodi:role="line">Hyresinkomster vid frvillig</tspan><tspan
-       id="tspan3876"
-       y="370.22171"
-       x="49.649284"
-       sodipodi:role="line">skattskyldighet</tspan></text>
-  <path
-     id="path3410-4"
-     style="fill:none;stroke:#000000;stroke-width:0.625;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:10;stroke-dasharray:none;stroke-opacity:1"
-     d="m 231.07457,347.41622 119.8775,0 0,30 -119.8775,0 0,-30 z"
-     inkscape:connector-curvature="0" />
-  <text
-     id="text3504-4"
-     style="font-variant:normal;font-weight:bold;font-size:10px;font-family:TeXGyreHeros;-inkscape-font-specification:TeXGyreHeros-Bold;writing-mode:lr-tb;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none"
-     x="215.08136"
-     y="356.80768">
-    <tspan
-       id="tspan3506-4"
-       y="356.80768"
-       x="215.08136">08</tspan>
-  </text>
-  <g
-     id="g4893"
-     transform="translate(-39.713677,-82.23014)">
-    <path
-       d="m 583.23607,319.2699 119.8725,0 0,30 -119.8725,0 0,-30 z"
-       style="fill:none;stroke:#000000;stroke-width:0.625;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:10;stroke-dasharray:none;stroke-opacity:1"
-       id="path3412"
-       inkscape:connector-curvature="0" />
-    <text
-       y="328.67807"
-       x="551.56152"
-       style="font-variant:normal;font-weight:bold;font-size:10px;font-family:TeXGyreHeros;-inkscape-font-specification:TeXGyreHeros-Bold;writing-mode:lr-tb;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none"
-       id="text3512">
-      <tspan
-         x="551.56152"
-         y="328.67807"
-         id="tspan3514">10</tspan>
-    </text>
-    <path
-       d="m 564.51665,319.23195 18.62368,0 0,29.97887 -18.62368,0 0,-29.97887 z"
-       style="fill:none;stroke:#000000;stroke-width:0.62095672;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:10;stroke-dasharray:none;stroke-opacity:1"
-       id="path3412-7"
-       inkscape:connector-curvature="0" />
-    <text
-       transform="scale(1.0587344,0.94452397)"
-       sodipodi:linespacing="125%"
-       id="text4043"
-       y="368.99707"
-       x="535.73334"
-       style="font-style:normal;font-variant:normal;font-weight:300;font-stretch:normal;font-size:21.47028923px;line-height:125%;font-family:Ubuntu;-inkscape-font-specification:'Ubuntu Light';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-       xml:space="preserve"><tspan
-         y="368.99707"
-         x="535.73334"
-         id="tspan4045"
-         sodipodi:role="line">+</tspan></text>
-  </g>
-  <g
-     transform="translate(-39.713677,-8.8398045)"
-     id="g4893-8">
-    <path
-       d="m 583.23607,319.2699 119.8725,0 0,30 -119.8725,0 0,-30 z"
-       style="fill:none;stroke:#000000;stroke-width:0.625;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:10;stroke-dasharray:none;stroke-opacity:1"
-       id="path3412-83"
-       inkscape:connector-curvature="0" />
-    <text
-       y="328.67807"
-       x="551.56152"
-       style="font-variant:normal;font-weight:bold;font-size:10px;font-family:TeXGyreHeros;-inkscape-font-specification:TeXGyreHeros-Bold;writing-mode:lr-tb;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none"
-       id="text3512-1">
-      <tspan
-         x="551.56152"
-         y="328.67807"
-         id="tspan3514-8">12</tspan>
-    </text>
-    <path
-       d="m 564.51665,319.23195 18.62368,0 0,29.97887 -18.62368,0 0,-29.97887 z"
-       style="fill:none;stroke:#000000;stroke-width:0.62095672;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:10;stroke-dasharray:none;stroke-opacity:1"
-       id="path3412-7-9"
-       inkscape:connector-curvature="0" />
-    <text
-       transform="scale(1.0587344,0.94452397)"
-       sodipodi:linespacing="125%"
-       id="text4043-6"
-       y="368.99707"
-       x="535.73334"
-       style="font-style:normal;font-variant:normal;font-weight:300;font-stretch:normal;font-size:21.47028923px;line-height:125%;font-family:Ubuntu;-inkscape-font-specification:'Ubuntu Light';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-       xml:space="preserve"><tspan
-         y="368.99707"
-         x="535.73334"
-         id="tspan4045-4"
-         sodipodi:role="line">+</tspan></text>
-  </g>
-  <g
-     transform="translate(-39.713677,-44.534972)"
-     id="g4893-3">
-    <path
-       d="m 583.23607,319.2699 119.8725,0 0,30 -119.8725,0 0,-30 z"
-       style="fill:none;stroke:#000000;stroke-width:0.625;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:10;stroke-dasharray:none;stroke-opacity:1"
-       id="path3412-3"
-       inkscape:connector-curvature="0" />
-    <text
-       y="328.67807"
-       x="551.56152"
-       style="font-variant:normal;font-weight:bold;font-size:10px;font-family:TeXGyreHeros;-inkscape-font-specification:TeXGyreHeros-Bold;writing-mode:lr-tb;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none"
-       id="text3512-3">
-      <tspan
-         x="551.56152"
-         id="tspan3514-86">11</tspan>
-    </text>
-    <path
-       d="m 564.51665,319.23195 18.62368,0 0,29.97887 -18.62368,0 0,-29.97887 z"
-       style="fill:none;stroke:#000000;stroke-width:0.62095672;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:10;stroke-dasharray:none;stroke-opacity:1"
-       id="path3412-7-0"
-       inkscape:connector-curvature="0" />
-    <text
-       transform="scale(1.0587344,0.94452397)"
-       sodipodi:linespacing="125%"
-       id="text4043-4"
-       y="368.99707"
-       x="535.73334"
-       style="font-style:normal;font-variant:normal;font-weight:300;font-stretch:normal;font-size:21.47028923px;line-height:125%;font-family:Ubuntu;-inkscape-font-specification:'Ubuntu Light';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-       xml:space="preserve"><tspan
-         y="368.99707"
-         x="535.73334"
-         id="tspan4045-8"
-         sodipodi:role="line">+</tspan></text>
-  </g>
-  <text
-     sodipodi:linespacing="125%"
-     id="text3742-88"
-     y="255.34428"
-     x="379.27875"
-     style="font-style:normal;font-variant:normal;font-weight:300;font-stretch:normal;font-size:11.3009634px;line-height:125%;font-family:Ubuntu;-inkscape-font-specification:'Ubuntu Light';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-     xml:space="preserve"><tspan
-       id="tspan3748-7"
-       y="255.34428"
-       x="379.27875"
-       sodipodi:role="line">Utgående moms 25 %</tspan></text>
-  <text
-     sodipodi:linespacing="125%"
-     id="text3742-88-6"
-     y="293.03946"
-     x="378.2059"
-     style="font-style:normal;font-variant:normal;font-weight:300;font-stretch:normal;font-size:11.3009634px;line-height:125%;font-family:Ubuntu;-inkscape-font-specification:'Ubuntu Light';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-     xml:space="preserve"><tspan
-       id="tspan3748-7-4"
-       y="293.03946"
-       x="378.2059"
-       sodipodi:role="line">Utgående moms 12 %</tspan></text>
-  <text
-     sodipodi:linespacing="125%"
-     id="text3742-88-3"
-     y="328.73462"
-     x="378.2059"
-     style="font-style:normal;font-variant:normal;font-weight:300;font-stretch:normal;font-size:11.3009634px;line-height:125%;font-family:Ubuntu;-inkscape-font-specification:'Ubuntu Light';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-     xml:space="preserve"><tspan
-       id="tspan3748-7-0"
-       y="328.73462"
-       x="378.2059"
-       sodipodi:role="line">Utgående moms 6 %</tspan></text>
-  <text
-     sodipodi:linespacing="125%"
-     id="text3742-3"
-     y="226.68652"
-     x="49.217392"
-     style="font-style:normal;font-variant:normal;font-weight:300;font-stretch:normal;font-size:11.3009634px;line-height:125%;font-family:Ubuntu;-inkscape-font-specification:'Ubuntu Light';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-     xml:space="preserve"><tspan
-       sodipodi:role="line"
-       id="tspan5050"
-       style="font-weight:bold"
-       x="49.217392"
-       y="226.68652">A. Momspliktig försäljning eller uttag exklusive moms</tspan></text>
-  <text
-     sodipodi:linespacing="125%"
-     id="text3742-3-3"
-     y="227.59607"
-     x="378.6756"
-     style="font-style:normal;font-variant:normal;font-weight:300;font-stretch:normal;font-size:11.3009634px;line-height:125%;font-family:Ubuntu;-inkscape-font-specification:'Ubuntu Light';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-     xml:space="preserve"><tspan
-       sodipodi:role="line"
-       id="tspan5050-3"
-       style="font-weight:bold"
-       x="378.6756"
-       y="227.59607">B. Utgående moms på försäljning eller uttag i ruta 05 - 08</tspan></text>
-  <path
-     inkscape:connector-curvature="0"
-     id="path3418-8"
-     style="fill:none;stroke:#000000;stroke-width:0.59491289;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:10;stroke-dasharray:none;stroke-opacity:1"
-     d="m 42.641418,238.66787 652.105992,0 0,181.79327 -652.105992,0 0,-181.79327 z" />
-  <text
-     sodipodi:linespacing="125%"
-     id="text3738-7"
-     y="184.56042"
-     x="48.124538"
-     style="font-style:normal;font-variant:normal;font-weight:300;font-stretch:normal;font-size:22.48102379px;line-height:125%;font-family:Ubuntu;-inkscape-font-specification:'Ubuntu Light';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-     xml:space="preserve"><tspan
-       y="184.56042"
-       x="48.124538"
-       id="tspan3740-8"
-       sodipodi:role="line">Moms att deklarera för </tspan></text>
-  <text
-     sodipodi:linespacing="125%"
-     id="text3742-4"
-     y="83.535225"
-     x="435.14645"
-     style="font-style:normal;font-variant:normal;font-weight:300;font-stretch:normal;font-size:10.4027977px;line-height:125%;font-family:Ubuntu;-inkscape-font-specification:'Ubuntu Light';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-     xml:space="preserve"><tspan
-       id="tspan3748-99"
-       y="83.535225"
-       x="435.14645"
-       sodipodi:role="line">01 Deklarationsdag</tspan></text>
-  <text
-     sodipodi:linespacing="125%"
-     id="text3742-4-6"
-     y="83.214798"
-     x="545.23993"
-     style="font-style:normal;font-variant:normal;font-weight:300;font-stretch:normal;font-size:10.4027977px;line-height:125%;font-family:Ubuntu;-inkscape-font-specification:'Ubuntu Light';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-     xml:space="preserve"><tspan
-       id="tspan3748-99-8"
-       y="83.214798"
-       x="545.23993"
-       sodipodi:role="line">02 Person-/Organisationsnummer</tspan></text>
+       sodipodi:role="line">KU10</tspan></text>
   <text
      sodipodi:linespacing="125%"
      id="text3742-89"
      y="63.565586"
      x="-1005.2945"
-     style="font-style:normal;font-variant:normal;font-weight:300;font-stretch:normal;font-size:11.3009634px;line-height:125%;font-family:Ubuntu;-inkscape-font-specification:'Ubuntu Light';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+     style="font-style:normal;font-variant:normal;font-weight:300;font-stretch:normal;font-size:11.30100015px;line-height:125%;font-family:Ubuntu;-inkscape-font-specification:'Ubuntu, Light';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;"
      xml:space="preserve"
      transform="matrix(0.03135686,-0.99950825,0.99950825,0.03135686,0,0)"><tspan
-       id="tspan3748-6"
-       y="63.565586"
-       x="-1005.2945"
-       sodipodi:role="line">SKV 4700</tspan></text>
+       sodipodi:role="line"
+       id="tspan5361">SKV 2300</tspan></text>
   <text
      sodipodi:linespacing="125%"
-     id="text3742-2"
-     y="108.56032"
-     x="62.58292"
+     id="text3738-3"
+     y="31.254702"
+     x="391.62552"
+     style="font-style:normal;font-variant:normal;font-weight:300;font-stretch:normal;font-size:21.89971161px;line-height:125%;font-family:Ubuntu;-inkscape-font-specification:'Ubuntu Light';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+     xml:space="preserve"><tspan
+       y="31.254702"
+       x="391.62552"
+       id="tspan3740-6"
+       sodipodi:role="line">Kontrolluppgift</tspan><tspan
+       y="49.098736"
+       x="391.62552"
+       sodipodi:role="line"
+       id="tspan3394"
+       style="font-style:normal;font-variant:normal;font-weight:300;font-stretch:normal;font-size:12.5px;line-height:125%;font-family:Ubuntu;-inkscape-font-specification:'Ubuntu, Light';text-align:start;writing-mode:lr-tb;text-anchor:start">från arbetsgivare m.fl.</tspan></text>
+  <text
+     sodipodi:linespacing="125%"
+     id="text3742-2-9-7"
+     y="43.873928"
+     x="675.45441"
      style="font-style:normal;font-variant:normal;font-weight:300;font-stretch:normal;font-size:11.3009634px;line-height:125%;font-family:Ubuntu;-inkscape-font-specification:'Ubuntu Light';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
      xml:space="preserve"><tspan
-       y="108.56032"
-       x="62.58292"
-       id="tspan3744-5"
-       sodipodi:role="line">Skatteverket</tspan><tspan
-       y="122.68652"
-       x="62.58292"
+       id="tspan3748-3-6-5"
+       y="43.873928"
+       x="675.45441"
+       sodipodi:role="line">Inkomstår</tspan></text>
+  <text
+     xml:space="preserve"
+     style="font-style:normal;font-weight:normal;font-size:40px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+     x="320"
+     y="62.362206"
+     id="text3390"
+     sodipodi:linespacing="125%"><tspan
        sodipodi:role="line"
-       id="tspan6028">Skattedeklarationer, moms/arb.giv</tspan><tspan
-       y="136.81273"
-       x="62.58292"
-       sodipodi:role="line"
-       id="tspan6030">SE-105 80 Stockholm</tspan><tspan
-       id="tspan3748-3"
-       y="150.93893"
-       x="62.58292"
-       sodipodi:role="line" /></text>
+       id="tspan3392"
+       x="320"
+       y="62.362206" /></text>
+  <rect
+     id="rect3396"
+     width="320.63571"
+     height="199.22502"
+     x="387.22882"
+     y="129.54489"
+     style="fill:none;stroke:#000000;stroke-width:0.30508241;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+  <rect
+     style="fill:none;stroke:#000000;stroke-width:0.30508241;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+     id="rect3468"
+     width="320.49234"
+     height="39.987629"
+     x="387.03171"
+     y="169.09109" />
+  <rect
+     style="fill:none;stroke:#000000;stroke-width:0.30508241;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+     id="rect3468-6"
+     width="165.23427"
+     height="38.956543"
+     x="387.28693"
+     y="129.79691" />
+  <rect
+     style="fill:none;stroke:#000000;stroke-width:0.30508241;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+     id="rect3468-7"
+     width="320.49234"
+     height="39.987629"
+     x="387.29752"
+     y="209.09" />
+  <rect
+     style="fill:none;stroke:#000000;stroke-width:0.30508241;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+     id="rect3468-3"
+     width="93.128136"
+     height="40.313953"
+     x="387.12875"
+     y="248.92587" />
+  <rect
+     style="fill:none;stroke:#000000;stroke-width:0.30508241;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+     id="rect3468-65"
+     width="320.49234"
+     height="39.987629"
+     x="387.54398"
+     y="289.09732" />
+  <rect
+     style="fill:none;stroke:#000000;stroke-width:0.30508241;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+     id="rect3512"
+     width="30.845026"
+     height="29.329052"
+     x="387.04376"
+     y="299.68814" />
   <text
      sodipodi:linespacing="125%"
-     id="text3742-2-9"
-     y="89.762909"
-     x="40.10453"
+     id="text3742-88-62"
+     y="164.004"
+     x="391.57788"
      style="font-style:normal;font-variant:normal;font-weight:300;font-stretch:normal;font-size:11.3009634px;line-height:125%;font-family:Ubuntu;-inkscape-font-specification:'Ubuntu Light';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
      xml:space="preserve"><tspan
-       id="tspan3748-3-6"
-       y="89.762909"
-       x="40.10453"
-       sodipodi:role="line">Skickas till</tspan></text>
+       id="tspan3748-7-8"
+       y="164.004"
+       x="391.57788"
+       sodipodi:role="line">Person-/organisationsnummer</tspan></text>
   <text
      sodipodi:linespacing="125%"
-     id="text3742-4-5"
-     y="122.90222"
-     x="431.93939"
-     style="font-style:normal;font-variant:normal;font-weight:300;font-stretch:normal;font-size:8.5494833px;line-height:125%;font-family:Ubuntu;-inkscape-font-specification:'Ubuntu Light';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+     id="text3742-88-62-7"
+     y="139.35718"
+     x="532.38159"
+     style="font-style:normal;font-variant:normal;font-weight:500;font-stretch:normal;font-size:11.3010006px;line-height:125%;font-family:Ubuntu;-inkscape-font-specification:'Ubuntu, Medium';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
      xml:space="preserve"><tspan
-       id="tspan3748-99-4"
-       y="122.90222"
-       x="431.93939"
-       sodipodi:role="line">Momsregistreringsnummer (VAT-nummer)</tspan></text>
+       id="tspan3748-7-8-2"
+       y="139.35718"
+       x="532.38159"
+       sodipodi:role="line">215</tspan></text>
+  <text
+     sodipodi:linespacing="125%"
+     id="text3742-88-62-9"
+     y="178.004"
+     x="390.96451"
+     style="font-style:normal;font-variant:normal;font-weight:300;font-stretch:normal;font-size:11.3009634px;line-height:125%;font-family:Ubuntu;-inkscape-font-specification:'Ubuntu Light';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+     xml:space="preserve"><tspan
+       id="tspan3748-7-8-0"
+       y="178.004"
+       x="390.96451"
+       sodipodi:role="line"
+       style="font-style:normal;font-variant:normal;font-weight:300;font-stretch:normal;font-size:10px;line-height:125%;font-family:Ubuntu;-inkscape-font-specification:'Ubuntu, Light';text-align:start;writing-mode:lr-tb;text-anchor:start">Namn</tspan></text>
+  <text
+     sodipodi:linespacing="125%"
+     id="text3742-88-62-9-1"
+     y="218.004"
+     x="391.96451"
+     style="font-style:normal;font-variant:normal;font-weight:300;font-stretch:normal;font-size:11.3009634px;line-height:125%;font-family:Ubuntu;-inkscape-font-specification:'Ubuntu Light';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+     xml:space="preserve"><tspan
+       id="tspan3748-7-8-0-7"
+       y="218.004"
+       x="391.96451"
+       sodipodi:role="line"
+       style="font-style:normal;font-variant:normal;font-weight:300;font-stretch:normal;font-size:10px;line-height:125%;font-family:Ubuntu;-inkscape-font-specification:'Ubuntu, Light';text-align:start;writing-mode:lr-tb;text-anchor:start">Gatuadress</tspan></text>
+  <text
+     sodipodi:linespacing="125%"
+     id="text3742-88-62-9-8"
+     y="259.004"
+     x="391.96451"
+     style="font-style:normal;font-variant:normal;font-weight:300;font-stretch:normal;font-size:11.3009634px;line-height:125%;font-family:Ubuntu;-inkscape-font-specification:'Ubuntu Light';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+     xml:space="preserve"><tspan
+       id="tspan3748-7-8-0-6"
+       y="259.004"
+       x="391.96451"
+       sodipodi:role="line"
+       style="font-style:normal;font-variant:normal;font-weight:300;font-stretch:normal;font-size:10px;line-height:125%;font-family:Ubuntu;-inkscape-font-specification:'Ubuntu, Light';text-align:start;writing-mode:lr-tb;text-anchor:start">Postnummer</tspan></text>
+  <text
+     sodipodi:linespacing="125%"
+     id="text3742-88-62-9-89"
+     y="260.004"
+     x="483.96451"
+     style="font-style:normal;font-variant:normal;font-weight:300;font-stretch:normal;font-size:11.3009634px;line-height:125%;font-family:Ubuntu;-inkscape-font-specification:'Ubuntu Light';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+     xml:space="preserve"><tspan
+       id="tspan3748-7-8-0-1"
+       y="260.004"
+       x="483.96451"
+       sodipodi:role="line"
+       style="font-style:normal;font-variant:normal;font-weight:300;font-stretch:normal;font-size:10px;line-height:125%;font-family:Ubuntu;-inkscape-font-specification:'Ubuntu, Light';text-align:start;writing-mode:lr-tb;text-anchor:start">Postort</tspan></text>
+  <text
+     sodipodi:linespacing="125%"
+     id="text3742-88-62-9-5"
+     y="322.004"
+     x="427.96451"
+     style="font-style:normal;font-variant:normal;font-weight:300;font-stretch:normal;font-size:11.3009634px;line-height:125%;font-family:Ubuntu;-inkscape-font-specification:'Ubuntu Light';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+     xml:space="preserve"><tspan
+       id="tspan3748-7-8-0-4"
+       y="322.004"
+       x="427.96451"
+       sodipodi:role="line"
+       style="font-style:normal;font-variant:normal;font-weight:300;font-stretch:normal;font-size:10px;line-height:125%;font-family:Ubuntu;-inkscape-font-specification:'Ubuntu, Light';text-align:start;writing-mode:lr-tb;text-anchor:start">Delägare m.fl. i fåmansbolag</tspan></text>
+  <text
+     sodipodi:linespacing="125%"
+     id="text3742-88-62-7-9"
+     y="298.26627"
+     x="391.38159"
+     style="font-style:normal;font-variant:normal;font-weight:500;font-stretch:normal;font-size:11.3010006px;line-height:125%;font-family:Ubuntu;-inkscape-font-specification:'Ubuntu, Medium';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+     xml:space="preserve"><tspan
+       id="tspan3748-7-8-2-4"
+       y="298.26627"
+       x="391.38159"
+       sodipodi:role="line">061</tspan></text>
   <rect
-     style="opacity:1;fill:none;fill-opacity:1;stroke:#000000;stroke-width:0.32772821;stroke-miterlimit:10;stroke-dasharray:none;stroke-opacity:1"
-     id="rect4443"
-     width="310.29727"
-     height="30.216492"
-     x="39.851364"
-     y="442.21356"
-     ry="0.001155998" />
+     id="rect3396-7"
+     width="320.74841"
+     height="79.196228"
+     x="386.84717"
+     y="339.67996"
+     style="fill:none;stroke:#000000;stroke-width:0.19238614;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
   <rect
-     style="opacity:1;fill:none;fill-opacity:1;stroke:#000000;stroke-width:0.32772821;stroke-miterlimit:10;stroke-dasharray:none;stroke-opacity:1"
-     id="rect4443-1"
-     width="310.29727"
-     height="30.216492"
-     x="379.27466"
-     y="442.9086"
-     ry="0.001155998" />
+     style="fill:none;stroke:#000000;stroke-width:0.30000001;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+     id="rect3468-8"
+     width="81.7127"
+     height="39.364761"
+     x="625.56219"
+     y="339.98148" />
+  <rect
+     style="fill:none;stroke:#000000;stroke-width:0.30508241;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+     id="rect3468-6-2"
+     width="165.23427"
+     height="38.956543"
+     x="386.96161"
+     y="339.98831" />
+  <rect
+     style="fill:none;stroke:#000000;stroke-width:0.30508241;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+     id="rect3468-7-5"
+     width="320.49234"
+     height="39.987629"
+     x="386.97223"
+     y="379.2814" />
+  <rect
+     style="fill:none;stroke:#000000;stroke-width:0.40615144;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+     id="rect3468-3-3"
+     width="165.46751"
+     height="40.212883"
+     x="386.854"
+     y="379.16782" />
+  <rect
+     style="fill:none;stroke:#000000;stroke-width:0.30000001;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+     id="rect3468-65-4"
+     width="155.73973"
+     height="11.992711"
+     x="552.06561"
+     y="339.6442" />
+  <text
+     sodipodi:linespacing="125%"
+     id="text3742-88-62-0"
+     y="374.1954"
+     x="391.25256"
+     style="font-style:normal;font-variant:normal;font-weight:300;font-stretch:normal;font-size:11.3009634px;line-height:125%;font-family:Ubuntu;-inkscape-font-specification:'Ubuntu Light';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+     xml:space="preserve"><tspan
+       id="tspan3748-7-8-20"
+       y="374.1954"
+       x="391.25256"
+       sodipodi:role="line">Anställningstid (t ex 04-12)</tspan></text>
+  <text
+     sodipodi:linespacing="125%"
+     id="text3742-88-62-7-1"
+     y="349.54861"
+     x="604.05627"
+     style="font-style:normal;font-variant:normal;font-weight:500;font-stretch:normal;font-size:11.3010006px;line-height:125%;font-family:Ubuntu;-inkscape-font-specification:'Ubuntu, Medium';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+     xml:space="preserve"><tspan
+       id="tspan3748-7-8-2-9"
+       y="349.54861"
+       x="604.05627"
+       sodipodi:role="line">008</tspan></text>
+  <text
+     sodipodi:linespacing="125%"
+     id="text3742-88-62-7-1-5"
+     y="350.54861"
+     x="684.05627"
+     style="font-style:normal;font-variant:normal;font-weight:500;font-stretch:normal;font-size:11.3010006px;line-height:125%;font-family:Ubuntu;-inkscape-font-specification:'Ubuntu, Medium';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+     xml:space="preserve"><tspan
+       id="tspan3748-7-8-2-9-8"
+       y="350.54861"
+       x="684.05627"
+       sodipodi:role="line">009</tspan></text>
+  <text
+     xml:space="preserve"
+     style="font-style:normal;font-weight:normal;font-size:40px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+     x="555.56879"
+     y="348.21774"
+     id="text3781"
+     sodipodi:linespacing="125%"><tspan
+       sodipodi:role="line"
+       id="tspan3783"
+       x="555.56879"
+       y="348.21774"
+       style="font-style:normal;font-variant:normal;font-weight:300;font-stretch:normal;font-size:7.5px;line-height:125%;font-family:Ubuntu;-inkscape-font-specification:'Ubuntu, Light';text-align:start;writing-mode:lr-tb;text-anchor:start">from</tspan></text>
+  <text
+     xml:space="preserve"
+     style="font-style:normal;font-weight:normal;font-size:40px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+     x="630.56879"
+     y="348.21774"
+     id="text3781-0"
+     sodipodi:linespacing="125%"><tspan
+       sodipodi:role="line"
+       id="tspan3783-2"
+       x="630.56879"
+       y="348.21774"
+       style="font-style:normal;font-variant:normal;font-weight:300;font-stretch:normal;font-size:7.5px;line-height:125%;font-family:Ubuntu;-inkscape-font-specification:'Ubuntu, Light';text-align:start;writing-mode:lr-tb;text-anchor:start">tom</tspan></text>
+  <text
+     sodipodi:linespacing="125%"
+     id="text3742-88-62-7-1-0"
+     y="388.54861"
+     x="528.05627"
+     style="font-style:normal;font-variant:normal;font-weight:500;font-stretch:normal;font-size:11.3010006px;line-height:125%;font-family:Ubuntu;-inkscape-font-specification:'Ubuntu, Medium';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+     xml:space="preserve"><tspan
+       id="tspan3748-7-8-2-9-85"
+       y="388.54861"
+       x="528.05627"
+       sodipodi:role="line">060</tspan></text>
+  <text
+     sodipodi:linespacing="125%"
+     id="text3742-88-62-0-4"
+     y="413.1954"
+     x="391.25256"
+     style="font-style:normal;font-variant:normal;font-weight:300;font-stretch:normal;font-size:11.3009634px;line-height:125%;font-family:Ubuntu;-inkscape-font-specification:'Ubuntu Light';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+     xml:space="preserve"><tspan
+       id="tspan3748-7-8-20-4"
+       y="413.1954"
+       x="391.25256"
+       sodipodi:role="line">Arbetsställenummer från SCB</tspan></text>
+  <rect
+     id="rect3396-74"
+     width="320.66766"
+     height="159.66579"
+     x="39.50729"
+     y="629.2157"
+     style="fill:none;stroke:#000000;stroke-width:0.40000001;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+  <rect
+     style="fill:none;stroke:#000000;stroke-width:0.30508241;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+     id="rect3468-0"
+     width="320.49234"
+     height="39.987629"
+     x="39.326168"
+     y="668.77789" />
+  <rect
+     style="fill:none;stroke:#000000;stroke-width:0.30508241;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+     id="rect3468-7-2"
+     width="320.49234"
+     height="39.987629"
+     x="39.591976"
+     y="708.77679" />
+  <rect
+     style="fill:none;stroke:#000000;stroke-width:0.4069446;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+     id="rect3468-3-8"
+     width="166.11769"
+     height="40.21209"
+     x="39.474148"
+     y="748.66357" />
+  <text
+     sodipodi:linespacing="125%"
+     id="text3742-88-62-9-8-4"
+     y="768.6908"
+     x="44.258968"
+     style="font-style:normal;font-variant:normal;font-weight:300;font-stretch:normal;font-size:11.30100012px;line-height:125%;font-family:Ubuntu;-inkscape-font-specification:'Ubuntu, Light';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;"
+     xml:space="preserve"><tspan
+       sodipodi:role="line"
+       id="tspan5265">Specifikation av annan</tspan><tspan
+       sodipodi:role="line"
+       id="tspan5267">förmån i ruta 047</tspan></text>
+  <text
+     sodipodi:linespacing="125%"
+     id="text3742-88-62-7-9-8"
+     y="759.95306"
+     x="183.67603"
+     style="font-style:normal;font-variant:normal;font-weight:500;font-stretch:normal;font-size:11.30100012px;line-height:125%;font-family:Ubuntu;-inkscape-font-specification:'Ubuntu, Medium';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;"
+     xml:space="preserve"><tspan
+       sodipodi:role="line"
+       id="tspan5269">065</tspan></text>
+  <rect
+     style="fill:none;stroke:#000000;stroke-width:0.30508241;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+     id="rect3512-7-2"
+     width="30.845026"
+     height="29.329052"
+     x="39.338203"
+     y="639.37494" />
+  <text
+     sodipodi:linespacing="125%"
+     id="text3742-88-62-7-4-2"
+     y="638.16229"
+     x="44.676033"
+     style="font-style:normal;font-variant:normal;font-weight:500;font-stretch:normal;font-size:11.3010006px;line-height:125%;font-family:Ubuntu;-inkscape-font-specification:'Ubuntu, Medium';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+     xml:space="preserve"><tspan
+       sodipodi:role="line"
+       id="tspan5122"
+       x="44.676033"
+       y="638.16229">041</tspan></text>
+  <rect
+     style="fill:none;stroke:#000000;stroke-width:0.30508241;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+     id="rect3512-7-2-1"
+     width="30.845026"
+     height="29.329052"
+     x="151.3382"
+     y="639.37494" />
+  <text
+     sodipodi:linespacing="125%"
+     id="text3742-88-62-7-4-2-8"
+     y="638.45618"
+     x="156.67603"
+     style="font-style:normal;font-variant:normal;font-weight:500;font-stretch:normal;font-size:11.3010006px;line-height:125%;font-family:Ubuntu;-inkscape-font-specification:'Ubuntu, Medium';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+     xml:space="preserve"><tspan
+       sodipodi:role="line"
+       id="tspan5148"
+       x="156.67603"
+       y="638.45618">042</tspan></text>
+  <rect
+     style="fill:none;stroke:#000000;stroke-width:0.30508241;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+     id="rect3512-7-2-1-4"
+     width="30.845026"
+     height="29.329052"
+     x="227.3382"
+     y="639.37494" />
+  <text
+     sodipodi:linespacing="125%"
+     id="text3742-88-62-7-4-2-8-2"
+     y="638.45618"
+     x="232.38211"
+     style="font-style:normal;font-variant:normal;font-weight:500;font-stretch:normal;font-size:11.3010006px;line-height:125%;font-family:Ubuntu;-inkscape-font-specification:'Ubuntu, Medium';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+     xml:space="preserve"><tspan
+       sodipodi:role="line"
+       id="tspan5150"
+       x="232.38211"
+       y="638.45618">043</tspan></text>
+  <text
+     sodipodi:linespacing="125%"
+     id="text3742-88-62-00-4"
+     y="663.6908"
+     x="69.872307"
+     style="font-style:normal;font-variant:normal;font-weight:300;font-stretch:normal;font-size:11.3010006px;line-height:125%;font-family:Ubuntu;-inkscape-font-specification:'Ubuntu, Light';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+     xml:space="preserve"><tspan
+       sodipodi:role="line"
+       id="tspan5124"
+       x="69.872307"
+       y="663.6908">Bostad småhus</tspan></text>
+  <text
+     sodipodi:linespacing="125%"
+     id="text3742-88-62-00-4-1"
+     y="663.6908"
+     x="183.87231"
+     style="font-style:normal;font-variant:normal;font-weight:300;font-stretch:normal;font-size:11.25px;line-height:125%;font-family:Ubuntu;-inkscape-font-specification:'Ubuntu, Light';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+     xml:space="preserve"><tspan
+       sodipodi:role="line"
+       id="tspan5146"
+       x="183.87231"
+       y="663.6908">kost</tspan></text>
+  <rect
+     style="fill:none;stroke:#000000;stroke-width:0.30508241;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+     id="rect3512-7-2-1-9-0"
+     width="30.845026"
+     height="29.329052"
+     x="39.338203"
+     y="719.37494" />
+  <text
+     sodipodi:linespacing="125%"
+     id="text3742-88-62-7-4-2-8-8-6"
+     y="717.56067"
+     x="44.676033"
+     style="font-style:normal;font-variant:normal;font-weight:500;font-stretch:normal;font-size:11.30100012px;line-height:125%;font-family:Ubuntu;-inkscape-font-specification:'Ubuntu, Medium';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;"
+     xml:space="preserve"><tspan
+       sodipodi:role="line"
+       id="tspan5221">048</tspan></text>
+  <rect
+     style="fill:none;stroke:#000000;stroke-width:0.30508241;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+     id="rect3512-7-2-1-4-7-9"
+     width="30.845026"
+     height="29.329052"
+     x="195.3382"
+     y="719.37494" />
+  <text
+     sodipodi:linespacing="125%"
+     id="text3742-88-62-7-4-2-8-2-0-9"
+     y="718.07727"
+     x="200.67603"
+     style="font-style:normal;font-variant:normal;font-weight:500;font-stretch:normal;font-size:11.30100012px;line-height:125%;font-family:Ubuntu;-inkscape-font-specification:'Ubuntu, Medium';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;"
+     xml:space="preserve"><tspan
+       sodipodi:role="line"
+       id="tspan5263">049</tspan></text>
+  <rect
+     id="rect3396-32"
+     width="320.66885"
+     height="158.26144"
+     x="41.925858"
+     y="398.80667"
+     style="fill:none;stroke:#000000;stroke-width:0.27192882;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+  <rect
+     style="fill:none;stroke:#000000;stroke-width:0.30508241;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+     id="rect3468-1"
+     width="320.49234"
+     height="39.987629"
+     x="41.745331"
+     y="438.36945" />
+  <rect
+     style="fill:none;stroke:#000000;stroke-width:0.30508241;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+     id="rect3468-6-7"
+     width="165.23427"
+     height="38.956543"
+     x="42.000549"
+     y="399.07526" />
+  <rect
+     style="fill:none;stroke:#000000;stroke-width:0.29673937;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+     id="rect3468-7-56"
+     width="320.50067"
+     height="37.829479"
+     x="42.006966"
+     y="478.09338" />
+  <rect
+     style="fill:none;stroke:#000000;stroke-width:0.30713284;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+     id="rect3468-65-2"
+     width="320.4903"
+     height="40.527203"
+     x="42.258625"
+     y="516.37671" />
+  <rect
+     style="fill:none;stroke:#000000;stroke-width:0.30508241;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+     id="rect3512-2"
+     width="30.845026"
+     height="29.329052"
+     x="41.757393"
+     y="526.96649" />
+  <text
+     sodipodi:linespacing="125%"
+     id="text3742-88-62-1"
+     y="433.28235"
+     x="44.291496"
+     style="font-style:normal;font-variant:normal;font-weight:300;font-stretch:normal;font-size:10px;line-height:125%;font-family:Ubuntu;-inkscape-font-specification:'Ubuntu, Light';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+     xml:space="preserve"><tspan
+       sodipodi:role="line"
+       id="tspan4380"
+       x="44.291496"
+       y="433.28235">Kontant bruttolön mm</tspan></text>
+  <text
+     sodipodi:linespacing="125%"
+     id="text3742-88-62-7-2"
+     y="408.63553"
+     x="187.09521"
+     style="font-style:normal;font-variant:normal;font-weight:500;font-stretch:normal;font-size:11.3010006px;line-height:125%;font-family:Ubuntu;-inkscape-font-specification:'Ubuntu, Medium';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+     xml:space="preserve"><tspan
+       id="tspan3748-7-8-2-41"
+       y="408.63553"
+       x="187.09521"
+       sodipodi:role="line">011</tspan></text>
+  <text
+     sodipodi:linespacing="125%"
+     id="text3742-88-62-9-5-3"
+     y="545.28235"
+     x="78.678131"
+     style="font-style:normal;font-variant:normal;font-weight:300;font-stretch:normal;font-size:11.3010006px;line-height:125%;font-family:Ubuntu;-inkscape-font-specification:'Ubuntu, Light';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+     xml:space="preserve"><tspan
+       sodipodi:role="line"
+       id="tspan4435"
+       x="78.678131"
+       y="545.28235">Socialavgiftsavtal finns</tspan></text>
+  <text
+     sodipodi:linespacing="125%"
+     id="text3742-88-62-7-9-4"
+     y="525.54462"
+     x="46.095207"
+     style="font-style:normal;font-variant:normal;font-weight:500;font-stretch:normal;font-size:11.3010006px;line-height:125%;font-family:Ubuntu;-inkscape-font-specification:'Ubuntu, Medium';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+     xml:space="preserve"><tspan
+       sodipodi:role="line"
+       id="tspan4437"
+       x="46.095207"
+       y="525.54462">093</tspan></text>
+  <rect
+     style="fill:none;stroke:#000000;stroke-width:0.30613589;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+     id="rect3468-6-7-9"
+     width="165.23322"
+     height="39.226299"
+     x="42.001076"
+     y="438.80499" />
+  <text
+     sodipodi:linespacing="125%"
+     id="text3742-88-62-1-7"
+     y="459.28235"
+     x="44.291496"
+     style="font-style:normal;font-variant:normal;font-weight:300;font-stretch:normal;font-size:10px;line-height:125%;font-family:Ubuntu;-inkscape-font-specification:'Ubuntu, Light';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+     xml:space="preserve"><tspan
+       sodipodi:role="line"
+       id="tspan4423"
+       x="44.291496"
+       y="459.28235">Ersättningar som ligger till grund</tspan><tspan
+       sodipodi:role="line"
+       id="tspan4425"
+       x="44.291496"
+       y="471.78235">för egenavgifter</tspan></text>
+  <text
+     sodipodi:linespacing="125%"
+     id="text3742-88-62-7-2-2"
+     y="448.6355"
+     x="187.09521"
+     style="font-style:normal;font-variant:normal;font-weight:500;font-stretch:normal;font-size:11.3010006px;line-height:125%;font-family:Ubuntu;-inkscape-font-specification:'Ubuntu, Medium';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+     xml:space="preserve"><tspan
+       sodipodi:role="line"
+       id="tspan4427"
+       x="187.09521"
+       y="448.6355">025</tspan></text>
+  <rect
+     style="fill:none;stroke:#000000;stroke-width:0.29868355;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+     id="rect3468-6-7-6"
+     width="165.24066"
+     height="37.33807"
+     x="41.997349"
+     y="478.6969" />
+  <text
+     sodipodi:linespacing="125%"
+     id="text3742-88-62-1-3"
+     y="501.28235"
+     x="44.291496"
+     style="font-style:normal;font-variant:normal;font-weight:300;font-stretch:normal;font-size:10px;line-height:125%;font-family:Ubuntu;-inkscape-font-specification:'Ubuntu, Light';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+     xml:space="preserve"><tspan
+       sodipodi:role="line"
+       id="tspan4429"
+       x="44.291496"
+       y="501.28235">Ersättningar som inte är</tspan><tspan
+       sodipodi:role="line"
+       id="tspan4431"
+       x="44.291496"
+       y="513.78235">underlag för socialaavgifter</tspan></text>
+  <text
+     sodipodi:linespacing="125%"
+     id="text3742-88-62-7-2-21"
+     y="488.6355"
+     x="187.09521"
+     style="font-style:normal;font-variant:normal;font-weight:500;font-stretch:normal;font-size:11.3010006px;line-height:125%;font-family:Ubuntu;-inkscape-font-specification:'Ubuntu, Medium';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+     xml:space="preserve"><tspan
+       sodipodi:role="line"
+       id="tspan4433"
+       x="187.09521"
+       y="488.6355">031</tspan></text>
+  <text
+     sodipodi:linespacing="125%"
+     id="text3742-3-6"
+     y="392.68652"
+     x="42.217392"
+     style="font-style:normal;font-variant:normal;font-weight:300;font-stretch:normal;font-size:11.3009634px;line-height:125%;font-family:Ubuntu;-inkscape-font-specification:'Ubuntu Light';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+     xml:space="preserve"><tspan
+       sodipodi:role="line"
+       id="tspan5050-5"
+       style="font-weight:bold"
+       x="42.217392"
+       y="392.68652">Kontant lön mm</tspan></text>
+  <rect
+     style="fill:none;stroke:#000000;stroke-width:0.30508241;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+     id="rect3468-6-7-0"
+     width="165.23427"
+     height="38.956543"
+     x="42.000549"
+     y="339.07526" />
+  <text
+     sodipodi:linespacing="125%"
+     id="text3742-88-62-1-0"
+     y="373.28235"
+     x="44.291496"
+     style="font-style:normal;font-variant:normal;font-weight:300;font-stretch:normal;font-size:10px;line-height:125%;font-family:Ubuntu;-inkscape-font-specification:'Ubuntu, Light';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+     xml:space="preserve"><tspan
+       sodipodi:role="line"
+       id="tspan4507"
+       x="44.291496"
+       y="373.28235">Avdragen skatt</tspan></text>
+  <text
+     sodipodi:linespacing="125%"
+     id="text3742-88-62-7-2-4"
+     y="348.6355"
+     x="187.09521"
+     style="font-style:normal;font-variant:normal;font-weight:500;font-stretch:normal;font-size:11.3010006px;line-height:125%;font-family:Ubuntu;-inkscape-font-specification:'Ubuntu, Medium';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+     xml:space="preserve"><tspan
+       sodipodi:role="line"
+       id="tspan4505"
+       x="187.09521"
+       y="348.6355">001</tspan></text>
+  <text
+     sodipodi:linespacing="125%"
+     id="text3742-3-6-6"
+     y="332.68652"
+     x="42.217377"
+     style="font-style:normal;font-variant:normal;font-weight:500;font-stretch:normal;font-size:11.3010006px;line-height:125%;font-family:Ubuntu;-inkscape-font-specification:'Ubuntu, Medium';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+     xml:space="preserve"><tspan
+       sodipodi:role="line"
+       id="tspan4509"
+       x="42.217377"
+       y="332.68652">Skatt</tspan></text>
+  <rect
+     style="fill:none;stroke:#000000;stroke-width:0.30134487;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+     id="rect3468-1-2"
+     width="319.142"
+     height="39.178928"
+     x="42.097519"
+     y="339.17999" />
+  <text
+     sodipodi:linespacing="125%"
+     id="text3742-3-6-6-0"
+     y="122.68652"
+     x="388.21738"
+     style="font-style:normal;font-variant:normal;font-weight:500;font-stretch:normal;font-size:11.30100012px;line-height:125%;font-family:Ubuntu;-inkscape-font-specification:'Ubuntu, Medium';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;"
+     xml:space="preserve"><tspan
+       sodipodi:role="line"
+       id="tspan4529">Inkomsttagare</tspan></text>
+  <text
+     sodipodi:linespacing="125%"
+     id="text3742-3-6-6-0-3"
+     y="434.68652"
+     x="388.21738"
+     style="font-style:normal;font-variant:normal;font-weight:500;font-stretch:normal;font-size:11.30100012px;line-height:125%;font-family:Ubuntu;-inkscape-font-specification:'Ubuntu, Medium';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;"
+     xml:space="preserve"><tspan
+       sodipodi:role="line"
+       id="tspan4549">Kostnadsersättningar</tspan></text>
+  <rect
+     id="rect3396-74-8"
+     width="320.66766"
+     height="159.66579"
+     x="388.92645"
+     y="443.80725"
+     style="fill:none;stroke:#000000;stroke-width:0.40000001;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+  <rect
+     style="fill:none;stroke:#000000;stroke-width:0.30508241;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+     id="rect3468-0-2"
+     width="320.49234"
+     height="39.987629"
+     x="388.74536"
+     y="483.36945" />
+  <rect
+     style="fill:none;stroke:#000000;stroke-width:0.30508241;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+     id="rect3468-7-2-1"
+     width="320.49234"
+     height="39.987629"
+     x="389.01117"
+     y="523.36835" />
+  <rect
+     style="fill:none;stroke:#000000;stroke-width:0.4069446;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+     id="rect3468-3-8-0"
+     width="166.11769"
+     height="40.21209"
+     x="388.89331"
+     y="563.25513" />
+  <text
+     sodipodi:linespacing="125%"
+     id="text3742-88-62-00-5"
+     y="478.28235"
+     x="393.2915"
+     style="font-style:normal;font-variant:normal;font-weight:300;font-stretch:normal;font-size:11.3010006px;line-height:125%;font-family:Ubuntu;-inkscape-font-specification:'Ubuntu, Light';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+     xml:space="preserve"><tspan
+       y="478.28235"
+       x="393.2915"
+       sodipodi:role="line"
+       id="tspan3920-8">Enligt schablon</tspan></text>
+  <text
+     sodipodi:linespacing="125%"
+     id="text3742-88-62-9-8-4-5"
+     y="583.28229"
+     x="393.67816"
+     style="font-style:normal;font-variant:normal;font-weight:300;font-stretch:normal;font-size:11.3010006px;line-height:125%;font-family:Ubuntu;-inkscape-font-specification:'Ubuntu, Light';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+     xml:space="preserve"><tspan
+       sodipodi:role="line"
+       id="tspan4212-5"
+       x="393.67816"
+       y="583.28229">Kostnadsersättningar</tspan><tspan
+       sodipodi:role="line"
+       id="tspan4214-0"
+       x="393.67816"
+       y="597.40851">som inte kryssats i ruta 050-056</tspan></text>
+  <text
+     sodipodi:linespacing="125%"
+     id="text3742-88-62-7-9-8-7"
+     y="574.54468"
+     x="533.09521"
+     style="font-style:normal;font-variant:normal;font-weight:500;font-stretch:normal;font-size:11.3010006px;line-height:125%;font-family:Ubuntu;-inkscape-font-specification:'Ubuntu, Medium';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+     xml:space="preserve"><tspan
+       id="tspan3748-7-8-2-4-9-3"
+       y="574.54468"
+       x="533.09521"
+       sodipodi:role="line">020</tspan></text>
+  <rect
+     style="fill:none;stroke:#000000;stroke-width:0.30508241;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+     id="rect3512-7-2-8"
+     width="30.845026"
+     height="29.329052"
+     x="472.75739"
+     y="453.96649" />
+  <text
+     sodipodi:linespacing="125%"
+     id="text3742-88-62-7-4-2-2"
+     y="453.63556"
+     x="478.09521"
+     style="font-style:normal;font-variant:normal;font-weight:500;font-stretch:normal;font-size:11.3010006px;line-height:125%;font-family:Ubuntu;-inkscape-font-specification:'Ubuntu, Medium';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+     xml:space="preserve"><tspan
+       id="tspan3748-7-8-2-92-3-30"
+       y="453.63556"
+       x="478.09521"
+       sodipodi:role="line">050</tspan></text>
+  <rect
+     style="fill:none;stroke:#000000;stroke-width:0.30508241;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+     id="rect3512-7-2-1-7"
+     width="30.845026"
+     height="29.329052"
+     x="544.75739"
+     y="453.96649" />
+  <text
+     sodipodi:linespacing="125%"
+     id="text3742-88-62-7-4-2-8-7"
+     y="453.63556"
+     x="550.09521"
+     style="font-style:normal;font-variant:normal;font-weight:500;font-stretch:normal;font-size:11.3010006px;line-height:125%;font-family:Ubuntu;-inkscape-font-specification:'Ubuntu, Medium';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+     xml:space="preserve"><tspan
+       id="tspan3748-7-8-2-92-3-3-7"
+       y="453.63556"
+       x="550.09521"
+       sodipodi:role="line">051</tspan></text>
+  <rect
+     style="fill:none;stroke:#000000;stroke-width:0.30508241;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+     id="rect3512-7-2-1-4-6"
+     width="30.845026"
+     height="29.329052"
+     x="620.75739"
+     y="453.96649" />
+  <text
+     sodipodi:linespacing="125%"
+     id="text3742-88-62-7-4-2-8-2-9"
+     y="453.63556"
+     x="626.09521"
+     style="font-style:normal;font-variant:normal;font-weight:500;font-stretch:normal;font-size:11.3010006px;line-height:125%;font-family:Ubuntu;-inkscape-font-specification:'Ubuntu, Medium';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+     xml:space="preserve"><tspan
+       id="tspan3748-7-8-2-92-3-3-2-1"
+       y="453.63556"
+       x="626.09521"
+       sodipodi:role="line">052</tspan></text>
+  <text
+     sodipodi:linespacing="125%"
+     id="text3742-88-62-00-4-19"
+     y="464.28235"
+     x="503.2915"
+     style="font-style:normal;font-variant:normal;font-weight:300;font-stretch:normal;font-size:11.3010006px;line-height:125%;font-family:Ubuntu;-inkscape-font-specification:'Ubuntu, Light';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+     xml:space="preserve"><tspan
+       sodipodi:role="line"
+       id="tspan4015-0"
+       x="503.2915"
+       y="464.28235">Biler-</tspan><tspan
+       sodipodi:role="line"
+       id="tspan4017-8"
+       x="503.2915"
+       y="478.4086">sättning</tspan></text>
+  <text
+     sodipodi:linespacing="125%"
+     id="text3742-88-62-00-4-1-9"
+     y="464.28235"
+     x="577.2915"
+     style="font-style:normal;font-variant:normal;font-weight:300;font-stretch:normal;font-size:7.5px;line-height:125%;font-family:Ubuntu;-inkscape-font-specification:'Ubuntu, Light';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+     xml:space="preserve"><tspan
+       sodipodi:role="line"
+       id="tspan4040-8"
+       x="577.2915"
+       y="464.28235">Traktamente</tspan><tspan
+       sodipodi:role="line"
+       id="tspan4042-8"
+       x="577.2915"
+       y="473.65735">inom riket</tspan></text>
+  <text
+     sodipodi:linespacing="125%"
+     id="text3742-88-62-00-4-1-7-0"
+     y="464.28235"
+     x="657.2915"
+     style="font-style:normal;font-variant:normal;font-weight:300;font-stretch:normal;font-size:7.5px;line-height:125%;font-family:Ubuntu;-inkscape-font-specification:'Ubuntu, Light';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+     xml:space="preserve"><tspan
+       y="464.28235"
+       x="657.2915"
+       sodipodi:role="line"
+       id="tspan4065-3">Traktamente</tspan><tspan
+       y="473.65735"
+       x="657.2915"
+       sodipodi:role="line"
+       id="tspan4067-7">utom riket</tspan></text>
+  <text
+     sodipodi:linespacing="125%"
+     id="text3742-88-62-00-9-0"
+     y="504.28235"
+     x="395.2915"
+     style="font-style:normal;font-variant:normal;font-weight:300;font-stretch:normal;font-size:11.3010006px;line-height:125%;font-family:Ubuntu;-inkscape-font-specification:'Ubuntu, Light';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+     xml:space="preserve"><tspan
+       sodipodi:role="line"
+       id="tspan4141-6"
+       x="395.2915"
+       y="504.28235">Motsvarande gjorda utlägg</tspan><tspan
+       sodipodi:role="line"
+       id="tspan4143-9"
+       x="395.2915"
+       y="518.40857">mm avseende</tspan></text>
+  <rect
+     style="fill:none;stroke:#000000;stroke-width:0.30508241;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+     id="rect3512-7-2-1-9-2"
+     width="30.845026"
+     height="29.329052"
+     x="542.75739"
+     y="493.96649" />
+  <text
+     sodipodi:linespacing="125%"
+     id="text3742-88-62-7-4-2-8-8-1"
+     y="493.1189"
+     x="548.09521"
+     style="font-style:normal;font-variant:normal;font-weight:500;font-stretch:normal;font-size:11.3010006px;line-height:125%;font-family:Ubuntu;-inkscape-font-specification:'Ubuntu, Medium';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+     xml:space="preserve"><tspan
+       id="tspan3748-7-8-2-92-3-3-6-7"
+       y="493.1189"
+       x="548.09521"
+       sodipodi:role="line">055</tspan></text>
+  <rect
+     style="fill:none;stroke:#000000;stroke-width:0.30508241;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+     id="rect3512-7-2-1-4-7-7"
+     width="30.845026"
+     height="29.329052"
+     x="622.75739"
+     y="493.96649" />
+  <text
+     sodipodi:linespacing="125%"
+     id="text3742-88-62-7-4-2-8-2-0-97"
+     y="493.1189"
+     x="627.83691"
+     style="font-style:normal;font-variant:normal;font-weight:500;font-stretch:normal;font-size:11.3010006px;line-height:125%;font-family:Ubuntu;-inkscape-font-specification:'Ubuntu, Medium';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+     xml:space="preserve"><tspan
+       id="tspan3748-7-8-2-92-3-3-2-4-6"
+       y="493.1189"
+       x="627.83691"
+       sodipodi:role="line">056</tspan></text>
+  <text
+     sodipodi:linespacing="125%"
+     id="text3742-88-62-00-4-1-1-2"
+     y="487.98029"
+     x="594.54962"
+     style="font-style:normal;font-variant:normal;font-weight:300;font-stretch:normal;font-size:7.25757885px;line-height:125%;font-family:Ubuntu;-inkscape-font-specification:'Ubuntu, Light';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+     xml:space="preserve"
+     transform="scale(0.96767716,1.0334025)"><tspan
+       sodipodi:role="line"
+       id="tspan4145-7"
+       x="594.54962"
+       y="487.98029">Resekostnader</tspan></text>
+  <text
+     sodipodi:linespacing="125%"
+     id="text3742-88-62-00-4-1-7-5-1"
+     y="504.28235"
+     x="659.2915"
+     style="font-style:normal;font-variant:normal;font-weight:300;font-stretch:normal;font-size:7.5px;line-height:125%;font-family:Ubuntu;-inkscape-font-specification:'Ubuntu, Light';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+     xml:space="preserve"><tspan
+       y="504.28235"
+       x="659.2915"
+       sodipodi:role="line"
+       id="tspan4147-5">Logi</tspan></text>
+  <text
+     sodipodi:linespacing="125%"
+     id="text3742-88-62-00-9-9-8"
+     y="542.28229"
+     x="393.2915"
+     style="font-style:normal;font-variant:normal;font-weight:300;font-stretch:normal;font-size:11.3010006px;line-height:125%;font-family:Ubuntu;-inkscape-font-specification:'Ubuntu, Light';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+     xml:space="preserve"><tspan
+       y="542.28229"
+       x="393.2915"
+       sodipodi:role="line"
+       id="tspan4200-8">Tjänsteresa längre</tspan><tspan
+       y="556.40851"
+       x="393.2915"
+       sodipodi:role="line"
+       id="tspan4202-4">tid än tre månader</tspan></text>
+  <rect
+     style="fill:none;stroke:#000000;stroke-width:0.30508241;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+     id="rect3512-7-2-1-9-0-5"
+     width="30.845026"
+     height="29.329052"
+     x="540.75739"
+     y="533.96649" />
+  <text
+     sodipodi:linespacing="125%"
+     id="text3742-88-62-7-4-2-8-8-6-6"
+     y="532.15222"
+     x="546.09521"
+     style="font-style:normal;font-variant:normal;font-weight:500;font-stretch:normal;font-size:11.3010006px;line-height:125%;font-family:Ubuntu;-inkscape-font-specification:'Ubuntu, Medium';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+     xml:space="preserve"><tspan
+       sodipodi:role="line"
+       id="tspan4208-5"
+       x="546.09521"
+       y="532.15222">053</tspan></text>
+  <rect
+     style="fill:none;stroke:#000000;stroke-width:0.30508241;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+     id="rect3512-7-2-1-4-7-9-6"
+     width="30.845026"
+     height="29.329052"
+     x="620.75739"
+     y="533.96649" />
+  <text
+     sodipodi:linespacing="125%"
+     id="text3742-88-62-7-4-2-8-2-0-9-8"
+     y="532.66882"
+     x="626.09521"
+     style="font-style:normal;font-variant:normal;font-weight:500;font-stretch:normal;font-size:11.3010006px;line-height:125%;font-family:Ubuntu;-inkscape-font-specification:'Ubuntu, Medium';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+     xml:space="preserve"><tspan
+       sodipodi:role="line"
+       id="tspan4210-4"
+       x="626.09521"
+       y="532.66882">054</tspan></text>
+  <text
+     sodipodi:linespacing="125%"
+     id="text3742-88-62-00-4-1-1-8-8"
+     y="542.28229"
+     x="575.2915"
+     style="font-style:normal;font-variant:normal;font-weight:300;font-stretch:normal;font-size:7.5px;line-height:125%;font-family:Ubuntu;-inkscape-font-specification:'Ubuntu, Light';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+     xml:space="preserve"><tspan
+       y="542.28229"
+       x="575.2915"
+       sodipodi:role="line"
+       id="tspan4204-8">inrikes</tspan></text>
+  <text
+     sodipodi:linespacing="125%"
+     id="text3742-88-62-00-4-1-7-5-3-3"
+     y="542.28229"
+     x="657.2915"
+     style="font-style:normal;font-variant:normal;font-weight:300;font-stretch:normal;font-size:7.5px;line-height:125%;font-family:Ubuntu;-inkscape-font-specification:'Ubuntu, Light';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+     xml:space="preserve"><tspan
+       y="542.28229"
+       x="657.2915"
+       sodipodi:role="line"
+       id="tspan4206-8">utrikes</tspan></text>
+  <rect
+     id="rect3396-32-7"
+     width="320.66885"
+     height="158.26144"
+     x="383.92584"
+     y="622.80664"
+     style="fill:none;stroke:#000000;stroke-width:0.27192882;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+  <rect
+     style="fill:none;stroke:#000000;stroke-width:0.30508241;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+     id="rect3468-1-5"
+     width="320.49234"
+     height="39.987629"
+     x="383.74533"
+     y="662.36945" />
+  <rect
+     style="fill:none;stroke:#000000;stroke-width:0.30508241;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+     id="rect3468-6-7-2"
+     width="165.23427"
+     height="38.956543"
+     x="384.00055"
+     y="623.07526" />
+  <rect
+     style="fill:none;stroke:#000000;stroke-width:0.29673937;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+     id="rect3468-7-56-4"
+     width="320.50067"
+     height="37.829479"
+     x="384.00696"
+     y="702.09338" />
+  <rect
+     style="fill:none;stroke:#000000;stroke-width:0.30713284;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+     id="rect3468-65-2-5"
+     width="320.4903"
+     height="40.527203"
+     x="384.25861"
+     y="740.37671" />
+  <text
+     sodipodi:linespacing="125%"
+     id="text3742-88-62-1-5"
+     y="657.28235"
+     x="386.2915"
+     style="font-style:normal;font-variant:normal;font-weight:300;font-stretch:normal;font-size:10px;line-height:125%;font-family:Ubuntu;-inkscape-font-specification:'Ubuntu, Light';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;"
+     xml:space="preserve"><tspan
+       sodipodi:role="line"
+       id="tspan5438">Tjänstepension</tspan></text>
+  <text
+     sodipodi:linespacing="125%"
+     id="text3742-88-62-7-2-3"
+     y="632.6355"
+     x="529.09521"
+     style="font-style:normal;font-variant:normal;font-weight:500;font-stretch:normal;font-size:11.30100012px;line-height:125%;font-family:Ubuntu;-inkscape-font-specification:'Ubuntu, Medium';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;"
+     xml:space="preserve"><tspan
+       sodipodi:role="line"
+       id="tspan5436">030</tspan></text>
+  <rect
+     style="fill:none;stroke:#000000;stroke-width:0.30613589;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+     id="rect3468-6-7-9-4"
+     width="165.23322"
+     height="39.226299"
+     x="384.0011"
+     y="662.80499" />
+  <text
+     sodipodi:linespacing="125%"
+     id="text3742-88-62-1-7-9"
+     y="703.63123"
+     x="368.18317"
+     style="font-style:normal;font-variant:normal;font-weight:300;font-stretch:normal;font-size:8.20334911px;line-height:125%;font-family:Ubuntu;-inkscape-font-specification:'Ubuntu, Light';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+     xml:space="preserve"
+     transform="scale(1.048569,0.95368068)"><tspan
+       sodipodi:role="line"
+       id="tspan5440"
+       x="368.18317"
+       y="703.63123">Ersättningar som inte är under-</tspan><tspan
+       sodipodi:role="line"
+       id="tspan5442"
+       x="368.18317"
+       y="713.88544">lag för socialavgifter och som inte</tspan><tspan
+       sodipodi:role="line"
+       id="tspan5444"
+       x="368.18317"
+       y="724.13959">ger rätt till skattereduktion för</tspan><tspan
+       sodipodi:role="line"
+       id="tspan5446"
+       x="368.18317"
+       y="734.3938">arbetsinkomst (jobbskatteavdrag)</tspan></text>
+  <text
+     sodipodi:linespacing="125%"
+     id="text3742-88-62-7-2-2-9"
+     y="672.6355"
+     x="529.09521"
+     style="font-style:normal;font-variant:normal;font-weight:500;font-stretch:normal;font-size:11.30100012px;line-height:125%;font-family:Ubuntu;-inkscape-font-specification:'Ubuntu, Medium';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;"
+     xml:space="preserve"><tspan
+       sodipodi:role="line"
+       id="tspan5448">032</tspan></text>
+  <rect
+     style="fill:none;stroke:#000000;stroke-width:0.29868355;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+     id="rect3468-6-7-6-7"
+     width="165.24066"
+     height="37.33807"
+     x="383.99734"
+     y="702.6969" />
+  <text
+     sodipodi:linespacing="125%"
+     id="text3742-88-62-1-3-4"
+     y="735.28235"
+     x="386.2915"
+     style="font-style:normal;font-variant:normal;font-weight:300;font-stretch:normal;font-size:10px;line-height:125%;font-family:Ubuntu;-inkscape-font-specification:'Ubuntu, Light';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+     xml:space="preserve"><tspan
+       sodipodi:role="line"
+       id="tspan5450"
+       x="386.2915"
+       y="735.28235">Vissa avdrag</tspan></text>
+  <text
+     sodipodi:linespacing="125%"
+     id="text3742-88-62-7-2-21-2"
+     y="712.6355"
+     x="529.09521"
+     style="font-style:normal;font-variant:normal;font-weight:500;font-stretch:normal;font-size:11.30100012px;line-height:125%;font-family:Ubuntu;-inkscape-font-specification:'Ubuntu, Medium';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;"
+     xml:space="preserve"><tspan
+       sodipodi:role="line"
+       id="tspan5452">037</tspan></text>
+  <text
+     sodipodi:linespacing="125%"
+     id="text3742-3-6-62"
+     y="616.68652"
+     x="384.21741"
+     style="font-style:normal;font-variant:normal;font-weight:500;font-stretch:normal;font-size:12.5px;line-height:125%;font-family:Ubuntu;-inkscape-font-specification:'Ubuntu, Medium';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;"
+     xml:space="preserve"><tspan
+       sodipodi:role="line"
+       id="tspan5434">Tjänstepension, övriga ersättningar, vissa avdrag</tspan></text>
+  <rect
+     id="rect3396-32-7-2"
+     width="320.67175"
+     height="154.90779"
+     x="39.924393"
+     y="788.80518"
+     style="fill:none;stroke:#000000;stroke-width:0.26903343;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+  <rect
+     style="fill:none;stroke:#000000;stroke-width:0.30508241;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+     id="rect3468-1-5-2"
+     width="320.49234"
+     height="39.987629"
+     x="39.745331"
+     y="828.36945" />
+  <rect
+     style="fill:none;stroke:#000000;stroke-width:0.30508241;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+     id="rect3468-6-7-2-9"
+     width="165.23427"
+     height="38.956543"
+     x="40.000549"
+     y="789.07526" />
+  <rect
+     style="fill:none;stroke:#000000;stroke-width:0.29673937;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+     id="rect3468-7-56-4-7"
+     width="320.50067"
+     height="37.829479"
+     x="40.006958"
+     y="868.09338" />
+  <rect
+     style="fill:none;stroke:#000000;stroke-width:0.2941964;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+     id="rect3468-65-2-5-4"
+     width="320.50323"
+     height="37.18359"
+     x="40.252144"
+     y="906.37024" />
+  <text
+     sodipodi:linespacing="125%"
+     id="text3742-88-62-1-5-5"
+     y="805.28235"
+     x="42.291496"
+     style="font-style:normal;font-variant:normal;font-weight:300;font-stretch:normal;font-size:10px;line-height:125%;font-family:Ubuntu;-inkscape-font-specification:'Ubuntu, Light';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;"
+     xml:space="preserve"><tspan
+       sodipodi:role="line"
+       id="tspan5271">Skattepliktig bilförmån utom</tspan><tspan
+       sodipodi:role="line"
+       id="tspan5273">drivmedel</tspan></text>
+  <text
+     sodipodi:linespacing="125%"
+     id="text3742-88-62-7-2-3-1"
+     y="800.6355"
+     x="185.09521"
+     style="font-style:normal;font-variant:normal;font-weight:500;font-stretch:normal;font-size:11.30100012px;line-height:125%;font-family:Ubuntu;-inkscape-font-specification:'Ubuntu, Medium';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;"
+     xml:space="preserve"><tspan
+       sodipodi:role="line"
+       id="tspan5275">013</tspan></text>
+  <rect
+     style="fill:none;stroke:#000000;stroke-width:0.30613589;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+     id="rect3468-6-7-9-4-7"
+     width="165.23322"
+     height="39.226299"
+     x="40.001099"
+     y="828.80499" />
+  <text
+     sodipodi:linespacing="125%"
+     id="text3742-88-62-1-7-9-7"
+     y="861.28235"
+     x="42.291496"
+     style="font-style:normal;font-variant:normal;font-weight:300;font-stretch:normal;font-size:10px;line-height:125%;font-family:Ubuntu;-inkscape-font-specification:'Ubuntu, Light';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+     xml:space="preserve"><tspan
+       sodipodi:role="line"
+       id="tspan5277"
+       x="42.291496"
+       y="861.28235">Drivmedel vid bilförmån</tspan></text>
+  <text
+     sodipodi:linespacing="125%"
+     id="text3742-88-62-7-2-2-9-1"
+     y="838.6355"
+     x="185.09521"
+     style="font-style:normal;font-variant:normal;font-weight:500;font-stretch:normal;font-size:11.30100012px;line-height:125%;font-family:Ubuntu;-inkscape-font-specification:'Ubuntu, Medium';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;"
+     xml:space="preserve"><tspan
+       sodipodi:role="line"
+       id="tspan5279">018</tspan></text>
+  <rect
+     style="fill:none;stroke:#000000;stroke-width:0.29868355;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+     id="rect3468-6-7-6-7-7"
+     width="165.24066"
+     height="37.33807"
+     x="39.997337"
+     y="868.6969" />
+  <text
+     sodipodi:linespacing="125%"
+     id="text3742-88-62-1-3-4-6"
+     y="899.28235"
+     x="42.291496"
+     style="font-style:normal;font-variant:normal;font-weight:300;font-stretch:normal;font-size:10px;line-height:125%;font-family:Ubuntu;-inkscape-font-specification:'Ubuntu, Light';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+     xml:space="preserve"><tspan
+       sodipodi:role="line"
+       id="tspan5281"
+       x="42.291496"
+       y="899.28235">Kod för förmånsbil</tspan></text>
+  <text
+     sodipodi:linespacing="125%"
+     id="text3742-88-62-7-2-21-2-0"
+     y="878.6355"
+     x="185.09521"
+     style="font-style:normal;font-variant:normal;font-weight:500;font-stretch:normal;font-size:11.30100012px;line-height:125%;font-family:Ubuntu;-inkscape-font-specification:'Ubuntu, Medium';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;"
+     xml:space="preserve"><tspan
+       sodipodi:role="line"
+       id="tspan5283">014</tspan></text>
+  <rect
+     style="fill:none;stroke:#000000;stroke-width:0.30508241;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+     id="rect3468-6-7-0-5"
+     width="165.23427"
+     height="38.956543"
+     x="382.00055"
+     y="839.07526" />
+  <text
+     sodipodi:linespacing="125%"
+     id="text3742-88-62-1-0-1"
+     y="873.28235"
+     x="384.2915"
+     style="font-style:normal;font-variant:normal;font-weight:300;font-stretch:normal;font-size:10px;line-height:125%;font-family:Ubuntu;-inkscape-font-specification:'Ubuntu, Light';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;"
+     xml:space="preserve"><tspan
+       sodipodi:role="line"
+       id="tspan5050">Hyresersättning</tspan></text>
+  <text
+     sodipodi:linespacing="125%"
+     id="text3742-88-62-7-2-4-7"
+     y="848.6355"
+     x="527.09521"
+     style="font-style:normal;font-variant:normal;font-weight:500;font-stretch:normal;font-size:11.30100012px;line-height:125%;font-family:Ubuntu;-inkscape-font-specification:'Ubuntu, Medium';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;"
+     xml:space="preserve"><tspan
+       sodipodi:role="line"
+       id="tspan5052">039</tspan></text>
+  <text
+     sodipodi:linespacing="125%"
+     id="text3742-3-6-6-3"
+     y="832.68652"
+     x="382.21738"
+     style="font-style:normal;font-variant:normal;font-weight:500;font-stretch:normal;font-size:11.3010006px;line-height:125%;font-family:Ubuntu;-inkscape-font-specification:'Ubuntu, Medium';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+     xml:space="preserve"><tspan
+       sodipodi:role="line"
+       id="tspan5048"
+       x="382.21738"
+       y="832.68652">Kapital</tspan></text>
+  <rect
+     style="fill:none;stroke:#000000;stroke-width:0.30134487;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+     id="rect3468-1-2-2"
+     width="319.142"
+     height="39.178928"
+     x="382.09753"
+     y="839.17999" />
+  <rect
+     id="rect3396-32-0"
+     width="320.74747"
+     height="79.955116"
+     x="379.88654"
+     y="902.76733"
+     style="fill:none;stroke:#000000;stroke-width:0.3;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+  <rect
+     style="fill:none;stroke:#000000;stroke-width:0.30508241;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+     id="rect3468-1-6"
+     width="320.49234"
+     height="39.987629"
+     x="379.74533"
+     y="942.36945" />
+  <rect
+     style="fill:none;stroke:#000000;stroke-width:0.30508241;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+     id="rect3468-6-7-8"
+     width="165.23427"
+     height="38.956543"
+     x="380.00055"
+     y="903.07526" />
+  <text
+     sodipodi:linespacing="125%"
+     id="text3742-88-62-1-2"
+     y="927.28235"
+     x="382.2915"
+     style="font-style:normal;font-variant:normal;font-weight:300;font-stretch:normal;font-size:10px;line-height:125%;font-family:Ubuntu;-inkscape-font-specification:'Ubuntu, Light';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+     xml:space="preserve"><tspan
+       sodipodi:role="line"
+       id="tspan5058"
+       x="382.2915"
+       y="927.28235">Underlag för skattereduktion</tspan><tspan
+       sodipodi:role="line"
+       id="tspan5060"
+       x="382.2915"
+       y="939.78235">för rutarbete</tspan></text>
+  <text
+     sodipodi:linespacing="125%"
+     id="text3742-88-62-7-2-45"
+     y="912.6355"
+     x="525.09521"
+     style="font-style:normal;font-variant:normal;font-weight:500;font-stretch:normal;font-size:11.30100012px;line-height:125%;font-family:Ubuntu;-inkscape-font-specification:'Ubuntu, Medium';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;"
+     xml:space="preserve"><tspan
+       sodipodi:role="line"
+       id="tspan5054">021</tspan></text>
+  <rect
+     style="fill:none;stroke:#000000;stroke-width:0.30613589;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+     id="rect3468-6-7-9-0"
+     width="165.23322"
+     height="39.226299"
+     x="380.0011"
+     y="942.80499" />
+  <text
+     sodipodi:linespacing="125%"
+     id="text3742-88-62-1-7-6"
+     y="967.28235"
+     x="382.2915"
+     style="font-style:normal;font-variant:normal;font-weight:300;font-stretch:normal;font-size:10px;line-height:125%;font-family:Ubuntu;-inkscape-font-specification:'Ubuntu, Light';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+     xml:space="preserve"><tspan
+       sodipodi:role="line"
+       id="tspan5062"
+       x="382.2915"
+       y="967.28235">Underlag för skattereduktion</tspan><tspan
+       sodipodi:role="line"
+       id="tspan5064"
+       x="382.2915"
+       y="979.78235">för rotarbete</tspan></text>
+  <text
+     sodipodi:linespacing="125%"
+     id="text3742-88-62-7-2-2-4"
+     y="952.6355"
+     x="525.09521"
+     style="font-style:normal;font-variant:normal;font-weight:500;font-stretch:normal;font-size:11.30100012px;line-height:125%;font-family:Ubuntu;-inkscape-font-specification:'Ubuntu, Medium';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;"
+     xml:space="preserve"><tspan
+       sodipodi:role="line"
+       id="tspan5056">022</tspan></text>
+  <text
+     sodipodi:linespacing="125%"
+     id="text3742-3-6-2"
+     y="896.68652"
+     x="380.21741"
+     style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:11.30100012px;line-height:125%;font-family:Ubuntu;-inkscape-font-specification:'Ubuntu, Normal';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;"
+     xml:space="preserve"><tspan
+       sodipodi:role="line"
+       id="tspan5046">Skattereduktion för rut-/rotarbete</tspan></text>
+  <text
+     sodipodi:linespacing="125%"
+     id="text3742-3-6-62-3"
+     y="578.68652"
+     x="42.217407"
+     style="font-style:normal;font-variant:normal;font-weight:300;font-stretch:normal;font-size:11.3009634px;line-height:125%;font-family:Ubuntu;-inkscape-font-specification:'Ubuntu Light';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+     xml:space="preserve"><tspan
+       sodipodi:role="line"
+       id="tspan5050-5-0-0"
+       style="font-weight:bold"
+       x="42.217407"
+       y="578.68652">Förmåner mm</tspan></text>
+  <rect
+     style="fill:none;stroke:#000000;stroke-width:0.3096298;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+     id="rect3468-6-7-0-9"
+     width="165.22972"
+     height="40.127628"
+     x="40.002823"
+     y="589.07751" />
+  <text
+     sodipodi:linespacing="125%"
+     id="text3742-88-62-1-0-9"
+     y="626.47784"
+     x="42.662868"
+     style="font-style:normal;font-variant:normal;font-weight:300;font-stretch:normal;font-size:9.46712303px;line-height:125%;font-family:Ubuntu;-inkscape-font-specification:'Ubuntu, Light';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+     xml:space="preserve"
+     transform="scale(1.0396442,0.96186753)"><tspan
+       sodipodi:role="line"
+       id="tspan5114"
+       x="42.662868"
+       y="626.47784">Skattepliktiga förmåner utom</tspan><tspan
+       sodipodi:role="line"
+       id="tspan5116"
+       x="42.662868"
+       y="638.97784">bilförmån och drivmedel vid</tspan><tspan
+       sodipodi:role="line"
+       id="tspan5118"
+       x="42.662868"
+       y="651.47784">bilförmån</tspan></text>
+  <text
+     sodipodi:linespacing="125%"
+     id="text3742-88-62-7-2-4-3"
+     y="598.6355"
+     x="185.09521"
+     style="font-style:normal;font-variant:normal;font-weight:500;font-stretch:normal;font-size:11.30100012px;line-height:125%;font-family:Ubuntu;-inkscape-font-specification:'Ubuntu, Medium';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;"
+     xml:space="preserve"><tspan
+       sodipodi:role="line"
+       id="tspan5120">012</tspan></text>
+  <rect
+     style="fill:none;stroke:#000000;stroke-width:0.3038657;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+     id="rect3468-1-2-5"
+     width="319.72729"
+     height="39.764225"
+     x="39.510963"
+     y="589.18121" />
+  <text
+     sodipodi:linespacing="125%"
+     id="text3742-88-62-00-4-0"
+     y="661.6908"
+     x="263.87231"
+     style="font-style:normal;font-variant:normal;font-weight:300;font-stretch:normal;font-size:11.3010006px;line-height:125%;font-family:Ubuntu;-inkscape-font-specification:'Ubuntu, Light';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+     xml:space="preserve"><tspan
+       sodipodi:role="line"
+       id="tspan5144"
+       x="263.87231"
+       y="661.6908">Bostad ej småhus</tspan></text>
+  <rect
+     style="fill:none;stroke:#000000;stroke-width:0.30508241;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+     id="rect3512-7-2-6"
+     width="30.845026"
+     height="29.329052"
+     x="39.750385"
+     y="678.96277" />
+  <text
+     sodipodi:linespacing="125%"
+     id="text3742-88-62-7-4-2-89"
+     y="678.04401"
+     x="45.676033"
+     style="font-style:normal;font-variant:normal;font-weight:500;font-stretch:normal;font-size:11.30100012px;line-height:125%;font-family:Ubuntu;-inkscape-font-specification:'Ubuntu, Medium';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;"
+     xml:space="preserve"><tspan
+       sodipodi:role="line"
+       id="tspan5209">044</tspan></text>
+  <rect
+     style="fill:none;stroke:#000000;stroke-width:0.30508241;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+     id="rect3512-7-2-1-5"
+     width="30.845026"
+     height="29.329052"
+     x="152.3382"
+     y="678.96277" />
+  <text
+     sodipodi:linespacing="125%"
+     id="text3742-88-62-7-4-2-8-21"
+     y="678.04401"
+     x="157.67603"
+     style="font-style:normal;font-variant:normal;font-weight:500;font-stretch:normal;font-size:11.30100012px;line-height:125%;font-family:Ubuntu;-inkscape-font-specification:'Ubuntu, Medium';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;"
+     xml:space="preserve"><tspan
+       sodipodi:role="line"
+       id="tspan5213">045</tspan></text>
+  <rect
+     style="fill:none;stroke:#000000;stroke-width:0.30508241;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+     id="rect3512-7-2-1-4-9"
+     width="30.845026"
+     height="29.329052"
+     x="228.3382"
+     y="678.96277" />
+  <text
+     sodipodi:linespacing="125%"
+     id="text3742-88-62-7-4-2-8-2-91"
+     y="678.04401"
+     x="233.67603"
+     style="font-style:normal;font-variant:normal;font-weight:500;font-stretch:normal;font-size:11.30100012px;line-height:125%;font-family:Ubuntu;-inkscape-font-specification:'Ubuntu, Medium';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;"
+     xml:space="preserve"><tspan
+       sodipodi:role="line"
+       id="tspan5217">047</tspan></text>
+  <text
+     sodipodi:linespacing="125%"
+     id="text3742-88-62-00-4-2"
+     y="702.6908"
+     x="70.872307"
+     style="font-style:normal;font-variant:normal;font-weight:300;font-stretch:normal;font-size:11.30100012px;line-height:125%;font-family:Ubuntu;-inkscape-font-specification:'Ubuntu, Light';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;"
+     xml:space="preserve"><tspan
+       sodipodi:role="line"
+       id="tspan5211">Ränta</tspan></text>
+  <text
+     sodipodi:linespacing="125%"
+     id="text3742-88-62-00-4-1-0"
+     y="667.58423"
+     x="194.6981"
+     style="font-style:normal;font-variant:normal;font-weight:300;font-stretch:normal;font-size:10.68794823px;line-height:125%;font-family:Ubuntu;-inkscape-font-specification:'Ubuntu, Light';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+     xml:space="preserve"
+     transform="scale(0.95003981,1.0525875)"><tspan
+       sodipodi:role="line"
+       id="tspan5215"
+       x="194.6981"
+       y="667.58423">Parkering</tspan></text>
+  <text
+     sodipodi:linespacing="125%"
+     id="text3742-88-62-00-4-0-3"
+     y="700.6908"
+     x="264.87231"
+     style="font-style:normal;font-variant:normal;font-weight:300;font-stretch:normal;font-size:11.30100012px;line-height:125%;font-family:Ubuntu;-inkscape-font-specification:'Ubuntu, Light';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;"
+     xml:space="preserve"><tspan
+       sodipodi:role="line"
+       id="tspan5219">Annan förmån</tspan></text>
+  <text
+     sodipodi:linespacing="125%"
+     id="text3742-88-62-00-4-2-1"
+     y="740.6908"
+     x="71.872307"
+     style="font-style:normal;font-variant:normal;font-weight:300;font-stretch:normal;font-size:11.30100012px;line-height:125%;font-family:Ubuntu;-inkscape-font-specification:'Ubuntu, Light';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;"
+     xml:space="preserve"><tspan
+       sodipodi:role="line"
+       id="tspan5241">Förmån har justerats</tspan></text>
+  <text
+     sodipodi:linespacing="125%"
+     id="text3742-88-62-00-4-0-3-7"
+     y="739.6908"
+     x="232.87231"
+     style="font-style:normal;font-variant:normal;font-weight:300;font-stretch:normal;font-size:11.30100012px;line-height:125%;font-family:Ubuntu;-inkscape-font-specification:'Ubuntu, Light';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;"
+     xml:space="preserve"><tspan
+       sodipodi:role="line"
+       id="tspan5261">Förmån som pension</tspan></text>
+  <rect
+     style="fill:none;stroke:#000000;stroke-width:0.29673937;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+     id="rect3468-7-56-4-7-8"
+     width="320.50067"
+     height="37.829479"
+     x="40.006958"
+     y="906.09338" />
+  <rect
+     style="fill:none;stroke:#000000;stroke-width:0.29868355;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+     id="rect3468-6-7-6-7-7-2"
+     width="165.24066"
+     height="37.33807"
+     x="39.997337"
+     y="906.6969" />
+  <text
+     sodipodi:linespacing="125%"
+     id="text3742-88-62-1-3-4-6-0"
+     y="937.28235"
+     x="42.291496"
+     style="font-style:normal;font-variant:normal;font-weight:300;font-stretch:normal;font-size:10px;line-height:125%;font-family:Ubuntu;-inkscape-font-specification:'Ubuntu, Light';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;"
+     xml:space="preserve"><tspan
+       sodipodi:role="line"
+       id="tspan5347">Antal månader med förmånsbil</tspan></text>
+  <text
+     sodipodi:linespacing="125%"
+     id="text3742-88-62-7-2-21-2-0-4"
+     y="916.6355"
+     x="185.09521"
+     style="font-style:normal;font-variant:normal;font-weight:500;font-stretch:normal;font-size:11.30100012px;line-height:125%;font-family:Ubuntu;-inkscape-font-specification:'Ubuntu, Medium';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;"
+     xml:space="preserve"><tspan
+       sodipodi:role="line"
+       id="tspan5349">015</tspan></text>
+  <rect
+     style="fill:none;stroke:#000000;stroke-width:0.29673937;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+     id="rect3468-7-56-4-7-3"
+     width="320.50067"
+     height="37.829479"
+     x="40.006958"
+     y="944.09338" />
+  <rect
+     style="fill:none;stroke:#000000;stroke-width:0.30377853;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+     id="rect3468-6-7-6-7-7-6"
+     width="165.23557"
+     height="38.623955"
+     x="39.999886"
+     y="943.40845" />
+  <text
+     sodipodi:linespacing="125%"
+     id="text3742-88-62-1-3-4-6-9"
+     y="1015.2822"
+     x="42.291496"
+     style="font-style:normal;font-variant:normal;font-weight:300;font-stretch:normal;font-size:10px;line-height:125%;font-family:Ubuntu;-inkscape-font-specification:'Ubuntu, Light';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;"
+     xml:space="preserve"><tspan
+       sodipodi:role="line"
+       id="tspan5359">Betalt för förmånsbil</tspan></text>
+  <text
+     sodipodi:linespacing="125%"
+     id="text3742-88-62-7-2-21-2-0-48"
+     y="954.6355"
+     x="185.09521"
+     style="font-style:normal;font-variant:normal;font-weight:500;font-stretch:normal;font-size:11.30100012px;line-height:125%;font-family:Ubuntu;-inkscape-font-specification:'Ubuntu, Medium';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;"
+     xml:space="preserve"><tspan
+       sodipodi:role="line"
+       id="tspan5351">016</tspan></text>
+  <rect
+     style="fill:none;stroke:#000000;stroke-width:0.29673937;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+     id="rect3468-7-56-4-7-1"
+     width="320.50067"
+     height="37.829479"
+     x="40.006958"
+     y="982.09338" />
+  <rect
+     style="fill:none;stroke:#000000;stroke-width:0.29868355;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+     id="rect3468-6-7-6-7-7-29"
+     width="165.24066"
+     height="37.33807"
+     x="39.997337"
+     y="982.6969" />
+  <text
+     sodipodi:linespacing="125%"
+     id="text3742-88-62-1-3-4-6-7"
+     y="965.28229"
+     x="42.291496"
+     style="font-style:normal;font-variant:normal;font-weight:300;font-stretch:normal;font-size:10px;line-height:125%;font-family:Ubuntu;-inkscape-font-specification:'Ubuntu, Light';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+     xml:space="preserve"><tspan
+       sodipodi:role="line"
+       id="tspan5353"
+       x="42.291496"
+       y="965.28229">Antal km med bilersättning</tspan><tspan
+       sodipodi:role="line"
+       id="tspan5355"
+       x="42.291496"
+       y="977.78229">vid förmånsbil</tspan></text>
+  <text
+     sodipodi:linespacing="125%"
+     id="text3742-88-62-7-2-21-2-0-8"
+     y="992.6355"
+     x="185.09521"
+     style="font-style:normal;font-variant:normal;font-weight:500;font-stretch:normal;font-size:11.30100012px;line-height:125%;font-family:Ubuntu;-inkscape-font-specification:'Ubuntu, Medium';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;"
+     xml:space="preserve"><tspan
+       sodipodi:role="line"
+       id="tspan5357">017</tspan></text>
+  <rect
+     style="fill:none;stroke:#000000;stroke-width:0.31393456;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+     id="rect3468-6-7-6-7-7-6-1"
+     width="165.2254"
+     height="41.252243"
+     x="384.246"
+     y="740.24097" />
+  <text
+     sodipodi:linespacing="125%"
+     id="text3742-88-62-7-2-21-2-0-48-8"
+     y="750.6355"
+     x="529.09521"
+     style="font-style:normal;font-variant:normal;font-weight:500;font-stretch:normal;font-size:11.30100012px;line-height:125%;font-family:Ubuntu;-inkscape-font-specification:'Ubuntu, Medium';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;"
+     xml:space="preserve"><tspan
+       sodipodi:role="line"
+       id="tspan5464">070</tspan></text>
+  <text
+     sodipodi:linespacing="125%"
+     id="text3742-88-62-1-3-4-6-7-4"
+     y="775.28229"
+     x="388.2915"
+     style="font-style:normal;font-variant:normal;font-weight:300;font-stretch:normal;font-size:10px;line-height:125%;font-family:Ubuntu;-inkscape-font-specification:'Ubuntu, Light';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+     xml:space="preserve"><tspan
+       sodipodi:role="line"
+       id="tspan5454"
+       x="388.2915"
+       y="775.28229">Specifikation av belopp i ruta 037</tspan></text>
+  <text
+     sodipodi:linespacing="125%"
+     id="text3742-88-62-7-2-21-2-0-8-3"
+     y="790.6355"
+     x="527.09521"
+     style="font-style:normal;font-variant:normal;font-weight:500;font-stretch:normal;font-size:11.30100012px;line-height:125%;font-family:Ubuntu;-inkscape-font-specification:'Ubuntu, Medium';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;"
+     xml:space="preserve"><tspan
+       sodipodi:role="line"
+       id="tspan5462">036</tspan></text>
+  <rect
+     style="fill:none;stroke:#000000;stroke-width:0.30128375;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+     id="rect3468-7-56-4-7-3-0"
+     width="320.49609"
+     height="38.997574"
+     x="384.06134"
+     y="780.92303" />
+  <rect
+     style="fill:none;stroke:#000000;stroke-width:0.30351019;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+     id="rect3468-6-7-6-7-7-6-12"
+     width="164.94267"
+     height="38.624222"
+     x="384.34503"
+     y="781.40833" />
+  <text
+     sodipodi:linespacing="125%"
+     id="text3742-88-62-1-3-4-6-7-8"
+     y="822.06677"
+     x="373.16144"
+     style="font-style:normal;font-variant:normal;font-weight:300;font-stretch:normal;font-size:8.78300285px;line-height:125%;font-family:Ubuntu;-inkscape-font-specification:'Ubuntu, Light';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+     xml:space="preserve"
+     transform="scale(1.0352103,0.96598729)"><tspan
+       sodipodi:role="line"
+       id="tspan5456"
+       x="373.16144"
+       y="822.06677">Vissa inte skattepliktiga ersättning-</tspan><tspan
+       sodipodi:role="line"
+       id="tspan5458"
+       x="373.16144"
+       y="833.04553">ar till utlänska experter mfl enligt</tspan><tspan
+       sodipodi:role="line"
+       id="tspan5460"
+       x="373.16144"
+       y="844.02429">beslut från Forskarskattenämnden</tspan></text>
+  <rect
+     style="fill:none;stroke:#000000;stroke-width:0.3048037;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+     id="rect3468-0-9"
+     width="319.90479"
+     height="39.987907"
+     x="41.913849"
+     y="168.77776" />
+  <rect
+     style="fill:none;stroke:#000000;stroke-width:0.25;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+     id="rect3468-6-7-0-9-0"
+     width="165.22972"
+     height="40.127628"
+     x="42.002823"
+     y="129.07753" />
+  <text
+     sodipodi:linespacing="125%"
+     id="text3742-88-62-1-0-9-2"
+     y="159.28235"
+     x="44.291496"
+     style="font-style:normal;font-variant:normal;font-weight:300;font-stretch:normal;font-size:10px;line-height:125%;font-family:Ubuntu;-inkscape-font-specification:'Ubuntu, Light';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+     xml:space="preserve"><tspan
+       sodipodi:role="line"
+       id="tspan5601"
+       x="44.291496"
+       y="159.28235">Specifikationsnummer</tspan></text>
+  <text
+     sodipodi:linespacing="125%"
+     id="text3742-88-62-7-2-4-3-0"
+     y="138.6355"
+     x="187.09521"
+     style="font-style:normal;font-variant:normal;font-weight:500;font-stretch:normal;font-size:11.3010006px;line-height:125%;font-family:Ubuntu;-inkscape-font-specification:'Ubuntu, Medium';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+     xml:space="preserve"><tspan
+       sodipodi:role="line"
+       id="tspan5603"
+       x="187.09521"
+       y="138.6355">570</tspan></text>
+  <rect
+     style="fill:none;stroke:#000000;stroke-width:0.30330548;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+     id="rect3468-1-2-5-5"
+     width="319.78961"
+     height="39.610016"
+     x="42.098511"
+     y="129.18097" />
+  <rect
+     style="fill:none;stroke:#000000;stroke-width:0.30508241;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+     id="rect3512-7-2-6-7"
+     width="30.845026"
+     height="29.329052"
+     x="122.59792"
+     y="179.15408" />
+  <text
+     sodipodi:linespacing="125%"
+     id="text3742-88-62-7-4-2-89-1"
+     y="178.04401"
+     x="127.67603"
+     style="font-style:normal;font-variant:normal;font-weight:500;font-stretch:normal;font-size:11.3010006px;line-height:125%;font-family:Ubuntu;-inkscape-font-specification:'Ubuntu, Medium';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+     xml:space="preserve"><tspan
+       sodipodi:role="line"
+       id="tspan5638"
+       x="127.67603"
+       y="178.04401">210</tspan></text>
+  <rect
+     style="fill:none;stroke:#000000;stroke-width:0.30508241;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+     id="rect3512-7-2-1-4-9-4"
+     width="30.845026"
+     height="29.329052"
+     x="248.3382"
+     y="179.15408" />
+  <text
+     sodipodi:linespacing="125%"
+     id="text3742-88-62-7-4-2-8-2-91-1"
+     y="178.04401"
+     x="253.67603"
+     style="font-style:normal;font-variant:normal;font-weight:500;font-stretch:normal;font-size:11.3010006px;line-height:125%;font-family:Ubuntu;-inkscape-font-specification:'Ubuntu, Medium';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+     xml:space="preserve"><tspan
+       sodipodi:role="line"
+       id="tspan5640"
+       x="253.67603"
+       y="178.04401">205</tspan></text>
+  <text
+     sodipodi:linespacing="125%"
+     id="text3742-88-62-00-4-2-0"
+     y="185.05943"
+     x="42.538555"
+     style="font-style:normal;font-variant:normal;font-weight:300;font-stretch:normal;font-size:10.08093166px;line-height:125%;font-family:Ubuntu;-inkscape-font-specification:'Ubuntu, Light';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+     xml:space="preserve"
+     transform="scale(1.0070225,0.99302648)"><tspan
+       sodipodi:role="line"
+       id="tspan5605"
+       x="42.538555"
+       y="185.05943">Denna kontroll-</tspan><tspan
+       sodipodi:role="line"
+       id="tspan5607"
+       x="42.538555"
+       y="197.6606">uppgift ska</tspan></text>
+  <text
+     sodipodi:linespacing="125%"
+     id="text3742-88-62-00-4-0-3-0"
+     y="188.03076"
+     x="277.01468"
+     style="font-style:normal;font-variant:normal;font-weight:300;font-stretch:normal;font-size:6.97823954px;line-height:125%;font-family:Ubuntu;-inkscape-font-specification:'Ubuntu, Light';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+     xml:space="preserve"
+     transform="scale(1.0149754,0.98524556)"><tspan
+       sodipodi:role="line"
+       id="tspan5609"
+       x="277.01468"
+       y="188.03076">ta bort tidigare inlämnad</tspan><tspan
+       sodipodi:role="line"
+       id="tspan5611"
+       x="277.01468"
+       y="196.75356">kontrolluppgift</tspan></text>
+  <text
+     sodipodi:linespacing="125%"
+     id="text3742-88-62-00-4-0-3-0-3"
+     y="190.52513"
+     x="150.07942"
+     style="font-style:normal;font-variant:normal;font-weight:300;font-stretch:normal;font-size:8.83138847px;line-height:125%;font-family:Ubuntu;-inkscape-font-specification:'Ubuntu, Light';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+     xml:space="preserve"
+     transform="scale(1.0265527,0.97413411)"><tspan
+       sodipodi:role="line"
+       id="tspan5634"
+       x="150.07942"
+       y="190.52513">rätta tidigare inlämnad</tspan><tspan
+       sodipodi:role="line"
+       id="tspan5636"
+       x="150.07942"
+       y="201.56436">kontrolluppgift</tspan></text>
+  <rect
+     style="fill:none;stroke:#000000;stroke-width:0.30508241;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+     id="rect3468-6-7-0-3"
+     width="165.23427"
+     height="38.956543"
+     x="40.000549"
+     y="233.07526" />
+  <text
+     sodipodi:linespacing="125%"
+     id="text3742-88-62-7-2-4-31"
+     y="242.6355"
+     x="185.09521"
+     style="font-style:normal;font-variant:normal;font-weight:500;font-stretch:normal;font-size:11.30100012px;line-height:125%;font-family:Ubuntu;-inkscape-font-specification:'Ubuntu, Medium';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;"
+     xml:space="preserve"><tspan
+       sodipodi:role="line"
+       id="tspan5730">201</tspan></text>
+  <text
+     sodipodi:linespacing="125%"
+     id="text3742-3-6-6-1"
+     y="226.68652"
+     x="40.217377"
+     style="font-style:normal;font-variant:normal;font-weight:500;font-stretch:normal;font-size:11.30100012px;line-height:125%;font-family:Ubuntu;-inkscape-font-specification:'Ubuntu, Medium';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;"
+     xml:space="preserve"><tspan
+       sodipodi:role="line"
+       id="tspan5728">Uppgiftslämnare</tspan></text>
+  <rect
+     style="fill:none;stroke:#000000;stroke-width:0.30134487;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+     id="rect3468-1-2-9"
+     width="319.142"
+     height="39.178928"
+     x="40.097519"
+     y="233.17999" />
+  <text
+     sodipodi:linespacing="125%"
+     id="text3742-88-62-1-0-6-5"
+     y="285.28235"
+     x="42.291489"
+     style="font-style:normal;font-variant:normal;font-weight:300;font-stretch:normal;font-size:10px;line-height:125%;font-family:Ubuntu;-inkscape-font-specification:'Ubuntu, Light';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;"
+     xml:space="preserve"><tspan
+       sodipodi:role="line"
+       id="tspan5726">Namn</tspan></text>
+  <rect
+     style="fill:none;stroke:#000000;stroke-width:0.30358744;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+     id="rect3468-1-2-9-9"
+     width="319.13974"
+     height="39.764503"
+     x="40.09864"
+     y="272.59329" />
+  <text
+     sodipodi:linespacing="125%"
+     id="text3742-88-62-17"
+     y="268.004"
+     x="43.577881"
+     style="font-style:normal;font-variant:normal;font-weight:300;font-stretch:normal;font-size:11.3009634px;line-height:125%;font-family:Ubuntu;-inkscape-font-specification:'Ubuntu Light';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+     xml:space="preserve"><tspan
+       id="tspan3748-7-8-7"
+       y="268.004"
+       x="43.577881"
+       sodipodi:role="line">Person-/organisationsnummer</tspan></text>
 </svg>

@@ -30,12 +30,27 @@ import random
 import logging
 _logger = logging.getLogger(__name__)
 
-
-
 from openerp.tools import DEFAULT_SERVER_DATE_FORMAT, DEFAULT_SERVER_DATETIME_FORMAT
 from datetime import timedelta, date, datetime
 
 import openerp.addons.decimal_precision as dp
+
+class hr_salary_rule(models.Model):
+    _inherit = 'hr.salary.rule'
+
+    def init_records(self,cr,uid, context=None):
+        hr_rule_basic = self.pool.get('ir.model.data').get_object_reference(cr, uid, 'hr_payroll', 'hr_rule_basic')
+        self.pool.get('hr.salary.rule').write(cr,uid,hr_rule_basic[1],{
+            'active': False,
+        })
+        hr_rule_taxable = self.pool.get('ir.model.data').get_object_reference(cr, uid, 'hr_payroll', 'hr_rule_taxable')
+        self.pool.get('hr.salary.rule').write(cr,uid,hr_rule_taxable[1],{
+            'active': False,
+        })
+        hr_rule_net = self.pool.get('ir.model.data').get_object_reference(cr, uid, 'hr_payroll', 'hr_rule_net')
+        self.pool.get('hr.salary.rule').write(cr,uid,hr_rule_net[1],{
+            'active': False,
+        })
 
 class hr_contract(models.Model):
     _inherit = 'hr.contract'
@@ -168,6 +183,10 @@ class hr_payslip(models.Model):
     @api.model
     def get_slip_line(self, code):
         return self.details_by_salary_rule_category.filtered(lambda l: l.code == code).mapped(lambda v: {'name': v.name, 'quantity': v.quantity, 'rate': v.rate, 'amount': v.amount, 'total': v.total})
+    @api.model
+    def get_slip_line_total(self, code):
+        #~ raise Warning(sum(self.details_by_salary_rule_category.filtered(lambda l: l.code == code).mapped('total')))
+        return sum(self.details_by_salary_rule_category.filtered(lambda l: l.code == code).mapped('total'))
 
     @api.model
     def get_slip_line_acc(self, code):

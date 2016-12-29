@@ -46,14 +46,42 @@ result = contract.wage * 0.008
       <field name="sequence">240</field>
       <field name="appears_on_payslip" eval="True"/>
       <field name="condition_select">python</field>
-      <field name="condition_python">result = worked_days.WORK100.payslip_id.leave_number_of_days('l10n_se_hr_holidays.holiday_status_unpaid') &gt; 0.0</field>
+      <field name="condition_python">result = worked_days.WORK100.payslip_id.leave_number_of_days('hr_holidays.holiday_status_unpaid') &gt; 0.0</field>
       <field name="amount_select">code</field>
       <field name="amount_python_compute">
 #(ML*0,046)*(VAD/VADI)
-result_qty = worked_days.WORK100.payslip_id.leave_number_of_days('l10n_se_hr_holidays.holiday_status_unpaid')
+result_qty = worked_days.WORK100.payslip_id.leave_number_of_days('hr_holidays.holiday_status_unpaid')
 result = contract.wage * 0.046
       </field>
       <field name="quantity">1</field>
+    </record>
+
+    <record id="hr_salary_rule_compensary_monetary" model="hr.salary.rule">
+      <field name="category_id" ref="l10n_se_hr_payroll.hr_salary_rule_category-BRUTIL" />
+      <field name="code">komp_peng</field>
+      <field name="salary_art">103</field>
+      <field name="name">Komptid i pengar</field>
+      <field name="sequence">250</field>
+      <field name="appears_on_payslip" eval="True"/>
+      <field name="condition_select">python</field>
+      <field name="condition_python">result = inputs.komp_peng.amount != 0</field>
+      <field name="amount_select">code</field>
+      <field name="amount_python_compute">
+#(ML/AVTID)*(100/APR)
+result_qty = inputs.komp_peng.amount
+result = contract.wage / 160
+      </field>
+      <field name="quantity">1</field>
+    </record>
+
+    <record id="hr_rule_input_compensary_monetary" model="hr.rule.input">
+      <field name="code">komp_peng</field>
+      <field name="name">Komptid i pengar (tim)</field>
+      <field name="input_id" ref="hr_salary_rule_compensary_monetary" />
+    </record>
+
+    <record id="l10n_se_hr_payroll.hr_payroll_structure-gl" model="hr.payroll.structure">
+      <field name="rule_ids" eval="[(4, ref('l10n_se_hr_holidays.hr_salary_rule_legal_leave_pay')), (4, ref('l10n_se_hr_holidays.hr_salary_rule_legal_leave_addition')), (4, ref('l10n_se_hr_holidays.hr_salary_rule_legal_leave_deduction'), ref('l10n_se_hr_holidays.hr_salary_rule_compensary_monetary'))]" />
     </record>
 
   </data>

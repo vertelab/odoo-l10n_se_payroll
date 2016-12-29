@@ -13,34 +13,50 @@
          </record>
     -->
     <record id="hr_payroll_structure-gl" model="hr.payroll.structure">
-      <field name="code">bas2015</field>
+      <field name="code">bas2017</field>
       <field name="name">Bas för löneavtal (Ska ej användas i avtal)</field>
       <field name="company_id" ref="base.main_company" />
-      <field eval="[(6,0,[ref('hr_salary_rule-AGE'), ref('hr_salary_rule-sum'), ref('hr_salary_rule-pre'), ref('hr_salary_rule-sa'), ref('hr_salary_rule-bl'), ref('hr_salary_rule-gl'), ref('hr_salary_rule-kval'), ref('hr_salary_rule-sjk'), ref('hr_salary_rule-resmil')])]" name="rule_ids" />
+      <field eval="[(6,0,[ref('hr_salary_rule-AGE'), ref('hr_salary_rule-sum'), ref('hr_salary_rule-pre'), ref('hr_salary_rule-sa'), ref('hr_salary_rule-bl'), ref('hr_salary_rule-kval'), ref('hr_salary_rule-resmil'), ref('hr_salary_rule-forman'), ref('hr_salary_rule_traktamente_domestic'), ref('hr_salary_rule_traktamente_foreign'), ref('hr_salary_rule_expenses'), ref('hr_salary_rule-retroactive-til')])]" name="rule_ids" />
 <!--
       <field eval="[(6,0,[ref('hr_salary_rule-AGE'), ref('hr_salary_rule-sum'), ref('hr_salary_rule-pre'), ref('hr_salary_rule-bl'), ref('hr_salary_rule-gl')])]" name="rule_ids" />
 -->
     </record>
     <record id="hr_payroll_structure-fl" model="hr.payroll.structure">
-      <field name="code">bas2015-fl</field>
+      <field name="code">bas2017-fl</field>
       <field name="name">Lön företagsledare</field>
       <field name="company_id" ref="base.main_company" />
       <field name="parent_id" ref="hr_payroll_structure-gl" />
-      <field eval="[(4, ref('hr_salary_rule-blfl'))]" name="rule_ids" />
+      <field eval="[(4, ref('hr_salary_rule-gl')), (4, ref('hr_salary_rule-blfl'))]" name="rule_ids" />
     </record>
     <record id="hr_payroll_structure-tj" model="hr.payroll.structure">
-      <field name="code">bas2015-tj</field>
+      <field name="code">bas2017-tj</field>
       <field name="name">Lön tjänsteman</field>
       <field name="company_id" ref="base.main_company" />
       <field name="parent_id" ref="hr_payroll_structure-gl" />
-      <field eval="[(4, ref('hr_salary_rule-bltj'))]" name="rule_ids" />
+      <field eval="[(4, ref('hr_salary_rule-gl')), (4, ref('hr_salary_rule-bltj'))]" name="rule_ids" />
     </record>
     <record id="hr_payroll_structure-kl" model="hr.payroll.structure">
-      <field name="code">bas2015-kl</field>
+      <field name="code">bas2017-kl</field>
       <field name="name">Lön kollektivanställd</field>
       <field name="company_id" ref="base.main_company" />
       <field name="parent_id" ref="hr_payroll_structure-gl" />
-      <field eval="[(4, ref('hr_salary_rule-blkl'))]" name="rule_ids" />
+      <field eval="[(4, ref('hr_salary_rule-gl')), (4, ref('hr_salary_rule-blkl'))]" name="rule_ids" />
     </record>
+    <!-- Lön tjänsteman - utan närvaro -->
+    <record id="hr_payroll_structure-tjun" model="hr.payroll.structure">
+      <field name="code">bas2017-tjun</field>
+      <field name="name">Lön tjänsteman (utan närvaro)</field>
+      <field name="company_id" ref="base.main_company" />
+      <field name="parent_id" ref="hr_payroll_structure-gl" />
+      <field eval="[(4, ref('hr_salary_rule-gl')), (4, ref('hr_salary_rule-bltj'))]" name="rule_ids" />
+    </record>
+    <!-- timanställd -->
+    <record id="hr_payroll_structure-tim" model="hr.payroll.structure">
+      <field name="code">bas2017-tim</field>
+      <field name="name">Timanställd</field>
+      <field name="company_id" ref="base.main_company" />
+      <field name="parent_id" ref="hr_payroll_structure-gl" />
+    </record>
+
   </data>
 </openerp>

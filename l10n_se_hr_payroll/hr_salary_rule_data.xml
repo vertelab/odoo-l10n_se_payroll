@@ -169,6 +169,7 @@ if age > 77:
       <field name="parent_rule_id" ref="hr_salary_rule-sau" />
       <field name="category_id" ref="hr_salary_rule_category-SKV" />
       <field name="code">(sau)</field>
+      <field name="salary_art">s110</field>
       <field name="name">Avräkning lagstadgade sociala avgifter</field>
       <field name="sequence">490</field>
       <field name="appears_on_payslip" eval="False"/>
@@ -203,6 +204,7 @@ if age > 77:
       <field name="parent_rule_id" ref="hr_salary_rule-san" />
       <field name="category_id" ref="hr_salary_rule_category-SKV" />
       <field name="code">(san)</field>
+      <field name="salary_art">s110</field>
       <field name="name">Avräkning lagstadgade sociala avgifter</field>
       <field name="sequence">490</field>
       <field name="appears_on_payslip" eval="False"/>
@@ -487,7 +489,7 @@ result = 0.0 if result_qty == 0 or inputs.traktinb.amount == 0 else inputs.trakt
     <record id="hr_salary_rule_expenses" model="hr.salary.rule">
       <field name="category_id" ref="hr_salary_rule_category-NETTIL" />
       <field name="code">utlagg</field>
-      <field name="salary_art">730</field>
+      <field name="salary_art">793</field>
       <field name="name">Utlägg</field>
       <field name="sequence">710</field>
       <field name="appears_on_payslip" eval="True"/>
@@ -675,8 +677,8 @@ result = inputs.utlagg.amount
       <field name="code">forman</field>
       <field name="salary_art">666</field>
       <field name="name">Förmån</field>
-      <field name="sequence">10</field>
-      <field name="appears_on_payslip" eval="True"/>
+      <field name="sequence">25</field>
+      <field name="appears_on_payslip" eval="False"/>
       <field name="condition_select">none</field>
       <field name="amount_select">code</field>
       <field name="amount_python_compute">result = worked_days.WORK100.payslip_id.get_employeefund_addition()</field>
@@ -684,4 +686,7 @@ result = inputs.utlagg.amount
     </record>
 
   </data>
+    <data noupdate="1">
+        <function model="hr.salary.rule" name="init_records" />
+    </data>
 </openerp>

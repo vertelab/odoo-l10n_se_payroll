@@ -22,7 +22,7 @@
     'name': 'Swedish - Payroll',
     'category': 'Localization',
     'author': 'Vertel AB',
-    'depends': ['hr_payroll','hr_holidays','hr_payroll_benefits', 'report'],
+    'depends': ['hr_payroll','hr_holidays','hr_payroll_benefits', 'report_glabels'],
     'version': '1.2',
     'description': """
 Swedish Payroll Rules.
@@ -40,18 +40,16 @@ Swedish Payroll Rules.
     'auto_install': False,
     'website': 'http://www.vertel.se',
     'data':[
+        'hr_payroll_data.xml',
         'hr_payroll_view.xml',
+        'hr_payroll_data.xml',
         'hr_payroll_payslip_report.xml',
+        'report_ku10_view.xml',
         #
         'hr_salary_rule_category_data.xml',
         'hr_salary_rule_data.xml',
-        'hr_salary_rule_data_sick.xml',
-        'hr_salary_rule_data_car.xml',
-        'hr_salary_rule_data_schema.xml',
         # last
         'hr_payroll_stucture_simple_data.xml',
-        'hr_payroll_data.xml',
-
     ],
     'demo':[
         'hr_payroll_demo.xml',

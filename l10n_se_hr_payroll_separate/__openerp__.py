@@ -22,7 +22,7 @@
     'name': 'HR Payroll Separate',
     'category': 'Localization',
     'author': 'Vertel AB',
-    'depends': ['l10n_se_hr_payroll'],
+    'depends': ['l10n_se_hr_payroll','base_synchro','l10n_se_hr_holidays','hr_attendance'],
     'version': '1.0',
     'licence': 'AGPL-3',
     'summary': 'Run Payroll separate',
@@ -37,9 +37,14 @@ Run payroll in another database synked with Odoo
     'website': 'http://vertel.se',
     'data':[
         'base_synchro_data.xml',
+<<<<<<< HEAD
+=======
+        'base_synchro_view.xml',
+>>>>>>> 107e45bfaa707ab23f72391771972bfe729e7934
     ],
     'demo':[
     ],
+    'external_dependencies': {'python': ['odoorpc']},
     'installable': True
 }
 
