@@ -183,6 +183,10 @@ class hr_payslip(models.Model):
     @api.model
     def get_slip_line(self, code):
         return self.details_by_salary_rule_category.filtered(lambda l: l.code == code).mapped(lambda v: {'name': v.name, 'quantity': v.quantity, 'rate': v.rate, 'amount': v.amount, 'total': v.total})
+    @api.model
+    def get_slip_line_total(self, code):
+        #~ raise Warning(sum(self.details_by_salary_rule_category.filtered(lambda l: l.code == code).mapped('total')))
+        return sum(self.details_by_salary_rule_category.filtered(lambda l: l.code == code).mapped('total'))
 
     @api.model
     def get_slip_line_acc(self, code):

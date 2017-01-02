@@ -36,6 +36,91 @@ except:
 import logging
 _logger = logging.getLogger(__name__)
 
+
+
+class hr_attendance(models.Model):
+    _inherit = 'hr.attendance'
+
+    def _altern_si_so(self, cr, uid, ids, context=None):
+        """ Alternance sign_in/sign_out check.
+            Previous (if exists) must be of opposite action.
+            Next (if exists) must be of opposite action.
+        """
+        return False
+        for att in self.browse(cr, uid, ids, context=context):
+            # search and browse for first previous and first next records
+            prev_att_ids = self.search(cr, uid, [('employee_id', '=', att.employee_id.id), ('name', '<', att.name), ('action', 'in', ('sign_in', 'sign_out'))], limit=1, order='name DESC')
+            next_add_ids = self.search(cr, uid, [('employee_id', '=', att.employee_id.id), ('name', '>', att.name), ('action', 'in', ('sign_in', 'sign_out'))], limit=1, order='name ASC')
+            prev_atts = self.browse(cr, uid, prev_att_ids, context=context)
+            next_atts = self.browse(cr, uid, next_add_ids, context=context)
+            # check for alternance, return False if at least one condition is not satisfied
+            if prev_atts and prev_atts[0].action == att.action: # previous exists and is same action
+                return False
+            if next_atts and next_atts[0].action == att.action: # next exists and is same action
+                return False
+            if (not prev_atts) and (not next_atts) and att.action != 'sign_in': # first attendance must be sign_in
+                return False
+        return True
+        
+    
+    _constraints = [(_altern_si_so, 'Error ! Sign in (resp. Sign out) must follow Sign out (resp. Sign in)', ['action'])]
+    #~ _constraints = [(lambda f: True, 'Error ! Sign in (resp. Sign out) must follow Sign out (resp. Sign in)', ['action'])]
+    #~ _constraints = []
+    def _auto_init(self, cr, context=None):
+        self._constraints = [(lambda f: True, 'Error ! Sign in (resp. Sign out) must follow Sign out (resp. Sign in)', ['action'])]
+        #raise Warning(self._constraints)
+        super(hr_attendance, self)._auto_init(cr, context)
+        
+        
+    @api.multi
+    def _validate_fields(self, field_names):
+        return True
+        field_names = set(field_names)
+
+        # old-style constraint methods
+        trans = self.env['ir.translation']
+        cr, uid, context = self.env.args
+        ids = self.ids
+        errors = []
+        raise Warning(self._constraints)
+        for fun, msg, names in self._constraints:
+            try:
+                # validation must be context-independent; call ``fun`` without context
+                valid = names and not (set(names) & field_names)
+                valid = valid or fun(self._model, cr, uid, ids)
+                extra_error = None
+            except Exception, e:
+                _logger.debug('Exception while validating constraint', exc_info=True)
+                valid = False
+                extra_error = tools.ustr(e)
+            if not valid:
+                if callable(msg):
+                    res_msg = msg(self._model, cr, uid, ids, context=context)
+                    if isinstance(res_msg, tuple):
+                        template, params = res_msg
+                        res_msg = template % params
+                else:
+                    res_msg = trans._get_source(self._name, 'constraint', self.env.lang, msg)
+                if extra_error:
+                    res_msg += "\n\n%s\n%s" % (_('Error details:'), extra_error)
+                errors.append(
+                    _("Field(s) `%s` failed against a constraint: %s") %
+                        (', '.join(names), res_msg)
+                )
+        if errors:
+            raise ValidationError('\n'.join(errors))
+
+        # new-style constraint methods
+        for check in self._constraint_methods:
+            if set(check._constrains) & field_names:
+                try:
+                    check(self)
+                except ValidationError, e:
+                    raise
+                except Exception, e:
+                    raise ValidationError("Error while validating constraint\n\n%s" % tools.ustr(e))
+
+
 class base_synchro(models.TransientModel):
     _inherit = 'base.synchro'
     
@@ -66,96 +151,7 @@ class base_synchro(models.TransientModel):
                             'name': '1900-01-01 00:00:00',
                         })
 
-class hr_payslip_run(models.Model):
-    _inherit = 'hr.payslip.run'
 
-    @api.model
-    def generate_csv(self):
-        temp = tempfile.NamedTemporaryFile(mode='w+t',suffix='.csv')
-        rules = self.env['hr.salary.rule'].search([('active', '=', True), ('appears_on_payslip', '=', True)], order='sequence, salary_art')
-        labelwriter = None
-        for slip in self.slip_ids.sorted(key=lambda s: s.employee_id.contract_id.name):
-            if not labelwriter:
-                columns = ['Anst nr', 'Name']
-                labelwriter = csv.DictWriter(temp, columns + ['%s\n%s' %(r.name.replace(u'ö', 'o').replace(u'å', 'a').replace(u'ä', 'a').encode('ascii', 'ignore'), r.salary_art) for r in rules if r.salary_art])
-                labelwriter.writeheader()
-            labelwriter.writerow(slip.get_payslip_run_row(rules))
-        temp.seek(0)
-        self.env['ir.attachment'].create({
-            'name': self.name.replace(' ', '_') + '.csv',
-            'res_name': self.name,
-            'res_model': self._name,
-            'res_id': self.id,
-            'datas': base64.encodestring(temp.read()),
-            'datas_fname': self.name.replace(' ', '_') + '.csv',
-        })
-        temp.close()
-        return True
 
-    @api.one
-    def _company_id(self):
-        self.company_id = self.env['res.company'].browse(self.env['res.users'].browse(self._uid)._get_company())
-    company_id = fields.Char(compute="_company_id")
-
-    # fields match Arbetsgivardeklaration document from Swelon.se
-    @api.one
-    def _nbr_employee(self):
-        self.nbr_employee = len(self.slip_ids)
-    nbr_employee = fields.Integer(compute="_nbr_employee")
-
-    @api.one
-    def _taxable_salary(self): #50
-        self.taxable_salary = sum([s.get_slip_line('bl')[0]['total'] for s in self.slip_ids if s.get_slip_line('bl')])
-    taxable_salary = fields.Integer(compute="_taxable_salary")
-
-    @api.one
-    def _social_normal_fees(self): #55 & 56
-        self.fully_social_normal_fees = sum([s.get_slip_line('san')[0]['amount'] for s in self.slip_ids if s.get_slip_line('san')])
-        self.social_normal_fees = sum([s.get_slip_line('san')[0]['total'] for s in self.slip_ids if s.get_slip_line('san')])
-    fully_social_normal_fees = fields.Integer(compute="_social_normal_fees")
-    social_normal_fees = fields.Integer(compute="_social_normal_fees")
-
-    @api.one
-    def _social_youth_fees(self): #57 & 58
-        self.fully_social_youth_fees = sum([s.get_slip_line('sau')[0]['amount'] for s in self.slip_ids if s.get_slip_line('sau')])
-        self.social_youth_fees = sum([s.get_slip_line('sau')[0]['total'] for s in self.slip_ids if s.get_slip_line('sau')])
-    fully_social_youth_fees = fields.Integer(compute="_social_youth_fees")
-    social_youth_fees = fields.Integer(compute="_social_youth_fees")
-
-    @api.one
-    def _social_retired_fees(self): #59 & 60
-        self.fully_social_retired_fees = sum([s.get_slip_line('sap')[0]['amount'] for s in self.slip_ids if s.get_slip_line('sap')])
-        self.social_retired_fees = sum([s.get_slip_line('sap')[0]['total'] for s in self.slip_ids if s.get_slip_line('sap')])
-    fully_social_retired_fees = fields.Integer(compute="_social_retired_fees")
-    social_retired_fees = fields.Integer(compute="_social_retired_fees")
-
-    @api.one
-    def _total_tax(self): #82/88
-        self.total_tax = sum([s.get_slip_line('pre')[0]['total'] for s in self.slip_ids if s.get_slip_line('pre')])
-    total_taxable = fields.Integer(compute="_total_tax")
-
-    @api.one
-    def _general_payroll_tax(self): #70/78
-        self.general_payroll_tax = sum([s.get_slip_line('sa')[0]['total'] for s in self.slip_ids if s.get_slip_line('sa')])
-    general_payroll_tax = fields.Integer(compute="_general_payroll_tax")
-
-    @api.one
-    def _net_salary(self): #81
-        self.net_salary = sum([s.get_slip_line('net')[0]['total'] for s in self.slip_ids if s.get_slip_line('net')])
-    net_salary = fields.Integer(compute="_net_salary")
-
-class hr_payslip(models.Model):
-    _inherit = 'hr.payslip'
-
-    @api.model
-    def get_payslip_run_row(self, rules):
-        rec = {
-            'Anst nr': self.employee_id.contract_id.name.encode('utf-8') if self.employee_id.contract_id else 'N/A',
-            'Name': self.employee_id.name.encode('utf-8'),
-        }
-        for r in rules:
-            if r.salary_art and self.get_slip_line(r.code):
-                rec['%s\n%s' %(r.name.replace(u'ö', 'o').replace(u'å', 'a').replace(u'ä', 'a').encode('ascii', 'ignore'), r.salary_art)] = self.get_slip_line(r.code)[0]['total']
-        return rec
 
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:

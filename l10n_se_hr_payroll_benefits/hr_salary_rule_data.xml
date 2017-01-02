@@ -17,21 +17,89 @@
       <field name="quantity">1</field>
       <field name="note">Företagets verkliga bilkostnad, t ex leasingavgift minus halv moms</field>
     </record>
-    <record id="hr_salary_rule-car-deduct" model="hr.salary.rule">
+
+
+    <record id="c041" model="hr.benefit">
+      <field name="name">041</field>
+      <field name="desc">Bostad småhus</field>
+      <field name="note">ku10</field>
+    </record>
+    <record id="c042" model="hr.benefit">
+      <field name="name">042</field>
+      <field name="desc">Kost</field>
+      <field name="note">ku10</field>
+    </record>
+    <record id="c043" model="hr.benefit">
+      <field name="name">043</field>
+      <field name="desc">Bostad ej småhus</field>
+      <field name="note">ku10</field>
+    </record>
+    <record id="c044" model="hr.benefit">
+      <field name="name">044</field>
+      <field name="desc">Ränta</field>
+      <field name="note">ku10</field>
+    </record>
+    <record id="c045" model="hr.benefit">
+      <field name="name">045</field>
+      <field name="desc">Parkering</field>
+      <field name="note">ku10</field>
+    </record>
+    <record id="c047" model="hr.benefit">
+      <field name="name">047</field>
+      <field name="desc">Ange förmån</field>
+      <field name="note">Ange i beskrivning vilken annan förmån, t ex fri dagstidning (ku10)</field>
+    </record>
+    <record id="hr_salary_rule-car-deduct013" model="hr.salary.rule">
       <field name="category_id" ref="l10n_se_hr_payroll.hr_salary_rule_category-NETAVG" />
       <field name="parent_rule_id" ref="l10n_se_hr_payroll.hr_salary_rule-forman" />
-      <field name="code">car_adv</field>
+      <field name="code">013</field>
       <field name="salary_art">711</field>
       <field name="name">Tjänstebilavdrag</field>
       <field name="sequence">710</field>
       <field name="appears_on_payslip" eval="True"/>
       <field name="condition_select">python</field>
-      <field name="condition_python">result = contract.benefit_ids.filtered(lambda b: b.name == 'car_adv')</field>
+      <field name="condition_python">result = contract.benefit_ids.filtered(lambda b: b.name == '013')</field>
       <field name="amount_select">code</field>
-      <field name="amount_python_compute">result = contract.benefit_ids.filtered(lambda b: b.name == 'car_adv').value or 0.0</field>
+      <field name="amount_python_compute">result = contract.benefit_ids.filtered(lambda b: b.name == '013').value or 0.0</field>
       <field name="quantity">1</field>
       <field name="note">Förmånsvärdesberäkning SKV http://www.skatteverket.se/privat/skatter/arbeteochinkomst/formaner/bilarochbilforman</field>
     </record>
+    <record id="c013" model="hr.benefit">
+      <field name="name">013</field>
+      <field name="desc">ange kod för förmånsbil</field>
+      <field name="note">Ange i beskrivning vilken annan förmån (ku10)</field>
+    </record>
+    <record id="hr_salary_rule-car-deduct017" model="hr.salary.rule">
+      <field name="category_id" ref="l10n_se_hr_payroll.hr_salary_rule_category-NETAVG" />
+      <field name="parent_rule_id" ref="l10n_se_hr_payroll.hr_salary_rule-forman" />
+      <field name="code">017</field>
+      <field name="salary_art">711</field>
+      <field name="name">Tjänstebilavdrag</field>
+      <field name="sequence">710</field>
+      <field name="appears_on_payslip" eval="True"/>
+      <field name="condition_select">python</field>
+      <field name="condition_python">result = contract.benefit_ids.filtered(lambda b: b.name == '017')</field>
+      <field name="amount_select">code</field>
+      <field name="amount_python_compute">result = contract.benefit_ids.filtered(lambda b: b.name == '017').value or 0.0</field>
+      <field name="quantity">1</field>
+      <field name="note">Förmånsvärdesberäkning SKV http://www.skatteverket.se/privat/skatter/arbeteochinkomst/formaner/bilarochbilforman</field>
+    </record>
+    <record id="c017" model="hr.benefit">
+      <field name="name">017</field>
+      <field name="desc">Betalt för bilförmån</field>
+      <field name="note">Om den anställde har betalat för bilförmånen med sin nettolön ska du minska förmånsvärdet med det belopp som han har betalt. (ku10)</field>
+    </record>
+    <record id="c021" model="hr.benefit">
+      <field name="name">021</field>
+      <field name="desc">Rutarbete</field>
+      <field name="note">(ku10)</field>
+    </record>
+    <record id="c022" model="hr.benefit">
+      <field name="name">022</field>
+      <field name="desc">Rotarbete</field>
+      <field name="note">(ku10)</field>
+    </record>
+    
 
   </data>
 

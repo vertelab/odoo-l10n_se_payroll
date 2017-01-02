@@ -35,12 +35,16 @@
       <field name="whitelist" eval="False" />
       <field name="avoid_ids" eval="[(0,0,{'name':'company_id'}),(0,0,{'name':'remaining_leaves'}),(0,0,{'name':'user_id'}),(0,0,{'name':'slip_ids'})]" />
     </record>
+
+ 
     <record id="holidays_status" model="base.synchro.obj">
       <field name="name">hr.holidays.status</field>
+
       <field name="active" eval="True" />
       <field name="sequence">15</field>
       <field name="server_id" ref="l10n_se_hr_payroll_separate.server" />
       <field name="model_id" ref="hr_holidays.model_hr_holidays_status" />
+
       <field name="action">d</field>
       <field name="domain">[]</field>
       <field name="whitelist" eval="False" />
@@ -122,6 +126,7 @@
       <field name="avoid_ids" eval="[(0,0,{'name':'name'}),(0,0,{'name':'employee_id'}),(0,0,{'name':'action'}),]" />
     </record>
     <!-- Cron -->
+
     
 
   </data>

@@ -22,7 +22,7 @@
     'name': 'Swedish - Schema Benefits',
     'category': 'Localization',
     'author': 'Vertel AB',
-    'depends': ['l10n_se_hr_payroll','hr_payroll_schema'],
+    'depends': ['l10n_se_hr_payroll','hr_payroll_benefits'],
     'version': '1.1',
     'description': """
 Swedish Payslip additions for Benefits
