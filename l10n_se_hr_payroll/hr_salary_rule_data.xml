@@ -681,7 +681,8 @@ result = inputs.utlagg.amount
       <field name="appears_on_payslip" eval="False"/>
       <field name="condition_select">none</field>
       <field name="amount_select">code</field>
-      <field name="amount_python_compute">result = worked_days.WORK100.payslip_id.get_employeefund_addition()</field>
+      <field name="amount_python_compute">#result = worked_days.WORK100.payslip_id.get_employeefund_addition()
+result = 0.0</field>
       <field name="quantity">1</field>
     </record>
 

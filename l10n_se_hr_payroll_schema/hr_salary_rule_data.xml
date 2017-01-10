@@ -24,7 +24,7 @@ result = contract.wage
       <field name="code">schema-hour</field>
       <field name="salary_art">300</field>
       <field name="name">Schema Hour Salary</field>
-      <field name="sequence">30</field>
+      <field name="sequence">300</field>
       <field name="appears_on_payslip" eval="True"/>
       <field name="condition_select">python</field>
       <field name="condition_python">result = contract.type_id.work_time == 'schema'</field>
