@@ -9,7 +9,7 @@
     </record>
 
     <record id="hr_salary_rule_legal_leave_of_furlough" model="hr.salary.rule">
-      <field name="category_id" ref="l10n_se_hr_payroll.hr_salary_rule_category-BRUTIL" />
+      <field name="category_id" ref="l10n_se_hr_payroll.hr_salary_rule_category-BRUAVG" />
       <field name="code">perm</field>
       <field name="salary_art">824b</field>
       <field name="name">Permission</field>
