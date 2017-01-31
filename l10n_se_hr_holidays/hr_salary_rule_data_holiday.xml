@@ -1,6 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
 <openerp>
   <data noupdate="1">
+
+    <record model="hr.holidays.status" id="holiday_status_furlough">
+      <field name="name">Furlough</field>
+      <field name="color_name">red</field>
+      <field name="limit" eval="True"/>
+    </record>
+
+    <record id="hr_salary_rule_legal_leave_of_furlough" model="hr.salary.rule">
+      <field name="category_id" ref="l10n_se_hr_payroll.hr_salary_rule_category-BRUAVG" />
+      <field name="code">perm</field>
+      <field name="salary_art">824b</field>
+      <field name="name">Permission</field>
+      <field name="sequence">230</field>
+      <field name="appears_on_payslip" eval="True"/>
+      <field name="condition_select">python</field>
+      <field name="condition_python">result = contract.get_leave_days('l10n_se_hr_holidays.holiday_status_furlough', worked_days) &gt; 0.0</field>
+      <field name="amount_select">code</field>
+      <field name="amount_python_compute">
+result_qty = contract.get_leave_days('l10n_se_hr_holidays.holiday_status_furlough', worked_days)
+result = 0.0
+      </field>
+      <field name="quantity">1</field>
+    </record>
+
     <!-- Semester -->
 
     <record id="hr_salary_rule_legal_leave_pay" model="hr.salary.rule">
@@ -81,7 +105,7 @@ result = contract.wage / 160
     </record>
 
     <record id="l10n_se_hr_payroll.hr_payroll_structure-gl" model="hr.payroll.structure">
-      <field name="rule_ids" eval="[(4, ref('l10n_se_hr_holidays.hr_salary_rule_legal_leave_pay')), (4, ref('l10n_se_hr_holidays.hr_salary_rule_legal_leave_addition')), (4, ref('l10n_se_hr_holidays.hr_salary_rule_legal_leave_deduction'), ref('l10n_se_hr_holidays.hr_salary_rule_compensary_monetary'))]" />
+      <field name="rule_ids" eval="[(4, ref('l10n_se_hr_holidays.hr_salary_rule_legal_leave_pay')), (4, ref('l10n_se_hr_holidays.hr_salary_rule_legal_leave_addition')), (4, ref('l10n_se_hr_holidays.hr_salary_rule_legal_leave_deduction'), ref('l10n_se_hr_holidays.hr_salary_rule_compensary_monetary')), (4, ref('l10n_se_hr_holidays.hr_salary_rule_legal_leave_of_furlough'))]" />
     </record>
 
   </data>
