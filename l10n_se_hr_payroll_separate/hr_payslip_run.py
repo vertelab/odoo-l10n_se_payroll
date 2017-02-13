@@ -151,7 +151,10 @@ class base_synchro(models.TransientModel):
                             'name': '1900-01-01 00:00:00',
                         })
 
-
+    @api.model
+    def _init_l10n_se_hr_payroll_separate(self):
+        """Disable workflow init on hr.holidays. Otherwise the workflow will corrupt synced data (the state field, and maybe more)."""
+        self.env.ref('hr_holidays.wkf_holidays').on_create = False
 
 
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
