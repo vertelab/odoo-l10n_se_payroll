@@ -26,20 +26,21 @@ import csv
 import os
 import tempfile
 import base64
+import pytz
 
 import logging
 _logger = logging.getLogger(__name__)
 
 class hr_payslip_run(models.Model):
     _inherit = 'hr.payslip.run'
-    
+
     @api.model
     def convert_to_local(self, timestamp):
         dt = fields.Datetime.from_string(timestamp)
         tz_name = self._context.get('tz') or self.env.user.tz
         local_dt = pytz.utc.localize(dt).astimezone(pytz.timezone(tz_name))
         return fields.Datetime.to_string(local_dt)
-    
+
     @api.model
     def generate_csv(self):
         temp = tempfile.NamedTemporaryFile(mode='w+t',suffix='.csv')
