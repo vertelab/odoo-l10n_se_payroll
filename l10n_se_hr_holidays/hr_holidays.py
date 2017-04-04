@@ -60,6 +60,14 @@ class hr_holidays_status(models.Model):
             'limit': True,
             'color_name': 'red',
         })
+        # holiday_status_comp
+        holiday_status_sl = self.pool.get('ir.model.data').get_object_reference(cr, uid, 'hr_holidays', 'holiday_status_sl')
+        self.pool.get('hr.holidays.status').write(cr,uid,holiday_status_sl[1],{
+            'name': 'Sick Leave 100%',
+            'legal_leave': False,
+            'limit': True,
+            'color_name': 'red',
+        })
 
     @api.one
     @api.depends('date_earning_start','date_earning_end','limit')

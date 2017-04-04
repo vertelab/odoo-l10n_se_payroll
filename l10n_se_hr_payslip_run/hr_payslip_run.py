@@ -67,7 +67,7 @@ class hr_payslip_run(models.Model):
                     'Anst nr': slip.employee_id.contract_id.name.encode('utf-8') if slip.employee_id.contract_id else 'N/A',
                     'Namn': slip.employee_id.name.encode('utf-8'),
                     'Franvarotyp': holiday.holiday_status_id.name.encode('utf-8'),
-                    'Datum': '%s - %s' %(holiday.date_from, holiday.date_to),
+                    'Datum': '%s - %s' %(fields.Date.context_timestamp(holiday.date_from), fields.Date.context_timestamp(holiday.date_to)),
                     'Antal dagar': holiday.number_of_days_temp,
                 })
         temp.seek(0)
