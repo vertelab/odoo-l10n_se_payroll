@@ -32,7 +32,14 @@ _logger = logging.getLogger(__name__)
 
 class hr_payslip_run(models.Model):
     _inherit = 'hr.payslip.run'
-
+    
+    @api.model
+    def convert_to_local(self, timestamp):
+        dt = fields.Datetime.from_string(timestamp)
+        tz_name = self._context.get('tz') or self.env.user.tz
+        local_dt = pytz.utc.localize(dt).astimezone(pytz.timezone(tz_name))
+        return fields.Datetime.to_string(local_dt)
+    
     @api.model
     def generate_csv(self):
         temp = tempfile.NamedTemporaryFile(mode='w+t',suffix='.csv')
@@ -67,7 +74,7 @@ class hr_payslip_run(models.Model):
                     'Anst nr': slip.employee_id.contract_id.name.encode('utf-8') if slip.employee_id.contract_id else 'N/A',
                     'Namn': slip.employee_id.name.encode('utf-8'),
                     'Franvarotyp': holiday.holiday_status_id.name.encode('utf-8'),
-                    'Datum': '%s - %s' %(fields.Date.context_timestamp(holiday.date_from), fields.Date.context_timestamp(holiday.date_to)),
+                    'Datum': '%s - %s' %(self.convert_to_local(holiday.date_from), self.convert_to_local(holiday.date_to)),
                     'Antal dagar': holiday.number_of_days_temp,
                 })
         temp.seek(0)
