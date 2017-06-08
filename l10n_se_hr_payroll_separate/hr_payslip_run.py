@@ -40,86 +40,18 @@ _logger = logging.getLogger(__name__)
 
 class hr_attendance(models.Model):
     _inherit = 'hr.attendance'
-
-    def _altern_si_so(self, cr, uid, ids, context=None):
-        """ Alternance sign_in/sign_out check.
-            Previous (if exists) must be of opposite action.
-            Next (if exists) must be of opposite action.
-        """
-        return False
-        for att in self.browse(cr, uid, ids, context=context):
-            # search and browse for first previous and first next records
-            prev_att_ids = self.search(cr, uid, [('employee_id', '=', att.employee_id.id), ('name', '<', att.name), ('action', 'in', ('sign_in', 'sign_out'))], limit=1, order='name DESC')
-            next_add_ids = self.search(cr, uid, [('employee_id', '=', att.employee_id.id), ('name', '>', att.name), ('action', 'in', ('sign_in', 'sign_out'))], limit=1, order='name ASC')
-            prev_atts = self.browse(cr, uid, prev_att_ids, context=context)
-            next_atts = self.browse(cr, uid, next_add_ids, context=context)
-            # check for alternance, return False if at least one condition is not satisfied
-            if prev_atts and prev_atts[0].action == att.action: # previous exists and is same action
-                return False
-            if next_atts and next_atts[0].action == att.action: # next exists and is same action
-                return False
-            if (not prev_atts) and (not next_atts) and att.action != 'sign_in': # first attendance must be sign_in
-                return False
-        return True
-        
     
-    _constraints = [(_altern_si_so, 'Error ! Sign in (resp. Sign out) must follow Sign out (resp. Sign in)', ['action'])]
-    #~ _constraints = [(lambda f: True, 'Error ! Sign in (resp. Sign out) must follow Sign out (resp. Sign in)', ['action'])]
-    #~ _constraints = []
-    def _auto_init(self, cr, context=None):
-        self._constraints = [(lambda f: True, 'Error ! Sign in (resp. Sign out) must follow Sign out (resp. Sign in)', ['action'])]
-        #raise Warning(self._constraints)
-        super(hr_attendance, self)._auto_init(cr, context)
-        
-        
     @api.multi
     def _validate_fields(self, field_names):
         return True
-        field_names = set(field_names)
+        
 
-        # old-style constraint methods
-        trans = self.env['ir.translation']
-        cr, uid, context = self.env.args
-        ids = self.ids
-        errors = []
-        raise Warning(self._constraints)
-        for fun, msg, names in self._constraints:
-            try:
-                # validation must be context-independent; call ``fun`` without context
-                valid = names and not (set(names) & field_names)
-                valid = valid or fun(self._model, cr, uid, ids)
-                extra_error = None
-            except Exception, e:
-                _logger.debug('Exception while validating constraint', exc_info=True)
-                valid = False
-                extra_error = tools.ustr(e)
-            if not valid:
-                if callable(msg):
-                    res_msg = msg(self._model, cr, uid, ids, context=context)
-                    if isinstance(res_msg, tuple):
-                        template, params = res_msg
-                        res_msg = template % params
-                else:
-                    res_msg = trans._get_source(self._name, 'constraint', self.env.lang, msg)
-                if extra_error:
-                    res_msg += "\n\n%s\n%s" % (_('Error details:'), extra_error)
-                errors.append(
-                    _("Field(s) `%s` failed against a constraint: %s") %
-                        (', '.join(names), res_msg)
-                )
-        if errors:
-            raise ValidationError('\n'.join(errors))
-
-        # new-style constraint methods
-        for check in self._constraint_methods:
-            if set(check._constrains) & field_names:
-                try:
-                    check(self)
-                except ValidationError, e:
-                    raise
-                except Exception, e:
-                    raise ValidationError("Error while validating constraint\n\n%s" % tools.ustr(e))
-
+class HrHolidays(models.Model):
+    _inherit = 'hr.holidays'
+    
+    @api.multi
+    def _validate_fields(self, field_names):
+        return True
 
 class base_synchro(models.TransientModel):
     _inherit = 'base.synchro'
