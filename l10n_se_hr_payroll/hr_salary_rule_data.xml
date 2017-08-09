@@ -1,6 +1,79 @@
 <?xml version="1.0" encoding="utf-8"?>
 <openerp>
   <data noupdate="1">
+    <record model="resource.calendar" id="calendar_40h_week">
+        <field name="name">40h Week</field>
+    </record>
+    <record model="resource.calendar.attendance" id="calendar_attendance_mo1">
+        <field name="name">Monday 1</field>
+        <field name="dayofweek">0</field>
+        <field name="hour_from">08</field>
+        <field name="hour_to">12</field>
+        <field name="calendar_id" ref="calendar_40h_week"/>
+    </record>
+    <record model="resource.calendar.attendance" id="calendar_attendance_mo2">
+        <field name="name">Monday 2</field>
+        <field name="dayofweek">0</field>
+        <field name="hour_from">13</field>
+        <field name="hour_to">17</field>
+        <field name="calendar_id" ref="calendar_40h_week"/>
+    </record>
+    <record model="resource.calendar.attendance" id="calendar_attendance_tu1">
+        <field name="name">Tuesday 1</field>
+        <field name="dayofweek">1</field>
+        <field name="hour_from">08</field>
+        <field name="hour_to">12</field>
+        <field name="calendar_id" ref="calendar_40h_week"/>
+    </record>
+    <record model="resource.calendar.attendance" id="calendar_attendance_tu2">
+        <field name="name">Tuesday 2</field>
+        <field name="dayofweek">1</field>
+        <field name="hour_from">13</field>
+        <field name="hour_to">17</field>
+        <field name="calendar_id" ref="calendar_40h_week"/>
+    </record>
+    <record model="resource.calendar.attendance" id="calendar_attendance_we1">
+        <field name="name">Wednesday 1</field>
+        <field name="dayofweek">2</field>
+        <field name="hour_from">08</field>
+        <field name="hour_to">12</field>
+        <field name="calendar_id" ref="calendar_40h_week"/>
+    </record>
+    <record model="resource.calendar.attendance" id="calendar_attendance_we2">
+        <field name="name">Wednesday 2</field>
+        <field name="dayofweek">2</field>
+        <field name="hour_from">13</field>
+        <field name="hour_to">17</field>
+        <field name="calendar_id" ref="calendar_40h_week"/>
+    </record>
+    <record model="resource.calendar.attendance" id="calendar_attendance_th1">
+        <field name="name">Thursday 1</field>
+        <field name="dayofweek">3</field>
+        <field name="hour_from">08</field>
+        <field name="hour_to">12</field>
+        <field name="calendar_id" ref="calendar_40h_week"/>
+    </record>
+    <record model="resource.calendar.attendance" id="calendar_attendance_th2">
+        <field name="name">Thursday 2</field>
+        <field name="dayofweek">3</field>
+        <field name="hour_from">13</field>
+        <field name="hour_to">17</field>
+        <field name="calendar_id" ref="calendar_40h_week"/>
+    </record>
+    <record model="resource.calendar.attendance" id="calendar_attendance_fr1">
+        <field name="name">Friday 1</field>
+        <field name="dayofweek">4</field>
+        <field name="hour_from">08</field>
+        <field name="hour_to">12</field>
+        <field name="calendar_id" ref="calendar_40h_week"/>
+    </record>
+    <record model="resource.calendar.attendance" id="calendar_attendance_fr2">
+        <field name="name">Friday 2</field>
+        <field name="dayofweek">4</field>
+        <field name="hour_from">13</field>
+        <field name="hour_to">17</field>
+        <field name="calendar_id" ref="calendar_40h_week"/>
+    </record>
     <record id="hr_salary_rule-AGE" model="hr.salary.rule">
       <field name="category_id" ref="hr_salary_rule_category-SYSTEM" />
       <field name="code">AGE</field>
