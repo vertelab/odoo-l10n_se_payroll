@@ -59,6 +59,22 @@
       <field name="key2">client_action_multi</field>
       <field name="value" eval="'ir.actions.server,%d' % earn_leaves_dayes" />
     </record>
+    <!--
+        Holiday pay
+    -->
+    <record id="hr_salary_rule-holiday-pay" model="hr.salary.rule">
+        <field name="name">Semesterlöneskuld</field>
+        <field name="parent_rule_id" ref="l10n_se_hr_payroll.hr_salary_rule-bl" />
+        <field name="category_id" ref="l10n_se_hr_payroll.hr_salary_rule_category-HANDLER" />
+        <field name="salary_art">220</field>
+        <field name="code">semsk</field>
+        <field name="sequence">491</field>
+        <field name="appears_on_payslip" eval="False"/>
+        <field name="condition_select">none</field>
+        <field name="amount_select">code</field>
+        <field name="amount_python_compute">result = contract.wage * 0.12</field>
+        <field name="quantity">1</field>
+    </record>
   </data>
   <data noupdate="0">
     <function model="hr.holidays.status" name="init_records" />
