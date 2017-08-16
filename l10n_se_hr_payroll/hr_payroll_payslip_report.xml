@@ -269,7 +269,7 @@
                     </ul>
 
                     <t t-if="company.custom_footer">
-                        <span t-raw="company.rml_footer"/>
+                        <span t-raw="company.rml_footer" style="font-size: 0.9em;"/>
                     </t>
 
                     <ul class="list-inline">
