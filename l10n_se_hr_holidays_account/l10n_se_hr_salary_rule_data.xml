@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+        <record id="l10n_se_hr_holidays.hr_salary_rule-holiday-pay" model="hr.salary.rule">
+            <field name="account_debit" search="[('code', '=', '7290')]" />
+            <field name="account_credit" search="[('code', '=', '2920')]" />
+        </record>
+    </data>
+</openerp>
