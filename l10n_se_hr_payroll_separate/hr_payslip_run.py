@@ -51,6 +51,7 @@ class HrHolidays(models.Model):
     
     @api.multi
     def _validate_fields(self, field_names):
+        _logger.warn('hr.holidays._validate_fields')
         return True
 
 class base_synchro(models.TransientModel):
