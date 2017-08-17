@@ -263,7 +263,7 @@ msgstr "Sparad semester"
 #. module: l10n_se_hr_holidays
 #: model:hr.holidays.status,name:l10n_se_hr_holidays.sick_leave_qualify
 msgid "Sick Leave Qualify Period"
-msgstr "Sjukfrånvaro karensdagen"
+msgstr "Sjukfrånvaro karensdag"
 
 #. module: l10n_se_hr_holidays
 #: model:hr.holidays.status,name:l10n_se_hr_holidays.sick_leave_146

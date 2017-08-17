@@ -181,14 +181,14 @@ result = contract.wage / 20
       <field name="sequence">30</field>
       <field name="appears_on_payslip" eval="True" />
       <field name="condition_select">python</field>
-      <field name="condition_python">result = contract.get_leave_days('hr_holidays.sick_leave_146', worked_days) &gt; 0.0</field>
+      <field name="condition_python">result = contract.get_leave_days('l10n_se_hr_holidays.sick_leave_146', worked_days) &gt; 0.0</field>
       <field name="amount_select">code</field>
       <field name="amount_python_compute">
 #(ML*12)/(52*VA)
 #Användarfall arbeta 40 h 5 dagar i veckan
 #Användarfall arbeta 32 h 4 dagar i veckan
 #Användarfall arbeta 32 h 5 dagar i veckan
-result_qty = contract.get_leave_days('hr_holidays.sick_leave_146', worked_days)
+result_qty = contract.get_leave_days('l10n_se_hr_holidays.sick_leave_146', worked_days)
 result = contract.wage / (52 * contract.weekly_working_hours / contract.wwh_days_intermittent)
       </field>
     </record>
