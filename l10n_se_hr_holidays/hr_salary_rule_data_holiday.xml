@@ -111,7 +111,7 @@ result = contract.wage / 160
         <field name="appears_on_payslip" eval="False"/>
         <field name="condition_select">none</field>
         <field name="amount_select">code</field>
-        <field name="amount_python_compute">result = contract.wage * 0.12</field>
+        <field name="amount_python_compute">result = contract.wage * worked_days.WORK100.payslip_id.get_holiday_basis_percent() * 0.12</field>
         <field name="quantity">1</field>
     </record>
 

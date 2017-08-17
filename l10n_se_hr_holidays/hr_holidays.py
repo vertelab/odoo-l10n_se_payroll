@@ -37,6 +37,7 @@ class hr_holidays_status(models.Model):
     payslip_rule = fields.Text(string='Earning Rule',help="Python Code")
     payslip_condition = fields.Text(string='Earning Condition',help="Python Code")
     legal_leave = fields.Boolean(string='Legal Leave', default=False, help='If checked, it will be included in legal leaves calculation')
+    holiday_basis = fields.Boolean(string='Holiday Basis', default=False, help='If checked, this kind of holiday will be included in holiday basis calculation')
 
     def init_records(self,cr,uid, context=None):
         holiday_status_cl = self.pool.get('ir.model.data').get_object_reference(cr, uid, 'hr_holidays', 'holiday_status_cl')
@@ -187,5 +188,23 @@ class hr_payslip(models.Model):
         year = datetime.datetime.now().year
         start_date = datetime.datetime(year, 1, 1)
         return abs(sum(self.env['hr.holidays'].search([('employee_id', '=', self.employee_id.id), ('date_from', '>=', start_date.strftime('%Y-%m-%d')), ('date_to', '<=', self.date_to), ('type', '=', 'remove'), ('state', '=', 'validate')]).filtered(lambda h: h.holiday_status_id.legal_leave == True).mapped('number_of_days')))
+
+    @api.multi
+    def get_holiday_basis_days(self):
+        days = 0.0
+        for line in self.worked_days_line_ids:
+            if self.env['hr.holidays.status'].search([('name', '=', line.code), ('holiday_basis', '=', True)]) or line.code == 'WORK100':
+                days += line.number_of_days
+        return days
+
+    @api.multi
+    def get_holiday_basis_percent(self):
+        days = 0.0
+        days_basis = 0.0
+        for line in self.worked_days_line_ids:
+            if self.env['hr.holidays.status'].search([('name', '=', line.code), ('holiday_basis', '=', True)]) or line.code == 'WORK100':
+                days_basis += line.number_of_days
+            days += line.number_of_days
+        return days_basis / days if days > 0.0 else 0.0
 
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
