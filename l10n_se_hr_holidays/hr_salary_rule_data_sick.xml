@@ -2,6 +2,10 @@
 <openerp>
   <data noupdate="1"> <!-- TODO: no update -->
 
+    <!-- inactive original sick leave -->
+    <record model="hr.holidays.status" id="hr_holidays.holiday_status_sl">
+        <field name="active" eval="False"/>
+    </record>
 
     <!-- Sick leave -->
     <record model="hr.holidays.status" id="sick_leave_qualify">
@@ -167,7 +171,7 @@ result_rate = 20
 result = contract.wage / 20
       </field>
     </record>
-    
+
     <record id="hr_salary_rule-sjk-100" model="hr.salary.rule">
       <field name="parent_rule_id" ref="hr_salary_rule-sjk" />
       <field name="category_id" ref="l10n_se_hr_payroll.hr_salary_rule_category-BRUAVG" />

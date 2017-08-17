@@ -4,10 +4,10 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 8.0-20161208\n"
+"Project-Id-Version: Odoo Server 8.0-20170601\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-12-09 07:38+0000\n"
-"PO-Revision-Date: 2016-12-09 08:51+0100\n"
+"POT-Creation-Date: 2017-08-17 12:00+0000\n"
+"PO-Revision-Date: 2017-08-17 14:12+0200\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -15,17 +15,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: \n"
 "Language: sv\n"
-"X-Generator: Poedit 1.8.7.1\n"
-
-#. module: l10n_se_hr_holidays
-#: field:hr.holidays.status,holidays_allowed:0
-msgid "Allowed"
-msgstr "Tillåten"
-
-#. module: l10n_se_hr_holidays
-#: view:website:l10n_se_hr_payroll.payslip_document
-msgid "Betalda"
-msgstr "Betalda"
+"X-Generator: Poedit 2.0.1\n"
 
 #. module: l10n_se_hr_holidays
 #: field:hr.holidays.earning,create_uid:0
@@ -43,12 +33,38 @@ msgid "Display Name"
 msgstr "Visningsnamn"
 
 #. module: l10n_se_hr_holidays
+#: view:hr.holidays.status:l10n_se_hr_holidays.view_holidays_status_filter
+#: field:hr.holidays.status,holidays_allowed:0
+msgid "Allowed"
+msgstr "Tillåten"
+
+#. module: l10n_se_hr_holidays
+#: view:hr.holidays.status:l10n_se_hr_holidays.view_holidays_status_filter
+msgid "Allowed legal leaves (after earning year)"
+msgstr "Tillåten frånvaro (Efter tjänsteår)"
+
+#. module: l10n_se_hr_holidays
+#: view:website:l10n_se_hr_payroll.payslip_document
+msgid "Antal dagar"
+msgstr "Antal dagar"
+
+#. module: l10n_se_hr_holidays
+#: view:website:l10n_se_hr_payroll.external_layout_footer
+msgid "Betalda"
+msgstr "Betalda"
+
+#. module: l10n_se_hr_holidays
+#: view:website:l10n_se_hr_payroll.payslip_document
+msgid "Datum"
+msgstr "Datum"
+
+#. module: l10n_se_hr_holidays
 #: model:ir.actions.server,name:l10n_se_hr_holidays.earn_leaves_dayes
 msgid "Earn Leaves Days"
 msgstr "Intjänade dagar"
 
 #. module: l10n_se_hr_holidays
-#: code:addons/l10n_se_hr_holidays/hr_holidays.py:69
+#: code:addons/l10n_se_hr_holidays/hr_holidays.py:105
 #, python-format
 msgid "Earn days %s: %s (%s)"
 msgstr "Intjänade dagar %s: %s (%s)"
@@ -87,16 +103,6 @@ msgstr "Anställd"
 #: field:hr.holidays.earning,employee_id:0
 msgid "Employee id"
 msgstr "Anställd id"
-
-#. module: l10n_se_hr_holidays
-#: field:hr.employee,holidays_earning_ids:0
-msgid "Holiday Earnings"
-msgstr "Intjänad semester"
-
-#. module: l10n_se_hr_holidays
-#: field:hr.holidays.earning,holiday_status_id:0
-msgid "Holiday status id"
-msgstr "Semester status id"
 
 #. module: l10n_se_hr_holidays
 #: model:ir.model,name:l10n_se_hr_holidays.model_hr_holidays
@@ -139,29 +145,109 @@ msgid "Leaves Take"
 msgstr "Frånvaro omfattning"
 
 #. module: l10n_se_hr_holidays
-#: model:hr.holidays.status,name:l10n_se_hr_holidays.holiday_status_cl1
-msgid "Legal Leaves 2016"
-msgstr "Sem 2016"
-
-#. module: l10n_se_hr_holidays
-#: model:hr.holidays.status,name:l10n_se_hr_holidays.holiday_status_cl2
-msgid "Legal Leaves 2017"
-msgstr "Sem 2017"
-
-#. module: l10n_se_hr_holidays
-#: model:hr.holidays.status,name:l10n_se_hr_holidays.holiday_status_cl3
-msgid "Legal Leaves 2018"
-msgstr "Sem 2018"
-
-#. module: l10n_se_hr_holidays
 #: field:hr.holidays.earning,max_leaves:0
 msgid "Max Leaves"
 msgstr "Max frånvarodagar"
 
 #. module: l10n_se_hr_holidays
+#: field:hr.employee,holidays_earning_ids:0
+msgid "Holiday Earnings"
+msgstr "Intjänad semester"
+
+#. module: l10n_se_hr_holidays
+#: view:website:l10n_se_hr_payroll.payslip_document
+msgid "Frånvarotyp"
+msgstr "Frånvarotyp"
+
+#. module: l10n_se_hr_holidays
+#: model:hr.holidays.status,name:l10n_se_hr_holidays.holiday_status_furlough
+msgid "Furlough"
+msgstr "Permission med lön"
+
+#. module: l10n_se_hr_holidays
+#: model:hr.holidays.status,name:l10n_se_hr_holidays.forald_ledig_165
+msgid "Föräld ledig 165"
+msgstr "Föräld ledig 165"
+
+#. module: l10n_se_hr_holidays
+#: model:hr.holidays.status,name:l10n_se_hr_holidays.forald_ledig_168
+msgid "Föräld ledig 168"
+msgstr "Föräld ledig 168"
+
+#. module: l10n_se_hr_holidays
+#: field:hr.holidays.status,holiday_basis:0
+msgid "Holiday Basis"
+msgstr "Semesterlönegrundande"
+
+#. module: l10n_se_hr_holidays
+#: field:hr.payslip,holiday_ids:0
+msgid "Holiday ids"
+msgstr "Holiday ids"
+
+#. module: l10n_se_hr_holidays
+#: field:hr.payslip,holiday_status_ids:0
+msgid "Holiday status ids"
+msgstr "Holiday status ids"
+
+#. module: l10n_se_hr_holidays
+#: help:hr.holidays.status,legal_leave:0
+msgid "If checked, it will be included in legal leaves calculation"
+msgstr "If checked, it will be included in legal leaves calculation"
+
+#. module: l10n_se_hr_holidays
+#: help:hr.holidays.status,holiday_basis:0
+msgid "If checked, this kind of holiday will be included in holiday basis calculation"
+msgstr "If checked, this kind of holiday will be included in holiday basis calculation"
+
+#. module: l10n_se_hr_holidays
+#: model:ir.model,name:l10n_se_hr_holidays.model_hr_holidays
+msgid "Leave"
+msgstr "Frånvaro"
+
+#. module: l10n_se_hr_holidays
+#: model:ir.model,name:l10n_se_hr_holidays.model_hr_holidays_status
+msgid "Leave Type"
+msgstr "Frånvarotyp"
+
+#. module: l10n_se_hr_holidays
+#: model:hr.holidays.status,name:l10n_se_hr_holidays.holiday_status_leave_of_absence
+msgid "Leave of Absence less than 5 days"
+msgstr "Övergångsperiod mindre än 5 dagar"
+
+#. module: l10n_se_hr_holidays
+#: model:hr.holidays.status,name:l10n_se_hr_holidays.holiday_status_leave_of_absence_5
+msgid "Leave of Absence more than 5 days"
+msgstr "Övergångsperiod mer än 5 dagar"
+
+#. module: l10n_se_hr_holidays
+#: field:hr.holidays.status,legal_leave:0
+msgid "Legal Leave"
+msgstr "Semester"
+
+#. module: l10n_se_hr_holidays
+#: model:hr.holidays.status,name:l10n_se_hr_holidays.holiday_status_cl1
+msgid "Legal Leaves 2017"
+msgstr "Sem 2017"
+
+#. module: l10n_se_hr_holidays
+#: model:hr.holidays.status,name:l10n_se_hr_holidays.holiday_status_cl2
+msgid "Legal Leaves 2018"
+msgstr "Sem 2018"
+
+#. module: l10n_se_hr_holidays
+#: model:hr.holidays.status,name:l10n_se_hr_holidays.holiday_status_cl3
+msgid "Legal Leaves 2019"
+msgstr "Sem 2019"
+
+#. module: l10n_se_hr_holidays
+#: model:hr.holidays.status,name:l10n_se_hr_holidays.pappaledig_166
+msgid "Pappaledig 166"
+msgstr "Pappaledig 166"
+
+#. module: l10n_se_hr_holidays
 #: model:ir.model,name:l10n_se_hr_holidays.model_hr_payslip
 msgid "Pay Slip"
-msgstr "Lönespecifikation "
+msgstr "Lönespecifikation"
 
 #. module: l10n_se_hr_holidays
 #: help:hr.holidays.status,payslip_condition:0
@@ -175,7 +261,42 @@ msgid "Remaining Leaves"
 msgstr "Sparad semester"
 
 #. module: l10n_se_hr_holidays
-#: view:website:l10n_se_hr_payroll.payslip_document
+#: model:hr.holidays.status,name:l10n_se_hr_holidays.sick_leave_qualify
+msgid "Sick Leave Qualify Period"
+msgstr "Sjukfrånvaro karensdagen"
+
+#. module: l10n_se_hr_holidays
+#: model:hr.holidays.status,name:l10n_se_hr_holidays.sick_leave_146
+msgid "Sick Leave day 15-180 (100%)"
+msgstr "Sjukfrånvarodagar 15-180 (100%)"
+
+#. module: l10n_se_hr_holidays
+#: model:hr.holidays.status,name:l10n_se_hr_holidays.sick_leave_214_100
+msgid "Sick Leave day 2-14 (100% deduction)"
+msgstr "Sjukfrånvarodagar 2-14 (100% avdrag)"
+
+#. module: l10n_se_hr_holidays
+#: model:hr.holidays.status,name:l10n_se_hr_holidays.sick_leave_148
+msgid "Sick Leave day 2-14 (25%)"
+msgstr "Sjukfrånvarodagar 2-14 (25%)"
+
+#. module: l10n_se_hr_holidays
+#: model:hr.holidays.status,name:l10n_se_hr_holidays.sick_leave_147
+msgid "Sick Leave day 2-14 (50%)"
+msgstr "Sjukfrånvarodagar 2-14 (50%)"
+
+#. module: l10n_se_hr_holidays
+#: model:hr.holidays.status,name:l10n_se_hr_holidays.sick_leave_1461
+msgid "Sick Leave day 2-14 (75%)"
+msgstr "Sjukfrånvarodagar 2-14 (75%)"
+
+#. module: l10n_se_hr_holidays
+#: model:hr.holidays.status,name:l10n_se_hr_holidays.sick_leave_214
+msgid "Sick Leave day 2-14 (80%)"
+msgstr "Sjukfrånvarodagar 2-14 (80%)"
+
+#. module: l10n_se_hr_holidays
+#: view:website:l10n_se_hr_payroll.external_layout_footer
 msgid "Sparad semester"
 msgstr "Sparad semester"
 
@@ -185,11 +306,21 @@ msgid "Virtual remaining Leaves"
 msgstr "Virtuell semester kvar"
 
 #. module: l10n_se_hr_holidays
-#: view:website:l10n_se_hr_payroll.payslip_document
-msgid "Årets semester"
-msgstr "Årets semester"
+#: model:hr.holidays.status,name:l10n_se_hr_holidays.vab_160
+msgid "Vård av barn 160"
+msgstr "Vård av barn 160"
 
 #. module: l10n_se_hr_holidays
-#: model:hr.holidays.status,name:l10n_se_hr_holidays.holiday_status_furlough
-msgid "Furlough"
-msgstr "Permission med lön"
+#: view:hr.holidays:l10n_se_hr_holidays.edit_holiday_new
+msgid "[('holidays_allowed','=',True)]"
+msgstr "[('holidays_allowed','=',True)]"
+
+#. module: l10n_se_hr_holidays
+#: view:hr.holidays:l10n_se_hr_holidays.edit_holiday_new
+msgid "{'employee_id':employee_id,'search_default_allowed':1}"
+msgstr "{'employee_id':employee_id,'search_default_allowed':1}"
+
+#. module: l10n_se_hr_holidays
+#: view:website:l10n_se_hr_payroll.external_layout_footer
+msgid "Årets semester"
+msgstr "Årets semester"
