@@ -1,6 +1,6 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
-# 	* l10n_se_hr_holidays
+#   * l10n_se_hr_holidays
 #
 msgid ""
 msgstr ""
@@ -188,3 +188,8 @@ msgstr "Virtuell semester kvar"
 #: view:website:l10n_se_hr_payroll.payslip_document
 msgid "Årets semester"
 msgstr "Årets semester"
+
+#. module: l10n_se_hr_holidays
+#: model:hr.holidays.status,name:l10n_se_hr_holidays.holiday_status_furlough
+msgid "Furlough"
+msgstr "Permission med lön"

@@ -98,6 +98,37 @@ result = contract.wage / 160
       <field name="quantity">1</field>
     </record>
 
+    <!--
+        Holiday pay
+    -->
+    <record id="hr_salary_rule-holiday-pay" model="hr.salary.rule">
+        <field name="name">Semesterlöneskuld</field>
+        <field name="parent_rule_id" ref="l10n_se_hr_payroll.hr_salary_rule-bl" />
+        <field name="category_id" ref="l10n_se_hr_holidays.hr_salary_rule_category-semesterloneskulder" />
+        <field name="salary_art">220</field>
+        <field name="code">semsk</field>
+        <field name="sequence">410</field>
+        <field name="appears_on_payslip" eval="False"/>
+        <field name="condition_select">none</field>
+        <field name="amount_select">code</field>
+        <field name="amount_python_compute">result = contract.wage * 0.12</field>
+        <field name="quantity">1</field>
+    </record>
+
+    <record id="hr_salary_rule-socav-for-sem" model="hr.salary.rule">
+        <field name="name">Sociala avgifter för semester- och löneskulder</field>
+        <field name="parent_rule_id" ref="l10n_se_hr_holidays.hr_salary_rule-holiday-pay" />
+        <field name="category_id" ref="l10n_se_hr_payroll.hr_salary_rule_category-DUMMY" />
+        <field name="salary_art"></field>
+        <field name="code">semsksoc</field>
+        <field name="sequence">420</field>
+        <field name="appears_on_payslip" eval="False"/>
+        <field name="condition_select">none</field>
+        <field name="amount_select">code</field>
+        <field name="amount_python_compute">result = categories.SEMSK * 0.3142</field>
+        <field name="quantity">1</field>
+    </record>
+
     <record id="hr_rule_input_compensary_monetary" model="hr.rule.input">
       <field name="code">komp_peng</field>
       <field name="name">Komptid i pengar (tim)</field>
