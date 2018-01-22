@@ -774,8 +774,7 @@ result = 0.0</field>
       <field name="amount_select">code</field>
       <field name="amount_python_compute">result = inputs.drivfuel.amount</field>
       <field name="quantity">1</field>
-      <field name="note">Förmån av fritt eller delvis fritt drivmedel i samband med bilförmån ska du redovisa för sig i ruta 018. Förmånen ska du värdera till marknadsvärdet x 1,2 när du redovisar den i kontrolluppgiften</field>
-      <field name="account_debit" search="[('code', '=', '7385')]" /> 
+      <field name="note">Forman av fritt eller delvis fritt drivmedel i samband med bilforman ska du redovisa for sig i ruta 018. Formanen ska du vardera till marknadsvardet x 1,2 när du redovisar den i kontrolluppgiften</field>
     </record>
     <record id="hr_salary_rule-fuel-018b" model="hr.salary.rule">
       <field name="category_id" ref="l10n_se_hr_payroll.hr_salary_rule_category-NETAVG" />
@@ -790,8 +789,7 @@ result = 0.0</field>
       <field name="amount_select">code</field>
       <field name="amount_python_compute">result = inputs.drivfuel.amount * 0.2</field>
       <field name="quantity">1</field>
-      <field name="note">Förmån av fritt eller delvis fritt drivmedel i samband med bilförmån ska du redovisa för sig i ruta 018. Förmånen ska du värdera till marknadsvärdet x 1,2 när du redovisar den i kontrolluppgiften</field>
-      <field name="account_debit" search="[('code', '=', '7385')]" /> 
+      <field name="note">Forman av fritt eller delvis fritt drivmedel i samband med bilforman ska du redovisa for sig i ruta 018. Formanen ska du vardera till marknadsvardet x 1,2 nar du redovisar den i kontrolluppgiften</field>
     </record>
 
     <!-- /// -->
