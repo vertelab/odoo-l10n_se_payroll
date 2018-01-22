@@ -759,6 +759,55 @@ result = 0.0</field>
       <field name="quantity">1</field>
     </record>
 
+    <!-- http://www.personalekonomi.se/artikel/drivmedelsforman.aspx  -->
+    
+    <record id="hr_salary_rule-fuel-deduct018" model="hr.salary.rule">
+      <field name="category_id" ref="l10n_se_hr_payroll.hr_salary_rule_category-NETAVG" />
+      <field name="parent_rule_id" ref="l10n_se_hr_payroll.hr_salary_rule-forman" />
+      <field name="code">018</field>
+      <field name="salary_art">711</field>
+      <field name="name">Drivmedelsförmån</field>
+      <field name="sequence">736</field>
+      <field name="appears_on_payslip" eval="True"/>
+      <field name="condition_select">python</field>
+      <field name="condition_python">result = inputs.drivfuel.amount != 0</field>
+      <field name="amount_select">code</field>
+      <field name="amount_python_compute">result = inputs.drivfuel.amount</field>
+      <field name="quantity">1</field>
+      <field name="note">Förmån av fritt eller delvis fritt drivmedel i samband med bilförmån ska du redovisa för sig i ruta 018. Förmånen ska du värdera till marknadsvärdet x 1,2 när du redovisar den i kontrolluppgiften</field>
+      <field name="account_debit" search="[('code', '=', '7385')]" /> 
+    </record>
+    <record id="hr_salary_rule-fuel-018b" model="hr.salary.rule">
+      <field name="category_id" ref="l10n_se_hr_payroll.hr_salary_rule_category-NETAVG" />
+      <field name="parent_rule_id" ref="l10n_se_hr_payroll.hr_salary_rule-forman" />
+      <field name="code">018</field>
+      <field name="salary_art">711</field>
+      <field name="name">Drivmedelsförmån upphöjt värde</field>
+      <field name="sequence">737</field>
+      <field name="appears_on_payslip" eval="True"/>
+      <field name="condition_select">python</field>
+      <field name="condition_python">result = contract.benefit_ids.filtered(lambda b: b.name == '018')</field>
+      <field name="amount_select">code</field>
+      <field name="amount_python_compute">result = inputs.drivfuel.amount * 0.2</field>
+      <field name="quantity">1</field>
+      <field name="note">Förmån av fritt eller delvis fritt drivmedel i samband med bilförmån ska du redovisa för sig i ruta 018. Förmånen ska du värdera till marknadsvärdet x 1,2 när du redovisar den i kontrolluppgiften</field>
+      <field name="account_debit" search="[('code', '=', '7385')]" /> 
+    </record>
+
+    <!-- /// -->
+    <record id="hr_rule_input-drivmil" model="hr.rule.input">
+      <field name="code">drivmil</field>
+      <field name="name">Drivmedelsförmån (antal mil)</field>
+      <field name="input_id" ref="hr_salary_rule-fuel-deduct018" />
+    </record>
+    <record id="hr_rule_input-drivfuel" model="hr.rule.input">
+      <field name="code">drivfuel</field>
+      <field name="name">Drivmedelsförmån (kronor)</field>
+      <field name="input_id" ref="hr_salary_rule-fuel-deduct018" />
+    </record>
+
+
+
   </data>
     <data noupdate="1">
         <function model="hr.salary.rule" name="init_records" />

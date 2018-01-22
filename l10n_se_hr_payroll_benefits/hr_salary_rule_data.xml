@@ -89,6 +89,28 @@
       <field name="desc">Betalt för bilförmån</field>
       <field name="note">Om den anställde har betalat för bilförmånen med sin nettolön ska du minska förmånsvärdet med det belopp som han har betalt. (ku10)</field>
     </record>
+    
+
+    
+ 
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     <record id="c021" model="hr.benefit">
       <field name="name">021</field>
       <field name="desc">Rutarbete</field>
