@@ -26,6 +26,12 @@
       <field name="name">Skatter</field>
       <field name="note">Används för att summera all skatt</field>
     </record>
+    <record id="hr_salary_rule_category-SKVPRE" model="hr.salary.rule.category">
+      <field name="code">SKVPRE</field>
+      <field name="name">Skatter (pre)</field>
+      <field name="note">Används för skatt att dra av förutom preleminär skatt</field>
+    </record>
+
     <record id="hr_salary_rule_category-BAS" model="hr.salary.rule.category">
       <field name="code">BAS</field>
       <field name="name">Bas</field>

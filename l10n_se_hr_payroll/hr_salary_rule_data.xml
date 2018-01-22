@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <openerp>
-  <data noupdate="1">
+  <data noupdate="0">
     <record model="resource.calendar" id="calendar_40h_week">
         <field name="name">40h Week</field>
     </record>
@@ -86,6 +86,7 @@
     <!--
          CHILD Ungdom
     -->
+<!--
     <record id="hr_salary_rule-AGEU" model="hr.salary.rule">
       <field name="parent_rule_id" ref="hr_salary_rule-AGE" />
       <field name="category_id" ref="hr_salary_rule_category-SYSTEM" />
@@ -102,6 +103,7 @@ if age >= 0 and age &lt; 26:
       </field>
       <field name="quantity">1</field>
     </record>
+-->
     <!--
          CHILD Normal
     -->
@@ -116,7 +118,7 @@ if age >= 0 and age &lt; 26:
       <field name="condition_python">
 result = False
 age = employee.age
-if age >= 26 and age &lt;= 65:
+if age &lt;= 65:
     result = True
       </field>
       <field name="quantity">1</field>
@@ -219,6 +221,7 @@ if age > 77:
     <!--
          ===== CHILD SAU
     -->
+<!--
     <record id="hr_salary_rule-sau" model="hr.salary.rule">
       <field name="parent_rule_id" ref="hr_salary_rule-sa" />
       <field name="category_id" ref="hr_salary_rule_category-SKV" />
@@ -233,11 +236,15 @@ if age > 77:
       <field name="amount_percentage_base">categories.BRUTTO</field>
       <field name="amount_percentage">25.46</field>
       <field name="quantity">1</field>
+-->
 <!--
       <field name="account_debit" search="[('code', '=', '7560')]" />
       <field name="account_tax_id" search="[('code', '=', 'AvgAldersp')]" />
 -->
+<!--
     </record>
+-->
+<!--
     <record id="hr_salary_rule-sau-mot" model="hr.salary.rule">
       <field name="parent_rule_id" ref="hr_salary_rule-sau" />
       <field name="category_id" ref="hr_salary_rule_category-SKV" />
@@ -251,6 +258,7 @@ if age > 77:
       <field name="amount_python_compute">result = rules.dict.get('sau').amount_percentage * categories.BRUTTO / 100</field>
       <field name="quantity">1</field>
     </record>
+-->
     <!--
          ===== CHILD SAN
     -->
@@ -264,8 +272,8 @@ if age > 77:
       <field name="appears_on_payslip" eval="False"/>
       <field name="condition_select">python</field>
       <field name="condition_python">result = rules.dict.get('AGEN', False)</field>
-      <field name="amount_select">percentage</field>
-      <field name="amount_percentage_base">categories.BRUTTO</field>
+      <field name="amount_select">code</field>
+      <field name="amount_python_compute">result = 31.42 * (categories.BRUTTO + categories.FORMAN) / 100</field>
       <field name="amount_percentage">31.42</field>
       <field name="quantity">1</field>
 <!--
@@ -283,7 +291,7 @@ if age > 77:
       <field name="appears_on_payslip" eval="False"/>
       <field name="condition_select">none</field>
       <field name="amount_select">code</field>
-      <field name="amount_python_compute">result = rules.dict.get('san').amount_percentage * categories.BRUTTO / 100</field>
+      <field name="amount_python_compute">result = rules.dict.get('san').amount_percentage * (categories.BRUTTO + categories.FORMAN) / 100</field>
       <field name="quantity">1</field>
     </record>
 <!--
@@ -314,8 +322,8 @@ if age > 77:
       <field name="appears_on_payslip" eval="False"/>
       <field name="condition_select">python</field>
       <field name="condition_python">result = rules.dict.get('AGEP', False)</field>
-      <field name="amount_select">percentage</field>
-      <field name="amount_percentage_base">categories.BRUTTO</field>
+      <field name="amount_select">code</field>
+      <field name="amount_python_compute">result = 10.21 * (categories.BRUTTO + categories.FORMAN) / 100</field>
       <field name="amount_percentage">10.21</field>
       <field name="quantity">1</field>
 <!--
@@ -333,7 +341,7 @@ if age > 77:
       <field name="appears_on_payslip" eval="True"/>
       <field name="condition_select">none</field>
       <field name="amount_select">code</field>
-      <field name="amount_python_compute">result = rules.dict.get('san').amount_percentage * categories.BRUTTO / 100</field>
+      <field name="amount_python_compute">result = rules.dict.get('san').amount_percentage * (categories.BRUTTO + categories.FORMAN) / 100</field>
       <field name="quantity">1</field>
 <!--
       <field name="account_credit" search="[('code', '=', '2731')]" />
@@ -366,7 +374,7 @@ if age > 77:
       <field name="appears_on_payslip" eval="True"/>
       <field name="condition_select">none</field>
       <field name="amount_select">code</field>
-      <field name="amount_python_compute">result = contract.prel_tax_amount</field>
+      <field name="amount_python_compute">result = contract.prel_tax_amount + categories.SKVPRE</field>
 <!--
       <field name="account_credit" search="[('code', '=', '2710')]" />
       <field name="account_tax_id" search="[('code', '=', 'SkAvdrLon')]" />
@@ -760,34 +768,86 @@ result = 0.0</field>
     </record>
 
     <!-- http://www.personalekonomi.se/artikel/drivmedelsforman.aspx  -->
+
+    <record id="hr_salary_rule-fuel-bru018" model="hr.salary.rule">
+      <field name="category_id" ref="l10n_se_hr_payroll.hr_salary_rule_category-FORMAN" />
+      <field name="parent_rule_id" ref="l10n_se_hr_payroll.hr_salary_rule-forman" />
+      <field name="code">drivbru</field>
+      <field name="salary_art">410</field>
+      <field name="name">Drivmedelsförmån</field>
+      <field name="sequence">24</field>
+      <field name="appears_on_payslip" eval="False"/>
+      <field name="condition_select">python</field>
+      <field name="condition_python">result = inputs.drivfuel.amount != 0</field>
+      <field name="amount_select">code</field>
+      <field name="amount_python_compute">result = inputs.drivfuel.amount</field>  <!-- arb avg bara på basbeloppet -->
+      <field name="quantity">1</field>
+      <field name="note">Forman av fritt eller delvis fritt drivmedel i samband med bilforman ska du redovisa for sig i ruta 018. Formanen ska du vardera till marknadsvardet x 1,2 när du redovisar den i kontrolluppgiften</field>
+    </record>
     
     <record id="hr_salary_rule-fuel-deduct018" model="hr.salary.rule">
-      <field name="category_id" ref="l10n_se_hr_payroll.hr_salary_rule_category-NETAVG" />
+      <field name="category_id" ref="l10n_se_hr_payroll.hr_salary_rule_category-SKVPRE" />
+<!--
       <field name="parent_rule_id" ref="l10n_se_hr_payroll.hr_salary_rule-forman" />
-      <field name="code">018</field>
-      <field name="salary_art">711</field>
+-->
+      <field name="code">driv</field>
+      <field name="salary_art">736</field>
       <field name="name">Drivmedelsförmån</field>
-      <field name="sequence">736</field>
+      <field name="sequence">690</field>
       <field name="appears_on_payslip" eval="True"/>
       <field name="condition_select">python</field>
       <field name="condition_python">result = inputs.drivfuel.amount != 0</field>
       <field name="amount_select">code</field>
-      <field name="amount_python_compute">result = inputs.drivfuel.amount</field>
+      <field name="amount_python_compute">result = inputs.drivfuel.amount * 0.3</field>  <!-- prel skatt -->
       <field name="quantity">1</field>
       <field name="note">Forman av fritt eller delvis fritt drivmedel i samband med bilforman ska du redovisa for sig i ruta 018. Formanen ska du vardera till marknadsvardet x 1,2 när du redovisar den i kontrolluppgiften</field>
     </record>
-    <record id="hr_salary_rule-fuel-018b" model="hr.salary.rule">
-      <field name="category_id" ref="l10n_se_hr_payroll.hr_salary_rule_category-NETAVG" />
-      <field name="parent_rule_id" ref="l10n_se_hr_payroll.hr_salary_rule-forman" />
-      <field name="code">018</field>
-      <field name="salary_art">711</field>
-      <field name="name">Drivmedelsförmån upphöjt värde</field>
-      <field name="sequence">737</field>
+    <record id="hr_salary_rule-fuel-deduct018u" model="hr.salary.rule">
+      <field name="category_id" ref="hr_salary_rule_category-DUMMY" />
+      <field name="parent_rule_id" ref="hr_salary_rule-fuel-deduct018" />
+      <field name="code">drivu</field>
+      <field name="salary_art">736</field>
+      <field name="name">Drivmedelsförmån</field>
+      <field name="sequence">690</field>
       <field name="appears_on_payslip" eval="True"/>
       <field name="condition_select">python</field>
-      <field name="condition_python">result = contract.benefit_ids.filtered(lambda b: b.name == '018')</field>
+      <field name="condition_python">result = inputs.drivfuel.amount != 0</field>
       <field name="amount_select">code</field>
-      <field name="amount_python_compute">result = inputs.drivfuel.amount * 0.2</field>
+      <field name="amount_python_compute">result = inputs.drivfuel.amount</field>  <!-- prel skatt -->
+      <field name="quantity">1</field>
+      <field name="note">Forman av fritt eller delvis fritt drivmedel i samband med bilforman ska du redovisa for sig i ruta 018. Formanen ska du vardera till marknadsvardet x 1,2 när du redovisar den i kontrolluppgiften</field>
+    </record>
+    
+    <record id="hr_salary_rule-fuel-018b" model="hr.salary.rule">
+      <field name="category_id" ref="l10n_se_hr_payroll.hr_salary_rule_category-SKVPRE" />
+<!--
+      <field name="parent_rule_id" ref="l10n_se_hr_payroll.hr_salary_rule-forman" />
+-->
+      <field name="code">drivextra</field>
+      <field name="salary_art">737</field>
+      <field name="name">Drivmedelsförmån upphöjt värde</field>
+      <field name="sequence">690</field>
+      <field name="appears_on_payslip" eval="True"/>
+      <field name="condition_select">python</field>
+      <field name="condition_python">result = inputs.drivfuel.amount != 0</field>
+      <field name="amount_select">code</field>
+      <field name="amount_python_compute">result = inputs.drivfuel.amount * 0.2 * 0.3</field>   <!-- prel skatt -->
+      <field name="quantity">1</field>
+      <field name="note">Forman av fritt eller delvis fritt drivmedel i samband med bilforman ska du redovisa for sig i ruta 018. Formanen ska du vardera till marknadsvardet x 1,2 nar du redovisar den i kontrolluppgiften</field>
+    </record>
+    
+    <record id="hr_salary_rule-fuel-018bu" model="hr.salary.rule">
+      <field name="category_id" ref="hr_salary_rule_category-DUMMY" />
+      <field name="parent_rule_id" ref="hr_salary_rule-fuel-018b" />
+      <field name="code">drivextrau</field>
+      <field name="salary_art">737</field>
+      <field name="name">Drivmedelsförmån upphöjt värde</field>
+      <field name="sequence">690</field>
+      <field name="appears_on_payslip" eval="True"/>
+      <field name="condition_select">python</field>
+      <field name="condition_python">result = inputs.drivfuel.amount != 0</field>
+      <field name="amount_select">code</field>
+      <field name="amount_python_compute">result = inputs.drivfuel.amount * 0.2</field>   <!-- prel skatt -->
       <field name="quantity">1</field>
       <field name="note">Forman av fritt eller delvis fritt drivmedel i samband med bilforman ska du redovisa for sig i ruta 018. Formanen ska du vardera till marknadsvardet x 1,2 nar du redovisar den i kontrolluppgiften</field>
     </record>
@@ -800,7 +860,7 @@ result = 0.0</field>
     </record>
     <record id="hr_rule_input-drivfuel" model="hr.rule.input">
       <field name="code">drivfuel</field>
-      <field name="name">Drivmedelsförmån (kronor)</field>
+      <field name="name">Drivmedelsförmån, aktuellt marknadspris * normal förbrukning * mil (kronor)</field>
       <field name="input_id" ref="hr_salary_rule-fuel-deduct018" />
     </record>
 

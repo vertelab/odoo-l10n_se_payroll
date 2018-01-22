@@ -69,11 +69,11 @@
     </record>
     
     <!-- Drivmedelsförmån -->
-        <record id="hr_salary_rule-fuel-deduct018" model="hr.salary.rule">
-           <field name="account_debit" search="[('code', '=', '7385')]" /> 
+    <record id="l10n_se_hr_payroll.hr_salary_rule-fuel-deduct018u" model="hr.salary.rule">
+           <field name="account_credit" search="[('code', '=', '7385')]" /> 
     </record>
-    <record id="hr_salary_rule-fuel-018b" model="hr.salary.rule">
-         <field name="account_debit" search="[('code', '=', '7385')]" /> 
+    <record id="l10n_se_hr_payroll.hr_salary_rule-fuel-018bu" model="hr.salary.rule">
+         <field name="account_credit" search="[('code', '=', '7385')]" /> 
     </record>
     
     
