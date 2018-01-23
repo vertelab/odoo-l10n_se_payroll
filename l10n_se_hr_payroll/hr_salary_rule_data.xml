@@ -786,14 +786,12 @@ result = 0.0</field>
     </record>
     
     <record id="hr_salary_rule-fuel-deduct018" model="hr.salary.rule">
-      <field name="category_id" ref="l10n_se_hr_payroll.hr_salary_rule_category-SKVPRE" />
-<!--
-      <field name="parent_rule_id" ref="l10n_se_hr_payroll.hr_salary_rule-forman" />
--->
+      <field name="category_id" ref="hr_salary_rule_category-DUMMY" />
+      <field name="parent_rule_id" ref="hr_salary_rule-prej" />
       <field name="code">driv</field>
       <field name="salary_art">736</field>
       <field name="name">Drivmedelsförmån</field>
-      <field name="sequence">690</field>
+      <field name="sequence">680</field>
       <field name="appears_on_payslip" eval="True"/>
       <field name="condition_select">python</field>
       <field name="condition_python">result = inputs.drivfuel.amount != 0</field>
@@ -819,14 +817,12 @@ result = 0.0</field>
     </record>
     
     <record id="hr_salary_rule-fuel-018b" model="hr.salary.rule">
-      <field name="category_id" ref="l10n_se_hr_payroll.hr_salary_rule_category-SKVPRE" />
-<!--
-      <field name="parent_rule_id" ref="l10n_se_hr_payroll.hr_salary_rule-forman" />
--->
+      <field name="category_id" ref="hr_salary_rule_category-DUMMY" />
+      <field name="parent_rule_id" ref="hr_salary_rule-prej" />
       <field name="code">drivextra</field>
       <field name="salary_art">737</field>
       <field name="name">Drivmedelsförmån upphöjt värde</field>
-      <field name="sequence">690</field>
+      <field name="sequence">680</field>
       <field name="appears_on_payslip" eval="True"/>
       <field name="condition_select">python</field>
       <field name="condition_python">result = inputs.drivfuel.amount != 0</field>
@@ -856,12 +852,12 @@ result = 0.0</field>
     <record id="hr_rule_input-drivmil" model="hr.rule.input">
       <field name="code">drivmil</field>
       <field name="name">Drivmedelsförmån (antal mil)</field>
-      <field name="input_id" ref="hr_salary_rule-fuel-deduct018" />
+      <field name="input_id" ref="hr_salary_rule-fuel-bru018" />
     </record>
     <record id="hr_rule_input-drivfuel" model="hr.rule.input">
       <field name="code">drivfuel</field>
       <field name="name">Drivmedelsförmån, aktuellt marknadspris * normal förbrukning * mil (kronor)</field>
-      <field name="input_id" ref="hr_salary_rule-fuel-deduct018" />
+      <field name="input_id" ref="hr_salary_rule-fuel-bru018" />
     </record>
 
 

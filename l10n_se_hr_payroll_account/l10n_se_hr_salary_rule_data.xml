@@ -69,13 +69,20 @@
     </record>
     
     <!-- Drivmedelsförmån -->
+    <record id="l10n_se_hr_payroll.hr_salary_rule-fuel-deduct018" model="hr.salary.rule">
+           <field name="account_credit" search="[('code', '=', '2710')]" />
+           <field name="account_tax_id" search="[('code', '=', 'SkAvdrLon')]" />
+    </record>
+    <record id="l10n_se_hr_payroll.hr_salary_rule-fuel-018b" model="hr.salary.rule">
+         <field name="account_credit" search="[('code', '=', '2710')]" />
+           <field name="account_tax_id" search="[('code', '=', 'SkAvdrLon')]" />
+    </record>
     <record id="l10n_se_hr_payroll.hr_salary_rule-fuel-deduct018u" model="hr.salary.rule">
            <field name="account_credit" search="[('code', '=', '7385')]" /> 
     </record>
     <record id="l10n_se_hr_payroll.hr_salary_rule-fuel-018bu" model="hr.salary.rule">
          <field name="account_credit" search="[('code', '=', '7385')]" /> 
     </record>
-    
     
     <!--
          ============================== EGEN FILE ???
