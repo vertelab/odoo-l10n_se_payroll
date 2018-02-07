@@ -1,8 +1,8 @@
-# -*- encoding: utf-8 -*-
+# -*- coding: utf-8 -*-
 ##############################################################################
 #
-#    OpenERP, Open Source Management Solution
-#    Copyright (C) 2011 OpenERP SA (<http://openerp.com>).
+#    Odoo, Open Source Enterprise Management Solution, third party addon
+#    Copyright (C) 2011- Vertel AB (<http://vertel.se>).
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as
@@ -33,7 +33,7 @@ Accounting Data for Swedish Holiday Pay Rules.
     'website': 'https://www.odoo.com/page/accounting',
     'demo': [],
     'data':[
-        'l10n_se_hr_salary_rule_data.xml',
+        'data/l10n_se_hr_salary_rule_data.xml',
     ],
     'installable': True
 }
