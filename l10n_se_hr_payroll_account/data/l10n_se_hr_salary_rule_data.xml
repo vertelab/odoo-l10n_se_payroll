@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<openerp>
+<odoo>
   <data>
     <record id="l10n_se_hr_payroll.hr_salary_rule-san" model="hr.salary.rule">
       <field name="account_debit" search="[('code', '=', '7511')]" />
     </record>
     <record id="l10n_se_hr_payroll.hr_salary_rule-san-mot" model="hr.salary.rule">
       <field name="account_credit" search="[('code', '=', '2731')]" />
-      <field name="account_tax_id" search="[('code', '=', 'AvgHel')]" />
+      <field name="account_tax_id" search="[('name', '=', 'AvgHel')]" />
     </record>
     <!--
          ===== CHILD SAP
@@ -16,14 +16,14 @@
     </record>
     <record id="l10n_se_hr_payroll.hr_salary_rule-sap-mot" model="hr.salary.rule">
       <field name="account_credit" search="[('code', '=', '2731')]" />
-      <field name="account_tax_id" search="[('code', '=', 'AvgAlderspSkLon')]" />
+      <field name="account_tax_id" search="[('name', '=', 'AvgAlderspSkLon')]" />
     </record>
     <!--
          =====
     -->
     <record id="l10n_se_hr_payroll.hr_salary_rule-prej" model="hr.salary.rule">
       <field name="account_credit" search="[('code', '=', '2710')]" />
-      <field name="account_tax_id" search="[('code', '=', 'SkAvdrLon')]" />
+      <field name="account_tax_id" search="[('name', '=', 'SkAvdrLon')]" />
     </record>
     <!--
          =====
@@ -47,19 +47,19 @@
     </record>
     <record id="l10n_se_hr_payroll.hr_salary_rule-blflsem" model="hr.salary.rule">
       <field name="account_debit" search="[('code', '=', '7223')]" />
-      <field name="account_tax_id" search="[('code', '=', 'UlagAvgAldersp')]" />
+      <field name="account_tax_id" search="[('name', '=', 'UlagAvgAldersp')]" />
     </record>
     <record id="l10n_se_hr_payroll.hr_salary_rule-blflu" model="hr.salary.rule">
       <field name="account_debit" search="[('code', '=', '7223')]" />
-      <field name="account_tax_id" search="[('code', '=', 'UlagAvgAldersp')]" />
+      <field name="account_tax_id" search="[('name', '=', 'UlagAvgAldersp')]" />
     </record>
     <record id="l10n_se_hr_payroll.hr_salary_rule-blfln" model="hr.salary.rule">
       <field name="account_debit" search="[('code', '=', '7221')]" />
-      <field name="account_tax_id" search="[('code', '=', 'UlagAvgHel')]" />
+      <field name="account_tax_id" search="[('name', '=', 'UlagAvgHel')]" />
     </record>
     <record id="l10n_se_hr_payroll.hr_salary_rule-blflp" model="hr.salary.rule">
       <field name="account_debit" search="[('code', '=', '7224')]" />
-      <field name="account_tax_id" search="[('code', '=', 'UlagAvgAlderspSkLon')]" />
+      <field name="account_tax_id" search="[('name', '=', 'UlagAvgAlderspSkLon')]" />
     </record>
     <record id="l10n_se_hr_payroll.hr_salary_rule-blflpx" model="hr.salary.rule">
       <field name="account_debit" search="[('code', '=', '7225')]" />
@@ -67,23 +67,23 @@
     <record id="l10n_se_hr_payroll.hr_salary_rule-sum" model="hr.salary.rule">
       <field name="account_credit" search="[('code', '=', '2821')]" />
     </record>
-    
+
     <!-- Drivmedelsförmån -->
     <record id="l10n_se_hr_payroll.hr_salary_rule-fuel-deduct018" model="hr.salary.rule">
            <field name="account_credit" search="[('code', '=', '2710')]" />
-           <field name="account_tax_id" search="[('code', '=', 'SkAvdrLon')]" />
+           <field name="account_tax_id" search="[('name', '=', 'SkAvdrLon')]" />
     </record>
     <record id="l10n_se_hr_payroll.hr_salary_rule-fuel-018b" model="hr.salary.rule">
          <field name="account_credit" search="[('code', '=', '2710')]" />
-           <field name="account_tax_id" search="[('code', '=', 'SkAvdrLon')]" />
+           <field name="account_tax_id" search="[('name', '=', 'SkAvdrLon')]" />
     </record>
     <record id="l10n_se_hr_payroll.hr_salary_rule-fuel-deduct018u" model="hr.salary.rule">
-           <field name="account_credit" search="[('code', '=', '7385')]" /> 
+           <field name="account_credit" search="[('code', '=', '7385')]" />
     </record>
     <record id="l10n_se_hr_payroll.hr_salary_rule-fuel-018bu" model="hr.salary.rule">
-         <field name="account_credit" search="[('code', '=', '7385')]" /> 
+         <field name="account_credit" search="[('code', '=', '7385')]" />
     </record>
-    
+
     <!--
          ============================== EGEN FILE ???
     -->
@@ -140,4 +140,4 @@ Finns i l10n_se
       <field name="register_id" ref="hr.hr_contribution_register-SKV" />
     </record>
   </data>
-</openerp>
+</odoo>

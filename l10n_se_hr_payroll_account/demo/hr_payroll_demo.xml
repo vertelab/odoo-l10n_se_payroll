@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<openerp>
+<odoo>
   <data>
     <!--
          <record id="account.account_journal-2a69a7d4-5ac2-11e5-89ef-525400e1f872-9" model="account.journal">
@@ -46,9 +46,9 @@
            <field name="group_invoice_lines">False</field>
       -->
     </record>
-    
+
     <record id="l10n_se_hr_payroll.hr_contract-LY" model="hr.contract">
       <field name="journal_id" ref="account_journal-lon-DEMO" />
     </record>
   </data>
-</openerp>
+</odoo>
