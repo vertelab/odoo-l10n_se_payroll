@@ -19,39 +19,39 @@
 #
 ##############################################################################
 {
-    'name': 'Swedish - Payroll',
+    'name': 'Swedish - Holidays',
     'category': 'Localization',
     'author': 'Vertel AB',
-    'depends': ['hr_payroll'],
-    'version': '1.2',
+    'depends': ['hr_holidays_sequence','l10n_se_hr_payroll'],
+    'version': '1.0',
+    'licence': 'AGPL-3',
+    'summary': 'Swedish Holidays Rules',
     'description': """
-Swedish Payroll Rules.
+Swedish Holidays Rules
 ======================
 
-    * Employee Details
-    * Employee Contracts
-    * Allowances/Deductions
-    * Allow to configure Basic/Gross/Net Salary
-    * Employee Payslip
-    * Monthly Payroll Register
-    * Integrated with Holiday Management
-    """,
+* Add holidays earning rules to payroll (hr.holiday)
+* Add hr.holiday.earning to hr.employee
+* Add holiday year to hr.holiday
 
+* hr.holiday.earning can be used for flextime and normal leaves days
+* Holiday earning rules can add days to an employees hr.holidays.earning
+  from hr.payslip
+
+
+    """,
     'auto_install': False,
-    'website': 'http://www.vertel.se',
+    'website': 'http://vertel.se',
     'data':[
-        'data/hr_payroll_data.xml',
-        'views/hr_payroll_view.xml',
-        'data/hr_payroll_data.xml',
-        'report/hr_payroll_payslip_report.xml',
-        #
+        'views/hr_employee_view.xml',
+        'views/hr_holidays_view.xml',
+        'data/hr_holidays_data.xml',
         'data/hr_salary_rule_category_data.xml',
-        'data/hr_salary_rule_data.xml',
-        # last
-        'data/hr_payroll_stucture_simple_data.xml',
+        'data/hr_salary_rule_data_holiday.xml',
+        'report/hr_payroll_payslip_report.xml',
+        'data/hr_salary_rule_data_sick.xml',
     ],
     'demo':[
-        'demo/hr_payroll_demo.xml',
     ],
     'installable': True
 }

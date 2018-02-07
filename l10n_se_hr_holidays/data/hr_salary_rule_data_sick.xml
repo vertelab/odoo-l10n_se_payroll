@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<openerp>
+<odoo>
   <data noupdate="1"> <!-- TODO: no update -->
 
     <!-- inactive original sick leave -->
@@ -350,4 +350,4 @@ result = contract.wage *12/365
     </record>
 
   </data>
-</openerp>
+</odoo>

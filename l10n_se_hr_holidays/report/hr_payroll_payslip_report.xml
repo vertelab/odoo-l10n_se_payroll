@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<openerp>
+<odoo>
     <data>
         <template id="payslip_document" inherit_id="l10n_se_hr_payroll.payslip_document">
             <xpath expr="//table[@id='holidays_table']" position="replace">
@@ -66,4 +66,4 @@
             </xpath>
         </template>
     </data>
-</openerp>
+</odoo>

@@ -18,42 +18,6 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
-{
-    'name': 'Swedish - Payroll',
-    'category': 'Localization',
-    'author': 'Vertel AB',
-    'depends': ['hr_payroll'],
-    'version': '1.2',
-    'description': """
-Swedish Payroll Rules.
-======================
-
-    * Employee Details
-    * Employee Contracts
-    * Allowances/Deductions
-    * Allow to configure Basic/Gross/Net Salary
-    * Employee Payslip
-    * Monthly Payroll Register
-    * Integrated with Holiday Management
-    """,
-
-    'auto_install': False,
-    'website': 'http://www.vertel.se',
-    'data':[
-        'data/hr_payroll_data.xml',
-        'views/hr_payroll_view.xml',
-        'data/hr_payroll_data.xml',
-        'report/hr_payroll_payslip_report.xml',
-        #
-        'data/hr_salary_rule_category_data.xml',
-        'data/hr_salary_rule_data.xml',
-        # last
-        'data/hr_payroll_stucture_simple_data.xml',
-    ],
-    'demo':[
-        'demo/hr_payroll_demo.xml',
-    ],
-    'installable': True
-}
+import hr_holidays
 
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:

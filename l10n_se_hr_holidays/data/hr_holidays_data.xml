@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<openerp>
+<odoo>
   <data noupdate="1">
     <!-- Casual leave -->
     <!--
@@ -63,4 +63,4 @@
   <data noupdate="0">
     <function model="hr.holidays.status" name="init_records" />
   </data>
-</openerp>
+</odoo>

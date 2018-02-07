@@ -1,21 +1,21 @@
 # -*- coding: utf-8 -*-
 ##############################################################################
 #
-# OpenERP, Open Source Management Solution, third party addon
-# Copyright (C) 2004-2016 Vertel AB (<http://vertel.se>).
+#    Odoo, Open Source Enterprise Management Solution, third party addon
+#    Copyright (C) 2014- Vertel AB (<http://vertel.se>).
 #
-# This program is free software: you can redistribute it and/or modify
-# it under the terms of the GNU Affero General Public License as
-# published by the Free Software Foundation, either version 3 of the
-# License, or (at your option) any later version.
+#    This program is free software: you can redistribute it and/or modify
+#    it under the terms of the GNU Affero General Public License as
+#    published by the Free Software Foundation, either version 3 of the
+#    License, or (at your option) any later version.
 #
-# This program is distributed in the hope that it will be useful,
-# but WITHOUT ANY WARRANTY; without even the implied warranty of
-# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
-# GNU Affero General Public License for more details.
+#    This program is distributed in the hope that it will be useful,
+#    but WITHOUT ANY WARRANTY; without even the implied warranty of
+#    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#    GNU Affero General Public License for more details.
 #
-# You should have received a copy of the GNU Affero General Public License
-# along with this program. If not, see <http://www.gnu.org/licenses/>.
+#    You should have received a copy of the GNU Affero General Public License
+#    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
 import openerp.exceptions
@@ -39,31 +39,32 @@ class hr_holidays_status(models.Model):
     legal_leave = fields.Boolean(string='Legal Leave', default=False, help='If checked, it will be included in legal leaves calculation')
     holiday_basis = fields.Boolean(string='Holiday Basis', default=False, help='If checked, this kind of holiday will be included in holiday basis calculation')
 
-    def init_records(self,cr,uid, context=None):
-        holiday_status_cl = self.pool.get('ir.model.data').get_object_reference(cr, uid, 'hr_holidays', 'holiday_status_cl')
-        self.pool.get('hr.holidays.status').write(cr,uid,holiday_status_cl[1],{
+    @api.model
+    def init_records(self):
+        holiday_status_cl = self.env['ir.model.data'].get_object_reference('hr_holidays', 'holiday_status_cl')
+        self.env['hr.holidays.status'].browse(holiday_status_cl[1]).write({
             'name': 'Legal Leaves '+ str(fields.Date.from_string(fields.Datetime.now()).year - 1),
             'legal_leave': True,
             'limit': False,
             'date_earning_start': fields.Date.to_string(date(date.today().year - 2,4,1 )),
             'date_earning_end':   fields.Date.to_string(date(date.today().year - 1,3,31)),
         })
-        holiday_status_unpaid = self.pool.get('ir.model.data').get_object_reference(cr, uid, 'hr_holidays', 'holiday_status_unpaid')
-        self.pool.get('hr.holidays.status').write(cr,uid,holiday_status_unpaid[1],{
+        holiday_status_unpaid = self.env['ir.model.data'].get_object_reference('hr_holidays', 'holiday_status_unpaid')
+        self.env['hr.holidays.status'].browse(holiday_status_unpaid[1]).write({
             'name': 'Legal Leaves unpaid',
             'legal_leave': False,
             'limit': True,
         })
-        holiday_status_sl = self.pool.get('ir.model.data').get_object_reference(cr, uid, 'hr_holidays', 'holiday_status_sl')
-        self.pool.get('hr.holidays.status').write(cr,uid,holiday_status_sl[1],{
+        holiday_status_sl = self.env['ir.model.data'].get_object_reference('hr_holidays', 'holiday_status_sl')
+        self.env['hr.holidays.status'].browse(holiday_status_sl[1]).write({
             'name': 'Sick Leave 100%',
             'legal_leave': False,
             'limit': True,
             'color_name': 'red',
         })
         # holiday_status_comp
-        holiday_status_sl = self.pool.get('ir.model.data').get_object_reference(cr, uid, 'hr_holidays', 'holiday_status_sl')
-        self.pool.get('hr.holidays.status').write(cr,uid,holiday_status_sl[1],{
+        holiday_status_sl = self.env['ir.model.data'].get_object_reference('hr_holidays', 'holiday_status_sl')
+        self.env['hr.holidays.status'].browse(holiday_status_sl[1]).write({
             'name': 'Sick Leave 100%',
             'legal_leave': False,
             'limit': True,
@@ -87,7 +88,6 @@ class hr_holidays_status(models.Model):
     date_earning_start = fields.Date(string='Earning year starts')
     date_earning_end = fields.Date(string='Earning year ends')
 
-
     @api.one
     def earn_leaves_days(self):
         for employee in self.env['hr.employee'].search([]):
@@ -109,44 +109,12 @@ class hr_holidays_status(models.Model):
                     'model': holiday._name,
                     'type': 'notification',})
 
-#~ class hr_holidays_earning(models.Model):
-    #~ _name = "hr.holidays.earning"
-
-    #~ employee_id = fields.Many2one(comodel_name='hr.employee')
-    #~ holiday_status_id = fields.Many2one(comodel_name='hr.holidays.status')
-
-    #~ @api.one
-    #~ def get_holidays_ids(self):
-        #~ return self.env['hr.holidays'].search([('employee_id', '=', self.employee_id),('state', 'in', ['confirm', 'validate1', 'validate']),('holiday_status_id', '=', self.holiday_status_id.id)])
-    #~ @api.one
-    #~ def get_payslips_ids(self):
-        #~ return self.env['hr.payslip'].search([('employee_id', '=', self.employee_id),('state', 'in', ['confirm', 'validate1', 'validate'])])
-
-    #~ @api.model
-    #~ def earn_leaves(self,payslip):
-        #~ return 1.0
-
-    #~ @api.one
-    #~ def _calc_leaves(self):
-        #~ self.leaves_taken = sum([h.number_of_days_temp for h in self.get_holidays_ids()])
-        #~ self.max_leaves = sum([self.earn_leaves(p) for p in self.get_payslips_ids()])
-        #~ self.remaining_leaves = self.max_leaves - leaves_taken
-        #~ self.virtual_remaining_leaves = 0.0
-    #~ max_leaves = fields.Float(string='Max Leaves',compute="_calc_leaves")
-    #~ leaves_take  = fields.Float(string='Leaves Take',compute="_calc_leaves")
-    #~ remaining_leaves  = fields.Float(string='Remaining Leaves',compute="_calc_leaves")
-    #~ virtual_remaining_leaves  = fields.Float(string='Virtual remaining Leaves',compute="_calc_leaves")
-
-
 class hr_employee(models.Model):
     _inherit = 'hr.employee'
-
-    #holidays_earning_ids = fields.Many2many(string='Holiday Earnings',comodel_name="hr.holidays.earning")
 
     @api.model
     def get_leaves_days(self,date_from,date_to):
         return self.contract_id.vacation_days
-        #employee.contract_ids.filtered(lambda c: c.date_end == None or c.date_end > leaves.date_earning_start).leaves_days
 
 class hr_payslip(models.Model):
     _inherit = 'hr.payslip'
