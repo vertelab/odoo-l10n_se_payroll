@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<openerp>
+<odoo>
   <data noupdate="0">
     <record model="resource.calendar" id="calendar_40h_week">
         <field name="name">40h Week</field>
@@ -784,7 +784,7 @@ result = 0.0</field>
       <field name="quantity">1</field>
       <field name="note">Forman av fritt eller delvis fritt drivmedel i samband med bilforman ska du redovisa for sig i ruta 018. Formanen ska du vardera till marknadsvardet x 1,2 när du redovisar den i kontrolluppgiften</field>
     </record>
-    
+
     <record id="hr_salary_rule-fuel-deduct018" model="hr.salary.rule">
       <field name="category_id" ref="hr_salary_rule_category-DUMMY" />
       <field name="parent_rule_id" ref="hr_salary_rule-prej" />
@@ -815,7 +815,7 @@ result = 0.0</field>
       <field name="quantity">1</field>
       <field name="note">Forman av fritt eller delvis fritt drivmedel i samband med bilforman ska du redovisa for sig i ruta 018. Formanen ska du vardera till marknadsvardet x 1,2 när du redovisar den i kontrolluppgiften</field>
     </record>
-    
+
     <record id="hr_salary_rule-fuel-018b" model="hr.salary.rule">
       <field name="category_id" ref="hr_salary_rule_category-DUMMY" />
       <field name="parent_rule_id" ref="hr_salary_rule-prej" />
@@ -831,7 +831,7 @@ result = 0.0</field>
       <field name="quantity">1</field>
       <field name="note">Forman av fritt eller delvis fritt drivmedel i samband med bilforman ska du redovisa for sig i ruta 018. Formanen ska du vardera till marknadsvardet x 1,2 nar du redovisar den i kontrolluppgiften</field>
     </record>
-    
+
     <record id="hr_salary_rule-fuel-018bu" model="hr.salary.rule">
       <field name="category_id" ref="hr_salary_rule_category-DUMMY" />
       <field name="parent_rule_id" ref="hr_salary_rule-fuel-018b" />
@@ -866,4 +866,4 @@ result = 0.0</field>
     <data noupdate="1">
         <function model="hr.salary.rule" name="init_records" />
     </data>
-</openerp>
+</odoo>

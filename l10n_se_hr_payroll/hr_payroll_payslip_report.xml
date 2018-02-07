@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<openerp>
+<odoo>
     <data>
         <report id="l10n_se_hr_payroll.payslip" model="hr.payslip" string="Payslip SE" report_type="qweb-pdf" name="l10n_se_hr_payroll.payslip_report" file="l10n_se_hr_payroll.payslip_report" attachment_use="True" attachment="('payslip_'+(object.number.replace('/','') if object.number else ''))+'.pdf'"/>
 <!--
@@ -283,4 +283,4 @@
         </template>
 
     </data>
-</openerp>
+</odoo>

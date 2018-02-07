@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<openerp>
+<odoo>
   <data noupdate="1">
     <record id="hr_salary_rule_category-SYSTEM" model="hr.salary.rule.category">
       <field name="code">SYSTEM</field>
@@ -80,4 +80,4 @@
     </record>
 -->
   </data>
-</openerp>
+</odoo>
