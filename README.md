@@ -6,3 +6,4 @@ Ported modules:
 Module name |Description
 --- | ---
  l10n_se_hr_payroll        | Ported
+ l10n_se_hr_holidays       | Ported
