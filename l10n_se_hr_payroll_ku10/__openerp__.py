@@ -22,6 +22,7 @@
     'name': 'Swedish - Payroll KU10',
     'category': 'Localization',
     'author': 'Vertel AB',
+    'license': 'AGPL-3',
     'depends': ['l10n_se_hr_payroll','l10n_se_hr_payroll_benefits', 'report_glabels'],
     'version': '1.2',
     'description': """

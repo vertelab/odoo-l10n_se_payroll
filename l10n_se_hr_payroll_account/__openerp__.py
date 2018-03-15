@@ -22,6 +22,7 @@
     'name': 'Sweden - Payroll with Accounting',
     'category': 'Localization',
     'author': 'Vertel AB',
+    'license': 'AGPL-3',
     'depends': ['l10n_se_hr_payroll', 'hr_payroll_account', 'l10n_se'],
     'version': '1.0',
     'description': """

@@ -22,6 +22,7 @@
     'name': 'Swedish - Payroll',
     'category': 'Localization',
     'author': 'Vertel AB',
+    'license': 'AGPL-3',
     'depends': ['hr_payroll'],
     'version': '1.2',
     'description': """

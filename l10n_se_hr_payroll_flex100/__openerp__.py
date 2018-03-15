@@ -22,6 +22,7 @@
     'name': 'Swedish - Flex100 Payslip',
     'category': 'Localization',
     'author': 'Vertel AB',
+    'license': 'AGPL-3',
     'depends': ['l10n_se_hr_payroll','hr_payroll_flex100'],
     'version': '1.1',
     'description': """

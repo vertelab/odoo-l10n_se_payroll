@@ -22,6 +22,7 @@
     'name': 'Swedish - Schema Payslip',
     'category': 'Localization',
     'author': 'Vertel AB',
+    'license': 'AGPL-3',
     'depends': ['l10n_se_hr_payroll','hr_payroll_schema'],
     'version': '1.1',
     'description': """

@@ -22,6 +22,7 @@
     'name': 'Sweden - Holiday Pay with Accounting',
     'category': '',
     'author': 'Vertel AB',
+    'license': 'AGPL-3',
     'depends': ['l10n_se_hr_holidays', 'hr_payroll_account', 'l10n_se'],
     'version': '1.0',
     'description': """

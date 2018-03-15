@@ -22,6 +22,7 @@
     'name': 'Swedish - Export',
     'category': 'Localization',
     'author': 'Vertel AB',
+    'license': 'AGPL-3',
     'depends': ['l10n_se'],
     'version': '0.1',
     'description': """
