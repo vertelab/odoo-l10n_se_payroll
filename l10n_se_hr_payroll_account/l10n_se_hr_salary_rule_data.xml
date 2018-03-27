@@ -67,7 +67,7 @@
     <record id="l10n_se_hr_payroll.hr_salary_rule-sum" model="hr.salary.rule">
       <field name="account_credit" search="[('code', '=', '2821')]" />
     </record>
-    
+
     <!-- Drivmedelsförmån -->
     <record id="l10n_se_hr_payroll.hr_salary_rule-fuel-deduct018" model="hr.salary.rule">
            <field name="account_credit" search="[('code', '=', '2710')]" />
@@ -78,12 +78,12 @@
            <field name="account_tax_id" search="[('code', '=', 'SkAvdrLon')]" />
     </record>
     <record id="l10n_se_hr_payroll.hr_salary_rule-fuel-deduct018u" model="hr.salary.rule">
-           <field name="account_credit" search="[('code', '=', '7385')]" /> 
+           <field name="account_credit" search="[('code', '=', '7385')]" />
     </record>
     <record id="l10n_se_hr_payroll.hr_salary_rule-fuel-018bu" model="hr.salary.rule">
-         <field name="account_credit" search="[('code', '=', '7385')]" /> 
+         <field name="account_credit" search="[('code', '=', '7385')]" />
     </record>
-    
+
     <!--
          ============================== EGEN FILE ???
     -->
@@ -101,22 +101,7 @@ Finns i l10n_se
     <!--
          ===========
     -->
-    <record id="base.res_partner-SKV" model="res.partner">
-      <field name="company_id" ref="base.main_company" />
-      <field name="name">Skatteverket</field>
-      <field name="tz">Europe/Stockholm</field>
-      <field name="is_company">False</field>
-      <field name="lang">sv_SE</field>
-      <!--
-           <field name="notify_email">always</field>
-           <field name="street">Ulriksdal</field>
-           <field name="tz_offset">+0100</field>
-           <field name="city">Linghem</field>
-           <field name="active">True</field>
-           <field name="zip">585 62</field>
-           <field name="type">contact</field>
-      -->
-    </record>
+
     <record id="hr.hr_contribution_register-SKV" model="hr.contribution.register">
       <field name="company_id" ref="base.main_company" />
       <field name="name">Skatteverket</field>
