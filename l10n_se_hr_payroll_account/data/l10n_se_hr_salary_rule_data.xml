@@ -98,33 +98,11 @@ Finns i l10n_se
       <field name="user_type" search="[('code', '=', 'payable')]" />
     </record>
 -->
-    <!--
-         ===========
-    -->
-    <record id="base.res_partner-SKV" model="res.partner">
-      <field name="company_id" ref="base.main_company" />
-      <field name="name">Skatteverket</field>
-      <field name="tz">Europe/Stockholm</field>
-      <field name="is_company">False</field>
-      <field name="lang">sv_SE</field>
-      <!--
-           <field name="notify_email">always</field>
-           <field name="street">Ulriksdal</field>
-           <field name="tz_offset">+0100</field>
-           <field name="city">Linghem</field>
-           <field name="active">True</field>
-           <field name="zip">585 62</field>
-           <field name="type">contact</field>
-      -->
-    </record>
     <record id="hr.hr_contribution_register-SKV" model="hr.contribution.register">
       <field name="company_id" ref="base.main_company" />
       <field name="name">Skatteverket</field>
       <field name="partner_id" ref="base.res_partner-SKV" />
     </record>
-    <!--
-         ===
-    -->
 <!--
     <record id="l10n_se_hr_payroll.hr_salary_rule-sau-mot" model="hr.salary.rule">
       <field name="register_id" ref="hr.hr_contribution_register-SKV" />
