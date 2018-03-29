@@ -130,7 +130,7 @@ if age &lt;= 65:
       <field name="parent_rule_id" ref="hr_salary_rule-AGE" />
       <field name="category_id" ref="hr_salary_rule_category-SYSTEM" />
       <field name="code">AGEP</field>
-      <field name="name">Pensionär (födda 1938-1949)</field>
+      <field name="name">Pensionär 66-77</field>
       <field name="sequence">1</field>
       <field name="appears_on_payslip" eval="False" />
       <field name="condition_select">python</field>
@@ -147,7 +147,7 @@ if age > 65 and age &lt;= 77:
       <field name="parent_rule_id" ref="hr_salary_rule-AGE" />
       <field name="category_id" ref="hr_salary_rule_category-SYSTEM" />
       <field name="code">AGEPX</field>
-      <field name="name">Pensionär (födda före 1938)</field>
+      <field name="name">Pensionär äldre 77</field>
       <field name="sequence">1</field>
       <field name="appears_on_payslip" eval="False" />
       <field name="condition_select">python</field>
@@ -317,14 +317,33 @@ if age > 77:
       <field name="category_id" ref="hr_salary_rule_category-SKV" />
       <field name="code">sap</field>
       <field name="salary_art">s110</field>
-      <field name="name">Sociala avgifter pensionär 10,21%</field>
+      <field name="name">Sociala avgifter pensionär 16,36%</field>
       <field name="sequence">490</field>
       <field name="appears_on_payslip" eval="False"/>
       <field name="condition_select">python</field>
       <field name="condition_python">result = rules.dict.get('AGEP', False)</field>
       <field name="amount_select">code</field>
-      <field name="amount_python_compute">result = 10.21 * (categories.BRUTTO + categories.FORMAN) / 100</field>
-      <field name="amount_percentage">10.21</field>
+      <field name="amount_python_compute">result = 16.36 * (categories.BRUTTO + categories.FORMAN) / 100</field>
+      <field name="amount_percentage">16.36</field>
+      <field name="quantity">1</field>
+<!--
+      <field name="account_debit" search="[('code', '=', '7521')]" />
+      <field name="account_tax_id" search="[('code', '=', 'AvgAlderspSkLon')]" />
+-->
+    </record>
+    <record id="hr_salary_rule-sapx" model="hr.salary.rule">
+      <field name="parent_rule_id" ref="hr_salary_rule-sa" />
+      <field name="category_id" ref="hr_salary_rule_category-SKV" />
+      <field name="code">sapx</field>
+      <field name="salary_art">s110</field>
+      <field name="name">Sociala avgifter pensionär 6,15%</field>
+      <field name="sequence">490</field>
+      <field name="appears_on_payslip" eval="False"/>
+      <field name="condition_select">python</field>
+      <field name="condition_python">result = rules.dict.get('AGEPX', False)</field>
+      <field name="amount_select">code</field>
+      <field name="amount_python_compute">result = 6.15 * (categories.BRUTTO + categories.FORMAN) / 100</field>
+      <field name="amount_percentage">6.15</field>
       <field name="quantity">1</field>
 <!--
       <field name="account_debit" search="[('code', '=', '7521')]" />
