@@ -3,6 +3,7 @@
   <data>
     <record id="l10n_se_hr_payroll.hr_salary_rule-san" model="hr.salary.rule">
       <field name="account_debit" search="[('code', '=', '7511')]" />
+      <field name="account_tax_id" search="[('name', '=', 'UlagAvgHel')]" />
     </record>
     <record id="l10n_se_hr_payroll.hr_salary_rule-san-mot" model="hr.salary.rule">
       <field name="account_credit" search="[('code', '=', '2731')]" />
@@ -13,10 +14,19 @@
     -->
     <record id="l10n_se_hr_payroll.hr_salary_rule-sap" model="hr.salary.rule">
       <field name="account_debit" search="[('code', '=', '7521')]" />
+      <field name="account_tax_id" search="[('name', '=', 'UlagAvgAldersp')]" />
     </record>
     <record id="l10n_se_hr_payroll.hr_salary_rule-sap-mot" model="hr.salary.rule">
       <field name="account_credit" search="[('code', '=', '2731')]" />
-      <field name="account_tax_id" search="[('name', '=', 'AvgAlderspSkLon')]" />
+      <field name="account_tax_id" search="[('name', '=', 'AvgAldersp')]" />
+    </record>
+    <record id="l10n_se_hr_payroll.hr_salary_rule-sapx" model="hr.salary.rule">
+      <field name="account_debit" search="[('code', '=', '7534')]" />
+      <field name="account_tax_id" search="[('name', '=', 'UlagSkLonSarsk')]" />
+    </record>
+    <record id="l10n_se_hr_payroll.hr_salary_rule-sapx-mot" model="hr.salary.rule">
+      <field name="account_credit" search="[('code', '=', '2731')]" />
+      <field name="account_tax_id" search="[('name', '=', 'SkLonSarsk')]" />
     </record>
     <!--
          =====

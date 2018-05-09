@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-  <data noupdate="0">
+  <data>
     <record model="resource.calendar" id="calendar_40h_week">
         <field name="name">40h Week</field>
     </record>
@@ -276,10 +276,6 @@ if age > 77:
       <field name="amount_python_compute">result = 31.42 * (categories.BRUTTO + categories.FORMAN) / 100</field>
       <field name="amount_percentage">31.42</field>
       <field name="quantity">1</field>
-<!--
-      <field name="account_debit" search="[('code', '=', '7511')]" />
-      <field name="account_tax_id" search="[('code', '=', 'AvgHel')]" />
--->
     </record>
     <record id="hr_salary_rule-san-mot" model="hr.salary.rule">
       <field name="parent_rule_id" ref="hr_salary_rule-san" />
@@ -326,10 +322,19 @@ if age > 77:
       <field name="amount_python_compute">result = 16.36 * (categories.BRUTTO + categories.FORMAN) / 100</field>
       <field name="amount_percentage">16.36</field>
       <field name="quantity">1</field>
-<!--
-      <field name="account_debit" search="[('code', '=', '7521')]" />
-      <field name="account_tax_id" search="[('code', '=', 'AvgAlderspSkLon')]" />
--->
+    </record>
+    <record id="hr_salary_rule-sap-mot" model="hr.salary.rule">
+      <field name="parent_rule_id" ref="hr_salary_rule-sap" />
+      <field name="category_id" ref="hr_salary_rule_category-SKV" />
+      <field name="code">(sap)</field>
+      <field name="salary_art">s110</field>
+      <field name="name">Avräkning lagstadgade sociala avgifter</field>
+      <field name="sequence">490</field>
+      <field name="appears_on_payslip" eval="True"/>
+      <field name="condition_select">none</field>
+      <field name="amount_select">code</field>
+      <field name="amount_python_compute">result = rules.dict.get('san').amount_percentage * (categories.BRUTTO + categories.FORMAN) / 100</field>
+      <field name="quantity">1</field>
     </record>
     <record id="hr_salary_rule-sapx" model="hr.salary.rule">
       <field name="parent_rule_id" ref="hr_salary_rule-sa" />
@@ -345,15 +350,11 @@ if age > 77:
       <field name="amount_python_compute">result = 6.15 * (categories.BRUTTO + categories.FORMAN) / 100</field>
       <field name="amount_percentage">6.15</field>
       <field name="quantity">1</field>
-<!--
-      <field name="account_debit" search="[('code', '=', '7521')]" />
-      <field name="account_tax_id" search="[('code', '=', 'AvgAlderspSkLon')]" />
--->
     </record>
-    <record id="hr_salary_rule-sap-mot" model="hr.salary.rule">
+    <record id="hr_salary_rule-sapx-mot" model="hr.salary.rule">
       <field name="parent_rule_id" ref="hr_salary_rule-sap" />
       <field name="category_id" ref="hr_salary_rule_category-SKV" />
-      <field name="code">(sap)</field>
+      <field name="code">(sapx)</field>
       <field name="salary_art">s110</field>
       <field name="name">Avräkning lagstadgade sociala avgifter</field>
       <field name="sequence">490</field>
@@ -362,9 +363,6 @@ if age > 77:
       <field name="amount_select">code</field>
       <field name="amount_python_compute">result = rules.dict.get('san').amount_percentage * (categories.BRUTTO + categories.FORMAN) / 100</field>
       <field name="quantity">1</field>
-<!--
-      <field name="account_credit" search="[('code', '=', '2731')]" />
--->
     </record>
     <!--
          =====
