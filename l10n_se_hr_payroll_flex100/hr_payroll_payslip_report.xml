@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<openerp>
+<odoo>
     <data>
         <template id="payslip_document" inherit_id="l10n_se_hr_payroll.external_layout_footer">
             <xpath expr="//td[@id='tidssaldon']" position="replace">
@@ -19,4 +19,4 @@
             </xpath>
         </template>
     </data>
-</openerp>
+</odoo>

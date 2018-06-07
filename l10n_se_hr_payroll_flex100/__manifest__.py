@@ -18,7 +18,22 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
-
-import hr_payroll_flex100
+{
+    'name': 'Swedish - Flex100 Payslip',
+    'category': 'Localization',
+    'author': 'Vertel AB',
+    'depends': ['l10n_se_hr_payroll','hr_payroll_flex100'],
+    'version': '1.1',
+    'description': """
+Swedish Payslip additions for Flex100
+    """,
+    'website': 'http://www.vertel.se',
+    'data':[
+        'hr_salary_rule_data.xml',
+        'hr_payroll_payslip_report.xml',
+    ],
+    'auto_install': True,
+    'installable': True,
+}
 
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
