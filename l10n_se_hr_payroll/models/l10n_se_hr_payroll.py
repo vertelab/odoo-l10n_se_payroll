@@ -59,7 +59,6 @@ class hr_contract(models.Model):
     _inherit = 'hr.contract'
 
     prel_tax_amount = fields.Float(string="Prel skatt kr", digits_compute=dp.get_precision('Payroll'), help="Ange preleminär skatt i kronor")
-    hourly = fields.Boolean(string='Hourly', help='When checked, this contract is for employed by the hour.')
 
     def _wage_tax_base(self):
         self.wage_tax_base = (self.wage - self.aws_amount) + self.ded_amount

@@ -70,9 +70,6 @@
               <field name="prel_tax_url" widget="url" filename="name" colspan="1" readonly="True" />
             </group>
           </separator>
-          <field name="type_id" position="after">
-            <field name="hourly"/>
-          </field>
       </field>
     </record>
 
