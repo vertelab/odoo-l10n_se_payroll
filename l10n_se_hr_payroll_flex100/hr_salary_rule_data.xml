@@ -38,9 +38,9 @@ result = contract.wage / 160</field>
 
     <record id="hr_salary_rule-prej-tim" model="hr.salary.rule">
       <field name="category_id" ref="l10n_se_hr_payroll.hr_salary_rule_category-NETAVG" />
-      <field name="code">prej-tim</field>
+      <field name="code">prej-flex</field>
       <field name="salary_art">s100</field>
-      <field name="name">Preliminärskatt (Timlön)</field>
+      <field name="name">Preliminärskatt (Flex timlön)</field>
       <field name="sequence">690</field>
       <field name="appears_on_payslip" eval="True"/>
       <field name="condition_select">python</field>

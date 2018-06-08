@@ -1,224 +1,182 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
     <data>
-        <report id="l10n_se_hr_payroll.payslip" model="hr.payslip" string="Payslip SE" report_type="qweb-pdf" name="l10n_se_hr_payroll.payslip_report" file="l10n_se_hr_payroll.payslip_report" attachment_use="True" attachment="('payslip_'+(object.number.replace('/','') if object.number else ''))+'.pdf'"/>
-<!--
-        <record id="l10n_se_hr_payroll.payslip" model="ir.actions.report.xml">
-            <field name="paperformat_id" ref="l10n_se_hr_payroll.payslip_papper_format"/>
-        </record>
--->
-        <template id="payslip_report">
-            <t t-call="report.html_container">
-                <t t-foreach="docs" t-as="o">
-                    <t t-raw="translate_doc(o.id, doc_model, 'employee_id.address_home_id.lang', 'l10n_se_hr_payroll.payslip_document')" />
-                </t>
-            </t>
-        </template>
-        <template id="l10n_se_hr_payroll.payslip_document">
-            <t t-call="l10n_se_hr_payroll.external_layout">
-                <div class="page">
-                    <h2 t-field="o.name" />
-                    <!--
-                         SALARY LINES
-                    -->
-                    <div>
-                        <table class="table table-condensed">
-                            <thead>
-                                <tr>
-                                    <th>Löneart</th>
-                                    <th>Kod</th>
-                                    <th>Benämning</th>
-                                    <th style="text-align: center;">Kvantitet</th>
-                                    <th style="text-align: center;">Procent</th>
-                                    <th style="text-align: center;">A-pris</th>
-                                    <th style="text-align: right;">Belopp</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <t t-foreach="o.line_ids" t-as="p">
-                                    <tr t-att-style="'background: #eee;' if p.code == 'net' else ''">
-                                        <td style="border-right: 1px solid black;">
-                                            <span>
-                                                <t t-esc="'%4s' %p.salary_rule_id.salary_art if p.salary_rule_id.salary_art else ''" />
-                                            </span>
-                                        </td>
-                                        <td>
-                                            <span>
-                                                <t t-esc="p.code" />
-                                            </span>
-                                        </td>
-                                        <td>
-                                            <span t-field="p.name" />
-                                        </td>
-                                        <td style="text-align: center;">
-                                            <t t-if="p.code != 'net'">
-                                                <span t-esc="p.quantity"/>
-                                            </t>
-<!--
-                                            <t t-if="not p.quantity == 1 or not p.rate == 100">
-                                                <span t-raw="'%s%2.2f' % ( '-&amp;nbsp;' if p.category_id.code == 'BRUAVG' or p.category_id.code == 'NETAVG' else '', p.amount)" />
-                                            </t>
--->
-                                        </td>
-                                        <td style="text-align: center;">
-                                            <t t-if="p.code != 'net'">
-                                                <span t-esc="int(p.rate) if (p.rate).is_integer() else p.rate" /> %
-                                            </t>
-<!--
-                                            <t t-if="not p.quantity == 1 and not p.rate == 100">
-                                                <span t-esc="'%2.2f' % (p.quantity * p.rate / 100)" />
-                                            </t>
-                                            <t t-if="not (not p.quantity == 1 and not p.rate == 100)">
-                                                <t t-if="not p.quantity == 1">
-                                                    <span t-esc="'%2.2f' % p.quantity" />
-                                                </t>
-                                                <t t-if="not p.rate == 100">
-                                                    <span t-esc="'%2.2f%s' % (p.rate,'%')" />
-                                                </t>
-                                            </t>
--->
-                                        </td>
-                                        <td style="text-align: center;">
-                                            <t t-if="p.code != 'net'">
-                                                <span t-esc="p.amount if p.quantity != 1.0 else ''" />
-                                            </t>
-                                        </td>
-                                        <td style="text-align: right; border-left: 1px solid black;">
-                                            <b t-if="p.code == 'net'">
-                                                <span t-field="p.total"/>
-                                            </b>
-                                            <t t-if="not p.code == 'net'">
-                                                <t t-if="p.category_id.code == 'BRUAVG' or p.category_id.code == 'NETAVG'">-</t>
-                                                <span t-field="p.total"/>
-                                            </t>
-                                        </td>
-                                    </tr>
-                                </t>
-                            </tbody>
-                        </table>
-                        <table id="holidays_table"/>
-                    </div>
-                </div>
-            </t>
-        </template>
-
         <template id="l10n_se_hr_payroll.external_layout">
             <t t-if="o and 'company_id' in o">
-                <t t-set="company" t-value="o.company_id"></t>
+                <t t-set="company" t-value="o.company_id" />
             </t>
             <t t-if="not o or not 'company_id' in o">
-                <t t-set="company" t-value="res_company"></t>
+                <t t-set="company" t-value="res_company" />
             </t>
-
             <t t-call="l10n_se_hr_payroll.external_layout_header" />
             <t t-raw="0" />
             <t t-call="l10n_se_hr_payroll.external_layout_footer" />
         </template>
-
         <template id="l10n_se_hr_payroll.external_layout_header">
             <div class="header">
                 <div class="row">
                     <div class="col-xs-3">
-                        <img t-if="company.logo" t-att-src="'data:image/png;base64,%s' % company.logo" style="max-height: 45px;"/>
+                        <img t-if="company.logo" t-att-src="'data:image/png;base64,%s' % company.logo" style="max-height: 45px;" />
                     </div>
-                    <div class="col-xs-9 text-right" style="margin-top:20px;" t-field="company.rml_header1"/>
+                    <div class="col-xs-9 text-right" style="margin-top:20px;" t-field="company.rml_header1" />
                 </div>
                 <div class="row zero_min_height">
                     <div class="col-xs-12">
-                        <div style="border-bottom: 1px solid black;"></div>
+                        <div style="border-bottom: 1px solid black;" />
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-xs-3">
-                        <div t-field="company.partner_id"
-                            t-field-options='{"widget": "contact", "fields": ["address", "name"], "no_marker": true}'
-                            style="border-bottom: 1px solid black;"/>
+                        <div t-field="company.partner_id" t-field-options='{"widget": "contact", "fields": ["address", "name"], "no_marker": true}' style="border-bottom: 1px solid black;" />
                     </div>
                     <div class="col-xs-4 col-xs-offset-2">
-                        <span t-field="o.contract_id.name" /><br/>
-                        <span t-field="o.employee_id.job_id" /><br/>
+                        <span t-field="o.contract_id.name" />
+                        <br />
+                        <span t-field="o.employee_id.job_id" />
+                        <br />
                         <span t-field="o.contract_id.working_hours" />
                     </div>
                     <div class="col-xs-3">
-                        <div t-field="o.employee_id.address_home_id"
-                            t-field-options='{"widget": "contact", "fields": ["address", "name"], "no_marker": true}'
-                            style="border-bottom: 1px solid black;"/>
+                        <div t-field="o.employee_id.address_home_id" t-field-options='{"widget": "contact", "fields": ["address", "name"], "no_marker": true}' style="border-bottom: 1px solid black;" />
                     </div>
                 </div>
             </div>
         </template>
-
         <template id="l10n_se_hr_payroll.external_layout_footer">
             <div class="footer" style="height: 500px;">
                 <div id="footer_table_div" class="col-md-12 col-sm-12 col-xs-12" style="padding: 0px;">
                     <table class="table table-sm table-responsive" style="margin: 0px; border-collapse: collapse;">
                         <tbody>
                             <tr id="table_row_one">
-                                <td id="tidssaldon"/>
-                                <td id="salary_balance"/>
+                                <td id="tidssaldon" />
+                                <td id="salary_balance" />
                                 <td>
-                                    <span style="font-size: 0.7em;">Arbetsgivaravgift</span><br/>
+                                    <span style="font-size: 0.7em;">Arbetsgivaravgift</span>
+                                    <br />
                                     <t t-if="len(o.get_slip_line('san')) &gt; 0">
-                                        <span class="pull-left"><t t-esc="o.get_slip_line('san')[0]['name']" /></span>
-                                        <span class="pull-right"><t t-esc="o.get_slip_line('san')[0]['total']" /></span>
+                                        <span class="pull-left">
+                                            <t t-esc="o.get_slip_line('san')[0]['name']" />
+                                        </span>
+                                        <span class="pull-right">
+                                            <t t-esc="o.get_slip_line('san')[0]['total']" />
+                                        </span>
                                     </t>
                                     <t t-if="len(o.get_slip_line('sau')) &gt; 0">
-                                        <span class="pull-left"><t t-esc="o.get_slip_line('sau')[0]['name']" /></span>
-                                        <span class="pull-right"><t t-esc="o.get_slip_line('sau')[0]['total']" /></span>
+                                        <span class="pull-left">
+                                            <t t-esc="o.get_slip_line('sau')[0]['name']" />
+                                        </span>
+                                        <span class="pull-right">
+                                            <t t-esc="o.get_slip_line('sau')[0]['total']" />
+                                        </span>
                                     </t>
                                     <t t-if="len(o.get_slip_line('sap')) &gt; 0">
-                                        <span class="pull-left"><t t-esc="o.get_slip_line('sap')[0]['name']" /></span>
-                                        <span class="pull-right"><t t-esc="o.get_slip_line('sap')[0]['total']" /></span>
+                                        <span class="pull-left">
+                                            <t t-esc="o.get_slip_line('sap')[0]['name']" />
+                                        </span>
+                                        <span class="pull-right">
+                                            <t t-esc="o.get_slip_line('sap')[0]['total']" />
+                                        </span>
                                     </t>
                                 </td>
                             </tr>
                             <tr id="table_row_two">
                                 <td id="salary_accumulators">
-                                    <span style="font-size: 0.7em;">Ackumulerad</span><br/>
-                                    <span class="pull-left">Bruttolön</span><span class="pull-right"><t t-esc="int(o.get_slip_line_acc('bl')) or 0" /></span><br/>
-                                    <span id="forman"/>
-                                    <span class="pull-left">Preliminärskatt</span><span class="pull-right"><t t-esc="int(o.get_slip_line_acc('prej')) or 0" /></span><br/>
+                                    <span style="font-size: 0.7em;">Ackumulerad</span>
+                                    <br />
+                                    <span class="pull-left">Bruttolön</span>
+                                    <span class="pull-right">
+                                        <t t-esc="int(o.get_slip_line_acc('bl')) or 0" />
+                                    </span>
+                                    <br />
+                                    <span id="forman" />
+                                    <span class="pull-left">Preliminärskatt</span>
+                                    <span class="pull-right">
+                                        <t t-esc="int(o.get_slip_line_acc('prej')) or 0" />
+                                    </span>
+                                    <br />
                                     <t t-if="len(o.get_slip_line('san')) &gt; 0">
-                                        <span class="pull-left"><t t-esc="o.get_slip_line('san')[0]['name']" /></span>
-                                        <span class="pull-right"><t t-esc="o.get_slip_line_acc('san')" /></span>
+                                        <span class="pull-left">
+                                            <t t-esc="o.get_slip_line('san')[0]['name']" />
+                                        </span>
+                                        <span class="pull-right">
+                                            <t t-esc="o.get_slip_line_acc('san')" />
+                                        </span>
                                     </t>
                                     <t t-if="len(o.get_slip_line('sau')) &gt; 0">
-                                        <span class="pull-left"><t t-esc="o.get_slip_line('sau')[0]['name']" /></span>
-                                        <span class="pull-right"><t t-esc="o.get_slip_line_acc('sau')" /></span>
+                                        <span class="pull-left">
+                                            <t t-esc="o.get_slip_line('sau')[0]['name']" />
+                                        </span>
+                                        <span class="pull-right">
+                                            <t t-esc="o.get_slip_line_acc('sau')" />
+                                        </span>
                                     </t>
                                     <t t-if="len(o.get_slip_line('sap')) &gt; 0">
-                                        <span class="pull-left"><t t-esc="o.get_slip_line('sap')[0]['name']" /></span>
-                                        <span class="pull-right"><t t-esc="o.get_slip_line_acc('sap')" /></span>
+                                        <span class="pull-left">
+                                            <t t-esc="o.get_slip_line('sap')[0]['name']" />
+                                        </span>
+                                        <span class="pull-right">
+                                            <t t-esc="o.get_slip_line_acc('sap')" />
+                                        </span>
                                     </t>
                                 </td>
                                 <td>
-                                    <span style="font-size: 0.7em;">Skatt beräknad på</span><br/>
-                                    <span class="pull-left">Belopp</span><span class="pull-right"><t t-esc="o.contract_id.wage_tax_base" /></span><br/>
-                                    <span class="pull-left">Skatt tabell</span><span class="pull-right"><t t-esc="o.contract_id.prel_tax_tabel" /></span><br/>
-                                    <span class="pull-left">Preliminärskatt</span><span class="pull-right">
+                                    <span style="font-size: 0.7em;">Skatt beräknad på</span>
+                                    <br />
+                                    <span class="pull-left">Belopp</span>
+                                    <span class="pull-right">
+                                        <t t-esc="o.contract_id.wage_tax_base" />
+                                    </span>
+                                    <br />
+                                    <span class="pull-left">Preliminärskatt</span>
+                                    <span class="pull-right">
                                         <t t-if="len(o.get_slip_line('prej')) &gt; 0">
                                             <t t-esc="o.get_slip_line('prej')[0]['total'] or 0" />
                                         </t>
                                         <t t-if="len(o.get_slip_line('prej-tim')) &gt; 0">
                                             <t t-esc="o.get_slip_line('prej-tim')[0]['total'] or 0" />
                                         </t>
-                                    </span><br/>
+                                    </span>
+                                    <br />
                                     <t t-if="len(o.get_slip_line('san')) &gt; 0">
-                                        <span class="pull-left"><t t-esc="o.get_slip_line('san')[0]['name']" /></span>
-                                        <span class="pull-right"><t t-esc="o.get_slip_line('san')[0]['total']" /></span>
+                                        <span class="pull-left">
+                                            <t t-esc="o.get_slip_line('san')[0]['name']" />
+                                        </span>
+                                        <span class="pull-right">
+                                            <t t-esc="o.get_slip_line('san')[0]['total']" />
+                                        </span>
                                     </t>
                                     <t t-if="len(o.get_slip_line('sau')) &gt; 0">
-                                        <span class="pull-left"><t t-esc="o.get_slip_line('sau')[0]['name']" /></span>
-                                        <span class="pull-right"><t t-esc="o.get_slip_line('sau')[0]['total']" /></span>
+                                        <span class="pull-left">
+                                            <t t-esc="o.get_slip_line('sau')[0]['name']" />
+                                        </span>
+                                        <span class="pull-right">
+                                            <t t-esc="o.get_slip_line('sau')[0]['total']" />
+                                        </span>
                                     </t>
                                     <t t-if="len(o.get_slip_line('sap')) &gt; 0">
-                                        <span class="pull-left"><t t-esc="o.get_slip_line('sap')[0]['name']" /></span>
-                                        <span class="pull-right"><t t-esc="o.get_slip_line('sap')[0]['total']" /></span>
+                                        <span class="pull-left">
+                                            <t t-esc="o.get_slip_line('sap')[0]['name']" />
+                                        </span>
+                                        <span class="pull-right">
+                                            <t t-esc="o.get_slip_line('sap')[0]['total']" />
+                                        </span>
                                     </t>
+                                    <br />
+                                    <span class="pull-left">Skattetabell</span>
+                                    <span class="pull-right">
+                                        <t t-esc="o.contract_id.prel_tax_tabel" />
+                                    </span>
                                 </td>
                                 <td>
-                                    <span style="font-size: 0.7em;">Löneperiod</span><br/>
-                                    <span class="pull-left">Bruttolön</span><span class="pull-right"><t t-esc="o.get_slip_line('bl')[0]['total'] if len(o.get_slip_line('bl')) &gt; 0 else 0" /></span><br/><br/><br/>
+                                    <span style="font-size: 0.7em;">Löneperiod</span>
+                                    <br />
+                                    <span class="pull-left">Bruttolön</span>
+                                    <span class="pull-right">
+                                        <t t-esc="o.get_slip_line('bl')[0]['total'] if len(o.get_slip_line('bl')) &gt; 0 else 0" />
+                                    </span>
+                                    <br />
+                                    <br />
+                                    <br />
                                 </td>
                             </tr>
                         </tbody>
@@ -227,13 +185,16 @@
                         <tbody>
                             <tr>
                                 <td>
-                                    <span style="font-size: 0.7em;">Årets semester</span><br/>
-                                    <span style="font-size: 0.7em;">Betalda</span><br/>
+                                    <span style="font-size: 0.7em;">Årets semester</span>
+                                    <br />
+                                    <span style="font-size: 0.7em;">Betalda</span>
+                                    <br />
                                     <span>0</span>
                                 </td>
                                 <td>
-                                    <span style="font-size: 0.7em;">Sparad semester</span><br/>
-                                    <br/>
+                                    <span style="font-size: 0.7em;">Sparad semester</span>
+                                    <br />
+                                    <br />
                                     <span>0</span>
                                 </td>
                             </tr>
@@ -242,45 +203,165 @@
                     <table id="overall" class="table table-sm table-responsive" style="margin: 0px; border-collapse: collapse;">
                         <tbody>
                             <tr style="background: #eee;">
-                                <td><span style="font-size: 0.7em;">Arbetad tid</span></td>
-                                <td><span style="font-size: 0.7em;">Övertid</span></td>
-                                <td><span style="font-size: 0.7em;">Frånvaro</span></td>
+                                <td>
+                                    <span style="font-size: 0.7em;">Arbetad tid</span>
+                                </td>
+                                <td>
+                                    <span style="font-size: 0.7em;">Övertid</span>
+                                </td>
+                                <td>
+                                    <span style="font-size: 0.7em;">Frånvaro</span>
+                                </td>
                             </tr>
                             <tr style="background: #eee;">
-                                <td><t t-esc="o.worked_days_line_ids.filtered(lambda l: l.code == 'WORK100').mapped('number_of_hours')[0] or 0.0"/></td>
-                                <td><t t-esc="o.get_slip_line('kval') and o.get_slip_line('kval')[0]['quantity'] or 0"/></td>
-                                <td><t t-esc="sum(o.worked_days_line_ids.mapped('number_of_hours')) - o.worked_days_line_ids.filtered(lambda l: l.code == 'WORK100').mapped('number_of_hours')[0]"/></td>
+                                <td>
+                                    <t t-esc="o.worked_days_line_ids.filtered(lambda l: l.code == 'WORK100').mapped('number_of_hours')[0] if len(o.worked_days_line_ids.filtered(lambda l: l.code == 'WORK100')) &gt; 0 else 0.0" />
+                                </td>
+                                <td>
+                                    <t t-esc="o.get_slip_line('kval') and o.get_slip_line('kval')[0]['quantity'] or 0" />
+                                </td>
+                                <td>
+                                    <t t-esc="sum(o.worked_days_line_ids.mapped('number_of_hours')) - o.worked_days_line_ids.filtered(lambda l: l.code == 'WORK100').mapped('number_of_hours')[0] if len(o.worked_days_line_ids.filtered(lambda l: l.code == 'WORK100').mapped('number_of_hours')) &gt; 0 else 0.0" />
+                                </td>
                             </tr>
                         </tbody>
                     </table>
                 </div>
                 <div class="text-center" style="border-top: 1px solid black;">
                     <ul t-if="not company.custom_footer" class="list-inline">
-                        <li t-if="company.phone">Phone: <span t-field="company.phone"/></li>
-
+                        <li t-if="company.phone">
+                            Phone:
+                            <span t-field="company.phone" />
+                        </li>
                         <li t-if="company.fax and company.phone">&amp;bull;</li>
-                        <li t-if="company.fax">Fax: <span t-field="company.fax"/></li>
-
+                        <li t-if="company.fax">
+                            Fax:
+                            <span t-field="company.fax" />
+                        </li>
                         <li t-if="company.email">&amp;bull;</li>
-                        <li t-if="company.email">Email: <span t-field="company.email"/></li>
-
+                        <li t-if="company.email">
+                            Email:
+                            <span t-field="company.email" />
+                        </li>
                         <li t-if="company.website">&amp;bull;</li>
-                        <li t-if="company.website">Website: <span t-field="company.website"/></li>
+                        <li t-if="company.website">
+                            Website:
+                            <span t-field="company.website" />
+                        </li>
                     </ul>
-
                     <t t-if="company.custom_footer">
-                        <span t-raw="company.rml_footer" style="font-size: 0.9em;"/>
+                        <span t-raw="company.rml_footer" style="font-size: 0.9em;" />
                     </t>
-
                     <ul class="list-inline">
                         <li>Page:</li>
-                        <li><span class="page"/></li>
+                        <li>
+                            <span class="page" />
+                        </li>
                         <li>/</li>
-                        <li><span class="topage"/></li>
+                        <li>
+                            <span class="topage" />
+                        </li>
                     </ul>
                 </div>
             </div>
         </template>
-
+        <!--
+             <record id="l10n_se_hr_payroll.payslip" model="ir.actions.report.xml">
+             <field name="paperformat_id" ref="l10n_se_hr_payroll.payslip_papper_format"/>
+             </record>
+        -->
+        <template id="l10n_se_hr_payroll.payslip_document">
+            <t t-call="report.html_container">
+                <t t-foreach="docs" t-as="o">
+                    <t t-call="l10n_se_hr_payroll.external_layout">
+                        <div class="page">
+                            <h2 t-field="o.name" />
+                            <!--
+                                 SALARY LINES
+                            -->
+                            <div>
+                                <table class="table table-condensed">
+                                    <thead>
+                                        <tr>
+                                            <th>Löneart</th>
+                                            <th>Kod</th>
+                                            <th>Benämning</th>
+                                            <th style="text-align: center;">Kvantitet</th>
+                                            <th style="text-align: center;">Procent</th>
+                                            <th style="text-align: center;">A-pris</th>
+                                            <th style="text-align: right;">Belopp</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <t t-foreach="o.line_ids.filtered(lambda r: r.salary_rule_id.appears_on_payslip)" t-as="p">
+                                            <tr t-att-style="'background: #eee;' if p.code == 'net' else ''">
+                                                <td style="border-right: 1px solid black;">
+                                                    <span>
+                                                        <t t-esc="'%4s' %p.salary_rule_id.salary_art if p.salary_rule_id.salary_art else ''" />
+                                                    </span>
+                                                </td>
+                                                <td>
+                                                    <span>
+                                                        <t t-esc="p.code" />
+                                                    </span>
+                                                </td>
+                                                <td>
+                                                    <span t-field="p.name" />
+                                                </td>
+                                                <td style="text-align: center;">
+                                                    <t t-if="p.code != 'net'">
+                                                        <span t-esc="p.quantity" />
+                                                    </t>
+                                                    <!--
+                                                         <t t-if="not p.quantity == 1 or not p.rate == 100">
+                                                         <span t-raw="'%s%2.2f' % ( '-&amp;nbsp;' if p.category_id.code == 'BRUAVG' or p.category_id.code == 'NETAVG' else '', p.amount)" />
+                                                         </t>
+                                                    -->
+                                                </td>
+                                                <td style="text-align: center;">
+                                                    <t t-if="p.code != 'net'">
+                                                        <span t-esc="int(p.rate) if (p.rate).is_integer() else p.rate" />
+                                                        %
+                                                    </t>
+                                                    <!--
+                                                         <t t-if="not p.quantity == 1 and not p.rate == 100">
+                                                         <span t-esc="'%2.2f' % (p.quantity * p.rate / 100)" />
+                                                         </t>
+                                                         <t t-if="not (not p.quantity == 1 and not p.rate == 100)">
+                                                         <t t-if="not p.quantity == 1">
+                                                         <span t-esc="'%2.2f' % p.quantity" />
+                                                         </t>
+                                                         <t t-if="not p.rate == 100">
+                                                         <span t-esc="'%2.2f%s' % (p.rate,'%')" />
+                                                         </t>
+                                                         </t>
+                                                    -->
+                                                </td>
+                                                <td style="text-align: center;">
+                                                    <t t-if="p.code != 'net'">
+                                                        <span t-esc="p.amount if p.quantity != 1.0 else ''" />
+                                                    </t>
+                                                </td>
+                                                <td style="text-align: right; border-left: 1px solid black;">
+                                                    <b t-if="p.code == 'net'">
+                                                        <span t-field="p.total" />
+                                                    </b>
+                                                    <t t-if="not p.code == 'net'">
+                                                        <t t-if="p.category_id.code == 'BRUAVG' or p.category_id.code == 'NETAVG'">-</t>
+                                                        <span t-field="p.total" />
+                                                    </t>
+                                                </td>
+                                            </tr>
+                                        </t>
+                                    </tbody>
+                                </table>
+                                <table id="holidays_table" />
+                            </div>
+                        </div>
+                    </t>
+                </t>
+            </t>
+        </template>
+        <report id="l10n_se_hr_payroll.payslip" model="hr.payslip" string="Payslip SE" report_type="qweb-pdf" name="l10n_se_hr_payroll.payslip_document" file="l10n_se_hr_payroll.payslip_document" attachment_use="True" attachment="('payslip_'+(object.number.replace('/','') if object.number else ''))+'.pdf'" />
     </data>
 </odoo>
