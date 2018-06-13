@@ -103,8 +103,6 @@ result = contract.wage / 160
     -->
     <record id="hr_salary_rule-holiday-pay" model="hr.salary.rule">
         <field name="name">Semesterlöneskuld</field>
-        <!-- TODO:remove parent_rule_id, add semsk to löne för tjänsteman/kollektiv -->
-        <field name="parent_rule_id" ref="l10n_se_hr_payroll.hr_salary_rule-bl" />
         <field name="category_id" ref="l10n_se_hr_holidays.hr_salary_rule_category-semesterloneskulder" />
         <field name="salary_art">220</field>
         <field name="code">semsk</field>
@@ -114,6 +112,22 @@ result = contract.wage / 160
         <field name="amount_select">code</field>
         <field name="amount_python_compute">result = contract.wage * worked_days.WORK100.payslip_id.get_holiday_basis_percent() * 0.12</field>
         <field name="quantity">1</field>
+    </record>
+    
+    <record id="l10n_se_hr_payroll.hr_payroll_structure-fl" model="hr.payroll.structure">
+		<field name="rule_ids" eval="[(4, ref('hr_salary_rule-holiday-pay'))]" />
+    </record>
+    
+    <record id="l10n_se_hr_payroll.hr_payroll_structure-tj" model="hr.payroll.structure">
+		<field name="rule_ids" eval="[(4, ref('hr_salary_rule-holiday-pay'))]" />
+    </record>
+    
+    <record id="l10n_se_hr_payroll.hr_payroll_structure-kl" model="hr.payroll.structure">
+		<field name="rule_ids" eval="[(4, ref('hr_salary_rule-holiday-pay'))]" />
+    </record>
+    
+    <record id="l10n_se_hr_payroll.hr_payroll_structure-tjun" model="hr.payroll.structure">
+		<field name="rule_ids" eval="[(4, ref('hr_salary_rule-holiday-pay'))]" />
     </record>
 
     <record id="hr_salary_rule-socav-for-sem" model="hr.salary.rule">

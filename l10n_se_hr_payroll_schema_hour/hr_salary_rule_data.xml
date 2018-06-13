@@ -16,7 +16,7 @@
         </record>
 -->
         <record id="hr_salary_rule-bl-tim-pre" model="hr.salary.rule">
-            <field name="category_id" ref="l10n_se_hr_payroll.hr_salary_rule_category-BRUTTO" />
+            <field name="category_id" ref="l10n_se_hr_payroll.hr_salary_rule_category-BRUTIL" />
             <field name="code">bl-tim-pre</field>
             <field name="name">Bruttolön (Timlön)</field>
             <field name="sequence">280</field>
