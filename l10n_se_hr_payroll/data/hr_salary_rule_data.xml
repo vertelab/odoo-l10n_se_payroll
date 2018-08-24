@@ -547,7 +547,7 @@ result = 18.5
       <field name="amount_select">code</field>
       <field name="amount_python_compute">
 result_qty = inputs.traktin.amount
-result = 0.0 if result_qty == 0 else 220
+result = 0.0 if result_qty == 0 else 230
       </field>
       <field name="quantity">1</field>
     </record>
