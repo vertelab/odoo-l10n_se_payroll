@@ -49,9 +49,10 @@ Swedish Payroll Rules.
         'data/hr_salary_rule_data.xml',
         # last
         'data/hr_payroll_stucture_simple_data.xml',
+        'demo/hr_payroll_demo.xml',
     ],
     'demo':[
-        'demo/hr_payroll_demo.xml',
+        # ~ 'demo/hr_payroll_demo.xml',
     ],
     'installable': True
 }

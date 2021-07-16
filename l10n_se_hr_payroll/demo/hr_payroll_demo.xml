@@ -1,7 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
   <data>
+    <!--
     <record id="base.res_partner-AW" model="res.partner">
+    Can't find the creation of this record anywhere in odoo10 or odoo12, so i asume that base.res_partner-AW is created here. Even tho the 'base' prefix would suggest otherwise
+    -->
+    <record id="res_partner-AW" model="res.partner">
       <!--
            <field name="last_reconciliation_date"></field>
       -->
@@ -32,7 +36,12 @@
     <!--
          ///
     -->
+    
+    <!--
     <record id="base.res_partner-LY" model="res.partner">
+    Can't find the creation of this record anywhere in odoo10 or odoo12, so i asume that base.res_partner-LY is created here. Even tho the 'base' prefix would suggest otherwise
+    -->
+    <record id="res_partner-LY" model="res.partner">
       <field name="company_id" ref="base.main_company" />
       <field name="name">Leif Ydreborn</field>
       <field name="notify_email">always</field>
@@ -49,7 +58,12 @@
     <!--
          =============================================================================
     -->
+    
+    <!--
     <record id="hr.hr_employee-AW" model="hr.employee">
+    Can't find the creation of this record anywhere in odoo10 or odoo12, so i asume that hr.hr_employee-AW is created here. Even tho the 'hr' prefix would suggest otherwise
+    -->
+    <record id="hr_employee-AW" model="hr.employee">
       <field name="address_id" ref="base.main_partner" />
       <field name="manager">True</field>
       <!--
@@ -64,13 +78,17 @@
       <field name="name_related">Anders Wallenquist (ans)</field>
       <field name="ssnid">False</field>
       <field name="leave_date_from">False</field>
-      <field name="address_home_id" ref="base.res_partner-AW" />
+      <field name="address_home_id" ref="l10n_se_hr_payroll.res_partner-AW" />
     </record>
     <!--
          ==============================================================================
          <record id="hr.hr_employee-7f6fa9c4-7e24-11e5-a6a2-52540087a7b7-2" model="hr.employee">
     -->
+    <!--
     <record id="hr.hr_employee-LY" model="hr.employee">
+    Can't find the creation of this record anywhere in odoo10 or odoo12, so i asume that hr.hr_employee-LY is created here. Even tho the 'hr' prefix would suggest otherwise
+    -->
+    <record id="hr_employee-LY" model="hr.employee">
       <field name="address_id" ref="base.main_partner" />
       <!--
            <field name="contract_id" ref="hr_contract.hr_contract-LY"/>
@@ -83,13 +101,16 @@
       -->
       <field name="name">Leif Ydreborn (ans)</field>
       <field name="name_related">Leif Ydreborn (ans)</field>
-      <field name="address_home_id" ref="base.res_partner-LY" />
+      <field name="address_home_id" ref="l10n_se_hr_payroll.res_partner-LY" />
     </record>
     <!--
          ================
     -->
-    <record id="hr.hr_employee-AW" model="hr.employee">
-      <field name="coach_id" ref="hr.hr_employee-LY" />
+    
+    
+
+    <record id="hr_employee-AW" model="hr.employee">
+      <field name="coach_id" ref="l10n_se_hr_payroll.hr_employee-LY" />
     </record>
     <!--
          ==================================================================
@@ -158,7 +179,7 @@
            <field name="struct_id" ref="hr_payroll_structure-gl"/>
       -->
       <field name="struct_id" ref="hr_payroll_structure-fl" />
-      <field name="employee_id" ref="hr.hr_employee-LY" />
+      <field name="employee_id" ref="l10n_se_hr_payroll.hr_employee-LY" />
       <!-- MÅSTE SÄTTAS
            <field name="journal_id" eval="[ref('account_journal-lon-DEMO')]"/>
       -->

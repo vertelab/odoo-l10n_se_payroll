@@ -58,6 +58,7 @@
                     <field name="prel_tax_amount" />
                     <field name="wage_tax_base" />
                     <field name="prel_tax_tabel" placeholder="SKATTETABELL 31/Kolumn 1/Ingen jämkning" />
+                    <field name="prel_tax_url" widget="url" filename="name" colspan="1" readonly="True" />
                     <!--
                          <field name="car_company_amount"/>
                          <field name="car_employee_deduction"/>
@@ -65,11 +66,13 @@
                          <field name="office_fund"/>
                     -->
                 </xpath>
+<!--
                 <separator position="before">
                     <group>
                         <field name="prel_tax_url" widget="url" filename="name" colspan="1" readonly="True" />
                     </group>
                 </separator>
+-->
             </field>
         </record>
         <!--
