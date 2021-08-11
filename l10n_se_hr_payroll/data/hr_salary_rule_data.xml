@@ -533,7 +533,7 @@ result = 18.5
       <field name="sequence">710</field>
       <field name="appears_on_payslip" eval="True"/>
       <field name="condition_select">python</field>
-      <field name="condition_python">	result = (inputs and inputs.traktin and inputs.traktin.amount != 0) or False</field>
+      <field name="condition_python">result = (inputs and inputs.traktin and inputs.traktin.amount != 0) or False</field>
 <!--
       <field name="condition_python">result = inputs.traktin.amount != 0</field>
 -->
