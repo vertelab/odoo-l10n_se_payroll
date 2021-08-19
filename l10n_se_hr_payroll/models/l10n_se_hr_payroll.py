@@ -43,15 +43,16 @@ class hr_salary_rule(models.Model):
 
     @api.model
     def init_records(self):
-        hr_rule_basic = self.env['ir.model.data'].get_object_reference('hr_payroll', 'hr_rule_basic')
+        # ~ Changed "hr_payroll" to "hr_payroll_community" since "hr_payroll" is an enterprise module now
+        hr_rule_basic = self.env['ir.model.data'].get_object_reference('hr_payroll_community', 'hr_rule_basic')
         self.env['hr.salary.rule'].browse(hr_rule_basic[1]).write({
             'active': False,
         })
-        hr_rule_taxable = self.env['ir.model.data'].get_object_reference('hr_payroll', 'hr_rule_taxable')
+        hr_rule_taxable = self.env['ir.model.data'].get_object_reference('hr_payroll_community', 'hr_rule_taxable')
         self.env['hr.salary.rule'].browse(hr_rule_taxable[1]).write({
             'active': False,
         })
-        hr_rule_net = self.env['ir.model.data'].get_object_reference('hr_payroll', 'hr_rule_net')
+        hr_rule_net = self.env['ir.model.data'].get_object_reference('hr_payroll_community', 'hr_rule_net')
         self.env['hr.salary.rule'].browse(hr_rule_net[1]).write({
             'active': False,
         })
@@ -100,9 +101,10 @@ class hr_contract(models.Model):
 class hr_employee(models.Model):
     _inherit = 'hr.employee'
 
-    @api.one
+    # ~ @api.one
     def _age(self):
-        self.age= -1 if not self.birthday else date.today().year - datetime.strptime(self.birthday, DEFAULT_SERVER_DATE_FORMAT).year
+        for rec in self: 
+            self.age= -1 if not self.birthday else date.today().year - datetime.strptime(self.birthday, DEFAULT_SERVER_DATE_FORMAT).year
     age = fields.Integer(string="Age", compute=_age, help="Age to calculate social security deduction")
 
 

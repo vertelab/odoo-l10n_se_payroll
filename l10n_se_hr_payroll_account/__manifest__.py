@@ -22,7 +22,7 @@
     'name': 'Sweden - Payroll with Accounting',
     'category': 'Localization',
     'author': 'Vertel AB',
-    'depends': ['l10n_se_hr_payroll', 'hr_payroll_account', 'l10n_se'],
+    'depends': ['l10n_se_hr_payroll', 'hr_payroll_account_community', 'l10n_se'],
     'version': '1.0',
     'description': """
 Accounting Data for Swedish Payroll Rules.

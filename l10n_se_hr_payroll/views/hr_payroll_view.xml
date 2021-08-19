@@ -1,10 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
+<!--
+  For odoo 14 i have changed all hr_payroll to hr_payroll_community  
+-->
     <data>
         <record id="hr_salary_rule_form" model="ir.ui.view">
             <field name="name">hr.salary.rule.form.inherit.l10n_se.payroll</field>
             <field name="model">hr.salary.rule</field>
-            <field name="inherit_id" ref="hr_payroll.hr_salary_rule_form" />
+            <field name="inherit_id" ref="hr_payroll_community.hr_salary_rule_form" />
             <field name="arch" type="xml">
                 <field name="sequence" position="before">
                     <field name="salary_art" />
@@ -14,7 +17,7 @@
         <record id="hr_salary_rule_list" model="ir.ui.view">
             <field name="name">hr.salary.rule.list.inherit.l10n_se.payroll</field>
             <field name="model">hr.salary.rule</field>
-            <field name="inherit_id" ref="hr_payroll.hr_salary_rule_list" />
+            <field name="inherit_id" ref="hr_payroll_community.hr_salary_rule_list" />
             <field name="arch" type="xml">
                 <field name="sequence" position="replace" />
                 <field name="name" position="before">
@@ -28,7 +31,7 @@
         <record id="view_hr_rule_filter" model="ir.ui.view">
             <field name="name">hr.salary.rule.select.inherit.l10n_se.payroll</field>
             <field name="model">hr.salary.rule</field>
-            <field name="inherit_id" ref="hr_payroll.view_hr_rule_filter" />
+            <field name="inherit_id" ref="hr_payroll_community.view_hr_rule_filter" />
             <field name="arch" type="xml">
                 <field name="condition_range_min" position="after">
                     <field name="appears_on_payslip" />
@@ -39,7 +42,8 @@
                 </field>
             </field>
         </record>
-        <record id="hr_payroll.action_salary_rule_form" model="ir.actions.act_window">
+
+        <record id="hr_payroll_community.action_salary_rule_form" model="ir.actions.act_window">
             <field name="domain">[]</field>
             <!--
                  <field name="context">{"search_default_parent_rule_id":1}</field>
@@ -117,11 +121,15 @@
         <record id="payroll_hr_employee_view_form" model="ir.ui.view">
             <field name="name">payroll.hr.employee.view.form</field>
             <field name="model">hr.employee</field>
+<!--
             <field name="inherit_id" ref="hr_payroll.payroll_hr_employee_view_form" />
+-->
+            
+            <field name="inherit_id" ref="hr_payroll_community.payroll_hr_employee_view_form" />
             <field name="arch" type="xml">
                 <data>
-                    <button name="%(hr_payroll.act_hr_employee_payslip_list)d" position="replace">
-                        <button name="%(hr_payroll.act_hr_employee_payslip_list)d" class="oe_stat_button" icon="fa-money" type="action" groups="base.group_hr_manager">
+                    <button name="%(hr_payroll_community.act_hr_employee_payslip_list)d" position="replace">
+                        <button name="%(hr_payroll_community.act_hr_employee_payslip_list)d" class="oe_stat_button" icon="fa-money" type="action" groups="base.group_hr_manager">
                             <field name="payslip_count" widget="statinfo" string="Payslips" />
                         </button>
                     </button>

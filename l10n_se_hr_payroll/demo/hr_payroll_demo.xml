@@ -14,7 +14,9 @@
            <field model="account.account" name="name" search="[('code','=','1510')]" use="name"/>
       -->
       <field name="name">Anders Wallenquist</field>
-      <field name="notify_email">always</field>
+<!--
+      <field name="notify_email">always</field>Field is missing in 14
+-->
       <field name="street">Furugatan 4B</field>
       <field name="tz_offset">+0100</field>
       <field name="city">Linköping</field>
@@ -44,7 +46,9 @@
     <record id="res_partner-LY" model="res.partner">
       <field name="company_id" ref="base.main_company" />
       <field name="name">Leif Ydreborn</field>
-      <field name="notify_email">always</field>
+<!--
+      <field name="notify_email">always</field> Field is missing in 14
+-->
       <field name="street">Ulriksdal</field>
       <field name="tz_offset">+0100</field>
       <field name="city">Linghem</field>
@@ -65,7 +69,9 @@
     -->
     <record id="hr_employee-AW" model="hr.employee">
       <field name="address_id" ref="base.main_partner" />
-      <field name="manager">True</field>
+<!--
+      <field name="manager">True</field> Field is missing in 14
+-->
       <!--
            <field name="display_name">Anders Wallenquist (ans)</field>
       -->
@@ -75,7 +81,6 @@
       <field name="company_id" ref="base.main_company" />
       <field name="birthday">1993-10-08</field>
       <field name="name">Anders Wallenquist (ans)</field>
-      <field name="name_related">Anders Wallenquist (ans)</field>
       <field name="ssnid">False</field>
       <field name="leave_date_from">False</field>
       <field name="address_home_id" ref="l10n_se_hr_payroll.res_partner-AW" />
@@ -100,7 +105,6 @@
            <field name="job_id" ref="hr.hr_job-7f6fa9c4-7e24-11e5-a6a2-52540087a7b7-1"/>
       -->
       <field name="name">Leif Ydreborn (ans)</field>
-      <field name="name_related">Leif Ydreborn (ans)</field>
       <field name="address_home_id" ref="l10n_se_hr_payroll.res_partner-LY" />
     </record>
     <!--
@@ -171,7 +175,7 @@
     -->
     <record id="hr_contract-LY" model="hr.contract">
       <field name="name">Leif (löneavtal NYA)</field>
-      <field name="type_id" ref="hr_contract.hr_contract_type_emp" />
+      <field name="type_id" ref="hr_contract_types.hr_contract_type_emp" />
       <!--
            Ska kollas ???
       -->

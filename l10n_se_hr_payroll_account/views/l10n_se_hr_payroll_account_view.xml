@@ -4,7 +4,10 @@
         <record id="hr_salary_rule_list" model="ir.ui.view">
             <field name="name">hr.salary.rule.list.inherit.l10n_se.account</field>
             <field name="model">hr.salary.rule</field>
+<!--
             <field name="inherit_id" ref="hr_payroll.hr_salary_rule_list"/>
+-->
+            <field name="inherit_id" ref="hr_payroll_community.hr_salary_rule_list"/>
             <field name="arch" type="xml">
                 <field name="code" position="after">
                     <field name="analytic_account_id"/>
