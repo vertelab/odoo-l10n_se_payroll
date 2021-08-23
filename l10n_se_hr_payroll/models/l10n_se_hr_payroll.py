@@ -19,6 +19,7 @@
 #
 ##############################################################################
 # ~ from odoo.modules.registry import RegistryManager
+from dateutil.relativedelta import relativedelta
 from odoo.modules.registry import Registry
 from odoo.exceptions import except_orm, Warning, RedirectWarning
 from odoo import models, fields, api, _
@@ -102,10 +103,18 @@ class hr_employee(models.Model):
     _inherit = 'hr.employee'
 
     # ~ @api.one
+    # ~ def _age(self):
+        # ~ for rec in self: 
+            # ~ self.age= -1 if not self.birthday else date.today().year - datetime.strptime(str(self.birthday), DEFAULT_SERVER_DATE_FORMAT).year
+    @api.depends("birthday")
     def _age(self):
-        for rec in self: 
-            self.age= -1 if not self.birthday else date.today().year - datetime.strptime(self.birthday, DEFAULT_SERVER_DATE_FORMAT).year
-    age = fields.Integer(string="Age", compute=_age, help="Age to calculate social security deduction")
+        for record in self:
+            age = 0
+            if record.birthday:
+                age = relativedelta(fields.Date.today(), record.birthday).years
+            _logger.warning(f"jakmar age: {age}")
+            record.age = age
+    age = fields.Integer(string="_compute_age", compute=_age, help="Age to calculate social security deduction")
 
 
 class hr_payslip(models.Model):

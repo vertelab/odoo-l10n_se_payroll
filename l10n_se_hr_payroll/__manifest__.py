@@ -22,7 +22,7 @@
     'name': 'Swedish - Payroll',
     'category': 'Localization',
     'author': 'Vertel AB',
-    'depends': ['hr_payroll_community','hr_contract_types'],
+    'depends': ['hr_payroll_community','hr_contract_types','account'],
     'version': '1.2',
     'description': """
 Swedish Payroll Rules.
@@ -49,10 +49,12 @@ Swedish Payroll Rules.
         'data/hr_salary_rule_data.xml',
         # last
         'data/hr_payroll_stucture_simple_data.xml',
-        'demo/hr_payroll_demo.xml',
+        'views/general_journal_view.xml'
+
     ],
     'demo':[
         # ~ 'demo/hr_payroll_demo.xml',
+        'demo/hr_payroll_demo.xml',
     ],
     'installable': True
 }

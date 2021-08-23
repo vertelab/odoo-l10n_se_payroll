@@ -27,12 +27,18 @@ import logging
 _logger = logging.getLogger(__name__)
 
 class hr_holidays(models.Model):
-    _inherit = "hr.holidays"
+    # ~ _inherit = "hr.holidays"
+        _inherit = "hr.leave"
 
-    earning_id = fields.Many2one(comodel_name='hr.holidays.earning')
+    # ~ earning_id = fields.Many2one(comodel_name='hr.holidays.earning')
 
 class hr_holidays_status(models.Model):
-    _inherit = "hr.holidays.status"
+    # ~ _inherit = "hr.holidays.status" looks like hr.leave.type is the replacment
+    _inherit = "hr.leave.type"
+    limit = fields.Boolean('Allow to Override Limit',
+    help='If you select this check box, the system allows the employees to take more leaves '
+         'than the available ones for this type and will not take them into account for the '
+         '"Remaining Legal Leaves" defined on the employee form.')
 
     payslip_rule = fields.Text(string='Earning Rule',help="Python Code")
     payslip_condition = fields.Text(string='Earning Condition',help="Python Code")
@@ -45,7 +51,7 @@ class hr_holidays_status(models.Model):
         self.env['hr.holidays.status'].browse(holiday_status_cl[1]).write({
             'name': 'Legal Leaves '+ str(fields.Date.from_string(fields.Datetime.now()).year - 1),
             'legal_leave': True,
-            'limit': False,
+            # ~ 'limit': False,
             'date_earning_start': fields.Date.to_string(date(date.today().year - 2,4,1 )),
             'date_earning_end':   fields.Date.to_string(date(date.today().year - 1,3,31)),
         })
@@ -53,13 +59,13 @@ class hr_holidays_status(models.Model):
         self.env['hr.holidays.status'].browse(holiday_status_unpaid[1]).write({
             'name': 'Legal Leaves unpaid',
             'legal_leave': False,
-            'limit': True,
+            # ~ 'limit': True,
         })
         holiday_status_sl = self.env['ir.model.data'].get_object_reference('hr_holidays', 'holiday_status_sl')
         self.env['hr.holidays.status'].browse(holiday_status_sl[1]).write({
             'name': 'Sick Leave 100%',
             'legal_leave': False,
-            'limit': True,
+            # ~ 'limit': True,
             'color_name': 'red',
         })
         # holiday_status_comp
@@ -67,17 +73,19 @@ class hr_holidays_status(models.Model):
         self.env['hr.holidays.status'].browse(holiday_status_sl[1]).write({
             'name': 'Sick Leave 100%',
             'legal_leave': False,
-            'limit': True,
+            # ~ 'limit': True,
             'color_name': 'red',
         })
 
-    @api.one
-    @api.depends('date_earning_start','date_earning_end','limit')
+    # ~ @api.one
+    # ~ @api.depends('date_earning_start','date_earning_end','limit')
+    @api.depends('date_earning_start','date_earning_end')
     def _holidays_allowed(self):
-        if not self.limit:
-            self.holidays_allowed = not (self.date_earning_start and self.date_earning_end) or fields.Date.today() > self.date_earning_end
-        else:
-            self.holidays_allowed = True
+        for rec in self:
+            if not rec.limit:
+                rec.holidays_allowed = not (rec.date_earning_start and rec.date_earning_end) or fields.Date.today() > rec.date_earning_end
+            else:
+                rec.holidays_allowed = True
     holidays_allowed = fields.Boolean(string="Allowed",compute='_holidays_allowed',store=True)
 
     @api.model
@@ -88,26 +96,27 @@ class hr_holidays_status(models.Model):
     date_earning_start = fields.Date(string='Earning year starts')
     date_earning_end = fields.Date(string='Earning year ends')
 
-    @api.one
+    # ~ @api.one
     def earn_leaves_days(self):
-        for employee in self.env['hr.employee'].search([]):
-            earning_days = self.env['hr.payslip'].get_leaves_earnings_days(employee,self.date_earning_start,self.date_earning_end)
-            if earning_days['employed_days'] - earning_days['absent_days'] > 0:
-                holiday = self.env['hr.holidays'].create({
-                        'name': '%s earned days' % self.name,
-                        'employee_id': employee.id,
-                        'holiday_status_id': self.id,
-                        'type': 'add',
-                        'state': 'validate',
-                        'number_of_days_temp': round(((earning_days['employed_days'] - earning_days['absent_days']) * employee.get_leaves_days(self.date_earning_start,self.date_earning_end) / 365) + 0.5,0),
-                })
-                self.env['mail.message'].create({
-                    'body': _("Earn days %s: %s (%s)" % (earning_days,holiday.number_of_days_temp,employee.get_leaves_days(self.date_earning_start,self.date_earning_end))),
-                    'subject': "Calculation",
-                    'author_id': self.env['res.users'].browse(self.env.uid).partner_id.id,
-                    'res_id': holiday.id,
-                    'model': holiday._name,
-                    'type': 'notification',})
+        for rec in self:
+            for employee in rec.env['hr.employee'].search([]):
+                earning_days = rec.env['hr.payslip'].get_leaves_earnings_days(employee,rec.date_earning_start,rec.date_earning_end)
+                if earning_days['employed_days'] - earning_days['absent_days'] > 0:
+                    holiday = rec.env['hr.holidays'].create({
+                            'name': '%s earned days' % rec.name,
+                            'employee_id': employee.id,
+                            'holiday_status_id': rec.id,
+                            'type': 'add',
+                            'state': 'validate',
+                            'number_of_days_temp': round(((earning_days['employed_days'] - earning_days['absent_days']) * employee.get_leaves_days(rec.date_earning_start,rec.date_earning_end) / 365) + 0.5,0),
+                    })
+                    rec.env['mail.message'].create({
+                        'body': _("Earn days %s: %s (%s)" % (earning_days,holiday.number_of_days_temp,employee.get_leaves_days(rec.date_earning_start,rec.date_earning_end))),
+                        'subject': "Calculation",
+                        'author_id': rec.env['res.users'].browse(rec.env.uid).partner_id.id,
+                        'res_id': holiday.id,
+                        'model': holiday._name,
+                        'type': 'notification',})
 
 class hr_employee(models.Model):
     _inherit = 'hr.employee'
@@ -119,15 +128,17 @@ class hr_employee(models.Model):
 class hr_payslip(models.Model):
     _inherit = 'hr.payslip'
 
-    @api.one
+    # ~ @api.one
     def _holiday_ids(self):
-        self.holiday_ids = self.env['hr.holidays'].search([('state','=','validate'),('employee_id','=',self.employee_id.id),('type','=','remove')]).filtered(lambda h: h.date_from[:10] <= self.date_to and h.date_from[:10] >= self.date_from)
+        for rec in self:
+            rec.holiday_ids = rec.env['hr.holidays'].search([('state','=','validate'),('employee_id','=',rec.employee_id.id),('type','=','remove')]).filtered(lambda h: h.date_from[:10] <= rec.date_to and h.date_from[:10] >= rec.date_from)
     holiday_ids = fields.Many2many(comodel_name='hr.holidays', compute='_holiday_ids')
 
-    @api.one
+    # ~ @api.one
     def _holiday_status_ids(self):
-        self.holiday_status_ids = self.env['hr.holidays.status'].search([('active','=',True),('limit','=',False)])
-        self.holiday_status_ids += self.env['hr.holidays.status'].search([('id','in',[self.env.ref('l10n_se_hr_holidays.sick_leave_qualify').id,self.env.ref('l10n_se_hr_holidays.sick_leave_214').id,self.env.ref('hr_holidays.holiday_status_sl').id])])
+        for rec in self:
+            rec.holiday_status_ids = rec.env['hr.holidays.status'].search([('active','=',True),('limit','=',False)])
+            rec.holiday_status_ids += rec.env['hr.holidays.status'].search([('id','in',[rec.env.ref('l10n_se_hr_holidays.sick_leave_qualify').id,rec.env.ref('l10n_se_hr_holidays.sick_leave_214').id,rec.env.ref('hr_holidays.holiday_status_sl').id])])
     holiday_status_ids = fields.Many2many(comodel_name="hr.holidays.status",compute="_holiday_status_ids")
 
     @api.model
@@ -147,7 +158,7 @@ class hr_payslip(models.Model):
     def get_legal_leaves(self):
         return self.holiday_ids.filtered(lambda h: h.holiday_status_id.legal_leave == True)
 
-    @api.multi
+    # ~ @api.multi
     def leave_number_of_days(self, holiday_status_ref):
         return sum(self.worked_days_line_ids.filtered(lambda w: w.code == self.env.ref(holiday_status_ref).name).mapped('number_of_days'))
 
@@ -157,7 +168,7 @@ class hr_payslip(models.Model):
         start_date = datetime.datetime(year, 1, 1)
         return abs(sum(self.env['hr.holidays'].search([('employee_id', '=', self.employee_id.id), ('date_from', '>=', start_date.strftime('%Y-%m-%d')), ('date_to', '<=', self.date_to), ('type', '=', 'remove'), ('state', '=', 'validate')]).filtered(lambda h: h.holiday_status_id.legal_leave == True).mapped('number_of_days')))
 
-    @api.multi
+    # ~ @api.multi
     def get_holiday_basis_days(self):
         days = 0.0
         for line in self.worked_days_line_ids:
@@ -165,7 +176,7 @@ class hr_payslip(models.Model):
                 days += line.number_of_days
         return days
 
-    @api.multi
+    # ~ @api.multi
     def get_holiday_basis_percent(self):
         days = 0.0
         days_basis = 0.0
