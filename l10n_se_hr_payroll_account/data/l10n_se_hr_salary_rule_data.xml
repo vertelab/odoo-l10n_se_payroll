@@ -18,6 +18,7 @@
       <field name="account_credit" search="[('code', '=', '2731')]" />
       <field name="account_tax_id" search="[('name', '=', 'AvgAldersp')]" />
     </record>
+<!-- 
     <record id="l10n_se_hr_payroll.hr_salary_rule-sapx" model="hr.salary.rule">
       <field name="account_debit" search="[('code', '=', '7534')]" />
     </record>
@@ -25,6 +26,7 @@
       <field name="account_credit" search="[('code', '=', '2731')]" />
       <field name="account_tax_id" search="[('name', '=', 'SkLonSarsk')]" />
     </record>
+-->
     <!--
          =====
     -->
