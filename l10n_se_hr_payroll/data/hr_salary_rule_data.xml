@@ -1,11 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-  <data>
-      <!--
-      https://www.srfkonsult.se/lonehantering/for-branschen/srflap/
-      Lönearter Svensk Löneartsplan
-      -->
-
+  <data noupdate="0">
     <record model="resource.calendar" id="calendar_40h_week">
         <field name="name">40h Week</field>
     </record>
@@ -135,7 +130,7 @@ if age &lt;= 65:
       <field name="parent_rule_id" ref="hr_salary_rule-AGE" />
       <field name="category_id" ref="hr_salary_rule_category-SYSTEM" />
       <field name="code">AGEP</field>
-      <field name="name">Pensionär 66-77</field>
+      <field name="name">Pensionär (födda 1938-1949)</field>
       <field name="sequence">1</field>
       <field name="appears_on_payslip" eval="False" />
       <field name="condition_select">python</field>
@@ -152,7 +147,7 @@ if age > 65 and age &lt;= 77:
       <field name="parent_rule_id" ref="hr_salary_rule-AGE" />
       <field name="category_id" ref="hr_salary_rule_category-SYSTEM" />
       <field name="code">AGEPX</field>
-      <field name="name">Pensionär äldre 77</field>
+      <field name="name">Pensionär (födda före 1938)</field>
       <field name="sequence">1</field>
       <field name="appears_on_payslip" eval="False" />
       <field name="condition_select">python</field>
@@ -281,6 +276,10 @@ if age > 77:
       <field name="amount_python_compute">result = 31.42 * (categories.BRUTTO + categories.FORMAN) / 100</field>
       <field name="amount_percentage">31.42</field>
       <field name="quantity">1</field>
+<!--
+      <field name="account_debit" search="[('code', '=', '7511')]" />
+      <field name="account_tax_id" search="[('code', '=', 'AvgHel')]" />
+-->
     </record>
     <record id="hr_salary_rule-san-mot" model="hr.salary.rule">
       <field name="parent_rule_id" ref="hr_salary_rule-san" />
@@ -318,15 +317,19 @@ if age > 77:
       <field name="category_id" ref="hr_salary_rule_category-SKV" />
       <field name="code">sap</field>
       <field name="salary_art">s110</field>
-      <field name="name">Sociala avgifter pensionär 16,36%</field>
+      <field name="name">Sociala avgifter pensionär 10,21%</field>
       <field name="sequence">490</field>
       <field name="appears_on_payslip" eval="False"/>
       <field name="condition_select">python</field>
       <field name="condition_python">result = rules.dict.get('AGEP', False)</field>
       <field name="amount_select">code</field>
-      <field name="amount_python_compute">result = 16.36 * (categories.BRUTTO + categories.FORMAN) / 100</field>
-      <field name="amount_percentage">16.36</field>
+      <field name="amount_python_compute">result = 10.21 * (categories.BRUTTO + categories.FORMAN) / 100</field>
+      <field name="amount_percentage">10.21</field>
       <field name="quantity">1</field>
+<!--
+      <field name="account_debit" search="[('code', '=', '7521')]" />
+      <field name="account_tax_id" search="[('code', '=', 'AvgAlderspSkLon')]" />
+-->
     </record>
     <record id="hr_salary_rule-sap-mot" model="hr.salary.rule">
       <field name="parent_rule_id" ref="hr_salary_rule-sap" />
@@ -340,34 +343,9 @@ if age > 77:
       <field name="amount_select">code</field>
       <field name="amount_python_compute">result = rules.dict.get('san').amount_percentage * (categories.BRUTTO + categories.FORMAN) / 100</field>
       <field name="quantity">1</field>
-    </record>
-    <record id="hr_salary_rule-sapx" model="hr.salary.rule">
-      <field name="parent_rule_id" ref="hr_salary_rule-sa" />
-      <field name="category_id" ref="hr_salary_rule_category-SKV" />
-      <field name="code">sapx</field>
-      <field name="salary_art">s110</field>
-      <field name="name">Sociala avgifter pensionär 6,15%</field>
-      <field name="sequence">490</field>
-      <field name="appears_on_payslip" eval="False"/>
-      <field name="condition_select">python</field>
-      <field name="condition_python">result = rules.dict.get('AGEPX', False)</field>
-      <field name="amount_select">code</field>
-      <field name="amount_python_compute">result = 6.15 * (categories.BRUTTO + categories.FORMAN) / 100</field>
-      <field name="amount_percentage">6.15</field>
-      <field name="quantity">1</field>
-    </record>
-    <record id="hr_salary_rule-sapx-mot" model="hr.salary.rule">
-      <field name="parent_rule_id" ref="hr_salary_rule-sap" />
-      <field name="category_id" ref="hr_salary_rule_category-SKV" />
-      <field name="code">(sapx)</field>
-      <field name="salary_art">s110</field>
-      <field name="name">Avräkning lagstadgade sociala avgifter</field>
-      <field name="sequence">490</field>
-      <field name="appears_on_payslip" eval="True"/>
-      <field name="condition_select">none</field>
-      <field name="amount_select">code</field>
-      <field name="amount_python_compute">result = rules.dict.get('san').amount_percentage * (categories.BRUTTO + categories.FORMAN) / 100</field>
-      <field name="quantity">1</field>
+<!--
+      <field name="account_credit" search="[('code', '=', '2731')]" />
+-->
     </record>
     <!--
          =====
@@ -443,7 +421,10 @@ if age > 77:
       <field name="sequence">115</field>
       <field name="appears_on_payslip" eval="True"/>
       <field name="condition_select">python</field>
+      <field name="condition_python">result = (inputs and inputs.kvaltim and inputs.kvaltim.amount != 0) or False</field>
+<!--
       <field name="condition_python">result = inputs.kvaltim.amount != 0</field>
+-->
       <field name="amount_select">code</field>
       <field name="amount_python_compute">
 #ML/72*100/APR
@@ -469,7 +450,10 @@ result = 2 * contract.wage / 160
       <field name="sequence">115</field>
       <field name="appears_on_payslip" eval="True"/>
       <field name="condition_select">python</field>
+      <field name="condition_python">result = (inputs and inputs.retroakt and inputs.retroakt.amount != 0) or False</field>
+<!--
       <field name="condition_python">result = inputs.retroakt.amount != 0</field>
+-->
       <field name="amount_select">code</field>
       <field name="amount_python_compute">
 result_rate = 100
@@ -492,7 +476,10 @@ result = inputs.retroakt.amount
       <field name="sequence">700</field>
       <field name="appears_on_payslip" eval="True"/>
       <field name="condition_select">python</field>
+      <field name="condition_python">result = (inputs and inputs.retroakt and inputs.retroakt.amount != 0) or False</field>
+<!--
       <field name="condition_python">result = inputs.retroakt.amount != 0</field>
+-->
       <field name="amount_select">code</field>
       <field name="amount_python_compute">
 result_rate = 30
@@ -513,7 +500,10 @@ categories.BRUTTO - categories.NETAVG + categories.NETTIL
       <field name="sequence">710</field>
       <field name="appears_on_payslip" eval="True"/>
       <field name="condition_select">python</field>
+      <field name="condition_python">result = (inputs and inputs.resmil and inputs.resmil.amount != 0) or False</field>
+<!--
       <field name="condition_python">result = inputs.resmil.amount != 0</field>
+-->
       <field name="amount_select">code</field>
       <field name="amount_python_compute">
 result_qty = inputs.resmil.amount
@@ -543,11 +533,14 @@ result = 18.5
       <field name="sequence">710</field>
       <field name="appears_on_payslip" eval="True"/>
       <field name="condition_select">python</field>
+      <field name="condition_python">result = (inputs and inputs.traktin and inputs.traktin.amount != 0) or False</field>
+<!--
       <field name="condition_python">result = inputs.traktin.amount != 0</field>
+-->
       <field name="amount_select">code</field>
       <field name="amount_python_compute">
 result_qty = inputs.traktin.amount
-result = 0.0 if result_qty == 0 else 230
+result = 0.0 if result_qty == 0 else 220
       </field>
       <field name="quantity">1</field>
     </record>
@@ -566,11 +559,13 @@ result = 0.0 if result_qty == 0 else 230
       <field name="sequence">710</field>
       <field name="appears_on_payslip" eval="True"/>
       <field name="condition_select">python</field>
+      <field name="condition_python">result = (inputs and inputs.traktuta and inputs.traktuta.amount  != 0 and inputs.traktutb and inputs.traktutb.amount  != 0) or False</field>
+<!--
       <field name="condition_python">result = inputs.traktuta.amount != 0 and inputs.traktutb.amount != 0</field>
+-->
       <field name="amount_select">code</field>
       <field name="amount_python_compute">
-result_qty = inputs.traktuta.amount
-result = 0.0 if result_qty == 0 or inputs.traktinb.amount == 0 else inputs.traktutb.amount
+result = inputs.traktuta.amount  * inputs.traktutb.amount  
       </field>
       <field name="quantity">1</field>
     </record>
@@ -597,7 +592,10 @@ result = 0.0 if result_qty == 0 or inputs.traktinb.amount == 0 else inputs.trakt
       <field name="sequence">710</field>
       <field name="appears_on_payslip" eval="True"/>
       <field name="condition_select">python</field>
+      <field name="condition_python">result = (inputs and inputs.utlagg and inputs.utlagg.amount != 0) or False</field>
+<!--
       <field name="condition_python">result = inputs.utlagg.amount != 0</field>
+-->
       <field name="amount_select">code</field>
       <field name="amount_python_compute">
 result_qty = 0.0 if inputs.utlagg.amount == 0 else 1.0
@@ -800,7 +798,10 @@ result = 0.0</field>
       <field name="sequence">24</field>
       <field name="appears_on_payslip" eval="False"/>
       <field name="condition_select">python</field>
+      <field name="condition_python">result = (inputs and inputs.drivfuel and inputs.drivfuel.amount != 0) or False</field>
+<!--
       <field name="condition_python">result = inputs.drivfuel.amount != 0</field>
+-->
       <field name="amount_select">code</field>
       <field name="amount_python_compute">result = inputs.drivfuel.amount</field>  <!-- arb avg bara på basbeloppet -->
       <field name="quantity">1</field>
@@ -816,7 +817,10 @@ result = 0.0</field>
       <field name="sequence">680</field>
       <field name="appears_on_payslip" eval="True"/>
       <field name="condition_select">python</field>
+      <field name="condition_python">result = (inputs and inputs.drivfuel and inputs.drivfuel.amount != 0) or False</field>
+<!--
       <field name="condition_python">result = inputs.drivfuel.amount != 0</field>
+-->
       <field name="amount_select">code</field>
       <field name="amount_python_compute">result = inputs.drivfuel.amount * 0.3</field>  <!-- prel skatt -->
       <field name="quantity">1</field>
@@ -831,7 +835,10 @@ result = 0.0</field>
       <field name="sequence">690</field>
       <field name="appears_on_payslip" eval="True"/>
       <field name="condition_select">python</field>
+      <field name="condition_python">result = (inputs and inputs.drivfuel and inputs.drivfuel.amount != 0)</field>
+<!--
       <field name="condition_python">result = inputs.drivfuel.amount != 0</field>
+-->
       <field name="amount_select">code</field>
       <field name="amount_python_compute">result = inputs.drivfuel.amount</field>  <!-- prel skatt -->
       <field name="quantity">1</field>
@@ -847,7 +854,10 @@ result = 0.0</field>
       <field name="sequence">680</field>
       <field name="appears_on_payslip" eval="True"/>
       <field name="condition_select">python</field>
+      <field name="condition_python">result = (inputs and inputs.drivfuel and inputs.drivfuel.amount != 0)</field>
+<!--
       <field name="condition_python">result = inputs.drivfuel.amount != 0</field>
+-->
       <field name="amount_select">code</field>
       <field name="amount_python_compute">result = inputs.drivfuel.amount * 0.2 * 0.3</field>   <!-- prel skatt -->
       <field name="quantity">1</field>
@@ -863,7 +873,10 @@ result = 0.0</field>
       <field name="sequence">690</field>
       <field name="appears_on_payslip" eval="True"/>
       <field name="condition_select">python</field>
+      <field name="condition_python">result = (inputs and inputs.drivfuel and inputs.drivfuel.amount != 0)</field>
+<!--
       <field name="condition_python">result = inputs.drivfuel.amount != 0</field>
+-->
       <field name="amount_select">code</field>
       <field name="amount_python_compute">result = inputs.drivfuel.amount * 0.2</field>   <!-- prel skatt -->
       <field name="quantity">1</field>
