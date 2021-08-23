@@ -82,7 +82,9 @@
       <field name="birthday">1993-10-08</field>
       <field name="name">Anders Wallenquist (ans)</field>
       <field name="ssnid">False</field>
+<!--
       <field name="leave_date_from">False</field>
+-->
       <field name="address_home_id" ref="l10n_se_hr_payroll.res_partner-AW" />
     </record>
     <!--
@@ -100,7 +102,9 @@
       -->
       <field name="company_id" ref="base.main_company" />
       <field name="birthday">1958-06-12</field>
+<!--
       <field name="leave_date_to">False</field>
+-->
       <!--
            <field name="job_id" ref="hr.hr_job-7f6fa9c4-7e24-11e5-a6a2-52540087a7b7-1"/>
       -->
