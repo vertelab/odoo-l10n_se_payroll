@@ -12,8 +12,8 @@
             <field name="inherit_id" ref="account.view_account_journal_form"/>
             <field name="arch" type="xml">
             <xpath expr="//field[@name='default_account_id']" position="after">
-                        <field name="profit_account_id" attrs="{'invisible': [('type', '!=', 'general')]}"/>
-                        <field name="loss_account_id" attrs="{'invisible': [('type', '!=', 'general')]}"/>
+                        <field name="default_credit_account_id" attrs="{'invisible': [('type', '!=', 'general')]}"/>
+                        <field name="default_debit_account_id" attrs="{'invisible': [('type', '!=', 'general')]}"/>
                 </xpath>
             </field>
         </record>
