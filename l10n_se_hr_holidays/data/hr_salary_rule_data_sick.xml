@@ -3,42 +3,42 @@
   <data noupdate="1"> <!-- TODO: no update -->
 
     <!-- inactive original sick leave -->
-    <record model="hr.holidays.status" id="hr_holidays.holiday_status_sl">
+    <record model="hr.leave.type" id="hr_holidays.holiday_status_sl">
         <field name="active" eval="False"/>
     </record>
 
     <!-- Sick leave -->
-    <record model="hr.holidays.status" id="sick_leave_qualify">
+    <record model="hr.leave.type" id="sick_leave_qualify">
       <field name="name" eval="'Sick Leave Qualify Period'" />
       <field name="color_name">red</field>
       <field name="limit" eval="True"/>
     </record>
-    <record model="hr.holidays.status" id="sick_leave_214_100">
+    <record model="hr.leave.type" id="sick_leave_214_100">
       <field name="name" eval="'Sick Leave day 2-14 (100% deduction)'" />
       <field name="color_name">red</field>
       <field name="limit" eval="True"/>
     </record>
-    <record model="hr.holidays.status" id="sick_leave_214">
+    <record model="hr.leave.type" id="sick_leave_214">
       <field name="name" eval="'Sick Leave day 2-14 (80%)'" />
       <field name="color_name">red</field>
       <field name="limit" eval="True"/>
     </record>
-    <record model="hr.holidays.status" id="sick_leave_147">
+    <record model="hr.leave.type" id="sick_leave_147">
       <field name="name" eval="'Sick Leave day 15-180 (50%)'" />
       <field name="color_name">red</field>
       <field name="limit" eval="True"/>
     </record>
-    <record model="hr.holidays.status" id="sick_leave_1461">
+    <record model="hr.leave.type" id="sick_leave_1461">
       <field name="name" eval="'Sick Leave day 15-180 (75%)'" />
       <field name="color_name">red</field>
       <field name="limit" eval="True"/>
     </record>
-    <record model="hr.holidays.status" id="sick_leave_148">
+    <record model="hr.leave.type" id="sick_leave_148">
       <field name="name" eval="'Sick Leave day 15-180 (25%)'" />
       <field name="color_name">red</field>
       <field name="limit" eval="True"/>
     </record>
-    <record model="hr.holidays.status" id="sick_leave_146">
+    <record model="hr.leave.type" id="sick_leave_146">
       <field name="name" eval="'Sick Leave day 15-180 (100%)'" />
       <field name="color_name">red</field>
       <field name="limit" eval="True"/>
@@ -203,32 +203,32 @@ result = contract.wage / (52 * contract.weekly_working_hours / contract.wwh_days
 -->
 
     <!-- VAB -->
-    <record model="hr.holidays.status" id="vab_160">
+    <record model="hr.leave.type" id="vab_160">
       <field name="name" eval="'Vård av barn 160'" />
       <field name="color_name">red</field>
       <field name="limit" eval="True"/>
     </record>
-    <record model="hr.holidays.status" id="forald_ledig_165">
+    <record model="hr.leave.type" id="forald_ledig_165">
       <field name="name" eval="'Föräld ledig 165'" />
       <field name="color_name">red</field>
       <field name="limit" eval="True"/>
     </record>
-    <record model="hr.holidays.status" id="forald_ledig_168">
+    <record model="hr.leave.type" id="forald_ledig_168">
       <field name="name" eval="'Föräld ledig 168'" />
       <field name="color_name">red</field>
       <field name="limit" eval="True"/>
     </record>
-    <record model="hr.holidays.status" id="pappaledig_166">
+    <record model="hr.leave.type" id="pappaledig_166">
       <field name="name" eval="'Pappaledig 166'" />
       <field name="color_name">red</field>
       <field name="limit" eval="True"/>
     </record>
-    <record model="hr.holidays.status" id="holiday_status_leave_of_absence">
+    <record model="hr.leave.type" id="holiday_status_leave_of_absence">
       <field name="name">Leave of Absence less than 5 days</field>
       <field name="color_name">black</field>
       <field name="limit" eval="False"/>
     </record>
-    <record model="hr.holidays.status" id="holiday_status_leave_of_absence_5">
+    <record model="hr.leave.type" id="holiday_status_leave_of_absence_5">
       <field name="name">Leave of Absence more than 5 days</field>
       <field name="color_name">black</field>
       <field name="limit" eval="False"/>

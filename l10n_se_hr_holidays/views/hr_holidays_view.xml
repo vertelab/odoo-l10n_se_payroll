@@ -3,14 +3,14 @@
   <data>
     <record model="ir.ui.view" id="edit_holiday_status_form">
       <field name="name">hr.holidays.status.inherit.form</field>
-      <field name="model">hr.holidays.status</field>
+      <field name="model">hr.leave.type</field>
       <field name="inherit_id" ref="hr_holidays.edit_holiday_status_form" />
       <field name="arch" type="xml">
         <field name="active" position="after">
           <field name="date_earning_start" />
           <field name="date_earning_end" />
         </field>
-        <field name="limit" position="after">
+        <field name="allocation_type" position="after">
           <field name="legal_leave" />
           <field name="holiday_basis" />
         </field>
@@ -18,17 +18,18 @@
     </record>
     <record model="ir.ui.view" id="view_holiday_status_normal_tree">
         <field name="name">hr.holidays.status.normal.inherit.tree</field>
-        <field name="model">hr.holidays.status</field>
+        <field name="model">hr.leave.type</field>
         <field name="inherit_id" ref="hr_holidays.view_holiday_status_normal_tree"/>
         <field name="arch" type="xml">
-            <field name="limit" position="after">
+            <field name="allocation_type" position="after">
                 <field name="holiday_basis"/>
             </field>
         </field>
     </record>
+<!--
     <record model="ir.ui.view" id="edit_holiday_new">
       <field name="name">Leave Request</field>
-      <field name="model">hr.holidays</field>
+      <field name="model">hr.leave</field>
       <field name="inherit_id" ref="hr_holidays.edit_holiday_new" />
       <field name="arch" type="xml">
         <field name="holiday_status_id" position="attributes">
@@ -37,9 +38,10 @@
         </field>
       </field>
     </record>
+-->
     <record id="view_holidays_status_filter" model="ir.ui.view">
       <field name="name">hr.holidays.status.filter</field>
-      <field name="model">hr.holidays.status</field>
+      <field name="model">hr.leave.type</field>
       <field name="inherit_id" ref="hr_holidays.view_holidays_status_filter" />
       <field name="arch" type="xml">
         <search position="inside">
