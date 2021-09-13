@@ -51,7 +51,7 @@ class hr_holidays_status(models.Model):
         self.env['hr.leave.type'].browse(holiday_status_cl[1]).write({
             'name': 'Legal Leaves '+ str(fields.Date.from_string(fields.Datetime.now()).year - 1),
             'legal_leave': True,
-            # ~ 'limit': False,
+            'limit': False,
             'allocation_type':'fixed_allocation',
             'date_earning_start': fields.Date.to_string(date(date.today().year - 2,4,1 )),
             'date_earning_end':   fields.Date.to_string(date(date.today().year - 1,3,31)),
@@ -61,7 +61,7 @@ class hr_holidays_status(models.Model):
             'name': 'Legal Leaves unpaid',
             'legal_leave': False,
             'allocation_type':'no',
-            # ~ 'limit': True,
+            'limit': True,
             'allocation_type':'no',
         })
         holiday_status_sl = self.env['ir.model.data'].get_object_reference('hr_holidays', 'holiday_status_sl')
@@ -69,7 +69,7 @@ class hr_holidays_status(models.Model):
             'name': 'Sick Leave 100%',
             'legal_leave': False,
             'allocation_type':'no',
-            # ~ 'limit': True,
+            'limit': True,
             'color_name': 'red',
         })
         # holiday_status_comp
@@ -78,13 +78,13 @@ class hr_holidays_status(models.Model):
             'name': 'Sick Leave 100%',
             'legal_leave': False,
             'allocation_type':'no',
-            # ~ 'limit': True,
+            'limit': True,
             'color_name': 'red',
         })
 
     # ~ @api.one
     # ~ @api.depends('date_earning_start','date_earning_end','limit')
-    @api.depends('date_earning_start','date_earning_end')
+    @api.depends('date_earning_start','date_earning_end','limit')
     def _holidays_allowed(self):
         for rec in self:
             if not rec.limit:
@@ -107,7 +107,7 @@ class hr_holidays_status(models.Model):
             for employee in rec.env['hr.employee'].search([]):
                 earning_days = rec.env['hr.payslip'].get_leaves_earnings_days(employee,rec.date_earning_start,rec.date_earning_end)
                 if earning_days['employed_days'] - earning_days['absent_days'] > 0:
-                    holiday = rec.env['hr.holidays'].create({
+                    holiday = rec.env['hr.leave'].create({
                             'name': '%s earned days' % rec.name,
                             'employee_id': employee.id,
                             'holiday_status_id': rec.id,
@@ -136,8 +136,9 @@ class hr_payslip(models.Model):
     # ~ @api.one
     def _holiday_ids(self):
         for rec in self:
-            rec.holiday_ids = rec.env['hr.holidays'].search([('state','=','validate'),('employee_id','=',rec.employee_id.id),('type','=','remove')]).filtered(lambda h: h.date_from[:10] <= rec.date_to and h.date_from[:10] >= rec.date_from)
-    holiday_ids = fields.Many2many(comodel_name='hr.holidays', compute='_holiday_ids')
+            # ~ rec.holiday_ids = rec.env['hr.leave'].search([('state','=','validate'),('employee_id','=',rec.employee_id.id),('type','=','remove')]).filtered(lambda h: h.date_from[:10] <= rec.date_to and h.date_from[:10] >= rec.date_from) the type field is removed in 14, i don't know what kind of after effects this will have. 
+            rec.holiday_ids = rec.env['hr.leave'].search([('state','=','validate'),('employee_id','=',rec.employee_id.id)]).filtered(lambda h: h.date_from.date()<= rec.date_to and h.date_from.date() >= rec.date_from)
+    holiday_ids = fields.Many2many(comodel_name='hr.leave', compute='_holiday_ids')
 
     # ~ @api.one
     def _holiday_status_ids(self):
@@ -157,7 +158,9 @@ class hr_payslip(models.Model):
 
     @api.model
     def get_legal_leaves_status(self):
-        return self.with_context({'employee_id' : self.employee_id.id}).holiday_status_ids.filtered(lambda h: h.remaining_leaves > 0 and h.id not in [self.env.ref('hr_holidays.holiday_status_comp').id]).sorted(key=lambda h: h.sequence)
+        result = self.with_context({'employee_id' : self.employee_id.id}).holiday_status_ids.filtered(lambda h: h.remaining_leaves > 0 and h.id not in [self.env.ref('hr_holidays.holiday_status_comp').id]).sorted(key=lambda h: h.sequence)
+        _logger.warning(f"jakmar result: {result}")
+        return result
 
     @api.model
     def get_legal_leaves(self):
@@ -171,7 +174,7 @@ class hr_payslip(models.Model):
     def get_legal_leaves_consumed(self):
         year = datetime.datetime.now().year
         start_date = datetime.datetime(year, 1, 1)
-        return abs(sum(self.env['hr.holidays'].search([('employee_id', '=', self.employee_id.id), ('date_from', '>=', start_date.strftime('%Y-%m-%d')), ('date_to', '<=', self.date_to), ('type', '=', 'remove'), ('state', '=', 'validate')]).filtered(lambda h: h.holiday_status_id.legal_leave == True).mapped('number_of_days')))
+        return abs(sum(self.env['hr.leave'].search([('employee_id', '=', self.employee_id.id), ('date_from', '>=', start_date.strftime('%Y-%m-%d')), ('date_to', '<=', self.date_to), ('type', '=', 'remove'), ('state', '=', 'validate')]).filtered(lambda h: h.holiday_status_id.legal_leave == True).mapped('number_of_days')))
 
     # ~ @api.multi
     def get_holiday_basis_days(self):
