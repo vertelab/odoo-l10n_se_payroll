@@ -164,7 +164,10 @@ class hr_payslip(models.Model):
 
     @api.model
     def get_legal_leaves(self):
-        return self.holiday_ids.filtered(lambda h: h.holiday_status_id.legal_leave == True)
+        _logger.warning("get_legal_leaves before")
+        result = self.holiday_ids.filtered(lambda h: h.holiday_status_id.legal_leave == True)
+        _logger.warning(f"get_legal_leaves after {result}")
+        return result
 
     # ~ @api.multi
     def leave_number_of_days(self, holiday_status_ref):
