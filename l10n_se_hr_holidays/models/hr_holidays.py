@@ -159,14 +159,14 @@ class hr_payslip(models.Model):
     @api.model
     def get_legal_leaves_status(self):
         result = self.with_context({'employee_id' : self.employee_id.id}).holiday_status_ids.filtered(lambda h: h.remaining_leaves > 0 and h.id not in [self.env.ref('hr_holidays.holiday_status_comp').id]).sorted(key=lambda h: h.sequence)
-        _logger.warning(f"jakmar result: {result}")
+        # ~ _logger.warning(f"jakmar result: {result}")
         return result
 
     @api.model
     def get_legal_leaves(self):
-        _logger.warning("get_legal_leaves before")
+        # ~ _logger.warning("get_legal_leaves before")
         result = self.holiday_ids.filtered(lambda h: h.holiday_status_id.legal_leave == True)
-        _logger.warning(f"get_legal_leaves after {result}")
+        # ~ _logger.warning(f"get_legal_leaves after {result}")
         return result
 
     # ~ @api.multi

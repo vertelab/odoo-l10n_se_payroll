@@ -38,7 +38,7 @@ result = 0.0
       <field name="condition_python">result = len(payslip.dict.get_legal_leaves()) &gt; 0</field>
       <field name="amount_select">code</field>
       <field name="amount_python_compute">
-result_qty = sum(payslip.dict.get_legal_leaves().mapped('number_of_days_temp'))
+result_qty = sum(payslip.dict.get_legal_leaves().mapped('number_of_days'))
 result = 0.0
       </field>
       <field name="quantity">1</field>
@@ -56,7 +56,7 @@ result = 0.0
       <field name="amount_select">code</field>
       <field name="amount_python_compute">
 #(ML*0,008)*(VAD/VADI)
-result_qty = sum(payslip.dict.get_legal_leaves().mapped('number_of_days_temp'))
+result_qty = sum(payslip.dict.get_legal_leaves().mapped('number_of_days'))
 result = contract.wage * 0.008
       </field>
       <field name="quantity">1</field>
