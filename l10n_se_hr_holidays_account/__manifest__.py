@@ -22,7 +22,7 @@
     'name': 'Sweden - Holiday Pay with Accounting',
     'category': '',
     'author': 'Vertel AB',
-    'depends': ['l10n_se_hr_holidays', 'hr_payroll_account_community', 'l10n_se'],
+    'depends': ['l10n_se_hr_holidays', 'hr_payroll_account_community_fixed', 'l10n_se'],
     'version': '1.0',
     'description': """
 Accounting Data for Swedish Holiday Pay Rules.
