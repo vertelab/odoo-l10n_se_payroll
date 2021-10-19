@@ -14,6 +14,7 @@
     -->
     <record model="hr.leave.type" id="holiday_status_cl1">
       <field name="name" eval="'Legal Leaves '+str(DateTime.today().year)" />
+      <field name="code" eval="'Legal Leaves '+str(DateTime.today().year)" />
       <field name="color_name">black</field>
       <field name="legal_leave" eval="True" />
       <field name="limit" eval="False" />
@@ -22,6 +23,7 @@
     </record>
     <record model="hr.leave.type" id="holiday_status_cl2">
       <field name="name" eval="'Legal Leaves '+str(DateTime.today().year + 1)" />
+      <field name="code" eval="'Legal Leaves '+str(DateTime.today().year + 1)" />
       <field name="color_name">black</field>
       <field name="legal_leave" eval="True" />
       <field name="limit" eval="False" />
@@ -30,6 +32,7 @@
     </record>
     <record model="hr.leave.type" id="holiday_status_cl3">
       <field name="name" eval="'Legal Leaves '+str(DateTime.today().year + 2)" />
+      <field name="code" eval="'Legal Leaves '+str(DateTime.today().year + 2)" />
       <field name="color_name">black</field>
       <field name="legal_leave" eval="True" />
       <field name="limit" eval="False" />
@@ -84,5 +87,15 @@
   </data>
   <data noupdate="0">
     <function model="hr.leave.type" name="init_records" />
+    
+    <record model="ir.actions.server" id="name_equals_code">
+            <field name="name">Set code equals name, code is used for a function when calculating sick leave compensation</field>
+            <field name="model_id" ref="hr_holidays.model_hr_leave_type"/>
+            <field name="state">code</field>
+            <field name="code">
+                    for record in records:
+                        record.write({'code':record.name})
+            </field>
+        </record>
   </data>
 </odoo>
