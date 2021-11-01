@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+  <data noupdate="1">
+    <record id="hr_salary_rule_category-SYSTEM" model="hr.salary.rule.category">
+      <field name="code">SYSTEM</field>
+      <field name="name">System</field>
+      <field name="note">Används till regler som är verktyg</field>
+    </record>
+    <record id="hr_salary_rule_category-PARENT" model="hr.salary.rule.category">
+      <field name="code">PARENT</field>
+      <field name="name">Grupp</field>
+      <field name="note">Används för en regel som inhåller själva reglerna</field>
+    </record>
+    <record id="hr_salary_rule_category-HANDLER" model="hr.salary.rule.category">
+      <field name="code">HANDLER</field>
+      <field name="name">Tillämpning</field>
+      <field name="note">Används när en 'category' ska bearbetas</field>
+    </record>
+    <record id="hr_salary_rule_category-DUMMY" model="hr.salary.rule.category">
+      <field name="code">DUMMY</field>
+      <field name="name">Slask</field>
+      <field name="note">Används när sumering inte är relevant</field>
+    </record>
+    <record id="hr_salary_rule_category-SKV" model="hr.salary.rule.category">
+      <field name="code">SKV</field>
+      <field name="name">Skatter</field>
+      <field name="note">Används för att summera all skatt</field>
+    </record>
+    <record id="hr_salary_rule_category-SKVPRE" model="hr.salary.rule.category">
+      <field name="code">SKVPRE</field>
+      <field name="name">Skatter (pre)</field>
+      <field name="note">Används för skatt att dra av förutom preleminär skatt</field>
+    </record>
+
+    <record id="hr_salary_rule_category-BAS" model="hr.salary.rule.category">
+      <field name="code">BAS</field>
+      <field name="name">Bas</field>
+      <field name="note">Grundlön</field>
+    </record>
+    <record id="hr_salary_rule_category-BRUTIL" model="hr.salary.rule.category">
+      <field name="code">BRUTIL</field>
+      <field name="name">Bruttotillägg</field>
+      <field name="note">Övertid</field>
+    </record>
+    <record id="hr_salary_rule_category-BRUAVG" model="hr.salary.rule.category">
+      <field name="code">BRUAVG</field>
+      <field name="name">Bruttoavdrag</field>
+      <field name="note">Sjukfrånvaro</field>
+    </record>
+    <record id="hr_salary_rule_category-BRUTTO" model="hr.salary.rule.category">
+      <field name="code">BRUTTO</field>
+      <field name="name">Brutto</field>
+      <field name="note">Grundlön minus brutto-avdrag plus brutto-tillägg</field>
+    </record>
+    <record id="hr_salary_rule_category-NETTIL" model="hr.salary.rule.category">
+      <field name="code">NETTIL</field>
+      <field name="name">Nettotillägg</field>
+      <field name="note">Reseräkning</field>
+    </record>
+    <record id="hr_salary_rule_category-NETAVG" model="hr.salary.rule.category">
+      <field name="code">NETAVG</field>
+      <field name="name">Nettoavdrag</field>
+      <field name="note">Källskatt, Fackavgift</field>
+    </record>
+    <record id="hr_salary_rule_category-SUMMA" model="hr.salary.rule.category">
+      <field name="code">SUMMA</field>
+      <field name="name">Summa</field>
+      <field name="note">Bruttolön minus netto-avdrag plus netto-tillägg</field>
+    </record>
+    <record id="hr_salary_rule_category-FORMAN" model="hr.salary.rule.category">
+      <field name="code">FORMAN</field>
+      <field name="name">Förmån</field>
+      <field name="note">Utgivna förmåner</field>
+    </record>
+<!--
+    <record id="hr_salary_rule_category-NETTO" model="hr.salary.rule.category">
+      <field name="code">NETTO</field>
+      <field name="name">Netto</field>
+      <field name="note">Använd summa</field>
+    </record>
+-->
+  </data>
+</odoo>

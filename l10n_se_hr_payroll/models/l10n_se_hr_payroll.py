@@ -92,8 +92,8 @@ class hr_contract(models.Model):
         line = worked_days.dict.get(self.env.ref(rule_id).name)
         # ~ for a,b in worked_days:
             # ~ _logger.warning(f"{a},{b}")
-        _logger.warning(f"jakmar rule?????????????????? {worked_days.__dict__}")
-        _logger.warning(f"jakmar rule!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! {self.env.ref(rule_id).name}")
+        #_logger.warning(f"jakmar rule?????????????????? {worked_days.__dict__}")
+        #_logger.warning(f"jakmar rule!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! {self.env.ref(rule_id).name}")
         return line and line.number_of_days or 0.0
 
     def raisethis(self,message):

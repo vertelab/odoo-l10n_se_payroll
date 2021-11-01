@@ -2,7 +2,7 @@
 ##############################################################################
 #
 #    Odoo, Open Source Enterprise Management Solution, third party addon
-#    Copyright (C) 2014- Vertel AB (<http://vertel.se>).
+#    Copyright (C) 2018- Vertel AB (<http://vertel.se>).
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as
@@ -18,7 +18,5 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
-from . import l10n_se_hr_payroll
-from . import account_journal
-from . import hr_employee
+from . import models
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:

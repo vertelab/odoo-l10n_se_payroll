@@ -18,7 +18,25 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
-from . import l10n_se_hr_payroll
-from . import account_journal
-from . import hr_employee
+{
+    'name': 'Swedish - Add Average Hours Per Week To Contracts',
+    'category': 'Localization',
+    'author': 'Vertel AB',
+    'depends': ['resource'],
+    'version': '1.1',
+    'description': """
+    Adding a average week field to resource.calendar to make it easier to make payroll rules.
+
+    """,
+
+    'auto_install': False,
+    'website': 'http://www.vertel.se',
+    'data':[
+        'views/resource_calander_view.xml',
+    ],
+    'demo':[
+    ],
+    'installable': True
+}
+
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:

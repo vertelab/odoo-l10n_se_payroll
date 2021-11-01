@@ -18,7 +18,5 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
-from . import l10n_se_hr_payroll
-from . import account_journal
-from . import hr_employee
+from . import resource_calander
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:

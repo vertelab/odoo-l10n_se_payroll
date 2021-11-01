@@ -1,0 +1,904 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+  <data noupdate="0">
+    <record model="resource.calendar" id="calendar_40h_week">
+        <field name="name">40h Week</field>
+    </record>
+    <record model="resource.calendar.attendance" id="calendar_attendance_mo1">
+        <field name="name">Monday 1</field>
+        <field name="dayofweek">0</field>
+        <field name="hour_from">08</field>
+        <field name="hour_to">12</field>
+        <field name="calendar_id" ref="calendar_40h_week"/>
+    </record>
+    <record model="resource.calendar.attendance" id="calendar_attendance_mo2">
+        <field name="name">Monday 2</field>
+        <field name="dayofweek">0</field>
+        <field name="hour_from">13</field>
+        <field name="hour_to">17</field>
+        <field name="calendar_id" ref="calendar_40h_week"/>
+    </record>
+    <record model="resource.calendar.attendance" id="calendar_attendance_tu1">
+        <field name="name">Tuesday 1</field>
+        <field name="dayofweek">1</field>
+        <field name="hour_from">08</field>
+        <field name="hour_to">12</field>
+        <field name="calendar_id" ref="calendar_40h_week"/>
+    </record>
+    <record model="resource.calendar.attendance" id="calendar_attendance_tu2">
+        <field name="name">Tuesday 2</field>
+        <field name="dayofweek">1</field>
+        <field name="hour_from">13</field>
+        <field name="hour_to">17</field>
+        <field name="calendar_id" ref="calendar_40h_week"/>
+    </record>
+    <record model="resource.calendar.attendance" id="calendar_attendance_we1">
+        <field name="name">Wednesday 1</field>
+        <field name="dayofweek">2</field>
+        <field name="hour_from">08</field>
+        <field name="hour_to">12</field>
+        <field name="calendar_id" ref="calendar_40h_week"/>
+    </record>
+    <record model="resource.calendar.attendance" id="calendar_attendance_we2">
+        <field name="name">Wednesday 2</field>
+        <field name="dayofweek">2</field>
+        <field name="hour_from">13</field>
+        <field name="hour_to">17</field>
+        <field name="calendar_id" ref="calendar_40h_week"/>
+    </record>
+    <record model="resource.calendar.attendance" id="calendar_attendance_th1">
+        <field name="name">Thursday 1</field>
+        <field name="dayofweek">3</field>
+        <field name="hour_from">08</field>
+        <field name="hour_to">12</field>
+        <field name="calendar_id" ref="calendar_40h_week"/>
+    </record>
+    <record model="resource.calendar.attendance" id="calendar_attendance_th2">
+        <field name="name">Thursday 2</field>
+        <field name="dayofweek">3</field>
+        <field name="hour_from">13</field>
+        <field name="hour_to">17</field>
+        <field name="calendar_id" ref="calendar_40h_week"/>
+    </record>
+    <record model="resource.calendar.attendance" id="calendar_attendance_fr1">
+        <field name="name">Friday 1</field>
+        <field name="dayofweek">4</field>
+        <field name="hour_from">08</field>
+        <field name="hour_to">12</field>
+        <field name="calendar_id" ref="calendar_40h_week"/>
+    </record>
+    <record model="resource.calendar.attendance" id="calendar_attendance_fr2">
+        <field name="name">Friday 2</field>
+        <field name="dayofweek">4</field>
+        <field name="hour_from">13</field>
+        <field name="hour_to">17</field>
+        <field name="calendar_id" ref="calendar_40h_week"/>
+    </record>
+    <record id="hr_salary_rule-AGE" model="hr.salary.rule">
+      <field name="category_id" ref="hr_salary_rule_category-SYSTEM" />
+      <field name="code">AGE</field>
+      <field name="name">Åldersregler (haterar inga belopp)</field>
+      <field name="sequence">1</field>
+      <field name="appears_on_payslip" eval="False" />
+      <field name="condition_select">none</field>
+      <field name="quantity">1</field>
+    </record>
+    <!--
+         CHILD Ungdom
+    -->
+<!--
+    <record id="hr_salary_rule-AGEU" model="hr.salary.rule">
+      <field name="parent_rule_id" ref="hr_salary_rule-AGE" />
+      <field name="category_id" ref="hr_salary_rule_category-SYSTEM" />
+      <field name="code">AGEU</field>
+      <field name="name">Ålder ungdom (under 26 år)</field>
+      <field name="sequence">1</field>
+      <field name="appears_on_payslip" eval="False" />
+      <field name="condition_select">python</field>
+      <field name="condition_python">
+result = False
+age = employee.age
+if age >= 0 and age &lt; 26:
+    result = True
+      </field>
+      <field name="quantity">1</field>
+    </record>
+-->
+    <!--
+         CHILD Normal
+    -->
+    <record id="hr_salary_rule-AGEN" model="hr.salary.rule">
+      <field name="parent_rule_id" ref="hr_salary_rule-AGE" />
+      <field name="category_id" ref="hr_salary_rule_category-SYSTEM" />
+      <field name="code">AGEN</field>
+      <field name="name">Ålder normal (26-65 år)</field>
+      <field name="sequence">1</field>
+      <field name="appears_on_payslip" eval="False" />
+      <field name="condition_select">python</field>
+      <field name="condition_python">
+result = False
+age = employee.age
+if age &lt;= 65:
+    result = True
+      </field>
+      <field name="quantity">1</field>
+    </record>
+    <!--
+         CHILD Pesionär
+    -->
+    <record id="hr_salary_rule-AGEP" model="hr.salary.rule">
+      <field name="parent_rule_id" ref="hr_salary_rule-AGE" />
+      <field name="category_id" ref="hr_salary_rule_category-SYSTEM" />
+      <field name="code">AGEP</field>
+      <field name="name">Pensionär (födda 1938-1949)</field>
+      <field name="sequence">1</field>
+      <field name="appears_on_payslip" eval="False" />
+      <field name="condition_select">python</field>
+      <field name="condition_python">
+result = False
+# born 1938-1949
+age = employee.age
+if age > 65 and age &lt;= 77:
+    result = True
+      </field>
+      <field name="quantity">1</field>
+    </record>
+    <record id="hr_salary_rule-AGEPX" model="hr.salary.rule">
+      <field name="parent_rule_id" ref="hr_salary_rule-AGE" />
+      <field name="category_id" ref="hr_salary_rule_category-SYSTEM" />
+      <field name="code">AGEPX</field>
+      <field name="name">Pensionär (födda före 1938)</field>
+      <field name="sequence">1</field>
+      <field name="appears_on_payslip" eval="False" />
+      <field name="condition_select">python</field>
+      <field name="condition_python">
+result = False
+# born 1938-1949
+age = employee.age
+if age > 77:
+    result = True
+      </field>
+      <field name="quantity">1</field>
+    </record>
+    <!--
+         =========================================
+    -->
+    <record id="hr_salary_rule-gl" model="hr.salary.rule">
+      <field name="category_id" ref="hr_salary_rule_category-BAS" />
+      <field name="code">gl</field>
+      <field name="salary_art">101</field>
+      <field name="name">Grundlön</field>
+      <field name="sequence">10</field>
+      <field name="appears_on_payslip" eval="True"/>
+      <field name="condition_select">none</field>
+      <field name="amount_select">code</field>
+      <field name="amount_python_compute">result = contract.wage</field>
+      <field name="quantity">1</field>
+    </record>
+    <!--
+         =====
+    -->
+    <record id="hr_salary_rule-bl" model="hr.salary.rule">
+      <field name="category_id" ref="hr_salary_rule_category-BRUTTO" />
+      <field name="code">bl</field>
+      <field name="name">Bruttolön</field>
+      <field name="sequence">300</field>
+      <field name="appears_on_payslip" eval="False"/>
+      <field name="condition_select">none</field>
+      <field name="amount_select">code</field>
+      <field name="amount_python_compute">result = categories.BAS - categories.BRUAVG + categories.BRUTIL</field>
+      <field name="quantity">1</field>
+    </record>
+    <!--
+         =====
+    -->
+    <record id="hr_salary_rule-sum" model="hr.salary.rule">
+      <field name="category_id" ref="hr_salary_rule_category-SUMMA" />
+      <field name="code">net</field>
+      <field name="name">Nettolön</field>
+      <field name="sequence">900</field>
+      <field name="salary_art">s116</field>
+      <field name="appears_on_payslip" eval="True"/>
+      <field name="condition_select">none</field>
+      <field name="amount_select">code</field>
+      <field name="amount_python_compute">result = categories.BRUTTO - categories.NETAVG + categories.NETTIL</field>
+      <field name="quantity">1</field>
+    </record>
+    <!--
+         =====
+    -->
+    <record id="hr_salary_rule-sa" model="hr.salary.rule">
+      <field name="category_id" ref="hr_salary_rule_category-PARENT" />
+      <field name="code">sa</field>
+      <field name="name">Arbetsgivaravgift</field>
+      <field name="sequence">490</field>
+      <field name="appears_on_payslip" eval="False"/>
+      <field name="condition_select">none</field>
+      <field name="amount_select">code</field>
+      <field name="amount_python_compute">result = 0</field>
+      <field name="quantity">1</field>
+    </record>
+    <!--
+         ===== CHILD SAU
+    -->
+<!--
+    <record id="hr_salary_rule-sau" model="hr.salary.rule">
+      <field name="parent_rule_id" ref="hr_salary_rule-sa" />
+      <field name="category_id" ref="hr_salary_rule_category-SKV" />
+      <field name="code">sau</field>
+      <field name="salary_art">s110</field>
+      <field name="name">Sociala avgifter ungdom 25,46%</field>
+      <field name="sequence">490</field>
+      <field name="appears_on_payslip" eval="False"/>
+      <field name="condition_select">python</field>
+      <field name="condition_python">result = rules.dict.get('AGEU', False)</field>
+      <field name="amount_select">percentage</field>
+      <field name="amount_percentage_base">categories.BRUTTO</field>
+      <field name="amount_percentage">25.46</field>
+      <field name="quantity">1</field>
+-->
+<!--
+      <field name="account_debit" search="[('code', '=', '7560')]" />
+      <field name="account_tax_id" search="[('code', '=', 'AvgAldersp')]" />
+-->
+<!--
+    </record>
+-->
+<!--
+    <record id="hr_salary_rule-sau-mot" model="hr.salary.rule">
+      <field name="parent_rule_id" ref="hr_salary_rule-sau" />
+      <field name="category_id" ref="hr_salary_rule_category-SKV" />
+      <field name="code">(sau)</field>
+      <field name="salary_art">s110</field>
+      <field name="name">Avräkning lagstadgade sociala avgifter</field>
+      <field name="sequence">490</field>
+      <field name="appears_on_payslip" eval="False"/>
+      <field name="condition_select">none</field>
+      <field name="amount_select">code</field>
+      <field name="amount_python_compute">result = rules.dict.get('sau').amount_percentage * categories.BRUTTO / 100</field>
+      <field name="quantity">1</field>
+    </record>
+-->
+    <!--
+         ===== CHILD SAN
+    -->
+    <record id="hr_salary_rule-san" model="hr.salary.rule">
+      <field name="parent_rule_id" ref="hr_salary_rule-sa" />
+      <field name="category_id" ref="hr_salary_rule_category-SKV" />
+      <field name="code">san</field>
+      <field name="salary_art">s110</field>
+      <field name="name">Sociala avgifter 31,42%</field>
+      <field name="sequence">490</field>
+      <field name="appears_on_payslip" eval="False"/>
+      <field name="condition_select">python</field>
+      <field name="condition_python">result = rules.dict.get('AGEN', False)</field>
+      <field name="amount_select">code</field>
+      <field name="amount_python_compute">result = 31.42 * (categories.BRUTTO + categories.FORMAN) / 100</field>
+      <field name="amount_percentage">31.42</field>
+      <field name="quantity">1</field>
+<!--
+      <field name="account_debit" search="[('code', '=', '7511')]" />
+      <field name="account_tax_id" search="[('code', '=', 'AvgHel')]" />
+-->
+    </record>
+    <record id="hr_salary_rule-san-mot" model="hr.salary.rule">
+      <field name="parent_rule_id" ref="hr_salary_rule-san" />
+      <field name="category_id" ref="hr_salary_rule_category-SKV" />
+      <field name="code">(san)</field>
+      <field name="salary_art">s110</field>
+      <field name="name">Avräkning lagstadgade sociala avgifter</field>
+      <field name="sequence">490</field>
+      <field name="appears_on_payslip" eval="False"/>
+      <field name="condition_select">none</field>
+      <field name="amount_select">code</field>
+      <field name="amount_python_compute">result = rules.dict.get('san').amount_percentage * (categories.BRUTTO + categories.FORMAN) / 100</field>
+      <field name="quantity">1</field>
+    </record>
+<!--
+    NY
+-->
+    <record id="hr_salary_rule-san-mot-SKV" model="hr.salary.rule">
+      <field name="parent_rule_id" ref="hr_salary_rule-san-mot" />
+      <field name="category_id" ref="hr_salary_rule_category-SKV" />
+      <field name="code">(san-skv)</field>
+      <field name="name">Skattekonto, sociala avgifter</field>
+      <field name="sequence">490</field>
+      <field name="appears_on_payslip" eval="False"/>
+      <field name="condition_select">none</field>
+      <field name="amount_select">code</field>
+      <field name="amount_python_compute">result = rules.dict.get('san').amount_percentage * categories.BRUTTO / 100</field>
+      <field name="quantity">1</field>
+    </record>
+    <!--
+         ===== CHILD SAP
+    -->
+    <record id="hr_salary_rule-sap" model="hr.salary.rule">
+      <field name="parent_rule_id" ref="hr_salary_rule-sa" />
+      <field name="category_id" ref="hr_salary_rule_category-SKV" />
+      <field name="code">sap</field>
+      <field name="salary_art">s110</field>
+      <field name="name">Sociala avgifter pensionär 10,21%</field>
+      <field name="sequence">490</field>
+      <field name="appears_on_payslip" eval="False"/>
+      <field name="condition_select">python</field>
+      <field name="condition_python">result = rules.dict.get('AGEP', False)</field>
+      <field name="amount_select">code</field>
+      <field name="amount_python_compute">result = 10.21 * (categories.BRUTTO + categories.FORMAN) / 100</field>
+      <field name="amount_percentage">10.21</field>
+      <field name="quantity">1</field>
+<!--
+      <field name="account_debit" search="[('code', '=', '7521')]" />
+      <field name="account_tax_id" search="[('code', '=', 'AvgAlderspSkLon')]" />
+-->
+    </record>
+    <record id="hr_salary_rule-sap-mot" model="hr.salary.rule">
+      <field name="parent_rule_id" ref="hr_salary_rule-sap" />
+      <field name="category_id" ref="hr_salary_rule_category-SKV" />
+      <field name="code">(sap)</field>
+      <field name="salary_art">s110</field>
+      <field name="name">Avräkning lagstadgade sociala avgifter</field>
+      <field name="sequence">490</field>
+      <field name="appears_on_payslip" eval="True"/>
+      <field name="condition_select">none</field>
+      <field name="amount_select">code</field>
+      <field name="amount_python_compute">result = rules.dict.get('san').amount_percentage * (categories.BRUTTO + categories.FORMAN) / 100</field>
+      <field name="quantity">1</field>
+<!--
+      <field name="account_credit" search="[('code', '=', '2731')]" />
+-->
+    </record>
+    <!--
+         =====
+    -->
+    <record id="hr_salary_rule-pre" model="hr.salary.rule">
+      <field name="category_id" ref="hr_salary_rule_category-PARENT" />
+      <field name="code">pre</field>
+      <field name="name">Preliminärskatt</field>
+      <field name="sequence">690</field>
+      <field name="appears_on_payslip" eval="False"/>
+      <field name="condition_select">none</field>
+      <field name="amount_select">code</field>
+      <field name="amount_python_compute">result = 0</field>
+      <field name="quantity">1</field>
+    </record>
+    <!--
+         ===== CHILD
+    -->
+    <record id="hr_salary_rule-prej" model="hr.salary.rule">
+      <field name="parent_rule_id" ref="hr_salary_rule-pre" />
+      <field name="category_id" ref="hr_salary_rule_category-NETAVG" />
+      <field name="code">prej</field>
+      <field name="salary_art">s100</field>
+      <field name="name">Preliminärskatt (jämkad)</field>
+      <field name="sequence">690</field>
+      <field name="appears_on_payslip" eval="True"/>
+      <field name="condition_select">none</field>
+      <field name="amount_select">code</field>
+      <field name="amount_python_compute">result = contract.prel_tax_amount + categories.SKVPRE</field>
+<!--
+      <field name="account_credit" search="[('code', '=', '2710')]" />
+      <field name="account_tax_id" search="[('code', '=', 'SkAvdrLon')]" />
+-->
+      <field name="quantity">1</field>
+    </record>
+<!--
+    <record id="hr_salary_rule-prej-tax" model="hr.salary.rule">
+      <field name="parent_rule_id" ref="hr_salary_rule-prej" />
+      <field name="category_id" ref="hr_salary_rule_category-DUMMY" />
+      <field name="code">(prej-tax)</field>
+      <field name="name">Preliminärskatt skattedeklaration</field>
+      <field name="sequence">590</field>
+      <field name="appears_on_payslip" eval="True"/>
+      <field name="condition_select">none</field>
+      <field name="amount_select">code</field>
+      <field name="amount_python_compute">result = contract.prel_tax_amount</field>
+      <field name="account_tax_id" search="[('code', '=', 'SkAvdrLon')]" />
+      <field name="quantity">1</field>
+    </record>
+-->
+    <!--
+         =====
+         <record id="hr_salary_rule-" model="hr.salary.rule">
+         <field name="category_id" ref="hr_salary_rule_category-"/>
+         <field name="code"></field>
+         <field name="name"></field>
+         <field name="sequence">1</field>
+         <field name="appears_on_payslip" eval="True"/>
+         <field name="condition_select">none</field>
+         <field name="amount_select">code</field>
+         <field name="amount_python_compute"></field>
+         <field name="quantity">1</field>
+         </record>
+    -->
+    <!--
+         =====
+    -->
+    <record id="hr_salary_rule-kval" model="hr.salary.rule">
+      <field name="category_id" ref="hr_salary_rule_category-BRUTIL" />
+      <field name="code">kval</field>
+      <field name="salary_art">111</field>
+      <field name="name">Kvalificerad övertid</field>
+      <field name="sequence">115</field>
+      <field name="appears_on_payslip" eval="True"/>
+      <field name="condition_select">python</field>
+      <field name="condition_python">result = (inputs and inputs.kvaltim and inputs.kvaltim.amount != 0) or False</field>
+<!--
+      <field name="condition_python">result = inputs.kvaltim.amount != 0</field>
+-->
+      <field name="amount_select">code</field>
+      <field name="amount_python_compute">
+#ML/72*100/APR
+result_qty = inputs.kvaltim.amount
+# result_rate = 150
+result = 2 * contract.wage / 160
+      </field>
+      <field name="quantity">1</field>
+    </record>
+    <!-- /// -->
+    <record id="hr_rule_input-kvaltim" model="hr.rule.input">
+      <field name="code">kvaltim</field>
+      <field name="name">Kvalificerad övertid (antal timmar)</field>
+      <field name="input_id" ref="hr_salary_rule-kval" />
+    </record>
+
+    <!-- retroaktiv lön bruttotillägg -->
+    <record id="hr_salary_rule-retroactive-til" model="hr.salary.rule">
+      <field name="category_id" ref="hr_salary_rule_category-BRUTIL" />
+      <field name="code">retro_akt</field>
+      <field name="salary_art">170</field>
+      <field name="name">Retroaktiv lön (bruttotillägg)</field>
+      <field name="sequence">115</field>
+      <field name="appears_on_payslip" eval="True"/>
+      <field name="condition_select">python</field>
+      <field name="condition_python">result = (inputs and inputs.retroakt and inputs.retroakt.amount != 0) or False</field>
+<!--
+      <field name="condition_python">result = inputs.retroakt.amount != 0</field>
+-->
+      <field name="amount_select">code</field>
+      <field name="amount_python_compute">
+result_rate = 100
+result = inputs.retroakt.amount
+      </field>
+      <field name="quantity">1</field>
+    </record>
+    <record id="hr_rule_input-retroakt-til" model="hr.rule.input">
+      <field name="code">retroakt</field>
+      <field name="name">Retroaktiv lön (i kronor)</field>
+      <field name="input_id" ref="hr_salary_rule-retroactive-til" />
+    </record>
+
+    <!-- retroaktiv lön nettoavdrag -->
+    <record id="hr_salary_rule-retroactive-avg" model="hr.salary.rule">
+      <field name="category_id" ref="hr_salary_rule_category-NETAVG" />
+      <field name="code">retro_skatte</field>
+      <field name="salary_art">s100</field>
+      <field name="name">Retroaktiv lön (skatt)</field>
+      <field name="sequence">700</field>
+      <field name="appears_on_payslip" eval="True"/>
+      <field name="condition_select">python</field>
+      <field name="condition_python">result = (inputs and inputs.retroakt and inputs.retroakt.amount != 0) or False</field>
+<!--
+      <field name="condition_python">result = inputs.retroakt.amount != 0</field>
+-->
+      <field name="amount_select">code</field>
+      <field name="amount_python_compute">
+result_rate = 30
+result = inputs.retroakt.amount
+      </field>
+      <field name="quantity">1</field>
+    </record>
+
+    <!--
+         =====
+categories.BRUTTO - categories.NETAVG + categories.NETTIL
+    -->
+    <record id="hr_salary_rule-resmil" model="hr.salary.rule">
+      <field name="category_id" ref="hr_salary_rule_category-NETTIL" />
+      <field name="code">resmil</field>
+      <field name="salary_art">730</field>
+      <field name="name">Milersättning</field>
+      <field name="sequence">710</field>
+      <field name="appears_on_payslip" eval="True"/>
+      <field name="condition_select">python</field>
+      <field name="condition_python">result = (inputs and inputs.resmil and inputs.resmil.amount != 0) or False</field>
+<!--
+      <field name="condition_python">result = inputs.resmil.amount != 0</field>
+-->
+      <field name="amount_select">code</field>
+      <field name="amount_python_compute">
+result_qty = inputs.resmil.amount
+# result_rate = 150
+result = 18.5
+      </field>
+<!--
+      <field name="account_debit" search="[('code', '=', '5841')]" /> Finns inte i bas2015
+      <field name="account_debit" search="[('code', '=', '5800')]" />
+-->
+      <field name="quantity">1</field>
+    </record>
+    <!-- /// -->
+    <record id="hr_rule_input-resmil" model="hr.rule.input">
+      <field name="code">resmil</field>
+      <field name="name">Milersättning (antal mil)</field>
+      <field name="input_id" ref="hr_salary_rule-resmil" />
+    </record>
+
+    <!-- Traktamente -->
+
+    <record id="hr_salary_rule_traktamente_domestic" model="hr.salary.rule">
+      <field name="category_id" ref="hr_salary_rule_category-NETTIL" />
+      <field name="code">traktin</field>
+      <field name="salary_art">771</field>
+      <field name="name">Traktamente inrikes</field>
+      <field name="sequence">710</field>
+      <field name="appears_on_payslip" eval="True"/>
+      <field name="condition_select">python</field>
+      <field name="condition_python">result = (inputs and inputs.traktin and inputs.traktin.amount != 0) or False</field>
+<!--
+      <field name="condition_python">result = inputs.traktin.amount != 0</field>
+-->
+      <field name="amount_select">code</field>
+      <field name="amount_python_compute">
+result_qty = inputs.traktin.amount
+result = 0.0 if result_qty == 0 else 220
+      </field>
+      <field name="quantity">1</field>
+    </record>
+
+    <record id="hr_rule_input_traktamente_domestic" model="hr.rule.input">
+      <field name="code">traktin</field>
+      <field name="name">Traktamente inrikes (antal dagar)</field>
+      <field name="input_id" ref="hr_salary_rule_traktamente_domestic" />
+    </record>
+
+    <record id="hr_salary_rule_traktamente_foreign" model="hr.salary.rule">
+      <field name="category_id" ref="hr_salary_rule_category-NETTIL" />
+      <field name="code">traktut</field>
+      <field name="salary_art">780</field>
+      <field name="name">Traktamente utrikes</field>
+      <field name="sequence">710</field>
+      <field name="appears_on_payslip" eval="True"/>
+      <field name="condition_select">python</field>
+      <field name="condition_python">result = (inputs and inputs.traktuta and inputs.traktuta.amount  != 0 and inputs.traktutb and inputs.traktutb.amount  != 0) or False</field>
+<!--
+      <field name="condition_python">result = inputs.traktuta.amount != 0 and inputs.traktutb.amount != 0</field>
+-->
+      <field name="amount_select">code</field>
+      <field name="amount_python_compute">
+result = inputs.traktuta.amount  * inputs.traktutb.amount  
+      </field>
+      <field name="quantity">1</field>
+    </record>
+
+    <record id="hr_rule_input_traktamente_foreign_amount" model="hr.rule.input">
+      <field name="code">traktuta</field>
+      <field name="name">Traktamente utrikes (antal dagar)</field>
+      <field name="input_id" ref="hr_salary_rule_traktamente_foreign" />
+    </record>
+
+    <record id="hr_rule_input_traktamente_foreign_value" model="hr.rule.input">
+      <field name="code">traktutb</field>
+      <field name="name">Traktamente utrikes (belopp/dag)</field>
+      <field name="input_id" ref="hr_salary_rule_traktamente_foreign" />
+    </record>
+
+    <!-- Utlägg -->
+
+    <record id="hr_salary_rule_expenses" model="hr.salary.rule">
+      <field name="category_id" ref="hr_salary_rule_category-NETTIL" />
+      <field name="code">utlagg</field>
+      <field name="salary_art">793</field>
+      <field name="name">Utlägg</field>
+      <field name="sequence">710</field>
+      <field name="appears_on_payslip" eval="True"/>
+      <field name="condition_select">python</field>
+      <field name="condition_python">result = (inputs and inputs.utlagg and inputs.utlagg.amount != 0) or False</field>
+<!--
+      <field name="condition_python">result = inputs.utlagg.amount != 0</field>
+-->
+      <field name="amount_select">code</field>
+      <field name="amount_python_compute">
+result_qty = 0.0 if inputs.utlagg.amount == 0 else 1.0
+result = inputs.utlagg.amount
+      </field>
+      <field name="quantity">1</field>
+    </record>
+
+    <record id="hr_rule_input_expenses" model="hr.rule.input">
+      <field name="code">utlagg</field>
+      <field name="name">Utlägg (belopp)</field>
+      <field name="input_id" ref="hr_salary_rule_expenses" />
+    </record>
+
+    <!--
+         =====
+    -->
+    <!--
+         <record id="hr.rule.input-resmil" model="hr.rule.input">
+         <field name="code">resmil</field>
+         <field name="display_name">Skattefri reseersättning (ange antal mil)</field>
+         <field name="name">Skattefri reseersättning (ange antal mil)</field>
+         <field name="input_id" ref="hr_payroll.res"/>
+         </record>
+         <record id="hr.rule.input-plustim" model="hr.rule.input">
+         <field name="code">plustim</field>
+         <field name="display_name">Övertid (antal timmar)</field>
+         <field name="name">Övertid (antal timmar)</field>
+         <field name="input_id" ref="hr_payroll.ötid"/>
+         </record>
+    -->
+    <!-- TEST
+         <record id="hr_salary_rule-TEST" model="hr.salary.rule">
+         <field name="category_id" ref="hr_salary_rule_category-BRUAVG"/>
+         <field name="code">TEST</field>
+         <field name="name">Sjukavdrag TEST</field>
+         <field name="sequence">100</field>
+         <field name="appears_on_payslip" eval="True"/>
+         <field name="condition_select">none</field>
+         <field name="amount_select">code</field>
+         <field name="amount_python_compute">
+         result_qty = inputs.sjkdag.amount
+         # result_rate = 150
+         result = -contract.wage / 20</field>
+         <field name="quantity">1</field>
+         </record>
+    -->
+    <!--
+         ==============================================================
+    -->
+    <record id="hr_salary_rule-blfl" model="hr.salary.rule">
+      <field name="category_id" ref="hr_salary_rule_category-HANDLER" />
+      <field name="code">blfl</field>
+      <field name="name">Lön företagsledare (åldersberoende)</field>
+      <field name="sequence">400</field>
+      <field name="appears_on_payslip" eval="False"/>
+      <field name="condition_select">none</field>
+      <field name="amount_select">code</field>
+      <field name="amount_python_compute">result = categories.BRUTTO</field>
+<!--
+      <field name="account_debit" search="[('code', '=', '7292')]" />
+      <field name="account_credit" search="[('code', '=', '2920')]" />
+-->
+      <field name="quantity">1</field>
+    </record>
+  <record id="hr_salary_rule-blflsem" model="hr.salary.rule">
+    <field name="parent_rule_id" ref="hr_salary_rule-blfl" />
+    <field name="category_id" ref="hr_salary_rule_category-HANDLER" />
+    <field name="code">blflsum</field>
+    <field name="salary_art">101</field>
+    <field name="name">Bruttolön företagsledare (ungdom)</field>
+    <field name="sequence">400</field>
+    <field name="appears_on_payslip" eval="False" />
+    <field name="condition_select">python</field>
+    <field name="condition_python">result = rules.dict.get('AGEU', False)</field>
+    <field name="amount_select">code</field>
+    <field name="amount_python_compute">result = categories.BRUTTO</field>
+<!--
+    <field name="account_debit" search="[('code', '=', '7223')]" />
+    <field name="account_tax_id" search="[('code', '=', 'UlagAvgAldersp')]" />
+-->
+    <field name="quantity">1</field>
+  </record>
+  <record id="hr_salary_rule-blflu" model="hr.salary.rule">
+    <field name="parent_rule_id" ref="hr_salary_rule-blfl" />
+    <field name="category_id" ref="hr_salary_rule_category-HANDLER" />
+    <field name="code">blflu</field>
+    <field name="salary_art">101</field>
+    <field name="name">Bruttolön företagsledare (ungdom)</field>
+    <field name="sequence">400</field>
+    <field name="appears_on_payslip" eval="False" />
+    <field name="condition_select">python</field>
+    <field name="condition_python">result = rules.dict.get('AGEU', False)</field>
+    <field name="amount_select">code</field>
+    <field name="amount_python_compute">result = categories.BRUTTO</field>
+<!--
+    <field name="account_debit" search="[('code', '=', '7223')]" />
+    <field name="account_tax_id" search="[('code', '=', 'UlagAvgAldersp')]" />
+-->
+    <field name="quantity">1</field>
+  </record>
+  <record id="hr_salary_rule-blfln" model="hr.salary.rule">
+    <field name="parent_rule_id" ref="hr_salary_rule-blfl" />
+    <field name="category_id" ref="hr_salary_rule_category-HANDLER" />
+    <field name="code">blfln</field>
+    <field name="salary_art">101</field>
+    <field name="name">Bruttolön företagsledare</field>
+    <field name="sequence">400</field>
+    <field name="appears_on_payslip" eval="False" />
+    <field name="condition_select">python</field>
+    <field name="condition_python">result = rules.dict.get('AGEN', False)</field>
+    <field name="amount_select">code</field>
+    <field name="amount_python_compute">result = categories.BRUTTO</field>
+<!--
+    <field name="account_debit" search="[('code', '=', '7221')]" />
+    <field name="account_tax_id" search="[('code', '=', 'UlagAvgHel')]" />
+-->
+    <field name="quantity">1</field>
+  </record>
+  <record id="hr_salary_rule-blflp" model="hr.salary.rule">
+    <field name="parent_rule_id" ref="hr_salary_rule-blfl" />
+    <field name="category_id" ref="hr_salary_rule_category-HANDLER" />
+    <field name="code">blflp</field>
+    <field name="salary_art">101</field>
+    <field name="name">Bruttolön företagsledare (pensinär)</field>
+    <field name="sequence">400</field>
+    <field name="appears_on_payslip" eval="False" />
+    <field name="condition_select">python</field>
+    <field name="condition_python">result = rules.dict.get('AGEP', False)</field>
+    <field name="amount_select">code</field>
+    <field name="amount_python_compute">result = categories.BRUTTO</field>
+<!--
+    <field name="account_debit" search="[('code', '=', '7224')]" />
+    <field name="account_tax_id" search="[('code', '=', 'UlagAvgAlderspSkLon')]" />
+-->
+    <field name="quantity">1</field>
+  </record>
+  <record id="hr_salary_rule-blflpx" model="hr.salary.rule">
+    <field name="parent_rule_id" ref="hr_salary_rule-blfl" />
+    <field name="category_id" ref="hr_salary_rule_category-HANDLER" />
+    <field name="code">blflpx</field>
+    <field name="salary_art">101</field>
+    <field name="name">Bruttolön företagsledare (avgiftsbefriad)</field>
+    <field name="sequence">400</field>
+    <field name="appears_on_payslip" eval="False" />
+    <field name="condition_select">python</field>
+    <field name="condition_python">result = rules.dict.get('AGEPX', False)</field>
+    <field name="amount_select">code</field>
+    <field name="amount_python_compute">result = categories.BRUTTO</field>
+<!--
+    <field name="account_debit" search="[('code', '=', '7225')]" />
+-->
+    <field name="quantity">1</field>
+  </record>
+
+    <record id="hr_salary_rule-bltj" model="hr.salary.rule">
+      <field name="category_id" ref="hr_salary_rule_category-HANDLER" />
+      <field name="code">bltj</field>
+      <field name="salary_art">101</field>
+      <field name="name">Lön tjänsteman (åldersberoende)</field>
+      <field name="sequence">400</field>
+      <field name="appears_on_payslip" eval="False"/>
+      <field name="condition_select">none</field>
+      <field name="quantity">1</field>
+    </record>
+
+    <record id="hr_salary_rule-blkl" model="hr.salary.rule">
+      <field name="category_id" ref="hr_salary_rule_category-HANDLER" />
+      <field name="code">blkl</field>
+      <field name="salary_art">200</field>
+      <field name="name">Lön kollektivanställd (åldersberoende)</field>
+      <field name="sequence">400</field>
+      <field name="appears_on_payslip" eval="False"/>
+      <field name="condition_select">none</field>
+      <field name="quantity">1</field>
+    </record>
+
+    <record id="hr_salary_rule-forman" model="hr.salary.rule">
+      <field name="category_id" ref="hr_salary_rule_category-FORMAN" />
+      <field name="code">forman</field>
+      <field name="salary_art">666</field>
+      <field name="name">Förmån</field>
+      <field name="sequence">25</field>
+      <field name="appears_on_payslip" eval="False"/>
+      <field name="condition_select">none</field>
+      <field name="amount_select">code</field>
+      <field name="amount_python_compute">#result = worked_days.WORK100.payslip_id.get_employeefund_addition()
+result = 0.0</field>
+      <field name="quantity">1</field>
+    </record>
+
+    <!-- http://www.personalekonomi.se/artikel/drivmedelsforman.aspx  -->
+
+    <record id="hr_salary_rule-fuel-bru018" model="hr.salary.rule">
+      <field name="category_id" ref="l10n_se_hr_payroll.hr_salary_rule_category-FORMAN" />
+      <field name="parent_rule_id" ref="l10n_se_hr_payroll.hr_salary_rule-forman" />
+      <field name="code">drivbru</field>
+      <field name="salary_art">410</field>
+      <field name="name">Drivmedelsförmån</field>
+      <field name="sequence">24</field>
+      <field name="appears_on_payslip" eval="False"/>
+      <field name="condition_select">python</field>
+      <field name="condition_python">result = (inputs and inputs.drivfuel and inputs.drivfuel.amount != 0) or False</field>
+<!--
+      <field name="condition_python">result = inputs.drivfuel.amount != 0</field>
+-->
+      <field name="amount_select">code</field>
+      <field name="amount_python_compute">result = inputs.drivfuel.amount</field>  <!-- arb avg bara på basbeloppet -->
+      <field name="quantity">1</field>
+      <field name="note">Forman av fritt eller delvis fritt drivmedel i samband med bilforman ska du redovisa for sig i ruta 018. Formanen ska du vardera till marknadsvardet x 1,2 när du redovisar den i kontrolluppgiften</field>
+    </record>
+
+    <record id="hr_salary_rule-fuel-deduct018" model="hr.salary.rule">
+      <field name="category_id" ref="hr_salary_rule_category-DUMMY" />
+      <field name="parent_rule_id" ref="hr_salary_rule-prej" />
+      <field name="code">driv</field>
+      <field name="salary_art">736</field>
+      <field name="name">Drivmedelsförmån</field>
+      <field name="sequence">680</field>
+      <field name="appears_on_payslip" eval="True"/>
+      <field name="condition_select">python</field>
+      <field name="condition_python">result = (inputs and inputs.drivfuel and inputs.drivfuel.amount != 0) or False</field>
+<!--
+      <field name="condition_python">result = inputs.drivfuel.amount != 0</field>
+-->
+      <field name="amount_select">code</field>
+      <field name="amount_python_compute">result = inputs.drivfuel.amount * 0.3</field>  <!-- prel skatt -->
+      <field name="quantity">1</field>
+      <field name="note">Forman av fritt eller delvis fritt drivmedel i samband med bilforman ska du redovisa for sig i ruta 018. Formanen ska du vardera till marknadsvardet x 1,2 när du redovisar den i kontrolluppgiften</field>
+    </record>
+    <record id="hr_salary_rule-fuel-deduct018u" model="hr.salary.rule">
+      <field name="category_id" ref="hr_salary_rule_category-DUMMY" />
+      <field name="parent_rule_id" ref="hr_salary_rule-fuel-deduct018" />
+      <field name="code">drivu</field>
+      <field name="salary_art">736</field>
+      <field name="name">Drivmedelsförmån</field>
+      <field name="sequence">690</field>
+      <field name="appears_on_payslip" eval="True"/>
+      <field name="condition_select">python</field>
+      <field name="condition_python">result = (inputs and inputs.drivfuel and inputs.drivfuel.amount != 0)</field>
+<!--
+      <field name="condition_python">result = inputs.drivfuel.amount != 0</field>
+-->
+      <field name="amount_select">code</field>
+      <field name="amount_python_compute">result = inputs.drivfuel.amount</field>  <!-- prel skatt -->
+      <field name="quantity">1</field>
+      <field name="note">Forman av fritt eller delvis fritt drivmedel i samband med bilforman ska du redovisa for sig i ruta 018. Formanen ska du vardera till marknadsvardet x 1,2 när du redovisar den i kontrolluppgiften</field>
+    </record>
+
+    <record id="hr_salary_rule-fuel-018b" model="hr.salary.rule">
+      <field name="category_id" ref="hr_salary_rule_category-DUMMY" />
+      <field name="parent_rule_id" ref="hr_salary_rule-prej" />
+      <field name="code">drivextra</field>
+      <field name="salary_art">737</field>
+      <field name="name">Drivmedelsförmån upphöjt värde</field>
+      <field name="sequence">680</field>
+      <field name="appears_on_payslip" eval="True"/>
+      <field name="condition_select">python</field>
+      <field name="condition_python">result = (inputs and inputs.drivfuel and inputs.drivfuel.amount != 0)</field>
+<!--
+      <field name="condition_python">result = inputs.drivfuel.amount != 0</field>
+-->
+      <field name="amount_select">code</field>
+      <field name="amount_python_compute">result = inputs.drivfuel.amount * 0.2 * 0.3</field>   <!-- prel skatt -->
+      <field name="quantity">1</field>
+      <field name="note">Forman av fritt eller delvis fritt drivmedel i samband med bilforman ska du redovisa for sig i ruta 018. Formanen ska du vardera till marknadsvardet x 1,2 nar du redovisar den i kontrolluppgiften</field>
+    </record>
+
+    <record id="hr_salary_rule-fuel-018bu" model="hr.salary.rule">
+      <field name="category_id" ref="hr_salary_rule_category-DUMMY" />
+      <field name="parent_rule_id" ref="hr_salary_rule-fuel-018b" />
+      <field name="code">drivextrau</field>
+      <field name="salary_art">737</field>
+      <field name="name">Drivmedelsförmån upphöjt värde</field>
+      <field name="sequence">690</field>
+      <field name="appears_on_payslip" eval="True"/>
+      <field name="condition_select">python</field>
+      <field name="condition_python">result = (inputs and inputs.drivfuel and inputs.drivfuel.amount != 0)</field>
+<!--
+      <field name="condition_python">result = inputs.drivfuel.amount != 0</field>
+-->
+      <field name="amount_select">code</field>
+      <field name="amount_python_compute">result = inputs.drivfuel.amount * 0.2</field>   <!-- prel skatt -->
+      <field name="quantity">1</field>
+      <field name="note">Forman av fritt eller delvis fritt drivmedel i samband med bilforman ska du redovisa for sig i ruta 018. Formanen ska du vardera till marknadsvardet x 1,2 nar du redovisar den i kontrolluppgiften</field>
+    </record>
+
+    <!-- /// -->
+    <record id="hr_rule_input-drivmil" model="hr.rule.input">
+      <field name="code">drivmil</field>
+      <field name="name">Drivmedelsförmån (antal mil)</field>
+      <field name="input_id" ref="hr_salary_rule-fuel-bru018" />
+    </record>
+    <record id="hr_rule_input-drivfuel" model="hr.rule.input">
+      <field name="code">drivfuel</field>
+      <field name="name">Drivmedelsförmån, aktuellt marknadspris * normal förbrukning * mil (kronor)</field>
+      <field name="input_id" ref="hr_salary_rule-fuel-bru018" />
+    </record>
+
+
+
+  </data>
+    <data noupdate="1">
+        <function model="hr.salary.rule" name="init_records" />
+    </data>
+</odoo>

@@ -103,7 +103,7 @@ class hr_holidays_status(models.Model):
 
     # ~ @api.one
     def earn_leaves_days(self):
-        for rec in self:
+       for rec in self:
             for employee in rec.env['hr.employee'].search([]):
                 earning_days = rec.env['hr.payslip'].get_leaves_earnings_days(employee,rec.date_earning_start,rec.date_earning_end)
                 if earning_days['employed_days'] - earning_days['absent_days'] > 0:

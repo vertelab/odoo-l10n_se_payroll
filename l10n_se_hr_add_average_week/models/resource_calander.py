@@ -18,7 +18,36 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
-from . import l10n_se_hr_payroll
-from . import account_journal
-from . import hr_employee
-# vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
+# ~ from odoo.modules.registry import RegistryManager
+from dateutil.relativedelta import relativedelta
+from odoo.modules.registry import Registry
+from odoo.exceptions import except_orm, Warning, RedirectWarning
+from odoo import models, fields, api, _
+from odoo import http
+from odoo.http import request
+from odoo import tools
+
+import random
+
+import logging
+_logger = logging.getLogger(__name__)
+
+from odoo.tools import DEFAULT_SERVER_DATE_FORMAT, DEFAULT_SERVER_DATETIME_FORMAT
+from datetime import timedelta, date, datetime
+
+import odoo.addons.decimal_precision as dp
+
+class ResourceCalendar(models.Model):
+   _inherit = "resource.calendar"
+   
+   hours_per_week = fields.Float("Hours per week", compute = "_compute_hours_per_week")
+   
+   @api.onchange('attendance_ids')
+   def _compute_hours_per_week(self):
+       for rec in self:
+          rec.hours_per_week = 0
+          for attendance in self.attendance_ids:
+            rec.hours_per_week += attendance.hour_to - attendance.hour_from
+   
+
+    
