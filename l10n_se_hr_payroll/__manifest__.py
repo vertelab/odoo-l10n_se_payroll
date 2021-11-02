@@ -50,8 +50,6 @@ Swedish Payroll Rules.
         # last
         'data/hr_payroll_stucture_simple_data.xml',
         'views/general_journal_view.xml',
-        'views/hr_employee.xml',
-        'data/time_report_server_action.xml',
 
     ],
     'demo':[
