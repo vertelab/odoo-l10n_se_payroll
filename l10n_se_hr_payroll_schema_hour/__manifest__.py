@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 ##############################################################################
 #
-#    Odoo, Open Source Enterprise Management Solution, third party addon
-#    Copyright (C) 2018 Vertel AB (<http://vertel.se>).
+#    Odoo SA, Open Source Management Solution, third party addon
+#    Copyright (C) 2022- Vertel AB (<https://vertel.se>).
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as
@@ -15,21 +15,29 @@
 #    GNU Affero General Public License for more details.
 #
 #    You should have received a copy of the GNU Affero General Public License
-#    along with this program.  If not, see <http://www.gnu.org/licenses/>.
+#    along with this program. If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
+
 {
-'name': 'Swedish - Payroll Schema Hour Salary',
-'version': '0.1',
-'summary': 'Hour salary rules',
-'category': 'hr',
-'description': """
+    'name': 'l10n_se_payroll: Schema Hour Salary',
+    'version': '14.0.1.0.0',
+    # Version ledger: 14.0 = Odoo version. 1 = Major. Non regressionable code. 2 = Minor. New features that are regressionable. 3 = Bug fixes
+    'summary': 'Hour salary rules',
+    'category': 'Localization',
+    #'sequence': '1'
+    'author': 'Vertel AB',
+    'website': 'https://vertel.se/apps/odoo-l10n-se-payroll/l10n-se_payroll_schema_hour',
+    'images': ['/static/description/banner.png'], # 560x280 px.
+    'license': 'AGPL-3',
+    'contributor': '',
+    'maintainer': 'Vertel AB',
+    'repository': 'https://github.com/vertelab/odoo-l10n-se-payroll',
+    'description': """
 Hour salary rules
 =================
 """,
-'author': 'Vertel AB',
-'website': 'http://www.vertel.se',
-'depends': ['hr_payroll_schema_hour', 'l10n_se_hr_payroll', 'l10n_se_hr_holidays'],
-'data': ['hr_salary_rule_data.xml'],
-'installable': True,
+    'depends': ['hr_payroll_schema_hour', 'l10n_se_hr_payroll', 'l10n_se_hr_holidays'],
+    'data': ['hr_salary_rule_data.xml'],
+    'installable': True,
 }
