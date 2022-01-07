@@ -30,7 +30,6 @@
 
     """,
     #'sequence': '1'
-    'images': ['/static/description/banner.png'], # 560x280 px.
     'author': 'Vertel AB',
     'website': 'https://vertel.se/apps/odoo-l10n-se-payroll/l10n-se_add_average_week',
     'images': ['/static/description/banner.png'], # 560x280 px.
