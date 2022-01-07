@@ -27,7 +27,6 @@
     'category': 'Localization',
     'description': '',
     #'sequence': '1'
-    'images': ['/static/description/banner.png'], # 560x280 px.
     'author': 'Vertel AB',
     'website': 'https://vertel.se/apps/odoo-l10n-se-payroll/l10n-se_export',
     'images': ['/static/description/banner.png'], # 560x280 px.
