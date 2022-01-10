@@ -26,7 +26,6 @@
     'summary': 'Swedish benefits, accounting codes.',
     'category': 'Localization',
     #'sequence': '1'
-    'images': ['/static/description/banner.png'], # 560x280 px.
     'author': 'Vertel AB',
     'website': 'https://vertel.se/apps/odoo-l10n-se-payroll/l10n-se_payroll_ku10',
     'images': ['/static/description/banner.png'], # 560x280 px.
@@ -35,7 +34,6 @@
     'maintainer': 'Vertel AB',
     'repository': 'https://github.com/vertelab/odoo-l10n-se-payroll',
     'depends': ['l10n_se_hr_payroll','l10n_se_hr_payroll_benefits', 'report_glabels'],
-    'version': '1.2',
     'description': """
 Swedish Payroll Rules.
 ======================

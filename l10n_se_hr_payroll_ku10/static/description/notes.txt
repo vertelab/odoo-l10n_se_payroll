@@ -1,5 +1,5 @@
-odoo-l10n_se_payroll / l10n_se_export
-2022-01-10
+odoo-l10n_se_payroll / l10n_se_hr_payroll_hu10
+2022-01-17
 
 /static/description/icon.png
 

@@ -1,4 +1,4 @@
-odoo-l10n_se_payroll / l10n_se_export
+odoo-l10n_se_payroll / l10n_se_resource_calendar_leaves_import
 2022-01-10
 
 /static/description/icon.png
