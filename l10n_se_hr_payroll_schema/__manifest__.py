@@ -20,7 +20,7 @@
 ##############################################################################
 
 {
-    'name': 'l10n_se_payroll: Schema Payslip',
+    'name': 'l10n_se_payroll: Payroll Schema',
     'version': '14.0.1.0.0',
     # Version ledger: 14.0 = Odoo version. 1 = Major. Non regressionable code. 2 = Minor. New features that are regressionable. 3 = Bug fixes
     'summary': '',

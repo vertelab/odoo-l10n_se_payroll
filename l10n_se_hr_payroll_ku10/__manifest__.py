@@ -20,7 +20,7 @@
 ##############################################################################
 
 {
-    'name': 'l10n_se_payroll: KU10',
+    'name': 'l10n_se_payroll: Payroll KU10',
     'version': '14.0.1.0.0',
     # Version ledger: 14.0 = Odoo version. 1 = Major. Non regressionable code. 2 = Minor. New features that are regressionable. 3 = Bug fixes
     'summary': 'Swedish benefits, accounting codes.',
@@ -40,16 +40,16 @@ Swedish Payroll Rules.
 
     * KU10 
     
-Formaner (benefit codes)
+Förmåner (benefit codes)
 ========================
     * 041	Bostad småhus
     * 042	Kost	
-    * 043	Bostad ej småhus	
-    * 044	Ranta	
+    * 043	Bostad, ej småhus	
+    * 044	Ränta	
     * 045	Parkering
-    * 047	Annan forman t ex Dagstidning
-    * 013	ange kod för formansbil
-    * 017	Betalt för bilforman
+    * 047	Annan förman t. ex. Dagstidning
+    * 013	Ange kod för förmansbil
+    * 017	Betalt för bilförman
     * 021   RUT
     * 022   ROT
     

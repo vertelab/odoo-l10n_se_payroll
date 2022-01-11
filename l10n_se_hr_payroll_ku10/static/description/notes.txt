@@ -1,4 +1,4 @@
-odoo-l10n_se_payroll / l10n_se_hr_payroll_hu10
+odoo-l10n_se_payroll / l10n_se_payroll_ku10
 2022-01-17
 
 /static/description/icon.png
