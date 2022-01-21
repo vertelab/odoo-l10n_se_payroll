@@ -42,14 +42,14 @@ Swedish Payroll Rules.
     
 Förmåner (benefit codes)
 ========================
-    * 041	Bostad småhus
-    * 042	Kost	
-    * 043	Bostad, ej småhus	
-    * 044	Ränta	
-    * 045	Parkering
-    * 047	Annan förman t. ex. Dagstidning
-    * 013	Ange kod för förmansbil
-    * 017	Betalt för bilförman
+    * 041   Bostad småhus
+    * 042   Kost
+    * 043   Bostad, ej småhus
+    * 044   Ränta
+    * 045   Parkering
+    * 047   Annan förman t. ex. Dagstidning
+    * 013   Ange kod för förmansbil
+    * 017   Betalt för bilförman
     * 021   RUT
     * 022   ROT
     
@@ -71,7 +71,7 @@ Kostnadsersattningar (salary rules/input fields)
     ],
     'demo':[
     ],
-    'installable': True
+    'installable': True,
 }
 
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:

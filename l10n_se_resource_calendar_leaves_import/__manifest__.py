@@ -40,8 +40,10 @@
     # for the full list
     'depends': ['resource_calendar_leaves_import'],
     'data': [
-        'resource_data.xml',
+        'resource_data.xml'
     ],
     'demo': [
     ],
 }
+
+# vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:

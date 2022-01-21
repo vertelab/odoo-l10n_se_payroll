@@ -33,9 +33,6 @@
     'contributor': '',
     'maintainer': 'Vertel AB',
     'repository': 'https://github.com/vertelab/odoo-l10n-se-payroll',
-
-
-{
     'depends': ['l10n_se_hr_payroll','base_synchro','l10n_se_hr_holidays','hr_attendance'],
     'licence': 'AGPL-3',
     'description': """
@@ -53,7 +50,7 @@ Run payroll in another database synked with Odoo
     'demo':[
     ],
     'external_dependencies': {'python': ['odoorpc']},
-    'installable': True
+    'installable': True,
 }
 
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
