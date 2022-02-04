@@ -1,0 +1,56 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* l10n_se_hr_payroll_account_move_state
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 14.0-20210312\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2022-02-04 09:55+0000\n"
+"PO-Revision-Date: 2022-02-04 11:01+0100\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 2.3\n"
+"Last-Translator: \n"
+"Language: sv\n"
+
+#. module: l10n_se_hr_payroll_account_move_state
+#: model:ir.model.fields,field_description:l10n_se_hr_payroll_account_move_state.field_res_config_settings__slip_state_is_draft
+msgid "Account Slip Status"
+msgstr "Verifikat Status"
+
+#. module: l10n_se_hr_payroll_account_move_state
+#: model:ir.model,name:l10n_se_hr_payroll_account_move_state.model_res_config_settings
+msgid "Config Settings"
+msgstr "Inställningar"
+
+#. module: l10n_se_hr_payroll_account_move_state
+#: model:ir.model.fields,field_description:l10n_se_hr_payroll_account_move_state.field_hr_payslip__display_name
+#: model:ir.model.fields,field_description:l10n_se_hr_payroll_account_move_state.field_res_config_settings__display_name
+msgid "Display Name"
+msgstr "Visningsnamn"
+
+#. module: l10n_se_hr_payroll_account_move_state
+#: model:ir.model.fields,field_description:l10n_se_hr_payroll_account_move_state.field_hr_payslip__id
+#: model:ir.model.fields,field_description:l10n_se_hr_payroll_account_move_state.field_res_config_settings__id
+msgid "ID"
+msgstr ""
+
+#. module: l10n_se_hr_payroll_account_move_state
+#: model_terms:ir.ui.view,arch_db:l10n_se_hr_payroll_account_move_state.res_config_settings_view_form_payroll_slip_state_is_draft
+msgid "Keep confirmed account slips in status: draft"
+msgstr "Behåll bekräftade verifikat som utkast"
+
+#. module: l10n_se_hr_payroll_account_move_state
+#: model:ir.model.fields,field_description:l10n_se_hr_payroll_account_move_state.field_hr_payslip____last_update
+#: model:ir.model.fields,field_description:l10n_se_hr_payroll_account_move_state.field_res_config_settings____last_update
+msgid "Last Modified on"
+msgstr "Senast ändrad"
+
+#. module: l10n_se_hr_payroll_account_move_state
+#: model:ir.model,name:l10n_se_hr_payroll_account_move_state.model_hr_payslip
+msgid "Pay Slip"
+msgstr "Verifikat"
