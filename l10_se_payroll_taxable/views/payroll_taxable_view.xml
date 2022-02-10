@@ -1,0 +1,59 @@
+<odoo>
+    <data>
+        <record id="payroll_taxable_tree_view" model="ir.ui.view">
+            <field name="name">payroll.taxable</field>
+            <field name="model">payroll.taxable</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="name"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="payroll_taxable_form_view" model="ir.ui.view">
+            <field name="name">payroll.taxable</field>
+            <field name="model">payroll.taxable</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+                            <field name="name"/>
+                        </group>
+                        <field name="taxable_lines" nolabel="1">
+                            <tree editable="bottom" create="false" edit="false" delete="false">
+                                <field name="year"/>
+                                <field name="table_number"/>
+                                <field name="income_from"/>
+                                <field name="income_to"/>
+                                <field name="column1"/>
+                                <field name="column2"/>
+                                <field name="column3"/>
+                                <field name="column4"/>
+                                <field name="column5"/>
+                                <field name="column6"/>
+                            </tree>
+                        </field>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_payroll_taxable" model="ir.actions.act_window">
+            <field name="name">Payroll Taxable</field>
+            <field name="res_model">payroll.taxable</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+              <p class="o_view_nocontent_smiling_face">
+                Create a new contract
+              </p>
+            </field>
+        </record>
+
+        <menuitem
+            id="menu_payroll_taxable"
+            name="Taxable"
+            parent="hr.menu_hr_root"
+            action="action_payroll_taxable"
+            sequence="50"/>
+    </data>
+</odoo>

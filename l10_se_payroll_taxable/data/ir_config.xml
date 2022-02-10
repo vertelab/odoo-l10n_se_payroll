@@ -1,0 +1,8 @@
+<odoo>
+    <data>
+        <record id="taxable_url_config" model="ir.config_parameter">
+            <field name="key">taxable_url</field>
+            <field name="value">https://skatteverket.entryscape.net/store/9/resource/1534</field>
+        </record>
+    </data>
+</odoo>
