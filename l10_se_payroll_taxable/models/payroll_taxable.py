@@ -11,7 +11,7 @@ class PayrollTaxable(models.Model):
 class PayrollTaxableLine(models.Model):
     _name = "payroll.taxable.line"
 
-    year = fields.Integer(string="Year")
+    year = fields.Char(string="Year")
     number_of_days = fields.Char(string="Number of Days")
     table_number = fields.Integer(string="Table Number")
     income_from = fields.Float(string="Income From")
