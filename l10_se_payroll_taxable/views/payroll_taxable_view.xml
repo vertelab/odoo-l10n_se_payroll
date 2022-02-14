@@ -22,6 +22,7 @@
                         <field name="taxable_lines" nolabel="1">
                             <tree editable="bottom" create="false" edit="false" delete="false">
                                 <field name="year"/>
+                                <field name="number_of_days"/>
                                 <field name="table_number"/>
                                 <field name="income_from"/>
                                 <field name="income_to"/>
@@ -31,6 +32,7 @@
                                 <field name="column4"/>
                                 <field name="column5"/>
                                 <field name="column6"/>
+                                <field name="total_amount"/>
                             </tree>
                         </field>
                     </sheet>
@@ -44,7 +46,7 @@
             <field name="view_mode">tree,form</field>
             <field name="help" type="html">
               <p class="o_view_nocontent_smiling_face">
-                Create a new contract
+                Create a new Payroll Taxable
               </p>
             </field>
         </record>
