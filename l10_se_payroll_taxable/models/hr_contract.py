@@ -46,6 +46,6 @@ class HRContract(models.Model):
             ('table_number', '=', self.table_number),
             ('income_from', '>=', self.wage),
             ('income_to', '<=', self.wage),
-            ('year', '=', year)
+            ('year', '=', int(year))
         ])
         return sum([line.total_amount for line in taxable_lines])
