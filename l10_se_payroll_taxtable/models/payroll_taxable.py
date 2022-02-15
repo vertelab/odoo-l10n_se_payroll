@@ -2,14 +2,14 @@ from odoo import models, fields, api, _
 
 
 class PayrollTaxable(models.Model):
-    _name = "payroll.taxable"
+    _name = "payroll.taxtable"
 
     name = fields.Char(string="Name")
-    taxable_lines = fields.One2many("payroll.taxable.line", "payroll_taxable_id", string="Taxable Lines")
+    taxable_lines = fields.One2many("payroll.taxtable.line", "payroll_taxable_id", string="Taxable Lines")
 
 
 class PayrollTaxableLine(models.Model):
-    _name = "payroll.taxable.line"
+    _name = "payroll.taxtable.line"
 
     year = fields.Char(string="Year")
     number_of_days = fields.Char(string="Number of Days")
@@ -29,4 +29,4 @@ class PayrollTaxableLine(models.Model):
             rec.total_amount = rec.column1 + rec.column2 + rec.column3 + rec.column4 + rec.column5 + rec.column6
 
     total_amount = fields.Float(string="Total", compute=_sum_columns)
-    payroll_taxable_id = fields.Many2one('payroll.taxable', string="Payroll Taxable")
+    payroll_taxable_id = fields.Many2one('payroll.taxtable', string="Payroll Taxable")

@@ -1,8 +1,8 @@
 <odoo>
     <data>
-        <record id="payroll_taxable_tree_view" model="ir.ui.view">
-            <field name="name">payroll.taxable</field>
-            <field name="model">payroll.taxable</field>
+        <record id="payroll_taxtable_tree_view" model="ir.ui.view">
+            <field name="name">payroll.taxtable</field>
+            <field name="model">payroll.taxtable</field>
             <field name="arch" type="xml">
                 <tree>
                     <field name="name"/>
@@ -10,9 +10,9 @@
             </field>
         </record>
 
-        <record id="payroll_taxable_form_view" model="ir.ui.view">
-            <field name="name">payroll.taxable</field>
-            <field name="model">payroll.taxable</field>
+        <record id="payroll_taxtable_form_view" model="ir.ui.view">
+            <field name="name">payroll.taxtable</field>
+            <field name="model">payroll.taxtable</field>
             <field name="arch" type="xml">
                 <form>
                     <sheet>
@@ -40,9 +40,9 @@
             </field>
         </record>
 
-        <record id="action_payroll_taxable" model="ir.actions.act_window">
-            <field name="name">Payroll Taxable</field>
-            <field name="res_model">payroll.taxable</field>
+        <record id="action_payroll_taxtable" model="ir.actions.act_window">
+            <field name="name">Payroll Taxtable</field>
+            <field name="res_model">payroll.taxtable</field>
             <field name="view_mode">tree,form</field>
             <field name="help" type="html">
               <p class="o_view_nocontent_smiling_face">
@@ -52,10 +52,10 @@
         </record>
 
         <menuitem
-            id="menu_payroll_taxable"
-            name="Taxable"
+            id="menu_payroll_taxtable"
+            name="Taxtable"
             parent="hr.menu_hr_root"
-            action="action_payroll_taxable"
+            action="action_payroll_taxtable"
             sequence="50"/>
     </data>
 </odoo>

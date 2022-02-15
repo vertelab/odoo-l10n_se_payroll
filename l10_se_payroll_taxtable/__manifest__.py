@@ -20,7 +20,7 @@
 ##############################################################################
 
 {
-    'name': 'Payroll Taxable',
+    'name': 'Payroll Tax Table',
     'version': '14.0.1.0.0',
     'summary': '',
     'category': 'Localization',
@@ -36,7 +36,7 @@
     'demo': [],
     'data': [
         'security/ir.model.access.csv',
-        'views/payroll_taxable_view.xml',
+        'views/payroll_taxtable_view.xml',
         'views/hr_contract_view.xml',
         'data/ir_config.xml',
         'data/ir_server_action.xml',

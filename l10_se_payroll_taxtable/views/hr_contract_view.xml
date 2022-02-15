@@ -8,6 +8,9 @@
                     <field name="table_number"/>
                     <field name="is_church_deductible"/>
                 </field>
+                <field name="hr_responsible_id" position="after">
+                    <field name="column_number"/>
+                </field>
             </field>
         </record>
     </data>
