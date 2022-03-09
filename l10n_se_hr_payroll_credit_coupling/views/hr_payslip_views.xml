@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+<record id="hr_payslip_form_add_linked_payslip" model="ir.ui.view">
+    <field name="name">hr_payroll_community.view_hr_payslip_form_inherit</field>
+    <field name="model">hr.payslip</field>
+    <field name="inherit_id" ref="hr_payroll_community.view_hr_payslip_form"/>
+    <field name="arch" type="xml">
+      <xpath expr="//sheet[1]/group[1]/field[@name='credit_note']" position="after">
+        <field name="linked_payslip"/>
+      </xpath>
+    </field>
+</record>
+</odoo>
