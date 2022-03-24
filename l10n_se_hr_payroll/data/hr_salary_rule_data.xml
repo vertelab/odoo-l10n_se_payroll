@@ -374,7 +374,7 @@ if age > 77:
       <field name="appears_on_payslip" eval="True"/>
       <field name="condition_select">none</field>
       <field name="amount_select">code</field>
-      <field name="amount_python_compute">result = contract.l10_sum_columns_taxtable_line(payslip.date_from) + categories.SKVPRE</field>
+      <field name="amount_python_compute">result = contract.l10_sum_columns_taxtable_line(payslip.date_from, categories.BRUTTO) + categories.SKVPRE</field>
 <!--      <field name="amount_python_compute">result = contract.prel_tax_amount + categories.SKVPRE</field>-->
 <!--
       <field name="account_credit" search="[('code', '=', '2710')]" />

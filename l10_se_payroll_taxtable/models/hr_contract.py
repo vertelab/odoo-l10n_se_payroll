@@ -43,12 +43,12 @@ class HRContract(models.Model):
         except Exception as e:
             pass
 
-    def l10_sum_columns_taxtable_line(self, date):
+    def l10_sum_columns_taxtable_line(self, date, wage):
         year = datetime.strptime(date, '%M/%d/%Y').year
         taxable_lines = self.env['payroll.taxtable.line'].search([
             ('table_number', '=', self.table_number),
-            ('income_from', '>=', self.wage),
-            ('income_to', '<=', self.wage),
+            ('income_from', '>=', wage),
+            ('income_to', '<=', wage),
             ('year', '=', str(year))
         ])
         return sum([line[self.column_number].name for line in taxable_lines])
