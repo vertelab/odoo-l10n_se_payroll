@@ -57,5 +57,22 @@
             parent="hr.menu_hr_root"
             action="action_payroll_taxtable"
             sequence="50"/>
+
+
+        <record model="ir.ui.view" id="view_payroll_taxtable_wizard_form">
+            <field name="name">payroll.taxtable.wizard</field>
+            <field name="model">payroll.taxtable.wizard</field>
+            <field name="arch" type="xml">
+                <form string="Add URL">
+                    <group>
+                        <field name="taxable_url"/>
+                    </group>
+                    <footer>
+                        <button name="action_sync_taxable" string="Sync" class="btn btn-primary" type="object" />
+                        <button special="cancel" string="Close" class="btn btn-danger" />
+                    </footer>
+                </form>
+            </field>
+        </record>
     </data>
 </odoo>
