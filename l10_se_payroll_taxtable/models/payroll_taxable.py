@@ -68,4 +68,4 @@ class PayrollTaxableLine(models.Model):
             rec.total_amount = rec.column1 + rec.column2 + rec.column3 + rec.column4 + rec.column5 + rec.column6
 
     total_amount = fields.Float(string="Total", compute=_sum_columns)
-    payroll_taxable_id = fields.Many2one('payroll.taxtable', string="Payroll Taxable")
+    payroll_taxable_id = fields.Many2one('payroll.taxtable', string="Payroll Taxable",  ondelete="cascade")
