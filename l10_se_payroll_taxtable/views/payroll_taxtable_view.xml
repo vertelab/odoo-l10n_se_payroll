@@ -74,5 +74,19 @@
                 </form>
             </field>
         </record>
+
+        <record id="action_payroll_taxtable_wizard_action" model="ir.actions.act_window">
+            <field name="name">Payroll Taxtable Wizard Action</field>
+            <field name="res_model">payroll.taxtable.wizard</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+        </record>
+
+        <menuitem id="hr_menu_payroll_taxtable_wizard"
+            name="Sync TaxTable"
+            parent="hr.menu_human_resources_configuration"
+            sequence="100"
+            action="action_payroll_taxtable_wizard_action"
+        />
     </data>
 </odoo>

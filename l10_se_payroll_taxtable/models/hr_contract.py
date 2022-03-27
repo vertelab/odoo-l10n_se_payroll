@@ -6,6 +6,7 @@ from datetime import datetime
 import logging
 _logger = logging.getLogger(__name__)
 
+
 class HRContract(models.Model):
     _inherit = 'hr.contract'
 
@@ -28,7 +29,8 @@ class HRContract(models.Model):
 
     def l10_sum_columns_taxtable_line(self, date, wage):
 
-        fails = [key for key, value in (('date', date), ('wage', wage), ('column_number', self.column_number), ('self.table_number', self.table_number)) if not value]
+        fails = [key for key, value in (('date', date), ('wage', wage), ('column_number', self.column_number),
+                                        ('self.table_number', self.table_number)) if not value]
         if fails:
             _logger.warning(f"Please fill these values{fails}")
             return
