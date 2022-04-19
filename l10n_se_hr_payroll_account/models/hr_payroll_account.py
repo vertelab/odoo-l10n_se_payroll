@@ -12,11 +12,6 @@ class HrPayslip(models.Model):
     
     
     def action_payslip_done(self):
-        _logger.warning("l10n_se action_payslip_done")
-        _logger.warning("l10n_se action_payslip_done")
-        _logger.warning("l10n_se action_payslip_done")
-        _logger.warning("l10n_se action_payslip_done")
-        _logger.warning("l10n_se action_payslip_done")
         self.compute_sheet()
         res = self.write({'state': 'done'})
 
