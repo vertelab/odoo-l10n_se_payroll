@@ -1,0 +1,1 @@
+git@github.com:vertelab/odoo-account.git
