@@ -32,7 +32,7 @@
     'contributor': '',
     'maintainer': 'Vertel AB',
     'repository': 'https://github.com/vertelab/odoo-l10n-se-payroll',
-    'depends': ['account','l10n_se_hr_payroll','hr_payroll_account_community_fixed'],
+    'depends': ['account','l10n_se_hr_payroll','l10n_se_hr_payroll_account'],
     'description': """
 Swedish Payroll Account Move State
 ==================================

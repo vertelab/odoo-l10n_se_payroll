@@ -28,7 +28,9 @@ class HRContract(models.Model):
         }
 
     def l10_sum_columns_taxtable_line(self, date, wage):
-
+        _logger.warning(f"{self}")
+        _logger.warning(f"{date}")
+        _logger.warning(f"{wage}")
         fails = [key for key, value in (('date', date), ('wage', wage), ('column_number', self.column_number),
                                         ('self.table_number', self.table_number)) if not value]
         if fails:
