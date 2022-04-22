@@ -30,7 +30,7 @@
     'contributor': '',
     'maintainer': 'Vertel AB',
     'repository': 'https://github.com/vertelab/odoo-l10n-se-payroll',
-    'depends': ['account','account_period','l10n_se_hr_payroll','hr_payroll_account_community_fixed'],
+    'depends': ['account','account_period','l10n_se_hr_payroll','hr_payroll_account_community'],
     'description': """
 Swedish Payroll Credit Coupling
 ===============================

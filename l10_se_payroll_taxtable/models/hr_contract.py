@@ -28,7 +28,6 @@ class HRContract(models.Model):
         }
 
     def l10_sum_columns_taxtable_line(self, date, wage):
-
         fails = [key for key, value in (('date', date), ('wage', wage), ('column_number', self.column_number),
                                         ('self.table_number', self.table_number)) if not value]
         if fails:

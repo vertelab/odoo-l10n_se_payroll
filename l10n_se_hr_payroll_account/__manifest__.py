@@ -33,7 +33,7 @@
     'contributor': '',
     'maintainer': 'Vertel AB',
     'repository': 'https://github.com/vertelab/odoo-l10n-se-payroll',
-    'depends': ['l10n_se_hr_payroll', 'hr_payroll_account_community_fixed', 'l10n_se'],
+    'depends': ['l10n_se_hr_payroll', 'hr_payroll_account_community', 'l10n_se'],
     'description': """
 Accounting Data for Swedish Payroll Rules.
 ==========================================
