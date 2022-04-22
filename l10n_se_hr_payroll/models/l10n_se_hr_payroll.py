@@ -89,7 +89,7 @@ class hr_contract(models.Model):
 
     @api.model
     def get_leave_days(self, rule_id, worked_days):
-        line = worked_days.dict.get(self.env.ref(rule_id).name)
+        line = worked_days.dict.get(self.env.ref(rule_id).code)
         # ~ for a,b in worked_days:
             # ~ _logger.warning(f"{a},{b}")
         #_logger.warning(f"jakmar rule?????????????????? {worked_days.__dict__}")
