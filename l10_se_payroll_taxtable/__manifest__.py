@@ -25,7 +25,7 @@
     'summary': '',
     'category': 'Localization',
     'author': 'Vertel AB',
-    'website': 'https://vertel.se/apps/odoo-l10n-se-payroll/l10n-se_payroll_taxablet',
+    'website': 'https://vertel.se/apps/odoo-l10n-se-payroll/l10n-se_payroll_taxable',
     'license': 'AGPL-3',
     'maintainer': 'Vertel AB',
     'repository': 'https://github.com/vertelab/odoo-l10n-se-payroll',
