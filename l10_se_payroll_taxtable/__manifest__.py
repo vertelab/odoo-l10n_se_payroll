@@ -20,7 +20,7 @@
 ##############################################################################
 
 {
-    'name': 'Payroll Tax Table',
+    'name': 'l10n_se_payroll: Payroll Tax Table',
     'version': '14.0.1.0.0',
     'summary': '',
     'category': 'Localization',
