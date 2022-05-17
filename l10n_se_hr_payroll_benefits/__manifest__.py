@@ -37,7 +37,6 @@
     'description': """
 Swedish Payslip additions for Benefits
     """,
-    'website': 'http://www.vertel.se',
     'data':[
         'hr_salary_rule_data.xml',
     ],
