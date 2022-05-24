@@ -40,7 +40,6 @@ Accounting Data for Swedish Payroll Rules.
     """,
 
     'auto_install': True,
-    'website': 'https://www.odoo.com/page/accounting',
     'demo': [],
     'data':[
         #~ 'data/l10n_se_wizard.yml', # Leif
