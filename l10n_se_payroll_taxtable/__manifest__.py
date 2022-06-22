@@ -20,12 +20,12 @@
 ##############################################################################
 
 {
-    'name': 'Payroll Tax Table',
+    'name': 'l10n_se_payroll: Payroll Tax Table',
     'version': '14.0.1.0.0',
     'summary': '',
     'category': 'Localization',
     'author': 'Vertel AB',
-    'website': 'https://vertel.se',
+    'website': 'https://vertel.se/apps/l10n_se_payroll/l10n_se_payroll_taxtable',
     'license': 'AGPL-3',
     'maintainer': 'Vertel AB',
     'repository': 'https://github.com/vertelab/odoo-l10n-se-payroll',

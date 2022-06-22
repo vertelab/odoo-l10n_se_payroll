@@ -25,6 +25,7 @@
     'summary': 'Extends payroll with a field that links between payslips and credited payslips',
     'category': 'Localization',
     'author': 'Vertel AB',
+    'website': 'https://vertel.se/apps/l10n_se_payroll/l10n_se_hr_payroll_credit_coupling',
     'images': ['/static/description/banner.png'], # 560x280 px.
     'license': 'AGPL-3',
     'contributor': '',

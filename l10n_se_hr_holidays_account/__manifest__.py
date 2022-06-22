@@ -23,11 +23,11 @@
     'name': 'l10n_se_payroll: Holiday Pay with Accounting',
     'version': '14.0.1.0.0',
     # Version ledger: 14.0 = Odoo version. 1 = Major. Non regressionable code. 2 = Minor. New features that are regressionable. 3 = Bug fixes
-    'summary': '',
+    'summary': 'Accounting Data for Swedish Holiday Pay Rules.',
     'category': 'Localization',
     #'sequence': '1'
     'author': 'Vertel AB',
-    'website': 'https://vertel.se/apps/odoo-l10n-se-payroll/l10n-se_holidays_account',
+    'website': 'https://vertel.se/apps/l10n_se_payroll/l10n_se_hr_holidays_account',
     'images': ['/static/description/banner.png'], # 560x280 px.
     'license': 'AGPL-3',
     'contributor': '',
