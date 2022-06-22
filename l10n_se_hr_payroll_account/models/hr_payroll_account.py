@@ -1,5 +1,6 @@
-import openerp.exceptions
-from openerp import models, fields, api, _
+
+import odoo
+from odoo import models, fields, api, _
 import datetime
 from datetime import timedelta, date
 
