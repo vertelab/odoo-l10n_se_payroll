@@ -26,6 +26,7 @@
     'category': 'Localization',
     'author': 'Vertel AB',
     'website': 'https://vertel.se/apps/l10n_se_payroll/l10n_se_payroll_taxtable',
+    'images': ['static/description/banner.png'], # 560x280 px.
     'license': 'AGPL-3',
     'maintainer': 'Vertel AB',
     'repository': 'https://github.com/vertelab/odoo-l10n-se-payroll',
