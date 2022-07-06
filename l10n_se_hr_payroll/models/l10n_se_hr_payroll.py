@@ -61,18 +61,18 @@ class hr_salary_rule(models.Model):
 class hr_contract(models.Model):
     _inherit = 'hr.contract'
 
-    prel_tax_amount = fields.Float(string="Prel skatt kr", digits_compute=dp.get_precision('Payroll'), help="Ange preleminär skatt i kronor")
+    prel_tax_amount = fields.Float(string="Prel skatt kr", digits='Payroll', help="Ange preleminär skatt i kronor")
 
     def _wage_tax_base(self):
         self.wage_tax_base = (self.wage - self.aws_amount) + self.ded_amount
 
-    wage_tax_base        = fields.Float(string="Lönunderlag",digits_compute=dp.get_precision('Payroll'),help="Uträknat löneunderlag för beräkning av preleminär skatt" )
+    wage_tax_base        = fields.Float(string="Lönunderlag", digits='Payroll', help="Uträknat löneunderlag för beräkning av preleminär skatt" )
     prel_tax_tabel       = fields.Char(string="Prel skatt info", help="Ange skattetabell/kolumn/ev jämkning som ligger till grund för angivet preleminärskatteavdrag")
     prel_tax_url         = fields.Char(string="Skattetabeller SKV", default="http://www.skatteverket.se/privat/skatter/arbeteochinkomst/skattetabeller.4.18e1b10334ebe8bc80005221.html",readonly=True, help="Ange skattetabell/kolumn/ev jämkning som ligger till grund för angivet preleminärskatteavdrag")
     #~ car_company_amount     = fields.Float('Bruttolöneavdrag för bil', digits_compute=dp.get_precision('Payroll'), help="Bruttolöneavdraget för företagsbil, dvs företagets kostnad för företagsbilen")
     #~ car_employee_deduction = fields.Float(string='Förmånsvärde för bil', digits_compute=dp.get_precision('Payroll'), help="Beräknat förmånsvärde för bil från skatteverket",)
     #~ car_deduction_url      = fields.Char(string='Förmånsvärdesberäkning SKV', default="http://www.skatteverket.se/privat/skatter/biltrafik/bilformansberakning", readonly=True,help="Beräknat förmånsvärde för bil från skatteverket")
-    vacation_days = fields.Float(string='Semesterdagar', digits_compute=dp.get_precision('Payroll'), help="Sparad semester i dagar",)
+    vacation_days = fields.Float(string='Semesterdagar', digits='Payroll', help="Sparad semester i dagar",)
     #~ office_fund = fields.Float(string='Office fund', digits_compute=dp.get_precision('Payroll'), help="Fund for personal office supplies",)
 
     def _get_param(self,param,value):
@@ -92,8 +92,10 @@ class hr_contract(models.Model):
         line = worked_days.dict.get(self.env.ref(rule_id).code)
         # ~ for a,b in worked_days:
             # ~ _logger.warning(f"{a},{b}")
-        #_logger.warning(f"jakmar rule?????????????????? {worked_days.__dict__}")
-        #_logger.warning(f"jakmar rule!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! {self.env.ref(rule_id).name}")
+        # ~ _logger.warning(f"jakmar rule?????????????????? {worked_days.__dict__}")
+        
+        # ~ _logger.warning(f"jakmar rule?????????????????? {worked_days.__dict__['dict']['WORK100']}")
+        # ~ _logger.warning(f"jakmar rule!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! {self.env.ref(rule_id).name}")
         return line and line.number_of_days or 0.0
 
     def raisethis(self,message):
