@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<Skatteavdrag xmlns="se/skatteverket/askatt/csr/2.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="se/skatteverket/askatt/csr/2.0 http://xmls.skatteverket.se/se/skatteverket/askatt/csr/V2/CSRUtdrag.xsd">
+  <Etikett>
+    <Frageetikett>
+      <Fragestallare organisationsNr="165560000100">
+        <Organisationsnamn>Nystads Bokföringsbyrå AB</Organisationsnamn>
+        <Kontaktperson>
+          <Namn>Nils Nilsson</Namn>
+          <Postadress>
+            <Gatuadress>Storg 14</Gatuadress>
+            <Postnr>12345</Postnr>
+            <Postort>Nystad</Postort>
+          </Postadress>
+          <TelefonNr>0123/45678</TelefonNr>
+          <E-postadress>nils.nilsson@nystads.se</E-postadress>
+        </Kontaktperson>
+      </Fragestallare>
+      <Inkomstar>2018</Inkomstar>
+      <Programvara>Programmix v 1.23</Programvara>
+      <SKVversion>2</SKVversion>
+    </Frageetikett>
+  </Etikett>
+  <Registerutdrag>
+    <Arbetsgivare organisationsNr="196304213389">
+      <Anstalld personNr="196206193143"/>
+      <Anstalld personNr="198504292387"/>
+      <Anstalld personNr="192807269234"/>
+      <Anstalld personNr="193803070000"/>
+      <Anstalld personNr="193912312380"/>
+    </Arbetsgivare>
+    <Arbetsgivare organisationsNr="165780016548">
+      <Anstalld personNr="194804032094">
+        <EgenReferens>SR-4714-23</EgenReferens>
+      </Anstalld>
+      <Anstalld personNr="196408233234">
+        <EgenReferens>SR-4714-25</EgenReferens>
+      </Anstalld>
+      <Anstalld personNr="199111022399"/>
+      <Anstalld personNr="194711222192"/>
+    </Arbetsgivare>
+    <Arbetsgivare organisationsNr="195011132097">
+      <Anstalld personNr="192907304766"/>
+      <Anstalld personNr="198501015555"/>
+    </Arbetsgivare>
+  </Registerutdrag>
+</Skatteavdrag>
