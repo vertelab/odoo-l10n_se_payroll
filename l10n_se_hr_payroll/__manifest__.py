@@ -33,7 +33,7 @@
     'contributor': '',
     'maintainer': 'Vertel AB',
     'repository': 'https://github.com/vertelab/odoo-l10n-se-payroll',
-    'depends': ['payroll','hr_contract_types','account','hr','hr_timesheet_sheet'],
+    'depends': ['payroll','hr_contract_types','account_period','hr','hr_timesheet_sheet'],
     'description': """
 Swedish Payroll Rules.
 ======================

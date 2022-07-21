@@ -1,17 +1,36 @@
 <odoo>
-    <data>
-        <record id="hr_contract_form_view" model="ir.ui.view">
-            <field name="model">hr.contract</field>
-            <field name="inherit_id" ref="hr_contract.hr_contract_view_form"/>
-            <field name="arch" type="xml">
-                <field name="structure_type_id" position="after">
-                    <field name="table_number"/>
-                    <field name="is_church_deductible"/>
-                </field>
-                <field name="hr_responsible_id" position="after">
-                    <field name="column_number"/>
-                </field>
-            </field>
-        </record>
-    </data>
+  <data>
+    <record id="hr_contract_form_view" model="ir.ui.view">
+      <field name="model">hr.contract</field>
+      <field name="inherit_id" ref="hr_contract.hr_contract_view_form" />
+      <field name="arch" type="xml">
+        <group name="salary_and_advantages" position="inside">
+          <label for="table_number" class="XXXoe_edit_only" />
+          <div class="o_row">
+            <field name="table_number" nolabel="0" required="1" />
+            <field name="column_number" nolabel="0" class="oe_inline" required="1" />
+          </div>
+          <label for="tax_equalization" class="XXXoe_edit_only" />
+          <div class="o_row">
+            <field name="has_tax_equalization" nolabel="0" />
+            <field name="tax_equalization" help="Factor to calculate tax, 0.3 is 30% tax" nolabel="0" attrs="{'invisible': [('has_tax_equalization', '=', False)], 'required': [('has_tax_equalization', '=', True)]}" />
+            <field name="tax_equalization_start" placeholder="Start Date" class="oe_inline" nolabel="1" attrs="{'invisible': [('has_tax_equalization', '=', False)], 'required': [('has_tax_equalization', '=', True)]}" />
+            <field name="tax_equalization_end"   placeholder="End Date"   class="oe_inline" nolabel="1" attrs="{'invisible': [('has_tax_equalization', '=', False)], 'required': [('has_tax_equalization', '=', True)]}" />
+          </div>
+          <field name="is_church_deductible" />
+        </group>
+      </field>
+    </record>
+    <record id="old_taxamount" model="ir.ui.view">
+      <field name="model">hr.contract</field>
+      <field name="inherit_id" ref="l10n_se_hr_payroll.hr_contract_form_inherit" />
+      <field name="arch" type="xml">
+        <field name="prel_tax_amount" position="replace" />
+        <field name="wage_tax_base" position="replace" />
+        <field name="prel_tax_tabel" position="replace" />
+        <field name="prel_tax_url" position="replace" />
+      </field>
+    </record>
+    
+  </data>
 </odoo>

@@ -125,6 +125,30 @@ class hr_employee(models.Model):
 
 class hr_payslip(models.Model):
     _inherit = 'hr.payslip'
+    
+    period_id = fields.Many2one(comodel_name='account.period', string="Period",
+        readonly=True,
+        required=True,
+        # ~ default=lambda self: fields.Date.to_string(date.today().replace(day=1)),
+        states={"draft": [("readonly", False)]},
+        tracking=1,) # domain|context|ondelete="'set null', 'restrict', 'cascade'"|auto_join|delegate
+
+    @api.onchange('employee_id','period_id')
+    def onchange_employee(self):
+
+        super(hr_payslip,self).onchange_employee()
+    
+        self.date_from = self.period_id.prev().date_start
+        self.date_to =   self.period_id.prev().date_stop
+        self.name = _("Salary Slip of %s for %s") % (
+            self.employee_id.name,
+            self.period_id.date_start.strftime('%B-%Y') if self.period_id else 'None',
+            # ~ tools.ustr(
+                # ~ babel.dates.format_date(date=ttyme, format="MMMM-y", locale=locale)
+            # ~ )
+        )
+        return
+    
 
     @api.model
     def get_slip_line(self, code):

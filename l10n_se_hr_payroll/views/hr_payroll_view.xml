@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
 <!--
-  For odoo 14 i have changed all hr_payroll to hr_payroll_community  
+  For odoo 14 i have changed all hr_payroll to OCA payroll  
 -->
     <data>
         <record id="hr_salary_rule_form" model="ir.ui.view">
             <field name="name">hr.salary.rule.form.inherit.l10n_se.payroll</field>
             <field name="model">hr.salary.rule</field>
-            <field name="inherit_id" ref="hr_payroll_community.hr_salary_rule_form" />
+            <field name="inherit_id" ref="payroll.hr_salary_rule_view_form" />
             <field name="arch" type="xml">
-                <field name="sequence" position="before">
+                <field name="name" position="before">
                     <field name="salary_art" />
                 </field>
             </field>
@@ -17,12 +17,14 @@
         <record id="hr_salary_rule_list" model="ir.ui.view">
             <field name="name">hr.salary.rule.list.inherit.l10n_se.payroll</field>
             <field name="model">hr.salary.rule</field>
-            <field name="inherit_id" ref="hr_payroll_community.hr_salary_rule_list" />
+            <field name="inherit_id" ref="payroll.hr_salary_rule_view_tree" />
             <field name="arch" type="xml">
+<!--
                 <field name="sequence" position="replace" />
                 <field name="name" position="before">
                     <field name="sequence" widget="handle" />
                 </field>
+-->
                 <field name="code" position="before">
                     <field name="salary_art" />
                 </field>
@@ -31,7 +33,7 @@
         <record id="view_hr_rule_filter" model="ir.ui.view">
             <field name="name">hr.salary.rule.select.inherit.l10n_se.payroll</field>
             <field name="model">hr.salary.rule</field>
-            <field name="inherit_id" ref="hr_payroll_community.view_hr_rule_filter" />
+            <field name="inherit_id" ref="payroll.hr_salary_rule_view_search" />
             <field name="arch" type="xml">
                 <field name="condition_range_min" position="after">
                     <field name="appears_on_payslip" />
@@ -42,8 +44,23 @@
                 </field>
             </field>
         </record>
+        
 
-        <record id="hr_payroll_community.action_salary_rule_form" model="ir.actions.act_window">
+        <record id="payslip_period_id" model="ir.ui.view">
+            <field name="name">period_id</field>
+            <field name="model">hr.payslip</field>
+            <field name="inherit_id" ref="payroll.hr_payslip_view_form" />
+            <field name="arch" type="xml">
+                <field name="date_from" position="before">
+                    <field name="period_id" />
+                </field>
+            </field>
+        </record>
+
+        
+        
+
+        <record id="payroll.action_salary_rule_form" model="ir.actions.act_window">
             <field name="domain">[]</field>
             <!--
                  <field name="context">{"search_default_parent_rule_id":1}</field>
@@ -125,11 +142,11 @@
             <field name="inherit_id" ref="hr_payroll.payroll_hr_employee_view_form" />
 -->
             
-            <field name="inherit_id" ref="hr_payroll_community.payroll_hr_employee_view_form" />
+            <field name="inherit_id" ref="payroll.hr_employee_view_form" />
             <field name="arch" type="xml">
                 <data>
-                    <button name="%(hr_payroll_community.act_hr_employee_payslip_list)d" position="replace">
-                        <button name="%(hr_payroll_community.act_hr_employee_payslip_list)d" class="oe_stat_button" icon="fa-money" type="action" groups="base.group_hr_manager">
+                    <button name="%(payroll.hr_payslip_action_employee)d" position="replace">
+                        <button name="%(payroll.hr_payslip_action_employee)d" class="oe_stat_button" icon="fa-money" type="action" groups="base.group_hr_manager">
                             <field name="payslip_count" widget="statinfo" string="Payslips" />
                         </button>
                     </button>

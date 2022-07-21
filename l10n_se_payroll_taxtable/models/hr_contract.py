@@ -11,11 +11,17 @@ class HRContract(models.Model):
     _inherit = 'hr.contract'
 
     table_number = fields.Integer(string="Tax Table")
-    is_church_deductible = fields.Boolean(string="Deductible")
+    is_church_deductible = fields.Boolean(string="Church Deductible")
     # ~ column_number = fields.Many2one('ir.model.fields', domain=[
         # ~ ('model_id.model', '=', 'payroll.taxtable.line'), ('ttype', '=', 'float')
     # ~ ])
     column_number = fields.Selection([ ('column1', "Column 1"),('column2', "Column 2"),('column3', "Column 3"),('column4', "Column 4"),('column5', "Column 5"),('column6', "Column 6")],'Tax Column')
+    has_tax_equalization = fields.Boolean(string="Tax Equalization")
+    tax_equalization = fields.Float(string="Tax Equalization")
+    tax_equalization_start = fields.Date(string="Start")
+    tax_equalization_end = fields.Date(string="End")
+
+
 
     def action_sync_taxable(self):
         return {
@@ -28,6 +34,10 @@ class HRContract(models.Model):
         }
 
     def l10_sum_columns_taxtable_line(self, date, wage):
+        
+        if has_tax_equalization and date >= tax_equalization_start and date <= tax_equalization_end:
+            return wage * tax_equalization
+        
         fails = [key for key, value in (('date', date), ('wage', wage), ('column_number', self.column_number),
                                         ('self.table_number', self.table_number)) if not value]
         if fails:
