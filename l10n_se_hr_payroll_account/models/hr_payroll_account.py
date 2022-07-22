@@ -1,8 +1,8 @@
 
-import odoo
-from odoo import models, fields, api, _
-import datetime
 from datetime import timedelta, date
+from odoo import models, fields, api, _
+from odoo.exceptions import UserError
+
 
 import logging
 _logger = logging.getLogger(__name__)
@@ -130,5 +130,7 @@ class HrPayslip(models.Model):
             if not move.line_ids:
                 raise UserError(_("As you installed the payroll accounting module you have to choose Debit and Credit"
                                   " account for at least one salary rule in the choosen Salary Structure."))
-            move.post()
+           
+            if self.env["ir.config_parameter"].sudo().get_param("l10n_se_hr_payroll_account.payroll_account_post"):
+                move.post()
         return res
