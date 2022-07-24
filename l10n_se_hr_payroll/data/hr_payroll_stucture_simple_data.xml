@@ -16,10 +16,24 @@
       <field name="code">bas2018</field>
       <field name="name">Bas för löneavtal (Ska ej användas i avtal)</field>
       <field name="company_id" ref="base.main_company" />
-      <field eval="[(6,0,[ref('hr_salary_rule-AGE'), ref('hr_salary_rule-sum'), ref('hr_salary_rule-sa'), ref('hr_salary_rule-bl'), ref('hr_salary_rule-kval'), ref('hr_salary_rule-resmil'), ref('hr_salary_rule-forman'), ref('hr_salary_rule_traktamente_domestic'), ref('hr_salary_rule_traktamente_foreign'), ref('hr_salary_rule_expenses'), ref('hr_salary_rule-retroactive-til')])]" name="rule_ids" />
-<!--
-      <field eval="[(6,0,[ref('hr_salary_rule-AGE'), ref('hr_salary_rule-sum'), ref('hr_salary_rule-pre'), ref('hr_salary_rule-bl'), ref('hr_salary_rule-gl')])]" name="rule_ids" />
--->
+      <field eval="[(6,0,[ref('hr_salary_rule-AGE'), 
+      ref('hr_salary_rule-sum'), 
+      ref('hr_salary_rule-sa'), 
+      ref('hr_salary_rule-bl'), 
+      ref('hr_salary_rule-kval'),
+      ref('hr_salary_rule-mertid'),
+      ref('hr_salary_rule-otid'),
+      ref('hr_salary_rule-resmil'), 
+      ref('hr_salary_rule-formon-til'), 
+      ref('hr_salary_rule_traktamente_domestic'), 
+      ref('hr_salary_rule_traktamente_foreign'), 
+      ref('hr_salary_rule_expenses'), 
+      ref('hr_salary_rule-nettoavdr-avg'),
+      ref('hr_salary_rule-formon-avg'), 
+      ref('hr_salary_rule-retroactive-til')])]" name="rule_ids" />
+      <!--
+           <field eval="[(6,0,[ref('hr_salary_rule-AGE'), ref('hr_salary_rule-sum'), ref('hr_salary_rule-pre'), ref('hr_salary_rule-bl'), ref('hr_salary_rule-gl')])]" name="rule_ids" />
+      -->
     </record>
     <record id="hr_payroll_structure-fl" model="hr.payroll.structure">
       <field name="code">bas2018-fl</field>
@@ -57,6 +71,5 @@
       <field name="company_id" ref="base.main_company" />
       <field name="parent_id" ref="hr_payroll_structure-gl" />
     </record>
-
   </data>
 </odoo>

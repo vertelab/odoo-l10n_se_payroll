@@ -412,7 +412,7 @@ if age > 77:
          </record>
     -->
     <!--
-         =====
+         =====  Kvalificerad övertid
     -->
     <record id="hr_salary_rule-kval" model="hr.salary.rule">
       <field name="category_id" ref="hr_salary_rule_category-BRUTIL" />
@@ -422,16 +422,16 @@ if age > 77:
       <field name="sequence">115</field>
       <field name="appears_on_payslip" eval="True"/>
       <field name="condition_select">python</field>
-      <field name="condition_python">result = (inputs and inputs.kvaltim and inputs.kvaltim.amount != 0) or False</field>
+      <field name="condition_python">result = (inputs and inputs.kvaltim and inputs.kvaltim.amount_qty != 0) or False</field>
 <!--
       <field name="condition_python">result = inputs.kvaltim.amount != 0</field>
 -->
       <field name="amount_select">code</field>
       <field name="amount_python_compute">
 #ML/72*100/APR
-result_qty = inputs.kvaltim.amount
+result_qty = inputs.kvaltim.amount_qty
 # result_rate = 150
-result = 2 * contract.wage / 160
+result = contract.wage / 72 
       </field>
       <field name="quantity">1</field>
     </record>
@@ -441,6 +441,126 @@ result = 2 * contract.wage / 160
       <field name="name">Kvalificerad övertid (antal timmar)</field>
       <field name="input_id" ref="hr_salary_rule-kval" />
     </record>
+
+<!-- Kvalificerad övertid slut -->
+    <!--
+         =====  Övertid
+    -->
+    <record id="hr_salary_rule-otid" model="hr.salary.rule">
+      <field name="category_id" ref="hr_salary_rule_category-BRUTIL" />
+      <field name="code">otid</field>
+      <field name="salary_art">111</field>
+      <field name="name">Bordrad övertid</field>
+      <field name="sequence">115</field>
+      <field name="appears_on_payslip" eval="True"/>
+      <field name="condition_select">python</field>
+      <field name="condition_python">result = (inputs and inputs.otidtim and inputs.otidtim.amount_qty != 0) or False</field>
+<!--
+      <field name="condition_python">result = inputs.kvaltim.amount != 0</field>
+-->
+      <field name="amount_select">code</field>
+      <field name="amount_python_compute">
+#ML/72*100/APR
+result_qty = inputs.otidtim.amount_qty
+# result_rate = 150
+result = contract.wage / 94 
+      </field>
+      <field name="quantity">1</field>
+    </record>
+    <!-- /// -->
+    <record id="hr_rule_input-otidtim" model="hr.rule.input">
+      <field name="code">otidtim</field>
+      <field name="name">Beordrad övertid (antal timmar)</field>
+      <field name="input_id" ref="hr_salary_rule-otid" />
+    </record>
+
+<!-- Övertid slut -->
+
+    <!--
+         =====  Mertid
+    -->
+    <record id="hr_salary_rule-mertid" model="hr.salary.rule">
+      <field name="category_id" ref="hr_salary_rule_category-BRUTIL" />
+      <field name="code">mertid</field>
+      <field name="salary_art">111</field>
+      <field name="name">Mertid</field>
+      <field name="sequence">115</field>
+      <field name="appears_on_payslip" eval="True"/>
+      <field name="condition_select">python</field>
+      <field name="condition_python">result = (inputs and inputs.mertidtim and inputs.mertidtim.amount_qty != 0) or False</field>
+<!--
+      <field name="condition_python">result = inputs.kvaltim.amount != 0</field>
+-->
+      <field name="amount_select">code</field>
+      <field name="amount_python_compute">
+#ML/72*100/APR
+result_qty = inputs.mertidtim.amount_qty
+# result_rate = 150
+result = contract.wage / (3.5 *  contract.scheduled_working_hours)
+      </field>
+      <field name="quantity">1</field>
+    </record>
+    <!-- /// -->
+    <record id="hr_rule_input-mertidtim" model="hr.rule.input">
+      <field name="code">mertidtim</field>
+      <field name="name">Mertid (antal timmar)</field>
+      <field name="input_id" ref="hr_salary_rule-mertid" />
+    </record>
+
+<!-- Mertid slut -->
+
+
+    <!-- Förmånsvärde bruttotillägg -->
+    <record id="hr_salary_rule-formon-til" model="hr.salary.rule">
+      <field name="category_id" ref="hr_salary_rule_category-BRUTIL" />
+      <field name="code">formon_til</field>
+      <field name="salary_art">170</field>
+      <field name="name">Förmån (bruttotillägg)</field>
+      <field name="sequence">115</field>
+      <field name="appears_on_payslip" eval="True"/>
+      <field name="condition_select">python</field>
+      <field name="condition_python">result = (inputs and inputs.formoner and inputs.formoner.amount != 0) or False</field>
+<!--
+      <field name="condition_python">result = inputs.retroakt.amount != 0</field>
+-->
+      <field name="amount_select">code</field>
+      <field name="amount_python_compute">
+result_rate = 100
+result = inputs.formoner.amount
+      </field>
+      <field name="quantity">1</field>
+    </record>
+    
+    <record id="hr_salary_rule-formon-avg" model="hr.salary.rule">
+      <field name="category_id" ref="hr_salary_rule_category-NETAVG" />
+      <field name="code">formon_avg</field>
+      <field name="salary_art">s100</field>
+      <field name="name">Förmån (avdrag)</field>
+      <field name="sequence">700</field>
+      <field name="appears_on_payslip" eval="True"/>
+      <field name="condition_select">python</field>
+      <field name="condition_python">result = (inputs and inputs.formoner and inputs.formoner.amount != 0) or False</field>
+<!--
+      <field name="condition_python">result = inputs.retroakt.amount != 0</field>
+-->
+      <field name="amount_select">code</field>
+      <field name="amount_python_compute">
+#result_rate = 30
+result = inputs.formoner.amount
+      </field>
+      <field name="quantity">1</field>
+    </record>
+
+    
+    <record id="hr_rule_input-formon-til" model="hr.rule.input">
+      <field name="code">formoner</field>
+      <field name="name">Förmån (i kronor)</field>
+      <field name="input_id" ref="hr_salary_rule-formon-til" />
+    </record>
+
+
+
+
 
     <!-- retroaktiv lön bruttotillägg -->
     <record id="hr_salary_rule-retroactive-til" model="hr.salary.rule">
@@ -488,6 +608,38 @@ result = inputs.retroakt.amount
       </field>
       <field name="quantity">1</field>
     </record>
+    
+    
+    
+    <!-- nettolöneavdrag -->
+     <record id="hr_rule_input-nettoavdr-til" model="hr.rule.input">
+      <field name="code">nettoavdr</field>
+      <field name="name">Nettoavdrag (i kronor)</field>
+      <field name="input_id" ref="hr_salary_rule-nettoavdr-avg" />
+    </record>
+
+    <!-- retroaktiv lön nettoavdrag -->
+    <record id="hr_salary_rule-nettoavdr-avg" model="hr.salary.rule">
+      <field name="category_id" ref="hr_salary_rule_category-NETAVG" />
+      <field name="code">nettoavdr</field>
+      <field name="salary_art">666</field>
+      <field name="name">Nettoavdrag</field>
+      <field name="sequence">690</field>
+      <field name="appears_on_payslip" eval="True"/>
+      <field name="condition_select">python</field>
+      <field name="condition_python">result = (inputs and inputs.nettoavdr and inputs.nettoavdr.amount != 0) or False</field>
+<!--
+      <field name="condition_python">result = inputs.retroakt.amount != 0</field>
+-->
+      <field name="amount_select">code</field>
+      <field name="amount_python_compute">
+result_rate = 100
+result = inputs.nettoavdr.amount
+      </field>
+      <field name="quantity">1</field>
+    </record>
+    
+    
 
     <!--
          =====

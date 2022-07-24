@@ -21,7 +21,7 @@
 # ~ from odoo.modules.registry import RegistryManager
 from dateutil.relativedelta import relativedelta
 from odoo.modules.registry import Registry
-from odoo.exceptions import except_orm, Warning, RedirectWarning
+from odoo.exceptions import except_orm, Warning, RedirectWarning, UserError
 from odoo import models, fields, api, _
 from odoo import http
 from odoo.http import request
@@ -87,16 +87,21 @@ class hr_contract(models.Model):
         from openerp.tools.safe_eval import safe_eval as eval
         eval(code,variables,mode='exec',nocopy=True)
 
-    @api.model
     def get_leave_days(self, rule_id, worked_days):
-        line = worked_days.dict.get(self.env.ref(rule_id).code)
-        # ~ for a,b in worked_days:
-            # ~ _logger.warning(f"{a},{b}")
-        # ~ _logger.warning(f"jakmar rule?????????????????? {worked_days.__dict__}")
-        
-        # ~ _logger.warning(f"jakmar rule?????????????????? {worked_days.__dict__['dict']['WORK100']}")
-        # ~ _logger.warning(f"jakmar rule!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! {self.env.ref(rule_id).name}")
-        return line and line.number_of_days or 0.0
+        _logger.error(f'get_leave_days: {self} {rule_id} {worked_days.dict}')
+        code = self.env.ref(rule_id).code if len(rule_id.split('.')) == 2 else rule_id
+        line = worked_days.dict.get(code,False)
+        _logger.error(f'get_leave_days: {code} {worked_days.dict}')
+        # ~ _logger.error(f'get_leave_days: {line.number_of_days}')
+        return line.number_of_days if line else 0.0
+
+    def get_leave_hours(self, rule_id, worked_days):
+        code = self.env.ref(rule_id).code if len(rule_id.split('.')) == 2 else rule_id
+        line = worked_days.dict.get(code,False)
+        _logger.error(f'get_leave_hours: {code} {worked_days.dict}')
+        # ~ _logger.error(f'get_leave_days: {line.number_of_days}')
+        return line.number_of_hours if line else 0.0
+
 
     def raisethis(self,message):
         raise Warning(message)
@@ -114,41 +119,78 @@ class hr_employee(models.Model):
             # ~ self.age= -1 if not self.birthday else date.today().year - datetime.strptime(str(self.birthday), DEFAULT_SERVER_DATE_FORMAT).year
     @api.depends("birthday")
     def _age(self):
-        for record in self:
-            age = 0
-            if record.birthday:
-                age = relativedelta(fields.Date.today(), record.birthday).years
-            _logger.warning(f"jakmar age: {age}")
-            record.age = age
+        for employee in self:
+            employee.age = 0
+            if employee.birthday:
+                employee.age = relativedelta(fields.Date.today(), employee.birthday).years
     age = fields.Integer(string="_compute_age", compute=_age, help="Age to calculate social security deduction")
 
 
 class hr_payslip(models.Model):
     _inherit = 'hr.payslip'
-    
+
+
     period_id = fields.Many2one(comodel_name='account.period', string="Period",
         readonly=True,
         required=True,
-        # ~ default=lambda self: fields.Date.to_string(date.today().replace(day=1)),
+        default=lambda self: self.env['account.period'].date2period(fields.Date.today()),
         states={"draft": [("readonly", False)]},
-        tracking=1,) # domain|context|ondelete="'set null', 'restrict', 'cascade'"|auto_join|delegate
+        tracking=1,) # domain|context|ondelperiodete="'set null', 'restrict', 'cascade'"|auto_join|delegate
+    date_start = fields.Date(related='period_id.date_start')
+    date_stop = fields.Date(related='period_id.date_stop')
+
+
 
     @api.onchange('employee_id','period_id')
     def onchange_employee(self):
 
         super(hr_payslip,self).onchange_employee()
+        
+        if not self.period_id:
+            raise UserError('pelle %s' % self.env['account.period'].find())
+            self.period_id = self.period_id.now()
     
         self.date_from = self.period_id.prev().date_start
         self.date_to =   self.period_id.prev().date_stop
         self.name = _("Salary Slip of %s for %s") % (
             self.employee_id.name,
             self.period_id.date_start.strftime('%B-%Y') if self.period_id else 'None',
-            # ~ tools.ustr(
-                # ~ babel.dates.format_date(date=ttyme, format="MMMM-y", locale=locale)
-            # ~ )
         )
         return
+
+
+    def get_payslip_vals_period(self, run, employee):
+        date_from = run.period_id.prev().date_start
+        date_to =   run.period_id.prev().date_stop
     
+        contract_ids = employee.contract_id.ids
+        
+                        # ~ contract_ids = employee._get_contracts(
+                    # ~ date_from=period.date_start, date_to=period.date_stop
+                # ~ ).ids
+        contract = self.env["hr.contract"].browse(contract_ids[0])
+        contracts = self.env["hr.contract"].browse(contract_ids)
+        return {
+                "employee_id": employee.id,
+                'period_id': run.period_id.id,
+                "name": _("Salary Slip of %s for %s") % (employee.name,
+                                                         run.period_id.date_start.strftime('%B-%Y') if run.period_id else 'None',
+                        ),
+                "company_id": employee.company_id.id,
+                "struct_id": contract.struct_id.id,
+                "contract_id": contract.id,
+                "payslip_run_id": run.id,
+                "input_line_ids": [
+                    (0, 0, x) for x in self.get_inputs(contracts, date_from, date_to)
+                ],
+                "worked_days_line_ids": [
+                    (0, 0, x) for x in self.get_worked_day_lines(contracts, date_from, date_to)
+                ],
+                "date_from": date_from,
+                "date_to": date_to,
+                "credit_note": run.credit_note,
+                "company_id": employee.company_id.id,
+            }
 
     @api.model
     def get_slip_line(self, code):

@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+  <data>
+    <record id="hr_payslip_action_employee" model="ir.actions.act_window">
+        <field name="res_model">hr.payslip</field>
+        <field name="name">Payslips</field>
+        <field name="view_mode">tree,form</field>
+        <field name="domain">[('employee_id','=',active_id)]</field>
+    </record>
+
+    <record id="view_employee_form" model="ir.ui.view">
+      <field name="name">payroll.hr.employee.view.form</field>
+      <field name="model">hr.employee</field>
+      <field name="inherit_id" ref="hr.view_employee_form" />
+      <field name="arch" type="xml">
+        <div name="button_box" position="inside">
+          <button name="%(l10n_se_hr_payroll.hr_payslip_action_employee)d" class="oe_stat_button" icon="fa-money" type="action">
+            <field name="payslip_count" widget="statinfo" string="Payslips" />
+          </button>
+        </div>
+        <field name="birthday" position="replace">
+          <label for='birthday' />
+          <div class="o_row" name="birthday_age">
+            <field name="birthday" /><span> Age </span>
+            <field name="age" class="oe_inline" />
+          </div>
+        </field>
+      </field>
+    </record>
+
+
+<!-- Remove original payslip button -->
+        <record id="payroll_hr_employee_view_form" model="ir.ui.view">
+            <field name="name">payroll.hr.employee.view.form</field>
+            <field name="model">hr.employee</field>            
+            <field name="inherit_id" ref="payroll.hr_employee_view_form" />
+            <field name="arch" type="xml">
+                    <button name="%(payroll.hr_payslip_action_employee)d" position="replace" />
+            </field>
+        </record>
+
+    
+  </data>
+</odoo>

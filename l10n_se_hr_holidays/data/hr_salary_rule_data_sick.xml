@@ -1,53 +1,98 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-  <data noupdate="1"> <!-- TODO: no update -->
+  <data noupdate="0"> <!-- TODO: no update -->
 
     <!-- inactive original sick leave -->
     <record model="hr.leave.type" id="hr_holidays.holiday_status_sl">
         <field name="active" eval="False"/>
     </record>
 
+    <record id="res_partner-FSK" model="res.partner">
+      <field name="company_id" ref="base.main_company" />
+      <field name="name">Försäkringskassan</field>
+      <field name="tz">Europe/Stockholm</field>
+      <field name="is_company">True</field>
+    </record>
+    <record id="contrib_register_FSK" model="hr.contribution.register">
+        <field name="name">Försäkringskassan</field>
+        <field name="partner_id" ref="l10n_se_hr_holidays.res_partner-FSK" />
+    </record>
+
+
+
     <!-- Sick leave -->
     <record model="hr.leave.type" id="sick_leave_qualify">
       <field name="name" eval="'Sick Leave Qualify Period'" />
-      <field name="code" eval="'Sick Leave Qualify Period'" />
+      <field name="code" eval="'sjk_kar'" />
       <field name="color_name">red</field>
+      <field name="leave_validation_type">no_validation</field>
+      <field name="request_unit">day</field>
+      <field name="allocation_type">no</field>
+      <field name="create_calendar_meeting" eval="True"/>
       <field name="limit" eval="True"/>
     </record>
     <record model="hr.leave.type" id="sick_leave_214_100">
       <field name="name" eval="'Sick Leave day 2-14 (100% deduction)'" />
-      <field name="code" eval="'Sick Leave day 2-14 (100% deduction)'" />
+      <field name="code" eval="'sjk_214_100'" />
       <field name="color_name">red</field>
+      <field name="leave_validation_type">no_validation</field>
+      <field name="request_unit">day</field>
+      <field name="allocation_type">no</field>
+      <field name="create_calendar_meeting" eval="True"/>
       <field name="limit" eval="True"/>
+
     </record>
     <record model="hr.leave.type" id="sick_leave_214">
       <field name="name" eval="'Sick Leave day 2-14 (80%)'" />
-      <field name="code" eval="'Sick Leave day 2-14 (80%)'" />
+      <field name="code">sjk_214</field>
       <field name="color_name">red</field>
+      <field name="leave_validation_type">no_validation</field>
+      <field name="request_unit">day</field>
+      <field name="allocation_type">no</field>
+      <field name="create_calendar_meeting" eval="True"/>
       <field name="limit" eval="True"/>
+
     </record>
     <record model="hr.leave.type" id="sick_leave_147">
       <field name="name" eval="'Sick Leave day 15-180 (50%)'" />
       <field name="code" eval="'Sick Leave day 15-180 (50%)'" />
       <field name="color_name">red</field>
+      <field name="leave_validation_type">no_validation</field>
+      <field name="request_unit">day</field>
+      <field name="allocation_type">no</field>
+      <field name="create_calendar_meeting" eval="True"/>
       <field name="limit" eval="True"/>
+
     </record>
     <record model="hr.leave.type" id="sick_leave_1461">
       <field name="name" eval="'Sick Leave day 15-180 (75%)'" />
       <field name="code" eval="'Sick Leave day 15-180 (75%)'" />
       <field name="color_name">red</field>
+      <field name="leave_validation_type">no_validation</field>
+      <field name="request_unit">day</field>
+      <field name="allocation_type">no</field>
+      <field name="create_calendar_meeting" eval="True"/>
       <field name="limit" eval="True"/>
     </record>
     <record model="hr.leave.type" id="sick_leave_148">
       <field name="name" eval="'Sick Leave day 15-180 (25%)'" />
       <field name="code" eval="'Sick Leave day 15-180 (25%)'" />
       <field name="color_name">red</field>
+      <field name="leave_validation_type">no_validation</field>
+      <field name="request_unit">day</field>
+      <field name="allocation_type">no</field>
+      <field name="create_calendar_meeting" eval="True"/>
       <field name="limit" eval="True"/>
+
     </record>
     <record model="hr.leave.type" id="sick_leave_146">
       <field name="name" eval="'Sick Leave day 15-180 (100%)'" />
       <field name="code" eval="'Sick Leave day 15-180 (100%)'" />
       <field name="color_name">red</field>
+      <field name="leave_validation_type">no_validation</field>
+      <field name="request_unit">day</field>
+      <field name="allocation_type">no</field>
+      <field name="create_calendar_meeting" eval="True"/>
       <field name="limit" eval="True"/>
     </record>
 
@@ -71,20 +116,45 @@
       <field name="parent_rule_id" ref="hr_salary_rule-sjk" />
       <field name="category_id" ref="l10n_se_hr_payroll.hr_salary_rule_category-BRUAVG" />
       <field name="code">sjk_kar</field>
-      <field name="name">Karensdagar</field>
+      <field name="name">Karensavdrag</field>
       <field name="salary_art">140</field>
       <field name="sequence">15</field>
       <field name="appears_on_payslip" eval="True" />
       <field name="condition_select">python</field>
-      <field name="condition_python">result = contract.get_leave_days('l10n_se_hr_holidays.sick_leave_qualify', worked_days) &gt; 0.0</field>
+      <field name="condition_python">result = worked_days.dict.get('sjk_kar', False)</field>
       <field name="amount_select">code</field>
       <field name="amount_python_compute">
 #(ML*12)/(52*VA)
-result_qty = contract.get_leave_days('l10n_se_hr_holidays.sick_leave_qualify', worked_days)
+result_qty = contract.get_leave_days('sjk_kar', worked_days) * -1
 # result_rate = 150
-result = contract.wage / 20
+result = (contract.wage * 12) / (52*contract.scheduled_working_hours) * 8
+# (ML*12)/(52*VA) / h day 1 and rest day 2 (8 hours)  
       </field>
     </record>
+
+
+    <record id="hr_salary_rule-sjk-lon" model="hr.salary.rule">
+      <field name="parent_rule_id" ref="hr_salary_rule-sjk" />
+      <field name="category_id" ref="l10n_se_hr_payroll.hr_salary_rule_category-SYSTEM"/>
+      <field name="code">sjk_lon</field>
+      <field name="name">Sjuklön</field>
+      <field name="salary_art">140</field>
+      <field name="sequence">15</field>
+      <field name="appears_on_payslip" eval="True" />
+      <field name="register_id" ref="l10n_se_hr_holidays.contrib_register_FSK" />
+      <field name="condition_select">python</field>
+      <field name="condition_python">result = worked_days.dict.get('sjk_214',False)</field>
+      <field name="amount_select">code</field>
+      <field name="amount_python_compute">
+#(ML*12)/(52*VA)
+result_qty = contract.get_leave_days('sjk_214', worked_days)  * -1
+# result_rate = 150
+result = (contract.wage * 12) / (52*contract.scheduled_working_hours) * 8 * 1.3142 
+# Ink arbetsgivaravg
+      </field>
+    </record>
+
+
 
 
     <record id="hr_salary_rule-sjk-214-100" model="hr.salary.rule">
@@ -96,11 +166,11 @@ result = contract.wage / 20
       <field name="sequence">20</field>
       <field name="appears_on_payslip" eval="True" />
       <field name="condition_select">python</field>
-      <field name="condition_python">result = contract.get_leave_days('l10n_se_hr_holidays.sick_leave_214_100', worked_days) &gt; 0.0</field>
+      <field name="condition_python">result = worked_days.dict.get('sjk_214_100', False)</field>
       <field name="amount_select">code</field>
       <field name="amount_python_compute">
 #(ML*12)/(52*VA)
-result_qty = contract.get_leave_days('l10n_se_hr_holidays.sick_leave_214_100', worked_days)
+result_qty = contract.get_leave_days('sjk_214_100', worked_days)
 result_rate = 100
 result = contract.wage / 20
       </field>
@@ -115,13 +185,13 @@ result = contract.wage / 20
       <field name="sequence">20</field>
       <field name="appears_on_payslip" eval="True" />
       <field name="condition_select">python</field>
-      <field name="condition_python">result = contract.get_leave_days('l10n_se_hr_holidays.sick_leave_214', worked_days) &gt; 0.0</field>
+      <field name="condition_python">result = worked_days.dict.get('sjk_214', False)</field>
       <field name="amount_select">code</field>
       <field name="amount_python_compute">
 #0,80*(ML*12)/(52*VA)
-result_qty = contract.get_leave_days('l10n_se_hr_holidays.sick_leave_214', worked_days)
-result_rate = 20
-result = contract.wage / 20
+result_qty = contract.get_leave_days('sjk_214', worked_days) * -1
+#result_rate = 20
+result = (contract.wage*12) / (52*contract.scheduled_working_hours) * 8 * 0.2
       </field>
     </record>
     <record id="hr_salary_rule-sjk-147" model="hr.salary.rule">
@@ -133,11 +203,11 @@ result = contract.wage / 20
       <field name="sequence">20</field>
       <field name="appears_on_payslip" eval="True" />
       <field name="condition_select">python</field>
-      <field name="condition_python">result = contract.get_leave_days('l10n_se_hr_holidays.sick_leave_147', worked_days) &gt; 0.0</field>
+      <field name="condition_python">result = worked_days.dict.get('sjk_147', False)</field>
       <field name="amount_select">code</field>
       <field name="amount_python_compute">
 #??0,80*(ML*12)/(52*VA)
-result_qty = contract.get_leave_days('l10n_se_hr_holidays.sick_leave_147', worked_days)
+result_qty = contract.get_leave_days('sjk_147', worked_days)
 result_rate = 50
 result = contract.wage / 20
       </field>
@@ -151,7 +221,7 @@ result = contract.wage / 20
       <field name="sequence">20</field>
       <field name="appears_on_payslip" eval="True" />
       <field name="condition_select">python</field>
-      <field name="condition_python">result = contract.get_leave_days('l10n_se_hr_holidays.sick_leave_1461', worked_days) &gt; 0.0</field>
+      <field name="condition_python">result = worked_days.dict.get('sjk_1461', False)</field>
       <field name="amount_select">code</field>
       <field name="amount_python_compute">
 #??0,80*(ML*12)/(52*VA)
@@ -169,7 +239,7 @@ result = contract.wage / 20
       <field name="sequence">20</field>
       <field name="appears_on_payslip" eval="True" />
       <field name="condition_select">python</field>
-      <field name="condition_python">result = contract.get_leave_days('l10n_se_hr_holidays.sick_leave_148', worked_days) &gt; 0.0</field>
+      <field name="condition_python">result = worked_days.dict.get('sjk_148', False)</field>
       <field name="amount_select">code</field>
       <field name="amount_python_compute">
 #0,80*(ML*12)/(52*VA)
@@ -188,7 +258,7 @@ result = contract.wage / 20
       <field name="sequence">30</field>
       <field name="appears_on_payslip" eval="True" />
       <field name="condition_select">python</field>
-      <field name="condition_python">result = contract.get_leave_days('l10n_se_hr_holidays.sick_leave_146', worked_days) &gt; 0.0</field>
+      <field name="condition_python">result = worked_days.dict.get('sjk_100', False)</field>
       <field name="amount_select">code</field>
       <field name="amount_python_compute">
 #(ML*12)/(52*VA)
@@ -212,25 +282,25 @@ result = contract.wage / (52 * contract.weekly_working_hours / contract.wwh_days
     <!-- VAB -->
     <record model="hr.leave.type" id="vab_160">
       <field name="name" eval="'Vård av barn 160'" />
-      <field name="code" eval="'Vård av barn 160'" />
+      <field name="code" eval="'vab'" />
       <field name="color_name">red</field>
       <field name="limit" eval="True"/>
     </record>
     <record model="hr.leave.type" id="forald_ledig_165">
       <field name="name" eval="'Föräld ledig 165'" />
-      <field name="code" eval="'Vård av barn 160'" />
+      <field name="code" eval="'fpe'" />
       <field name="color_name">red</field>
       <field name="limit" eval="True"/>
     </record>
     <record model="hr.leave.type" id="forald_ledig_168">
       <field name="name" eval="'Föräld ledig 168'" />
-      <field name="code" eval="'Föräld ledig 168'" />
+      <field name="code" eval="'fpe_kol'" />
       <field name="color_name">red</field>
       <field name="limit" eval="True"/>
     </record>
     <record model="hr.leave.type" id="pappaledig_166">
       <field name="name" eval="'Pappaledig 166'" />
-      <field name="code" eval="'Pappaledig 166'" />
+      <field name="code" eval="'pap'" />
       <field name="color_name">red</field>
       <field name="limit" eval="True"/>
     </record>
