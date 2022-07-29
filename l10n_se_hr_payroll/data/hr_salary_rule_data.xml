@@ -610,13 +610,7 @@ result = inputs.retroakt.amount
     </record>
     
     
-    
-    <!-- nettolöneavdrag -->
-     <record id="hr_rule_input-nettoavdr-til" model="hr.rule.input">
-      <field name="code">nettoavdr</field>
-      <field name="name">Nettoavdrag (i kronor)</field>
-      <field name="input_id" ref="hr_salary_rule-nettoavdr-avg" />
-    </record>
+
 
     <!-- retroaktiv lön nettoavdrag -->
     <record id="hr_salary_rule-nettoavdr-avg" model="hr.salary.rule">
@@ -639,6 +633,13 @@ result = inputs.nettoavdr.amount
       <field name="quantity">1</field>
     </record>
     
+        
+    <!-- nettolöneavdrag -->
+     <record id="hr_rule_input-nettoavdr-til" model="hr.rule.input">
+      <field name="code">nettoavdr</field>
+      <field name="name">Nettoavdrag (i kronor)</field>
+      <field name="input_id" ref="hr_salary_rule-nettoavdr-avg" />
+    </record>
     
 
     <!--
@@ -1051,7 +1052,9 @@ result = 0.0</field>
 
 
   </data>
+<!--
     <data noupdate="1">
         <function model="hr.salary.rule" name="init_records" />
     </data>
+-->
 </odoo>

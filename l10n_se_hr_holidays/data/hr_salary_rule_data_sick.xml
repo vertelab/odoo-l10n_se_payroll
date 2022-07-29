@@ -124,10 +124,11 @@
       <field name="condition_python">result = worked_days.dict.get('sjk_kar', False)</field>
       <field name="amount_select">code</field>
       <field name="amount_python_compute">
-#(ML*12)/(52*VA)
+#(ML*12)/(52*VA) dock inte mer än 20 % av veckoarbetstiden
 result_qty = contract.get_leave_days('sjk_kar', worked_days) * -1
 # result_rate = 150
-result = (contract.wage * 12) / (52*contract.scheduled_working_hours) * 8
+result = (contract.wage * 12) / (52*contract.scheduled_working_hours) * min(0.2,8/contract.scheduled_working_hours) * contract.scheduled_working_hours
+#result = contract.wage / 21
 # (ML*12)/(52*VA) / h day 1 and rest day 2 (8 hours)  
       </field>
     </record>
@@ -326,13 +327,13 @@ result = contract.wage / (52 * contract.weekly_working_hours / contract.wwh_days
       <field name="sequence">40</field>
       <field name="appears_on_payslip" eval="True" />
       <field name="condition_select">python</field>
-      <field name="condition_python">result = contract.get_leave_days('l10n_se_hr_holidays.vab_160', worked_days) > 0.0</field>
+      <field name="condition_python">result = worked_days.dict.get('vab',False)</field>
       <field name="amount_select">code</field>
       <field name="amount_python_compute">
-#(ML*12)/(52*VA)
-result_qty = contract.get_leave_days('l10n_se_hr_holidays.vab_160', worked_days)
+# ML / 21
+result_qty = contract.get_leave_days('vab', worked_days) * -1
 result_rate = 100
-result = contract.wage / 20
+result = contract.wage / 21
       </field>
     </record>
 
@@ -345,13 +346,13 @@ result = contract.wage / 20
       <field name="sequence">50</field>
       <field name="appears_on_payslip" eval="True" />
       <field name="condition_select">python</field>
-      <field name="condition_python">result = contract.get_leave_days('l10n_se_hr_holidays.forald_ledig_165', worked_days) &gt; 0.0</field>
+      <field name="condition_python">result = worked_days.dict.get('fpe',False)</field>
       <field name="amount_select">code</field>
       <field name="amount_python_compute">
 #ML*12/365
-result_qty = contract.get_leave_days('l10n_se_hr_holidays.forald_ledig_165', worked_days)
+result_qty = contract.get_leave_days('fpe', worked_days) * -1
 result_rate = 100
-result = contract.wage / 20
+result = contract.wage / 21
       </field>
     </record>
 
@@ -364,13 +365,13 @@ result = contract.wage / 20
       <field name="sequence">60</field>
       <field name="appears_on_payslip" eval="True" />
       <field name="condition_select">python</field>
-      <field name="condition_python">result = contract.get_leave_days('l10n_se_hr_holidays.forald_ledig_168', worked_days) &gt; 0.0</field>
+      <field name="condition_python">result = worked_days.dict.get('fpe_kol',False)</field>
       <field name="amount_select">code</field>
       <field name="amount_python_compute">
 #ML/21*(VAD/VADI)
-result_qty = contract.get_leave_days('l10n_se_hr_holidays.forald_ledig_168', worked_days)
+result_qty = contract.get_leave_days('fpe_kol', worked_days) * -1
 result_rate = 100
-result = contract.wage / 20
+result = contract.wage / 21
       </field>
     </record>
 
@@ -383,12 +384,12 @@ result = contract.wage / 20
       <field name="sequence">70</field>
       <field name="appears_on_payslip" eval="True" />
       <field name="condition_select">python</field>
-      <field name="condition_python">result = contract.get_leave_days('l10n_se_hr_holidays.pappaledig_166', worked_days) &gt; 0.0</field>
+      <field name="condition_python">result = worked_days.dict.get('pap',False)</field>
       <field name="amount_select">code</field>
       <field name="amount_python_compute">
-result_qty = contract.get_leave_days('l10n_se_hr_holidays.pappaledig_166', worked_days)
+result_qty = contract.get_leave_days('pap', worked_days) * -1
 result_rate = 100
-result = contract.wage / 20
+result = contract.wage / 21
       </field>
     </record>
 
