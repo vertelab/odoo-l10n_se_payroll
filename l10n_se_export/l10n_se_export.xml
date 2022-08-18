@@ -1,53 +1,34 @@
 <?xml version="1.0" encoding="utf-8"?>
-<openerp>
+<odoo>
     <data>
-
-
-<!-- account.account -->
-
-<report 
-            id="l10n_se_export.export_transaction"
-<!--
-            model="account.move"
--->
-            string="Export Transaction"
-            report_type="qweb-html"
-            name="l10n_se_export.export_transaction_container"
-            file="l10n_se_export.export_transaction_container"
-            attachment_use="True"
-/>
-
-<!--
-
-<record id="report_blocks_report_extended_company" model="ir.actions.report.xml">
-    <field name="paperformat_id" ref="share_register.paperformat_landscape"/>
-</record>
--->
-
-
-<template id="l10n_se_export.export_transaction_container">
-    <t t-call="report.html_container">
-
-<!--
-        <t t-foreach="period" t-as="record">
-            <t t-raw="export_xml(record)" /t>
-        </t>
-        <t t-foreach="journal" t-as="record">
-            <t t-raw="export_xml(record)" /t>
-        </t>
-        <t t-foreach="account" t-as="record">
-            <t t-raw="export_xml(record)" /t>
-        </t>
-        <t t-foreach="move" t-as="record">
-            <t t-raw="export_xml(record)" /t>
-        </t>
-        <t t-foreach="lines" t-as="record">
-            <t t-raw="export_xml(record)" /t>
-        </t>
--->
-    </t>
-</template>
-
-
+        <!-- account.account -->
+        <report id="l10n_se_export.export_transaction" model="account.move" string="Export Transaction" report_type="qweb-html" name="l10n_se_export.export_transaction_container" file="l10n_se_export.export_transaction_container" attachment_use="True" />
+        <!--
+             
+             <record id="report_blocks_report_extended_company" model="ir.actions.report.xml">
+             <field name="paperformat_id" ref="share_register.paperformat_landscape"/>
+             </record>
+        -->
+        <template id="l10n_se_export.export_transaction_container">
+            <t t-call="report.html_container">
+                <!--
+                     <t t-foreach="period" t-as="record">
+                     <t t-raw="export_xml(record)" /t>
+                     </t>
+                     <t t-foreach="journal" t-as="record">
+                     <t t-raw="export_xml(record)" /t>
+                     </t>
+                     <t t-foreach="account" t-as="record">
+                     <t t-raw="export_xml(record)" /t>
+                     </t>
+                     <t t-foreach="move" t-as="record">
+                     <t t-raw="export_xml(record)" /t>
+                     </t>
+                     <t t-foreach="lines" t-as="record">
+                     <t t-raw="export_xml(record)" /t>
+                     </t>
+                -->
+            </t>
+        </template>
     </data>
-</openerp>
+</odoo>
