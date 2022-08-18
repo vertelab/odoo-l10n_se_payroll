@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    
+    <record id="res_users_view_form" model="ir.ui.view">
+        <field name="name">user.preferences.payslip</field>
+        <field name="model">res.users</field>
+        <field name="inherit_id" ref="hr.res_users_view_form_simple_modif"/> 
+        <field name="arch" type="xml">
+            <div name="button_box" position="inside">
+                <button name="payslip_action"
+                        type="object"
+                        class="oe_stat_button"
+                        icon="fa-money"
+                        Xattrs="{'invisible': [('payslip_nbr','&gt;', 0)]}"
+                        groups="base.group_user"
+                        help="Payslips">
+                    <div class="o_field_widget o_stat_info">
+                        <span class="o_stat_value">
+                            <field name="payslip_nbr" widget="statinfo"/>
+                        </span>
+
+                    </div>
+                </button>
+            
+            </div>
+
+        </field>
+    </record>
+    
+    
+    <record id="user_payslip_view_tree" model="ir.ui.view">
+        <field name="name">user.payslip.tree</field>
+        <field name="model">user.payslip</field>
+        <field name="arch" type="xml">
+            <tree
+                decoration-info="state in ('confirm','hr_check','accont_check')"
+                decoration-muted="state == 'cancel'"
+                string="Payslips"
+                multi_edit="1"
+                sample="1"
+            >
+                <field name="number" readonly="1" decoration-bf="1" />
+                <field name="employee_id" optional="hidden"/>
+                <field name="name" />
+                <field
+                    name="state"
+                    decoration-success="state == 'done'"
+                    decoration-info="state == 'draft' or state == 'verify'"
+                    decoration-danger="state == 'cancel'"
+                    widget="badge"
+                    optional="show"
+                />
+                <field name="payslip_run_id" optional="show" />
+                <field name="period_id" optional="show" />
+                <field name="paid" optional="show" />
+                <field name="credit_note" optional="show" />
+                <button name="payslip_report" string="Payslip" type="object" class="o_replenish_buttons" icon="fa-refresh" />
+
+            </tree>
+        </field>
+    </record>
+    <record id="user_payslip_view_search" model="ir.ui.view">
+        <field name="name">user.payslip.select</field>
+        <field name="model">user.payslip</field>
+        <field name="arch" type="xml">
+            <search string="Search Payslips">
+                <field
+                    name="name"
+                    string="Payslips"
+                    filter_domain="['|',('name','ilike',self),('number','ilike',self)]"
+                />
+                <field name="period_id" />
+                <filter
+                    string="Draft"
+                    name="draft"
+                    domain="[('state','=','draft')]"
+                    help="Draft Slip"
+                />
+                <filter
+                    string="Done"
+                    name="done"
+                    domain="[('state','=','done')]"
+                    help="Done Slip"
+                />
+                <field name="employee_id" />
+                <field name="payslip_run_id" />
+                <group expand="0" string="Group By">
+                    <filter
+                        string="Employees"
+                        name="employee_id"
+                        context="{'group_by':'employee_id'}"
+                    />
+                    <filter
+                        string="PaySlip Batch"
+                        name="payslip_run_id"
+                        context="{'group_by':'payslip_run_id'}"
+                    />
+                    <filter
+                        string="States"
+                        name="state"
+                        context="{'group_by':'state'}"
+                    />
+                    
+                
+                    
+                </group>
+            </search>
+        </field>
+    </record>
+
+</odoo>

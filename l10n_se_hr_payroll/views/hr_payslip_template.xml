@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
      <template id="payslip_2_report">
-      <t t-call="report.html_container">
-        <t t-foreach="docs" t-as="o">
+       <t t-call="web.report_layout">
+        <t t-foreach="docs.sudo()" t-as="o">
           <t t-call="report.external_layout">
             <div class="page">
               <h1>Lönespecifikation</h1>
