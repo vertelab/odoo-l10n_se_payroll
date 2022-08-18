@@ -33,7 +33,8 @@
     'contributor': '',
     'maintainer': 'Vertel AB',
     'repository': 'https://github.com/vertelab/odoo-l10n-se-payroll',
-    'depends': ['l10n_se_hr_payroll','hr_payroll_employeefund'],
+    # ~ 'depends': ['l10n_se_hr_payroll','hr_payroll_employeefund'],
+    'depends': ['l10n_se_hr_payroll'],
     'description': """
 Swedish Payroll Employee Fund.
 ======================

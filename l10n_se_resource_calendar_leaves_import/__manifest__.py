@@ -38,7 +38,8 @@
     # Categories can be used to filter modules in modules listing
     # Check https://github.com/odoo/odoo/blob/master/openerp/addons/base/module/module_data.xml
     # for the full list
-    'depends': ['resource_calendar_leaves_import'],
+    # ~ 'depends': ['resource_calendar_leaves_import'],
+    'depends': [],
     'data': [
         'resource_data.xml'
     ],
