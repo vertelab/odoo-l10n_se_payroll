@@ -26,14 +26,14 @@ class HrPayslip(models.Model):
             name = _('Payslip of %s') % (slip.employee_id.name)
             move_dict = {
                 'narration': name,
-                'ref': slip.number,
+                'ref': f"{slip.number}: {slip.employee_id.name}",
                 'journal_id': slip.journal_id.id,
                 'date': date,
             }
-            
+
             move = self.env['account.move'].create(move_dict)
             move.period_id.date2period(move.date)
-            
+            move.message_post(body=_("This was created from:") + f"<a href=# data-oe-model=hr.payslip data-oe-id={slip.id}>{slip.name}</a>")
             for line in slip.details_by_salary_rule_category:
                 amount = currency.round(slip.credit_note and -line.total or line.total)
                 if currency.is_zero(amount):
