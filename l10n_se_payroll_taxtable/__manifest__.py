@@ -32,6 +32,7 @@
     'repository': 'https://github.com/vertelab/odoo-l10n-se-payroll',
     'depends': ['l10n_se', 'hr_contract'],
     'description': """
+    https://skatteverket.entryscape.net/store/9/resource/1534
     """,
     'auto_install': False,
     'demo': [],
