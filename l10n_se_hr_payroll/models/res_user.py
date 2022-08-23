@@ -62,6 +62,12 @@ class HrPayslipline(models.TransientModel):
     name = fields.Char(string="Name")
     quantity = fields.Char(string="Quantity")
     category_id = fields.Many2one("user.salary.rule.category")
+    user_payslip_id = fields.Many2one(
+        "user.payslip"
+    )
+    user_payslip_line_original_id = fields.Many2one(
+        "hr.payslip.line",
+    )
 
 class HrSaleryRule(models.TransientModel):
     _name = "user.salary.rule"
@@ -72,12 +78,28 @@ class HrSaleryCategory(models.TransientModel):
     _name = "user.salary.rule.category"
     code = fields.Char(string = "Code")
 
+class HrContract(models.TransientModel):
+    _name = "user.contract"
+    wage_tax_base = fields.Float(string="Lönunderlag", digits='Payroll', help="Uträknat löneunderlag för beräkning av preleminär skatt" )
+    prel_tax_tabel = fields.Char(string="Prel skatt info", help="Ange skattetabell/kolumn/ev jämkning som ligger till grund för angivet preleminärskatteavdrag")
+    resource_calendar_id = fields.Many2one("user.calendar")
+    name = fields.Char(string="Name")
 
+class HrCalender(models.TransientModel):
+    _name = "user.calendar"
+    name = fields.Char(string="Name")
+
+class HrWorkdays(models.TransientModel):
+    _name = "user.workdays"
+    name = fields.Char(string="Name")
+    code = fields.Char(string="code")
+    number_of_hours = fields.Float(string="Number of hours")
+    
 class HrPayslip(models.TransientModel):
     _name = "user.payslip"
 
     line_ids = fields.One2many(
-        "user.payslip.line"
+        "user.payslip.line",inverse_name='user_payslip_id'
     )
 
     name = fields.Char(
@@ -89,6 +111,11 @@ class HrPayslip(models.TransientModel):
     )
     employee_id = fields.Many2one(
         comodel_name="hr.employee",
+        string="Employee",
+    )
+
+    contract_id = fields.Many2one(
+        comodel_name="user.contract",
         string="Employee",
     )
     state = fields.Selection(
@@ -122,71 +149,22 @@ class HrPayslip(models.TransientModel):
         readonly=True,)
 
     payslip_id = fields.Many2one(comodel_name='hr.payslip')
+    @api.model
+    def get_slip_line(self, code):
+        lines = self.payslip_id.details_by_salary_rule_category.filtered(lambda l: l.code == code).mapped(lambda v: {'name': v.name, 'quantity': v.quantity, 'rate': v.rate, 'amount': v.amount, 'total': v.total})
+        return lines
+
+    @api.model
+    def get_slip_line_total(self, code):
+        return self.payslip_id.get_slip_line_total(code)
+
+    @api.model
+    def get_slip_line_acc(self, code):
+        return self.payslip_id.get_slip_line_acc(code)
 
     def payslip_report(self):
-        self = self.sudo()
-        
-        _logger.warning("1"*100)
-        # ~ data = self.read(cr, uid, ids)[0]
-        payslip = self
-        # ~ action = self.env.ref('l10n_se_hr_payroll.payslip').report_action(docids=payslip, data={}, config=False)
-        report_name = "l10n_se_hr_payroll.payslip"
-        # ~ pdf = self.env['user.payslip'].sudo().get_pdf(payslip, report_name)
-        _logger.warning("2"*100)
 
-        # ~ lines = self.with_context(print_mode=True).get_pdf_lines(line_data)
-        base_url = self.env['ir.config_parameter'].sudo().get_param('web.base.url')
-        rcontext = {
-            'mode': 'print',
-            'base_url': base_url,
-        }
-        _logger.warning("3"*100)
-        view_id = self.env['ir.ui.view'].sudo().get_view_id("l10n_se_hr_payroll.payslip")
-        view_obj = self.env['ir.ui.view'].sudo().browse(view_id)
-        # ~ raise Warning(view_obj._render({},'ir.qweb'))
-
-
-        # ~ body = self.env['ir.ui.view']._render_template(
-            # ~ "l10n_se_hr_payroll.payslip",{}
-            # ~ values=dict(rcontext, lines=payslip, report=self, context=self),
-        # ~ )
-        _logger.warning("4"*100)
-        header = self.env['ir.actions.report']._render_template("web.internal_layout", values=rcontext)
-        header = self.env['ir.actions.report']._render_template("web.minimal_layout", values=dict(rcontext, subst=True, body=header))
-
-        body = self.env['ir.actions.report']._render_template("l10n_se_hr_payroll.payslip_2_report", values=dict(datas=payslip))
-
-
-        pdf  = self.env['ir.actions.report']._run_wkhtmltopdf(
-            [body],
-            header=header,
-            landscape=False,
-            specific_paperformat_args={'data-report-margin-top': 10, 'data-report-header-spacing': 10}
-        )
-        _logger.warning("5"*100)
-        file = base64.b64encode(pdf)
-
-        data = {
-       # ~ 'from_date': self.from_date,
-       # ~ 'to_date': self.to_date
-        }
-       # docids = self.env['sale.order'].search([]).ids
-        _logger.warning("6"*100)
-        return self.env.ref('l10n_se_hr_payroll.payslip').report_action(payslip, data={})
-        _logger.warning("7"*100)
-
-
-        return file
-        # ~ datas = {
-             # ~ 'ids': context.get('active_ids',[]),
-             # ~ 'model': 'account.analytic.account',
-             # ~ 'form': data
-                 # ~ }
-        # ~ return {
-            # ~ 'type': 'ir.actions.report.xml',
-            # ~ 'report_name': 'account.analytic.account.balance',
-            # ~ 'datas': datas,
-            # ~ }
+        return self.env.ref('l10n_se_hr_payroll.payslip').report_action(docids=[self.id],data={})
 
 
 
@@ -228,14 +206,22 @@ class ResUsers(models.Model):
 #     appears_on_payslip = fields.Boolean(string="Appears on Payslip")
 #     salary_art = fields.Many2one(string="Salary art")
 
+
+# class HrContract(models.TransientModel):
+#     _name = "user.contract"
+#     wage_tax_base = fields.Float(string="Lönunderlag", digits='Payroll', help="Uträknat löneunderlag för beräkning av preleminär skatt" )
+#     prel_tax_tabel = fields.Char(string="Prel skatt info", help="Ange skattetabell/kolumn/ev jämkning som ligger till grund för angivet preleminärskatteavdrag")
+#     resource_calendar_name = fields.Char(string="Calender Name")
+#     name = fields.Char(string="Name")
+
     def payslip_action(self):
         self = self.sudo()
         _logger.warning("1"*100)
-        self.env['user.payslip'].search([]).unlink()
+        self.env['user.payslip'].search([("employee_id","=",self.employee_id.id)]).unlink()
         _logger.warning("2"*100)
         if self.employee_id:
             for slip in self.employee_id.sudo().slip_ids:
-
+                _logger.warning("Hello"*100)
                 user_payslip = self.env['user.payslip'].create({
                     'name': slip.name,
                     'number': slip.number,
@@ -247,10 +233,23 @@ class ResUsers(models.Model):
                     'state': slip.state,
                     'payslip_id': slip.id,
                 })
+                if slip.contract_id:
+                   user_contract = self.env["user.contract"].create({
+                    "wage_tax_base":slip.contract_id.wage_tax_base,
+                    "prel_tax_tabel":slip.contract_id.prel_tax_tabel,
+                    # "resource_calendar_id":slip.contract_id.resource_calendar_id.name,
+                    "name":slip.contract_id.resource_calendar_id.name,
+                   })
+                   if slip.contract_id.resource_calendar_id:
+                        user_calendar = self.env['user.calendar'].create({'name':slip.contract_id.resource_calendar_id.name})
+                        user_contract.resource_calendar_id = user_calendar.id
+
+                   user_payslip.contract_id = user_contract
+
                 for line in slip.line_ids:
                     _logger.warning(f"{line=}")
                     #Create user line
-                    salery_category = self.env['user.salary.rule.category'].create({
+                    salary_category = self.env["user.salary.rule.category"].create({
                         'code': line.category_id.code if line.category_id else False
                     })
                     salary_rule_id = self.env['user.salary.rule'].create({
@@ -260,11 +259,13 @@ class ResUsers(models.Model):
                         {'code':line.code,
                         'name':line.name,
                         'quantity':line.quantity,
-                        'category_id':salery_category,
+                        'category_id':salary_category,
                         'salary_rule_id': salary_rule_id
                         })
-                    user_payslip.write({(4,user_line.id,0)})
-                    
+                    user_payslip.write({"line_ids":(4,user_line.id,0)})
+                _logger.warning("LOOK HERE"*100)
+                _logger.warning(user_payslip.line_ids)
+
 
         else:
             raise UserError(_("There is no employee connected to this user."))
@@ -278,7 +279,7 @@ class ResUsers(models.Model):
             "res_model": "user.payslip",
             "type": "ir.actions.act_window",
             "target": "current",
-            # ~ "domain": "[('id', 'in', %s)]" % copied_payslip.ids,
+            "domain": [("employee_id","=",self.employee_id.id)],
             "views": [
                 (treeview_ref and treeview_ref.id or False, "tree"),
                 # ~ (formview_ref and formview_ref.id or False, "form"),
