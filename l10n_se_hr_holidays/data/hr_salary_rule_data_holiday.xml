@@ -129,7 +129,7 @@ result = contract.wage / 160
         <field name="sequence">410</field>
         <field name="appears_on_payslip" eval="False"/>
         <field name="condition_select">python</field>
-        <field name="condition_python">result = payslip.dict.has_legal_leaves()</field>
+        <field name="condition_python">result = payslip.dict.has_legal_leaves('sem_bet')</field>
         <field name="amount_select">code</field>
         <field name="amount_python_compute">
 result_qty = payslip.dict.get_legal_leaves_days('sem_bet') * -1
@@ -164,7 +164,7 @@ result = 0.046*contract.wage
         <field name="sequence">420</field>
         <field name="appears_on_payslip" eval="False"/>
         <field name="condition_select">python</field>
-        <field name="condition_python">result = payslip.dict.has_legal_leaves()</field>
+        <field name="condition_python">result = payslip.dict.has_legal_leaves('sem_bet')</field>
         <field name="amount_select">code</field>
         <field name="amount_python_compute">result = categories.SEMSK * 0.3142</field>
         <field name="quantity">1</field>
