@@ -68,11 +68,13 @@ class HrPayslipline(models.TransientModel):
     user_payslip_line_original_id = fields.Many2one(
         "hr.payslip.line",
     )
+    total = fields.Float(string ="Total")
+    rate = fields.Float(string ="rate")
 
 class HrSaleryRule(models.TransientModel):
     _name = "user.salary.rule"
     appears_on_payslip = fields.Boolean(string="Appears on Payslip")
-    salary_art = fields.Many2one(string="Salary art")
+    salary_art = fields.Char(string="Salary art")
 
 class HrSaleryCategory(models.TransientModel):
     _name = "user.salary.rule.category"
@@ -84,6 +86,16 @@ class HrContract(models.TransientModel):
     prel_tax_tabel = fields.Char(string="Prel skatt info", help="Ange skattetabell/kolumn/ev jämkning som ligger till grund för angivet preleminärskatteavdrag")
     resource_calendar_id = fields.Many2one("user.calendar")
     name = fields.Char(string="Name")
+    # employee_fund = fields.Many2one(string="Employee Fund", comodel_name='account.analytic.account',
+    #                                 help="Use this account together with marked salary rule")
+    employee_fund_balance = fields.Monetary(string='Balance',currency_field='currency_id')
+    employee_fund_name = fields.Char(string='Name')
+    currency_id = fields.Many2one(
+        comodel_name="res.currency",
+        string="Currency of the Payment Transaction"
+    )
+
+
 
 class HrCalender(models.TransientModel):
     _name = "user.calendar"
@@ -95,8 +107,36 @@ class HrWorkdays(models.TransientModel):
     code = fields.Char(string="code")
     number_of_hours = fields.Float(string="Number of hours")
     
+class HrPayslipWorkedDays(models.TransientModel):
+    _name = "user.payslip.worked_days"
+    _description = "Payslip Worked Days"
+    _order = "payslip_id, sequence"
+
+    name = fields.Char(string="Description", required=False)
+    payslip_id = fields.Many2one(
+        "user.payslip", string="Pay Slip", required=False, ondelete="cascade", index=True
+    )
+    sequence = fields.Integer(required=False, index=False, default=10)
+    code = fields.Char(
+        required=False, help="The code that can be used in the salary rules"
+    )
+    number_of_days = fields.Float(string="Number of Days")
+    number_of_hours = fields.Float(string="Number of Hours")
+    contract_id = fields.Many2one(
+        "user.contract",
+        string="Contract",
+        required=False,
+        help="The contract for which applied this input",
+    )
+
 class HrPayslip(models.TransientModel):
     _name = "user.payslip"
+    worked_days_line_ids = fields.One2many(
+        "user.payslip.worked_days",
+        "payslip_id",
+        string="Payslip Worked Days",
+    )
+    
 
     line_ids = fields.One2many(
         "user.payslip.line",inverse_name='user_payslip_id'
@@ -233,12 +273,17 @@ class ResUsers(models.Model):
                     'state': slip.state,
                     'payslip_id': slip.id,
                 })
+                for worked_day in slip.worked_days_line_ids:
+                    worked_day_id = self.env['user.payslip.worked_days'].create({'code':worked_day.code,'number_of_hours':worked_day.number_of_hours})
+                    user_payslip.write({"worked_days_line_ids":(4,worked_day_id.id,0)})
+
                 if slip.contract_id:
                    user_contract = self.env["user.contract"].create({
                     "wage_tax_base":slip.contract_id.wage_tax_base,
                     "prel_tax_tabel":slip.contract_id.prel_tax_tabel,
                     # "resource_calendar_id":slip.contract_id.resource_calendar_id.name,
                     "name":slip.contract_id.resource_calendar_id.name,
+                    "employee_fund_balance":slip.contract_id.employee_fund_balance,
                    })
                    if slip.contract_id.resource_calendar_id:
                         user_calendar = self.env['user.calendar'].create({'name':slip.contract_id.resource_calendar_id.name})
@@ -259,8 +304,10 @@ class ResUsers(models.Model):
                         {'code':line.code,
                         'name':line.name,
                         'quantity':line.quantity,
-                        'category_id':salary_category,
-                        'salary_rule_id': salary_rule_id
+                        'category_id':salary_category.id,
+                        'salary_rule_id': salary_rule_id.id,
+                        'rate':line.rate,
+                        'total':line.total,
                         })
                     user_payslip.write({"line_ids":(4,user_line.id,0)})
                 _logger.warning("LOOK HERE"*100)
