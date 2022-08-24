@@ -74,9 +74,9 @@ result = contract.wage * 0.008
       <field name="amount_select">code</field>
       <field name="amount_python_compute">
 #(ML*0,008)*(VAD/VADI)
-result_qty = contract.get_leave_days('sem_bet', worked_days) * -1
-result = contract.wage * 0.0043
-#result = contract.wage * 0.008
+result_qty = contract.get_leave_days('sem_til', worked_days) * -1
+#result = contract.wage * 0.0043
+result = contract.wage * 0.008
       </field>
       <field name="quantity">1</field>
     </record>
@@ -128,9 +128,14 @@ result = contract.wage / 160
         <field name="code">semsk</field>
         <field name="sequence">410</field>
         <field name="appears_on_payslip" eval="False"/>
-        <field name="condition_select">none</field>
+        <field name="condition_select">python</field>
+        <field name="condition_python">result = len(payslip.dict.get_legal_leaves()) > 0</field>
         <field name="amount_select">code</field>
-        <field name="amount_python_compute">result = contract.wage * worked_days.WORK100.payslip_id.get_holiday_basis_percent() * 0.12</field>
+        <field name="amount_python_compute">
+result_qty = contract.get_leave_days('sem_bet', worked_days) * -1
+result = 0.046*contract.wage
+#result = contract.wage / 21   
+        </field>
         <field name="quantity">1</field>
     </record>
     
@@ -158,7 +163,8 @@ result = contract.wage / 160
         <field name="code">semsksoc</field>
         <field name="sequence">420</field>
         <field name="appears_on_payslip" eval="False"/>
-        <field name="condition_select">none</field>
+        <field name="condition_select">python</field>
+        <field name="condition_python">result = len(payslip.dict.get_legal_leaves()) > 0</field>
         <field name="amount_select">code</field>
         <field name="amount_python_compute">result = categories.SEMSK * 0.3142</field>
         <field name="quantity">1</field>

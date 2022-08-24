@@ -12,6 +12,37 @@
                 <field name="name" position="before">
                     <field name="salary_art" />
                 </field>
+
+                <page  position="replace">
+                    <page string="General">
+                    <group>
+                        <!--<group string="Conditions" name="conditions">-->
+                            <field name="condition_select"/>
+                            <field name="condition_python"  attrs="{'invisible':[('condition_select','!=','python')], 'required': [('condition_select','=','python')]}" widget="ace" options="{'mode': 'python'}" id="condition_python"/>
+                            <field name="condition_range" attrs="{'invisible':[('condition_select','!=','range')], 'required':[('condition_select','=','range')]}"/>
+                            <label string="Condition Range" attrs="{'invisible':[('condition_select','!=','range')], 'required':[('condition_select','=','range')]}" for="condition_range_min"/>
+                            <div attrs="{'invisible':[('condition_select','!=','range')], 'required':[('condition_select','=','range')]}">
+                                <strong>Between </strong>
+                                <field name="condition_range_min" class="oe_inline" attrs="{'invisible':[('condition_select','!=','range')], 'required':[('condition_select','=','range')]}"/>
+                                <strong> and </strong>
+                                <field name="condition_range_max" class="oe_inline" attrs="{'invisible':[('condition_select','!=','range')], 'required':[('condition_select','=','range')]}"/>
+                            </div>
+                            <separator string="Company Contribution"/>
+                            <field name="register_id"/>
+                        <!--</group>-->
+                        <!--<group string="Computation" name="computation">-->
+                            <field name="amount_select"/>
+                            <field name="amount_percentage_base" attrs="{'invisible':[('amount_select','!=','percentage')], 'required': [('amount_select','=','percentage')]}"/>
+                            <field name="quantity" attrs="{'invisible':[('amount_select','=','code')], 'required':[('amount_select','!=','code')]}"/>
+                            <field name="amount_fix" attrs="{'invisible':[('amount_select','!=','fix')], 'required':[('amount_select','=','fix')]}"/>
+                            <field name="amount_python_compute" attrs="{'invisible':[('amount_select','!=','code')], 'required':[('amount_select','=','code')]}" widget="ace" options="{'mode': 'python'}" id="amount_python_compute"/>
+                            <field name="amount_percentage" attrs="{'invisible':[('amount_select','!=','percentage')], 'required':[('amount_select','=','percentage')]}"/>
+                        <!--</group>-->
+                        <separator string="Notes"/>
+                        <field name="note" placeholder="Write salary rule notes or observations here..."/>
+                    </group>
+                </page>
+                </page>
             </field>
         </record>
         <record id="hr_salary_rule_list" model="ir.ui.view">

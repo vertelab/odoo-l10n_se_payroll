@@ -66,9 +66,9 @@ class hr_contract(models.Model):
     def _wage_tax_base(self):
         self.wage_tax_base = (self.wage - self.aws_amount) + self.ded_amount
 
-    wage_tax_base        = fields.Float(string="Lönunderlag", digits='Payroll', help="Uträknat löneunderlag för beräkning av preleminär skatt" )
-    prel_tax_tabel       = fields.Char(string="Prel skatt info", help="Ange skattetabell/kolumn/ev jämkning som ligger till grund för angivet preleminärskatteavdrag")
-    prel_tax_url         = fields.Char(string="Skattetabeller SKV", default="http://www.skatteverket.se/privat/skatter/arbeteochinkomst/skattetabeller.4.18e1b10334ebe8bc80005221.html",readonly=True, help="Ange skattetabell/kolumn/ev jämkning som ligger till grund för angivet preleminärskatteavdrag")
+    wage_tax_base = fields.Float(string="Lönunderlag", digits='Payroll', help="Uträknat löneunderlag för beräkning av preleminär skatt" )
+    prel_tax_tabel = fields.Char(string="Prel skatt info", help="Ange skattetabell/kolumn/ev jämkning som ligger till grund för angivet preleminärskatteavdrag")
+    prel_tax_url = fields.Char(string="Skattetabeller SKV", default="http://www.skatteverket.se/privat/skatter/arbeteochinkomst/skattetabeller.4.18e1b10334ebe8bc80005221.html",readonly=True, help="Ange skattetabell/kolumn/ev jämkning som ligger till grund för angivet preleminärskatteavdrag")
     #~ car_company_amount     = fields.Float('Bruttolöneavdrag för bil', digits_compute=dp.get_precision('Payroll'), help="Bruttolöneavdraget för företagsbil, dvs företagets kostnad för företagsbilen")
     #~ car_employee_deduction = fields.Float(string='Förmånsvärde för bil', digits_compute=dp.get_precision('Payroll'), help="Beräknat förmånsvärde för bil från skatteverket",)
     #~ car_deduction_url      = fields.Char(string='Förmånsvärdesberäkning SKV', default="http://www.skatteverket.se/privat/skatter/biltrafik/bilformansberakning", readonly=True,help="Beräknat förmånsvärde för bil från skatteverket")
@@ -88,12 +88,53 @@ class hr_contract(models.Model):
         eval(code,variables,mode='exec',nocopy=True)
 
     def get_leave_days(self, rule_id, worked_days):
-        _logger.error(f'get_leave_days: {self} {rule_id} {worked_days.dict}')
-        code = self.env.ref(rule_id).code if len(rule_id.split('.')) == 2 else rule_id
-        line = worked_days.dict.get(code,False)
-        _logger.error(f'get_leave_days: {code} {worked_days.dict}')
-        # ~ _logger.error(f'get_leave_days: {line.number_of_days}')
-        return line.number_of_days if line else 0.0
+
+        if (rule_id and rule_id == "sem_til") or (rule_id and rule_id == "sem_bet"):
+            _logger.warning(f"{rule_id=}")
+            _logger.warning(f"{worked_days=}")
+            code = self.env.ref(rule_id).code if len(rule_id.split('.')) == 2 else rule_id
+            leave_lines = []
+            for key,val in worked_days.dict.items():
+                _logger.warning(f"{key=} {val=}")
+                if "sem_bet" in key:
+                    leave_lines.append(val)
+            if len(leave_lines) > 0:
+                number_of_days = 0
+                for line in leave_lines:
+                    number_of_days += line.number_of_days
+                    _logger.warning(f"{number_of_days=}")
+                return number_of_days
+            else:
+                return 0.0
+            
+        
+        else:
+            #_logger.error(f'get_leave_days: {self} {rule_id} {worked_days.dict}')
+            code = self.env.ref(rule_id).code if len(rule_id.split('.')) == 2 else rule_id
+            line = worked_days.dict.get(code,False)
+            #_logger.error(f'get_leave_days: {code} {worked_days.dict}')
+            # ~ _logger.error(f'get_leave_days: {line.number_of_days}')
+            return line.number_of_days if line else 0.0
+
+    # def get_leave_days2(self, rule_id, worked_days):
+    #     #rule_id = "sem_bet"
+    #     if rule_id and rule_id == "sem_bet":
+    #         _logger.warning("LOOK HERE"*100)
+    #         _logger.error(f'get_leave_days: {self} {rule_id} {worked_days.dict}')
+    #     code = self.env.ref(rule_id).code if len(rule_id.split('.')) == 2 else rule_id
+    #     #{'WORK100': hr.payslip.worked_days(15,), 'Legal Leaves 2022': hr.payslip.worked_days(13,), 'Legal Leaves 2023': hr.payslip.worked_days(14,)}
+    #     #line = worked_days.dict.get(code,False)
+    #     if rule_id and rule_id == "sem_bet":
+    #         _logger.error(f'get_leave_days: {code} {worked_days.dict}')
+    #         for key,val in worked_days.dict:
+    #             _logger.warning(f"{key=} {val=}")
+    #             if "Legal Leaves" in key:
+    #                 line.append(val)
+    #         if len(line) == 0:
+    #             line = False
+    #         else:
+    #             return 4
+    #     return line.number_of_days if line else 0.0
 
     def get_leave_hours(self, rule_id, worked_days):
         code = self.env.ref(rule_id).code if len(rule_id.split('.')) == 2 else rule_id
