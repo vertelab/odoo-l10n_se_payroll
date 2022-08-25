@@ -43,7 +43,7 @@ Swedish Payslip additions for Flex100
         'hr_salary_rule_data.xml',
         'hr_payroll_payslip_report.xml',
     ],
-    'auto_install': True,
+    'auto_install': False,
     'installable': True,
 }
 
