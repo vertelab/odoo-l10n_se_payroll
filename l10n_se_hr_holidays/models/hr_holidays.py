@@ -189,7 +189,8 @@ class hr_payslip(models.Model):
     def get_legal_leaves_consumed(self):
         year = datetime.datetime.now().year
         start_date = datetime.datetime(year, 1, 1)
-        return abs(sum(self.env['hr.leave'].search([('employee_id', '=', self.employee_id.id), ('date_from', '>=', start_date.strftime('%Y-%m-%d')), ('date_to', '<=', self.date_to), ('type', '=', 'remove'), ('state', '=', 'validate')]).filtered(lambda h: h.holiday_status_id.legal_leave == True).mapped('number_of_days')))
+        return abs(sum(self.env['hr.leave'].search([('employee_id', '=', self.employee_id.id), ('date_from', '>=', start_date.strftime('%Y-%m-%d')), ('date_to', '<=', self.date_to), ('state', '=', 'validate')]).filtered(lambda h: h.holiday_status_id.legal_leave == True).mapped('number_of_days')))
+        #return abs(sum(self.env['hr.leave'].search([('employee_id', '=', self.employee_id.id), ('date_from', '>=', start_date.strftime('%Y-%m-%d')), ('date_to', '<=', self.date_to), ('type', '=', 'remove'), ('state', '=', 'validate')]).filtered(lambda h: h.holiday_status_id.legal_leave == True).mapped('number_of_days')))
 
     # ~ @api.multi
     def get_holiday_basis_days(self):

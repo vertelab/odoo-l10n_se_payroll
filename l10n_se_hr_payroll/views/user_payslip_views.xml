@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <odoo>
-    
+
     <record id="res_users_view_form" model="ir.ui.view">
         <field name="name">user.preferences.payslip</field>
         <field name="model">res.users</field>
@@ -12,7 +12,6 @@
                         class="oe_stat_button"
                         icon="fa-money"
                         Xattrs="{'invisible': [('payslip_nbr','&gt;', 0)]}"
-                        groups="base.group_user"
                         help="Payslips">
                     <div class="o_field_widget o_stat_info">
                         <span class="o_stat_value">

@@ -4,9 +4,176 @@ import base64
 from odoo import fields, models, api, _
 
 from odoo.exceptions import UserError, ValidationError, RedirectWarning, Warning
+import logging
+_logger = logging.getLogger(__name__)
+
+
+# class HrPayslipLine(models.Model):
+#     _name = "hr.payslip.line"
+#     _inherit = "hr.salary.rule"
+#     _description = "Payslip Line"
+#     _order = "contract_id, sequence"
+
+#     slip_id = fields.Many2one(
+#         "hr.payslip", string="Pay Slip", required=True, ondelete="cascade"
+#     )
+#     salary_rule_id = fields.Many2one("hr.salary.rule", string="Rule", required=True)
+#     employee_id = fields.Many2one("hr.employee", string="Employee", required=True)
+#     contract_id = fields.Many2one(
+#         "hr.contract", string="Contract", required=True, index=True
+#     )
+#     rate = fields.Float(string="Rate (%)", digits="Payroll Rate", default=100.0)
+#     amount = fields.Float(digits="Payroll")
+#     quantity = fields.Float(digits="Payroll", default=1.0)
+#     total = fields.Float(
+#         compute="_compute_total",
+#         string="Total",
+#         digits="Payroll",
+#         store=True,
+#     )
+
+#     @api.depends("quantity", "amount", "rate")
+#     def _compute_total(self):
+#         for line in self:
+#             line.total = float(line.quantity) * line.amount * line.rate / 100
+
+#     @api.model_create_multi
+#     def create(self, vals_list):
+#         for values in vals_list:
+#             if "employee_id" not in values or "contract_id" not in values:
+#                 payslip = self.env["hr.payslip"].browse(values.get("slip_id"))
+#                 values["employee_id"] = (
+#                     values.get("employee_id") or payslip.employee_id.id
+#                 )
+#                 values["contract_id"] = (
+#                     values.get("contract_id")
+#                     or payslip.contract_id
+#                     and payslip.contract_id.id
+#                 )
+#                 if not values["contract_id"]:
+#                     raise UserError(
+#                         _("You must set a contract to create a payslip line.")
+#                     )
+#         return super(HrPayslipLine, self).create(vals_list)
+class HrPayslipline(models.TransientModel):
+    _name = "user.payslip.line"
+    salary_rule_id = fields.Many2one("user.salary.rule", string="Rule", required=True)
+    code = fields.Char(string="Code")
+    name = fields.Char(string="Name")
+    quantity = fields.Char(string="Quantity")
+    category_id = fields.Many2one("user.salary.rule.category")
+    user_payslip_id = fields.Many2one(
+        "user.payslip"
+    )
+    user_payslip_line_original_id = fields.Many2one(
+        "hr.payslip.line",
+    )
+    total = fields.Float(string ="Total")
+    rate = fields.Float(string ="rate")
+
+class HrSaleryRule(models.TransientModel):
+    _name = "user.salary.rule"
+    appears_on_payslip = fields.Boolean(string="Appears on Payslip")
+    salary_art = fields.Char(string="Salary art")
+
+class HrSaleryCategory(models.TransientModel):
+    _name = "user.salary.rule.category"
+    code = fields.Char(string = "Code")
+
+class HrContract(models.TransientModel):
+    _name = "user.contract"
+    wage_tax_base = fields.Float(string="Lönunderlag", digits='Payroll', help="Uträknat löneunderlag för beräkning av preleminär skatt" )
+    prel_tax_tabel = fields.Char(string="Prel skatt info", help="Ange skattetabell/kolumn/ev jämkning som ligger till grund för angivet preleminärskatteavdrag")
+    resource_calendar_id = fields.Many2one("user.calendar")
+    name = fields.Char(string="Name")
+    # employee_fund = fields.Many2one(string="Employee Fund", comodel_name='account.analytic.account',
+    #                                 help="Use this account together with marked salary rule")
+    employee_fund_balance = fields.Monetary(string='Balance',currency_field='currency_id')
+    employee_fund_name = fields.Char(string='Name')
+    currency_id = fields.Many2one(
+        comodel_name="res.currency",
+        string="Currency of the Payment Transaction"
+    )
+
+
+
+class HrCalender(models.TransientModel):
+    _name = "user.calendar"
+    name = fields.Char(string="Name")
+
+class HrWorkdays(models.TransientModel):
+    _name = "user.workdays"
+    name = fields.Char(string="Name")
+    code = fields.Char(string="code")
+    number_of_hours = fields.Float(string="Number of hours")
+    
+class HrPayslipWorkedDays(models.TransientModel):
+    _name = "user.payslip.worked_days"
+    _description = "Payslip Worked Days"
+    _order = "payslip_id, sequence"
+
+    name = fields.Char(string="Description", required=False)
+    payslip_id = fields.Many2one(
+        "user.payslip", string="Pay Slip", required=False, ondelete="cascade", index=True
+    )
+    sequence = fields.Integer(required=False, index=False, default=10)
+    code = fields.Char(
+        required=False, help="The code that can be used in the salary rules"
+    )
+    number_of_days = fields.Float(string="Number of Days")
+    number_of_hours = fields.Float(string="Number of Hours")
+    contract_id = fields.Many2one(
+        "user.contract",
+        string="Contract",
+        required=False,
+        help="The contract for which applied this input",
+    )
+
+class HrLeave(models.TransientModel):
+    _name = "user.leave"
+    date_from = fields.Datetime()
+    date_to = fields.Datetime()
+    number_of_days_temp = fields.Float(string="Number of days")
+    payslip_id = fields.Many2one(
+        "user.payslip", string="Pay Slip", required=False, ondelete="cascade", index=True
+    )    
+    holiday_status_id = fields.Many2one(
+        "user.holiday.status"
+    )
+
+class HrHolidayStatus(models.TransientModel):
+    _name = "user.holiday.status"
+    name = fields.Char(string="name")
 
 class HrPayslip(models.TransientModel):
     _name = "user.payslip"
+
+    def get_legal_leaves_consumed(self):
+        self = self.sudo()
+        return self.payslip_id.get_legal_leaves_consumed()
+
+    def get_legal_leaves_status(self):
+        self = self.sudo()
+        return self.payslip_id.get_legal_leaves_status()
+
+
+    worked_days_line_ids = fields.One2many(
+        "user.payslip.worked_days",
+        "payslip_id",
+        string="Payslip Worked Days",
+    )
+    
+    # def _holiday_ids(self):
+    #     for rec in self:
+    #         # ~ rec.holiday_ids = rec.env['hr.leave'].search([('state','=','validate'),('employee_id','=',rec.employee_id.id),('type','=','remove')]).filtered(lambda h: h.date_from[:10>
+    #         rec.holiday_ids = rec.env['hr.leave'].search([('state','=','validate'),('employee_id','=',rec.employee_id.id)]).filtered(lambda h: h.date_from.date()<= rec.date_to and h.da>
+    holiday_ids = fields.One2many('user.leave',"payslip_id")
+
+
+
+    line_ids = fields.One2many(
+        "user.payslip.line",inverse_name='user_payslip_id'
+    )
 
     name = fields.Char(
         string="Payslip Name", readonly=True, states={"draft": [("readonly", False)]}
@@ -17,6 +184,11 @@ class HrPayslip(models.TransientModel):
     )
     employee_id = fields.Many2one(
         comodel_name="hr.employee",
+        string="Employee",
+    )
+
+    contract_id = fields.Many2one(
+        comodel_name="user.contract",
         string="Employee",
     )
     state = fields.Selection(
@@ -49,90 +221,159 @@ class HrPayslip(models.TransientModel):
     period_id = fields.Many2one(comodel_name='account.period', string="Period",
         readonly=True,)
 
+    payslip_id = fields.Many2one(comodel_name='hr.payslip')
+    @api.model
+    def get_slip_line(self, code):
+        self = self.sudo()
+        lines = self.payslip_id.details_by_salary_rule_category.filtered(lambda l: l.code == code).mapped(lambda v: {'name': v.name, 'quantity': v.quantity, 'rate': v.rate, 'amount': v.amount, 'total': v.total})
+        return lines
+
+    @api.model
+    def get_slip_line_total(self, code):
+        self = self.sudo()
+        return self.payslip_id.get_slip_line_total(code)
+
+    @api.model
+    def get_slip_line_acc(self, code):
+        self = self.sudo()
+        return self.payslip_id.get_slip_line_acc(code)
+
     def payslip_report(self):
-        # ~ data = self.read(cr, uid, ids)[0]
-        payslip = self.env['hr.payslip'].sudo().browse(self.id)
-        
-        # ~ action = self.env.ref('l10n_se_hr_payroll.payslip').report_action(docids=payslip, data={}, config=False)
-        report_name = "l10n_se_hr_payroll.payslip"
-        # ~ pdf = self.env['user.payslip'].sudo().get_pdf(payslip, report_name)
-        
-        
-        # ~ lines = self.with_context(print_mode=True).get_pdf_lines(line_data)
-        base_url = self.env['ir.config_parameter'].sudo().get_param('web.base.url')
-        rcontext = {
-            'mode': 'print',
-            'base_url': base_url,
-        }
 
-        view_id = self.env['ir.ui.view'].sudo().get_view_id("l10n_se_hr_payroll.payslip")
-        view_obj = self.env['ir.ui.view'].sudo().browse(view_id)
-        # ~ raise Warning(view_obj._render({},'ir.qweb'))
+        return self.env.ref('l10n_se_hr_payroll.payslip').report_action(docids=[self.id],data={})
 
 
-        # ~ body = self.env['ir.ui.view']._render_template(
-            # ~ "l10n_se_hr_payroll.payslip",{}
-            # ~ values=dict(rcontext, lines=payslip, report=self, context=self),
-        # ~ )
 
-        header = self.env['ir.actions.report']._render_template("web.internal_layout", values=rcontext)
-        header = self.env['ir.actions.report']._render_template("web.minimal_layout", values=dict(rcontext, subst=True, body=header))
-
-        body = self.env['ir.actions.report']._render_template("l10n_se_hr_payroll.payslip_2_report", values=dict(datas=payslip))
-
-
-        pdf  = self.env['ir.actions.report']._run_wkhtmltopdf(
-            [body],
-            header=header,
-            landscape=False,
-            specific_paperformat_args={'data-report-margin-top': 10, 'data-report-header-spacing': 10}
-        )
-        
-        file = base64.b64encode(pdf)
-
-        data = {
-       # ~ 'from_date': self.from_date,
-       # ~ 'to_date': self.to_date
-        }
-       # docids = self.env['sale.order'].search([]).ids
-        return self.env.ref('l10n_se_hr_payroll.payslip').report_action(payslip, data={})
-
-
-        return file
-        # ~ datas = {
-             # ~ 'ids': context.get('active_ids',[]),
-             # ~ 'model': 'account.analytic.account',
-             # ~ 'form': data
-                 # ~ }
-        # ~ return {
-            # ~ 'type': 'ir.actions.report.xml',
-            # ~ 'report_name': 'account.analytic.account.balance',
-            # ~ 'datas': datas,
-            # ~ }
-
-
-    
 class ResUsers(models.Model):
     _inherit = "res.users"
 
     def _payslip_nbr(self):
+        self = self.sudo()
         self.payslip_nbr = len(self.employee_id.sudo().slip_ids if self.employee_id else 0)
+
     payslip_nbr = fields.Integer(string="Number Payslips",compute=_payslip_nbr)
 
-    def payslip_action(self):
-        self.env['user.payslip'].search([]).unlink()
-        for slip in self.employee_id.sudo().slip_ids:
-            self.env['user.payslip'].create({
-                'name': slip.name,
-                'number': slip.number,
-                'employee_id': self.employee_id.id,
-                'period_id': slip.period_id.id,
-                'payslip_run_id': slip.payslip_run_id.id,
-                'credit_note': slip.credit_note,
-                'paid': slip.paid,
-                'state': slip.state,
-            })
 
+
+    def __init__(self, pool, cr):
+        """Override of __init__ to add access rights.
+        Access rights are disabled by default, but allowed on some specific
+        fields defined in self.SELF_{READ/WRITE}ABLE_FIELDS.
+        """
+        super().__init__(pool, cr)
+        # duplicate list to avoid modifying the original reference
+        type(self).SELF_WRITEABLE_FIELDS = list(self.SELF_WRITEABLE_FIELDS)
+        type(self).SELF_WRITEABLE_FIELDS.extend(["payslip_nbr"])
+        # duplicate list to avoid modifying the original reference
+        type(self).SELF_READABLE_FIELDS = list(self.SELF_READABLE_FIELDS)
+        type(self).SELF_READABLE_FIELDS.extend(["payslip_nbr"])
+
+
+#     class HrPayslipline(models.TransientModel):
+#     _name = "user.payslip.line"
+#     salary_rule_id = fields.Many2one("user.salary.rule", string="Rule", required=True)
+#     code = fields.Char(string="Code")
+#     name = fields.Char(string="Name")
+#     quantity = fields.Char(string="Quantity")
+#     category_id = fields.Many2one("user.salary.rule.category")
+
+# class HrSaleryRule(models.TransientModel):
+#     _name = "user.salary.rule"
+#     appears_on_payslip = fields.Boolean(string="Appears on Payslip")
+#     salary_art = fields.Many2one(string="Salary art")
+
+
+# class HrContract(models.TransientModel):
+#     _name = "user.contract"
+#     wage_tax_base = fields.Float(string="Lönunderlag", digits='Payroll', help="Uträknat löneunderlag för beräkning av preleminär skatt" )
+#     prel_tax_tabel = fields.Char(string="Prel skatt info", help="Ange skattetabell/kolumn/ev jämkning som ligger till grund för angivet preleminärskatteavdrag")
+#     resource_calendar_name = fields.Char(string="Calender Name")
+#     name = fields.Char(string="Name")
+# class HrLeave(models.TransientModel):
+#     _name = "user.leave"
+#     date_from = fields.Datetime()
+#     date_to = fields.Datetime()
+#     number_of_days_temp = fields.Float(string="Number of days")
+#     payslip_id = fields.Many2one(
+#         "user.payslip", string="Pay Slip", required=False, ondelete="cascade", index=True
+#     )    
+#     holiday_status_id = fields.Many2one(
+#         "user.holiday.status"
+#     )
+
+# class HrHolidayStatus(models.TransientModel):
+#     _name = "user.holiday.status"
+#     name = fields.Char(string="name")
+
+    def payslip_action(self):
+        self = self.sudo()
+        _logger.warning("1"*100)
+        self.env['user.payslip'].search([("employee_id","=",self.employee_id.id)]).unlink()
+        _logger.warning("2"*100)
+        if self.employee_id:
+            for slip in self.employee_id.sudo().slip_ids:
+                _logger.warning("Hello"*100)
+                user_payslip = self.env['user.payslip'].create({
+                    'name': slip.name,
+                    'number': slip.number,
+                    'employee_id': self.employee_id.id,
+                    'period_id': slip.period_id.id,
+                    'payslip_run_id': slip.payslip_run_id.id,
+                    'credit_note': slip.credit_note,
+                    'paid': slip.paid,
+                    'state': slip.state,
+                    'payslip_id': slip.id,
+                })
+
+                for holiday_id in slip.holiday_ids:
+                    holiday_status_id = self.env['user.holiday.status'].create({'name': holiday_id.holiday_status_id.name})
+                    holiday_day_id = self.env['user.leave'].create({'holiday_status_id': holiday_status_id.id, 'date_from':holiday_id.date_from,'date_to':holiday_id.date_to,'number_of_days_temp':holiday_id.number_of_days_display})
+                    user_payslip.write({"holiday_ids":(4,holiday_day_id.id,0)})
+
+                for worked_day in slip.worked_days_line_ids:
+                    worked_day_id = self.env['user.payslip.worked_days'].create({'code':worked_day.code,'number_of_hours':worked_day.number_of_hours})
+                    user_payslip.write({"worked_days_line_ids":(4,worked_day_id.id,0)})
+
+                if slip.contract_id:
+                   user_contract = self.env["user.contract"].create({
+                    "wage_tax_base":slip.contract_id.wage_tax_base,
+                    "prel_tax_tabel":slip.contract_id.prel_tax_tabel,
+                    # "resource_calendar_id":slip.contract_id.resource_calendar_id.name,
+                    "name":slip.contract_id.resource_calendar_id.name,
+                    "employee_fund_balance":slip.contract_id.employee_fund_balance,
+                   })
+                   if slip.contract_id.resource_calendar_id:
+                        user_calendar = self.env['user.calendar'].create({'name':slip.contract_id.resource_calendar_id.name})
+                        user_contract.resource_calendar_id = user_calendar.id
+
+                   user_payslip.contract_id = user_contract
+
+                for line in slip.line_ids:
+                    _logger.warning(f"{line=}")
+                    #Create user line
+                    salary_category = self.env["user.salary.rule.category"].create({
+                        'code': line.category_id.code if line.category_id else False
+                    })
+                    salary_rule_id = self.env['user.salary.rule'].create({
+                        'appears_on_payslip': line.appears_on_payslip,
+                        'salary_art': line.salary_rule_id.salary_art if line.salary_rule_id else False})
+                    user_line = self.env["user.payslip.line"].create(
+                        {'code':line.code,
+                        'name':line.name,
+                        'quantity':line.quantity,
+                        'category_id':salary_category.id,
+                        'salary_rule_id': salary_rule_id.id,
+                        'rate':line.rate,
+                        'total':line.total,
+                        })
+                    user_payslip.write({"line_ids":(4,user_line.id,0)})
+                _logger.warning("LOOK HERE"*100)
+                _logger.warning(user_payslip.line_ids)
+
+
+        else:
+            raise UserError(_("There is no employee connected to this user."))
+        _logger.warning("3"*100)
         # ~ formview_ref = self.env.ref("payroll.hr_payslip_view_form", False)
         treeview_ref = self.env.ref("l10n_se_hr_payroll.user_payslip_view_tree", False)
         return {
@@ -142,7 +383,7 @@ class ResUsers(models.Model):
             "res_model": "user.payslip",
             "type": "ir.actions.act_window",
             "target": "current",
-            # ~ "domain": "[('id', 'in', %s)]" % copied_payslip.ids,
+            "domain": [("employee_id","=",self.employee_id.id)],
             "views": [
                 (treeview_ref and treeview_ref.id or False, "tree"),
                 # ~ (formview_ref and formview_ref.id or False, "form"),
