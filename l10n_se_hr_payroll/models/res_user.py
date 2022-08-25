@@ -307,12 +307,10 @@ class ResUsers(models.Model):
 
     def payslip_action(self):
         self = self.sudo()
-        _logger.warning("1"*100)
         self.env['user.payslip'].search([("employee_id","=",self.employee_id.id)]).unlink()
-        _logger.warning("2"*100)
         if self.employee_id:
             for slip in self.employee_id.sudo().slip_ids:
-                _logger.warning("Hello"*100)
+
                 user_payslip = self.env['user.payslip'].create({
                     'name': slip.name,
                     'number': slip.number,
@@ -325,10 +323,12 @@ class ResUsers(models.Model):
                     'payslip_id': slip.id,
                 })
 
+                holiday_ids_ids = []
                 for holiday_id in slip.holiday_ids:
                     holiday_status_id = self.env['user.holiday.status'].create({'name': holiday_id.holiday_status_id.name})
                     holiday_day_id = self.env['user.leave'].create({'holiday_status_id': holiday_status_id.id, 'date_from':holiday_id.date_from,'date_to':holiday_id.date_to,'number_of_days_temp':holiday_id.number_of_days_display})
-                    user_payslip.write({"holiday_ids":(4,holiday_day_id.id,0)})
+                    holiday_ids_ids.append(holiday_day_id.id)
+                user_payslip.write({"holiday_ids":[(6,0,holiday_ids_ids)]})
 
                 for worked_day in slip.worked_days_line_ids:
                     worked_day_id = self.env['user.payslip.worked_days'].create({'code':worked_day.code,'number_of_hours':worked_day.number_of_hours})
@@ -349,7 +349,6 @@ class ResUsers(models.Model):
                    user_payslip.contract_id = user_contract
 
                 for line in slip.line_ids:
-                    _logger.warning(f"{line=}")
                     #Create user line
                     salary_category = self.env["user.salary.rule.category"].create({
                         'code': line.category_id.code if line.category_id else False
@@ -367,13 +366,11 @@ class ResUsers(models.Model):
                         'total':line.total,
                         })
                     user_payslip.write({"line_ids":(4,user_line.id,0)})
-                _logger.warning("LOOK HERE"*100)
-                _logger.warning(user_payslip.line_ids)
+
 
 
         else:
             raise UserError(_("There is no employee connected to this user."))
-        _logger.warning("3"*100)
         # ~ formview_ref = self.env.ref("payroll.hr_payslip_view_form", False)
         treeview_ref = self.env.ref("l10n_se_hr_payroll.user_payslip_view_tree", False)
         return {
