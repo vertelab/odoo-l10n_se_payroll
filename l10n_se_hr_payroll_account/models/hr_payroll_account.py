@@ -1,7 +1,8 @@
 
-from datetime import timedelta, date
+from datetime import timedelta, date, datetime
 from odoo import models, fields, api, _
 from odoo.exceptions import UserError
+
 
 
 import logging
@@ -20,13 +21,13 @@ class HrPayslip(models.Model):
             line_ids = []
             debit_sum = 0.0
             credit_sum = 0.0
-            date = slip.date or slip.date_to
+            date = datetime.now()
             currency = slip.company_id.currency_id
 
             name = _('Payslip of %s') % (slip.employee_id.name)
             move_dict = {
                 'narration': name,
-                'ref': f"{slip.number}: {slip.employee_id.name}",
+                'ref': f"{slip.number} {slip.employee_id.name}",
                 'journal_id': slip.journal_id.id,
                 'date': date,
             }
