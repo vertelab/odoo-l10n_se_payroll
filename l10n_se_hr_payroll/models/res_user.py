@@ -129,14 +129,47 @@ class HrPayslipWorkedDays(models.TransientModel):
         help="The contract for which applied this input",
     )
 
+class HrLeave(models.TransientModel):
+    _name = "user.leave"
+    date_from = fields.Datetime()
+    date_to = fields.Datetime()
+    number_of_days_temp = fields.Float(string="Number of days")
+    payslip_id = fields.Many2one(
+        "user.payslip", string="Pay Slip", required=False, ondelete="cascade", index=True
+    )    
+    holiday_status_id = fields.Many2one(
+        "user.holiday.status"
+    )
+
+class HrHolidayStatus(models.TransientModel):
+    _name = "user.holiday.status"
+    name = fields.Char(string="name")
+
 class HrPayslip(models.TransientModel):
     _name = "user.payslip"
+
+    def get_legal_leaves_consumed(self):
+        self = self.sudo()
+        return self.payslip_id.get_legal_leaves_consumed()
+
+    def get_legal_leaves_status(self):
+        self = self.sudo()
+        return self.payslip_id.get_legal_leaves_status()
+
+
     worked_days_line_ids = fields.One2many(
         "user.payslip.worked_days",
         "payslip_id",
         string="Payslip Worked Days",
     )
     
+    # def _holiday_ids(self):
+    #     for rec in self:
+    #         # ~ rec.holiday_ids = rec.env['hr.leave'].search([('state','=','validate'),('employee_id','=',rec.employee_id.id),('type','=','remove')]).filtered(lambda h: h.date_from[:10>
+    #         rec.holiday_ids = rec.env['hr.leave'].search([('state','=','validate'),('employee_id','=',rec.employee_id.id)]).filtered(lambda h: h.date_from.date()<= rec.date_to and h.da>
+    holiday_ids = fields.One2many('user.leave',"payslip_id")
+
+
 
     line_ids = fields.One2many(
         "user.payslip.line",inverse_name='user_payslip_id'
@@ -191,15 +224,18 @@ class HrPayslip(models.TransientModel):
     payslip_id = fields.Many2one(comodel_name='hr.payslip')
     @api.model
     def get_slip_line(self, code):
+        self = self.sudo()
         lines = self.payslip_id.details_by_salary_rule_category.filtered(lambda l: l.code == code).mapped(lambda v: {'name': v.name, 'quantity': v.quantity, 'rate': v.rate, 'amount': v.amount, 'total': v.total})
         return lines
 
     @api.model
     def get_slip_line_total(self, code):
+        self = self.sudo()
         return self.payslip_id.get_slip_line_total(code)
 
     @api.model
     def get_slip_line_acc(self, code):
+        self = self.sudo()
         return self.payslip_id.get_slip_line_acc(code)
 
     def payslip_report(self):
@@ -253,6 +289,21 @@ class ResUsers(models.Model):
 #     prel_tax_tabel = fields.Char(string="Prel skatt info", help="Ange skattetabell/kolumn/ev jämkning som ligger till grund för angivet preleminärskatteavdrag")
 #     resource_calendar_name = fields.Char(string="Calender Name")
 #     name = fields.Char(string="Name")
+# class HrLeave(models.TransientModel):
+#     _name = "user.leave"
+#     date_from = fields.Datetime()
+#     date_to = fields.Datetime()
+#     number_of_days_temp = fields.Float(string="Number of days")
+#     payslip_id = fields.Many2one(
+#         "user.payslip", string="Pay Slip", required=False, ondelete="cascade", index=True
+#     )    
+#     holiday_status_id = fields.Many2one(
+#         "user.holiday.status"
+#     )
+
+# class HrHolidayStatus(models.TransientModel):
+#     _name = "user.holiday.status"
+#     name = fields.Char(string="name")
 
     def payslip_action(self):
         self = self.sudo()
@@ -273,6 +324,12 @@ class ResUsers(models.Model):
                     'state': slip.state,
                     'payslip_id': slip.id,
                 })
+
+                for holiday_id in slip.holiday_ids:
+                    holiday_status_id = self.env['user.holiday.status'].create({'name': holiday_id.holiday_status_id.name})
+                    holiday_day_id = self.env['user.leave'].create({'holiday_status_id': holiday_status_id.id, 'date_from':holiday_id.date_from,'date_to':holiday_id.date_to,'number_of_days_temp':holiday_id.number_of_days_display})
+                    user_payslip.write({"holiday_ids":(4,holiday_day_id.id,0)})
+
                 for worked_day in slip.worked_days_line_ids:
                     worked_day_id = self.env['user.payslip.worked_days'].create({'code':worked_day.code,'number_of_hours':worked_day.number_of_hours})
                     user_payslip.write({"worked_days_line_ids":(4,worked_day_id.id,0)})

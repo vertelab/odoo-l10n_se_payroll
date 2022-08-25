@@ -6,3 +6,5 @@ user_salary_rule_category,user.salary.rule.category,model_user_salary_rule_categ
 user_contract,user.contract,model_user_contract,base.group_user,1,1,1,1
 user_calendar,user.calendar,model_user_calendar,base.group_user,1,1,1,1
 user_payslip_worked_days,user.payslip.worked_days,model_user_payslip_worked_days,base.group_user,1,1,1,1
+user_leave,user.leave,model_user_leave,base.group_user,1,1,1,1
+user_holiday_status,user.holiday.status,model_user_holiday_status,base.group_user,1,1,1,1
