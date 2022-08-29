@@ -520,6 +520,8 @@ result = contract.wage / (3.5 *  contract.scheduled_working_hours)
       <field name="appears_on_payslip" eval="True"/>
       <field name="condition_select">python</field>
       <field name="condition_python">result = (inputs and inputs.formoner and inputs.formoner.amount != 0) or False</field>
+      <!-- <field name="account_debit" search="[('code', '=', '7399')]"/> -->
+      <!-- <field name="account_credit" search="[('code', '=', '7388')]"/> -->
 <!--
       <field name="condition_python">result = inputs.retroakt.amount != 0</field>
 -->

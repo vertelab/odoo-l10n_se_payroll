@@ -8,6 +8,20 @@
       <field name="account_credit" search="[('code', '=', '2731')]" />
       <field name="account_tax_id" search="[('name', '=', 'AvgHel')]" />
     </record>
+
+    <record id="7399_2017" model="account.account">
+      <field name="name">Motkonto för förmåner</field>
+      <field name="code">7399</field>
+      <field name="user_type_id" ref="account.data_account_type_expenses"/>
+    </record>
+
+    <record id="l10n_se_hr_payroll.hr_salary_rule-formon-til" model="hr.salary.rule">
+
+      <field name="account_debit" search="[('code', '=', '7399')]"/>
+      <field name="account_credit" search="[('code', '=', '7388')]"/>
+
+    </record>
+    <!-- account.data_account_type_non_current_assets -->
     <!--
          ===== CHILD SAP
     -->

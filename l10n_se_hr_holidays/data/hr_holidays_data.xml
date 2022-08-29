@@ -14,7 +14,7 @@
     -->
     <record model="hr.leave.type" id="holiday_status_cl1">
       <field name="name" eval="'Legal Leaves '+str(DateTime.today().year)" />
-      <field name="code" eval="'sem_bet '+str(DateTime.today().year)" />
+      <field name="code" eval="'sem_bet'" />
       <field name="color_name">black</field>
       <field name="legal_leave" eval="True" />
       <field name="limit" eval="False" />
@@ -23,7 +23,7 @@
     </record>
     <record model="hr.leave.type" id="holiday_status_cl2">
       <field name="name" eval="'Legal Leaves '+str(DateTime.today().year + 1)" />
-      <field name="code" eval="'sem_bet '+str(DateTime.today().year) +1" />
+      <field name="code" eval="'sem_bet'" />
       <field name="color_name">black</field>
       <field name="legal_leave" eval="True" />
       <field name="limit" eval="False" />
@@ -32,7 +32,7 @@
     </record>
     <record model="hr.leave.type" id="holiday_status_cl3">
       <field name="name" eval="'Legal Leaves '+str(DateTime.today().year + 2)" />
-      <field name="code" eval="'sem_bet '+str(DateTime.today().year) +2" />
+      <field name="code" eval="'sem_bet'" />
       <field name="color_name">black</field>
       <field name="legal_leave" eval="True" />
       <field name="limit" eval="False" />
