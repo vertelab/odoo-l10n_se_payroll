@@ -351,14 +351,17 @@ if age > 77:
          =====
     -->
     <record id="hr_salary_rule-pre" model="hr.salary.rule">
-      <field name="category_id" ref="hr_salary_rule_category-PARENT" />
+      <field name="category_id" ref="hr_salary_rule_category-NETAVG" />
       <field name="code">pre</field>
       <field name="name">Preliminärskatt</field>
       <field name="sequence">690</field>
       <field name="appears_on_payslip" eval="False"/>
       <field name="condition_select">none</field>
       <field name="amount_select">code</field>
-      <field name="amount_python_compute">result = 0</field>
+      <field name="amount_python_compute">
+#result = 0
+result = contract.l10_sum_columns_taxtable_line(payslip.date_from, categories.BRUTTO) + categories.SKVPRE
+</field>
       <field name="quantity">1</field>
     </record>
     <!--
@@ -374,7 +377,11 @@ if age > 77:
       <field name="appears_on_payslip" eval="True"/>
       <field name="condition_select">none</field>
       <field name="amount_select">code</field>
-      <field name="amount_python_compute">result = contract.l10_sum_columns_taxtable_line(payslip.date_from, categories.BRUTTO) + categories.SKVPRE</field>
+      <field name="amount_python_compute">
+#result = contract.l10_sum_columns_taxtable_line(payslip.date_from, categories.BRUTTO) + categories.SKVPRE
+result = 0
+</field>
+
 <!--      <field name="amount_python_compute">result = contract.prel_tax_amount + categories.SKVPRE</field>-->
 <!--
       <field name="account_credit" search="[('code', '=', '2710')]" />

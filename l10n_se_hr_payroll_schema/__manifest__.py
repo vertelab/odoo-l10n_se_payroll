@@ -40,7 +40,7 @@ Swedish Payslip additions for Schema
     'data':[
         'hr_salary_rule_data.xml',
     ],
-    'auto_install': True,
+    'auto_install': False,
     'installable': True,
 }
 

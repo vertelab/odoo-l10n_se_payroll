@@ -380,5 +380,26 @@
             </t>
         </template>
         <report id="l10n_se_hr_payroll.payslip" model="user.payslip" string="Payslip SE" report_type="qweb-pdf" name="l10n_se_hr_payroll.payslip_document" file="l10n_se_hr_payroll.payslip_document" attachment_use="True" attachment="('payslip_'+(object.number.replace('/','') if object.number else ''))+'.pdf'" />
+
+            <!-- <record id="payslip_odt" model="ir.actions.report">
+                <field name="report_type">py3o</field>
+                <field name="py3o_filetype">odt</field>
+                <field name="module">l10n_se_hr_payroll</field>
+                <field name="py3o_template_fallback">/usr/share/l10n_se_hr_payroll/report/payslip.odt</field>
+            </record> -->
+
+
+            <record id="payslip_odt" model="ir.actions.report">
+                <field name="name">Payslip Odt</field>
+                <field name="model">user.payslip</field>
+                <field name="report_name">Pyslip_odt</field>
+                <field name="report_type">py3o</field>
+                <field name="py3o_filetype">pdf</field>
+                <field name="module">l10n_se_hr_payroll</field>
+                <field name="py3o_template_fallback">/usr/share/l10n_se_hr_payroll/report/payslip.odt</field>
+                <!-- Add entry in "Print" drop-down list -->
+                <field name="binding_type">report</field>
+                <field name="binding_model_id" ref="l10n_se_hr_payroll.model_user_payslip"/>
+            </record>
     </data>
 </odoo>

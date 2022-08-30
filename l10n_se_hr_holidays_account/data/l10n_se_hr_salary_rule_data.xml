@@ -2,12 +2,12 @@
 <odoo>
     <data>
         <record id="l10n_se_hr_holidays.hr_salary_rule-holiday-pay" model="hr.salary.rule">
-            <field name="account_debit" search="[('code', '=', '7290')]" />
-            <field name="account_credit" search="[('code', '=', '2920')]" />
+            <field name="account_credit" search="[('code', '=', '7290')]" />
+            <field name="account_debit" search="[('code', '=', '2920')]" />
         </record>
         <record id="l10n_se_hr_holidays.hr_salary_rule-socav-for-sem" model="hr.salary.rule">
-            <field name="account_debit" search="[('code', '=', '7519')]" />
-            <field name="account_credit" search="[('code', '=', '2941')]" />
+            <field name="account_credit" search="[('code', '=', '7519')]" />
+            <field name="account_debit" search="[('code', '=', '2941')]" />
         </record>
     </data>
 </odoo>
