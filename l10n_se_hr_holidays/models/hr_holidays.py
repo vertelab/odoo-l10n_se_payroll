@@ -18,6 +18,7 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
+from dataclasses import field
 import openerp.exceptions
 from openerp import models, fields, api, _
 import datetime
@@ -26,14 +27,51 @@ from datetime import timedelta, date
 import logging
 _logger = logging.getLogger(__name__)
 
-class hr_holidays(models.Model):
-    # ~ _inherit = "hr.holidays"
-        _inherit = "hr.leave"
+#class hr_holidays(models.Model):
+class Holidays(models.Model):
+    # _inherit = "hr_holidays.holidays"
+    _inherit = "hr.leave"
 
     # ~ earning_id = fields.Many2one(comodel_name='hr.holidays.earning')
 
+    # def _timesheet_prepare_line_values(self, index, work_hours_data, day_date, work_hours_count):
+    #     self.ensure_one()
+    #     return {
+    #         'name': "%s (%s/%s)" % (self.holiday_status_id.name or '', index + 1, len(work_hours_data)),
+    #         'project_id': self.holiday_status_id.timesheet_project_id.id,
+    #         'task_id': self.holiday_status_id.timesheet_task_id.id,
+    #         'account_id': self.holiday_status_id.timesheet_project_id.analytic_account_id.id,
+    #         'unit_amount': work_hours_count,
+    #         'user_id': self.employee_id.user_id.id,
+    #         'date': day_date,
+    #         'holiday_id': self.id,
+    #         'employee_id': self.employee_id.id,
+    #         'company_id': self.holiday_status_id.timesheet_task_id.company_id.id or self.holiday_status_id.timesheet_project_id.company_id.id,
+    #     }
+
+    # not_paid = field.Boolean()
+
+    # unpaid = fields.Boolean('Is Unpaid', default=False)
+    def _timesheet_prepare_line_values(self, index, work_hours_data, day_date, work_hours_count):
+        val_list = super(Holidays, self)._timesheet_prepare_line_values(index, work_hours_data, day_date, work_hours_count)
+        _logger.error(f"{val_list=}")
+        val_list['non_billable_time'] = self.holiday_status_id.unpaid * val_list["unit_amount"]
+        val_list['non_billable'] = self.holiday_status_id.unpaid
+        _logger.error(f"{val_list=}")
+        return val_list
+
+# class HolidaysType(models.Model):
+#     _inherit = "hr.leave.type"
+#     # _description = "Time Off Type"
+
+#     @api.model
+#     def _model_sorting_key(self):
+#         self.unpaid = fields.Boolean('Is Unpaid', default=False)
+
+
 class hr_holidays_status(models.Model):
     # ~ _inherit = "hr.holidays.status" looks like hr.leave.type is the replacment
+    #_inherit = ["hr.leave.type","hr.timesheet.schema"]
     _inherit = "hr.leave.type"
     limit = fields.Boolean('Allow to Override Limit',
     help='If you select this check box, the system allows the employees to take more leaves '
@@ -63,6 +101,7 @@ class hr_holidays_status(models.Model):
             'allocation_type':'no',
             'limit': True,
             'allocation_type':'no',
+            #'unpaid': True,
         })
         holiday_status_sl = self.env['ir.model.data'].get_object_reference('hr_holidays', 'holiday_status_sl')
         self.env['hr.leave.type'].browse(holiday_status_sl[1]).write({
