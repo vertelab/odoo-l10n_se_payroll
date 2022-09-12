@@ -5,7 +5,7 @@
 {
         'name': 'l10n_se Payroll Paysplip',
     'version': '1.0.0',
-    'category': 'Human Resources',
+    'category': 'Payroll Localization',
     'license': 'AGPL-3',
     'summary': 'Sample py3o payslip reports',
     'description': """
