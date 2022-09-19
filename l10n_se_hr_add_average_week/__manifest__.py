@@ -23,10 +23,10 @@
     'name': 'l10n_se_payroll: Add Average Hours Per Week To Contracts',
     'version': '14.0.1.0.0',
     # Version ledger: 14.0 = Odoo version. 1 = Major. Non regressionable code. 2 = Minor. New features that are regressionable. 3 = Bug fixes
-    'summary': '',
+    'summary': 'Adding an average week field to resource.calendar!',
     'category': 'Payroll Localization',
     'description': """
-    Adding a average week field to resource.calendar to make it easier to make payroll rules.
+    Adding an average week field to resource.calendar to make it easier to make payroll rules.
 
     """,
     #'sequence': '1'
