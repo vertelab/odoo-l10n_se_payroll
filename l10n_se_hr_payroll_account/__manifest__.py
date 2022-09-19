@@ -23,9 +23,12 @@
     'name': 'l10n_se_payroll: Payroll with Accounting',
     'version': '14.0.1.0.0',
     # Version ledger: 14.0 = Odoo version. 1 = Major. Non regressionable code. 2 = Minor. New features that are regressionable. 3 = Bug fixes
-    'summary': '',
+    'summary': 'Accounting Data for Swedish Payroll Rules.',
     'category': 'Payroll Localization',
-    'description': '',
+    'description': """
+Accounting Data for Swedish Payroll Rules.
+==========================================
+    """,
     #'sequence': '1'
     'author': 'Vertel AB',
     'website': 'https://vertel.se/apps/l10n_se_payroll/l10n_se_hr_payroll_account',
@@ -35,11 +38,6 @@
     'maintainer': 'Vertel AB',
     'repository': 'https://github.com/vertelab/odoo-l10n-se-payroll',
     'depends': ['l10n_se_hr_payroll', 'payroll_account', 'l10n_se'],
-    'description': """
-Accounting Data for Swedish Payroll Rules.
-==========================================
-    """,
-
     'auto_install': True,
     'demo': [],
     'data':[
