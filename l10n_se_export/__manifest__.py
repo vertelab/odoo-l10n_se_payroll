@@ -23,9 +23,9 @@
     'name': 'l10n_se_payroll: Swedish Export',
     'version': '14.0.1.0.0',
     # Version ledger: 14.0 = Odoo version. 1 = Major. Non regressionable code. 2 = Minor. New features that are regressionable. 3 = Bug fixes
-    'summary': '',
+    'summary': 'Export of Swedish accounting.',
     'category': 'Payroll Localization',
-    'description': '',
+    'description': 'Export of Swedish data.',
     #'sequence': '1'
     'author': 'Vertel AB',
     'website': 'https://vertel.se/apps/l10n_se_payroll/l10n_se_export',
