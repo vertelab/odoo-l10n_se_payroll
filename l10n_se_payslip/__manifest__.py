@@ -3,7 +3,7 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
 {
-        'name': 'l10n_se Payroll Paysplip',
+        'name': 'l10n_se Payroll: Paysplip',
     'version': '1.0.0',
     'category': 'Payroll Localization',
     'license': 'AGPL-3',
