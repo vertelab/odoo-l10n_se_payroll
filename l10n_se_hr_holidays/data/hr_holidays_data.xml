@@ -42,6 +42,7 @@
     
     <record model="hr.leave.type" id="holiday_status_cl4">
          <field name="name">Legal Leaves unpaid</field>
+         <field name="code" eval="'sem_obet'" />
          <field name="color_name">black</field>
          </record>
    
