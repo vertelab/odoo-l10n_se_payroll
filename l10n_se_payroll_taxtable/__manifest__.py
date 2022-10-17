@@ -32,7 +32,11 @@
     'repository': 'https://github.com/vertelab/odoo-l10n-se-payroll',
     'depends': ['l10n_se', 'hr_contract'],
     'description': """
+    To configure the tax table start with coping this link:
     https://skatteverket.entryscape.net/store/9/resource/1534
+    Then go to Employee and chose in the sub menu Configuration.
+    Click on Sync TaxTable and insert the link.
+    Click on Sync and it's done.
     """,
     'auto_install': False,
     'demo': [],
