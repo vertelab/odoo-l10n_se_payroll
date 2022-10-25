@@ -9,13 +9,13 @@
                 <t t-if="not o or not 'company_id' in o">
                     <t t-set="company" t-value="res_company" />
                 </t>
+                <t t-raw="0"/>
                 <t t-call="l10n_se_hr_payroll.external_layout_header" />
-                <t t-raw="0" />
                 <t t-call="l10n_se_hr_payroll.external_layout_footer" />
             </div>
         </template>
         <template id="l10n_se_hr_payroll.external_layout_header">
-            <div class="header">
+            <div class="header" style="margin-bottom:0px;">
                 <div class="row">
                     <div class="col-xs-3">
                         <img t-if="company.logo" t-att-src="'data:image/png;base64,%s' % company.logo" style="max-height: 45px;" />
@@ -47,8 +47,9 @@
                 </div>
             </div>
         </template>
+        <!--Facktiskt footern height: 500px;  margin-top:-500px; height:500px;-->
         <template id="l10n_se_hr_payroll.external_layout_footer">
-            <div class="footer" style="height: 500px;">
+            <div class="footer" >
                 <div id="footer_table_div" class="col-md-12 col-sm-12 col-xs-12" style="padding: 0px;">
                     <table class="table table-sm table-responsive" style="margin: 0px; border-collapse: collapse;">
                         <tbody>
@@ -186,7 +187,8 @@
                             </tr>
                         </tbody>
                     </table>
-                    <table id="holidays" class="table table-sm table-responsive" style="margin: 0px; border-collapse: collapse;">
+                    <table id="holidays" class="table table-sm table-responsive" style="margin: 0px; border-collapse: collapse; ">
+                        <div>
                         <tbody>
                             <tr>
                                 <td>
@@ -204,8 +206,10 @@
                                 </td>
                             </tr>
                         </tbody>
+                    </div>
                     </table>
                     <table id="overall" class="table table-sm table-responsive" style="margin: 0px; border-collapse: collapse;">
+                        <div>
                         <tbody>
                             <tr style="background: #eee;">
                                 <td>
@@ -230,6 +234,7 @@
                                 </td>
                             </tr>
                         </tbody>
+                        </div>
                     </table>
                 </div>
                 <div class="text-center" style="border-top: 1px solid black;">
@@ -237,44 +242,44 @@
                     <ul t-if="not company.custom_footer" class="list-inline">
 -->
                     <ul class="list-inline">
-                        <li t-if="company.phone">
+                        <li>
+                        <span t-if="company.phone">
                             Phone:
                             <span t-field="company.phone" />
-                        </li>
+                        </span>
 <!--
                         <li t-if="company.fax and company.phone">&amp;bull;</li>
 -->
-                        <li t-if="company.phone">&amp;bull;</li>
+                        <!-- <span t-if="company.phone">&amp;bull;</span> -->
 <!--
                         <li t-if="company.fax">
                             Fax:
                             <span t-field="company.fax" />
                         </li>
 -->
-                        <li t-if="company.email">&amp;bull;</li>
-                        <li t-if="company.email">
+                        <span t-if="company.email">&amp;bull;</span>
+                        <span t-if="company.email">
                             Email:
                             <span t-field="company.email" />
-                        </li>
-                        <li t-if="company.website">&amp;bull;</li>
-                        <li t-if="company.website">
+                        </span>
+                        <span t-if="company.website">&amp;bull;</span>
+                        <span t-if="company.website">
                             Website:
                             <span t-field="company.website" />
-                        </li>
+                        </span>
+                    </li>
                     </ul>
 <!--
                     <t t-if="company.custom_footer">
 -->
                     <t>
-                        <!--rml_footer-->><span t-raw="company.report_footer" style="font-size: 0.9em;" />
+                        <!--rml_footer--><span t-raw="company.report_footer" style="font-size: 0.9em;" />
                     </t>
                     <ul class="list-inline">
-                        <li>Page:</li>
                         <li>
+                            Page:
                             <span class="page" />
-                        </li>
-                        <li>/</li>
-                        <li>
+                        <span>/</span>
                             <span class="topage" />
                         </li>
                     </ul>
@@ -300,6 +305,7 @@
                                 <table class="table table-condensed">
                                     <thead>
                                         <tr>
+                                            <!--Kommer efter titel-->
                                             <th>Löneart</th>
                                             <th>Kod</th>
                                             <th>Benämning</th>
@@ -387,7 +393,17 @@
                 <field name="module">l10n_se_hr_payroll</field>
                 <field name="py3o_template_fallback">/usr/share/l10n_se_hr_payroll/report/payslip.odt</field>
             </record> -->
-
+            <record id="payslip_pdf_format" model="report.paperformat">
+                <field name="name">Payslip pdf format</field>
+                <field name="format">A4</field>
+                <field name="orientation">Portrait</field>
+                <field name="margin_top">40</field>
+                <field name="margin_bottom">90</field>
+                <field name="margin_left">7</field>
+                <field name="margin_right">7</field>
+                <field name="header_spacing">35</field>
+                <field name="dpi">90</field>
+            </record>
 
             <record id="payslip_odt" model="ir.actions.report">
                 <field name="name">Payslip Odt</field>
