@@ -9,8 +9,9 @@
                 <t t-if="not o or not 'company_id' in o">
                     <t t-set="company" t-value="res_company" />
                 </t>
-                <t t-raw="0"/>
                 <t t-call="l10n_se_hr_payroll.external_layout_header" />
+                <t t-raw="0"/>
+                <!-- <t t-call="test_table" /> -->
                 <t t-call="l10n_se_hr_payroll.external_layout_footer" />
             </div>
         </template>
@@ -47,12 +48,74 @@
                 </div>
             </div>
         </template>
-        <!--Facktiskt footern height: 500px;  margin-top:-500px; height:500px;-->
+        <!--Facktiskt footern height: 500px;  margin-top:-500px; height:500px; border-collapse: collapse;-->
+        
         <template id="l10n_se_hr_payroll.external_layout_footer">
             <div class="footer" >
-                <div id="footer_table_div" class="col-md-12 col-sm-12 col-xs-12" style="padding: 0px;">
-                    <table class="table table-sm table-responsive" style="margin: 0px; border-collapse: collapse;">
-                        <tbody>
+                <div id="footer_table_div" class="col-md-12 col-sm-12 col-xs-12">
+                        <table style="width:100%;">
+                            <tr style = "background-color: #eee;">
+                                <th style="padding:10px 0px 0px 10px;">
+                                    Ackumulerad
+                                </th>
+                                <th style="padding:10px 0px 0px 10px;">
+                                    Skatt beräknad på
+                                </th>
+                                <th style="padding:10px 0px 0px 10px;">
+                                    Löneperiod
+                                </th>
+                            </tr>
+                            <tr >
+                                <td style = "border:1px solid #C0C0C0;">
+                                    <div>
+                                        <span style="padding:10px 0px 0px 10px;">Bruttolön:
+                                        <span class="pull-right pr-5" ><t t-esc="int(o.get_slip_line_acc('bl')) or 0" /></span></span>
+                                        <br />
+                                        <span id='forman-table1' style="padding:10px 0px 0px 10px;"></span>
+                                        <br />
+                                        <span style="padding:10px 0px 0px 10px;">Preliminärskatt:
+                                        <span class="pull-right pr-5" ><t t-esc="int(o.get_slip_line_acc('prej')) or 0" /></span></span>
+                                        <br />
+                                        <span style="padding:10px 0px 0px 10px;">
+                                            <t t-if="len(o.get_slip_line('san')) &gt; 0">
+                                                <span class="pull-right pr-5">
+                                                    <t t-esc="o.get_slip_line('san')[0]['name']" />
+                                                </span>
+                                            </t>
+                                        </span>
+                                    </div>
+                                </td>
+                                <td style = "border:1px solid #C0C0C0;">
+                                    <div>
+                                        <span style="padding:10px 0px 0px 10px;">Belopp:
+                                        <span class="pull-right pr-5" ><t t-esc="o.contract_id.wage_tax_base" /></span></span>
+                                        <br />
+                                        <span style="padding:10px 0px 0px 10px;">Skattetabell:
+                                        <span class="pull-right pr-5" ><t t-esc="o.contract_id.prel_tax_tabel" /></span></span>
+                                    </div>
+                                </td>
+                                <td style = "border:1px solid #C0C0C0;">
+                                    <div>
+                                        <span style="padding:10px 0px 0px 10px;">Bruttolön:
+                                        <span class="pull-right pr-5" ><t t-esc="o.get_slip_line('bl')[0]['total'] if len(o.get_slip_line('bl')) &gt; 0 else 0" /></span></span>
+                                        <br />
+                                        <span id='forman-table2' style="padding:10px 0px 0px 10px;"></span>
+                                        <br />
+                                        <span style="padding:10px 0px 0px 10px;">Skatteavdrag:</span>
+                                        <br />
+                                        <span style="padding:10px 0px 0px 10px;">Övriga avdrag:</span>
+                                        <br />
+                                        <span style="padding:10px 0px 0px 10px;">Ersättning:</span>
+                                        <br />
+                                        <span style="padding:10px 0px 0px 10px;">Öresutjämning:</span>
+                                        <br />
+                                        <span ><h5 style="padding:10px 0px 0px 10px;"><b>Nettolön:</b></h5></span>
+                                    </div>
+                                </td>
+                            </tr>
+                        </table>
+                    <!-- <table class="table table-sm table-responsive" style="margin: 0px; width:100%;">
+                        <tbody >
                             <tr id="table_row_one">
                                 <td id="tidssaldon" />
                                 <td id="salary_balance" />
@@ -63,130 +126,132 @@
                                         <span class="pull-left">
                                             <t t-esc="o.get_slip_line('san')[0]['name']" />
                                         </span>
-                                        <span class="pull-right">
-                                            <t t-esc="o.get_slip_line('san')[0]['total']" />
-                                        </span>
-                                    </t>
-                                    <t t-if="len(o.get_slip_line('sau')) &gt; 0">
+                                        <span class="pull-right"> -->
+                                            <!--random sifror-->
+                                            <!-- <t t-esc="o.get_slip_line('san')[0]['total']" /> -->
+                                        <!-- </span>
+                                    </t> -->
+                                     <!-- <t t-if="len(o.get_slip_line('sau')) &gt; 0">
                                         <span class="pull-left">
                                             <t t-esc="o.get_slip_line('sau')[0]['name']" />
                                         </span>
                                         <span class="pull-right">
                                             <t t-esc="o.get_slip_line('sau')[0]['total']" />
                                         </span>
-                                    </t>
-                                    <t t-if="len(o.get_slip_line('sap')) &gt; 0">
+                                    </t> -->
+                                    <!-- <t t-if="len(o.get_slip_line('sap')) &gt; 0">
                                         <span class="pull-left">
                                             <t t-esc="o.get_slip_line('sap')[0]['name']" />
                                         </span>
                                         <span class="pull-right">
                                             <t t-esc="o.get_slip_line('sap')[0]['total']" />
                                         </span>
-                                    </t>
-                                </td>
+                                    </t> -->
+                                <!-- </td>
                             </tr>
                             <tr id="table_row_two">
                                 <td id="salary_accumulators">
                                     <span style="font-size: 0.7em;">Ackumulerad</span>
                                     <br />
                                     <span class="pull-left">Bruttolön</span>
-                                    <span class="pull-right">
-                                        <t t-esc="int(o.get_slip_line_acc('bl')) or 0" />
-                                    </span>
+                                    <span class="pull-right"> -->
+                                        <!-- <t t-esc="int(o.get_slip_line_acc('bl')) or 0" /> -->
+                                    <!-- </span>
                                     <br />
                                     <span id="forman" />
                                     <span class="pull-left">Preliminärskatt</span>
-                                    <span class="pull-right">
-                                        <t t-esc="int(o.get_slip_line_acc('prej')) or 0" />
-                                    </span>
-                                    <br />
-                                    <t t-if="len(o.get_slip_line('san')) &gt; 0">
+                                    <span class="pull-right"> -->
+                                        <!-- <t t-esc="int(o.get_slip_line_acc('prej')) or 0" /> -->
+                                    <!-- </span>
+                                    <br /> -->
+                                    <!-- <t t-if="len(o.get_slip_line('san')) &gt; 0">
                                         <span class="pull-left">
                                             <t t-esc="o.get_slip_line('san')[0]['name']" />
                                         </span>
                                         <span class="pull-right">
                                             <t t-esc="o.get_slip_line_acc('san')" />
                                         </span>
-                                    </t>
-                                    <t t-if="len(o.get_slip_line('sau')) &gt; 0">
+                                    </t> -->
+                                    <!-- <t t-if="len(o.get_slip_line('sau')) &gt; 0">
                                         <span class="pull-left">
                                             <t t-esc="o.get_slip_line('sau')[0]['name']" />
                                         </span>
                                         <span class="pull-right">
                                             <t t-esc="o.get_slip_line_acc('sau')" />
                                         </span>
-                                    </t>
-                                    <t t-if="len(o.get_slip_line('sap')) &gt; 0">
+                                    </t> -->
+                                    <!-- <t t-if="len(o.get_slip_line('sap')) &gt; 0">
                                         <span class="pull-left">
                                             <t t-esc="o.get_slip_line('sap')[0]['name']" />
                                         </span>
                                         <span class="pull-right">
                                             <t t-esc="o.get_slip_line_acc('sap')" />
                                         </span>
-                                    </t>
-                                </td>
-                                <td>
+                                    </t> -->
+                                <!-- </td>
+
+                                <td style="text-align: center;">
                                     <span style="font-size: 0.7em;">Skatt beräknad på</span>
                                     <br />
                                     <span class="pull-left">Belopp</span>
-                                    <span class="pull-right">
-                                        <t t-esc="o.contract_id.wage_tax_base" />
-                                    </span>
+                                    <span class="pull-right"> -->
+                                        <!-- <t t-esc="o.contract_id.wage_tax_base" /> -->
+                                    <!-- </span>
                                     <br />
                                     <span class="pull-left">Preliminärskatt</span>
-                                    <span class="pull-right">
-                                        <t t-if="len(o.get_slip_line('prej')) &gt; 0">
+                                    <span class="pull-right"> -->
+                                        <!-- <t t-if="len(o.get_slip_line('prej')) &gt; 0">
                                             <t t-esc="o.get_slip_line('prej')[0]['total'] or 0" />
                                         </t>
                                         <t t-if="len(o.get_slip_line('prej-tim')) &gt; 0">
                                             <t t-esc="o.get_slip_line('prej-tim')[0]['total'] or 0" />
-                                        </t>
-                                    </span>
-                                    <br />
-                                    <t t-if="len(o.get_slip_line('san')) &gt; 0">
+                                        </t> -->
+                                    <!-- </span>
+                                    <br /> -->
+                                    <!-- <t t-if="len(o.get_slip_line('san')) &gt; 0">
                                         <span class="pull-left">
                                             <t t-esc="o.get_slip_line('san')[0]['name']" />
                                         </span>
                                         <span class="pull-right">
                                             <t t-esc="o.get_slip_line('san')[0]['total']" />
                                         </span>
-                                    </t>
-                                    <t t-if="len(o.get_slip_line('sau')) &gt; 0">
+                                    </t> -->
+                                    <!-- <t t-if="len(o.get_slip_line('sau')) &gt; 0">
                                         <span class="pull-left">
                                             <t t-esc="o.get_slip_line('sau')[0]['name']" />
                                         </span>
                                         <span class="pull-right">
                                             <t t-esc="o.get_slip_line('sau')[0]['total']" />
                                         </span>
-                                    </t>
-                                    <t t-if="len(o.get_slip_line('sap')) &gt; 0">
+                                    </t> -->
+                                    <!-- <t t-if="len(o.get_slip_line('sap')) &gt; 0">
                                         <span class="pull-left">
                                             <t t-esc="o.get_slip_line('sap')[0]['name']" />
                                         </span>
                                         <span class="pull-right">
                                             <t t-esc="o.get_slip_line('sap')[0]['total']" />
                                         </span>
-                                    </t>
-                                    <br />
+                                    </t> -->
+                                    <!-- <br />
                                     <span class="pull-left">Skattetabell</span>
-                                    <span class="pull-right">
-                                        <t t-esc="o.contract_id.prel_tax_tabel" />
-                                    </span>
+                                    <span class="pull-right"> -->
+                                        <!-- <t t-esc="o.contract_id.prel_tax_tabel" /> -->
+                                    <!-- </span>
                                 </td>
                                 <td>
                                     <span style="font-size: 0.7em;">Löneperiod</span>
                                     <br />
                                     <span class="pull-left">Bruttolön</span>
-                                    <span class="pull-right">
-                                        <t t-esc="o.get_slip_line('bl')[0]['total'] if len(o.get_slip_line('bl')) &gt; 0 else 0" />
-                                    </span>
+                                    <span class="pull-right"> -->
+                                        <!-- <t t-esc="o.get_slip_line('bl')[0]['total'] if len(o.get_slip_line('bl')) &gt; 0 else 0" /> -->
+                                    <!-- </span>
                                     <br />
                                     <br />
                                     <br />
                                 </td>
                             </tr>
                         </tbody>
-                    </table>
+                    </table> -->
                     <table id="holidays" class="table table-sm table-responsive" style="margin: 0px; border-collapse: collapse; ">
                         <div>
                         <tbody>
@@ -208,6 +273,7 @@
                         </tbody>
                     </div>
                     </table>
+                    <!--Keep-->
                     <table id="overall" class="table table-sm table-responsive" style="margin: 0px; border-collapse: collapse;">
                         <div>
                         <tbody>
@@ -236,6 +302,7 @@
                         </tbody>
                         </div>
                     </table>
+
                 </div>
                 <div class="text-center" style="border-top: 1px solid black;">
 <!--

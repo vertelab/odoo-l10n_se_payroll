@@ -1,17 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
 <openerp>
     <data>
-        <template id="payslip_document" inherit_id="l10n_se_hr_payroll.external_layout_footer">
+        <!-- <template id="payslip_document" inherit_id="l10n_se_hr_payroll.external_layout_footer">
             <xpath expr="//td[@id='salary_balance']" position="replace">
                 <td id="salary_balance">
                     <span style="font-size: 0.7em;">Anställd fond</span><br/>
-                    <span class="pull-left" t-field="o.contract_id.employee_fund_name"/>
+                    <span class="pull-left" t-field="o.contract_id.employee_fund_name"/> -->
                     <!--Behöver fixas ger error-->
                     <!-- <span class="pull-right" t-field="o.contract_id.employee_fund_balance" /> -->
-                </td>
+                <!-- </td>
             </xpath>
             <xpath expr="//span[@id='forman']" position="replace">
                 <span id="forman" class="pull-left">Förmån</span><span class="pull-right"><t t-esc="o.get_slip_line_acc('forman') or 0" /></span><br/>
+            </xpath>
+        </template> -->
+        
+        <template id="payslip_document" inherit_id="l10n_se_hr_payroll.external_layout_footer">
+            <xpath expr="//span[@id='forman-table1']" position="inside">
+                <span>Förmån:</span><span class="pull-right pr-5"><t t-esc="o.get_slip_line_acc('forman') or 0" /></span>
+            </xpath>
+            <xpath expr="//span[@id='forman-table2']" position="inside">
+                <span>Förmån:</span><span class="pull-right pr-5"><t t-esc="o.get_slip_line_acc('forman') or 0" /></span>
             </xpath>
         </template>
     </data>
