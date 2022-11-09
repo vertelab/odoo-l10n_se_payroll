@@ -107,9 +107,13 @@
                                         <br />
                                         <span style="padding:10px 0px 0px 10px;">Ersättning:</span>
                                         <br />
-                                        <span style="padding:10px 0px 0px 10px;">Öresutjämning:</span>
+                                        <span style="padding:10px 0px 0px 10px;">Öresutjämning:
+                                            <span class="pull-right pr-5" ><t t-esc="o.get_slip_line('ner_ore')[0]['total'] if len(o.get_slip_line('net_ore')) &gt; 0 else 0" /></span>
+                                        </span>
                                         <br />
-                                        <span ><h5 style="padding:10px 0px 0px 10px;"><b>Nettolön:</b></h5></span>
+                                        <span ><h5 style="padding:10px 0px 0px 10px;"><b>Nettolön:
+                                            <span class="pull-right pr-5" ><t t-esc="o.get_slip_line('bl')[0]['total'] if len(o.get_slip_line('net')) &gt; 0 else 0" /></span>
+                                        </b></h5></span>
                                     </div>
                                 </td>
                             </tr>
@@ -257,7 +261,7 @@
                         <tbody>
                             <tr>
                                 <td>
-                                    <span style="font-size: 0.7em;">Årets semester</span>
+                                    <span style="font-size: 0.7em;" >Årets semester</span>
                                     <br />
                                     <span style="font-size: 0.7em;">Betalda</span>
                                     <br />
@@ -465,24 +469,12 @@
                 <field name="format">A4</field>
                 <field name="orientation">Portrait</field>
                 <field name="margin_top">40</field>
-                <field name="margin_bottom">90</field>
+                <field name="margin_bottom">100</field>
                 <field name="margin_left">7</field>
                 <field name="margin_right">7</field>
                 <field name="header_spacing">35</field>
                 <field name="dpi">90</field>
             </record>
 
-            <record id="payslip_odt" model="ir.actions.report">
-                <field name="name">Payslip Odt</field>
-                <field name="model">user.payslip</field>
-                <field name="report_name">Pyslip_odt</field>
-                <field name="report_type">py3o</field>
-                <field name="py3o_filetype">pdf</field>
-                <field name="module">l10n_se_hr_payroll</field>
-                <field name="py3o_template_fallback">/report/payslipODT.odt</field>
-                <!-- Add entry in "Print" drop-down list -->
-                <field name="binding_type">report</field>
-                <field name="binding_model_id" ref="l10n_se_hr_payroll.model_user_payslip"/>
-            </record>
     </data>
 </odoo>
