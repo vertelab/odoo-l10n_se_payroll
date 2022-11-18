@@ -1,31 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
     <data>
-        <template id="payslip_document" inherit_id="l10n_se_hr_payroll.payslip_document">
-            <xpath expr="//table[@id='holidays_table']" position="replace">
-                <t t-if="len(o.holiday_ids) &gt; 0">
-                    <table id="holidays_table" class="table table-condensed">
-                        <thead>
-                            <tr>
-                                <th>Frånvarotyp</th>
-                                <th style="text-align: center;">Datum</th>
-                                <th style="text-align: right;">Antal dagar</th>
-                            </tr>
-                        </thead>
-                        <tbody t-foreach="o.holiday_ids" t-as="h">
-                            <tr>
-                                <td><span t-field="h.holiday_status_id.name"/></td>
-                                <td style="text-align: center;"><span t-field="h.date_from"/> - <span t-field="h.date_to"/></td>
-                                <td style="text-align: right;"><span t-field="h.number_of_days_temp"/></td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </t>
-                <t t-if="len(o.holiday_ids) == 0">
-                    <table id="holidays_table"/>
-                </t>
+        
+        <!-- <template id="payslip_document" inherit_id="l10n_se_hr_payroll.payslip_document">
+            <xpath expr="//table[@id='holidays_table']" position="inside">
+                <t t-if="counter == 5">
+                    <p style="page-break-inside: auto"> </p>
+                   <t t-set="counter" t-value="0"/>
+                   </t>
+                   <t t-set="counter" t-value="+ 1" /> 
+                    <t t-if="len(o.holiday_ids) &gt; 0">
+                        <table id="holidays_table" class="table table-condensed">
+                            <thead>
+                                <tr>
+                                    <th>Frånvarotyp</th>
+                                    <th style="text-align: center;">Datum</th>
+                                    <th style="text-align: right;">Antal dagar</th>
+                                </tr>
+                            </thead>
+                            <tbody t-foreach="o.holiday_ids" t-as="h">
+                                <tr>
+                                    <td><span t-field="h.holiday_status_id.name"/></td>
+                                    <td style="text-align: center;"><span t-field="h.date_from"/> - <span t-field="h.date_to"/></td>
+                                    <td style="text-align: center;"><span t-field="h.code"/></td>
+                                    <td style="text-align: right;"><span t-field="h.number_of_days_temp"/></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </t>
+                    <t t-if="len(o.holiday_ids) == 0">
+                        <table id="holidays_table"/>
+                    </t>
             </xpath>
-        </template>
+        </template> -->
         <template id="external_layout_footer" inherit_id="l10n_se_hr_payroll.external_layout_footer">
             <xpath expr="//table[@id='holidays']" position="replace">
                 <table id="holidays" class="table table-sm table-responsive" style="margin: 0px; border-collapse: collapse;">

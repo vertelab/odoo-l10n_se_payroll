@@ -19,9 +19,9 @@
             <div class="header" style="margin-bottom:0px;">
                 <div class="row">
                     <div class="col-xs-3">
-                        <img t-if="company.logo" t-att-src="'data:image/png;base64,%s' % company.logo" style="max-height: 45px;" />
+                        <!-- <img t-if="company.logo" t-att-src="/static/description/icon_vertel.png" style="max-height: 45px;" /> -->
                     </div>
-                    <div class="col-xs-9 text-right" style="margin-top:20px;" t-field="company.report_header" /> <!--rml_header1-->
+                    <div class="col-xs-9 text-right" style="margin-top:20px; margin-left: 200mm;" t-field="company.report_header" /> <!--rml_header1-->
                 </div>
                 <div class="row zero_min_height">
                     <div class="col-xs-12">
@@ -30,26 +30,52 @@
                 </div>
                 <div class="row">
                     <div class="col-xs-3">
-                        <div t-field="company.partner_id" t-field-options='{"widget": "contact", "fields": ["address", "name"], "no_marker": true}' style="border-bottom: 1px solid black;" />
+                        <!-- <div t-field="company.partner_id" t-field-options='{"widget": "contact", "fields": ["address", "name"], "no_marker": true}' style="border-bottom: 1px solid black;" /> -->
+                        <img src="/l10n_se_hr_payroll/static/description/icon_vertel.png" alt="Vertel"></img>
                     </div>
-                    <div class="col-xs-4 col-xs-offset-2">
-                        <span t-field="o.contract_id.name" />
+                    <!--Employe info-->
+                    <div style="top:50mm; right:115mm; position: absolute;">
+                       <span t-field="o.contract_id.name" />
                         <br />
                         <span t-field="o.employee_id.job_id" />
-                        <br />
-                        <span t-field="o.contract_id.resource_calendar_id.name" />
-<!--
-                        working_hours
--->
                     </div>
-                    <div class="col-xs-3">
-                        <div t-field="o.employee_id.address_home_id" t-field-options='{"widget": "contact", "fields": ["address", "name"], "no_marker": true}' style="border-bottom: 1px solid black;" />
+                    <div class="col-xs-4 col-xs-offset-2" style="padding: 28mm 30mm 0mm 117mm; position: absolute;">
+                        <!-- <div class="col-xs-3"> -->
+                            <!-- <t t-esc="o.employee_id.address_home_id" t-as="e"> -->
+                                <!-- <span t-field="o.employee_id.address_home_id" t-field-options='{"widget": "contact", "fields": ["address", "name"], "no_marker": true}' style="border-bottom: 1px solid black;" /> -->
+                                <span t-field="o.employee_id.name" style="border-bottom: 1px solid black;" />
+                                <br />
+                        <span t-esc="o.employee_id.address_home_id.street" />
+                        <t t-if="o.employee_id.address_home_id.street2">
+                            <br />
+                            <span t-esc="o.employee_id.address_home_id.street2"/>
+                        </t>
+                        <br />
+                        <span t-esc="o.employee_id.address_home_id.zip"/>
+                        <br />
+                        <span t-esc="o.employee_id.address_home_id.city"/>
+                        <br />
+                        <span t-esc="o.employee_id.address_home_id.state_id.name"/>
+                        <br />
+                        <span t-esc="o.employee_id.address_home_id.country_id.name"/>
+                        
+                        <!-- <span t-field="o.employee_id.address_id"/> -->
+                        <!-- </div> -->
+                        <!-- <span t-field="o.contract_id.name" />
+                            <br /> -->
+                            <!-- <span t-field="o.employee_id.job_id" /> -->
+                            <!-- <br /> -->
+                            <!-- <span t-field="o.contract_id.resource_calendar_id.name" /> -->
+                            <!--
+                                working_hours style="margin-left: 70mm;"
+                            -->
+                            <!-- </t> -->
+                        </div>
                     </div>
                 </div>
-            </div>
-        </template>
+            </template>
         <!--Facktiskt footern height: 500px;  margin-top:-500px; height:500px; border-collapse: collapse;-->
-        
+
         <template id="l10n_se_hr_payroll.external_layout_footer">
             <div class="footer" >
                 <div id="footer_table_div" class="col-md-12 col-sm-12 col-xs-12">
@@ -69,10 +95,10 @@
                                 <td style = "border:1px solid #C0C0C0;">
                                     <div>
                                         <span style="padding:10px 0px 0px 10px;">Bruttolön:
-                                        <span class="pull-right pr-5" ><t t-esc="int(o.get_slip_line_acc('bl')) or 0" /></span></span>
+                                        <span class="pull-right pr-5" ><t t-esc="o.get_slip_line('bl')[0]['amount'] or 0" /></span></span>
                                         <br />
-                                        <span id='forman-table1' style="padding:10px 0px 0px 10px;"></span>
-                                        <br />
+                                        <!-- <span id='forman-table1' style="padding:10px 0px 0px 10px;"></span>
+                                        <br /> -->
                                         <span style="padding:10px 0px 0px 10px;">Preliminärskatt:
                                         <span class="pull-right pr-5" ><t t-esc="int(o.get_slip_line_acc('prej')) or 0" /></span></span>
                                         <br />
@@ -90,8 +116,9 @@
                                         <span style="padding:10px 0px 0px 10px;">Belopp:
                                         <span class="pull-right pr-5" ><t t-esc="o.contract_id.wage_tax_base" /></span></span>
                                         <br />
-                                        <span style="padding:10px 0px 0px 10px;">Skattetabell:
-                                        <span class="pull-right pr-5" ><t t-esc="o.contract_id.prel_tax_tabel" /></span></span>
+                                        <span style="padding:10px 0px 0px 10px;">Skattetabell:</span>
+                                        <!-- <span class="pull-right pr-5" ><t t-esc="o.contract_id.hr_contract_id.table_number" /></span></span> -->
+                                        <!-- <t t-esc="o.contract_id.prel_tax_tabel" /> -->
                                     </div>
                                 </td>
                                 <td style = "border:1px solid #C0C0C0;">
@@ -106,13 +133,13 @@
                                         <span style="padding:10px 0px 0px 10px;">Övriga avdrag:</span>
                                         <br />
                                         <span style="padding:10px 0px 0px 10px;">Ersättning:</span>
-                                        <br />
+                                        <!-- <br />
                                         <span style="padding:10px 0px 0px 10px;">Öresutjämning:
-                                            <span class="pull-right pr-5" ><t t-esc="o.get_slip_line('ner_ore')[0]['total'] if len(o.get_slip_line('net_ore')) &gt; 0 else 0" /></span>
-                                        </span>
+                                            <span class="pull-right pr-5" ><t t-esc="o.get_slip_line('net_ore')[0]['amount'] or 0" /></span>
+                                        </span> -->
                                         <br />
                                         <span ><h5 style="padding:10px 0px 0px 10px;"><b>Nettolön:
-                                            <span class="pull-right pr-5" ><t t-esc="o.get_slip_line('bl')[0]['total'] if len(o.get_slip_line('net')) &gt; 0 else 0" /></span>
+                                            <span class="pull-right pr-5" ><t t-esc="o.get_slip_line('net')[0]['amount'] or 0" /></span>
                                         </b></h5></span>
                                     </div>
                                 </td>
@@ -256,7 +283,7 @@
                             </tr>
                         </tbody>
                     </table> -->
-                    <table id="holidays" class="table table-sm table-responsive" style="margin: 0px; border-collapse: collapse; ">
+                    <table id="holidays" class="table table-sm table-responsive" style="margin: 0px; border-collapse: collapse;">
                         <div>
                         <tbody>
                             <tr>
@@ -276,6 +303,7 @@
                             </tr>
                         </tbody>
                     </div>
+                    <!-- <p style="page-break-after: always;"></p> -->
                     </table>
                     <!--Keep-->
                     <table id="overall" class="table table-sm table-responsive" style="margin: 0px; border-collapse: collapse;">
@@ -305,8 +333,8 @@
                             </tr>
                         </tbody>
                         </div>
+                        <!-- <table id="holidays_table" /> -->
                     </table>
-
                 </div>
                 <div class="text-center" style="border-top: 1px solid black;">
 <!--
@@ -364,15 +392,17 @@
         -->
         <template id="l10n_se_hr_payroll.payslip_document">
             <t t-call="web.html_container">
-                <div t-raw="docs"/>
+                <div t-raw="docs" />
                 <t t-foreach="docs" t-as="o">
                     <t t-call="l10n_se_hr_payroll.external_layout">
-                        <div class="page">
+                        <div class="page" style="padding-top: 50mm;">
                             <h2 t-field="o.name" />
                             <!--
                                  SALARY LINES
                             -->
                             <div>
+                                <!-- <table id="holidays_table"></table>
+                                <p style="page-break-after: always;"></p> -->
                                 <table class="table table-condensed">
                                     <thead>
                                         <tr>
@@ -387,69 +417,104 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <t t-foreach="o.line_ids.filtered(lambda r: r.salary_rule_id.appears_on_payslip)" t-as="p">
-                                            <tr t-att-style="'background: #eee;' if p.code == 'net' else ''">
+                                        <!-- <t t-esc="o.get_slip_line('bl')[0]['total'] if len(o.get_slip_line('bl')) &gt; 0 else 0" /> -->
+                                        <t t-foreach="o.payslip_id.worked_days_line_ids" t-as="p">
+                                            <t t-foreach="o.line_ids" t-as="pa">
+                                            <tr style="background: #eee;">
+                                                <!--Lönerart-->
                                                 <td style="border-right: 1px solid black;">
                                                     <span>
-                                                        <t t-esc="'%4s' %p.salary_rule_id.salary_art if p.salary_rule_id.salary_art else ''" />
+                                                        <t t-esc="o.line_ids.salary_rule_id.salary_art"/>
+                                                        <!-- <t t-esc="o.get_slip_line('bl')[0]['total'] if len(o.get_slip_line('bl')) &gt; 0 else 0" /> -->
                                                     </span>
                                                 </td>
+                                                 <!--Kod-->
                                                 <td>
                                                     <span>
-                                                        <t t-esc="p.code" />
+                                                        <t t-if="p.code =='WORK100'">
+                                                            <span>bl</span>
+                                                        </t>
+                                                        <t t-else="">
+                                                            <t t-esc="p.code" />
+                                                        </t>
+                                                            <!-- <t t-esc="o.get_slip_line('bl') or 0" />
+                                                        </t> -->
+                                                        <!-- <t t-esc="p.get_slip_line('bl')[0]['code'] if len(o.get_slip_line('bl')) &gt; 0 else 0" /> -->
                                                     </span>
                                                 </td>
                                                 <td>
-                                                    <span t-field="p.name" />
-                                                </td>
-                                                <td style="text-align: center;">
-                                                    <t t-if="p.code != 'net'">
-                                                        <span t-esc="p.quantity" />
+                                                    <!--Name?-->
+                                                    <!-- <span t-field="p.name" /> -->
+                                                    <t t-if="p.name =='Normal Working Days paid at 100%'">
+                                                        <t t-esc="o.get_slip_line('bl')[0]['name'] or 0" />
                                                     </t>
-                                                    <!--
-                                                         <t t-if="not p.quantity == 1 or not p.rate == 100">
-                                                         <span t-raw="'%s%2.2f' % ( '-&amp;nbsp;' if p.category_id.code == 'BRUAVG' or p.category_id.code == 'NETAVG' else '', p.amount)" />
-                                                         </t>
-                                                    -->
-                                                </td>
-                                                <td style="text-align: center;">
-                                                    <t t-if="p.code != 'net'">
-                                                        <span t-esc="int(p.rate) if (p.rate).is_integer() else p.rate" />
-                                                        %
-                                                    </t>
-                                                    <!--
-                                                         <t t-if="not p.quantity == 1 and not p.rate == 100">
-                                                         <span t-esc="'%2.2f' % (p.quantity * p.rate / 100)" />
-                                                         </t>
-                                                         <t t-if="not (not p.quantity == 1 and not p.rate == 100)">
-                                                         <t t-if="not p.quantity == 1">
-                                                         <span t-esc="'%2.2f' % p.quantity" />
-                                                         </t>
-                                                         <t t-if="not p.rate == 100">
-                                                         <span t-esc="'%2.2f%s' % (p.rate,'%')" />
-                                                         </t>
-                                                         </t>
-                                                    -->
-                                                </td>
-                                                <td style="text-align: center;">
-                                                    <t t-if="p.code != 'net'">
-                                                        <span t-esc="p.amount if p.quantity != 1.0 else ''" />
+                                                    <t t-else="">
+                                                        <t t-esc="p.name" />
                                                     </t>
                                                 </td>
+                                                <!--Kvantitet-->
+                                                <td style="text-align: center;">
+                                                    <span t-esc="pa.quantity" />
+                                                    <t t-if="not pa.quantity == 1 or not pa.rate == 100">
+                                                    </t>
+                                                </td>
+                                                <!--Procent-->
+                                                <td style="text-align: center;">
+                                                    <t t-esc="pa.rate"></t>
+                                               </td>
+                                               <!--A-pris?-->
+                                               <td style="text-align: center;">
+                                                <t t-esc="o.get_slip_line(p.code)[0]['amount'] if len(o.get_slip_line(p.code)) &gt; 0 else 0"/>
+                                                </td>
+                                                <!--Belopp?-->
                                                 <td style="text-align: right; border-left: 1px solid black;">
-                                                    <b t-if="p.code == 'net'">
-                                                        <span t-field="p.total" />
-                                                    </b>
-                                                    <t t-if="not p.code == 'net'">
-                                                        <t t-if="p.category_id.code == 'BRUAVG' or p.category_id.code == 'NETAVG'">-</t>
-                                                        <span t-field="p.total" />
-                                                    </t>
-                                                </td>
+                                                        <t t-esc="o.get_slip_line(p.code)[0]['amount'] if len(o.get_slip_line(p.code)) &gt; 0 else 0 * pa.quantity"></t>
+                                                        <!-- <span t-field="pa.total" /> -->
+                                                    </td>
+
                                             </tr>
                                         </t>
+                                        </t>
+                                        <!-- <td> -->
+                                            <!-- <t t-if="o.worked_days_line_ids.code == 'sem_bet'"/> -->
+                                                <!-- </tr> -->
+                                            <!-- </t> -->
+                                        <!-- </td> -->
+                                        <!-- <t t-foreach="o.line_ids.filtered(lambda r: r.salary_rule_id.appears_on_payslip)" t-as="p"> -->
+                                            <!-- <tr t-att-style="'background: #eee;' if p.code == 'net' else ''"> -->
+                                                <!-- <td style="border-right: 1px solid black;"> -->
+                                                    <!--Lönerart-->
+                                                    <!-- <span>
+                                                        <t t-esc="'%4s' %p.salary_rule_id.salary_art if p.salary_rule_id.salary_art else ''" />
+                                                    </span>
+                                                </td> -->
+                                                    <!--Kod-->
+                                                    <!-- <t t-if="p.code != 'net'"> -->
+                                                    <!-- </t>  -->
+
+                                                    <!--Kvantitet-->
+                                                         <!-- <span t-raw="'%s%2.2f' % ( '-&amp;nbsp;' if p.category_id.code == 'BRUAVG' or p.category_id.code == 'NETAVG' else '', p.amount)" /> -->
+
+                                                    <!--Procent-->
+                                                    <!-- <t t-if="o.code != 'bl'"> -->
+                                                        <!-- <span t-esc="int(p.rate) if (p.rate).is_integer() else p.rate" /> -->
+                                                    <!-- </t> -->
+                                                         <!-- <t t-if="not p.quantity == 1">
+                                                         <span t-esc="'%2.2f' % p.quantity" />
+                                                         </t> -->
+                                                    <!--A-pris?-->
+                                                    <!-- <t t-if="p.code != 'bl'"> -->
+                                                    <!-- </t> -->
+                                                    <!--Belopp?-->
+                                                    <!-- <b t-if="p.code == 'bl'"> -->
+                                                    <!-- </b> -->
+                                                    <!-- <t t-if="not p.code == 'bl'"> -->
+                                                        <!-- <t t-if="p.category_id.code == 'BRUAVG' or p.category_id.code == 'NETAVG'">-</t> -->
+                                                    <!-- </t> -->
+                                        <!-- </t> -->
                                     </tbody>
                                 </table>
-                                <table id="holidays_table" />
+                                <!-- <table id="holidays_table"></table> -->
                             </div>
                         </div>
                     </t>

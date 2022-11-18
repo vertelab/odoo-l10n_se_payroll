@@ -16,9 +16,9 @@
         </template> -->
         
         <template id="payslip_document" inherit_id="l10n_se_hr_payroll.external_layout_footer">
-            <xpath expr="//span[@id='forman-table1']" position="inside">
+            <!-- <xpath expr="//span[@id='forman-table1']" position="inside">
                 <span>Förmån:</span><span class="pull-right pr-5"><t t-esc="o.get_slip_line_acc('forman') or 0" /></span>
-            </xpath>
+            </xpath> -->
             <xpath expr="//span[@id='forman-table2']" position="inside">
                 <span>Förmån:</span><span class="pull-right pr-5"><t t-esc="o.get_slip_line_acc('forman') or 0" /></span>
             </xpath>

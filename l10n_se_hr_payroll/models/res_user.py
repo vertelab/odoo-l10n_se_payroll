@@ -80,6 +80,7 @@ class HrSaleryCategory(models.TransientModel):
     _name = "user.salary.rule.category"
     code = fields.Char(string = "Code")
 
+
 class HrContract(models.TransientModel):
     _name = "user.contract"
     wage_tax_base = fields.Float(string="Lönunderlag", digits='Payroll', help="Uträknat löneunderlag för beräkning av preleminär skatt" )
@@ -94,7 +95,12 @@ class HrContract(models.TransientModel):
         comodel_name="res.currency",
         string="Currency of the Payment Transaction"
     )
+    # hr_contract_id = fields.Many2one(
+    #     "hr.contract", string="Contract", required=True, index=True
+    # )
 
+    # hr_payroll_taxable_id = fields.Many2one('payroll.taxtable', string="Payroll Taxable")
+    # taxable_lines = fields.One2many("payroll.taxtable.line", "payroll_taxable_id", string="Taxable Lines")
 
 
 class HrCalender(models.TransientModel):
