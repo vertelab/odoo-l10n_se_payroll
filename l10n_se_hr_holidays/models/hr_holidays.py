@@ -26,7 +26,6 @@ from datetime import timedelta, date
 
 import logging
 _logger = logging.getLogger(__name__)
-
 #class hr_holidays(models.Model):
 class Holidays(models.Model):
     # _inherit = "hr_holidays.holidays"
@@ -55,8 +54,9 @@ class Holidays(models.Model):
     def _timesheet_prepare_line_values(self, index, work_hours_data, day_date, work_hours_count):
         val_list = super(Holidays, self)._timesheet_prepare_line_values(index, work_hours_data, day_date, work_hours_count)
         _logger.error(f"{val_list=}")
-        val_list['non_billable_time'] = self.holiday_status_id.unpaid * val_list["unit_amount"]
-        val_list['non_billable'] = self.holiday_status_id.unpaid
+        # _logger.error(f"{val_list['non_billable_time']=}")
+        # val_list['non_billable_time'] = self.holiday_status_id.unpaid * val_list["unit_amount"]
+        # val_list['non_billable'] = self.holiday_status_id.unpaid
         _logger.error(f"{val_list=}")
         return val_list
 
@@ -161,6 +161,7 @@ class hr_holidays_status(models.Model):
                         'res_id': holiday.id,
                         'model': holiday._name,
                         'type': 'notification',})
+                        
 
 class hr_employee(models.Model):
     _inherit = 'hr.employee'
@@ -224,12 +225,20 @@ class hr_payslip(models.Model):
     def leave_number_of_days(self, holiday_status_ref):
         return sum(self.worked_days_line_ids.filtered(lambda w: w.code == self.env.ref(holiday_status_ref).name).mapped('number_of_days'))
 
+    # @api.model
+    # def get_legal_leaves_consumed(self, year = False):
+    #     if not year:
+    #         year = datetime.datetime.now().year
+    #     start_date = datetime.datetime(year,1,1)
+    #     stop_date = datetime.datetime(year,12,30)
+    #     return abs(sum(self.env['hr.leave'].search([('employee_id', '=', self.employee_id.id), ('date_from', '>=', start_date.strftime('%Y-%m-%d')), ('date_to', '<=',stop_date.strftime('%Y-%m-%d') ), ('state', '=', 'validate')]).filtered(lambda h: h.holiday_status_id.legal_leave == True).mapped('number_of_days')))
+    #     #return abs(sum(self.env['hr.leave'].search([('employee_id', '=', self.employee_id.id), ('date_from', '>=', start_date.strftime('%Y-%m-%d')), ('date_to', '<=', self.date_to), ('type', '=', 'remove'), ('state', '=', 'validate')]).filtered(lambda h: h.holiday_status_id.legal_leave == True).mapped('number_of_days')))
+
     @api.model
     def get_legal_leaves_consumed(self):
         year = datetime.datetime.now().year
         start_date = datetime.datetime(year, 1, 1)
         return abs(sum(self.env['hr.leave'].search([('employee_id', '=', self.employee_id.id), ('date_from', '>=', start_date.strftime('%Y-%m-%d')), ('date_to', '<=', self.date_to), ('state', '=', 'validate')]).filtered(lambda h: h.holiday_status_id.legal_leave == True).mapped('number_of_days')))
-        #return abs(sum(self.env['hr.leave'].search([('employee_id', '=', self.employee_id.id), ('date_from', '>=', start_date.strftime('%Y-%m-%d')), ('date_to', '<=', self.date_to), ('type', '=', 'remove'), ('state', '=', 'validate')]).filtered(lambda h: h.holiday_status_id.legal_leave == True).mapped('number_of_days')))
 
     # ~ @api.multi
     def get_holiday_basis_days(self):

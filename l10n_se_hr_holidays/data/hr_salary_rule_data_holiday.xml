@@ -127,7 +127,7 @@ result = contract.wage / 160
         <field name="salary_art">220</field>
         <field name="code">semsk</field>
         <field name="sequence">410</field>
-        <field name="appears_on_payslip" eval="False"/>
+        <field name="appears_on_payslip" eval="True"/>
         <field name="condition_select">python</field>
         <field name="condition_python">result = payslip.dict.has_legal_leaves('sem_bet')</field>
         <field name="amount_select">code</field>
@@ -162,7 +162,7 @@ result = 0.046*contract.wage
         <field name="salary_art"></field>
         <field name="code">semsksoc</field>
         <field name="sequence">420</field>
-        <field name="appears_on_payslip" eval="False"/>
+        <field name="appears_on_payslip" eval="True"/>
         <field name="condition_select">python</field>
         <field name="condition_python">result = payslip.dict.has_legal_leaves('sem_bet')</field>
         <field name="amount_select">code</field>

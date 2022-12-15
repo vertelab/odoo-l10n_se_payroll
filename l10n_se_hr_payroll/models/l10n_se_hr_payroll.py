@@ -180,9 +180,9 @@ class hr_payslip(models.Model):
     def onchange_employee(self):
         super(hr_payslip, self).onchange_employee()
 
-        if not self.period_id:
-            self.period_id = self.period_id.now()
-            raise UserError('pelle %s' % self.env['account.period'].find())
+        # if not self.period_id:
+        #     # self.period_id = self.period_id.now()
+        #     raise UserError('pelle %s' % self.env['account.period'].find())
 
         self.date_from = self.period_id.prev().date_start
         self.date_to = self.period_id.prev().date_stop

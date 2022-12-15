@@ -5,19 +5,21 @@ from odoo import fields, models, api, _
 
 from odoo.exceptions import UserError, ValidationError, RedirectWarning, Warning
 import logging
+import datetime
+
 _logger = logging.getLogger(__name__)
 
 
-# class HrPayslipLine(models.Model):
-#     _name = "hr.payslip.line"
-#     _inherit = "hr.salary.rule"
-#     _description = "Payslip Line"
+class UserPayslipLinePayroll(models.TransientModel):
+    _name = "user.payslip.line.payroll"
+    # _inherit = "hr.salary.rule"
+    _description = "Payslip Line"
 #     _order = "contract_id, sequence"
 
 #     slip_id = fields.Many2one(
 #         "hr.payslip", string="Pay Slip", required=True, ondelete="cascade"
 #     )
-#     salary_rule_id = fields.Many2one("hr.salary.rule", string="Rule", required=True)
+    # salary_rule_id = fields.Many2one("hr.salary.rule", string="Rule", required=True)
 #     employee_id = fields.Many2one("hr.employee", string="Employee", required=True)
 #     contract_id = fields.Many2one(
 #         "hr.contract", string="Contract", required=True, index=True
@@ -55,8 +57,36 @@ _logger = logging.getLogger(__name__)
 #                         _("You must set a contract to create a payslip line.")
 #                     )
 #         return super(HrPayslipLine, self).create(vals_list)
+
+    payslip_character = fields.Selection([
+        ("minus", "Minus"),
+        ("parentheses", "Parentheses"),
+    ],default=False)
+
+    # def character_on_payslip(self):
+    #     for rule in self:
+    #         if rule.payslip_character == "minus":
+    #             "-" + str()
+    #         elif rule.payslip_character == "parentheses":
+    #             "("+ str() +")"
+
+# class HRContract(models.TransientModel):
+#     _name = 'hr.contract'
+
+    # table_number = fields.Integer(string="Tax Table")
+    # is_church_deductible = fields.Boolean(string="Church Deductible")
+    # ~ column_number = fields.Many2one('ir.model.fields', domain=[
+        # ~ ('model_id.model', '=', 'payroll.taxtable.line'), ('ttype', '=', 'float')
+    # ~ ])
+    # column_number = fields.Selection([ ('column1', "Column 1"),('column2', "Column 2"),('column3', "Column 3"),('column4', "Column 4"),('column5', "Column 5"),('column6', "Column 6")],'Tax Column')
+    # has_tax_equalization = fields.Boolean(string="Tax Equalization")
+    # tax_equalization = fields.Float(string="Tax Equalization")
+    # tax_equalization_start = fields.Date(string="Start")
+    # tax_equalization_end = fields.Date(string="End")
+
 class HrPayslipline(models.TransientModel):
     _name = "user.payslip.line"
+    _description = "User Payslip Line"
     salary_rule_id = fields.Many2one("user.salary.rule", string="Rule", required=True)
     code = fields.Char(string="Code")
     name = fields.Char(string="Name")
@@ -73,16 +103,19 @@ class HrPayslipline(models.TransientModel):
 
 class HrSaleryRule(models.TransientModel):
     _name = "user.salary.rule"
+    _description = "User Salary Rule"
     appears_on_payslip = fields.Boolean(string="Appears on Payslip")
     salary_art = fields.Char(string="Salary art")
 
 class HrSaleryCategory(models.TransientModel):
     _name = "user.salary.rule.category"
+    _description = "User Salary Rule Category"
     code = fields.Char(string = "Code")
 
 
 class HrContract(models.TransientModel):
     _name = "user.contract"
+    _description = "User Contract"
     wage_tax_base = fields.Float(string="Lönunderlag", digits='Payroll', help="Uträknat löneunderlag för beräkning av preleminär skatt" )
     prel_tax_tabel = fields.Char(string="Prel skatt info", help="Ange skattetabell/kolumn/ev jämkning som ligger till grund för angivet preleminärskatteavdrag")
     resource_calendar_id = fields.Many2one("user.calendar")
@@ -95,6 +128,7 @@ class HrContract(models.TransientModel):
         comodel_name="res.currency",
         string="Currency of the Payment Transaction"
     )
+
     # hr_contract_id = fields.Many2one(
     #     "hr.contract", string="Contract", required=True, index=True
     # )
@@ -105,10 +139,12 @@ class HrContract(models.TransientModel):
 
 class HrCalender(models.TransientModel):
     _name = "user.calendar"
+    _description = "User Calendar"
     name = fields.Char(string="Name")
 
 class HrWorkdays(models.TransientModel):
     _name = "user.workdays"
+    _description = "User Workdays"
     name = fields.Char(string="Name")
     code = fields.Char(string="code")
     number_of_hours = fields.Float(string="Number of hours")
@@ -137,6 +173,7 @@ class HrPayslipWorkedDays(models.TransientModel):
 
 class HrLeave(models.TransientModel):
     _name = "user.leave"
+    _description = "User Leave"
     date_from = fields.Datetime()
     date_to = fields.Datetime()
     number_of_days_temp = fields.Float(string="Number of days")
@@ -149,10 +186,16 @@ class HrLeave(models.TransientModel):
 
 class HrHolidayStatus(models.TransientModel):
     _name = "user.holiday.status"
+    _description = "User Holiday Status"
     name = fields.Char(string="name")
 
 class HrPayslip(models.TransientModel):
     _name = "user.payslip"
+    _description = "User Payslip"
+
+    # def get_legal_leaves_consumed(self, year = False):
+    #     self = self.sudo()
+    #     return self.payslip_id.get_legal_leaves_consumed(year)
 
     def get_legal_leaves_consumed(self):
         self = self.sudo()
@@ -160,14 +203,35 @@ class HrPayslip(models.TransientModel):
 
     def get_legal_leaves_status(self):
         self = self.sudo()
+        stop_date = self.payslip_id.date_to
+        _logger.error(f"{stop_date=}")
         return self.payslip_id.get_legal_leaves_status()
 
+    def get_slip_date_to(self):
+        self = self.sudo()
+        return self.payslip_id.date_from
+
+    def get_slip_date_from(self):
+        self = self.sudo()
+        return self.payslip_id.date_to
+
+    # @api.model
+    # def get_legal_leaves_consumed(self, year = False):
+    #     # if not year:
+    #         # year = datetime.datetime.now().year
+    #     # start_date = datetime.datetime(year,1,1)
+    #     # stop_date = datetime.datetime(year,12,30)
+    #     remaining_leaves
+    #     stop_date = self.get_slip_date_to()
+    #     return abs(sum(self.env['hr.leave.allocation'].search([('employee_id', '=', self.employee_id.id), ('date_to', '<=',stop_date.strftime('%Y-%m-%d') ), ('state', '=', 'validate')]).filtered(lambda h: h.holiday_status_id.legal_leave == True).mapped('number_of_days')))
 
     worked_days_line_ids = fields.One2many(
         "user.payslip.worked_days",
         "payslip_id",
         string="Payslip Worked Days",
     )
+
+    # social_normal_fees
     
     # def _holiday_ids(self):
     #     for rec in self:
@@ -191,6 +255,11 @@ class HrPayslip(models.TransientModel):
     employee_id = fields.Many2one(
         comodel_name="hr.employee",
         string="Employee",
+    )
+
+    leave_allocation_id = fields.Many2one(
+        "hr.leave.allocation",
+        string="Leave allocation",
     )
 
     contract_id = fields.Many2one(
@@ -227,13 +296,28 @@ class HrPayslip(models.TransientModel):
     period_id = fields.Many2one(comodel_name='account.period', string="Period",
         readonly=True,)
 
+    character_id = fields.Many2one(comodel_name='user.payslip.line.payroll')
+
+    # user_payslip_id2 = fields.Many2one(
+    #     "user.payslip"
+    # )
+
+
     payslip_id = fields.Many2one(comodel_name='hr.payslip')
     @api.model
     def get_slip_line(self, code):
         self = self.sudo()
-        lines = self.payslip_id.details_by_salary_rule_category.filtered(lambda l: l.code == code).mapped(lambda v: {'name': v.name, 'quantity': v.quantity, 'rate': v.rate, 'amount': v.amount, 'total': v.total})
+        lines = self.payslip_id.details_by_salary_rule_category.filtered(lambda l: l.code == code).mapped(lambda v: 
+        {'name': v.name, 
+        'quantity': v.quantity, 
+        'rate': v.rate, 
+        'amount': v.amount, 
+        'total': v.total, 
+        'amount_percentage': v.amount_percentage,
+        # 'payslip_character':v.character_id.payslip_character,
+        })
         return lines
-
+    
     @api.model
     def get_slip_line_total(self, code):
         self = self.sudo()
@@ -248,10 +332,18 @@ class HrPayslip(models.TransientModel):
 
         return self.env.ref('l10n_se_hr_payroll.payslip').report_action(docids=[self.id],data={})
 
+    # @api.model
+    # def social_tax_combined(self, code):
+    #     self = self.sudo()
+    #     lines = self.payslip_id.details_by_salary_rule_category.filtered(lambda p: p.code == code).mapped(lambda a: 
+    #     {
+    #         '':a.,
+    #     })
 
 
 class ResUsers(models.Model):
     _inherit = "res.users"
+    _description = "Res Users"
 
     def _payslip_nbr(self):
         self = self.sudo()
@@ -329,6 +421,12 @@ class ResUsers(models.Model):
                     'payslip_id': slip.id,
                 })
 
+                # hr_contract_id = self.env['hr.contract'].create({
+                #     'column_number':slip.column_number,
+                #     'table_number':slip.table_number
+                # })
+                # user_payslip.write({"hr_contract_ids":[(4,hr_contract_id,0)]})
+
                 holiday_ids_ids = []
                 for holiday_id in slip.holiday_ids:
                     holiday_status_id = self.env['user.holiday.status'].create({'name': holiday_id.holiday_status_id.name})
@@ -346,7 +444,7 @@ class ResUsers(models.Model):
                     "prel_tax_tabel":slip.contract_id.prel_tax_tabel,
                     # "resource_calendar_id":slip.contract_id.resource_calendar_id.name,
                     "name":slip.contract_id.resource_calendar_id.name,
-                    "employee_fund_balance":slip.contract_id.employee_fund_balance,
+                    # "employee_fund_balance":slip.contract_id.employee_fund_balance,
                    })
                    if slip.contract_id.resource_calendar_id:
                         user_calendar = self.env['user.calendar'].create({'name':slip.contract_id.resource_calendar_id.name})
@@ -371,7 +469,7 @@ class ResUsers(models.Model):
                         'rate':line.rate,
                         'total':line.total,
                         })
-                    user_payslip.write({"line_ids":(4,user_line.id,0)})
+                    user_payslip.write({"line_ids":[(4,user_line.id,0)]})
 
 
 

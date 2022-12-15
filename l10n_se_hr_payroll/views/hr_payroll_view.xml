@@ -43,8 +43,24 @@
                     </group>
                 </page>
                 </page>
+
+                <!-- <field name="appears_on_payslip" position="after">
+                    <field name="payslip_character"></field>
+                </field> -->
             </field>
         </record>
+
+        <!-- <record id="hr_salary_rule_form_payroll" model="ir.ui.view">
+            <field name="name">user.payslip.line.payroll</field>
+            <field name="model">user.payslip.line.payroll</field>
+            <field name="inherit_id" ref="payroll.hr_salary_rule_view_form" />
+            <field name="arch" type="xml">
+                <field name="appears_on_payslip" position="after">
+                    <field name="payslip_character"></field>
+                </field>
+            </field>
+        </record> -->
+
         <record id="hr_salary_rule_list" model="ir.ui.view">
             <field name="name">hr.salary.rule.list.inherit.l10n_se.payroll</field>
             <field name="model">hr.salary.rule</field>
