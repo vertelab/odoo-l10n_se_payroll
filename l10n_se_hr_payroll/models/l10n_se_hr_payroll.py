@@ -176,6 +176,14 @@ class hr_payslip(models.Model):
     date_start = fields.Date(related='period_id.date_start')
     date_stop = fields.Date(related='period_id.date_stop')
 
+    details_by_salary_rule_category = fields.One2many('hr.payslip.line',
+                                                        compute='_compute_details_by_salary_rule_category',
+                                                        string='Details by Salary Rule Category', help="Details from the salary rule category")
+
+    def _compute_details_by_salary_rule_category(self):
+        for payslip in self:
+            payslip.details_by_salary_rule_category = payslip.mapped('line_ids').filtered(lambda line: line.category_id)
+
     @api.onchange('employee_id', 'period_id')
     def onchange_employee(self):
         super(hr_payslip, self).onchange_employee()
@@ -242,5 +250,35 @@ class hr_payslip(models.Model):
             [('employee_id', '=', self.employee_id.id), ('date_from', '>=', start_date.strftime('%Y-%m-%d')),
              ('date_to', '<=', self.date_to)]).mapped('details_by_salary_rule_category').filtered(
             lambda l: l.code == code).mapped('total'))
+
+    @api.model
+    def get_worked_day_lines(self, contracts, date_from, date_to):
+        """
+        @param contracts: Browse record of contracts
+        @return: returns a list of dict containing the input that should be
+        applied for the given contract between date_from and date_to
+        """
+        res = []
+        for contract in contracts.filtered(
+            lambda contract: contract.resource_calendar_id
+        ):
+            day_from = datetime.combine(date_from, datetime.min)
+            day_to = datetime.combine(date_to, datetime.max)
+            day_contract_start = datetime.combine(contract.date_start, datetime.min)
+            # Support for the hr_public_holidays module.
+            contract = contract.with_context(
+                employee_id=self.employee_id.id, exclude_public_holidays=True
+            )
+            # only use payslip day_from if it's greather than contract start date
+            if day_from < day_contract_start:
+                day_from = day_contract_start
+            # == compute leave days == #
+            leaves = self._compute_leave_days(contract, day_from, day_to)
+            res.extend(leaves)
+            # == compute worked days == #
+            attendances = self._compute_worked_days(contract, day_from, day_to)
+            res.append(attendances)
+        return res
+
 
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
