@@ -30,6 +30,13 @@ import logging
 _logger = logging.getLogger(__name__)
 
 
+class ContractType(models.Model):
+    _name = "hr.contract.type"
+    _description = "Contract Type"
+
+    name = fields.Char(required=True)
+
+
 class hr_salary_rule(models.Model):
     _inherit = 'hr.salary.rule'
 
@@ -59,6 +66,10 @@ class hr_contract(models.Model):
 
     def _wage_tax_base(self):
         self.wage_tax_base = (self.wage - self.aws_amount) + self.ded_amount
+
+    type_id = fields.Many2one('hr.contract.type', string="Employee Category",
+                              required=True, help="Employee category",
+                              default=lambda self: self.env['hr.contract.type'].search([], limit=1))
 
     wage_tax_base = fields.Float(string="Lönunderlag", digits='Payroll',
                                  help="Uträknat löneunderlag för beräkning av preleminär skatt")
