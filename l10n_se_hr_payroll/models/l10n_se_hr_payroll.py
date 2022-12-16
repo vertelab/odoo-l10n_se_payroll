@@ -24,6 +24,7 @@ from odoo import models, fields, api, _
 from odoo.tools.safe_eval import safe_eval as eval
 from datetime import timedelta, date, datetime
 import random
+import dateutil.relativedelta
 
 import logging
 
@@ -198,13 +199,13 @@ class hr_payslip(models.Model):
     @api.onchange('employee_id', 'period_id')
     def onchange_employee(self):
         super(hr_payslip, self).onchange_employee()
+        #skapa ett select fält så man kan välja om man vill att datumet ska bli sat sama månad som perioden eller inte!
 
-        # if not self.period_id:
-        #     # self.period_id = self.period_id.now()
-        #     raise UserError('pelle %s' % self.env['account.period'].find())
-
-        self.date_from = self.period_id.prev().date_start
-        self.date_to = self.period_id.prev().date_stop
+        # self.date_from = self.period_id.date_start
+        # self.date_to = self.period_id.date_stop
+        # month = datetime.strptime(str(self.period_id.date_start), "%Y-%m-%d").strftime('%m')
+        self.date_from = self.period_id.date_start - dateutil.relativedelta.relativedelta(months=1)
+        self.date_to = self.period_id.date_stop - dateutil.relativedelta.relativedelta(months=1)
         self.name = _("Salary Slip of %s for %s") % (
             self.employee_id.name,
             self.period_id.date_start.strftime('%B-%Y') if self.period_id else 'None',
