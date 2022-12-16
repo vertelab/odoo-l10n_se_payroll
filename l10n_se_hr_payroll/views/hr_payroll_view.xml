@@ -95,6 +95,21 @@
                 </field>
             </field>
         </record>
+        <record id="payslip_period_id_details" model="ir.ui.view">
+            <field name="name">notebook</field>
+            <field name="model">hr.payslip</field>
+            <field name="inherit_id" ref="payroll.hr_payslip_view_form" />
+            <field name="arch" type="xml">
+                <page name="input" position="after">
+                    <page string="Salary Details">
+                        
+                        <field name="details_by_salary_rule_category"></field>
+                    </page>
+                </page>
+            </field>
+
+        </record>
+
         <record id="payroll.action_salary_rule_form" model="ir.actions.act_window">
             <field name="domain">[]</field>
             <!--

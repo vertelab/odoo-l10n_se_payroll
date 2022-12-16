@@ -273,9 +273,9 @@ class hr_payslip(models.Model):
         for contract in contracts.filtered(
             lambda contract: contract.resource_calendar_id
         ):
-            day_from = datetime.combine(date_from, datetime.min)
-            day_to = datetime.combine(date_to, datetime.max)
-            day_contract_start = datetime.combine(contract.date_start, datetime.min)
+            day_from = datetime.combine(date_from, datetime.min.time())
+            day_to = datetime.combine(date_to, datetime.max.time())
+            day_contract_start = datetime.combine(contract.date_start, datetime.min.time())
             # Support for the hr_public_holidays module.
             contract = contract.with_context(
                 employee_id=self.employee_id.id, exclude_public_holidays=True

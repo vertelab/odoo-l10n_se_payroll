@@ -9,3 +9,4 @@ user_payslip_worked_days,user.payslip.worked_days,model_user_payslip_worked_days
 user_leave,user.leave,model_user_leave,base.group_user,1,1,1,1
 user_holiday_status,user.holiday.status,model_user_holiday_status,base.group_user,1,1,1,1
 user_payslip_line_payroll,user.payslip.line.payroll,model_user_payslip_line_payroll,base.group_user,1,1,1,1
+hr_contract_type,hr_contract_type,model_hr_contract_type,base.group_user,1,1,1,1
