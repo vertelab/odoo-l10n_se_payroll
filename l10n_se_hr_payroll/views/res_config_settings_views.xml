@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+
+    <record id="res_config_settings_payroll" model="ir.ui.view">
+        <field name="name">res.config.settings.view.form.inherit.hr.payroll</field>
+        <field name="model">res.config.settings</field>
+        <field name="priority" eval="45" />
+        <field name="inherit_id" ref="base.res_config_settings_view_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//div[hasclass('settings')]" position="inside">
+                <div
+                    class="app_settings_block"
+                    data-string="Payroll"
+                    string="Payslip"
+                    data-key="payroll"
+                    groups="payroll.group_payroll_manager"
+                >
+                <h2>Payslip</h2>
+                    <div class="row mt16 o_settings_container" id="payroll_payslip_post">
+                        <div class="col-lg-6 col-12 o_setting_box">
+                            <div>
+                                 <!-- <field name="payroll_account_post" /> -->
+                                <!-- <string>Test</string> -->
+                            <!-- </div> -->
+                            <!-- <div class="o_setting_right_pane">
+                                 <label
+                                    for=""
+                                    string="Post Account Move"
+                                /> 
+                                 <div class="text-muted">
+                                    Post Account Move Automaticly for payslips
+                                </div> -->
+                                <field name="choose_date_method"></field>
+                            </div>
+                            <!-- <string>Hello!!</string> -->
+                        </div>
+                    </div>
+                </div>
+            </xpath>
+        </field>
+    </record>
+    <!-- <record id="res_config_settings_view_form_payroll" model="ir.ui.view">
+        <field name="name">res.config.settings.view.form.inherit.hr.payroll</field>
+        <field name="model">res.config.settings</field> -->
+        <!-- <field name="priority" eval="45" /> -->
+        <!-- <field name="inherit_id" ref="base.res_config_settings_view_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//div[hasclass('settings')]" position="inside">
+                <div
+                    class="app_settings_block"
+                    data-string="Payroll"
+                    string="Payroll"
+                    data-key="payroll"
+                    groups="payroll.group_payroll_manager"
+                >
+                    <h2>Accounting</h2>
+                    <div class="row mt16 o_settings_container" id="payroll_accountant">
+                        <div class="col-lg-6 col-12 o_setting_box">
+                            <div class="o_setting_left_pane"> -->
+                                <!-- <field name="module_payroll_account" /> -->
+                                <!-- <span>Hi</span>
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <span>Hello</span> -->
+                                <!-- <label
+                                    for="module_payroll_account"
+                                    string="Payroll Entries"
+                                />
+                                <div class="text-muted">
+                                    Post payslips in accounting
+                                </div> -->
+                            <!-- </div>
+                        </div>
+                    </div>
+                </div>
+            </xpath>
+        </field>
+    </record> -->
+
+</odoo>

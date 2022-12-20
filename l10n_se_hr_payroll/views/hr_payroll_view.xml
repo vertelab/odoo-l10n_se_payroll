@@ -85,6 +85,16 @@
                 </field>
             </field>
         </record>
+        <!-- <record id="payslip_period_id_select" model="ir.ui.view">
+            <field name="name">period_id</field>
+            <field name="model">hr.payslip</field>
+            <field name="inherit_id" ref="payroll.hr_payslip_view_form" />
+            <field name="arch" type="xml">
+                <field name="period_id" position="before">
+                    <string><field name="choose_date_method"/></string>
+                </field>
+            </field>
+        </record> -->
         <record id="payslip_period_id" model="ir.ui.view">
             <field name="name">period_id</field>
             <field name="model">hr.payslip</field>
