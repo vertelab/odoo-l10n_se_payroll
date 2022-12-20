@@ -192,6 +192,7 @@ class hr_payslip(models.Model):
                                                         compute='_compute_details_by_salary_rule_category',
                                                         string='Details by Salary Rule Category', help="Details from the salary rule category")
 
+
     def _compute_details_by_salary_rule_category(self):
         for payslip in self:
             payslip.details_by_salary_rule_category = payslip.mapped('line_ids').filtered(lambda line: line.category_id)
@@ -199,18 +200,41 @@ class hr_payslip(models.Model):
     @api.onchange('employee_id', 'period_id')
     def onchange_employee(self):
         super(hr_payslip, self).onchange_employee()
-        #skapa ett select fält så man kan välja om man vill att datumet ska bli sat sama månad som perioden eller inte!
-
-        # self.date_from = self.period_id.date_start
-        # self.date_to = self.period_id.date_stop
-        # month = datetime.strptime(str(self.period_id.date_start), "%Y-%m-%d").strftime('%m')
-        self.date_from = self.period_id.date_start - dateutil.relativedelta.relativedelta(months=1)
-        self.date_to = self.period_id.date_stop - dateutil.relativedelta.relativedelta(months=1)
-        self.name = _("Salary Slip of %s for %s") % (
-            self.employee_id.name,
-            self.period_id.date_start.strftime('%B-%Y') if self.period_id else 'None',
-        )
+        if self.choose_date_method == "date_then":
+        
+            self.date_from = self.period_id.date_start - dateutil.relativedelta.relativedelta(months=1)
+            self.date_to = self.period_id.date_stop - dateutil.relativedelta.relativedelta(months=1)
+            self.name = _("Salary Slip of %s for %s") % (
+                self.employee_id.name,
+                self.period_id.date_start.strftime('%B-%Y') if self.period_id else 'None',
+            )
         return
+
+    @api.onchange('employee_id', 'period_id')
+    def onchange_employee_date_now(self):
+        # super(hr_payslip, self).onchange_employee_date_now()
+        if self.choose_date_method == "date_now":
+
+            self.date_from = self.period_id.date_start
+            self.date_to = self.period_id.date_stop
+            self.name = _("Salary Slip of %s for %s") % (
+                self.employee_id.name,
+                self.period_id.date_start.strftime('%B-%Y') if self.period_id else 'None',
+            )
+        return
+
+
+    def compute_date_method(self):
+        for rec in self:
+            rec.choose_date_method = "date_then"
+
+    choose_date_method = fields.Selection([
+        ("date_now", "Date now"),
+        ("date_then", "Date then"),],
+        store=True, compute = "compute_date_method", readonly=False)
+    # compute = "compute_date_method")
+   
+    
 
     def get_payslip_vals_period(self, run, employee):
         date_from = run.period_id.prev().date_start
