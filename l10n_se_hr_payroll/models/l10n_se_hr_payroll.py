@@ -223,15 +223,18 @@ class hr_payslip(models.Model):
             )
         return
 
-
+    
     def compute_date_method(self):
-        for rec in self:
-            rec.choose_date_method = "date_then"
+        self.choose_date_method = (
+        self.env["ir.config_parameter"].sudo().get_param("l10n_se_hr_payroll.choose_date_method")
+        )
 
     choose_date_method = fields.Selection([
         ("date_now", "Date now"),
         ("date_then", "Date then"),],
         store=True, compute = "compute_date_method", readonly=False)
+
+    # _logger.error(f"{choose_date_method=}")
     # compute = "compute_date_method")
    
     
