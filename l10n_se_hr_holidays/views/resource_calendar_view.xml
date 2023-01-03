@@ -1,0 +1,16 @@
+<odoo>
+    <data>
+        <record id="resource_calender_form_view" model="ir.ui.view">
+            <field name="name">resource.calendar</field>
+            <field name="model">resource.calendar</field>
+            <field name="inherit_id" ref="resource.resource_calendar_form" />
+            <field name="arch" type="xml">
+                <xpath expr="//page[@name='working_hours']" position="after">
+                    <page string="Weekend">
+                        <field name="weekends"/>
+                    </page>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

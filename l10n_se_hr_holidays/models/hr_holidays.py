@@ -58,6 +58,15 @@ class Holidays(models.Model):
         _logger.error(f"{val_list=}")
         return val_list
 
+    def _get_number_of_days(self, date_from, date_to, employee_id):
+        context_data = {'hr_leave_request': True, 'include_weekends': False}
+
+        if self.holiday_status_id.include_weekends:
+            context_data['include_weekends'] = True
+
+        instance = self.with_context(context_data)
+        return super(Holidays, instance)._get_number_of_days(date_from, date_to, employee_id, )
+
 
 # class HolidaysType(models.Model):
 #     _inherit = "hr.leave.type"

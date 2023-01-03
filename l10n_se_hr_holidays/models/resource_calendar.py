@@ -1,7 +1,7 @@
 # Copyright 2020 Shabeer VPK
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 
-from odoo import api, models
+from odoo import api, models, fields, _
 from odoo.addons.resource.models.resource import Intervals
 
 from pytz import timezone
@@ -10,6 +10,7 @@ import datetime
 # from dateutil.rrule import *
 #
 from dateutil import rrule
+import pandas as pd
 
 
 #
@@ -19,49 +20,70 @@ from dateutil import rrule
 class ResourceCalendar(models.Model):
     _inherit = 'resource.calendar'
 
-    def _weekend_resource(self, start_dt, end_dt, resources):
-        """
-            (datetime.datetime(2022, 12, 30, 8, 0, tzinfo=<DstTzInfo 'Europe/Stockholm' CET+1:00:00 STD>), datetime.datetime(2022, 12, 30, 12, 0, tzinfo=<DstTzInfo 'Europe/Stockholm' CET+1:00:00 STD>), resource.calendar.attendance(9,))
-            (datetime.datetime(2022, 12, 30, 13, 0, tzinfo=<DstTzInfo 'Europe/Stockholm' CET+1:00:00 STD>), datetime.datetime(2022, 12, 30, 17, 0, tzinfo=<DstTzInfo 'Europe/Stockholm' CET+1:00:00 STD>), resource.calendar.attendance(10,))
-        """
-        weekends = rrule.rrule(rrule.DAILY, byweekday=(rrule.SU, rrule.SA), dtstart=start_dt, until=end_dt)
-        weekend_list = []
-        # for weekend in weekends:
-        #     weekend_list.append()
+    @api.model
+    def _default_weekends(self):
+        return [
+            (0, 0, {'name': _('Saturday Morning'), 'dayofweek': '0', 'hour_from': 8, 'hour_to': 12,
+                    'day_period': 'morning'}),
+            (0, 0, {'name': _('Saturday Afternoon'), 'dayofweek': '0', 'hour_from': 13, 'hour_to': 17,
+                    'day_period': 'afternoon'}),
+            (0, 0, {'name': _('Sunday Morning'), 'dayofweek': '1', 'hour_from': 8, 'hour_to': 12,
+                    'day_period': 'morning'}),
+            (0, 0, {'name': _('Sunday Afternoon'), 'dayofweek': '1', 'hour_from': 13, 'hour_to': 17,
+                    'day_period': 'afternoon'}),
+        ]
+
+    weekends = fields.One2many('resource.calendar.attendance', 'weekend_calendar_id', 'Weekend Time',
+                               store=True, readonly=False, copy=True, default=_default_weekends)
 
     def _weekend_intervals(self, start_dt, end_dt, intervals, resources, tz):
         """ Return the weekend intervals in the given datetime range.
             The returned intervals are expressed in the resource's timezone.
         """
-        start = start_dt.date()
-        until = end_dt.date()
-        result = []
 
-        # self._weekend_resource(start_dt, end_dt, resources)
+        attendance_id = self.env['resource.calendar.attendance'].search([], limit=1)
 
         for resource in resources:
             interval_resource = intervals[resource.id]
             attendances = []
-            # print(interval_resource._items)
+            wkend_list = []
+
+            weekends = pd.bdate_range(start=start_dt, end=end_dt, freq="C", weekmask="Sat Sun").tz_convert(resource.tz)
+
             for attendance in interval_resource._items:
-                print(attendance)
-            # if attendance[0].date() not in list_by_dates:
-            #         attendances.append(attendance)
-            # intervals[resource.id] = Intervals(attendances)
+                attendances.append(attendance)
 
-        weekdays = [int(attendance.dayofweek) for attendance in self.attendance_ids]
-        # weekends = [d for d in range(7) if d not in weekdays]
+            for wkend in weekends.to_pydatetime():
+                wkend_pattern = [
+                    (
+                        wkend.replace(hour=8),
+                        wkend.replace(hour=12),
+                        attendance_id
+                    ),
+                    (
+                        wkend.replace(hour=13),
+                        wkend.replace(hour=17),
+                        attendance_id
+                    )
+                ]
+                wkend_list.extend(wkend_pattern)
 
+            attendances.extend(wkend_list)
+
+            intervals[resource.id] = Intervals(attendances)
         return intervals
 
     def _attendance_intervals_batch(self, start_dt, end_dt, resources=None, domain=None, tz=None):
         res = super()._attendance_intervals_batch(
             start_dt=start_dt, end_dt=end_dt, resources=resources, domain=domain, tz=tz
         )
-        # print(start_dt, end_dt)
-        # if self.env.context.get("include_weekends") and resources:
-        if resources:
-            return self._weekend_intervals(
-                start_dt, end_dt, res, resources, tz
-            )
+        if self.env.context.get("include_weekends") and resources:
+            return self._weekend_intervals(start_dt, end_dt, res, resources, tz)
         return res
+
+
+class ResourceCalendarAttendance(models.Model):
+    _inherit = "resource.calendar.attendance"
+
+    weekend_calendar_id = fields.Many2one("resource.calendar", string="Resource's Calendar", required=True,
+                                          ondelete='cascade')
