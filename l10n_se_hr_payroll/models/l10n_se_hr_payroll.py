@@ -193,14 +193,16 @@ class hr_payslip(models.Model):
     date_stop = fields.Date(related='period_id.date_stop')
 
     details_by_salary_rule_category = fields.One2many('hr.payslip.line',
-                                                        compute='_compute_details_by_salary_rule_category',
-                                                        string='Details by Salary Rule Category', help="Details from the salary rule category")
+                                                      compute='_compute_details_by_salary_rule_category',
+                                                      string='Details by Salary Rule Category',
+                                                      help="Details from the salary rule category")
+
     def get_number_of_days(self):
         year = self.date_from.year
-        if year % 4 == 0 :
-           return 366
+        if year % 4 == 0:
+            return 366
         return 365
-        
+
     def _compute_details_by_salary_rule_category(self):
         for payslip in self:
             payslip.details_by_salary_rule_category = payslip.mapped('line_ids').filtered(lambda line: line.category_id)
@@ -209,7 +211,6 @@ class hr_payslip(models.Model):
     def onchange_employee(self):
         super(hr_payslip, self).onchange_employee()
         if self.choose_date_method == "date_then":
-        
             self.date_from = self.period_id.date_start - dateutil.relativedelta.relativedelta(months=1)
             self.date_to = self.period_id.date_stop - dateutil.relativedelta.relativedelta(months=1)
             self.name = _("Salary Slip of %s for %s") % (
@@ -222,7 +223,6 @@ class hr_payslip(models.Model):
     def onchange_employee_date_now(self):
         # super(hr_payslip, self).onchange_employee_date_now()
         if self.choose_date_method == "date_now":
-
             self.date_from = self.period_id.date_start
             self.date_to = self.period_id.date_stop
             self.name = _("Salary Slip of %s for %s") % (
@@ -231,10 +231,9 @@ class hr_payslip(models.Model):
             )
         return
 
-    
     def compute_date_method(self):
         self.choose_date_method = (
-        self.env["ir.config_parameter"].sudo().get_param("l10n_se_hr_payroll.choose_date_method")
+            self.env["ir.config_parameter"].sudo().get_param("l10n_se_hr_payroll.choose_date_method")
         )
 
     choose_date_method = fields.Selection([
@@ -244,8 +243,6 @@ class hr_payslip(models.Model):
 
     # _logger.error(f"{choose_date_method=}")
     # compute = "compute_date_method")
-   
-    
 
     def get_payslip_vals_period(self, run, employee):
         date_from = run.period_id.prev().date_start
@@ -307,7 +304,7 @@ class hr_payslip(models.Model):
         """
         res = []
         for contract in contracts.filtered(
-            lambda contract: contract.resource_calendar_id
+                lambda contract: contract.resource_calendar_id
         ):
             day_from = datetime.combine(date_from, datetime.min.time())
             day_to = datetime.combine(date_to, datetime.max.time())
@@ -316,7 +313,7 @@ class hr_payslip(models.Model):
             contract = contract.with_context(
                 employee_id=self.employee_id.id, exclude_public_holidays=True
             )
-            # only use payslip day_from if it's greather than contract start date
+            # only use payslip day_from if it's greater than contract start date
             if day_from < day_contract_start:
                 day_from = day_contract_start
             # == compute leave days == #
@@ -326,6 +323,5 @@ class hr_payslip(models.Model):
             attendances = self._compute_worked_days(contract, day_from, day_to)
             res.append(attendances)
         return res
-
 
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
