@@ -37,6 +37,10 @@ class ContractType(models.Model):
 
     name = fields.Char(required=True)
 
+class HrPayslipWorkedDays(models.Model):
+    _inherit = "hr.payslip.worked_days"
+
+    hr_leave_id = fields.Many2one(comodel_name="hr.leave", string="hr leave id")
 
 class hr_salary_rule(models.Model):
     _inherit = 'hr.salary.rule'
@@ -236,7 +240,7 @@ class hr_payslip(models.Model):
     choose_date_method = fields.Selection([
         ("date_now", "Date now"),
         ("date_then", "Date then"),],
-        store=True, compute = "compute_date_method", readonly=False)
+        store=True, compute = "compute_date_method", readonly=False, default=False)
 
     # _logger.error(f"{choose_date_method=}")
     # compute = "compute_date_method")
