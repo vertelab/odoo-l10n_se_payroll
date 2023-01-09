@@ -37,10 +37,12 @@ class ContractType(models.Model):
 
     name = fields.Char(required=True)
 
+
 class HrPayslipWorkedDays(models.Model):
     _inherit = "hr.payslip.worked_days"
 
     hr_leave_id = fields.Many2one(comodel_name="hr.leave", string="hr leave id")
+
 
 class hr_salary_rule(models.Model):
     _inherit = 'hr.salary.rule'
@@ -87,9 +89,12 @@ class hr_contract(models.Model):
                                readonly=True,
                                help="Ange skattetabell/kolumn/ev jämkning som ligger till grund för angivet "
                                     "preleminärskatteavdrag")
-    # ~ car_company_amount     = fields.Float('Bruttolöneavdrag för bil', digits_compute=dp.get_precision('Payroll'), help="Bruttolöneavdraget för företagsbil, dvs företagets kostnad för företagsbilen")
-    # ~ car_employee_deduction = fields.Float(string='Förmånsvärde för bil', digits_compute=dp.get_precision('Payroll'), help="Beräknat förmånsvärde för bil från skatteverket",)
-    # ~ car_deduction_url      = fields.Char(string='Förmånsvärdesberäkning SKV', default="http://www.skatteverket.se/privat/skatter/biltrafik/bilformansberakning", readonly=True,help="Beräknat förmånsvärde för bil från skatteverket")
+    # ~ car_company_amount = fields.Float('Bruttolöneavdrag för bil', digits_compute=dp.get_precision('Payroll'),
+    # help="Bruttolöneavdraget för företagsbil, dvs företagets kostnad för företagsbilen") ~ car_employee_deduction =
+    # fields.Float(string='Förmånsvärde för bil', digits_compute=dp.get_precision('Payroll'), help="Beräknat
+    # förmånsvärde för bil från skatteverket",) ~ car_deduction_url = fields.Char(string='Förmånsvärdesberäkning
+    # SKV', default="http://www.skatteverket.se/privat/skatter/biltrafik/bilformansberakning", readonly=True,
+    # help="Beräknat förmånsvärde för bil från skatteverket")
     vacation_days = fields.Float(string='Semesterdagar', digits='Payroll', help="Sparad semester i dagar", )
 
     # ~ office_fund = fields.Float(string='Office fund', digits_compute=dp.get_precision('Payroll'), help="Fund for
@@ -133,25 +138,13 @@ class hr_contract(models.Model):
             # ~ _logger.error(f'get_leave_days: {line.number_of_days}')
             return line.number_of_days if line else 0.0
 
-    # def get_leave_days2(self, rule_id, worked_days):
-    #     #rule_id = "sem_bet"
-    #     if rule_id and rule_id == "sem_bet":
-    #         _logger.warning("LOOK HERE"*100)
-    #         _logger.error(f'get_leave_days: {self} {rule_id} {worked_days.dict}')
-    #     code = self.env.ref(rule_id).code if len(rule_id.split('.')) == 2 else rule_id
-    #     #{'WORK100': hr.payslip.worked_days(15,), 'Legal Leaves 2022': hr.payslip.worked_days(13,), 'Legal Leaves 2023': hr.payslip.worked_days(14,)}
-    #     #line = worked_days.dict.get(code,False)
-    #     if rule_id and rule_id == "sem_bet":
-    #         _logger.error(f'get_leave_days: {code} {worked_days.dict}')
-    #         for key,val in worked_days.dict:
-    #             _logger.warning(f"{key=} {val=}")
-    #             if "Legal Leaves" in key:
-    #                 line.append(val)
-    #         if len(line) == 0:
-    #             line = False
-    #         else:
-    #             return 4
-    #     return line.number_of_days if line else 0.0
+    # def get_leave_days2(self, rule_id, worked_days): #rule_id = "sem_bet" if rule_id and rule_id == "sem_bet":
+    # _logger.warning("LOOK HERE"*100) _logger.error(f'get_leave_days: {self} {rule_id} {worked_days.dict}') code =
+    # self.env.ref(rule_id).code if len(rule_id.split('.')) == 2 else rule_id #{'WORK100': hr.payslip.worked_days(15,
+    # ), 'Legal Leaves 2022': hr.payslip.worked_days(13,), 'Legal Leaves 2023': hr.payslip.worked_days(14,)} #line =
+    # worked_days.dict.get(code,False) if rule_id and rule_id == "sem_bet": _logger.error(f'get_leave_days: {code} {
+    # worked_days.dict}') for key,val in worked_days.dict: _logger.warning(f"{key=} {val=}") if "Legal Leaves" in
+    # key: line.append(val) if len(line) == 0: line = False else: return 4 return line.number_of_days if line else 0.0
 
     def get_leave_hours(self, rule_id, worked_days):
         code = self.env.ref(rule_id).code if len(rule_id.split('.')) == 2 else rule_id
@@ -238,8 +231,8 @@ class hr_payslip(models.Model):
 
     choose_date_method = fields.Selection([
         ("date_now", "Date now"),
-        ("date_then", "Date then"),],
-        store=True, compute = "compute_date_method", readonly=False, default=False)
+        ("date_then", "Date then"), ],
+        store=True, compute="compute_date_method", readonly=False, default=False)
 
     # _logger.error(f"{choose_date_method=}")
     # compute = "compute_date_method")
