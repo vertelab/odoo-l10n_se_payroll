@@ -306,9 +306,10 @@ class hr_payslip(models.Model):
             day_to = datetime.combine(date_to, datetime.max.time())
             day_contract_start = datetime.combine(contract.date_start, datetime.min.time())
             # Support for the hr_public_holidays module.
-            contract = contract.with_context(
-                employee_id=self.employee_id.id, exclude_public_holidays=True
-            )
+
+            context_val = {'employee_id': self.employee_id.id, 'exclude_public_holidays': True, 'compute_payslip': True}
+            contract = contract.with_context(context_val)
+
             # only use payslip day_from if it's greater than contract start date
             if day_from < day_contract_start:
                 day_from = day_contract_start
