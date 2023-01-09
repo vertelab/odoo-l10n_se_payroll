@@ -1,0 +1,218 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="0">
+        <record id="main_company" model="res.company">
+            <field name="name">Aronssons Montage AB</field>
+            <field name="street">Rosersbergsvägen 5</field>
+            <field name="zip">192 00</field>
+            <field name="city">Rosersberg</field>
+            <field name="vat">SE123456789701</field>
+            <field name="company_registry">556060-0000</field>
+            <field name="city">Rosersberg</field>
+            <field name="email">info@aronssons.se</field>
+            <field name="website">http://www.aronssons.se</field>
+        </record>
+        <!--
+             <field name="country_id" ref="main_country" />
+             <field name="partner_id" ref="main_partner" />
+             <field name="currency_id" ref="base.EUR" />
+             <field name="favicon" model="res.company" eval="obj()._get_default_favicon(original=True)" />
+        -->
+        <record id="hr_person1_partner" model="res.partner">
+            <field name="company_type">person</field>
+            <field name="name">Asse Aronsson Kontakt</field>
+            <field name="street">Tjädervägen 23</field>
+            <field name="zip">175 00</field>
+            <field name="city">Järfälla</field>
+            <field name="mobile">073-500000</field>
+            <field name="function">VD och försäljningschef</field>
+        </record>
+        <record id="hr_person2_partner" model="res.partner">
+            <field name="company_type">person</field>
+            <field name="name">Frans Filipsson Kontakt</field>
+            <field name="street">Högbyvägen 34</field>
+            <field name="zip">127 00</field>
+            <field name="city">Älvsjö</field>
+            <field name="mobile">073-6000000</field>
+            <field name="function">Inköpare</field>
+        </record>
+        <record id="hr_person3_partner" model="res.partner">
+            <field name="company_type">person</field>
+            <field name="name">Doris Dahlin Kontakt</field>
+            <field name="street">Slingerstigen 33</field>
+            <field name="zip">186 45</field>
+            <field name="city">Ingarö</field>
+            <field name="mobile">073-700000</field>
+            <field name="function">Lönekonsult</field>
+        </record>
+        <record id="hr_person4_partner" model="res.partner">
+            <field name="company_type">person</field>
+            <field name="name">Camilla Cobolt Kontakt</field>
+            <field name="street">Sveavägen 7</field>
+            <field name="zip">112 00</field>
+            <field name="city">Stockholm</field>
+            <field name="mobile">073-980001</field>
+            <field name="function">Logistikansvarig</field>
+        </record>
+        <record id="hr_person5_partner" model="res.partner">
+            <field name="company_type">person</field>
+            <field name="name">Gustav Groth Kontakt</field>
+            <field name="street">Gruvvägen 7</field>
+            <field name="zip">171 00</field>
+            <field name="city">Solna</field>
+            <field name="mobile">073-700000</field>
+            <field name="function">Montör</field>
+        </record>
+        <record id="hr_person7_partner" model="res.partner">
+            <field name="company_type">person</field>
+            <field name="name">Helmer Henriksson Kontakt</field>
+            <field name="street">Högvägen 34</field>
+            <field name="zip">197 00</field>
+            <field name="city">Bro</field>
+            <field name="mobile">073-800000</field>
+            <field name="function">Montör</field>
+        </record>
+        <record id="bank_asse" model="res.partner.bank">
+            <field name="acc_number">4333-44444444</field>
+            <field name="partner_id" ref="hr_person1_partner" />
+        </record>
+        <record id="bank_frans" model="res.partner.bank">
+            <field name="acc_number">4333-44444444</field>
+            <field name="partner_id" ref="hr_person2_partner" />
+        </record>
+        <record id="bank_doris" model="res.partner.bank">
+            <field name="acc_number">4333-55555555</field>
+            <field name="partner_id" ref="hr_person3_partner" />
+        </record>
+        <record id="bank_camilla" model="res.partner.bank">
+            <field name="acc_number">4132-123123</field>
+            <field name="partner_id" ref="hr_person4_partner" />
+        </record>
+        <record id="bank_gustav" model="res.partner.bank">
+            <field name="acc_number">4333-7777777</field>
+            <field name="partner_id" ref="hr_person4_partner" />
+        </record>
+        <record id="bank_helmer" model="res.partner.bank">
+            <field name="acc_number">4333-888888</field>
+            <field name="partner_id" ref="hr_person4_partner" />
+        </record>
+        <record id="hr_person1_employee" model="hr.employee">
+            <field name="name">Asse Aronsson Anställd</field>
+            <field name="work_location">Rosersberg, HK</field>
+            <field name="work_phone">073-400000</field>
+            <field name="work_email">asse.aronsson@aronssons.se</field>
+            <field name="identification_id">651031-3114</field>
+            <field name="job_title">VD och försäljningschef</field>
+            <field name="address_home_id" ref="hr_person1_partner" />
+        </record>
+        <record id="hr_person2_employee" model="hr.employee">
+            <field name="name">Frans Filipsson Anställd</field>
+            <field name="work_location">Rosersberg, HK</field>
+            <field name="work_phone">073-400000</field>
+            <field name="work_email">frans.filipsson@aronssons.se</field>
+            <field name="identification_id">460507-6738</field>
+            <field name="job_title">Inköpare</field>
+            <field name="address_home_id" ref="hr_person2_partner" />
+        </record>
+        <record id="hr_person3_employee" model="hr.employee">
+            <field name="name">Doris Dahlin Anställd</field>
+            <field name="work_location">Rosersberg, HK</field>
+            <field name="work_phone">073-400000</field>
+            <field name="work_email">doris.dahlin@aronssons.se</field>
+            <field name="identification_id">920217-2384</field>
+            <field name="job_title">Lönekonsult</field>
+            <field name="address_home_id" ref="hr_person3_partner" />
+        </record>
+        <record id="hr_person4_employee" model="hr.employee">
+            <field name="name">Camilla Cobolt Anställd</field>
+            <field name="work_location">Rosersberg, HK</field>
+            <field name="work_phone">073-400000</field>
+            <field name="work_email">camilla.cobolt@aronssons.se</field>
+            <field name="identification_id">711002-1834</field>
+            <field name="job_title">Logistikansvarig</field>
+            <field name="address_home_id" ref="hr_person4_partner" />
+        </record>
+        <record id="hr_person5_employee" model="hr.employee">
+            <field name="name">Gustav Groth Anställd</field>
+            <field name="work_location">Rosersberg, HK</field>
+            <field name="work_phone">073-400000</field>
+            <field name="work_email">gustav.groth@aronssons.se</field>
+            <field name="identification_id">790124-0207</field>
+            <field name="job_title">Montör</field>
+            <field name="address_home_id" ref="hr_person5_partner" />
+        </record>
+        <record id="bank_swedbank" model="res.bank">
+            <field name="name">Swedbank</field>
+        </record>
+        <record id="hr_person1_contract_type" model="hr.contract.type">
+            <field name="name">Employee</field>
+        </record>
+        <record id="hr_person2_contract_type" model="hr.contract.type">
+            <field name="name">Employee</field>
+        </record>
+        <record id="hr_person3_contract_type" model="hr.contract.type">
+            <field name="name">Employee</field>
+        </record>
+        <record id="hr_person4_contract_type" model="hr.contract.type">
+            <field name="name">Employee</field>
+        </record>
+        <record id="hr_person5_contract_type" model="hr.contract.type">
+            <field name="name">Employee</field>
+        </record>
+        <record id="contract_asse" model="hr.contract">
+            <field name="name">Asse Aronsson Avtal</field>
+            <field name="wage">52000</field>
+            <field name="type_id" ref="hr_person1_contract_type" />
+            <field name="employee_id" ref="hr_person1_employee" />
+            <field name="schedule_pay" eval="'monthly'" />
+            <field name="state" eval="'open'" />
+            <field name="date_start">2022-01-01</field>
+            <field name="first_contract_date">2022-01-01</field>
+            <field name="struct_id" ref="l10n_se_hr_payroll.hr_payroll_structure-tj" />
+        </record>
+        <record id="contract_frans" model="hr.contract">
+            <field name="name">Frans Filipsson Avtal</field>
+            <field name="wage">26000</field>
+            <field name="type_id" ref="hr_person2_contract_type" />
+            <field name="employee_id" ref="hr_person2_employee" />
+            <field name="schedule_pay" eval="'monthly'" />
+            <field name="state" eval="'open'" />
+            <field name="date_start">2022-01-01</field>
+            <field name="first_contract_date">2022-01-01</field>
+            <field name="struct_id" ref="l10n_se_hr_payroll.hr_payroll_structure-tj" />
+        </record>
+        <record id="contract_doris" model="hr.contract">
+            <field name="name">Doris Dahlin Avtal</field>
+            <field name="wage">17600</field>
+            <field name="type_id" ref="hr_person3_contract_type" />
+            <field name="employee_id" ref="hr_person3_employee" />
+            <field name="schedule_pay" eval="'monthly'" />
+            <field name="state" eval="'open'" />
+            <field name="date_start">2022-01-01</field>
+            <field name="first_contract_date">2022-01-01</field>
+            <field name="struct_id" ref="l10n_se_hr_payroll.hr_payroll_structure-tj" />
+        </record>
+        <record id="contract_camilla" model="hr.contract">
+            <field name="name">Camilla Cobolt Avtal</field>
+            <field name="wage">30000</field>
+            <field name="type_id" ref="hr_person4_contract_type" />
+            <field name="employee_id" ref="hr_person4_employee" />
+            <field name="schedule_pay" eval="'monthly'" />
+            <field name="state" eval="'open'" />
+            <field name="date_start">2022-01-01</field>
+            <field name="first_contract_date">2022-01-01</field>
+            <field name="struct_id" ref="l10n_se_hr_payroll.hr_payroll_structure-tj" />
+        </record>
+        <record id="contract_gustav" model="hr.contract">
+            <field name="name">Gustav Groth Avtal</field>
+            <field name="wage">30000</field>
+            <field name="type_id" ref="hr_person5_contract_type" />
+            <field name="employee_id" ref="hr_person5_employee" />
+            <field name="schedule_pay" eval="'monthly'" />
+            <field name="state" eval="'open'" />
+            <field name="date_start">2022-01-01</field>
+            <field name="first_contract_date">2022-01-01</field>
+            <field name="struct_id" ref="l10n_se_hr_payroll.hr_payroll_structure-tj" />
+        </record>
+    </data>
+</odoo>
