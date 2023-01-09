@@ -33,7 +33,8 @@
     'contributor': '',
     'maintainer': 'Vertel AB',
     'repository': 'https://github.com/vertelab/odoo-l10n-se-payroll',
-    'depends': ['l10n_se_hr_payroll_benefits', 'report_glabels', 'l10n_se_hr_payroll'],
+    # ~ 'depends': ['l10n_se_hr_payroll_benefits', 'report_glabels', 'l10n_se_hr_payroll'],
+    'depends': ['l10n_se_hr_payroll_benefits', 'l10n_se_hr_payroll'], ## report_glabels
     'description': """
 Swedish Payroll Rules.
 ======================
