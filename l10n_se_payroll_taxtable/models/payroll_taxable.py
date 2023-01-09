@@ -6,6 +6,7 @@ from datetime import datetime
 
 class PayrollTaxableWizard(models.Model):
     _name = "payroll.taxtable.wizard"
+    _description=" "
 
     taxable_url = fields.Char(string="Taxable URL")
 
@@ -42,6 +43,7 @@ class PayrollTaxableWizard(models.Model):
 
 class PayrollTaxable(models.Model):
     _name = "payroll.taxtable"
+    _description=" "
 
     name = fields.Char(string="Name")
     taxable_lines = fields.One2many("payroll.taxtable.line", "payroll_taxable_id", string="Taxable Lines")
@@ -49,6 +51,7 @@ class PayrollTaxable(models.Model):
 
 class PayrollTaxableLine(models.Model):
     _name = "payroll.taxtable.line"
+    _description=" "
 
     year = fields.Char(string="Year")
     number_of_days = fields.Char(string="Number of Days")

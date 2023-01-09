@@ -19,8 +19,8 @@
 #
 ##############################################################################
 from dataclasses import field
-import openerp.exceptions
-from openerp import models, fields, api, _
+import odoo.exceptions
+from odoo import models, fields, api, _
 import datetime
 from datetime import timedelta, date
 
@@ -49,13 +49,12 @@ class Holidays(models.Model):
 
     # unpaid = fields.Boolean('Is Unpaid', default=False)
     def _timesheet_prepare_line_values(self, index, work_hours_data, day_date, work_hours_count):
-        val_list = super(Holidays, self)._timesheet_prepare_line_values(index, work_hours_data, day_date,
-                                                                        work_hours_count)
-        _logger.error(f"{val_list=}")
+        val_list = super(Holidays, self)._timesheet_prepare_line_values(index, work_hours_data, day_date, work_hours_count)
+        # _logger.error(f"{val_list=}")
         # _logger.error(f"{val_list['non_billable_time']=}")
         # val_list['non_billable_time'] = self.holiday_status_id.unpaid * val_list["unit_amount"]
         # val_list['non_billable'] = self.holiday_status_id.unpaid
-        _logger.error(f"{val_list=}")
+        # _logger.error(f"{val_list=}")
         return val_list
 
     def _get_number_of_days(self, date_from, date_to, employee_id):
@@ -240,13 +239,14 @@ class hr_payslip(models.Model):
 
     @api.model
     def has_legal_leaves(self, code):
-        _logger.warning(f"get_legal_leaves before {self}")
         result = self.worked_days_line_ids.filtered(lambda h: h.code == code).mapped('number_of_days')
         return len(result) > 0
 
     @api.model
     def get_legal_leaves_days(self, code):
-        _logger.warning(f"get_legal_leaves before {self}")
+        # ~ raise Warning(f"get_legal_leaves before {self}")
+        # _logger.warning(f"get_legal_leaves before {self}")
+        # ~ result = self.holiday_ids.filtered(lambda h: h.holiday_status_id.legal_leave == True)
         result = sum(self.worked_days_line_ids.filtered(lambda h: h.code == code).mapped('number_of_days'))
         return result
 
