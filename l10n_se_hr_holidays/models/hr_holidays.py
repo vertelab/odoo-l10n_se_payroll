@@ -19,8 +19,8 @@
 #
 ##############################################################################
 from dataclasses import field
-import openerp.exceptions
-from openerp import models, fields, api, _
+import odoo.exceptions
+from odoo import models, fields, api, _
 import datetime
 from datetime import timedelta, date
 from odoo.exceptions import AccessError, UserError, ValidationError
@@ -219,7 +219,7 @@ class hr_payslip(models.Model):
             # effects this will have.
             rec.holiday_ids = rec.env['hr.leave'].search(
                 [('state', '=', 'validate'), ('employee_id', '=', rec.employee_id.id)]).filtered(
-                lambda h: h.date_from.date() <= rec.date_to and h.date_from.date() >= rec.date_from)
+                lambda h: rec.date_to >= h.date_from.date() >= rec.date_from)
 
     holiday_ids = fields.Many2many(comodel_name='hr.leave', compute='_holiday_ids')
 
@@ -252,16 +252,11 @@ class hr_payslip(models.Model):
         result = self.with_context({'employee_id': self.employee_id.id}).holiday_status_ids.filtered(
             lambda h: h.remaining_leaves > 0 and h.id not in [
                 self.env.ref('hr_holidays.holiday_status_comp').id]).sorted(key=lambda h: h.sequence)
-        # ~ _logger.warning(f"jakmar result: {result}")
         return result
 
     @api.model
     def has_legal_leaves(self, code):
-        # ~ raise Warning(f"get_legal_leaves before {self}")
-        # _logger.warning(f"get_legal_leaves before {self}")
-        # ~ result = self.holiday_ids.filtered(lambda h: h.holiday_status_id.legal_leave == True)
         result = self.worked_days_line_ids.filtered(lambda h: h.code == code).mapped('number_of_days')
-        # ~ _logger.warning(f"get_legal_leaves after {result}")
         return len(result) > 0
 
     @api.model
@@ -270,10 +265,8 @@ class hr_payslip(models.Model):
         # _logger.warning(f"get_legal_leaves before {self}")
         # ~ result = self.holiday_ids.filtered(lambda h: h.holiday_status_id.legal_leave == True)
         result = sum(self.worked_days_line_ids.filtered(lambda h: h.code == code).mapped('number_of_days'))
-        # ~ _logger.warning(f"get_legal_leaves after {result}")
         return result
 
-    # ~ @api.multi
     def leave_number_of_days(self, holiday_status_ref):
         return sum(self.worked_days_line_ids.filtered(lambda w: w.code == self.env.ref(holiday_status_ref).name).mapped(
             'number_of_days'))
@@ -294,9 +287,8 @@ class hr_payslip(models.Model):
         return abs(sum(self.env['hr.leave'].search(
             [('employee_id', '=', self.employee_id.id), ('date_from', '>=', start_date.strftime('%Y-%m-%d')),
              ('date_to', '<=', self.date_to), ('state', '=', 'validate')]).filtered(
-            lambda h: h.holiday_status_id.legal_leave == True).mapped('number_of_days')))
+            lambda h: h.holiday_status_id.legal_leave).mapped('number_of_days')))
 
-    # ~ @api.multi
     def get_holiday_basis_days(self):
         days = 0.0
         for line in self.worked_days_line_ids:
@@ -305,7 +297,6 @@ class hr_payslip(models.Model):
                 days += line.number_of_days
         return days
 
-    # ~ @api.multi
     def get_holiday_basis_percent(self):
         days = 0.0
         days_basis = 0.0

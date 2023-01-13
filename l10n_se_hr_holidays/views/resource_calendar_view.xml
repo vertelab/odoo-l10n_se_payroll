@@ -5,9 +5,14 @@
             <field name="model">resource.calendar</field>
             <field name="inherit_id" ref="resource.resource_calendar_form" />
             <field name="arch" type="xml">
+                <xpath expr="//sheet" position="before">
+                    <header>
+                        <button name="set_non_work_days" string="Get Absent Days" type="object" class="btn btn-primary"/>
+                    </header>
+                </xpath>
                 <xpath expr="//page[@name='working_hours']" position="after">
-                    <page string="Weekend">
-                        <field name="weekends"/>
+                    <page string="Absent Hours">
+                        <field name="absent_work_days" force_save="1"/>
                     </page>
                 </xpath>
             </field>
