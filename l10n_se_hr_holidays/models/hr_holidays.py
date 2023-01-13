@@ -23,6 +23,7 @@ import openerp.exceptions
 from openerp import models, fields, api, _
 import datetime
 from datetime import timedelta, date
+from odoo.exceptions import AccessError, UserError, ValidationError
 
 import logging
 
@@ -74,6 +75,22 @@ class Holidays(models.Model):
 #     @api.model
 #     def _model_sorting_key(self):
 #         self.unpaid = fields.Boolean('Is Unpaid', default=False)
+
+    @api.constrains('date_from', 'date_to', 'employee_id')
+    def _check_date(self):
+        if self.env.context.get('leave_skip_date_check', False):
+            return
+        for holiday in self.filtered('employee_id'):
+            domain = [
+                ('date_from', '<', holiday.date_to),
+                ('date_to', '>', holiday.date_from),
+                ('employee_id', '=', holiday.employee_id.id),
+                ('id', '!=', holiday.id),
+                ('state', 'not in', ['cancel', 'refuse']),
+            ]
+            nholidays = self.search_count(domain)
+            # if nholidays:
+            #     raise ValidationError(_('HELLOOOO'))
 
 
 class hr_holidays_status(models.Model):
