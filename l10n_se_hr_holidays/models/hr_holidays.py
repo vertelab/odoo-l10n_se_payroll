@@ -97,7 +97,8 @@ class Holidays(models.Model):
     def action_validate(self):
         current_employee = self.env.user.employee_id
         leaves = self.filtered(lambda l: l.employee_id and not l.number_of_days)
-        # if leaves:
+        if leaves:
+            return
         #     raise ValidationError(_('The following employees are not supposed to work during that period:\n %s') % ','.join(leaves.mapped('employee_id.name')))
 
         if any(holiday.state not in ['confirm', 'validate1'] and holiday.validation_type != 'no_validation' for holiday in self):
@@ -116,9 +117,9 @@ class Holidays(models.Model):
                 employees = holiday.department_id.member_ids
 
             conflicting_leaves = self.env['hr.leave'].with_context(
-                tracking_disable=True,
-                mail_activity_automation_skip=True,
-                leave_fast_create=True
+                # tracking_disable=True,
+                # mail_activity_automation_skip=True,
+                # leave_fast_create=True
             ).search([
                 ('date_from', '<=', holiday.date_to),
                 ('date_to', '>', holiday.date_from),
@@ -128,8 +129,9 @@ class Holidays(models.Model):
 
             if conflicting_leaves:
                 # YTI: More complex use cases could be managed in master
-                if holiday.leave_type_request_unit != 'day' or any(l.leave_type_request_unit == 'hour' for l in conflicting_leaves):
-                    raise ValidationError(_('You can not have 2 time off that overlaps on the same day.'))
+                
+                # if holiday.leave_type_request_unit != 'day' or any(l.leave_type_request_unit == 'hour' for l in conflicting_leaves):
+                #     raise ValidationError(_('You can not have 2 time off that overlaps on the same day.'))
 
                 # keep track of conflicting leaves states before refusal
                 target_states = {l.id: l.state for l in conflicting_leaves}
