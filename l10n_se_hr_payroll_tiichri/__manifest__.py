@@ -18,6 +18,8 @@
 #    along with this program. If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
+# SKATTETABELLEN
+# https://www.skatteverket.se/foretag/arbetsgivare/arbetsgivaravgifterochskatteavdrag/skattetabeller.4.96cca41179bad4b1aa8a46.html
 
 {
     'name': 'l10n_se_payroll: Tiichri',
@@ -36,8 +38,7 @@ We create test data to seven employees, to use while developing our own code. To
     'contributor': '',
     'maintainer': 'Vertel AB',
     'repository': 'https://github.com/vertelab/odoo-l10n-se-payroll',
-    'depends': ['hr_contract','l10n_se_hr_payroll', 'l10n_se_hr_holidays', 'l10n_se_hr_payroll_benefits'],
-    # ~ 'depends': ['hr_contract','l10n_se_hr_payroll', 'l10n_se_hr_holidays', 'l10n_se_hr_payroll_benefits', 'l10n_se_payroll_taxtable'],
+    'depends': ['hr_contract','l10n_se_hr_payroll', 'l10n_se_hr_holidays', 'l10n_se_hr_payroll_benefits', 'l10n_se_payroll_taxtable'],
     'data':[
         'data/hr_payroll_tiichri_data.xml',
     ],

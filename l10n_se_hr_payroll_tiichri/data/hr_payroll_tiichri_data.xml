@@ -321,27 +321,5 @@
             <field name="first_contract_date">2022-06-01</field>
             <field name="struct_id" ref="l10n_se_hr_payroll.hr_payroll_structure-tj" />
         </record>
-        <!-- ### TIDRAPPORTER -->
-        <!--
-             <record id="generic_work_assignment" model="project.project">
-             <field name="name">Dagliga arbetsuppgifer</field>
-             <field name="description">Det dagliga kneget för alla, efter förmåga.</field>
-             <field name="allowed_portal_user_ids" />
-             </record>
-        -->
-        <!-- ## ADD USERS // FOLLOWERS -->
-        <!-- ## ILLNESS // SETTINGS -->
-        <!-- ##  ILLNESS // LEAVE ASSE ARONSSON -->
-        <record id="work_leave" model="hr.leave">
-            <field name="holiday_status_id" enval="'Sick Leave Qualify Period'" />
-            <field name="holiday_type" eval="'employee'" />
-            <field name="employee_id" ref="hr_person1_employee" />
-            <field name="name">Sjuk 4 timmar</field>
-            <field name="request_date_from">2023-01-13</field>
-            <field name="request_date_to">2023-01-13</field>
-            <field name="number_of_days">1</field>
-            <field name="holiday_type">employee</field>
-            <field name="state" eval="'validate'" />
-        </record>
     </data>
 </odoo>

@@ -27,6 +27,9 @@
     'category': 'Payroll Localization',
     'description': """
 We create test data to seven employees, to use while developing our own code. To validare that it all turns out correct.
+
+"Så var det det där med närvaron..."
+Den detaljen på lönebeskedet! Vi skapar mall för fejkad frånvaro under övningsåret, som för stunden är 2022.
     """,
     #'sequence': '1'
     'author': 'Vertel AB',
@@ -36,8 +39,7 @@ We create test data to seven employees, to use while developing our own code. To
     'contributor': '',
     'maintainer': 'Vertel AB',
     'repository': 'https://github.com/vertelab/odoo-l10n-se-payroll',
-    'depends': ['hr_contract','l10n_se_hr_payroll', 'l10n_se_hr_holidays', 'l10n_se_hr_payroll_benefits'],
-    # ~ 'depends': ['hr_contract','l10n_se_hr_payroll', 'l10n_se_hr_holidays', 'l10n_se_hr_payroll_benefits', 'l10n_se_payroll_taxtable'],
+    'depends': ['hr_contract','l10n_se_hr_payroll', 'l10n_se_hr_holidays', 'l10n_se_hr_payroll_benefits', 'l10n_se_payroll_taxtable', 'l10n_se_hr_payroll_tiichri'],
     'data':[
         'data/hr_payroll_tiichri_data.xml',
     ],
