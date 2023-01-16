@@ -2,7 +2,7 @@
 ##############################################################################
 #
 #    Odoo SA, Open Source Management Solution, third party addon
-#    Copyright (C) 2022- Vertel AB (<https://vertel.se>).
+#    Copyright (C) 2021- Vertel AB (<https://vertel.se>).
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as
@@ -20,34 +20,31 @@
 ##############################################################################
 
 {
-    'name': 'l10n_se_payroll: Payroll Tax Table',
+    'name': 'l10n_se_payroll: Tiichri',
     'version': '14.0.1.0.0',
-    'summary': 'https://skatteverket.entryscape.net/store/9/resource/1534',
+    # Version ledger: 14.0 = Odoo version. 1 = Major. Non regressionable code. 2 = Minor. New features that are regressionable. 3 = Bug fixes
+    'summary': 'Generate test data for Swedish accounting',
     'category': 'Payroll Localization',
+    'description': """
+We create test data to seven employees, to use while developing our own code. To validare that it all turns out correct.
+
+"Så var det det där med närvaron..."
+Den detaljen på lönebeskedet! Vi skapar mall för fejkad frånvaro under övningsåret, som för stunden är 2022.
+    """,
+    #'sequence': '1'
     'author': 'Vertel AB',
-    'website': 'https://vertel.se/apps/l10n_se_payroll/l10n_se_payroll_taxtable',
+    'website': 'https://vertel.se/apps/l10n_se_payroll/l10n_se_hr_payroll_tiichri',
     'images': ['static/description/banner.png'], # 560x280 px.
     'license': 'AGPL-3',
+    'contributor': '',
     'maintainer': 'Vertel AB',
     'repository': 'https://github.com/vertelab/odoo-l10n-se-payroll',
-    'depends': ['l10n_se', 'hr_contract', 'l10n_se_hr_payroll'],
-    'description': """
-    To configure the tax table start with coping this link:
-    https://skatteverket.entryscape.net/store/9/resource/1534
-    Then go to Employee and chose in the sub menu Configuration.
-    Click on Sync TaxTable and insert the link.
-    Click on Sync and it's done.
-    """,
-    'auto_install': False,
-    'demo': [],
-    'data': [
-        'security/ir.model.access.csv',
-        'views/payroll_taxtable_view.xml',
-        'views/hr_contract_view.xml',
-        'data/ir_config.xml',
-        # 'data/ir_server_action.xml',
+    'depends': ['hr_contract','l10n_se_hr_payroll', 'l10n_se_hr_holidays', 'l10n_se_hr_payroll_benefits', 'l10n_se_payroll_taxtable', 'l10n_se_hr_payroll_tiichri'],
+    'data':[
+        'data/hr_payroll_tiichri_data.xml',
     ],
-    'installable': True
+    'auto_install': True,
+    'installable': True,
 }
 
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:

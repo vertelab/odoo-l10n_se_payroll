@@ -41,7 +41,7 @@ Swedish Payslip additions for Benefits
     'data':[
         'hr_salary_rule_data.xml',
     ],
-    'auto_install': False,
+    'auto_install': True,
     'installable': True,
 }
 
