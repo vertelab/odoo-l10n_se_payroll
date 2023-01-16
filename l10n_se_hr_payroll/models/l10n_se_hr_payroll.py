@@ -324,4 +324,10 @@ class hr_payslip(models.Model):
             res.append(attendances)
         return res
 
+
+
+
+
+
+
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
