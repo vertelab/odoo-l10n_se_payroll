@@ -30,7 +30,7 @@
     'license': 'AGPL-3',
     'maintainer': 'Vertel AB',
     'repository': 'https://github.com/vertelab/odoo-l10n-se-payroll',
-    'depends': ['l10n_se', 'hr_contract'],
+    'depends': ['l10n_se', 'hr_contract', 'l10n_se_hr_payroll'],
     'description': """
     To configure the tax table start with coping this link:
     https://skatteverket.entryscape.net/store/9/resource/1534

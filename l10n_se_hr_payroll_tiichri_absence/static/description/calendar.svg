@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   viewBox="0 0 44 44"
+   version="1.1"
+   id="svg9"
+   sodipodi:docname="calendar.svg"
+   inkscape:version="0.92.5 (2060ec1f9f, 2020-04-08)">
+  <metadata
+     id="metadata15">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <defs
+     id="defs13" />
+  <sodipodi:namedview
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1"
+     objecttolerance="10"
+     gridtolerance="10"
+     guidetolerance="10"
+     inkscape:pageopacity="0"
+     inkscape:pageshadow="2"
+     inkscape:window-width="1393"
+     inkscape:window-height="707"
+     id="namedview11"
+     showgrid="false"
+     inkscape:zoom="5.3636364"
+     inkscape:cx="10.067797"
+     inkscape:cy="15.474577"
+     inkscape:window-x="2087"
+     inkscape:window-y="112"
+     inkscape:window-maximized="0"
+     inkscape:current-layer="svg9" />
+  <title
+     id="title2">calendar@1x</title>
+  <g
+     id="Layer_2"
+     data-name="Layer 2">
+    <g
+       id="General">
+      <g
+         id="Calendar_2_2x.png"
+         data-name="Calendar 2@2x.png">
+        <path
+           d="M 40,4 H 36 V 1 c 0,-1.33333275 -2,-1.33333275 -2,0 V 4 H 10 V 1 C 10,-0.33333275 8,-0.33333275 8,1 V 4 H 4 C 1.790861,4 0,5.790861 0,8 v 32 c 0,2.209139 1.790861,4 4,4 h 36 c 2.209139,0 4,-1.790861 4,-4 V 8 C 44,5.790861 42.209139,4 40,4 Z m 2,36 c 0,1.104569 -0.895431,2 -2,2 H 4 C 2.8954305,42 2,41.104569 2,40 V 16 H 42 Z M 42,14 H 2 V 8 C 2,6.8954305 2.8954305,6 4,6 h 4 v 3 c 0,1.333333 2,1.333333 2,0 V 6 h 24 v 3 c 0,1.333333 2,1.333333 2,0 V 6 h 4 c 1.104569,0 2,0.8954305 2,2 z"
+           id="path4"
+           inkscape:connector-curvature="0"
+           sodipodi:nodetypes="scssccsscssssssssssssccsccsscssccsscssc" />
+      </g>
+    </g>
+  </g>
+  <path
+     style="opacity:1;fill:#ffffff;fill-opacity:0.99460918;stroke:#4b1f50;stroke-width:0;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+     d="M 3.3164288,41.766427 C 3.0998714,41.678929 2.7433036,41.379289 2.5240559,41.10056 2.1260046,40.594519 2.1254239,40.575892 2.1254239,28.31384 V 16.033898 H 21.981356 41.837288 v 12.36315 c 0,12.294245 -0.0022,12.365488 -0.390785,12.782608 -0.214931,0.230701 -0.597936,0.498216 -0.85112,0.594477 -0.581994,0.221273 -36.7307314,0.213801 -37.2789542,-0.0077 z"
+     id="path819"
+     inkscape:connector-curvature="0" />
+  <path
+     style="opacity:1;fill:#ffffff;fill-opacity:0.99460916;stroke:#4b1f50;stroke-width:0;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+     d="M 2.1254237,10.612777 V 7.2425028 L 2.6704041,6.6975224 C 3.2149752,6.1529513 3.2171458,6.152542 5.5602346,6.152542 h 2.3448501 v 1.6490701 c 0,1.8234783 0.2284385,2.2661839 1.1693628,2.2661839 0.7937321,0 1.0679255,-0.6090167 1.0679255,-2.3719925 V 6.152542 H 22.074576 34.00678 v 1.7646267 c 0,1.553821 0.04308,1.787683 0.360624,1.9576271 0.51736,0.2768832 1.059151,0.2381162 1.397245,-0.099978 0.222593,-0.2225923 0.292978,-0.6928975 0.292978,-1.957627 V 6.152542 h 2.34485 c 2.343089,0 2.345259,4.101e-4 2.88983,0.5449804 l 0.544981,0.5449804 V 10.612777 13.98305 H 21.981356 2.1254237 Z"
+     id="path824"
+     inkscape:connector-curvature="0" />
+</svg>

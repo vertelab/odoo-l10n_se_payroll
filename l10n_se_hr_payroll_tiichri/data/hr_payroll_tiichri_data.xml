@@ -129,6 +129,7 @@
             <field name="job_title">VD och försäljningschef</field>
             <field name="address_home_id" ref="hr_person1_partner" />
             <field name="address_id" ref="main_company_partner" />
+            <field name="tz" eval="'Europe/Stockholm'" />
         </record>
         <record id="hr_person2_employee" model="hr.employee">
             <field name="name">Frans Filipsson Anställd</field>
@@ -139,6 +140,7 @@
             <field name="job_title">Inköpare</field>
             <field name="address_home_id" ref="hr_person2_partner" />
             <field name="address_id" ref="main_company_partner" />
+            <field name="tz" eval="'Europe/Stockholm'" />
         </record>
         <record id="hr_person3_employee" model="hr.employee">
             <field name="name">Doris Dahlin Anställd</field>
@@ -149,6 +151,7 @@
             <field name="job_title">Lönekonsult</field>
             <field name="address_home_id" ref="hr_person3_partner" />
             <field name="address_id" ref="main_company_partner" />
+            <field name="tz" eval="'Europe/Stockholm'" />
         </record>
         <record id="hr_person4_employee" model="hr.employee">
             <field name="name">Camilla Cobolt Anställd</field>
@@ -160,6 +163,7 @@
             <field name="job_title">Logistikansvarig</field>
             <field name="address_home_id" ref="hr_person4_partner" />
             <field name="address_id" ref="main_company_partner" />
+            <field name="tz" eval="'Europe/Stockholm'" />
         </record>
         <record id="hr_person5_employee" model="hr.employee">
             <field name="name">Gustav Groth Anställd</field>
@@ -170,6 +174,7 @@
             <field name="job_title">Montör</field>
             <field name="address_home_id" ref="hr_person5_partner" />
             <field name="address_id" ref="main_company_partner" />
+            <field name="tz" eval="'Europe/Stockholm'" />
         </record>
         <record id="hr_person6_employee" model="hr.employee">
             <field name="name">Helmer Henriksson Anställd</field>
@@ -180,6 +185,7 @@
             <field name="job_title">Montör</field>
             <field name="address_home_id" ref="hr_person6_partner" />
             <field name="address_id" ref="main_company_partner" />
+            <field name="tz" eval="'Europe/Stockholm'" />
         </record>
         <record id="hr_person7_employee" model="hr.employee">
             <field name="name">Karin Kullberg Anställd</field>
@@ -191,6 +197,7 @@
             <field name="timesheet_cost">115</field>
             <field name="address_home_id" ref="hr_person7_partner" />
             <field name="address_id" ref="main_company_partner" />
+            <field name="tz" eval="'Europe/Stockholm'" />
         </record>
         <record id="bank_swedbank" model="res.bank">
             <field name="name">Swedbank</field>
@@ -230,7 +237,7 @@
             <field name="name">Asse Aronsson Avtal</field>
             <field name="wage">52000</field>
             <field name="type_id" ref="hr_contract_type" />
-            <field name="type_id" ref="hr_contract_type" />
+            <field name="employee_id" ref="hr_person1_employee" />
             <field name="schedule_pay" eval="'monthly'" />
             <field name="state" eval="'open'" />
             <field name="job_id" ref="job_id_president" />
