@@ -93,7 +93,6 @@ class HRLeave(models.Model):
                     attendance_to = next((att for att in reversed(attendances) if
                                           int(att.dayofweek) <= holiday.request_date_to.weekday()),
                                          attendances[-1] if attendances else default_value)
-                    print(attendance_to)
 
                 compensated_request_date_from = holiday.request_date_from
                 compensated_request_date_to = holiday.request_date_to
