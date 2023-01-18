@@ -24,7 +24,7 @@
                     <label for="one_off_tax"/>
                     <div class="o_row">
                         <field name="has_one_off_tax" nolable="0"></field>
-                        <field name="one_off_tax" attrs="{'invisible': [('has_one_off_tax', '=', False)], 'required': [('has_one_off_tax', '=', True)]}" ></field>
+                        <field name="one_off_tax" attrs="{'invisible': [('has_one_off_tax', '=', False)], 'required': [('has_one_off_tax', '=', True)]}" widget="percentage"></field>
                     </div>
                 </group>
             </field>
