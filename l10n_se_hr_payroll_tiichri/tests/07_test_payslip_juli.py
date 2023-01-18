@@ -49,49 +49,52 @@ class TestPayslipJanuary(common.SavepointCase):
         super().setUpClass()
         # Asse Aronsson
         cls.employee_asse = self.env.ref('hr_asse_employee')  # asse_employee
-        cls.asse_kar = self.create_leave(cls.employee_asse,'sjk_kar',"2022-06-03","2022-06-03",1.0)
+        cls.asse_kar = self.create_leave(cls.employee_asse,'sjk_kar',"2022-07-18","2022-07-22",5.0)
         cls.asse_kar.action_approve()
-        cls.asse_kar = self.create_leave(cls.employee_asse,'sjk_kar',"2022-06-07","2022-06-09",3.0)
+        cls.asse_kar = self.create_leave(cls.employee_asse,'sjk_kar',"2022-07-25","2022-07-25",1.0)
         cls.asse_kar.action_approve()
             
-        # Frans Filipsson -- Låt stå! :-) Inte sjuk i juni
-        # ~ cls.employee_frans = self.env.ref('hr_frans_employee')  # frans_employee
-        # ~ cls.frans_kar = self.create_leave(cls.employee_frans,'sjk_kar',"2022-04-04","2022-04-06",3.0)
-        # ~ cls.frans_kar.action_approve()
+        # Frans Filipsson
+        cls.employee_frans = self.env.ref('hr_frans_employee')  # frans_employee
+        cls.frans_kar = self.create_leave(cls.employee_frans,'sjk_kar',"2022-07-01","2022-07-01",1.0)
+        cls.frans_kar.action_approve()
+        cls.frans_kar = self.create_leave(cls.employee_frans,'sjk_kar',"2022-07-04","2022-07-08",5.0)
+        cls.frans_kar.action_approve()
+        cls.frans_kar = self.create_leave(cls.employee_frans,'sjk_kar',"2022-07-11","2022-07-12",2.0)
+        cls.frans_kar.action_approve()
 
-        # Doris Dahlin -- Låt stå! :-) Inte sjuk i juni
-        # ~ cls.employee_doris = self.env.ref('hr_doris_employee')  # doris_employee
-        # ~ cls.doris_kar = self.create_leave(cls.employee_doris,'sjk_kar',"2022-04-06","2022-04-07",2.0)
-        # ~ cls.doris_kar.action_approve()
+        # Doris Dahlin
+        cls.employee_doris = self.env.ref('hr_doris_employee')  # doris_employee
+        cls.doris_kar = self.create_leave(cls.employee_doris,'sjk_kar',"2022-07-04","2022-07-07",4.0)
+        cls.doris_kar.action_approve()
+        cls.doris_kar = self.create_leave(cls.employee_doris,'sjk_kar',"2022-07-11","2022-07-14",4.0)
+        cls.doris_kar.action_approve()
 
         # Camilla Cobolt
         cls.employee_camilla = self.env.ref('hr_camilla_employee')  # camilla_employee
-        cls.camilla_kar = self.create_leave(cls.employee_camilla,'sjk_kar',"2022-06-07","2022-06-08",2.0)
+        cls.camilla_kar = self.create_leave(cls.employee_camilla,'sjk_kar',"2022-07-11","2022-07-11",1.0)
+        cls.camilla_kar.action_approve()
+        cls.camilla_kar = self.create_leave(cls.employee_camilla,'sjk_kar',"2022-07-18","2022-07-19",2.0)
         cls.camilla_kar.action_approve()
 
         # Gustav Groth
         cls.employee_gustav = self.env.ref('hr_gustav_employee')  # gustav_employee
-        cls.gustav_kar = self.create_leave(cls.employee_gustav,'sjk_kar',"2022-06-02","2022-06-03",2.0)
+        cls.gustav_kar = self.create_leave(cls.employee_gustav,'sjk_kar',"2022-07-01","2022-07-01",2.0)
         cls.gustav_kar.action_approve()
-        cls.gustav_kar = self.create_leave(cls.employee_gustav,'sjk_kar',"2022-06-07","2022-06-10",4.0)
-        cls.gustav_kar.action_approve()
-        cls.gustav_kar = self.create_leave(cls.employee_gustav,'sjk_kar',"2022-06-13","2022-06-17",5.0)
-        cls.gustav_kar.action_approve()
-        cls.gustav_kar = self.create_leave(cls.employee_gustav,'sjk_kar',"2022-06-20","2022-06-23",3.0)
-        cls.gustav_kar.action_approve()
-        cls.gustav_kar = self.create_leave(cls.employee_gustav,'sjk_kar',"2022-06-27","2022-06-30",3.0)
+        cls.gustav_kar = self.create_leave(cls.employee_gustav,'sjk_kar',"2022-07-05","2022-07-08",2.0)
         cls.gustav_kar.action_approve()
         
         # Helmer Henriksson
         cls.employee_helmer = self.env.ref('hr_helmer_employee')  # helmer_employee
-        cls.helmer_kar = self.create_leave(cls.employee_helmer,'sjk_kar',"2022-06-08","2022-05-10",3.0)
+        cls.helmer_kar = self.create_leave(cls.employee_helmer,'sjk_kar',"2022-07-07","2022-07-08",2.0)
         cls.helmer_kar.action_approve()
-        cls.helmer_kar = self.create_leave(cls.employee_helmer,'sjk_kar',"2022-06-14","2022-05-14",1.0)
+        cls.helmer_kar = self.create_leave(cls.employee_helmer,'sjk_kar',"2022-07-11","2022-07-11",1.0)
         cls.helmer_kar.action_approve()
 
 
-        # Karin Kullberg -- Låt stå! :-) Inte sjuk i juni
-        # Anställning per timme, påbörjad 2022-06-01
+         # Karin Kullberg -- Låt stå! :-) Inte sjuk i juni
+        cls.helmer_kar = self.create_leave(cls.employee_helmer,'sjk_kar',"2022-07-04","2022-07-07",1.0)
+        cls.helmer_kar.action_approve()
         
        
 
