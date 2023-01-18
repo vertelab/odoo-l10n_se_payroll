@@ -20,5 +20,6 @@
 ##############################################################################
 from . import hr_holidays
 from . import resource_calendar
+from . import hr_leave
 
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:

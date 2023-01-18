@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="0">
+        <!-- CAMILLA COBOLT -->
+        <record id="hr_camilla_partner" model="res.partner">
+            <field name="company_type">person</field>
+            <field name="name">Camilla Cobolt Kontakt</field>
+            <field name="street">Sveavägen 7</field>
+            <field name="zip">112 00</field>
+            <field name="city">Stockholm</field>
+            <field name="mobile">073-980001</field>
+            <field name="function">Logistikansvarig</field>
+        </record>
+        <record id="bank_camilla" model="res.partner.bank">
+            <field name="acc_number">4132-123123</field>
+            <field name="partner_id" ref="hr_camilla_partner" />
+        </record>
+        <record id="hr_camilla_employee" model="hr.employee">
+            <field name="name">Camilla Cobolt Anställd</field>
+            <field name="address_id" ref="main_company" />
+            <field name="work_location">Rosersberg, HK</field>
+            <field name="work_phone">073-400000</field>
+            <field name="work_email">camilla.cobolt@aronssons.se</field>
+            <field name="identification_id">711002-1834</field>
+            <field name="job_title">Logistikansvarig</field>
+            <field name="address_home_id" ref="hr_camilla_partner" />
+            <field name="address_id" ref="main_company_partner" />
+            <field name="tz" eval="'Europe/Stockholm'" />
+        </record>
+        <record id="contract_camilla" model="hr.contract">
+            <field name="name">Camilla Cobolt Avtal</field>
+            <field name="wage">30000</field>
+            <field name="type_id" ref="hr_contract_type" />
+            <field name="employee_id" ref="hr_camilla_employee" />
+            <field name="schedule_pay" eval="'monthly'" />
+            <field name="state" eval="'open'" />
+            <field name="job_id" ref="job_id_logistics" />
+            <field name="date_start">2022-01-10</field>
+            <field name="first_contract_date">2022-01-10</field>
+            <field name="struct_id" ref="l10n_se_hr_payroll.hr_payroll_structure-tj" />
+            <!--
+                 <field name="benefit_ids" ref="benefits_camilla" />
+            -->
+        </record>
+    </data>
+</odoo>
