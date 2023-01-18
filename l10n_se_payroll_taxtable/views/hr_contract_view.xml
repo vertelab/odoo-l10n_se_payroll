@@ -20,6 +20,12 @@
                         <field name="tax_equalization_end" placeholder="End Date" class="oe_inline" nolabel="1" attrs="{'invisible': [('has_tax_equalization', '=', False)], 'required': [('has_tax_equalization', '=', True)]}" />
                     </div>
                     <field name="is_church_deductible" />
+
+                    <label for="one_off_tax"/>
+                    <div class="o_row">
+                        <field name="has_one_off_tax" nolable="0"></field>
+                        <field name="one_off_tax" attrs="{'invisible': [('has_one_off_tax', '=', False)], 'required': [('has_one_off_tax', '=', True)]}" ></field>
+                    </div>
                 </group>
             </field>
         </record>

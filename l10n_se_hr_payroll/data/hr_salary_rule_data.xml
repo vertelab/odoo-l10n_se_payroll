@@ -363,6 +363,23 @@ if age > 77:
       <field name="account_credit" search="[('code', '=', '2731')]" />
 -->
     </record>
+
+    <!--
+         =====
+    -->
+    <record id="hr_salary_rule-pre" model="hr.salary.rule">
+      <field name="category_id" ref="hr_salary_rule_category-NETAVG" />
+      <field name="code">ens</field>
+      <field name="name">Engångsskatt</field>
+      <field name="sequence">691</field>
+      <field name="appears_on_payslip" eval="False"/>
+      <field name="condition_select">none</field>
+      <field name="amount_select">code</field>
+      <field name="amount_python_compute">
+result = contract.l10_sum_columns_one_off_tax(categories.BRUTTO)
+</field>
+      <field name="quantity">1</field>
+    </record>
     <!--
          =====
     -->

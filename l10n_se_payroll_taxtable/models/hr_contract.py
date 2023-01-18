@@ -21,6 +21,8 @@ class HRContract(models.Model):
     tax_equalization_start = fields.Date(string="Start")
     tax_equalization_end = fields.Date(string="End")
 
+    has_one_off_tax = fields.Boolean(string="One-off Tax")
+    one_off_tax = fields.Float(string="One-off Tax")
 
 
     def action_sync_taxable(self):
@@ -32,6 +34,11 @@ class HRContract(models.Model):
             'view_id': self.env.ref('l10_se_payroll_taxtable.view_payroll_taxtable_wizard_form').id,
             'target': 'new',
         }
+
+    def l10_sum_columns_one_off_tax(self, wage):
+        if self.has_one_off_tax:
+            return wage * self.one_off_tax
+
 
     def l10_sum_columns_taxtable_line(self, date, wage):
         
@@ -58,3 +65,5 @@ class HRContract(models.Model):
         # ~ _logger.warning(f"{wage}")
         # ~ _logger.warning(f"{taxable_lines}")
         # ~ return sum([line[self.column_number].name for line in taxable_lines])
+
+
