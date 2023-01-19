@@ -24,15 +24,17 @@ class TestPayslipJanuary(common.SavepointCase):
                             # ~ 'employee_id': cls.employee_asse,
                         # ~ })
         # ~ return leave
-    def _create_leave(self, employee_id,code,date_from,date_to,number_of_days): 
+    @classmethod
+    def _create_leave(cls, employee_id, code, date_from, date_to, number_of_days): 
         leave = cls.env["hr.leave"].create({    
-                            "holiday_status_id": code,
+                            "holiday_status_id": cls.env["hr.leave.type"].search([('code','=', code )]).mapped('id')[0],
                             "request_date_from": date_from,
                             "request_date_to": date_to,
                             "number_of_days": number_of_days,
                             'holiday_type': 'employee',
                             'employee_id': employee_id,
                         })
+        _logger.warning('Test ***  %s ' % leave.state)
         return leave
         
     def _create_payslip(self, employee_id,date,input_recs): 
@@ -52,27 +54,23 @@ class TestPayslipJanuary(common.SavepointCase):
         # Asse Aronsson -- Låt stå! :-) Inte sjuk i februari
         # ~ cls.employee_asse = self.env.ref('hr_asse_employee')  # asse_employee
         # ~ cls.asse_kar = self.create_leave(cls.employee_asse,'sjk_kar',"2022-01-07","2022-01-07",1.0)
-        # ~ cls.asse_kar.action_approve()
-        # ~ cls.asse_kar = self.create_leave(cls.employee_asse,'sjk_kar',"2022-01-12","2022-01-13",2.0)
-        # ~ cls.asse_kar.action_approve()
-        # ~ cls.asse_kar = self.create_leave(cls.employee_asse,'sjk_kar',"2022-01-24","2022-01-24",1.0)
-        # ~ cls.asse_kar.action_approve()
             
         # Frans Filipsson -- Låt stå! :-) Inte sjuk i februari
         # ~ cls.employee_frans = self.env.ref('hr_frans_employee')  # frans_employee
         # ~ cls.frans_kar = self.create_leave(cls.employee_frans,'sjk_kar',"2022-01-07","2022-01-07",1.0)
-        # ~ cls.frans_kar.action_approve()
-        # ~ cls.frans_kar = self.create_leave(cls.employee_frans,'sjk_kar',"2022-01-10","2022-01-12",3.0)
-        # ~ cls.frans_kar.action_approve()
             
         # Doris Dahlin
-        cls.employee_doris = self.env.ref('hr_doris_employee')  # doris_employee
-        cls.doris_kar = self.create_leave(cls.employee_doris,'sjk_kar',"2022-02-01","2022-02-03",3.0)
-        cls.doris_kar.action_approve()
-        cls.doris_kar = self.create_leave(cls.employee_doris,'sjk_kar',"2022-02-07","2022-02-10",4.0)
-        cls.doris_kar.action_approve()
+        cls.employee_doris = cls.env.ref('l10n_se_hr_payroll_tiichri.hr_doris_employee')  # doris_employee
+        cls.doris_kar = cls._create_leave(cls.employee_doris.id, "sjk_kar" ,"2022-02-01","2022-02-01",1)
+        cls.doris_kar = cls._create_leave(cls.employee_doris.id, "sjk_214" ,"2022-02-02","2022-02-03",2)
+        cls.doris_kar = cls._create_leave(cls.employee_doris.id, "sjk_kar" ,"2022-02-07","2022-02-07",1)
+        cls.doris_kar = cls._create_leave(cls.employee_doris.id, "sjk_214" ,"2022-02-08","2022-02-10",3)
 
         # Camilla Cobolt
+        cls.employee_camilla = cls.env.ref('l10n_se_hr_payroll_tiichri.hr_camilla_employee')  # camilla_employee
+        cls.camilla_kar = cls._create_leave(cls.employee_camilla.id, "sjk_kar" ,"2022-02-03","2022-02-03",1)
+        cls.camilla_kar = cls._create_leave(cls.employee_camilla.id, "sjk_214" ,"2022-02-04","2022-02-04",1)
+
         cls.employee_camilla = self.env.ref('hr_camilla_employee')  # camilla_employee
         cls.camilla_kar = self.create_leave(cls.employee_camilla,'sjk_kar',"2022-02-03","2022-02-04",2.0)
         cls.camilla_kar.action_approve()
