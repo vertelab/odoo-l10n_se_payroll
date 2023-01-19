@@ -7,6 +7,8 @@ from odoo.tests import common
 # $ sudo service odoo stop
 # $ sudo su odoo
 # $ odoo --test-tags /l10n_se_payroll_tiichri -c /etc/odoo/odoo.conf
+# $ odoo -c /etc/odoo/odoo.conf -d DATABASNAMN -i l10n_se_hr_payroll_tiichri --test-enable
+# $ odoo -c /etc/odoo/odoo.conf -d odoo-tiichri4 -i l10n_se_hr_payroll_tiichri --test-enable
 #
 
 class TestPayslipJanuary(common.SavepointCase):

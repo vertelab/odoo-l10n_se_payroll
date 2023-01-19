@@ -1,5 +1,11 @@
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 
+# DOCUMENTAION // RECOURCES
+# https://docs.python.org/3/library/unittest.html
+# https://www.odoo.com/forum/help-1/using-self-env-to-go-over-all-module-record-and-create-new-record-in-another-module-144407
+# https://stackoverflow.com/questions/17534345/typeerror-missing-1-required-positional-argument-self
+
+
 from odoo import fields
 from odoo.tests import common
 
@@ -7,7 +13,9 @@ from odoo.tests import common
 # $ sudo service odoo stop
 # $ sudo su odoo
 # $ odoo --test-tags /l10n_se_payroll_tiichri -c /etc/odoo/odoo.conf
-#
+# $ odoo -c /etc/odoo/odoo.conf -d DATABASNAMN -i l10n_se_hr_payroll_tiichri --test-enable
+# $ odoo -c /etc/odoo/odoo.conf -d odoo-tiichri4 -i l10n_se_hr_payroll_tiichri --test-enable
+
 
 class TestPayslipJanuary(common.SavepointCase):
 
@@ -22,18 +30,25 @@ class TestPayslipJanuary(common.SavepointCase):
                             # ~ 'employee_id': cls.employee_asse,
                         # ~ })
         # ~ return leave
-    def _create_leave(self, employee_id,code,date_from,date_to,number_of_days): 
+    
+    @classmethod
+    def _create_leave(cls, employee_id, code, date_from, date_to, number_of_days): 
         leave = cls.env["hr.leave"].create({    
-                            "holiday_status_id": code,
+                            "holiday_status_id": cls.env["hr.leave.type"].search([('code','=', code )]).mapped('id')[0],
                             "request_date_from": date_from,
                             "request_date_to": date_to,
                             "number_of_days": number_of_days,
                             'holiday_type': 'employee',
                             'employee_id': employee_id,
                         })
+        leave.state = 'draft'
+        # ~ leave.state = 'confirm'
+        leave.action_confirm()
+        leave.action_approve()
         return leave
-        
-    def _create_payslip(self, employee_id,date,input_recs): 
+    
+    @classmethod
+    def _create_payslip(cls, employee_id,date,input_recs): 
         payslip = cls.env["hr.payslip"].create({
                             'employee_id': employee_id,
                             'date':  fields.Date.from_string(date),
@@ -47,9 +62,9 @@ class TestPayslipJanuary(common.SavepointCase):
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
-        # Asse Aronsson
-        cls.employee_asse = self.env.ref('hr_asse_employee')  # asse_employee
-        cls.asse_kar = self.create_leave(cls.employee_asse,'sjk_kar',"2022-01-07","2022-01-07",1.0)
+        # Asse Aronsson = id 15
+        cls.employee_asse = cls.env.ref('l10n_se_hr_payroll_tiichri.hr_asse_employee')  # asse_employee
+        cls.asse_kar = cls._create_leave(cls.employee_asse.id, "sjk_kar" ,"2022-01-07","2022-01-07",1)
         cls.asse_kar.action_approve()
         cls.asse_kar = self.create_leave(cls.employee_asse,'sjk_kar',"2022-01-12","2022-01-13",2.0)
         cls.asse_kar.action_approve()

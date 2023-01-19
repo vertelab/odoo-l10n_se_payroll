@@ -1,6 +1,6 @@
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 
-from . import 01_test_payslip_january
+from . import test_01_payslip_january
 #from . import test_payslip_february
 #from . import test_payslip_mars
 #from . import test_payslip_april
