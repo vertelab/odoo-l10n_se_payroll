@@ -2,6 +2,8 @@
 
 from odoo import fields
 from odoo.tests import common
+import logging
+_logger = logging.getLogger(__name__)
 
 # Test with somthing like this
 # $ sudo service odoo stop
@@ -11,7 +13,7 @@ from odoo.tests import common
 # $ odoo -c /etc/odoo/odoo.conf -d odoo-tiichri4 -i l10n_se_hr_payroll_tiichri --test-enable
 #
 
-class TestPayslipJanuary(common.SavepointCase):
+class TestPayslipFebruary(common.SavepointCase):
 
 
     # ~ def _create_leave(self, employee_id,code,date_from,date_to,number_of_days): 
@@ -36,6 +38,7 @@ class TestPayslipJanuary(common.SavepointCase):
                         })
         _logger.warning('Test ***  %s ' % leave.state)
         return leave
+    
         
     def _create_payslip(self, employee_id,date,input_recs): 
         payslip = cls.env["hr.payslip"].create({
@@ -70,12 +73,7 @@ class TestPayslipJanuary(common.SavepointCase):
         cls.employee_camilla = cls.env.ref('l10n_se_hr_payroll_tiichri.hr_camilla_employee')  # camilla_employee
         cls.camilla_kar = cls._create_leave(cls.employee_camilla.id, "sjk_kar" ,"2022-02-03","2022-02-03",1)
         cls.camilla_kar = cls._create_leave(cls.employee_camilla.id, "sjk_214" ,"2022-02-04","2022-02-04",1)
-
-        cls.employee_camilla = self.env.ref('hr_camilla_employee')  # camilla_employee
-        cls.camilla_kar = self.create_leave(cls.employee_camilla,'sjk_kar',"2022-02-03","2022-02-04",2.0)
-        cls.camilla_kar.action_approve()
-        cls.camilla_kar = self.create_leave(cls.employee_camilla,'sjk_kar',"2022-02-07","2022-02-11",5.0)
-        cls.camilla_kar.action_approve()
+        cls.camilla_kar = cls._create_leave(cls.employee_camilla.id, "sjk_214" ,"2022-02-07","2022-02-11",5)
 
         # Gustav Groth -- Låt stå! :-) Inte sjuk i februari
         # ~ cls.employee_gustav = self.env.ref('hr_gustav_employee')  # gustav_employee
@@ -83,13 +81,12 @@ class TestPayslipJanuary(common.SavepointCase):
         # ~ cls.gustav_kar.action_approve()
         
         # Helmer Henriksson
-        cls.employee_helmer = self.env.ref('hr_helmer_employee')  # helmer_employee
-        cls.helmer_kar = self.create_leave(cls.employee_helmer,'sjk_kar',"2022-02-07","2022-02-10",4.0)
-        cls.helmer_kar.action_approve()
+        cls.employee_helmer = cls.env.ref('l10n_se_hr_payroll_tiichri.hr_helmer_employee')  # helmer_employee
+        cls.helmer_kar = cls._create_leave(cls.employee_helmer.id, "sjk_kar" ,"2022-02-03","2022-02-03",1)
+        cls.helmer_kar = cls._create_leave(cls.employee_helmer.id, "sjk_214" ,"2022-02-04","2022-02-04",1)
 
         # Karin Kullberg
         # Anställning per timme, påbörjad 2022-06-01
-        
        
 
     def test_asse(self):

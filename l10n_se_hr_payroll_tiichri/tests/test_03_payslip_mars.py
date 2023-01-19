@@ -2,6 +2,8 @@
 
 from odoo import fields
 from odoo.tests import common
+import logging
+_logger = logging.getLogger(__name__)
 
 # Test with somthing like this
 # $ sudo service odoo stop
@@ -9,7 +11,7 @@ from odoo.tests import common
 # $ odoo --test-tags /l10n_se_payroll_tiichri -c /etc/odoo/odoo.conf
 #
 
-class TestPayslipJanuary(common.SavepointCase):
+class TestPayslipMars(common.SavepointCase):
 
 
     # ~ def _create_leave(self, employee_id,code,date_from,date_to,number_of_days): 
@@ -22,6 +24,20 @@ class TestPayslipJanuary(common.SavepointCase):
                             # ~ 'employee_id': cls.employee_asse,
                         # ~ })
         # ~ return leave
+        
+    @classmethod
+    def _create_leave(cls, employee_id, code, date_from, date_to, number_of_days): 
+        leave = cls.env["hr.leave"].create({    
+                            "holiday_status_id": cls.env["hr.leave.type"].search([('code','=', code )]).mapped('id')[0],
+                            "request_date_from": date_from,
+                            "request_date_to": date_to,
+                            "number_of_days": number_of_days,
+                            'holiday_type': 'employee',
+                            'employee_id': employee_id,
+                        })
+        _logger.warning('test ***  %s ' % leave.state)
+        return leave
+        
     def _create_leave(self, employee_id,code,date_from,date_to,number_of_days): 
         leave = cls.env["hr.leave"].create({    
                             "holiday_status_id": code,
@@ -48,48 +64,31 @@ class TestPayslipJanuary(common.SavepointCase):
     def setUpClass(cls):
         super().setUpClass()
         # Asse Aronsson
-        cls.employee_asse = self.env.ref('hr_asse_employee')  # asse_employee
-        cls.asse_kar = self.create_leave(cls.employee_asse,'sjk_kar',"2022-03-01","2022-03-04",4.0)
-        cls.asse_kar.action_approve()
-        cls.asse_kar = self.create_leave(cls.employee_asse,'sjk_kar',"2022-03-07","2022-03-09",3.0)
-        cls.asse_kar.action_approve()
-            
+        cls.employee_asse = cls.env.ref('l10n_se_hr_payroll_tiichri.hr_asse_employee')  # asse_employee
+        cls.asse_kar = cls._create_leave(cls.employee_asse.id, "sjk_kar" ,"2022-03-01","2022-03-01",1)
+        cls.asse_kar = cls._create_leave(cls.employee_asse.id, "sjk_214" ,"2022-03-02","2022-03-04",3)
+        cls.asse_kar = cls._create_leave(cls.employee_asse.id, "sjk_214" ,"2022-03-07","2022-03-09",3)
+
         # Frans Filipsson
-        cls.employee_frans = self.env.ref('hr_frans_employee')  # frans_employee
-        cls.frans_kar = self.create_leave(cls.employee_frans,'sjk_kar',"2022-03-04","2022-03-04",1.0)
-        cls.frans_kar.action_approve()
-        cls.frans_kar = self.create_leave(cls.employee_frans,'sjk_kar',"2022-03-07","2022-03-11",5.0)
-        cls.frans_kar.action_approve()
-        cls.frans_kar = self.create_leave(cls.employee_frans,'sjk_kar',"2022-03-14","2022-03-16",3.0)
-        cls.frans_kar.action_approve()
-        cls.frans_kar = self.create_leave(cls.employee_frans,'sjk_kar',"2022-03-29","2022-03-29",1.0)
-        cls.frans_kar.action_approve()
-            
+        cls.employee_frans = cls.env.ref('l10n_se_hr_payroll_tiichri.hr_frans_employee')  # frans_employee
+        cls.frans_kar = cls._create_leave(cls.employee_frans.id, "sjk_kar" ,"2022-03-04","2022-03-04",1)
+        cls.frans_kar = cls._create_leave(cls.employee_frans.id, "sjk_214" ,"2022-03-07","2022-03-11",5)
+        cls.frans_kar = cls._create_leave(cls.employee_frans.id, "sjk_214" ,"2022-03-14","2022-03-16",3)
+
         # Doris Dahlin -- Låt stå! :-) Inte sjuk i mars
-        # ~ cls.employee_doris = self.env.ref('hr_doris_employee')  # doris_employee
-        # ~ cls.doris_kar = self.create_leave(cls.employee_doris,'sjk_kar',"2022-02-01","2022-02-03",3.0)
-        # ~ cls.doris_kar.action_approve()
-        # ~ cls.doris_kar = self.create_leave(cls.employee_doris,'sjk_kar',"2022-02-07","2022-02-10",4.0)
-        # ~ cls.doris_kar.action_approve()
 
         # Camilla Cobolt -- Låt stå! :-) Inte sjuk i mars
-        # ~ cls.employee_camilla = self.env.ref('hr_camilla_employee')  # camilla_employee
-        # ~ cls.camilla_kar = self.create_leave(cls.employee_camilla,'sjk_kar',"2022-02-03","2022-02-04",2.0)
-        # ~ cls.camilla_kar.action_approve()
-        # ~ cls.camilla_kar = self.create_leave(cls.employee_camilla,'sjk_kar',"2022-02-07","2022-02-11",5.0)
-        # ~ cls.camilla_kar.action_approve()
 
         # Gustav Groth
-        cls.employee_gustav = self.env.ref('hr_gustav_employee')  # gustav_employee
-        cls.gustav_kar = self.create_leave(cls.employee_gustav,'sjk_kar',"2022-03-02","2022-03-03",2.0)
-        cls.gustav_kar.action_approve()
+        cls.employee_gustav = cls.env.ref('l10n_se_hr_payroll_tiichri.hr_gustav_employee')  # gustav_employee
+        cls.gustav_kar = cls._create_leave(cls.employee_gustav.id, "sjk_kar" ,"2022-03-02","2022-03-02",1)
+        cls.gustav_kar = cls._create_leave(cls.employee_gustav.id, "sjk_214" ,"2022-03-03","2022-03-03",1)
         
         # Helmer Henriksson
-        cls.employee_helmer = self.env.ref('hr_helmer_employee')  # helmer_employee
-        cls.helmer_kar = self.create_leave(cls.employee_helmer,'sjk_kar',"2022-03-03","2022-03-04",2.0)
-        cls.helmer_kar.action_approve()
-        cls.helmer_kar = self.create_leave(cls.employee_helmer,'sjk_kar',"2022-03-16","2022-03-16",1.0)
-        cls.helmer_kar.action_approve()
+        cls.employee_helmer = cls.env.ref('l10n_se_hr_payroll_tiichri.hr_helmer_employee')  # helmer_employee
+        cls.helmer_kar = cls._create_leave(cls.employee_helmer.id, "sjk_kar" ,"2022-03-03","2022-03-03",1)
+        cls.helmer_kar = cls._create_leave(cls.employee_helmer.id, "sjk_214" ,"2022-03-04","2022-03-04",1)
+        cls.helmer_kar = cls._create_leave(cls.employee_helmer.id, "sjk_kar" ,"2022-03-16","2022-03-16",1)
 
         # Karin Kullberg
         # Anställning per timme, påbörjad 2022-06-01
