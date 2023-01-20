@@ -72,24 +72,24 @@ class TestPayslipJune(common.SavepointCase):
 
         # Camilla Cobolt
         cls.employee_camilla = cls.env.ref('l10n_se_hr_payroll_tiichri.hr_camilla_employee')  # camilla_employee
-        cls.camilla_kar = cls._create_leave(cls.employee_camilla.id, "sjk_kar" ,"2022-05-07","2022-05-08",1)
-        cls.camilla_kar = cls._create_leave(cls.employee_camilla.id, "sjk_214" ,"2022-05-08","2022-05-08",1)
+        cls.camilla_kar = cls._create_leave(cls.employee_camilla.id, "sjk_kar" ,"2022-06-07","2022-06-08",1)
+        cls.camilla_kar = cls._create_leave(cls.employee_camilla.id, "sjk_214" ,"2022-06-08","2022-06-08",1)
 
         # Gustav Groth
         cls.employee_gustav = cls.env.ref('l10n_se_hr_payroll_tiichri.hr_gustav_employee')  # gustav_employee
-        cls.gustav_kar = cls._create_leave(cls.employee_gustav.id, "sjk_kar" ,"2022-05-02","2022-05-02",1)
-        cls.gustav_kar = cls._create_leave(cls.employee_gustav.id, "sjk_214" ,"2022-05-03","2022-05-03",1)
-        cls.gustav_kar = cls._create_leave(cls.employee_gustav.id, "sjk_214" ,"2022-05-07","2022-05-10",1)
-        cls.gustav_kar = cls._create_leave(cls.employee_gustav.id, "sjk_214" ,"2022-05-13","2022-05-17",1)
-        cls.gustav_kar = cls._create_leave(cls.employee_gustav.id, "sjk_214" ,"2022-05-20","2022-05-23",1)
-        cls.gustav_kar = cls._create_leave(cls.employee_gustav.id, "sjk_214" ,"2022-05-27","2022-05-30",1)
+        cls.gustav_kar = cls._create_leave(cls.employee_gustav.id, "sjk_kar" ,"2022-06-02","2022-06-02",1)
+        cls.gustav_kar = cls._create_leave(cls.employee_gustav.id, "sjk_214" ,"2022-06-03","2022-06-03",1)
+        cls.gustav_kar = cls._create_leave(cls.employee_gustav.id, "sjk_214" ,"2022-06-07","2022-06-10",1)
+        cls.gustav_kar = cls._create_leave(cls.employee_gustav.id, "sjk_214" ,"2022-06-13","2022-06-17",1)
+        cls.gustav_kar = cls._create_leave(cls.employee_gustav.id, "sjk_214" ,"2022-06-20","2022-06-23",1)
+        cls.gustav_kar = cls._create_leave(cls.employee_gustav.id, "sjk_214" ,"2022-06-27","2022-06-30",1)
        
         # Helmer Henriksson
         cls.employee_helmer = cls.env.ref('l10n_se_hr_payroll_tiichri.hr_helmer_employee')  # helmer_employee
-        cls.helmer_kar = cls._create_leave(cls.employee_helmer.id, "sjk_kar" ,"2022-05-19","2022-05-19",1)
-        cls.helmer_kar = cls._create_leave(cls.employee_helmer.id, "sjk_214" ,"2022-05-20","2022-05-20",1)
-        cls.helmer_kar = cls._create_leave(cls.employee_helmer.id, "sjk_kar" ,"2022-05-27","2022-05-27",1)
-        cls.helmer_kar = cls._create_leave(cls.employee_helmer.id, "sjk_214" ,"2022-05-30","2022-05-30",1)
+        cls.helmer_kar = cls._create_leave(cls.employee_helmer.id, "sjk_kar" ,"2022-06-19","2022-06-19",1)
+        cls.helmer_kar = cls._create_leave(cls.employee_helmer.id, "sjk_214" ,"2022-06-20","2022-06-20",1)
+        cls.helmer_kar = cls._create_leave(cls.employee_helmer.id, "sjk_kar" ,"2022-06-27","2022-06-27",1)
+        cls.helmer_kar = cls._create_leave(cls.employee_helmer.id, "sjk_214" ,"2022-06-30","2022-06-30",1)
 
         # Karin Kullberg -- Låt stå! :-) Inte sjuk i juni
         # Anställning per timme, påbörjad 2022-06-01
