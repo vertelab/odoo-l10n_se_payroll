@@ -8,6 +8,8 @@
 
 from odoo import fields
 from odoo.tests import common
+import logging
+_logger = logging.getLogger(__name__)
 
 # Test with somthing like this
 # $ sudo service odoo stop
@@ -40,12 +42,14 @@ class TestPayslipJanuary(common.SavepointCase):
                             "number_of_days": number_of_days,
                             'holiday_type': 'employee',
                             'employee_id': employee_id,
+                            # ~ 'state': 'confirm',
                         })
-        # leave.state = 'draft'
-        # # ~ leave.state = 'confirm'
-        # leave.action_confirm()
-        # leave.state = 'confirm'
-        # leave.action_approve()
+        # ~ leave.state = 'draft'
+        # ~ leave.state = 'confirm'
+        _logger.warning('jakob ***  %s ' % leave.state)
+        # ~ leave.action_confirm()
+        # ~ leave.action_approve()
+
         return leave
     
     @classmethod
@@ -66,23 +70,24 @@ class TestPayslipJanuary(common.SavepointCase):
         super().setUpClass()
         # Asse Aronsson = id 15
         cls.employee_asse = cls.env.ref('l10n_se_hr_payroll_tiichri.hr_asse_employee')  # asse_employee
-        cls.asse_kar = cls._create_leave(cls.employee_asse.id,'sjk_kar',"2022-01-07","2022-01-07",1)
-        cls.asse_kar = cls._create_leave(cls.employee_asse.id,'sjk_kar',"2022-01-12","2022-01-13",2)
-        cls.asse_kar = cls._create_leave(cls.employee_asse.id,'sjk_kar',"2022-01-24","2022-01-24",1)
+
+        cls.asse_kar = cls._create_leave(cls.employee_asse.id, "sjk_kar" ,"2022-01-07","2022-01-07",1)
+        cls.asse_kar = cls._create_leave(cls.employee_asse.id, "sjk_kar" ,"2022-01-12","2022-01-12",1)
+        cls.asse_kar = cls._create_leave(cls.employee_asse.id, "sjk_214" ,"2022-01-13","2022-01-13",1)
+        cls.asse_kar = cls._create_leave(cls.employee_asse.id, "sjk_kar" ,"2022-01-24","2022-01-24",1)
             
-        # # Frans Filipsson
-        # cls.employee_frans = self.env.ref('hr_frans_employee')  # frans_employee
-        # cls.frans_kar = self.create_leave(cls.employee_frans,'sjk_kar',"2022-01-07","2022-01-07",1.0)
-        # cls.frans_kar.action_approve()
-        # cls.frans_kar = self.create_leave(cls.employee_frans,'sjk_kar',"2022-01-10","2022-01-12",3.0)
-        # cls.frans_kar.action_approve()
-            
-        # # Doris Dahlin
-        # cls.employee_doris = self.env.ref('hr_doris_employee')  # doris_employee
-        # cls.doris_kar = self.create_leave(cls.employee_doris,'sjk_kar',"2022-01-04","2022-01-05",2.0)
-        # cls.doris_kar.action_approve()
-        # cls.doris_kar = self.create_leave(cls.employee_doris,'sjk_kar',"2022-01-10","2022-01-12",3.0)
-        # cls.doris_kar.action_approve()
+        # Frans Filipsson
+        cls.employee_frans = cls.env.ref('l10n_se_hr_payroll_tiichri.hr_frans_employee')  # frans_employee
+        cls.frans_kar = cls._create_leave(cls.employee_frans.id, "sjk_kar" ,"2022-01-07","2022-01-07",1)
+        cls.frans_kar = cls._create_leave(cls.employee_frans.id, "sjk_kar" ,"2022-01-10","2022-01-10",1)
+        cls.frans_kar = cls._create_leave(cls.employee_frans.id, "sjk_214" ,"2022-01-11","2022-01-12",2)
+
+        # Doris Dahlin
+        cls.employee_doris = cls.env.ref('l10n_se_hr_payroll_tiichri.hr_doris_employee')  # doris_employee
+        cls.doris_kar = cls._create_leave(cls.employee_doris.id, "sjk_kar" ,"2022-01-04","2022-01-04",1)
+        cls.doris_kar = cls._create_leave(cls.employee_doris.id, "sjk_214" ,"2022-01-05","2022-01-05",1)
+        cls.doris_kar = cls._create_leave(cls.employee_doris.id, "sjk_kar" ,"2022-01-10","2022-01-10",1)
+        cls.doris_kar = cls._create_leave(cls.employee_doris.id, "sjk_214" ,"2022-01-11","2022-01-12",2)
 
         # Camilla Cobolt -- Låt stå! :-) Inte sjuk i januari
         # ~ cls.employee_camilla = self.env.ref('hr_camilla_employee')  # camilla_employee
@@ -91,28 +96,23 @@ class TestPayslipJanuary(common.SavepointCase):
         # ~ cls.camilla_kar = self.create_leave(cls.employee_camilla,'sjk_kar',"2022-01-10","2022-01-12",3.0)
         # ~ cls.camilla_kar.action_approve()
 
-        # # Gustav Groth
-        # cls.employee_gustav = self.env.ref('hr_gustav_employee')  # gustav_employee
-        # cls.gustav_kar = self.create_leave(cls.employee_gustav,'sjk_kar',"2022-01-07","2022-01-07",1.0)
-        # cls.gustav_kar.action_approve()
-        # cls.gustav_kar = self.create_leave(cls.employee_gustav,'sjk_kar',"2022-01-10","2022-01-14",5.0)
-        # cls.gustav_kar.action_approve()
-        # cls.gustav_kar = self.create_leave(cls.employee_gustav,'sjk_kar',"2022-01-17","2022-01-21",5.0)
-        # cls.gustav_kar.action_approve()
-        # cls.gustav_kar = self.create_leave(cls.employee_gustav,'sjk_kar',"2022-01-24","2022-01-25",2.0)
-        # cls.gustav_kar.action_approve()
+
+        # Gustav Groth
+        cls.employee_gustav = cls.env.ref('l10n_se_hr_payroll_tiichri.hr_gustav_employee')  # gustav_employee
+        cls.gustav_kar = cls._create_leave(cls.employee_gustav.id, "sjk_kar" ,"2022-01-07","2022-01-07",1)
+        cls.gustav_kar = cls._create_leave(cls.employee_gustav.id, "sjk_214" ,"2022-01-10","2022-01-14",5)
+        cls.gustav_kar = cls._create_leave(cls.employee_gustav.id, "sjk_214" ,"2022-01-17","2022-01-21",5)
+        cls.gustav_kar = cls._create_leave(cls.employee_gustav.id, "sjk_214" ,"2022-01-24","2022-01-25",2)
         
-        # # Helmer Henriksson
-        # cls.employee_helmer = self.env.ref('hr_helmer_employee')  # helmer_employee
-        # cls.helmer_kar = self.create_leave(cls.employee_helmer,'sjk_kar',"2022-01-04","2022-01-05",2.0)
-        # cls.helmer_kar.action_approve()
-        # cls.helmer_kar = self.create_leave(cls.employee_helmer,'sjk_kar',"2022-01-12","2022-01-14",3.0)
-        # cls.helmer_kar.action_approve()
+        # Helmer Henriksson
+        cls.employee_helmer = cls.env.ref('l10n_se_hr_payroll_tiichri.hr_helmer_employee')  # helmer_employee
+        cls.helmer_kar = cls._create_leave(cls.employee_helmer.id, "sjk_kar" ,"2022-01-04","2022-01-04",1)
+        cls.helmer_kar = cls._create_leave(cls.employee_helmer.id, "sjk_214" ,"2022-01-05","2022-01-05",1)
+        cls.helmer_kar = cls._create_leave(cls.employee_helmer.id, "sjk_kar" ,"2022-01-12","2022-01-12",1)
+        cls.helmer_kar = cls._create_leave(cls.employee_helmer.id, "sjk_214" ,"2022-01-13","2022-01-14",2)
 
         # Karin Kullberg
         # Anställning per timme, påbörjad 2022-06-01
-        
-       
 
     def test_asse(self):
         payslip = self._create_payslip(self.employee_asse,'2022-01-25',[
