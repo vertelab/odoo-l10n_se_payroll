@@ -138,7 +138,7 @@ class TestPayslipJanuary(common.SavepointCase):
                 {'code': 'kvaltim','amount': 2.0},
             ])
         payslip.compute_sheet()
-        self.assertEqual(payslip.state, 'draft')
+        self.assertEqual(payslip.state, 'verify')
         # self.assertAlmostEqual(payslip.net, 29531.0)
 
     # def test_camilla(self):
