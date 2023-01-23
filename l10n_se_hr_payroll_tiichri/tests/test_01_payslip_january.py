@@ -46,19 +46,19 @@ class TestPayslipJanuary(common.SavepointCase):
                         })
         # ~ leave.state = 'draft'
         # ~ leave.state = 'confirm'
-        _logger.warning('state status: ***  %s ' % leave.state)
+        # _logger.warning('jakob ***  %s ' % leave.state)
         # ~ leave.action_confirm()
         # ~ leave.action_approve()
 
         return leave
     
     @classmethod
-    def _create_payslip(cls, employee_id, date,input_recs): 
+    def _create_payslip(cls, employee_id, contract_id, input_recs): 
         payslip = cls.env["hr.payslip"].create({
                             'employee_id': employee_id.id,
-                            'date_from':  fields.Date.from_string(date),
-                            'period_id': 1,
-                            'contract_id': 23,
+                            'date_from': cls.date_start,
+                            'period_id': cls.period.id,
+                            'contract_id': contract_id[0].id,
             })
         for input_rec in input_recs:
             line = cls.env["hr.payslip.input"].search([('code','=',input_rec['code']),('payslip_id','=',payslip.id)])
@@ -68,9 +68,27 @@ class TestPayslipJanuary(common.SavepointCase):
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
-        # Asse Aronsson = id 15
-        cls.employee_asse = cls.env.ref('l10n_se_hr_payroll_tiichri.hr_asse_employee')  # asse_employee
+        cls.date_start = fields.Date.from_string('2022-01-01')
+        cls.date_stop = fields.Date.from_string('2022-12-31')
+        cls.company = cls.env['res.company'].search([('name', '=', 'Aronssons Montage AB')])
 
+        cls.fiscal_year = cls.env['account.fiscalyear'].create({
+            'name': 'Unittest fiscal year',
+            'code': 'UFY',
+            'company_id': cls.company.id,
+            'date_start': cls.date_start,
+            'date_stop': cls.date_stop,
+        })
+
+        cls.period = cls.env['account.period'].create({
+            'name': 'Unittest period',
+            'fiscalyear_id': cls.fiscal_year.id,
+            'date_start': cls.date_start,
+            'date_stop': cls.date_stop,
+        })
+
+        # Asse Aronsson
+        cls.employee_asse = cls.env.ref('l10n_se_hr_payroll_tiichri.hr_asse_employee')
         cls.asse_kar = cls._create_leave(cls.employee_asse.id, "sjk_kar" ,"2022-01-07","2022-01-07",1)
         cls.asse_kar = cls._create_leave(cls.employee_asse.id, "sjk_kar" ,"2022-01-12","2022-01-12",1)
         cls.asse_kar = cls._create_leave(cls.employee_asse.id, "sjk_214" ,"2022-01-13","2022-01-13",1)
@@ -115,7 +133,8 @@ class TestPayslipJanuary(common.SavepointCase):
         # Anställning per timme, påbörjad 2022-06-01
 
     def test_asse(self):
-        payslip = self._create_payslip(self.employee_asse,'2022-01-25',[
+        contract_id = self.env['hr.contract'].search([('name', '=', f"{' '.join(self.employee_asse.name.split(' ')[:2])} Avtal")])
+        payslip = self._create_payslip(self.employee_asse, contract_id, [
                 {'code': 'kvaltim','amount': 2.0},
             ])
         payslip.compute_sheet()
