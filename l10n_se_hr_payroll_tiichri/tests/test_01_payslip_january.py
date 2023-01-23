@@ -46,7 +46,7 @@ class TestPayslipJanuary(common.SavepointCase):
                         })
         # ~ leave.state = 'draft'
         # ~ leave.state = 'confirm'
-        _logger.warning('jakob ***  %s ' % leave.state)
+        _logger.warning('state status: ***  %s ' % leave.state)
         # ~ leave.action_confirm()
         # ~ leave.action_approve()
 
