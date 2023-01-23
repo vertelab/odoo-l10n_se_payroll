@@ -47,6 +47,8 @@ class ContractType(models.Model):
 
     name = fields.Char(required=True)
 
+    work_time = fields.Selection([('none', 'None')], string='Work Time', default='none', help="Type of work time")
+
 
 class HrPayslipWorkedDays(models.Model):
     _inherit = "hr.payslip.worked_days"
@@ -109,6 +111,8 @@ class hr_contract(models.Model):
 
     # ~ office_fund = fields.Float(string='Office fund', digits_compute=dp.get_precision('Payroll'), help="Fund for
     # personal office supplies",)
+
+    # hourly_employee = fields.Float(string="Hourly employee")
 
     def _get_param(self, param, value):
         if not self.env['ir.config_parameter'].get_param(param):
