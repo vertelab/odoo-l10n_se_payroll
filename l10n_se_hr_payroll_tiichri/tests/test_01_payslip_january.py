@@ -57,20 +57,24 @@ class TestPayslipJanuary(common.SavepointCase):
         payslip = cls.env["hr.payslip"].create({
                             'employee_id': employee_id.id,
                             'date_from': cls.date_start,
+                            'date_to': cls.date_stop,
                             'period_id': cls.period.id,
                             'contract_id': contract_id[0].id,
+                            'struct_id': cls.struct.id
             })
         for input_rec in input_recs:
             line = cls.env["hr.payslip.input"].search([('code','=',input_rec['code']),('payslip_id','=',payslip.id)])
-            line.amount = input_rec['amount']            
+            line.amount = input_rec['amount']
+            line.amount_qty = input_rec['amount']              
         return payslip
     
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
-        cls.date_start = fields.Date.from_string('2022-01-01')
-        cls.date_stop = fields.Date.from_string('2022-12-31')
+        cls.date_start = fields.Date.from_string('2023-01-01')
+        cls.date_stop = fields.Date.from_string('2023-01-31')
         cls.company = cls.env['res.company'].search([('name', '=', 'Aronssons Montage AB')])
+        cls.struct = cls.env['hr.payroll.structure'].search([('code', '=', 'bas2018-tj')])
 
         cls.fiscal_year = cls.env['account.fiscalyear'].create({
             'name': 'Unittest fiscal year',
@@ -137,8 +141,18 @@ class TestPayslipJanuary(common.SavepointCase):
         payslip = self._create_payslip(self.employee_asse, contract_id, [
                 {'code': 'kvaltim','amount': 2.0},
             ])
+        
+        payslip.onchange_struct_id()
         payslip.compute_sheet()
+        payslip._compute_details_by_salary_rule_category()       
+        
         self.assertEqual(payslip.state, 'verify')
+
+        for detail in payslip.details_by_salary_rule_category:
+            _logger.warning(f"line id from input: {detail.name} {detail.total}")
+            if detail.code == 'net':
+                self.assertAlmostEqual(detail.total, 29531.0)
+
         # self.assertAlmostEqual(payslip.net, 29531.0)
 
     # def test_camilla(self):

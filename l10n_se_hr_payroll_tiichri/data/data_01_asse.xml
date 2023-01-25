@@ -77,6 +77,8 @@
             <field name="date_start">2018-04-01</field>
             <field name="first_contract_date">2018-04-01</field>
             <field name="struct_id" ref="l10n_se_hr_payroll.hr_payroll_structure-tj" />
+            <field name="table_number">30</field>
+            <field name="column_number" eval="'column1'"/>
         </record>
     </data>
 </odoo>
