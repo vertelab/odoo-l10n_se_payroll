@@ -47,8 +47,6 @@ class ContractType(models.Model):
 
     name = fields.Char(required=True)
 
-    work_time = fields.Selection([('none', 'None')], string='Work Time', default='none', help="Type of work time")
-
 
 class HrPayslipWorkedDays(models.Model):
     _inherit = "hr.payslip.worked_days"
