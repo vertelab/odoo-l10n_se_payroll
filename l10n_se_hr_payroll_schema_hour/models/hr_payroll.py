@@ -32,12 +32,16 @@ class hr_contract(models.Model):
     type_id = fields.Many2one('hr.contract.type', string="Employee Category",
                               required=True, help="Employee category",
                               default=lambda self: self.env['hr.contract.type'].search([], limit=1))
+    
+    work_id = fields.Selection(related='type_id.work_time', readonly=False)
+
     #type_id
 class ContractType(models.Model):
     _inherit = "hr.contract.type"
     _description = "Contract Type"
     
     work_time = fields.Selection([('none', 'None'),('schema_hour', 'Schema Hour')], string='Work Time', default='none', help="Type of work time")
+    # state = fields.Char(string="state")
 
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
 
