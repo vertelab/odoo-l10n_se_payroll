@@ -41,7 +41,7 @@ Hour salary rules
     'depends': ['l10n_se_hr_payroll', 'l10n_se_hr_holidays'],
     'data': ['views/hr_salary_rule_data.xml',
              'views/employee_contract_schema_hours_view.xml'
-             ],
+             ], 
     'installable': True,
 }
 
