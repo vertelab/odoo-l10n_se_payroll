@@ -24,6 +24,19 @@ from odoo import models, fields, api, _, tools
 import logging
 _logger = logging.getLogger(__name__)
 
+class ContractType(models.Model):
+    _inherit = "hr.contract.type"
+    _description = "Contract Type"
+    
+    work_time = fields.Selection([('none', 'None'),('schema_hour', 'Schema Hour')], string='Work Time', default='none', help="Type of work time")
+
+class hr_contract(models.Model):
+    _inherit = 'hr.contract'
+    
+    type_id = fields.Many2one('hr.contract.type', string="Employee Category",
+                              required=True, help="Employee category",
+                              default=lambda self: self.env['hr.contract.type'].search([], limit=1))
+    #type_id
 
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
 
