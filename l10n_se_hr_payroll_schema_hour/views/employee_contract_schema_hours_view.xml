@@ -7,7 +7,7 @@
         <field name="arch" type="xml">
             <xpath expr="//field[@name='structure_type_id']" position="after">
                 <field name="type_id"></field>
-                <field name="work_time"></field>
+                <!-- <field name="work_time"></field> -->
             </xpath>
         </field>
     </record>
