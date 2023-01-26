@@ -33,27 +33,32 @@ class HRContract(models.Model):
             'target': 'new',
         }
 
-    def l10_sum_columns_taxtable_line(self, date, wage):
+
+    def l10_sum_columns_taxtable_line(self, payslip, wage):
         
-        if self.has_tax_equalization and date >= self.tax_equalization_start and date <= self.tax_equalization_end:
+        if self.has_tax_equalization and payslip.compute_date >= self.tax_equalization_start and payslip.compute_date <= self.tax_equalization_end:
             return wage * self.tax_equalization
         
-        fails = [key for key, value in (('date', date), ('wage', wage), ('column_number', self.column_number),
+        fails = [key for key, value in (('date', payslip.compute_date), ('wage', wage), ('column_number', self.column_number),
                                         ('self.table_number', self.table_number)) if not value]
         if fails:
             _logger.warning(f"Please fill these values{fails}")
             return
             
-        year = date.year
         taxable_line = self.env['payroll.taxtable.line'].search([
             ('table_number', '=', self.table_number),
             ('income_from', '<=', float(wage)),
             ('income_to', '>=', float(wage)),
-            ('year', '=', year)
+            ('year', '=', payslip.compute_date.year)
         ])
         
+    
+ 
+        
         return getattr(taxable_line, self.column_number)
-     
+  
+  
+    
         # ~ _logger.warning(f"{self.table_number}")
         # ~ _logger.warning(f"{wage}")
         # ~ _logger.warning(f"{taxable_lines}")
