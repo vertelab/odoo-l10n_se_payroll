@@ -31,11 +31,27 @@ import logging
 _logger = logging.getLogger(__name__)
 
 
+class HrPayslipLine(models.Model):
+    _inherit = "hr.payslip.line"
+
+
+    @api.depends("quantity", "amount", "rate")
+    def _compute_total(self):
+        for line in self:
+            line.total = round(float(line.quantity) * line.amount * line.rate / 100)
+
+            
 class ContractType(models.Model):
     _name = "hr.contract.type"
     _description = "Contract Type"
 
     name = fields.Char(required=True)
+
+
+class HrPayslipWorkedDays(models.Model):
+    _inherit = "hr.payslip.worked_days"
+
+    hr_leave_id = fields.Many2one(comodel_name="hr.leave", string="hr leave id")
 
 
 class hr_salary_rule(models.Model):
@@ -83,13 +99,18 @@ class hr_contract(models.Model):
                                readonly=True,
                                help="Ange skattetabell/kolumn/ev jämkning som ligger till grund för angivet "
                                     "preleminärskatteavdrag")
-    # ~ car_company_amount     = fields.Float('Bruttolöneavdrag för bil', digits_compute=dp.get_precision('Payroll'), help="Bruttolöneavdraget för företagsbil, dvs företagets kostnad för företagsbilen")
-    # ~ car_employee_deduction = fields.Float(string='Förmånsvärde för bil', digits_compute=dp.get_precision('Payroll'), help="Beräknat förmånsvärde för bil från skatteverket",)
-    # ~ car_deduction_url      = fields.Char(string='Förmånsvärdesberäkning SKV', default="http://www.skatteverket.se/privat/skatter/biltrafik/bilformansberakning", readonly=True,help="Beräknat förmånsvärde för bil från skatteverket")
+    # ~ car_company_amount = fields.Float('Bruttolöneavdrag för bil', digits_compute=dp.get_precision('Payroll'),
+    # help="Bruttolöneavdraget för företagsbil, dvs företagets kostnad för företagsbilen") ~ car_employee_deduction =
+    # fields.Float(string='Förmånsvärde för bil', digits_compute=dp.get_precision('Payroll'), help="Beräknat
+    # förmånsvärde för bil från skatteverket",) ~ car_deduction_url = fields.Char(string='Förmånsvärdesberäkning
+    # SKV', default="http://www.skatteverket.se/privat/skatter/biltrafik/bilformansberakning", readonly=True,
+    # help="Beräknat förmånsvärde för bil från skatteverket")
     vacation_days = fields.Float(string='Semesterdagar', digits='Payroll', help="Sparad semester i dagar", )
 
     # ~ office_fund = fields.Float(string='Office fund', digits_compute=dp.get_precision('Payroll'), help="Fund for
     # personal office supplies",)
+
+    # hourly_employee = fields.Float(string="Hourly employee")
 
     def _get_param(self, param, value):
         if not self.env['ir.config_parameter'].get_param(param):
@@ -129,25 +150,13 @@ class hr_contract(models.Model):
             # ~ _logger.error(f'get_leave_days: {line.number_of_days}')
             return line.number_of_days if line else 0.0
 
-    # def get_leave_days2(self, rule_id, worked_days):
-    #     #rule_id = "sem_bet"
-    #     if rule_id and rule_id == "sem_bet":
-    #         _logger.warning("LOOK HERE"*100)
-    #         _logger.error(f'get_leave_days: {self} {rule_id} {worked_days.dict}')
-    #     code = self.env.ref(rule_id).code if len(rule_id.split('.')) == 2 else rule_id
-    #     #{'WORK100': hr.payslip.worked_days(15,), 'Legal Leaves 2022': hr.payslip.worked_days(13,), 'Legal Leaves 2023': hr.payslip.worked_days(14,)}
-    #     #line = worked_days.dict.get(code,False)
-    #     if rule_id and rule_id == "sem_bet":
-    #         _logger.error(f'get_leave_days: {code} {worked_days.dict}')
-    #         for key,val in worked_days.dict:
-    #             _logger.warning(f"{key=} {val=}")
-    #             if "Legal Leaves" in key:
-    #                 line.append(val)
-    #         if len(line) == 0:
-    #             line = False
-    #         else:
-    #             return 4
-    #     return line.number_of_days if line else 0.0
+    # def get_leave_days2(self, rule_id, worked_days): #rule_id = "sem_bet" if rule_id and rule_id == "sem_bet":
+    # _logger.warning("LOOK HERE"*100) _logger.error(f'get_leave_days: {self} {rule_id} {worked_days.dict}') code =
+    # self.env.ref(rule_id).code if len(rule_id.split('.')) == 2 else rule_id #{'WORK100': hr.payslip.worked_days(15,
+    # ), 'Legal Leaves 2022': hr.payslip.worked_days(13,), 'Legal Leaves 2023': hr.payslip.worked_days(14,)} #line =
+    # worked_days.dict.get(code,False) if rule_id and rule_id == "sem_bet": _logger.error(f'get_leave_days: {code} {
+    # worked_days.dict}') for key,val in worked_days.dict: _logger.warning(f"{key=} {val=}") if "Legal Leaves" in
+    # key: line.append(val) if len(line) == 0: line = False else: return 4 return line.number_of_days if line else 0.0
 
     def get_leave_hours(self, rule_id, worked_days):
         code = self.env.ref(rule_id).code if len(rule_id.split('.')) == 2 else rule_id
@@ -189,14 +198,16 @@ class hr_payslip(models.Model):
     date_stop = fields.Date(related='period_id.date_stop')
 
     details_by_salary_rule_category = fields.One2many('hr.payslip.line',
-                                                        compute='_compute_details_by_salary_rule_category',
-                                                        string='Details by Salary Rule Category', help="Details from the salary rule category")
+                                                      compute='_compute_details_by_salary_rule_category',
+                                                      string='Details by Salary Rule Category',
+                                                      help="Details from the salary rule category")
+
     def get_number_of_days(self):
         year = self.date_from.year
-        if year % 4 == 0 :
-           return 366
+        if year % 4 == 0:
+            return 366
         return 365
-        
+
     def _compute_details_by_salary_rule_category(self):
         for payslip in self:
             payslip.details_by_salary_rule_category = payslip.mapped('line_ids').filtered(lambda line: line.category_id)
@@ -205,7 +216,6 @@ class hr_payslip(models.Model):
     def onchange_employee(self):
         super(hr_payslip, self).onchange_employee()
         if self.choose_date_method == "date_then":
-        
             self.date_from = self.period_id.date_start - dateutil.relativedelta.relativedelta(months=1)
             self.date_to = self.period_id.date_stop - dateutil.relativedelta.relativedelta(months=1)
             self.name = _("Salary Slip of %s for %s") % (
@@ -218,7 +228,6 @@ class hr_payslip(models.Model):
     def onchange_employee_date_now(self):
         # super(hr_payslip, self).onchange_employee_date_now()
         if self.choose_date_method == "date_now":
-
             self.date_from = self.period_id.date_start
             self.date_to = self.period_id.date_stop
             self.name = _("Salary Slip of %s for %s") % (
@@ -227,21 +236,18 @@ class hr_payslip(models.Model):
             )
         return
 
-    
     def compute_date_method(self):
         self.choose_date_method = (
-        self.env["ir.config_parameter"].sudo().get_param("l10n_se_hr_payroll.choose_date_method")
+            self.env["ir.config_parameter"].sudo().get_param("l10n_se_hr_payroll.choose_date_method")
         )
 
     choose_date_method = fields.Selection([
         ("date_now", "Date now"),
-        ("date_then", "Date then"),],
-        store=True, compute = "compute_date_method", readonly=False)
+        ("date_then", "Date then"), ],
+        store=True, compute="compute_date_method", readonly=False, default=False)
 
     # _logger.error(f"{choose_date_method=}")
     # compute = "compute_date_method")
-   
-    
 
     def get_payslip_vals_period(self, run, employee):
         date_from = run.period_id.prev().date_start
@@ -303,16 +309,17 @@ class hr_payslip(models.Model):
         """
         res = []
         for contract in contracts.filtered(
-            lambda contract: contract.resource_calendar_id
+                lambda contract: contract.resource_calendar_id
         ):
             day_from = datetime.combine(date_from, datetime.min.time())
             day_to = datetime.combine(date_to, datetime.max.time())
             day_contract_start = datetime.combine(contract.date_start, datetime.min.time())
             # Support for the hr_public_holidays module.
-            contract = contract.with_context(
-                employee_id=self.employee_id.id, exclude_public_holidays=True
-            )
-            # only use payslip day_from if it's greather than contract start date
+
+            context_val = {'employee_id': self.employee_id.id, 'exclude_public_holidays': True, 'compute_payslip': True}
+            contract = contract.with_context(context_val)
+
+            # only use payslip day_from if it's greater than contract start date
             if day_from < day_contract_start:
                 day_from = day_contract_start
             # == compute leave days == #
@@ -322,6 +329,11 @@ class hr_payslip(models.Model):
             attendances = self._compute_worked_days(contract, day_from, day_to)
             res.append(attendances)
         return res
+
+
+
+
+
 
 
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:

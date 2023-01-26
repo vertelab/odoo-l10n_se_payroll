@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="0">
+        <!-- ### FRÅNVARO :: SJUKANMÄLAN -->
+<!--
+        <record id="work_leave" model="hr.leave">
+            <field name="holiday_status_id" eval="'Sick Leave Qualify Period'" />
+             <field name="holiday_status_id" search="[
+             ('user_type_id', '=', ref('account.data_account_type_direct_costs')),
+             ('company_id', '=', obj().env.company.id)]
+             "/>
+            <field name="holiday_type" eval="'employee'" />
+            <field name="employee_id" ref="hr_person1_employee" />
+            <field name="name">Sjuk 4 timmar</field>
+            <field name="request_date_from">2023-01-16</field>
+            <field name="request_date_to">2023-01-16</field>
+            <field name="number_of_days">1</field>
+            <field name="holiday_type">employee</field>
+            <field name="state" eval="'validate'" />
+        </record>
+-->
+        <!--
+             <record id="id1" model="tutorial.example">
+             <field name="year" eval="datetime.now().year+1"/>
+             </record>
+             <record id="id1" model="account.move.line">
+             <field name="account_id" search="[
+             ('user_type_id', '=', ref('account.data_account_type_direct_costs')),
+             ('company_id', '=', obj().env.company.id)]
+             "/>
+             </record>
+        -->
+        <!--
+             <record id="generic_work_assignment" model="project.project">
+             <field name="name">Dagliga arbetsuppgifer</field>
+             <field name="description">Det dagliga kneget för alla, efter förmåga.</field>
+             <field name="allowed_portal_user_ids" />
+             </record>
+        -->
+        <!-- ## ADD USERS // FOLLOWERS -->
+        <!-- ## ILLNESS // SETTINGS -->
+        <!-- ##  ILLNESS // LEAVE ASSE ARONSSON -->
+        <!--
+             <record id="work_leave" model="hr.leave">
+             <field name="holiday_status_id" eval="'Sick Leave Qualify Period'" />
+             <field name="holiday_type" eval="'employee'" />
+             <field name="employee_id" ref="hr_person1_employee" />
+             <field name="name">Sjuk 4 timmar</field>
+             <field name="request_date_from">2023-01-13</field>
+             <field name="request_date_to">2023-01-13</field>
+             <field name="number_of_days">1</field>
+             <field name="holiday_type">employee</field>
+             <field name="state" eval="'validate'" />
+             </record>
+        -->
+    </data>
+</odoo>

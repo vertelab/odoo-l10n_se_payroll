@@ -28,12 +28,12 @@
     #'sequence': '1'
     'author': 'Vertel AB',
     'website': 'https://vertel.se/apps/l10n_se_payroll/l10n_se_hr_holidays',
-    'images': ['static/description/banner.png'], # 560x280 px.
+    'images': ['static/description/banner.png'],  # 560x280 px.
     'license': 'AGPL-3',
     'contributor': '',
     'maintainer': 'Vertel AB',
     'repository': 'https://github.com/vertelab/odoo-l10n-se-payroll',
-    'depends': ['l10n_se_hr_payroll','hr_holidays','hr_weekly_working_hours',],
+    'depends': ['l10n_se_hr_payroll', 'hr_holidays', 'hr_weekly_working_hours', ],
     'licence': 'AGPL-3',
     'description': """
 Swedish Holidays Rules
@@ -49,16 +49,18 @@ Swedish Holidays Rules
 
 """,
     'auto_install': False,
-    'data':[
+    'data': [
         'views/hr_employee_view.xml',
         'views/hr_holidays_view.xml',
+        'views/hr_leave_views.xml',
+        'views/resource_calendar_view.xml',
         'data/hr_holidays_data.xml',
         'data/hr_salary_rule_category_data.xml',
         'data/hr_salary_rule_data_holiday.xml',
         'report/hr_payroll_payslip_report.xml',
         'data/hr_salary_rule_data_sick.xml',
     ],
-    'demo':[
+    'demo': [
     ],
     'installable': True
 }

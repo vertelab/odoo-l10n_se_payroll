@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="contract_schema_hours_form" model="ir.ui.view">
+        <field name="name">schema.hours.form</field>
+        <field name="model">hr.contract</field>
+        <field name="inherit_id" ref="hr_contract.hr_contract_view_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='structure_type_id']" position="after">
+                <field name="work_id"></field>
+            </xpath>
+        </field>
+    </record>
+    <!-- <record id="contract_schema_hours_type_form" model="ir.ui.view">
+        <field name="name">schema.hours.type.form</field>
+        <field name="model">hr.contract.type</field>
+        <field name="inherit_id" ref="hr_contract.hr_contract_view_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='structure_type_id']" position="after">
+                <field name="work_time"></field>
+            </xpath>
+        </field>
+    </record> -->
+</odoo>

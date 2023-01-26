@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="0">
+        <record id="hr_helmer_partner" model="res.partner">
+            <field name="company_type">person</field>
+            <field name="name">Helmer Henriksson Kontakt</field>
+            <field name="street">Högvägen 34</field>
+            <field name="zip">197 00</field>
+            <field name="city">Bro</field>
+            <field name="mobile">073-800000</field>
+            <field name="function">Montör</field>
+        </record>
+        <record id="bank_helmer" model="res.partner.bank">
+            <field name="acc_number">4333-888888</field>
+            <field name="partner_id" ref="hr_helmer_partner" />
+        </record>
+        <record id="hr_helmer_employee" model="hr.employee">
+            <field name="name">Helmer Henriksson Anställd</field>
+            <field name="work_location">Rosersberg, HK</field>
+            <field name="work_phone">073-400000</field>
+            <field name="work_email">helmer.henriksson@aronssons.se</field>
+            <field name="identification_id">680522-9272</field>
+            <field name="job_title">Montör</field>
+            <field name="address_home_id" ref="hr_helmer_partner" />
+            <field name="address_id" ref="main_company_partner" />
+            <field name="tz" eval="'Europe/Stockholm'" />
+        </record>
+        <record id="contract_helmer" model="hr.contract">
+            <field name="name">Helmer Henriksson Avtal</field>
+            <field name="wage">0</field>
+            <field name="type_id" ref="hr_contract_type" />
+            <field name="employee_id" ref="hr_helmer_employee" />
+            <field name="schedule_pay" eval="'monthly'" />
+            <field name="state" eval="'open'" />
+            <field name="job_id" ref="job_id_assembly" />
+            <field name="date_start">2011-04-01</field>
+            <field name="first_contract_date">2011-04-01</field>
+            <field name="struct_id" ref="l10n_se_hr_payroll.hr_payroll_structure-tj" />
+        </record>
+    </data>
+</odoo>

@@ -21,6 +21,8 @@ class HRContract(models.Model):
     tax_equalization_start = fields.Date(string="Start")
     tax_equalization_end = fields.Date(string="End")
 
+    has_one_off_tax = fields.Boolean(string="One-off Tax")
+    one_off_tax = fields.Float(string="One-off Tax")
 
 
     def action_sync_taxable(self):
@@ -33,8 +35,17 @@ class HRContract(models.Model):
             'target': 'new',
         }
 
+<<<<<<< HEAD
 
     def l10_sum_columns_taxtable_line(self, payslip, wage):
+=======
+    def l10_sum_columns_one_off_tax(self, wage):
+        if self.has_one_off_tax:
+            return wage * self.one_off_tax
+
+
+    def l10_sum_columns_taxtable_line(self, date, wage):
+>>>>>>> 602330bb8b11ef5313fe3e7879b9688a53411e5f
         
         if self.has_tax_equalization and payslip.compute_date >= self.tax_equalization_start and payslip.compute_date <= self.tax_equalization_end:
             return wage * self.tax_equalization
@@ -63,3 +74,5 @@ class HRContract(models.Model):
         # ~ _logger.warning(f"{wage}")
         # ~ _logger.warning(f"{taxable_lines}")
         # ~ return sum([line[self.column_number].name for line in taxable_lines])
+
+
