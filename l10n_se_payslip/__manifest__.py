@@ -42,10 +42,7 @@ This module adds a sample py3o expense reports.
     'contributor': '',
     'maintainer': 'Vertel AB',
     'repository': 'https://github.com/vertelab/odoo-l10n_se_payroll',
-    'depends': [
-        'report_py3o',
-        'l10n_se_hr_payroll',
-        ],
+    'depends': ['report_py3o','l10n_se_hr_payroll',],
     'data': ['report.xml'],
     'installable': True,
 }
