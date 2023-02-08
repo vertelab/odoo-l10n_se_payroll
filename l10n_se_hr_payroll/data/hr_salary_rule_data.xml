@@ -393,7 +393,7 @@ result = contract.l10_sum_columns_one_off_tax(categories.BRUTTO)
       <field name="amount_select">code</field>
       <field name="amount_python_compute">
 #result = 0
-result = contract.l10_sum_columns_taxtable_line(payslip.date_from, categories.BRUTTO) + categories.SKVPRE
+result = contract.l10_sum_columns_taxtable_line(payslip, categories.BRUTTO) + categories.SKVPRE
 </field>
       <field name="quantity">1</field>
     </record>
@@ -411,7 +411,7 @@ result = contract.l10_sum_columns_taxtable_line(payslip.date_from, categories.BR
       <field name="condition_select">none</field>
       <field name="amount_select">code</field>
       <field name="amount_python_compute">
-#result = contract.l10_sum_columns_taxtable_line(payslip.date_from, categories.BRUTTO) + categories.SKVPRE
+#result = contract.l10_sum_columns_taxtable_line(payslip, categories.BRUTTO) + categories.SKVPRE
 result = 0
 </field>
 
