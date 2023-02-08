@@ -4,11 +4,12 @@
 # https://docs.python.org/3/library/unittest.html
 # https://www.odoo.com/forum/help-1/using-self-env-to-go-over-all-module-record-and-create-new-record-in-another-module-144407
 # https://stackoverflow.com/questions/17534345/typeerror-missing-1-required-positional-argument-self
-
-
+from pytz import utc
+from datetime import date, datetime, time
 from odoo import fields
-from odoo.tests import common
+from odoo.tests import common, Form
 import logging
+
 _logger = logging.getLogger(__name__)
 
 # Test with somthing like this
@@ -35,44 +36,134 @@ class TestPayslipJanuary(common.SavepointCase):
     
     @classmethod
     def _create_leave(cls, employee_id, code, date_from, date_to, number_of_days): 
-        leave = cls.env["hr.leave"].create({    
-                            "holiday_status_id": cls.env["hr.leave.type"].search([('code','=', code )]).mapped('id')[0],
-                            "request_date_from": date_from,
-                            "request_date_to": date_to,
-                            "number_of_days": number_of_days,
-                            'holiday_type': 'employee',
-                            'employee_id': employee_id,
-                            # ~ 'state': 'confirm',
-                        })
+        local_date_start = fields.Datetime.from_string(date_from)
+        local_date_stop = fields.Datetime.from_string(date_to)
+        cls.leave_type = cls.env["hr.leave.type"].search([('code', '=', code)])
+
+        leave_form = Form(cls.env['hr.leave'])
+        leave_form.employee_id = cls.employee_asse
+        leave_form.name = "test1"
+        leave_form.date_from = date_from
+        leave_form.request_date_from = date_from
+        leave_form.date_to = date_to
+        leave_form.request_date_to = date_to
+        leave_form.name = number_of_days
+        leave_form.number_of_days = number_of_days
+        leave_form.holiday_type = 'employee'
+        leave_form.holiday_status_id = cls.leave_type
+
+        leave_form = leave_form.save()
+
+        # leave = cls.env["hr.leave"].create({
+        #                     "name":"test1",    
+        #                     "holiday_status_id": cls.env["hr.leave.type"].search([('code','=', code )]).mapped('id')[0],
+        #                     "date_from": date_from,
+        #                     "date_to": date_to,
+        #                     "number_of_days": number_of_days,
+        #                     'holiday_type': 'employee',
+        #                     'employee_id': employee_id,
+        #                     # ~ 'state': 'confirm',
+        #                 })
+        # _logger.warning(f"{cls.env["hr.leave.type"].search([('code','=', code )]).mapped('id')[0]=}")
+        # _logger.warning(f"{leave.holiday_status_id.time_type=}")
+
+        # _logger.warning(f"leave status id and stuff: {leave.holiday_status_id} {leave.holiday_status_id.display_name}")
+        
+        # leave.action_approve()
+        # leave.action_validate()
         # ~ leave.state = 'draft'
         # ~ leave.state = 'confirm'
         # _logger.warning('jakob ***  %s ' % leave.state)
-        # ~ leave.action_confirm()
-        # ~ leave.action_approve()
+        # _logger.warning(f"leave state: {leave.state}")
+        # leave.action_draft()
+        # leave.action_confirm()
+        # leave.action_approve()
+        if leave_form.state == 'confirm':
+            leave_form.action_validate()
 
-        return leave
+        # day_from_fix = datetime.combine(fields.Date.from_string(date_from), time.min)
+        # day_to_fix = datetime.combine(fields.Date.from_string(date_to), time.max)
+
+        # vals_list = []
+        # work_hours_data = cls.employee_asse.list_work_time_per_day(day_from_fix, day_to_fix)
+        # for index, (day_date, work_hours_count) in enumerate(work_hours_data):
+        #     vals_list.append(leave_form._timesheet_prepare_line_values(index, work_hours_data, day_date, work_hours_count))
+                
+        # timesheets = cls.env['account.analytic.line'].sudo().create(vals_list)
+        # leave_form.timesheet_ids = [(4, timesheets[0].id)]
+        # leave_form = leave_form.save()
+
+        return leave_form
     
     @classmethod
     def _create_payslip(cls, employee_id, contract_id, input_recs): 
-        payslip = cls.env["hr.payslip"].create({
-                            'employee_id': employee_id.id,
-                            'date_from': cls.date_start,
-                            'date_to': cls.date_stop,
-                            'period_id': cls.period.id,
-                            'contract_id': contract_id[0].id,
-                            'struct_id': cls.struct.id
-            })
+        # payslip = cls.env["hr.payslip"].create({
+        #                     'employee_id': employee_id.id,
+        #                     'date_from': cls.date_start,
+        #                     'date_to': cls.date_stop,
+        #                     'period_id': cls.period.id,
+        #                     'contract_id': contract_id[0].id,
+        #                     'struct_id': cls.struct.id,
+        #     })
+
+        payslip_form = Form(cls.env['hr.payslip'])
+        payslip_form.employee_id = employee_id
+        payslip_form.date_from = cls.date_start
+        payslip_form.date_to = cls.date_stop
+        payslip_form.period_id = cls.period
+        payslip_form.contract_id = contract_id
+        payslip_form.struct_id = cls.struct
+        payslip_form = payslip_form.save()
+
+        payslip_form.action_payslip_draft()
+
+        # _logger.warning(f"TESTTEST {payslip.get_worked_day_lines(payslip.contract_id, cls.date_start, cls.date_stop)}")
+        # payslip.onchange_employee()
+        # payslip._compute_details_by_salary_rule_category()
+        # # _logger.warning(f"checkpoint1 {payslip.worked_days_line_ids}")
+        # payslip.get_worked_day_lines(payslip.contract_id, cls.date_start, cls.date_stop)
+        # # payslip.get_payslip_vals(cls.date_start, cls.date_stop, cls.employee_asse.id, contract_id[0].id, cls.struct)
+        # payslip.onchange_struct_id()
+        # payslip.compute_sheet()
+
+
+        # _logger.warning(f"{payslip.onchange_employee()=}")
+        # _logger.warning(f"{payslip._compute_details_by_salary_rule_category()=}")
+        # _logger.warning(f"{payslip.get_worked_day_lines(payslip.contract_id, cls.date_start, cls.date_stop)=}")
+        # _logger.warning(f"{payslip.onchange_struct_id()=}")
+        # _logger.warning(f"{payslip.compute_sheet()=}")
+
+        # date_start_2 = fields.Date.from_string('2023-01-01')
+        # date_stop_2 = fields.Date.from_string('2023-01-31')
+        # day_from_2 = datetime.combine(date_start_2, time.min)
+        # day_to_2 = datetime.combine(date_stop_2, time.max)
+        # day_from = datetime.combine(cls.date_start, time.min)
+        # day_to = datetime.combine(cls.date_stop, time.max)
+        # contract_id = cls.env['hr.contract'].search([('name', '=', f"{' '.join(cls.employee_asse.name.split(' ')[:2])} Avtal")])
+        # mitchell = cls.env['res.users'].browse(2)
+   
+        # _logger.warning(f"{employee_id.resource_calendar_id._leave_intervals_batch(day_from.replace(tzinfo=utc), day_to.replace(tzinfo=utc), resources=contract_id.resource_calendar_id)[0]._items=}")
+        # _logger.warning(f"{mitchell.employee_id.resource_calendar_id._leave_intervals_batch(day_from_2.replace(tzinfo=utc), day_to_2.replace(tzinfo=utc))=}")
+        
+
+        # _logger.warning(f"{payslip._compute_leave_days(contract_id, day_from, day_to)=}")
+
+        # for something in payslip.get_payslip_vals(cls.date_start, cls.date_stop, cls.employee_asse.id, contract_id[0].id, cls.struct)['value']['worked_days_line_ids']:
+        #     _logger.warning(f"something: {something}")
+
+        # _logger.warning(f"{employee_id.list_leaves(day_from, day_to, calendar=contract_id.resource_calendar_id)=}")
+
         for input_rec in input_recs:
-            line = cls.env["hr.payslip.input"].search([('code','=',input_rec['code']),('payslip_id','=',payslip.id)])
+            line = cls.env["hr.payslip.input"].search([('code','=',input_rec['code']),('payslip_id','=',payslip_form.id)])
             line.amount = input_rec['amount']
             line.amount_qty = input_rec['amount']              
-        return payslip
+        return payslip_form
     
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
-        cls.date_start = fields.Date.from_string('2023-01-01')
-        cls.date_stop = fields.Date.from_string('2023-01-31')
+        cls.date_start = fields.Date.from_string('2022-01-01')
+        cls.date_stop = fields.Date.from_string('2022-01-31')
         cls.company = cls.env['res.company'].search([('name', '=', 'Aronssons Montage AB')])
         cls.struct = cls.env['hr.payroll.structure'].search([('code', '=', 'bas2018-tj')])
 
@@ -93,23 +184,31 @@ class TestPayslipJanuary(common.SavepointCase):
 
         # Asse Aronsson
         cls.employee_asse = cls.env.ref('l10n_se_hr_payroll_tiichri.hr_asse_employee')
-        cls.asse_kar = cls._create_leave(cls.employee_asse.id, "sjk_kar" ,"2022-01-07","2022-01-07",1)
-        cls.asse_kar = cls._create_leave(cls.employee_asse.id, "sjk_kar" ,"2022-01-12","2022-01-12",1)
-        cls.asse_kar = cls._create_leave(cls.employee_asse.id, "sjk_214" ,"2022-01-13","2022-01-13",1)
-        cls.asse_kar = cls._create_leave(cls.employee_asse.id, "sjk_kar" ,"2022-01-24","2022-01-24",1)
+        cls.asse_kar1 = cls._create_leave(cls.employee_asse.id, "sjk_kar" ,"2022-01-07","2022-01-07",1)
+        cls.asse_kar2 = cls._create_leave(cls.employee_asse.id, "sjk_kar" ,"2022-01-12","2022-01-12",1)
+        cls.asse_kar3 = cls._create_leave(cls.employee_asse.id, "sjk_214" ,"2022-01-13","2022-01-13",1)
+        cls.asse_kar4 = cls._create_leave(cls.employee_asse.id, "sjk_214" ,"2022-01-24","2022-01-24",1)
+        cls.asse_kar5 = cls._create_leave(cls.employee_asse.id, "vab" ,"2022-01-25","2022-01-25",1)
+        cls.asse_kar6 = cls._create_leave(cls.employee_asse.id, "vab", "2022-01-26", "2022-01-26",1)
+        cls.asse_kar7 = cls._create_leave(cls.employee_asse.id, "Leave of Absence less than 5 days", "2022-01-03", "2022-01-03",1)
+        cls.asse_kar8 = cls._create_leave(cls.employee_asse.id, "Leave of Absence less than 5 days", "2022-01-14", "2022-01-14",1)
+        cls.asse_kar9 = cls._create_leave(cls.employee_asse.id, "Leave of Absence less than 5 days", "2022-01-17", "2022-01-17",1)
+        cls.asse_kar10 = cls._create_leave(cls.employee_asse.id, "Leave of Absence less than 5 days", "2022-01-18", "2022-01-18",1)
+        cls.asse_kar11 = cls._create_leave(cls.employee_asse.id, "Leave of Absence less than 5 days", "2022-01-19", "2022-01-19",1)
+        cls.asse_kar12 = cls._create_leave(cls.employee_asse.id, "Leave of Absence more than 5 days", "2022-01-20", "2022-01-20",1)
             
-        # Frans Filipsson
-        cls.employee_frans = cls.env.ref('l10n_se_hr_payroll_tiichri.hr_frans_employee')  # frans_employee
-        cls.frans_kar = cls._create_leave(cls.employee_frans.id, "sjk_kar" ,"2022-01-07","2022-01-07",1)
-        cls.frans_kar = cls._create_leave(cls.employee_frans.id, "sjk_kar" ,"2022-01-10","2022-01-10",1)
-        cls.frans_kar = cls._create_leave(cls.employee_frans.id, "sjk_214" ,"2022-01-11","2022-01-12",2)
+        # # Frans Filipsson
+        # cls.employee_frans = cls.env.ref('l10n_se_hr_payroll_tiichri.hr_frans_employee')  # frans_employee
+        # cls.frans_kar = cls._create_leave(cls.employee_frans.id, "sjk_kar" ,"2022-01-07","2022-01-07",1)
+        # cls.frans_kar = cls._create_leave(cls.employee_frans.id, "sjk_kar" ,"2022-01-10","2022-01-10",1)
+        # cls.frans_kar = cls._create_leave(cls.employee_frans.id, "sjk_214" ,"2022-01-11","2022-01-12",2)
 
-        # Doris Dahlin
-        cls.employee_doris = cls.env.ref('l10n_se_hr_payroll_tiichri.hr_doris_employee')  # doris_employee
-        cls.doris_kar = cls._create_leave(cls.employee_doris.id, "sjk_kar" ,"2022-01-04","2022-01-04",1)
-        cls.doris_kar = cls._create_leave(cls.employee_doris.id, "sjk_214" ,"2022-01-05","2022-01-05",1)
-        cls.doris_kar = cls._create_leave(cls.employee_doris.id, "sjk_kar" ,"2022-01-10","2022-01-10",1)
-        cls.doris_kar = cls._create_leave(cls.employee_doris.id, "sjk_214" ,"2022-01-11","2022-01-12",2)
+        # # Doris Dahlin
+        # cls.employee_doris = cls.env.ref('l10n_se_hr_payroll_tiichri.hr_doris_employee')  # doris_employee
+        # cls.doris_kar = cls._create_leave(cls.employee_doris.id, "sjk_kar" ,"2022-01-04","2022-01-04",1)
+        # cls.doris_kar = cls._create_leave(cls.employee_doris.id, "sjk_214" ,"2022-01-05","2022-01-05",1)
+        # cls.doris_kar = cls._create_leave(cls.employee_doris.id, "sjk_kar" ,"2022-01-10","2022-01-10",1)
+        # cls.doris_kar = cls._create_leave(cls.employee_doris.id, "sjk_214" ,"2022-01-11","2022-01-12",2)
 
         # Camilla Cobolt -- Låt stå! :-) Inte sjuk i januari
         # ~ cls.employee_camilla = self.env.ref('hr_camilla_employee')  # camilla_employee
@@ -119,39 +218,44 @@ class TestPayslipJanuary(common.SavepointCase):
         # ~ cls.camilla_kar.action_approve()
 
 
-        # Gustav Groth
-        cls.employee_gustav = cls.env.ref('l10n_se_hr_payroll_tiichri.hr_gustav_employee')  # gustav_employee
-        cls.gustav_kar = cls._create_leave(cls.employee_gustav.id, "sjk_kar" ,"2022-01-07","2022-01-07",1)
-        cls.gustav_kar = cls._create_leave(cls.employee_gustav.id, "sjk_214" ,"2022-01-10","2022-01-14",5)
-        cls.gustav_kar = cls._create_leave(cls.employee_gustav.id, "sjk_214" ,"2022-01-17","2022-01-21",5)
-        cls.gustav_kar = cls._create_leave(cls.employee_gustav.id, "sjk_214" ,"2022-01-24","2022-01-25",2)
+        # # Gustav Groth
+        # cls.employee_gustav = cls.env.ref('l10n_se_hr_payroll_tiichri.hr_gustav_employee')  # gustav_employee
+        # cls.gustav_kar = cls._create_leave(cls.employee_gustav.id, "sjk_kar" ,"2022-01-07","2022-01-07",1)
+        # cls.gustav_kar = cls._create_leave(cls.employee_gustav.id, "sjk_214" ,"2022-01-10","2022-01-14",5)
+        # cls.gustav_kar = cls._create_leave(cls.employee_gustav.id, "sjk_214" ,"2022-01-17","2022-01-21",5)
+        # cls.gustav_kar = cls._create_leave(cls.employee_gustav.id, "sjk_214" ,"2022-01-24","2022-01-25",2)
         
-        # Helmer Henriksson
-        cls.employee_helmer = cls.env.ref('l10n_se_hr_payroll_tiichri.hr_helmer_employee')  # helmer_employee
-        cls.helmer_kar = cls._create_leave(cls.employee_helmer.id, "sjk_kar" ,"2022-01-04","2022-01-04",1)
-        cls.helmer_kar = cls._create_leave(cls.employee_helmer.id, "sjk_214" ,"2022-01-05","2022-01-05",1)
-        cls.helmer_kar = cls._create_leave(cls.employee_helmer.id, "sjk_kar" ,"2022-01-12","2022-01-12",1)
-        cls.helmer_kar = cls._create_leave(cls.employee_helmer.id, "sjk_214" ,"2022-01-13","2022-01-14",2)
+        # # Helmer Henriksson
+        # cls.employee_helmer = cls.env.ref('l10n_se_hr_payroll_tiichri.hr_helmer_employee')  # helmer_employee
+        # cls.helmer_kar = cls._create_leave(cls.employee_helmer.id, "sjk_kar" ,"2022-01-04","2022-01-04",1)
+        # cls.helmer_kar = cls._create_leave(cls.employee_helmer.id, "sjk_214" ,"2022-01-05","2022-01-05",1)
+        # cls.helmer_kar = cls._create_leave(cls.employee_helmer.id, "sjk_kar" ,"2022-01-12","2022-01-12",1)
+        # cls.helmer_kar = cls._create_leave(cls.employee_helmer.id, "sjk_214" ,"2022-01-13","2022-01-14",2)
 
         # Karin Kullberg
         # Anställning per timme, påbörjad 2022-06-01
 
     def test_asse(self):
         contract_id = self.env['hr.contract'].search([('name', '=', f"{' '.join(self.employee_asse.name.split(' ')[:2])} Avtal")])
-        payslip = self._create_payslip(self.employee_asse, contract_id, [
+   
+        payslip_form = self._create_payslip(self.employee_asse, contract_id, [
                 {'code': 'kvaltim','amount': 2.0},
             ])
-        
-        payslip.onchange_struct_id()
-        payslip.compute_sheet()
-        payslip._compute_details_by_salary_rule_category()       
-        
-        self.assertEqual(payslip.state, 'verify')
 
-        for detail in payslip.details_by_salary_rule_category:
+        payslip_form.onchange_dates()  
+        payslip_form.compute_sheet()
+
+        # _logger.warning(f"{self.env['hr.leave'].search([('employee_id', '=', self.employee_asse.id)])}")   
+        for worked_day in payslip_form.worked_days_line_ids:
+            _logger.warning(f"{worked_day.name=} {worked_day.code=}")
+
+        # self.assertEqual(payslip.state, 'verify')
+
+        for detail in payslip_form.dynamic_filtered_payslip_lines:
             _logger.warning(f"line id from input: {detail.name} {detail.total}")
             if detail.code == 'net':
                 self.assertAlmostEqual(detail.total, 29531.0)
+
 
         # self.assertAlmostEqual(payslip.net, 29531.0)
 

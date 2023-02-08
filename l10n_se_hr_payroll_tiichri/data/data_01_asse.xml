@@ -8,7 +8,6 @@
             <field name="street">Rosersbergsvägen 5</field>
             <field name="zip">192 00</field>
             <field name="city">Rosersberg</field>
-            <field name="city">Rosersberg</field>
             <field name="email">info@aronssons.se</field>
             <field name="phone">07</field>
             <field name="website">http://www.aronssons.se</field>
@@ -20,7 +19,6 @@
             <field name="city">Rosersberg</field>
             <field name="vat">SE123456789701</field>
             <field name="company_registry">556060-0000</field>
-            <field name="city">Rosersberg</field>
             <field name="email">info@aronssons.se</field>
             <field name="website">http://www.aronssons.se</field>
         </record>
