@@ -40,10 +40,10 @@ class HRContract(models.Model):
 
     def l10_sum_columns_taxtable_line(self, payslip, wage):     
         
-        if self.has_tax_equalization and payslip.compute_date >= self.tax_equalization_start and payslip.compute_date <= self.tax_equalization_end:
+        if self.has_tax_equalization and payslip.date_from >= self.tax_equalization_start and payslip.compute_date <= self.tax_equalization_end:
             return wage * self.tax_equalization
         
-        fails = [key for key, value in (('date', payslip.compute_date), ('wage', wage), ('column_number', self.column_number),
+        fails = [key for key, value in (('date', payslip.date_from), ('wage', wage), ('column_number', self.column_number),
                                         ('self.table_number', self.table_number)) if not value]
         if fails:
             _logger.warning(f"Please fill these values{fails}")
@@ -53,7 +53,7 @@ class HRContract(models.Model):
             ('table_number', '=', self.table_number),
             ('income_from', '<=', float(wage)),
             ('income_to', '>=', float(wage)),
-            ('year', '=', payslip.compute_date.year)
+            ('year', '=', payslip.date_from.year)
         ])
         
         return getattr(taxable_line, self.column_number)
