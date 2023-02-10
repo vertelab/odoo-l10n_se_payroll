@@ -41,9 +41,13 @@
     # Check https://github.com/odoo/odoo/blob/master/openerp/addons/base/module/module_data.xml
     # for the full list
     # ~ 'depends': ['resource_calendar_leaves_import'],
-    'depends': [],
+    'depends': [
+    'ics_import_holidays'
+    ],
     'data': [
-        'resource_data.xml'
+    'views/res_config_settings_url.xml',
+        'data/ir_server_action.xml'
+        # 'security/ir.model.access.csv',
     ],
     'demo': [
     ],

@@ -38,8 +38,8 @@ Hour salary rules
 =================
 """,
     #'depends': ['hr_payroll_schema_hour', 'l10n_se_hr_payroll', 'l10n_se_hr_holidays'],
-    'depends': ['l10n_se_hr_payroll', 'l10n_se_hr_holidays'],
-    'data': ['views/hr_salary_rule_data.xml',
+    'depends': ['l10n_se_hr_payroll', 'l10n_se_hr_holidays', 'hr_timesheet_sheet'],
+    'data': ['data/hr_salary_rule_data.xml',
              'views/employee_contract_schema_hours_view.xml'
              ], 
     'installable': True,
