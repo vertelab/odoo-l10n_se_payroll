@@ -114,6 +114,8 @@ class TestPayslipJanuary(common.SavepointCase):
         payslip_form = payslip_form.save()
 
         payslip_form.action_payslip_draft()
+        payslip_form.onchange_dates()  
+        payslip_form.compute_sheet()
 
         # _logger.warning(f"TESTTEST {payslip.get_worked_day_lines(payslip.contract_id, cls.date_start, cls.date_stop)}")
         # payslip.onchange_employee()
@@ -236,44 +238,28 @@ class TestPayslipJanuary(common.SavepointCase):
         # Karin Kullberg
         # Anställning per timme, påbörjad 2022-06-01
 
-    # def test_asse(self):
-    #     contract_id = self.env['hr.contract'].search([('name', '=', f"{' '.join(self.employee_asse.name.split(' ')[:2])} Avtal")])
-   
-    #     payslip_form = self._create_payslip(self.employee_asse, contract_id, [
-    #             {'code': 'kvaltim','amount': 2.0},
-    #         ])
-
-    #     payslip_form.onchange_dates()  
-    #     payslip_form.compute_sheet()
-
-    #     # _logger.warning(f"{self.env['hr.leave'].search([('employee_id', '=', self.employee_asse.id)])}")   
-    #     for worked_day in payslip_form.worked_days_line_ids:
-    #         _logger.warning(f"{worked_day.name=} {worked_day.number_of_hours=}")
-
-    #     # self.assertEqual(payslip.state, 'verify')
-
-    #     for detail in payslip_form.dynamic_filtered_payslip_lines:
-    #         _logger.warning(f"line id from input: {detail.name} {detail.total}")
-    #         if detail.code == 'net':
-    #             self.assertAlmostEqual(detail.total, 29531.0)
-
-    def test_frans(self):
-        contract_id = self.env['hr.contract'].search([('name', '=', f"{' '.join(self.employee_frans.name.split(' ')[:2])} Avtal")])
-   
-        payslip_form = self._create_payslip(self.employee_frans, contract_id, [
-                {'code': 'kvaltim','amount': 3.0},
+    def test_asse(self):   
+        payslip_form = self._create_payslip(self.employee_asse, self.employee_asse.contract_id, [
+                {'code': 'kvaltim','amount': 2.0},
             ])
- 
-        payslip_form.onchange_dates()  
-        payslip_form.compute_sheet()
 
-        # _logger.warning(f"{self.env['hr.leave'].search([('employee_id', '=', self.employee_asse.id)])}")   
         for worked_day in payslip_form.worked_days_line_ids:
             _logger.warning(f"{worked_day.name=} {worked_day.number_of_hours=}")
-
-        # self.assertEqual(payslip.state, 'verify')
 
         for detail in payslip_form.dynamic_filtered_payslip_lines:
             _logger.warning(f"line id from input: {detail.name} {detail.total}")
             if detail.code == 'net':
-                self.assertAlmostEqual(detail.total, 29531.0)   
+                self.assertAlmostEqual(detail.total, 29531.0)
+
+    def test_frans(self):
+        payslip_form = self._create_payslip(self.employee_frans, self.employee_frans.contract_id, [
+                {'code': 'kvaltim','amount': 3.0},
+            ])
+
+        for worked_day in payslip_form.worked_days_line_ids:
+            _logger.warning(f"{worked_day.name=} {worked_day.number_of_hours=}")
+
+        for detail in payslip_form.dynamic_filtered_payslip_lines:
+            _logger.warning(f"line id from input: {detail.name} {detail.total}")
+            if detail.code == 'net':
+                self.assertAlmostEqual(detail.total, 23008.0)   

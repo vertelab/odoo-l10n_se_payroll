@@ -55,6 +55,5 @@ class HRContract(models.Model):
             ('income_to', '>=', float(wage)),
             ('year', '=', payslip.date_from.year)
         ])
-        
         return getattr(taxable_line, self.column_number)
 
