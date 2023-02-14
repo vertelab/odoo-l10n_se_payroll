@@ -22,16 +22,13 @@ class ImportSwedishHolidays(models.Model):
 
     @api.model
     def eves_conf(self):
-        url = self.env['ir.config_parameter'].sudo().get_param('holiday.url.ics.eve')
+        _logger.error("GO")
+        url = self.env['ir.config_parameter'].sudo().get_param('holiday.url.ics')
         calendar = Calendar(requests.get(url).text)
         responsible_id = self.env['res.users'].search([('login', '=', 'holidays')])[0].id
 
         for event in list(calendar.timeline):
             event_xmlid = f"{IMPORT}.calendar_{event.name.replace(' ', '_')}_{event.begin.date().strftime('%Y-%m-%d')}"
-            # try:
-            #     ref_try = self.env.ref(event_xmlid)
-
-            # except ValueError: 
 
             #Event_id is needed as a refrens for eve_id, so the code knows at what date to add the eves
             event_id = {'name': event.name, 
@@ -52,18 +49,6 @@ class ImportSwedishHolidays(models.Model):
                             }
                     
                     eve_xmlid = f"{IMPORT}.calendar_{eve['name'].replace(' ', '_')}_{eve['start']}".replace(' ', '_')
-                    test_name = eve_xmlid.split('.')[-1]
-                    # if 'FIELD_NAME' in self.env['product.product']._fields:
-                    # _logger.error(f"{test_name in self.env['calendar.event.name'].search([('name','=',test_name)])=}")
-                    # _logger.error(f"{self.env['calendar.event'].search([('name','=',test_name)])=}")
-                    # _logger.error(f"{eve_xmlid.split('.')[-1]=}")
-                    # for test in self.env['calendar.event']._fields:
-                    #     _logger.error(f"{test=}")
-                    # _logger.error(f"{self.env['calendar.event']._fields=}")
-                    _logger.error("Helooooooo"*100)
-                    _logger.error(f"{eve_xmlid.split('.')[-1]=}")
-                    _logger.error(f"{self.env['ir.model.data']._fields=}")
-                    _logger.error(f"{self.env['ir.model.data'].search([('name','=',eve_xmlid.split('.')[-1])])=}")
                     if not self.env['ir.model.data'].search([('name','=',eve_xmlid.split('.')[-1])]):
                         eve_id = self.env["calendar.event"].create(eve)
 

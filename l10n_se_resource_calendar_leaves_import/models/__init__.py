@@ -1,2 +1,3 @@
 from . import import_swedish_holidays
-# from . import import_swedish_holidays_settings
+from . import import_swedish_holidays_settings
+

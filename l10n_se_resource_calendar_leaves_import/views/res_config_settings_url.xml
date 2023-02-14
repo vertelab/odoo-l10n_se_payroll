@@ -1,36 +1,15 @@
 <odoo>
 <data>
     <record id="res_config_settings_url_view_form" model="ir.ui.view">
-        <field name="name">res.config.setings.url.view.form</field>
+        <field name="name">res.config.settings.url.view.form</field>
         <field name="model">res.config.settings</field>
-        <field name="priority" eval="39"/>
+        <field name="priority" eval="41"/>
         <field name="inherit_id" ref="ics_import_holidays.res_config_settings_view_form"/>
         <field name="arch" type="xml">
             <xpath expr="//field[@name='ics_url']" position="replace">
-
-            <!-- <xpath expr="//div[@class='app_settings_block']" position="after"></xpath> -->
-                <!-- <div class="app_settings_block" style="background : url('/static/description/icon.png') no-repeat center;background-size:contain;" data-string="Calendar settings" string="Calendar settings" data-key="swedish_holidays">
-                    <h2>Import (currently only one) ICS into schedule and calendar</h2>
-                    <div class="row mt16 o_settings_container">
-                        <div class="col-12 col-lg-6 o_setting_box">
-                            <div class="o_setting_left_pane"/>
-                            <div class="o_setting_right_pane">
-                                <span class="o_form_label">ICS URL EVE</span>
-                                <div class="text-muted content-group mt16"> -->
                 <field name="ics_url_eve"></field>
-                <!-- <span>HEllo</span> -->
-                                <!-- </div>
-                            </div>
-                        </div>
-                    </div>
-                </div> -->
             </xpath>
         </field>
-    </record>
-
-    <record id="url_ics_eve" model="ir.config_parameter">
-        <field name="key">holiday.url.ics.eve</field>
-        <field name="value">If you see this text, kindly set your url</field>
     </record>
 </data>
 </odoo>
