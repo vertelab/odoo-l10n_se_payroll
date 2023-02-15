@@ -242,9 +242,9 @@ class hr_payslip(models.Model):
         )
 
     choose_date_method = fields.Selection([
-        ("date_now", "Date now"),
-        ("date_then", "Date then"), ],
-        store=True, compute="compute_date_method", readonly=False, default=False)
+        ("date_now", "Same date as period"),
+        ("date_then", "A month after period"), ],
+        store=True, compute="compute_date_method", readonly=False, default="date_then")
 
     # _logger.error(f"{choose_date_method=}")
     # compute = "compute_date_method")
