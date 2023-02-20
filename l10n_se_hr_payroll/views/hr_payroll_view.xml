@@ -44,9 +44,9 @@
                 </page>
                 </page>
 
-                <!-- <field name="appears_on_payslip" position="after">
+                <field name="appears_on_payslip" position="after">
                     <field name="payslip_character"></field>
-                </field> -->
+                </field>
             </field>
         </record>
 
@@ -78,6 +78,7 @@
             <field name="arch" type="xml">
                 <field name="condition_range_min" position="after">
                     <field name="appears_on_payslip" />
+                    <!-- <field name="payslip_character"></field> -->
                     <field name="parent_rule_id" />
                     <field name="child_ids" />
                     <filter string="Appears On Payslip" name="appears_on_payslip" domain="[('appears_on_payslip','=',True)]" />

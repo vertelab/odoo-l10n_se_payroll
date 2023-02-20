@@ -58,10 +58,10 @@ class UserPayslipLinePayroll(models.TransientModel):
 #                     )
 #         return super(HrPayslipLine, self).create(vals_list)
 
-    payslip_character = fields.Selection([
-        ("minus", "Minus"),
-        ("parentheses", "Parentheses"),
-    ],default=False)
+    # payslip_character = fields.Selection([
+    #     ("minus", "Minus"),
+    #     ("parentheses", "Parentheses"),
+    # ],default=False)
 
     # def character_on_payslip(self):
     #     for rule in self:
@@ -73,16 +73,16 @@ class UserPayslipLinePayroll(models.TransientModel):
 # class HRContract(models.TransientModel):
 #     _name = 'hr.contract'
 
-    # table_number = fields.Integer(string="Tax Table")
-    # is_church_deductible = fields.Boolean(string="Church Deductible")
-    # ~ column_number = fields.Many2one('ir.model.fields', domain=[
-        # ~ ('model_id.model', '=', 'payroll.taxtable.line'), ('ttype', '=', 'float')
-    # ~ ])
-    # column_number = fields.Selection([ ('column1', "Column 1"),('column2', "Column 2"),('column3', "Column 3"),('column4', "Column 4"),('column5', "Column 5"),('column6', "Column 6")],'Tax Column')
-    # has_tax_equalization = fields.Boolean(string="Tax Equalization")
-    # tax_equalization = fields.Float(string="Tax Equalization")
-    # tax_equalization_start = fields.Date(string="Start")
-    # tax_equalization_end = fields.Date(string="End")
+#     table_number = fields.Integer(string="Tax Table")
+#     is_church_deductible = fields.Boolean(string="Church Deductible")
+#     # ~ column_number = fields.Many2one('ir.model.fields', domain=[
+#     #     ~ ('model_id.model', '=', 'payroll.taxtable.line'), ('ttype', '=', 'float')
+#     # ~ ])
+#     column_number = fields.Selection([ ('column1', "Column 1"),('column2', "Column 2"),('column3', "Column 3"),('column4', "Column 4"),('column5', "Column 5"),('column6', "Column 6")],'Tax Column')
+#     has_tax_equalization = fields.Boolean(string="Tax Equalization")
+#     tax_equalization = fields.Float(string="Tax Equalization")
+#     tax_equalization_start = fields.Date(string="Start")
+#     tax_equalization_end = fields.Date(string="End")
 
 class HrPayslipline(models.TransientModel):
     _name = "user.payslip.line"
@@ -129,10 +129,12 @@ class HrContract(models.TransientModel):
         string="Currency of the Payment Transaction"
     )
 
-    # hr_contract_id = fields.Many2one(
-    #     "hr.contract", string="Contract", required=True, index=True
-    # )
+    hr_contract_id = fields.Many2one(
+        "hr.contract", string="Contract", required=True, index=True
+    )
 
+    table_number = fields.Integer(string="Tax Table")
+    column_number = fields.Selection([ ('column1', "Column 1"),('column2', "Column 2"),('column3', "Column 3"),('column4', "Column 4"),('column5', "Column 5"),('column6', "Column 6")],'Tax Column')
     # hr_payroll_taxable_id = fields.Many2one('payroll.taxtable', string="Payroll Taxable")
     # taxable_lines = fields.One2many("payroll.taxtable.line", "payroll_taxable_id", string="Taxable Lines")
 
@@ -239,7 +241,8 @@ class HrPayslip(models.TransientModel):
     #         rec.holiday_ids = rec.env['hr.leave'].search([('state','=','validate'),('employee_id','=',rec.employee_id.id)]).filtered(lambda h: h.date_from.date()<= rec.date_to and h.da>
     holiday_ids = fields.One2many('user.leave',"payslip_id")
 
-
+    allocation_used_display = fields.Char(related='employee_id.allocation_used_display')
+    allocation_display = fields.Char(related='employee_id.allocation_display')
 
     line_ids = fields.One2many(
         "user.payslip.line",inverse_name='user_payslip_id'
@@ -442,6 +445,7 @@ class ResUsers(models.Model):
                    user_contract = self.env["user.contract"].create({
                     "wage_tax_base":slip.contract_id.wage_tax_base,
                     "prel_tax_tabel":slip.contract_id.prel_tax_tabel,
+                    'column_number':slip.contract_id.column_number,
                     # "resource_calendar_id":slip.contract_id.resource_calendar_id.name,
                     "name":slip.contract_id.resource_calendar_id.name,
                     # "employee_fund_balance":slip.contract_id.employee_fund_balance,

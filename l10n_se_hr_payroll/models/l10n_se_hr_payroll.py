@@ -59,6 +59,11 @@ class hr_salary_rule(models.Model):
 
     salary_art = fields.Char(string='Salary art', help="Code to interchange payslip rows with other systems")
 
+    payslip_character = fields.Selection([
+        ("minus", "Minus"),
+        ("parentheses", "Parentheses"),
+    ],default=False)
+
     @api.model
     def init_records(self):
         # ~ Changed "hr_payroll" to "hr_payroll_community" since "hr_payroll" is an enterprise module now
