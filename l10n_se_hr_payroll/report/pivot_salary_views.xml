@@ -30,6 +30,7 @@
 action="action_salary_menu" 
 id="action_menu_salary" 
 parent="payroll.payroll_menu_root"
-name="Salary overview"/>
+name="Salary overview"
+groups="payroll.group_payroll_manager"/>
 
 </odoo>
