@@ -44,9 +44,9 @@
                 </page>
                 </page>
 
-                <field name="appears_on_payslip" position="after">
+                <!-- <field name="appears_on_payslip" position="after">
                     <field name="payslip_character"></field>
-                </field>
+                </field> -->
             </field>
         </record>
 
@@ -97,6 +97,18 @@
             </field>
         </record> -->
 
+
+        <record id="last_salary_view_form" model="ir.ui.view">
+            <field name="name">last_salary</field>
+            <field name="model">hr.payslip</field>
+            <field name="inherit_id" ref="payroll.hr_payslip_view_form" />
+            <field name="arch" type="xml">
+                <field name="number" position="before">
+                    <field name="last_salary"></field>
+                    <field name="colected_vecation_days"></field>
+                </field>
+            </field>
+        </record>
 
 
 
