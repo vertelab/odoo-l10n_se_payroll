@@ -34,18 +34,10 @@ _logger = logging.getLogger(__name__)
 class HrPayslipLine(models.Model):
     _inherit = "hr.payslip.line"
 
-
     @api.depends("quantity", "amount", "rate")
     def _compute_total(self):
         for line in self:
             line.total = round(float(line.quantity) * line.amount * line.rate / 100)
-
-            
-class ContractType(models.Model):
-    _name = "hr.contract.type"
-    _description = "Contract Type"
-
-    name = fields.Char(required=True)
 
 
 class HrPayslipWorkedDays(models.Model):
@@ -206,8 +198,8 @@ class hr_payslip(models.Model):
                                                       compute='_compute_details_by_salary_rule_category',
                                                       string='Details by Salary Rule Category',
                                                       help="Details from the salary rule category")
-    
-    allocation_display = fields.Char(related='employee_id.allocation_display') #Dont know about this one?
+
+    allocation_display = fields.Char(related='employee_id.allocation_display')  # Dont know about this one?
     colected_vecation_days = fields.Date(string="Colected Vacation Days", compute="_compute_bla")
 
     def _compute_bla(self):
@@ -220,7 +212,7 @@ class hr_payslip(models.Model):
         step = self.allocation_display * employed_days
         _logger.error(f"{self.allocation_display=}")
         _logger.error(f"{step=}")
-        res = step/date.year
+        res = step / date.year
         _logger.error(f"{date.year=}")
         _logger.error(f"{res=}")
         return res
@@ -243,8 +235,6 @@ class hr_payslip(models.Model):
     #             self.employee_id.name,
     #             self.period_id.date_start.strftime('%B-%Y') if self.period_id else 'None',
     #         )
-        
-
 
     def get_number_of_days(self):
         year = self.date_from.year
@@ -373,11 +363,5 @@ class hr_payslip(models.Model):
             attendances = self._compute_worked_days(contract, day_from, day_to)
             res.append(attendances)
         return res
-
-
-
-
-
-
 
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:

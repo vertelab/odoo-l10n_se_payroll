@@ -25,18 +25,14 @@
     # Version ledger: 14.0 = Odoo version. 1 = Major. Non regressionable code. 2 = Minor. New features that are regressionable. 3 = Bug fixes
     'summary': 'Swedish Payroll Rules.',
     'category': 'Payroll Localization',
-    #'sequence': '1'
     'author': 'Vertel AB',
     'website': 'https://vertel.se/apps/l10n_se_payroll/l10n_se_hr_holidays_account',
-    'images': ['static/description/banner.png'], # 560x280 px.
+    'images': ['static/description/banner.png'],  # 560x280 px.
     'license': 'AGPL-3',
     'contributor': '',
     'maintainer': 'Vertel AB',
     'repository': 'https://github.com/vertelab/odoo-l10n-se-payroll',
-    # ~ 'depends': ['payroll','hr_contract_types','account_period','hr','hr_timesheet_sheet','hr_weekly_working_hours'],
     'depends': ['payroll', 'account_period', 'hr', 'hr_timesheet_sheet'],
-        # 'hr_weekly_working_hours'
-        # hr_contract_types | CybroOdoo-OpenHRMS/hr_contract_types
     'description': """
 Swedish Payroll Rules.
 ======================
@@ -50,7 +46,7 @@ Swedish Payroll Rules.
     * Integrated with Holiday Management
     """,
     'auto_install': False,
-    'data':[
+    'data': [
         'data/hr_payroll_data.xml',
         'views/hr_payroll_view.xml',
         'data/hr_payroll_data.xml',
@@ -70,7 +66,7 @@ Swedish Payroll Rules.
         'report/pivot_salary_views.xml',
 
     ],
-    'demo':[
+    'demo': [
         # ~ 'demo/hr_payroll_demo.xml',
         'demo/hr_payroll_demo.xml',
     ],

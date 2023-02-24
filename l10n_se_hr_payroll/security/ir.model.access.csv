@@ -9,6 +9,6 @@ user_payslip_worked_days,user.payslip.worked_days,model_user_payslip_worked_days
 user_leave,user.leave,model_user_leave,base.group_user,1,1,1,1
 user_holiday_status,user.holiday.status,model_user_holiday_status,base.group_user,1,1,1,1
 user_payslip_line_payroll,user.payslip.line.payroll,model_user_payslip_line_payroll,base.group_user,1,1,1,1
-hr_contract_type,hr_contract_type,model_hr_contract_type,base.group_user,1,1,1,1
 report_salary_task,report_salary_task,model_report_salary_task,base.group_user,1,1,1,1
+access_user_workdays,access_user_workdays,model_user_workdays,base.group_user,1,1,1,1
 
