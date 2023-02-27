@@ -1,18 +1,16 @@
-odoo-l10n_se_payroll / l10n_se_hr_payroll_tiichri
-2022-02-27
+odoo-l10n_se | l10n_se_intrastat
+2023-02-27
 
 Path:
 /static/description/banner.png
 /static/description/icon.png
 
-
-Icon: User
+Icon: Hat-wizard, Plus
 Icons may be found at: https://fontawesome.com/v5/cheatsheet
 
 
 Odoo banner: 560 x 280
 Odoo icon: 140 x 140
-
 
 HEX
 #930a57
