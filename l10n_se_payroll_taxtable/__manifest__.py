@@ -25,7 +25,7 @@
     'summary': 'https://skatteverket.entryscape.net/store/9/resource/1534',
     'category': 'Payroll Localization',
     'author': 'Vertel AB',
-    'website': 'https://vertel.se/apps/l10n_se_payroll/l10n_se_payroll_taxtable',
+    'website': 'https://vertel.se/apps/odoo-l10n_se_payroll/l10n_se_payroll_taxtable',
     'images': ['static/description/banner.png'], # 560x280 px.
     'license': 'AGPL-3',
     'maintainer': 'Vertel AB',
