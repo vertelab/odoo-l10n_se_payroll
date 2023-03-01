@@ -207,7 +207,47 @@ class hr_payslip(models.Model):
                                                       string='Details by Salary Rule Category',
                                                       help="Details from the salary rule category")
     
- 
+#Work in progres
+    # allocation_display = fields.Char(related='employee_id.allocation_display') #Dont know about this one?
+    # collected_vacation_days = fields.Date(string="Collected Vacation days", compute="_compute_vacation_days")
+
+    # def _compute_vacation_days(self):
+    #     year = date.strftime(date.today().year, "%Y")
+    #     _logger.error(f"{year=}")
+    #     april = date.strftime('03-01', "%m-%d").strftime('%m-%d')
+    #     employed_days = date.today()
+    #     _logger.error(f"{date.today()=}")
+    #     _logger.error(f"{employed_days=}")
+    #     allocation = self.allocation_display
+    #     _logger.error(f"{allocation=}")
+    #     step = allocation * employed_days
+    #     _logger.error(f"{self.allocation_display=}")
+    #     _logger.error(f"{step=}")
+    #     res = step/date.year
+    #     _logger.error(f"{date.year=}")
+    #     _logger.error(f"{res=}")
+    #     return res
+
+    # last_salary_payslip = fields.Boolean(string="Last Salary", readonly=False)
+
+    # @api.onchange('last_salary_payslip')
+    # def onchange_employee_last_salary(self):
+    #     # super(hr_payslip, self).onchange_employee_last_salary()
+    #     _logger.error(f"{self.last_salary_payslip=}")
+    #     if self.last_salary_payslip == True:
+    #         self.date_from = self.period_id.date_start - dateutil.relativedelta.relativedelta(months=1)
+    #         _logger.error(f"{self.date_from=}")
+    #         if self.contract_id.date_end:
+    #             self.date_to = self.contract_id.date_end
+    #         elif self.contract_id.date_end == None:
+    #             self.date_to = self.period_id.date_stop
+    #         _logger.error(f"{self.date_to=}")
+    #         self.name = _("Salary Slip of %s for %s") % (
+    #             self.employee_id.name,
+    #             self.period_id.date_start.strftime('%B-%Y') if self.period_id else 'None',
+    #         )
+        
+
 
     def get_number_of_days(self):
         year = self.date_from.year
