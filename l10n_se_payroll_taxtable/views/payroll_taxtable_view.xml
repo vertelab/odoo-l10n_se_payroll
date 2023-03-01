@@ -21,8 +21,8 @@
                         </group>
                         <field name="taxable_lines" nolabel="1">
                             <tree editable="bottom" create="false" edit="false" delete="false">
-                                <field name="year" />
-                                <field name="number_of_days" />
+                                <field name="year" invisible="1"/>
+                                <field name="number_of_days" invisible="1"/>
                                 <field name="table_number" />
                                 <field name="income_from" />
                                 <field name="income_to" />
@@ -32,7 +32,7 @@
                                 <field name="column4" />
                                 <field name="column5" />
                                 <field name="column6" />
-                                <field name="total_amount" />
+                                <field name="column7"  />
                             </tree>
                         </field>
                     </sheet>
@@ -72,3 +72,4 @@
         <menuitem id="hr_menu_payroll_taxtable_wizard" name="Sync TaxTable" parent="hr.menu_human_resources_configuration" sequence="100" action="action_payroll_taxtable_wizard_action" />
     </data>
 </odoo>
+
