@@ -33,7 +33,7 @@ class hr_contract(models.Model):
                               required=False, help="Employee category",
                               default=lambda self: self.env['hr.contract.type'].search([], limit=1))
     
-    work_time = fields.Selection(related='type_id.work_time', readonly=False)
+    work_time = fields.Selection(related='type_id.work_time', readonly=False, default='none')
 
 
 class ContractType(models.Model):
@@ -41,6 +41,7 @@ class ContractType(models.Model):
     _description = "Contract Type"
     
     work_time = fields.Selection([('none', 'None'),('schema_hour', 'Schema Hour')], string='Work Type', default='none', help="Type of work time")
+    name = fields.Char(required=False)
 
 
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
