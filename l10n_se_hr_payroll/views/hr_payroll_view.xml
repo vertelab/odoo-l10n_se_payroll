@@ -104,7 +104,7 @@
             <field name="inherit_id" ref="payroll.hr_payslip_view_form" />
             <field name="arch" type="xml">
                 <field name="number" position="before">
-                    <field name="last_salary_payslip"></field>
+                    <!-- <field name="last_salary_payslip"></field> -->
                     <!-- <field name="colected_vecation_days"></field> -->
                 </field>
             </field>
