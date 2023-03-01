@@ -42,6 +42,8 @@ class HRContract(models.Model):
     
     def l10_sum_columns_taxtable_line(self, payslip, wage):
 
+        
+
         if self.has_tax_equalization and payslip.date_from >= self.tax_equalization_start and payslip.date_from <= self.tax_equalization_end:
             return wage * self.tax_equalization
 
@@ -178,8 +180,8 @@ class HRContract(models.Model):
             for item in results:
 
                 if item["inkomst t.o.m."] == "":
-                    res_to = sys.maxsize
-                    pay_up = sys.maxsize
+                    res_to = wage
+                    pay_up = wage
                 else:
                     res_to = float(item["inkomst t.o.m."])
 
@@ -243,9 +245,7 @@ class HRContract(models.Model):
                         
                         if build_to is True:
                             
-                            if char == "0" and counter >= 2 and wage_length > 4:
-                                reg_ex_build += f"[0]"
-                            elif counter != wage_length -1:
+                            if counter != wage_length -1:
                                 reg_ex_build += f"[0-9]"
                             else:
                                 reg_ex_build += f"[{char}-9]"
@@ -285,8 +285,8 @@ class HRContract(models.Model):
                     
                     
                 else:
-                    #--wide search if salary is 100.000+ 
-                    if build_to is False and wage_length >= 6:
+                    #--wide search if salary is 600.000+ 
+                    if build_to is False and wage >= 600000:
                         reg_ex_build += f"$|[0-9][0-9][0-9][0-9][0-9][0-9][0-9]"
                     #--lowest amount from the API is 1.
                     reg_ex_build += f"$|^[0-9]$)"
