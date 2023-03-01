@@ -179,7 +179,7 @@ class HRContract(models.Model):
             columns = []
             for item in results:
 
-                if item["inkomst t.o.m."] == "":
+                if item["inkomst t.o.m."] == "" and wage >= float(item["inkomst fr.o.m.":
                     res_to = wage
                     pay_up = wage
                 else:
