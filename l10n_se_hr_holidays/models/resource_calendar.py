@@ -62,8 +62,7 @@ class ResourceCalendar(models.Model):
                             'hour_to': 17, 'day_period': 'afternoon', 'absent_calendar_id': self.id}),
                 ]
 
-    absent_work_days = fields.One2many('resource.calendar.attendance', 'absent_calendar_id', 'Absent Hours',
-                                       )
+    absent_work_days = fields.One2many('resource.calendar.attendance', 'absent_calendar_id', 'Absent Hours')
 
     def set_non_work_days(self):
         formatted_days_of_weeks = {}

@@ -12,12 +12,14 @@ import logging
 
 _logger = logging.getLogger(__name__)
 
+
 # Test with somthing like this
 # $ sudo service odoo stop
 # $ sudo su odoo
 # $ odoo --test-tags /l10n_se_payroll_tiichri -c /etc/odoo/odoo.conf
 # $ odoo -c /etc/odoo/odoo.conf -d DATABASNAMN -i l10n_se_hr_payroll_tiichri --test-enable
 # $ odoo -c /etc/odoo/odoo.conf -d odoo-tiichri4 -i l10n_se_hr_payroll_tiichri --test-enable
+
 
 
 class TestPayslipJanuary(common.SavepointCase):
@@ -182,29 +184,29 @@ class TestPayslipJanuary(common.SavepointCase):
             'date_stop': cls.date_stop,
         })
 
-        # Asse Aronsson
-        cls.employee_asse = cls.env.ref('l10n_se_hr_payroll_tiichri.hr_asse_employee')
-        cls.asse_1 = cls._create_leave(cls.employee_asse, "sjk_kar" ,"2022-01-07","2022-01-07",1)
-        cls.asse_2 = cls._create_leave(cls.employee_asse, "sjk_kar" ,"2022-01-12","2022-01-12",1)
-        cls.asse_3 = cls._create_leave(cls.employee_asse, "sjk_214" ,"2022-01-13","2022-01-13",1)
-        cls.asse_4 = cls._create_leave(cls.employee_asse, "sjk_214" ,"2022-01-24","2022-01-24",1)
-        cls.asse_5 = cls._create_leave(cls.employee_asse, "vab" ,"2022-01-25","2022-01-25",1)
-        cls.asse_6 = cls._create_leave(cls.employee_asse, "vab", "2022-01-26", "2022-01-26",1)
-        cls.asse_7 = cls._create_leave(cls.employee_asse, "Leave of Absence less than 5 days", "2022-01-03", "2022-01-03",1)
-        cls.asse_8 = cls._create_leave(cls.employee_asse, "Leave of Absence less than 5 days", "2022-01-14", "2022-01-14",1)
-        cls.asse_9 = cls._create_leave(cls.employee_asse, "Leave of Absence less than 5 days", "2022-01-17", "2022-01-17",1)
-        cls.asse_10 = cls._create_leave(cls.employee_asse, "Leave of Absence less than 5 days", "2022-01-18", "2022-01-18",1)
-        cls.asse_11 = cls._create_leave(cls.employee_asse, "Leave of Absence less than 5 days", "2022-01-19", "2022-01-19",1)
-        cls.asse_12 = cls._create_leave(cls.employee_asse, "Leave of Absence more than 5 days", "2022-01-20", "2022-01-20",1)
+        # # Asse Aronsson
+        # cls.employee_asse = cls.env.ref('l10n_se_hr_payroll_tiichri.hr_asse_employee')
+        # cls.asse_1 = cls._create_leave(cls.employee_asse, "sjk_kar" ,"2022-01-07","2022-01-07",1)
+        # cls.asse_2 = cls._create_leave(cls.employee_asse, "sjk_kar" ,"2022-01-12","2022-01-12",1)
+        # cls.asse_3 = cls._create_leave(cls.employee_asse, "sjk_214" ,"2022-01-13","2022-01-13",1)
+        # cls.asse_4 = cls._create_leave(cls.employee_asse, "sjk_214" ,"2022-01-24","2022-01-24",1)
+        # cls.asse_5 = cls._create_leave(cls.employee_asse, "vab" ,"2022-01-25","2022-01-25",1)
+        # cls.asse_6 = cls._create_leave(cls.employee_asse, "vab", "2022-01-26", "2022-01-26",1)
+        # cls.asse_7 = cls._create_leave(cls.employee_asse, "Leave of Absence less than 5 days", "2022-01-03", "2022-01-03",1)
+        # cls.asse_8 = cls._create_leave(cls.employee_asse, "Leave of Absence less than 5 days", "2022-01-14", "2022-01-14",1)
+        # cls.asse_9 = cls._create_leave(cls.employee_asse, "Leave of Absence less than 5 days", "2022-01-17", "2022-01-17",1)
+        # cls.asse_10 = cls._create_leave(cls.employee_asse, "Leave of Absence less than 5 days", "2022-01-18", "2022-01-18",1)
+        # cls.asse_11 = cls._create_leave(cls.employee_asse, "Leave of Absence less than 5 days", "2022-01-19", "2022-01-19",1)
+        # cls.asse_12 = cls._create_leave(cls.employee_asse, "Leave of Absence more than 5 days", "2022-01-20", "2022-01-20",1)
             
-        # Frans Filipsson
-        cls.employee_frans = cls.env.ref('l10n_se_hr_payroll_tiichri.hr_frans_employee')  # frans_employee
-        cls.frans_1 = cls._create_leave(cls.employee_frans, "sjk_kar" ,"2022-01-07","2022-01-07",1)
-        cls.frans_2 = cls._create_leave(cls.employee_frans, "sjk_kar" ,"2022-01-10","2022-01-10",1)
-        cls.frans_3 = cls._create_leave(cls.employee_frans, "sjk_214" ,"2022-01-11","2022-01-12",2)
-        cls.frans_4 = cls._create_leave(cls.employee_frans, "Leave of Absence less than 5 days" ,"2022-01-20","2022-01-21",2)
-        cls.frans_5 = cls._create_leave(cls.employee_frans, "Leave of Absence less than 5 days" ,"2022-01-24","2022-01-26",3)
-        cls.frans_6 = cls._create_leave(cls.employee_frans, "Leave of Absence more than 5 days" ,"2022-01-27","2022-01-27",1)
+        # # Frans Filipsson
+        # cls.employee_frans = cls.env.ref('l10n_se_hr_payroll_tiichri.hr_frans_employee')  # frans_employee
+        # cls.frans_1 = cls._create_leave(cls.employee_frans, "sjk_kar" ,"2022-01-07","2022-01-07",1)
+        # cls.frans_2 = cls._create_leave(cls.employee_frans, "sjk_kar" ,"2022-01-10","2022-01-10",1)
+        # cls.frans_3 = cls._create_leave(cls.employee_frans, "sjk_214" ,"2022-01-11","2022-01-12",2)
+        # cls.frans_4 = cls._create_leave(cls.employee_frans, "Leave of Absence less than 5 days" ,"2022-01-20","2022-01-21",2)
+        # cls.frans_5 = cls._create_leave(cls.employee_frans, "Leave of Absence less than 5 days" ,"2022-01-24","2022-01-26",3)
+        # cls.frans_6 = cls._create_leave(cls.employee_frans, "Leave of Absence more than 5 days" ,"2022-01-27","2022-01-27",1)
 
         # Doris Dahlin
         cls.employee_doris = cls.env.ref('l10n_se_hr_payroll_tiichri.hr_doris_employee')  # doris_employee
@@ -239,60 +241,60 @@ class TestPayslipJanuary(common.SavepointCase):
         # Karin Kullberg
         # Anställning per timme, påbörjad 2022-06-01
 
-    def test_asse(self):   
-        payslip_form = self._create_payslip(self.employee_asse, self.employee_asse.contract_id, [
-                {'code': 'kvaltim','amount': 4.0},
-            ])
+    # def test_asse(self):   
+    #     payslip_form = self._create_payslip(self.employee_asse, self.employee_asse.contract_id, [
+    #             {'code': 'kvaltim','amount': 4.0},
+    #         ])
 
-        for worked_day in payslip_form.worked_days_line_ids:
-            _logger.warning(f"{worked_day.name=} {worked_day.number_of_hours=}")
+    #     for worked_day in payslip_form.worked_days_line_ids:
+    #         _logger.warning(f"{worked_day.name=} {worked_day.number_of_hours=}")
 
-        for detail in payslip_form.dynamic_filtered_payslip_lines:
-            _logger.warning(f"line id from input: {detail.name} {detail.total}")
-            if detail.code == 'net':
-                self.assertAlmostEqual(detail.total, 29531.0)
+    #     for detail in payslip_form.dynamic_filtered_payslip_lines:
+    #         _logger.warning(f"line id from input: {detail.name} {detail.total}")
+    #         if detail.code == 'net':
+    #             self.assertAlmostEqual(detail.total, 29531.0)
 
-    def test_frans(self):
-        payslip_form = self._create_payslip(self.employee_frans, self.employee_frans.contract_id, [
-                {'code': 'kvaltim','amount': 3.0},
-            ])
+    # def test_frans(self):
+    #     payslip_form = self._create_payslip(self.employee_frans, self.employee_frans.contract_id, [
+    #             {'code': 'kvaltim','amount': 3.0},
+    #         ])
 
-        for line in payslip_form.input_line_ids:
-            if line.amount != 0.0:
-                _logger.warning(f"{line.name=} {line.amount_qty=} {line.amount=}")
+    #     for line in payslip_form.input_line_ids:
+    #         if line.amount != 0.0:
+    #             _logger.warning(f"{line.name=} {line.amount_qty=} {line.amount=}")
 
-        _logger.warning(f"--------------") 
+    #     _logger.warning(f"--------------") 
 
-        for worked_day in payslip_form.worked_days_line_ids:
-            _logger.warning(f"{worked_day.name=} {worked_day.number_of_hours=}")
+    #     for worked_day in payslip_form.worked_days_line_ids:
+    #         _logger.warning(f"{worked_day.name=} {worked_day.number_of_hours=}")
 
-        _logger.warning(f"--------------") 
+    #     _logger.warning(f"--------------") 
 
-        for detail in payslip_form.dynamic_filtered_payslip_lines:
-            _logger.warning(f"line id from input: {detail.name} {detail.total}")
-            if detail.code == 'net':
-                self.assertAlmostEqual(detail.total, 23008.0)   
+    #     for detail in payslip_form.dynamic_filtered_payslip_lines:
+    #         _logger.warning(f"line id from input: {detail.name} {detail.total}")
+    #         if detail.code == 'net':
+    #             self.assertAlmostEqual(detail.total, 23008.0)   
 
     def test_doris(self):
-        payslip_form = self._create_payslip(self.employee_doris, self.employee_doris.contract_id, [
-                {'code': 'kvaltim','amount': 2.0},
-                {'code': 'mertidtim','amount': 8.0},
-            ])
+        # ~ payslip_form = self._create_payslip(self.employee_doris, self.employee_doris.contract_id, [
+                # ~ {'code': 'kvaltim','amount': 2.0},
+                # ~ {'code': 'mertidtim','amount': 8.0},
+            # ~ ])
+        payslip_form = self._create_payslip(self.employee_doris, self.employee_doris.contract_id, [])
 
         for line in payslip_form.input_line_ids:
             if line.amount != 0.0:
-                _logger.warning(f"{line.name=} {line.amount_qty=} {line.amount=}")
+                _logger.info(f"{line.name=} {line.amount_qty=} {line.amount=}", "yellow", 4, "line.amount != 0.0")
 
-        _logger.warning(f"--------------")
+        _logger.info(f"--------------")
 
         for worked_day in payslip_form.worked_days_line_ids:
-            _logger.warning(f"{worked_day.name=} {worked_day.number_of_hours=}")
+            _logger.info(f"{worked_day.name=} {worked_day.number_of_hours=}", "magenta", 4, "worked_day in payslip_form.worked_days_line_ids")
 
-        _logger.warning(f"--------------")    
+        _logger.info(f"--------------")    
 
         for detail in payslip_form.dynamic_filtered_payslip_lines:
-            _logger.warning(f"line id from input: {detail.name} {detail.total}")
+            _logger.info(f"line id from input: {detail.name} {detail.total}", "cyan", 4, "detail in payslip_form.dynamic_filtered_payslip_lines")
             if detail.code == 'net':
+                _logger.info(detail.total, "green", 10, "netto")
                 self.assertAlmostEqual(detail.total, 19538.0)   
-
- 

@@ -22,13 +22,22 @@ from dataclasses import field
 import odoo.exceptions
 from odoo import models, fields, api, _
 import datetime
-from datetime import timedelta, date
+from datetime import timedelta, date, datetime
 from odoo.exceptions import AccessError, UserError, ValidationError
 
 import logging
 
+from pytz import timezone, UTC
+from collections import defaultdict, namedtuple
+import math
+from odoo.tools.float_utils import float_round
 _logger = logging.getLogger(__name__)
 
+from odoo.addons.resource.models.resource import float_to_time, HOURS_PER_DAY
+
+# Used to agglomerate the attendances in order to find the hour_from and hour_to
+# See _compute_date_from_to
+DummyAttendance = namedtuple('DummyAttendance', 'hour_from, hour_to, dayofweek, day_period, week_type')
 
 class Holidays(models.Model):
     _inherit = "hr.leave"
@@ -62,17 +71,16 @@ class Holidays(models.Model):
             nholidays = self.search_count(domain)
             if nholidays:
                 return
-                # raise ValidationError(_('HELLOOOO'))
 
     # Owerriding this function to get rid of an if case that raises a VaildationError
     def action_validate(self):
         current_employee = self.env.user.employee_id
         leaves = self.filtered(lambda l: l.employee_id and not l.number_of_days)
         if leaves:
-            # return
-            raise ValidationError(
-                _('The following employees are not supposed to work during that period:\n %s') % ','.join(
-                    leaves.mapped('employee_id.name')))
+            return
+            # raise ValidationError(
+            #     _('The following employees are not supposed to work during that period:\n %s') % ','.join(
+            #         leaves.mapped('employee_id.name')))
 
         if any(holiday.state not in ['confirm', 'validate1'] and holiday.validation_type != 'no_validation' for holiday
                in self):
@@ -177,6 +185,20 @@ class Holidays(models.Model):
         if not self.env.context.get('leave_fast_create'):
             employee_requests.filtered(lambda holiday: holiday.validation_type != 'no_validation').activity_update()
         return True
+    
+    # def _default_start_datetime(self):
+    #     return fields.Datetime.to_string(datetime.combine(fields.Datetime.now(), datetime.min.time()))
+        
+
+    # @api.depends('request_hour_start')
+    # def _default_end_datetime(self):
+    #     return fields.Datetime.to_string(datetime.combine(fields.Datetime.now(), datetime.max.time()))
+
+
+    # request_hour_start = fields.Datetime()
+    # request_hour_end = fields.Datetime()
+    # display_time = fields.Char(string="Time!", compute="_compute_display_time")
+
 
 
 class hr_holidays_status(models.Model):

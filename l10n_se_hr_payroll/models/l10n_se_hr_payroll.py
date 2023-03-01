@@ -34,18 +34,10 @@ _logger = logging.getLogger(__name__)
 class HrPayslipLine(models.Model):
     _inherit = "hr.payslip.line"
 
-
     @api.depends("quantity", "amount", "rate")
     def _compute_total(self):
         for line in self:
             line.total = round(float(line.quantity) * line.amount * line.rate / 100)
-
-            
-class ContractType(models.Model):
-    _name = "hr.contract.type"
-    _description = "Contract Type"
-
-    name = fields.Char(required=True)
 
 
 class HrPayslipWorkedDays(models.Model):
@@ -246,8 +238,6 @@ class hr_payslip(models.Model):
     #             self.employee_id.name,
     #             self.period_id.date_start.strftime('%B-%Y') if self.period_id else 'None',
     #         )
-        
-
 
     def get_number_of_days(self):
         year = self.date_from.year
@@ -379,11 +369,5 @@ class hr_payslip(models.Model):
             attendances = self._compute_worked_days(contract, day_from, day_to)
             res.append(attendances)
         return res
-
-
-
-
-
-
 
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:

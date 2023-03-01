@@ -25,6 +25,12 @@ import logging
 _logger = logging.getLogger(__name__)
 
 
+class ContractType(models.Model):
+    _inherit = "hr.contract.type"
+    _description = "Contract Type"
+    
+    work_time = fields.Selection([('none', 'None'),('schema_hour', 'Schema Hour')], string='Work Type', default='none', help="Type of work time")
+
 
 class hr_contract(models.Model):
     _inherit = 'hr.contract'

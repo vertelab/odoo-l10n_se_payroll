@@ -25,7 +25,7 @@
             <field name="zip">582 45</field>
             <field name="type">contact</field>
             <field name="is_company">False</field>
-            <field name="lang">sv_SE</field>
+<!--            <field name="lang">sv_SE</field>-->
             <!--
                  <field name="property_account_receivable" search="[('model','=','account.account'),('code','=','1510')]" />
                  <field name="property_account_payable" search="[('model','=','account.account'),('code','=','2441')]" />
