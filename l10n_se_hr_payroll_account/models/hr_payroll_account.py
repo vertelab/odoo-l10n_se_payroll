@@ -39,6 +39,8 @@ class HrPayslip(models.Model):
                 amount = currency.round(slip.credit_note and -line.total or line.total)
                 if currency.is_zero(amount):
                     continue
+                    
+                # Hitta kontot för nyvarande företag
                 debit_account_id = line.salary_rule_id.account_debit.id
                 credit_account_id = line.salary_rule_id.account_credit.id
 
