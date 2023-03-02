@@ -252,39 +252,39 @@ class hr_payslip(models.Model):
 
 # Might be casing a problem or maby not useful for now
 
-    # @api.onchange('employee_id', 'period_id')
-    # def onchange_employee(self):
-    #     super(hr_payslip, self).onchange_employee()
-    #     if self.choose_date_method == "date_then":
-    #         self.date_from = self.period_id.date_start - dateutil.relativedelta.relativedelta(months=1)
-    #         self.date_to = self.period_id.date_stop - dateutil.relativedelta.relativedelta(months=1)
-    #         self.name = _("Salary Slip of %s for %s") % (
-    #             self.employee_id.name,
-    #             self.period_id.date_start.strftime('%B-%Y') if self.period_id else 'None',
-    #         )
-    #     return
+    @api.onchange('employee_id', 'period_id')
+    def onchange_employee(self):
+        super(hr_payslip, self).onchange_employee()
+        if self.choose_date_method == "date_then" and self.period_id.date_start and self.period_id.date_stop:
+            self.date_from = self.period_id.date_start - dateutil.relativedelta.relativedelta(months=1)
+            self.date_to = self.period_id.date_stop - dateutil.relativedelta.relativedelta(months=1)
+            self.name = _("Salary Slip of %s for %s") % (
+                self.employee_id.name,
+                self.period_id.date_start.strftime('%B-%Y') if self.period_id else 'None',
+            )
+        return
 
-    # @api.onchange('employee_id', 'period_id')
-    # def onchange_employee_date_now(self):
-    #     # super(hr_payslip, self).onchange_employee_date_now()
-    #     if self.choose_date_method == "date_now":
-    #         self.date_from = self.period_id.date_start
-    #         self.date_to = self.period_id.date_stop
-    #         self.name = _("Salary Slip of %s for %s") % (
-    #             self.employee_id.name,
-    #             self.period_id.date_start.strftime('%B-%Y') if self.period_id else 'None',
-    #         )
-    #     return
+    @api.onchange('employee_id', 'period_id')
+    def onchange_employee_date_now(self):
+        # super(hr_payslip, self).onchange_employee_date_now()
+        if self.choose_date_method == "date_now":
+            self.date_from = self.period_id.date_start
+            self.date_to = self.period_id.date_stop
+            self.name = _("Salary Slip of %s for %s") % (
+                self.employee_id.name,
+                self.period_id.date_start.strftime('%B-%Y') if self.period_id else 'None',
+            )
+        return
 
-    # def compute_date_method(self):
-    #     self.choose_date_method = (
-    #         self.env["ir.config_parameter"].sudo().get_param("l10n_se_hr_payroll.choose_date_method")
-    #     )
+    def compute_date_method(self):
+         self.choose_date_method = (
+             self.env["ir.config_parameter"].sudo().get_param("l10n_se_hr_payroll.choose_date_method")
+         )
 
-    # choose_date_method = fields.Selection([
-    #     ("date_now", "Same date as period"),
-    #     ("date_then", "A month after period"), ],
-    #     store=True, compute="compute_date_method", readonly=False, default="date_then")
+    choose_date_method = fields.Selection([
+         ("date_now", "Same date as period"),
+         ("date_then", "A month after period"), ],
+         store=True, compute="compute_date_method", readonly=False, default="date_then")
 
     # _logger.error(f"{choose_date_method=}")
     # compute = "compute_date_method")
