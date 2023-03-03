@@ -95,7 +95,7 @@
             <field name="arch" type="xml">
 
                 <field name="date_from" position="before">
-                    <field name="choose_date_method"/><
+                    <field name="choose_date_method"/>
                 </field>
             </field>
         </record>
