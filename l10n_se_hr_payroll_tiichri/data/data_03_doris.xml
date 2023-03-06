@@ -11,12 +11,11 @@
             <field name="mobile">073-700000</field>
             <field name="function">Lönekonsult</field>
         </record>
-                <!-- ## HR.CONTRACT.BENEFIT -->
-        <record id="hr_benefit_asse" model="hr.contract.benefit">
-            <field name="contact_id">forman_carbru</field>
-            <field name="desc">Bilförmån, brutto</field>
-            <field name="name">forman_carbru</field>
-            <field name="value">4391</field>
+        <!-- ## HR.CONTRACT.BENEFIT -->
+        <record id="hr_benefit_doris" model="hr.contract.benefit">
+            <field name="contract_id" ref="contract_doris" />
+            <field name="desc">Tjänstebostad 60 kvm i Stockholms innerstad</field>
+            <field name="value">6960</field>
         </record>
         <record id="bank_doris" model="res.partner.bank">
             <field name="acc_number">4333-55555555</field>
@@ -45,7 +44,7 @@
             <field name="first_contract_date">2019-04-01</field>
             <field name="struct_id" ref="l10n_se_hr_payroll.hr_payroll_structure-tj" />
             <field name="table_number">30</field>
-            <field name="column_number" eval="'column1'"/>
+            <field name="column_number" eval="'column1'" />
         </record>
     </data>
 </odoo>
