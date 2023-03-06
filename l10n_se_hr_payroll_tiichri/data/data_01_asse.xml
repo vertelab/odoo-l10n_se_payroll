@@ -46,29 +46,6 @@
             <field name="address_id" ref="main_company_partner" />
             <field name="tz" eval="'Europe/Stockholm'" />
         </record>
-        <!-- ## HR.BENEFIT -->
-        <record id="hr_benefit_forman_carbru" model="hr.benefit">
-            <field name="name">hr_forman_carbru</field>
-            <field name="desc">Bilförmån, brutto **</field>
-        </record>
-        <record id="hr_benefit_forman_carnet" model="hr.benefit">
-            <field name="name">hr_forman_carnet</field>
-            <field name="desc">Bilförmån, netto **</field>
-        </record>
-        <record id="hr_benefit_forman_driv" model="hr.benefit">
-            <field name="name">hr_forman_driv</field>
-            <field name="desc">Drivmedel **</field>
-        </record>
-        <record id="hr_benefit_forman_bost" model="hr.benefit">
-            <field name="name">forman_bost</field>
-            <field name="desc">hr_Bostad **</field>
-        </record>
-        <!-- ## HR.CONTRACT.BENEFIT -->
-        <record id="hr_benefit_asse" model="hr.contract.benefit">
-            <field name="contract_id" ref="contract_asse" />
-            <field name="desc">Volvo tjänstebil</field>
-            <field name="value">4391</field>
-        </record>
         <!--  -->
         <record id="hr_contract_type" model="hr.contract.type">
             <field name="name">Employee</field>
@@ -101,6 +78,30 @@
             <field name="struct_id" ref="l10n_se_hr_payroll.hr_payroll_structure-tj" />
             <field name="table_number">30</field>
             <field name="column_number" eval="'column1'" />
+        </record>
+        <!-- ## HR.BENEFIT -->
+        <record id="hr_benefit_forman_carbru" model="hr.benefit">
+            <field name="name">hr_forman_carbru</field>
+            <field name="desc">Bilförmån, brutto **</field>
+        </record>
+        <record id="hr_benefit_forman_carnet" model="hr.benefit">
+            <field name="name">hr_forman_carnet</field>
+            <field name="desc">Bilförmån, netto **</field>
+        </record>
+        <record id="hr_benefit_forman_driv" model="hr.benefit">
+            <field name="name">hr_forman_driv</field>
+            <field name="desc">Drivmedel **</field>
+        </record>
+        <record id="hr_benefit_forman_bost" model="hr.benefit">
+            <field name="name">hr_forman_bost</field>
+            <field name="desc">hr_Bostad **</field>
+        </record>
+        <!-- ## HR.CONTRACT.BENEFIT -->
+        <record id="hr_benefit_asse" model="hr.contract.benefit">
+            <field name="contract_id" ref="contract_asse" />
+            <field name="name" ref="hr_benefit_forman_carbru" />
+            <field name="desc">Volvo tjänstebil</field>
+            <field name="value">4391</field>
         </record>
     </data>
 </odoo>
