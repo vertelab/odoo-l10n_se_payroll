@@ -27,6 +27,7 @@
             <field name="address_id" ref="main_company_partner" />
             <field name="tz" eval="'Europe/Stockholm'" />
         </record>
+        <!--  -->
         <record id="contract_camilla" model="hr.contract">
             <field name="name">Camilla Cobolt Avtal</field>
             <field name="wage">30000</field>
@@ -39,10 +40,14 @@
             <field name="first_contract_date">2022-01-10</field>
             <field name="struct_id" ref="l10n_se_hr_payroll.hr_payroll_structure-tj" />
             <field name="table_number">30</field>
-            <field name="column_number" eval="'column1'"/>
-            <!--
-                 <field name="benefit_ids" ref="benefits_camilla" />
-            -->
+            <field name="column_number" eval="'column1'" />
+        </record>
+        <!-- ## HR.CONTRACT.BENEFIT -->
+        <record id="hr_benefit_camilla" model="hr.contract.benefit">
+            <field name="contract_id" ref="contract_camilla" />
+            <field name="name" ref="hr_benefit_forman_carbru" />
+            <field name="desc">Tjänstebil, Volvo</field>
+            <field name="value">3908</field>
         </record>
     </data>
 </odoo>

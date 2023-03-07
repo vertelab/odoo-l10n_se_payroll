@@ -250,7 +250,7 @@ class TestPayslipJanuary(common.SavepointCase):
         for detail in payslip_form.dynamic_filtered_payslip_lines:
             _logger.warning(f"line id from input: {detail.name} {detail.total}")
             if detail.code == 'net':
-                self.assertAlmostEqual(detail.total, 29531.0)
+                self.assertAlmostEqual(detail.total, 27734.0)
 
     def test_frans(self):
         payslip_form = self._create_payslip(self.employee_frans, self.employee_frans.contract_id, [
