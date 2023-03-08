@@ -135,9 +135,9 @@ class HrContract(models.TransientModel):
         string="Currency of the Payment Transaction"
     )
 
-    hr_contract_id = fields.Many2one(
-        "hr.contract", string="Contract", required=True, index=True
-    )
+    # hr_contract_id = fields.Many2one(
+    #     "user.contract", string="Contract", required=True, index=True
+    # )
 
     table_number = fields.Integer(string="Tax Table")
     column_number = fields.Selection(
