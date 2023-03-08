@@ -65,6 +65,8 @@ Swedish Payroll Rules.
         'security/ir.model.access.csv',
         'report/pivot_salary_views.xml',
 
+        'views/res_company.xml',
+
     ],
     'demo': [
         # ~ 'demo/hr_payroll_demo.xml',
