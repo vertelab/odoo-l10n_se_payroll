@@ -459,6 +459,7 @@ class ResUsers(models.Model):
                         "wage_tax_base": slip.contract_id.wage_tax_base,
                         "prel_tax_tabel": slip.contract_id.prel_tax_tabel,
                         'column_number': slip.contract_id.column_number,
+                        'table_number': slip.contract_id.table_number,
                         # "resource_calendar_id":slip.contract_id.resource_calendar_id.name,
                         "name": slip.contract_id.resource_calendar_id.name,
                         # "employee_fund_balance":slip.contract_id.employee_fund_balance,
