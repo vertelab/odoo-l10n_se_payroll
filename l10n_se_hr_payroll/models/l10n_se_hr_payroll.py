@@ -447,6 +447,10 @@ class HrPayrollStructure(models.Model):
                         'amount_fix': payroll_salary_rule_id.amount_fix,
                         'note': payroll_salary_rule_id.note,
                         'parent_rule_id': payroll_salary_rule_id.parent_rule_id.id,
+                        'account_debit': payroll_salary_rule_id.account_debit.id,
+                        'account_credit': payroll_salary_rule_id.account_credit.id,
+                        'account_tax_id': payroll_salary_rule_id.account_tax_id.id,
+                        'tax_base_id': payroll_salary_rule_id.tax_base_id.id,
                     })
 
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
