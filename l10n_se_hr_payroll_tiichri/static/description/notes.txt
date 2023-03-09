@@ -49,3 +49,5 @@ ls | wc -l
 grep -sR "'website':" */*__.py | tr "'" " "
 
 grep -r "2023-02-*" odoo-*/*/static/description/notes.txt
+
+

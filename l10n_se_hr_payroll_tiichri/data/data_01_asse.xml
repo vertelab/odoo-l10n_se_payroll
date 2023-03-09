@@ -1,6 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
     <data noupdate="0">
+        <!-- ## DATABASE DEFAULT SETTINGS -->
+        <!-- https://github.com/vertelab/odoo-l10n_se/blob/14.0/l10n_se/data/fiscal_position_data.xml -->
+        <record id="main_company_year_2022" model="account.fiscalyear">
+            <field name="name">2022</field>
+            <field name="code">2022</field>
+            <field name="date_start">2022-01-01</field>
+            <field name="date_stop">2022-12-31</field>
+        </record>
+        <!-- ## CREATE PERIODS // 12, MONTHS -->
         <!-- ## ASSE ARONSSON -->
         <record id="main_company_partner" model="res.partner">
             <field name="company_type">company</field>
