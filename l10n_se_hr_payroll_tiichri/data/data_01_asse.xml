@@ -1,36 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
     <data noupdate="0">
-        <!-- ## DATABASE DEFAULT SETTINGS -->
-        <!-- https://github.com/vertelab/odoo-l10n_se/blob/14.0/l10n_se/data/fiscal_position_data.xml -->
-        <record id="main_company_year_2022" model="account.fiscalyear">
-            <field name="name">2022</field>
-            <field name="code">2022</field>
-            <field name="date_start">2022-01-01</field>
-            <field name="date_stop">2022-12-31</field>
-        </record>
-        <!-- ## CREATE PERIODS // 12, MONTHS -->
         <!-- ## ASSE ARONSSON -->
-        <record id="main_company_partner" model="res.partner">
-            <field name="company_type">company</field>
-            <field name="name">Aronssons Montage AB</field>
-            <field name="street">Rosersbergsvägen 5</field>
-            <field name="zip">192 00</field>
-            <field name="city">Rosersberg</field>
-            <field name="email">info@aronssons.se</field>
-            <field name="phone">07</field>
-            <field name="website">http://www.aronssons.se</field>
-        </record>
-        <record id="main_company" model="res.company">
-            <field name="name">Aronssons Montage AB</field>
-            <field name="street">Rosersbergsvägen 5</field>
-            <field name="zip">192 00</field>
-            <field name="city">Rosersberg</field>
-            <field name="vat">SE123456789701</field>
-            <field name="company_registry">556060-0000</field>
-            <field name="email">info@aronssons.se</field>
-            <field name="website">http://www.aronssons.se</field>
-        </record>
         <record id="hr_asse_partner" model="res.partner">
             <field name="company_type">person</field>
             <field name="name">Asse Aronsson Kontakt</field>
@@ -55,25 +26,6 @@
             <field name="address_id" ref="main_company_partner" />
             <field name="tz" eval="'Europe/Stockholm'" />
         </record>
-        <!--  -->
-        <record id="hr_contract_type" model="hr.contract.type">
-            <field name="name">Employee</field>
-        </record>
-        <record id="job_id_president" model="hr.job">
-            <field name="name">VD och försäljningschef</field>
-        </record>
-        <record id="job_id_sales" model="hr.job">
-            <field name="name">Inköpare</field>
-        </record>
-        <record id="job_id_accounting" model="hr.job">
-            <field name="name">Lönekonsult</field>
-        </record>
-        <record id="job_id_logistics" model="hr.job">
-            <field name="name">Logistikansvarig</field>
-        </record>
-        <record id="job_id_assembly" model="hr.job">
-            <field name="name">Montör</field>
-        </record>
         <record id="contract_asse" model="hr.contract">
             <field name="name">Asse Aronsson Avtal</field>
             <field name="wage">52000</field>
@@ -88,23 +40,7 @@
             <field name="table_number">30</field>
             <field name="column_number" eval="'column1'" />
         </record>
-        <!-- ## HR.BENEFIT -->
-        <record id="hr_benefit_forman_carbru" model="hr.benefit">
-            <field name="name">hr_forman_carbru</field>
-            <field name="desc">Bilförmån, brutto **</field>
-        </record>
-        <record id="hr_benefit_forman_carnet" model="hr.benefit">
-            <field name="name">hr_forman_carnet</field>
-            <field name="desc">Bilförmån, netto **</field>
-        </record>
-        <record id="hr_benefit_forman_driv" model="hr.benefit">
-            <field name="name">hr_forman_driv</field>
-            <field name="desc">Drivmedel **</field>
-        </record>
-        <record id="hr_benefit_forman_bost" model="hr.benefit">
-            <field name="name">hr_forman_bost</field>
-            <field name="desc">hr_Bostad **</field>
-        </record>
+
         <!-- ## HR.CONTRACT.BENEFIT -->
         <record id="hr_benefit_asse" model="hr.contract.benefit">
             <field name="contract_id" ref="contract_asse" />

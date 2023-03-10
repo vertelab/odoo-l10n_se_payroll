@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="0">
+        <!-- ## DATABASE DEFAULT SETTINGS -->
+        <!-- https://github.com/vertelab/odoo-l10n_se/blob/14.0/l10n_se/data/fiscal_position_data.xml -->
+        <record id="main_company_year_2022" model="account.fiscalyear">
+            <field name="name">2022</field>
+            <field name="code">2022</field>
+            <field name="date_start">2022-01-01</field>
+            <field name="date_stop">2022-12-31</field>
+        </record>
+        <!-- ## CREATE PERIODS // 12, MONTHS -->
+        <!--
+             <function model="account.fiscalyear"  name="create_period1"/>
+             <function eval="[[('state','=','draft'),('id', '=', ref('create_period1'))]]" model="account.fiscalyear" name="year2022" />
+             
+             method = getattr(type(model), name)
+             AttributeError: type object 'account.fiscalyear' has no attribute 'main_company_year_2022'
+             
+             ## core-odoo/addons/  /sale_stock/data/sale_order_demo.xml:        <function model="stock.inventory" name="action_validate">
+             <function model="stock.inventory" name="action_start">
+             <function eval="[[('state','=','draft'),('id', '=', ref('stock_inventory_customizable_desk_update'))]]" model="stock.inventory" name="search"/>
+             </function>
+             <function model="stock.inventory" name="action_validate">
+             <function eval="[[('state','=','confirm'),('id', '=', ref('stock_inventory_customizable_desk_update'))]]" model="stock.inventory" name="search"/>
+             </function>
+             
+        <function model="account.fiscalyear" attr="main_company_year_2022" name="create_period1" />
+             
+        -->
+        <function model="account.fiscalyear" name="create_period1">
+            <function eval="[[('state','=','draft'),('id', '=', ref('main_company_year_2022'))]]" model="account.fiscalyear" name="search" />
+        </function>
+<!--
+        <function model="create_period1" name="action_validate">
+            <function eval="[[('state','=','confirm'),('id', '=', ref('main_company_year_2022'))]]" model="account.fiscalyear" name="search" />
+        </function>
+-->
+        <!-- ## COMPANY SETTNINGS -->
+        <record id="main_company_partner" model="res.partner">
+            <field name="company_type">company</field>
+            <field name="name">Aronssons Montage AB</field>
+            <field name="street">Rosersbergsvägen 5</field>
+            <field name="zip">192 00</field>
+            <field name="city">Rosersberg</field>
+            <field name="email">info@aronssons.se</field>
+            <field name="phone">07</field>
+            <field name="website">http://www.aronssons.se</field>
+        </record>
+        <record id="main_company" model="res.company">
+            <field name="name">Aronssons Montage AB</field>
+            <field name="street">Rosersbergsvägen 5</field>
+            <field name="zip">192 00</field>
+            <field name="city">Rosersberg</field>
+            <field name="vat">SE123456789701</field>
+            <field name="company_registry">556060-0000</field>
+            <field name="email">info@aronssons.se</field>
+            <field name="website">http://www.aronssons.se</field>
+        </record>
+        <!-- ## OFFICE TITLES -->
+        <record id="hr_contract_type" model="hr.contract.type">
+            <field name="name">Employee</field>
+        </record>
+        <record id="job_id_president" model="hr.job">
+            <field name="name">VD och försäljningschef</field>
+        </record>
+        <record id="job_id_sales" model="hr.job">
+            <field name="name">Inköpare</field>
+        </record>
+        <record id="job_id_accounting" model="hr.job">
+            <field name="name">Lönekonsult</field>
+        </record>
+        <record id="job_id_logistics" model="hr.job">
+            <field name="name">Logistikansvarig</field>
+        </record>
+        <record id="job_id_assembly" model="hr.job">
+            <field name="name">Montör</field>
+        </record>
+        <!-- ## HR.BENEFIT -->
+        <record id="hr_benefit_forman_carbru" model="hr.benefit">
+            <field name="name">hr_forman_carbru</field>
+            <field name="desc">Bilförmån, brutto **</field>
+        </record>
+        <record id="hr_benefit_forman_carnet" model="hr.benefit">
+            <field name="name">hr_forman_carnet</field>
+            <field name="desc">Bilförmån, netto **</field>
+        </record>
+        <record id="hr_benefit_forman_driv" model="hr.benefit">
+            <field name="name">hr_forman_driv</field>
+            <field name="desc">Drivmedel **</field>
+        </record>
+        <record id="hr_benefit_forman_bost" model="hr.benefit">
+            <field name="name">hr_forman_bost</field>
+            <field name="desc">hr_Bostad **</field>
+        </record>
+    </data>
+</odoo>

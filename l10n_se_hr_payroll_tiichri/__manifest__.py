@@ -41,6 +41,7 @@ We create test data to seven employees, to use while developing our own code. To
     'depends': ['hr_contract','l10n_se_hr_payroll', 'l10n_se_hr_holidays', 'l10n_se_hr_payroll_benefits', 'l10n_se_payroll_taxtable', ],
     'data':[
         # ~ 'data/hr_payroll_tiichri_data.xml',
+        'data/data_00_aronssons_montage.xml',
         'data/data_01_asse.xml',
         'data/data_02_frans.xml',
         'data/data_03_doris.xml',
