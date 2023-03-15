@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
     <data noupdate="0">
+        <!-- ## KONTOPLAN // FISCALYEAR -->
+        <!-- ## DO THE SELECTION TO K2! -->
+        <function model="res.company" name="account_chart_func" />
         <!-- ## DATABASE DEFAULT SETTINGS -->
         <!-- https://github.com/vertelab/odoo-l10n_se/blob/14.0/l10n_se/data/fiscal_position_data.xml -->
         <record id="main_company_year_2022" model="account.fiscalyear">
@@ -10,32 +13,9 @@
             <field name="date_stop">2022-12-31</field>
         </record>
         <!-- ## CREATE PERIODS // 12, MONTHS -->
-        <!--
-             <function model="account.fiscalyear"  name="create_period1"/>
-             <function eval="[[('state','=','draft'),('id', '=', ref('create_period1'))]]" model="account.fiscalyear" name="year2022" />
-             
-             method = getattr(type(model), name)
-             AttributeError: type object 'account.fiscalyear' has no attribute 'main_company_year_2022'
-             
-             ## core-odoo/addons/  /sale_stock/data/sale_order_demo.xml:        <function model="stock.inventory" name="action_validate">
-             <function model="stock.inventory" name="action_start">
-             <function eval="[[('state','=','draft'),('id', '=', ref('stock_inventory_customizable_desk_update'))]]" model="stock.inventory" name="search"/>
-             </function>
-             <function model="stock.inventory" name="action_validate">
-             <function eval="[[('state','=','confirm'),('id', '=', ref('stock_inventory_customizable_desk_update'))]]" model="stock.inventory" name="search"/>
-             </function>
-             
-        <function model="account.fiscalyear" attr="main_company_year_2022" name="create_period1" />
-             
-        -->
         <function model="account.fiscalyear" name="create_period1">
             <function eval="[[('state','=','draft'),('id', '=', ref('main_company_year_2022'))]]" model="account.fiscalyear" name="search" />
         </function>
-<!--
-        <function model="create_period1" name="action_validate">
-            <function eval="[[('state','=','confirm'),('id', '=', ref('main_company_year_2022'))]]" model="account.fiscalyear" name="search" />
-        </function>
--->
         <!-- ## COMPANY SETTNINGS -->
         <record id="main_company_partner" model="res.partner">
             <field name="company_type">company</field>
