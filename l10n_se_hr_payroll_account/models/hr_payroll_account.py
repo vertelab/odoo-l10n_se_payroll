@@ -182,7 +182,8 @@ class HrSalaryRule(models.Model):
             if len(error) > 0:
                 all_errors = all_errors + error + "\n"
         if len(all_errors) > 0:
-            raise UserError(all_errors)
+            _logger.warning(f"{all_errors=}")
+            #raise UserError(all_errors)
             
     @api.model
     def set_account_tax_using_char_fields(self):

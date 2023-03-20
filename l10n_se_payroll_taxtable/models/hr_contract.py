@@ -50,7 +50,7 @@ class HRContract(models.Model):
 
         fails = [key for key, value in (('date', payslip.date_from), ('wage', wage), ('column_number', self.column_number),
                                         ('self.table_number', self.table_number)) if not value]
-
+        
         if fails:
             _logger.warning(f"Please fill these values{fails}")
             return
@@ -58,15 +58,18 @@ class HRContract(models.Model):
         year = payslip.date_from.year
 
         taxtable_name = f"Skattetabell {year}"
-        taxtable_id = self.env['payroll.taxtable'].search([ ('name', '=', taxtable_name) ])
+        taxtable_id = self.env['payroll.taxtable'].search([ ('name', 'like', f'%{year}%') ])
+        
 
         taxtable_line = self.env['payroll.taxtable.line'].search([
-            ('payroll_taxable_id', '=', taxtable_id.id),
+            ('payroll_taxable_id.name', 'like', f'%{year}%'),
             ('table_number', '=', self.table_number),
             ('income_from', '<=', float(wage)),
             ('income_to', '>=', float(wage)),
         ])
 
+        # ~ raise Warning(taxtable_line)
+        # ~ taxtable_line = False
 
         if not taxtable_line:
             taxtable_line = self.do_api_call(taxtable_id, taxtable_name, wage, year, payslip)
@@ -138,6 +141,7 @@ class HRContract(models.Model):
             response = urllib.request.urlopen(request_url).read()
 
             json_response = json.loads(response)
+            raise Warning(json_response)
 
             results = json_response["results"]
 

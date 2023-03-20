@@ -14,8 +14,8 @@
       <field name="user_type_id" ref="account.data_account_type_expenses"/>
     </record>
     <record id="l10n_se_hr_payroll.hr_salary_rule-formon-til" model="hr.salary.rule">
-      <field name="account_debit_char">7399</field>
-      <field name="account_credit_char">7388</field>
+      <field name="account_debit_char">7388</field>
+      <field name="account_credit_char">7399</field>
     </record>
     <record id="l10n_se_hr_payroll.hr_salary_rule-sap" model="hr.salary.rule">
       <field name="account_debit_char" >7521</field>
@@ -61,6 +61,10 @@
     </record>
     <record id="l10n_se_hr_payroll.hr_salary_rule-sum" model="hr.salary.rule">
       <field name="account_credit_char">2821</field>
+    </record>
+    
+    <record id="l10n_se_hr_payroll.hr_salary_rule-nettoavdr-avg" model="hr.salary.rule">
+        <field name="account_credit_char">7399</field>
     </record>
 
     <!-- Drivmedelsförmån -->

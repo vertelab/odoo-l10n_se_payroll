@@ -215,11 +215,9 @@ class TestPayslipJanuary(common.SavepointCase):
         cls.doris_5 = cls._create_leave(cls.employee_doris, "Leave of Absence less than 5 days" ,"2022-01-13","2022-01-13",1)
 
         # Camilla Cobolt -- Låt stå! :-) Inte sjuk i januari
-        # ~ cls.employee_camilla = self.env.ref('hr_camilla_employee')  # camilla_employee
-        # ~ cls.camilla_kar = self.create_leave(cls.employee_camilla,'sjk_kar',"2022-01-07","2022-01-07",1.0)
-        # ~ cls.camilla_kar.action_approve()
-        # ~ cls.camilla_kar = self.create_leave(cls.employee_camilla,'sjk_kar',"2022-01-10","2022-01-12",3.0)
-        # ~ cls.camilla_kar.action_approve()
+        cls.employee_camilla = self.env.ref('hr_camilla_employee')  # camilla_employee
+        cls.camilla_1 = cls._create_leave(cls.employee_camilla, "vab" ,"2022-01-14","2022-01-14",1)
+        cls.camilla_2 = cls._create_leave(cls.employee_camilla, "vab" ,"2022-01-17","2022-01-17",1)
 
 
         # # Gustav Groth
@@ -295,4 +293,26 @@ class TestPayslipJanuary(common.SavepointCase):
             if detail.code == 'net':
                 self.assertAlmostEqual(detail.total, 19538.0)   
 
- 
+
+    def test_camilla(self):
+        payslip_form = self._create_payslip(self.employee_doris, self.employee_doris.contract_id, [
+                {'code': 'kvaltim','amount': 2.0},
+                {'code': 'mertidtim','amount': 8.0},
+            ])
+
+        for line in payslip_form.input_line_ids:
+            if line.amount != 0.0:
+                _logger.warning(f"{line.name=} {line.amount_qty=} {line.amount=}")
+
+        _logger.warning(f"--------------")
+
+        for worked_day in payslip_form.worked_days_line_ids:
+            _logger.warning(f"{worked_day.name=} {worked_day.number_of_hours=}")
+
+        _logger.warning(f"--------------")    
+
+        for detail in payslip_form.dynamic_filtered_payslip_lines:
+            _logger.warning(f"line id from input: {detail.name} {detail.total}")
+            if detail.code == 'net':
+                self.assertAlmostEqual(detail.total, 15524.0)   
+
