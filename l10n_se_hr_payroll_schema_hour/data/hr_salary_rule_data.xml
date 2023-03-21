@@ -93,7 +93,8 @@
             <field name="sequence">280</field>
             <field name="appears_on_payslip" eval="True" />
             <field name="condition_select">python</field>
-            <field name="condition_python">result = contract.type_id.work_time == 'schema_hour'</field>
+            <!-- <field name="condition_python">result = contract.type_id.work_time == 'schema_hour'</field> -->
+            <field name="condition_python">result = True</field>
             <field name="amount_select">code</field>
             <field name="amount_python_compute">
 find = 0
@@ -111,7 +112,8 @@ result = find
             <field name="sequence">690</field>
             <field name="appears_on_payslip" eval="True" />
             <field name="condition_select">python</field>
-            <field name="condition_python">result = contract.type_id.work_time == 'schema_hour'</field>
+            <!-- <field name="condition_python">result = contract.type_id.work_time == 'schema_hour'</field> -->
+            <field name="condition_python">result = True</field>
             <field name="amount_select">code</field>
             <field name="amount_python_compute">result = categories.BRUTTO * 0.3</field>
             <field name="quantity">1</field>
@@ -124,7 +126,8 @@ result = find
             <field name="salary_art">s116</field>
             <field name="appears_on_payslip" eval="True" />
             <field name="condition_select">python</field>
-            <field name="condition_python">result = contract.type_id.work_time == 'schema_hour'</field>
+            <!-- <field name="condition_python">result = contract.type_id.work_time == 'schema_hour'</field> -->
+            <field name="condition_python">result = True</field>
             <field name="amount_select">code</field>
             <field name="amount_python_compute">result = categories.BRUTTOTIM - categories.NETAVG + categories.NETTIL</field>
             <field name="quantity">1</field>
@@ -140,7 +143,8 @@ result = find
             <field name="sequence">290</field>
             <field name="appears_on_payslip" eval="True" />
             <field name="condition_select">python</field>
-            <field name="condition_python">result = contract.type_id.work_time == 'schema_hour'</field>
+            <!-- <field name="condition_python">result = contract.type_id.work_time == 'schema_hour'</field> -->
+            <field name="condition_python">result = True</field>
             <field name="amount_select">code</field>
             <field name="amount_python_compute">result = contract.wage * sum(payslip.worked_days_line_ids.filtered(lambda l: l.code == 'HOUR').mapped('number_of_hours')) * 0.12</field>
             <field name="quantity">1</field>
@@ -152,7 +156,8 @@ result = find
             <field name="sequence">5</field>
             <field name="appears_on_payslip" eval="True" />
             <field name="condition_select">python</field>
-            <field name="condition_python">result = worked_days.dict.get('sjk_kar_tim', False)</field>
+            <!-- <field name="condition_python">result = worked_days.dict.get('sjk_kar_tim', False)</field> -->
+            <field name="condition_python">result = True</field>
             <field name="amount_select">code</field>
             <field name="amount_python_compute">
 result_qty = contract.get_leave_days('sjk_kar_tim', worked_days) * -1
