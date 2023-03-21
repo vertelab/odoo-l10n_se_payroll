@@ -20,6 +20,7 @@ from pytz import timezone, utc
 from odoo.addons.resource.models.resource import float_round, float_to_time, float_utils
 from odoo.osv import expression
 
+
 # Default hour per day value. The one should
 # only be used when the one from the calendar
 # is not available.

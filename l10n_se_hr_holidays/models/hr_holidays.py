@@ -35,13 +35,6 @@ _logger = logging.getLogger(__name__)
 
 from odoo.addons.resource.models.resource import float_to_time, HOURS_PER_DAY
 
-from importlib.machinery import SourceFileLoader
-
-logger = SourceFileLoader("logger","/usr/share/tommy/logger.py").load_module()
-logg = logger.TerminalOutput
-
-# ~ from logger import logger.TerminalOutput.getLogger()
-
 # Used to agglomerate the attendances in order to find the hour_from and hour_to
 # See _compute_date_from_to
 DummyAttendance = namedtuple('DummyAttendance', 'hour_from, hour_to, dayofweek, day_period, week_type')
@@ -51,8 +44,33 @@ DummyAttendance = namedtuple('DummyAttendance', 'hour_from, hour_to, dayofweek, 
 class Holidays(models.Model):
     _inherit = "hr.leave"
 
-    # ~ logg.msg("Holidays","green",0,"inne i")
-    # ~ logg.msg("Holidays","green",0,"inne i", True)
+    def _compute_karens(self):
+        for rec in self:
+
+            rec.is_deffered_period = True
+
+            all_leaves = self.env['hr.leave'].search([('employee_id','=',rec.employee_id.id)])
+
+            for leave in all_leaves:
+
+                type_of_leave = self.env['hr.leave.type'].search([('id','=',leave.holiday_status_id.id)])
+
+                if type_of_leave.sick_leave is False and leave.id == rec.id:
+                    rec.is_deffered_period = False
+                    return
+
+                #--this also excludes the leave.id that is rec.id  
+                if leave.date_to < rec.date_from and type_of_leave.sick_leave is True:
+                
+                    days_passed = rec.date_from - leave.date_to
+
+                    if days_passed.days <= 5:
+                        rec.is_deffered_period = False
+                        return
+
+    
+    is_deffered_period = fields.Boolean(string="Deffered Day", compute=_compute_karens)
+    
 
     def _timesheet_prepare_line_values(self, index, work_hours_data, day_date, work_hours_count):
         val_list = super(Holidays, self)._timesheet_prepare_line_values(index, work_hours_data, day_date,
@@ -69,38 +87,13 @@ class Holidays(models.Model):
         return super(Holidays, instance)._get_number_of_days(date_from, date_to, employee_id, )
 
 
-    # ~ def _compute_is_deffered:
-        # ~ logg.msg("_compute_is_deffered","green",0,"inne i")
-        # ~ logg(_compute_is_deffered,"g,0,inne i,*10")
-        # ~ start_date - 5
-
-        # ~ leaves = self.env['hr.leave'].search([])
-
-        # ~ if leaves:
-            # ~ pass
-            # ~ logg.msg(leaves,"yellow",0,"inne i")
-
-
-    # ~ is_karens_dag = field.Boolean(compute="_compute_is_deffered")
-
-    # ~ _logger.warning(logg)
-    # ~ _logger.warning(type(logg))
-    # ~ _logger.warning(dir(logg))
-    # ~ _logger.warning(f"{type(logg)}"*100)
-
-    _logger.warning(f"inne i Holidays"*100)
-
-    # ~ logg.msg("HolidaysOK!")
+    def action_fetch_data(self):
+        pass
 
 
 
 class hr_holidays_status(models.Model):
     _inherit = "hr.leave.type"
-
-    _logger.warning(f"inne i hr_holidays_status"*100)
-
-
-    # ~ logg.msg("hr_holidays_status","green",0,"inne i")
 
     limit = fields.Boolean('Allow to Override Limit',
                            help='If you select this check box, the system allows the employees to take more leaves '
@@ -113,8 +106,8 @@ class hr_holidays_status(models.Model):
                                  help='If checked, it will be included in legal leaves calculation')
     holiday_basis = fields.Boolean(string='Holiday Basis', default=False,
                                    help='If checked, this kind of holiday will be included in holiday basis calculation')
-    # ~ sick_leave = fields.Boolean(string='Sick Leave', default=False,
-                                 # ~ help='If checked, it will automatically check if any day will be a deferred period')
+    sick_leave = fields.Boolean(string='Sick Leave', default=False,
+                                 help='If checked, it will automatically check if any day will be a deferred period')
 
     include_weekends = fields.Boolean(string='Include Weekends', default=False,
                                       help='If enabled, weekends are counted in leave days calculation.')
@@ -293,6 +286,19 @@ class hr_payslip(models.Model):
                 days_basis += line.number_of_days
             days += line.number_of_days
         return days_basis / days if days > 0.0 else 0.0
+
+
+    
+    def get_sick_days(self):
+
+        pass
+
+        # ~ days = 0.0
+        # ~ for line in self.worked_days_line_ids:
+            # ~ if self.env['hr.leave.type'].search(
+                    # ~ [('name', '=', line.code), ('holiday_basis', '=', True)]) or line.code == 'WORK100':
+                # ~ days += line.number_of_days
+        # ~ return days
 
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
 
