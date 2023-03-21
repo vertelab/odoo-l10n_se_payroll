@@ -37,8 +37,8 @@ from odoo.addons.resource.models.resource import float_to_time, HOURS_PER_DAY
 
 from importlib.machinery import SourceFileLoader
 
-logger = SourceFileLoader("logger","/usr/share/tommy/logger.py").load_module()
-logg = logger.TerminalOutput
+# logger = SourceFileLoader("logger","/usr/share/tommy/logger.py").load_module()
+# logg = logger.TerminalOutput
 
 # ~ from logger import logger.TerminalOutput.getLogger()
 
