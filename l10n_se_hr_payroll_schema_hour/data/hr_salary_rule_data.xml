@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-    <data noupdate="0">
+    <data noupdate="1">
 <!-- 
         <record id="hr_salary_rule-bl-tim" model="hr.salary.rule">
             <field name="category_id" ref="l10n_se_hr_payroll.hr_salary_rule_category-BRUTTO" />
