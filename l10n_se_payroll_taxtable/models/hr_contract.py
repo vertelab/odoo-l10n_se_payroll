@@ -4,8 +4,8 @@ import json
 import sys
 from odoo import models, fields, api, _
 from odoo.exceptions import UserError
-from datetime import datetime
 from urllib.error import URLError, HTTPError
+from datetime import datetime
 import logging
 _logger = logging.getLogger(__name__)
 
@@ -40,10 +40,15 @@ class HRContract(models.Model):
         if self.has_one_off_tax:
             return wage * self.one_off_tax
 
+
+    def fetch_taxtable_data(self):
+        all_payslips_for_employee = self.env["hr.payslip"].search([('employee_id', '=', self.employee_id.id),])
+
+        for payslip in all_payslips_for_employee:
+            self.fetch_entire_tablenumber_SKV_data(payslip.date_from.year)
+
     
     def l10_sum_columns_taxtable_line(self, payslip, wage):
-
-        
 
         if self.has_tax_equalization and payslip.date_from >= self.tax_equalization_start and payslip.date_from <= self.tax_equalization_end:
             return wage * self.tax_equalization
@@ -61,7 +66,6 @@ class HRContract(models.Model):
         taxtable_name = f"Skattetabell {year}"
         taxtable_id = self.env['payroll.taxtable'].search([ ('name', 'like', f'%{year}%') ])
 
-
         taxtable_line = self.env['payroll.taxtable.line'].search([
             ('payroll_taxable_id.name', 'like', f'%{year}%'),
             ('table_number', '=', self.table_number),
@@ -75,14 +79,21 @@ class HRContract(models.Model):
         return getattr(taxtable_line, self.column_number)
 
 
-
     def do_api_call(self, taxtable_id, taxtable_name, wage, year, payslip):
 
         if not taxtable_id:
             taxtable_id = self.env['payroll.taxtable'].create({ 'name': taxtable_name })
 
-        return self.create_taxtable_line(taxtable_id.id, wage, year, payslip)
+        self.fetch_entire_tablenumber_SKV_data(payslip.date_from.year)
 
+        taxtable_line = self.env['payroll.taxtable.line'].search([
+            ('payroll_taxable_id.name', 'like', f'%{year}%'),
+            ('table_number', '=', self.table_number),
+            ('income_from', '<=', float(wage)),
+            ('income_to', '>=', float(wage)),
+        ])
+
+        return taxtable_line
 
 
     def create_taxtable_line(self, taxtable_id, wage, year, payslip):
@@ -128,26 +139,119 @@ class HRContract(models.Model):
         })
 
 
+    def url_open(self, request_url):
+        
+        try:
+            response = urllib.request.urlopen(request_url)
+        except HTTPError as e:
+            raise Warning(f"felkod: {e.code}, self.table_number: {self.table_number}, reg_ex_income_to: {reg_ex_income_to}, year: {year}, reg_ex_income_from: {reg_ex_income_from}")
+        except URLError as e:
+            raise Warning(f"felkod: {e.reason}, self.table_number: {self.table_number}, reg_ex_income_to: {reg_ex_income_to}, year: {year}, reg_ex_income_from: {reg_ex_income_from}")
+        else:
+            response = response.read()
+            return json.loads(response)
+
+
+    def fetch_entire_tablenumber_SKV_data(self, year):
+
+        url_offset = 0
+        url_limit = 500
+        skip_once = True #--do while, kind of
+        
+        taxtable_url = "https://skatteverket.entryscape.net/rowstore/dataset/88320397-5c32-4c16-ae79-d36d95b17b95?"
+        request_url = f"{taxtable_url}tabellnr={self.table_number}&%C3%A5r={year}&_limit=500&_offset={url_offset}"
+        response = self.url_open(request_url)
+
+        results = response["results"]
+        results_count = response["resultCount"]
+        url_offset += url_limit
+
+        next_search = "check it later"
+
+        taxtable_name = f"Skattetabell {year}"
+        taxtable_id = self.env['payroll.taxtable'].search([ ('name', 'like', f'%{year}%') ])
+
+        if not taxtable_id:
+            taxtable_id = self.env['payroll.taxtable'].create({'name': taxtable_name})
+
+        while next_search is not None:
+
+            if skip_once is False:
+                
+                if results_count - response['offset'] > url_limit:
+                    request_url = f"{taxtable_url}tabellnr={self.table_number}&%C3%A5r={year}&_limit=500&_offset={url_offset}"
+                    response = self.url_open(request_url)
+                    results = response["results"]
+                    url_offset += url_limit
+                else:
+                    next_search = None
+
+            skip_once = False
+
+
+            for item in results:
+                #--changes percentages to currency if necessary
+                if float(item['inkomst fr.o.m.']) > 60000 and float(item['kolumn 3']) < 100:
+                    for index in range(1,8):
+                        if index == 7 and item['kolumn 7'] == "":
+                            item['kolumn 7'] = "0"
+                        else:
+                            #--float during calculations, int to get decimals to .00, and then back to string.
+                            item[f'kolumn {index}'] = str(int(float(item['inkomst fr.o.m.']) * float(item[f'kolumn {index}']) / 100))
+
+                taxtable_line = self.env['payroll.taxtable.line'].search([
+                                                                        ('year', '=', item['år']),
+                                                                        ('number_of_days', '=', item['antal dgr']),
+                                                                        ('table_number', '=', item['tabellnr']),
+                                                                        ('income_from', '=', item['inkomst fr.o.m.']),
+                                                                        ('income_to', '=', item['inkomst t.o.m.']),
+                                                                        ('column1', '=', item['kolumn 1']),
+                                                                        ('column2', '=', item['kolumn 2']),
+                                                                        ('column3', '=', item['kolumn 3']),
+                                                                        ('column4', '=', item['kolumn 4']),
+                                                                        ('column5', '=', item['kolumn 5']),
+                                                                        ('column6', '=', item['kolumn 6']),
+                                                                        ('column7', '=', item['kolumn 7']),
+                                                                        ])
+
+                if not taxtable_line:
+
+                    self.env['payroll.taxtable.line'].create({
+
+                                                            'year': item['år'],
+                                                            'number_of_days': item['antal dgr'],
+                                                            'table_number': item['tabellnr'],
+                                                            'income_from': item['inkomst fr.o.m.'],
+                                                            'income_to': item['inkomst t.o.m.'],
+                                                            'column1': item['kolumn 1'],
+                                                            'column2': item['kolumn 2'],
+                                                            'column3': item['kolumn 3'],
+                                                            'column4': item['kolumn 4'],
+                                                            'column5': item['kolumn 5'],
+                                                            'column6': item['kolumn 6'],
+                                                            'column7': item['kolumn 7'],
+                                                            'payroll_taxable_id': taxtable_id.id,
+                                                            })
+
 
     def fetch_SKV_data(self, wage, year):
 
             reg_ex_income_to, readable_income_to = self.build_regex(wage, True)
             reg_ex_income_from, readable_income_from = self.build_regex(wage, False)
 
-            taxtable_url = "https://skattevfeaferket.entryscape.net/rowstore/dataset/88320397-5c32-4c16-ae79-d36d95b17b95?"
+            taxtable_url = "https://skatteverket.entryscape.net/rowstore/dataset/88320397-5c32-4c16-ae79-d36d95b17b95?"
             request_url = f"{taxtable_url}tabellnr={self.table_number}&inkomst%20t.o.m.={reg_ex_income_to}&%C3%A5r={year}&inkomst%20fr.o.m.={reg_ex_income_from}&_limit=500&_offset=0"
 
             try:
                 response = urllib.request.urlopen(request_url)
             except HTTPError as e:
-                raise Warning(f"felkod: {e.code}, self.table_number: {self.table_number}, reg_ex_income_to: {readable_income_to}, year: {year}, reg_ex_income_from: {readable_income_from}")
+                raise Warning(f"felkod: {e.code}, self.table_number: {self.table_number}, reg_ex_income_to: {reg_ex_income_to}, year: {year}, reg_ex_income_from: {reg_ex_income_from}")
             except URLError as e:
-                raise Warning(f"felkod: {e.reason}, self.table_number: {self.table_number}, reg_ex_income_to: {readable_income_to}, year: {year}, reg_ex_income_from: {readable_income_from}")
+                raise Warning(f"felkod: {e.reason}, self.table_number: {self.table_number}, reg_ex_income_to: {reg_ex_income_to}, year: {year}, reg_ex_income_from: {reg_ex_income_from}")
             else:
                 response = response.read()
 
             json_response = json.loads(response)
-            raise Warning(json_response)
 
             results = json_response["results"]
 
@@ -203,7 +307,6 @@ class HRContract(models.Model):
 
 
             return pay_down, pay_up, columns
-
 
 
     def build_regex(self, wage, build_to):
@@ -303,7 +406,6 @@ class HRContract(models.Model):
 
 
         return urllib.parse.quote(reg_ex_build), reg_ex_build
-
 
 
     def add_column_data(self, item):

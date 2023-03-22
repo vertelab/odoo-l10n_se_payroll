@@ -2,7 +2,7 @@ import urllib.request
 import json
 from odoo import models, fields, api, _
 from datetime import datetime
-    
+from odoo.exceptions import UserError    
 
 class PayrollTaxableWizard(models.Model):
     _name = "payroll.taxtable.wizard"
