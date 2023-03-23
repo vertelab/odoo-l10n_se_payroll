@@ -44,31 +44,24 @@ DummyAttendance = namedtuple('DummyAttendance', 'hour_from, hour_to, dayofweek, 
 class Holidays(models.Model):
     _inherit = "hr.leave"
 
-    def _compute_karens(self):
-        for rec in self:
-
-            rec.is_deffered_period = True
-
-            all_leaves = self.env['hr.leave'].search([('employee_id','=',rec.employee_id.id)])
-
-            for leave in all_leaves:
-
-                type_of_leave = self.env['hr.leave.type'].search([('id','=',leave.holiday_status_id.id)])
-
-                if type_of_leave.sick_leave is False and leave.id == rec.id:
-                    rec.is_deffered_period = False
-                    return
-
-                #--this also excludes the leave.id that is rec.id  
-                if leave.date_to < rec.date_from and type_of_leave.sick_leave is True:
-                
-                    days_passed = rec.date_from - leave.date_to
-
-                    if days_passed.days <= 5:
-                        rec.is_deffered_period = False
-                        return
 
     
+    def _compute_karens(self):
+         for leave_request in self:
+            if leave_request.holiday_status_id.sick_leave:    
+                leave = self.env['hr.leave'].search([
+                 ('employee_id','=',leave_request.employee_id.id),
+                 ('date_to', '<', leave_request.date_from)],
+                 order='date_to desc', limit=1)
+      
+                if not leave or (leave_request.date_from - leave[0].date_to).days > 5:
+                    leave_request.is_deffered_period = True
+                else:
+                    leave_request.is_deffered_period = False
+            else:
+                leave_request.is_deffered_period = False
+
+        
     is_deffered_period = fields.Boolean(string="Deffered Day", compute=_compute_karens)
     
 
