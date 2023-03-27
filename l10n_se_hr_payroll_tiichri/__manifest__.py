@@ -51,7 +51,7 @@ We create test data to seven employees, to use while developing our own code. To
         'data/data_07_karin.xml',
         'data/data_10_aronssons_montage.xml',
     ],
-    'auto_install': True,
+    'auto_install': False,
     'installable': True,
 }
 
