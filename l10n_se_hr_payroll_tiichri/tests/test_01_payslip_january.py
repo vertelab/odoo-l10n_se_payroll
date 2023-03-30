@@ -9,7 +9,7 @@ from datetime import date, datetime, time
 from odoo import fields
 from odoo.tests import common, Form
 import logging
-
+   
 _logger = logging.getLogger(__name__)
 
 # Test with somthing like this
@@ -181,6 +181,7 @@ class TestPayslipJanuary(common.SavepointCase):
             'date_start': cls.date_start,
             'date_stop': cls.date_stop,
         })
+        
         # ~ Leave of Absence less than 5 days = pem
         # ~ Leave of Absence more than 5 days = pem_5
         # Asse Aronsson
@@ -232,39 +233,55 @@ class TestPayslipJanuary(common.SavepointCase):
 
 
         # # Gustav Groth
-        # cls.employee_gustav = cls.env.ref('l10n_se_hr_payroll_tiichri.hr_gustav_employee')  # gustav_employee
-        # cls.gustav_kar = cls._create_leave(cls.employee_gustav.id, "sjk_kar" ,"2022-01-07","2022-01-07",1)
-        # cls.gustav_kar = cls._create_leave(cls.employee_gustav.id, "sjk_214" ,"2022-01-10","2022-01-14",5)
-        # cls.gustav_kar = cls._create_leave(cls.employee_gustav.id, "sjk_214" ,"2022-01-17","2022-01-21",5)
-        # cls.gustav_kar = cls._create_leave(cls.employee_gustav.id, "sjk_214" ,"2022-01-24","2022-01-25",2)
+        cls.employee_gustav = cls.env.ref('l10n_se_hr_payroll_tiichri.hr_gustav_employee')  # gustav_employee
+        cls.gustav_1 = cls._create_leave(cls.employee_gustav, "sjk_kar" ,"2022-01-07","2022-01-07",1)
+        cls.gustav_2 = cls._create_leave(cls.employee_gustav, "sjk_214" ,"2022-01-10","2022-01-14",5)
+        cls.gustav_3 = cls._create_leave(cls.employee_gustav, "sjk_214" ,"2022-01-17","2022-01-21",5)
+        cls.gustav_4 = cls._create_leave(cls.employee_gustav, "sjk_214" ,"2022-01-24","2022-01-25",2)
         
         # # Helmer Henriksson
-        # cls.employee_helmer = cls.env.ref('l10n_se_hr_payroll_tiichri.hr_helmer_employee')  # helmer_employee
-        # cls.helmer_kar = cls._create_leave(cls.employee_helmer.id, "sjk_kar" ,"2022-01-04","2022-01-04",1)
-        # cls.helmer_kar = cls._create_leave(cls.employee_helmer.id, "sjk_214" ,"2022-01-05","2022-01-05",1)
-        # cls.helmer_kar = cls._create_leave(cls.employee_helmer.id, "sjk_kar" ,"2022-01-12","2022-01-12",1)
-        # cls.helmer_kar = cls._create_leave(cls.employee_helmer.id, "sjk_214" ,"2022-01-13","2022-01-14",2)
+        cls.employee_helmer = cls.env.ref('l10n_se_hr_payroll_tiichri.hr_helmer_employee')  # helmer_employee
+        cls.helmer_1 = cls._create_leave(cls.employee_helmer, "sjk_kar" ,"2022-01-04","2022-01-04",1)
+        cls.helmer_2 = cls._create_leave(cls.employee_helmer, "sjk_214" ,"2022-01-05","2022-01-05",1)
+        cls.helmer_3 = cls._create_leave(cls.employee_helmer, "sjk_kar" ,"2022-01-12","2022-01-12",1)
+        cls.helmer_4 = cls._create_leave(cls.employee_helmer, "sjk_214" ,"2022-01-13","2022-01-14",2)
 
         # Karin Kullberg
         # Anställning per timme, påbörjad 2022-06-01
 
+    ## Test 1
     def test_asse(self):   
         payslip_form = self._create_payslip(self.employee_asse, self.employee_asse.contract_id, [
                 {'code': 'kvaltim','amount': 4.0},
             ])
 
+        _logger.warning(f"--------------")
+
+        for line in payslip_form.input_line_ids:
+            if line.amount != 0.0:
+                _logger.warning(f"{line.name=} {line.amount_qty=} {line.amount=}")
+
+        _logger.warning(f"--------------") 
+
         for worked_day in payslip_form.worked_days_line_ids:
             _logger.warning(f"{worked_day.name=} {worked_day.number_of_hours=}")
+
+        _logger.warning(f"--------------") 
 
         for detail in payslip_form.dynamic_filtered_payslip_lines:
             _logger.warning(f"line id from input: {detail.name} {detail.total}")
             if detail.code == 'net':
                 self.assertAlmostEqual(detail.total, 27734.0)
 
+              
+    ## Test 4
     def test_frans(self):
         payslip_form = self._create_payslip(self.employee_frans, self.employee_frans.contract_id, [
                 {'code': 'kvaltim','amount': 3.0},
+                {'code': 'mertidtim','amount': 2.0},
             ])
+
+        _logger.warning(f"--------------")
 
         for line in payslip_form.input_line_ids:
             if line.amount != 0.0:
@@ -282,11 +299,14 @@ class TestPayslipJanuary(common.SavepointCase):
             if detail.code == 'net':
                 self.assertAlmostEqual(detail.total, 23008.0)   
 
+    ## Test 3
     def test_doris(self):
         payslip_form = self._create_payslip(self.employee_doris, self.employee_doris.contract_id, [
                 {'code': 'kvaltim','amount': 2.0},
                 {'code': 'mertidtim','amount': 8.0},
             ])
+
+        _logger.warning(f"--------------")
 
         for line in payslip_form.input_line_ids:
             if line.amount != 0.0:
@@ -304,12 +324,14 @@ class TestPayslipJanuary(common.SavepointCase):
             if detail.code == 'net':
                 self.assertAlmostEqual(detail.total, 19538.0)   
 
-
+    ## Test 2
     def test_camilla(self):
-        payslip_form = self._create_payslip(self.employee_doris, self.employee_doris.contract_id, [
+        payslip_form = self._create_payslip(self.employee_camilla, self.employee_camilla.contract_id, [
                 {'code': 'kvaltim','amount': 2.0},
                 {'code': 'mertidtim','amount': 8.0},
             ])
+
+        _logger.warning(f"--------------")
 
         for line in payslip_form.input_line_ids:
             if line.amount != 0.0:
@@ -326,4 +348,57 @@ class TestPayslipJanuary(common.SavepointCase):
             _logger.warning(f"line id from input: {detail.name} {detail.total}")
             if detail.code == 'net':
                 self.assertAlmostEqual(detail.total, 15524.0)   
+
+    ## Test 5
+    def test_gustav(self):
+        payslip_form = self._create_payslip(self.employee_gustav, self.employee_gustav.contract_id, [
+                {'code': 'kvaltim','amount': 4.0},
+            ])
+
+        _logger.warning(f"--------------")
+
+        for line in payslip_form.input_line_ids:
+            if line.amount != 0.0:
+                _logger.warning(f"{line.name=} {line.amount_qty=} {line.amount=}")
+
+        _logger.warning(f"--------------")
+
+        for worked_day in payslip_form.worked_days_line_ids:
+            _logger.warning(f"{worked_day.name=} {worked_day.number_of_hours=}")
+
+        _logger.warning(f"--------------")    
+
+        for detail in payslip_form.dynamic_filtered_payslip_lines:
+            _logger.warning(f"line id from input: {detail.name} {detail.total}")
+            if detail.code == 'net':
+                self.assertAlmostEqual(detail.total, 20540.0)   
+
+
+
+    ## Test 6
+    def test_helmer(self):
+        payslip_form = self._create_payslip(self.employee_helmer, self.employee_helmer.contract_id, [
+                {'code': 'kvaltim','amount': 4.0},
+            ])
+
+        _logger.warning(f"--------------")
+
+        for line in payslip_form.input_line_ids:
+            if line.amount != 0.0:
+                _logger.warning(f"{line.name=} {line.amount_qty=} {line.amount=}")
+
+        _logger.warning(f"--------------")
+
+        for worked_day in payslip_form.worked_days_line_ids:
+            _logger.warning(f"{worked_day.name=} {worked_day.number_of_hours=}")
+
+        _logger.warning(f"--------------")    
+
+        for detail in payslip_form.dynamic_filtered_payslip_lines:
+            _logger.warning(f"line id from input: {detail.name} {detail.total}")
+            if detail.code == 'net':
+                self.assertAlmostEqual(detail.total, 20104.0)
+
+
+
 
