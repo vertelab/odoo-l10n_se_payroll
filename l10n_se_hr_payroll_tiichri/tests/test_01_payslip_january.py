@@ -186,65 +186,55 @@ class TestPayslipJanuary(common.SavepointCase):
         # ~ Leave of Absence more than 5 days = pem_5
         # Asse Aronsson
         cls.employee_asse = cls.env.ref('l10n_se_hr_payroll_tiichri.hr_asse_employee')
-        cls.asse_1 = cls._create_leave(cls.employee_asse, "sjk_kar" ,"2022-01-07","2022-01-07",1)
-        cls.asse_2 = cls._create_leave(cls.employee_asse, "sjk_kar" ,"2022-01-12","2022-01-12",1)
-        cls.asse_3 = cls._create_leave(cls.employee_asse, "sjk_214" ,"2022-01-13","2022-01-13",1)
-        cls.asse_4 = cls._create_leave(cls.employee_asse, "sjk_214" ,"2022-01-24","2022-01-24",1)
-        cls.asse_5 = cls._create_leave(cls.employee_asse, "vab" ,"2022-01-25","2022-01-25",1)
-        cls.asse_6 = cls._create_leave(cls.employee_asse, "vab", "2022-01-26", "2022-01-26",1)
-        # ~ cls.asse_7 = cls._create_leave(cls.employee_asse, "Leave of Absence less than 5 days", "2022-01-03", "2022-01-03",1)
-        # ~ cls.asse_8 = cls._create_leave(cls.employee_asse, "Leave of Absence less than 5 days", "2022-01-14", "2022-01-14",1)
-        # ~ cls.asse_9 = cls._create_leave(cls.employee_asse, "Leave of Absence less than 5 days", "2022-01-17", "2022-01-17",1)
-        # ~ cls.asse_10 = cls._create_leave(cls.employee_asse, "Leave of Absence less than 5 days", "2022-01-18", "2022-01-18",1)
-        # ~ cls.asse_11 = cls._create_leave(cls.employee_asse, "Leave of Absence less than 5 days", "2022-01-19", "2022-01-19",1)
-        # ~ cls.asse_12 = cls._create_leave(cls.employee_asse, "Leave of Absence more than 5 days", "2022-01-20", "2022-01-20",1)
-        cls.asse_7 = cls._create_leave(cls.employee_asse, "pem", "2022-01-03", "2022-01-03",1)
-        cls.asse_8 = cls._create_leave(cls.employee_asse, "pem", "2022-01-14", "2022-01-14",1)
-        cls.asse_9 = cls._create_leave(cls.employee_asse, "pem", "2022-01-17", "2022-01-17",1)
-        cls.asse_10 = cls._create_leave(cls.employee_asse, "pem", "2022-01-18", "2022-01-18",1)
-        cls.asse_11 = cls._create_leave(cls.employee_asse, "pem", "2022-01-19", "2022-01-19",1)
-        cls.asse_12 = cls._create_leave(cls.employee_asse, "pem_5", "2022-01-20", "2022-01-20",1)
+        cls.asse_101 = cls._create_leave(cls.employee_asse, "sjk_kar" ,"2022-01-07","2022-01-07",1)
+        cls.asse_102 = cls._create_leave(cls.employee_asse, "sjk_kar" ,"2022-01-12","2022-01-12",1)
+        cls.asse_103 = cls._create_leave(cls.employee_asse, "sjk_214" ,"2022-01-13","2022-01-13",1)
+        cls.asse_104 = cls._create_leave(cls.employee_asse, "sjk_214" ,"2022-01-24","2022-01-24",1)
+        cls.asse_105 = cls._create_leave(cls.employee_asse, "vab" ,"2022-01-25","2022-01-25",1)
+        cls.asse_106 = cls._create_leave(cls.employee_asse, "vab", "2022-01-26", "2022-01-26",1)
+        cls.asse_107 = cls._create_leave(cls.employee_asse, "pem", "2022-01-03", "2022-01-03",1)
+        cls.asse_108 = cls._create_leave(cls.employee_asse, "pem", "2022-01-14", "2022-01-14",1)
+        cls.asse_109 = cls._create_leave(cls.employee_asse, "pem", "2022-01-17", "2022-01-17",1)
+        cls.asse_110 = cls._create_leave(cls.employee_asse, "pem", "2022-01-18", "2022-01-18",1)
+        cls.asse_111 = cls._create_leave(cls.employee_asse, "pem", "2022-01-19", "2022-01-19",1)
+        cls.asse_112 = cls._create_leave(cls.employee_asse, "pem_5", "2022-01-20", "2022-01-20",1)
             
         # Frans Filipsson
         cls.employee_frans = cls.env.ref('l10n_se_hr_payroll_tiichri.hr_frans_employee')  # frans_employee
-        cls.frans_1 = cls._create_leave(cls.employee_frans, "sjk_kar" ,"2022-01-07","2022-01-07",1)
-        cls.frans_2 = cls._create_leave(cls.employee_frans, "sjk_kar" ,"2022-01-10","2022-01-10",1)
-        cls.frans_3 = cls._create_leave(cls.employee_frans, "sjk_214" ,"2022-01-11","2022-01-12",2)
-        # ~ cls.frans_4 = cls._create_leave(cls.employee_frans, "Leave of Absence less than 5 days" ,"2022-01-20","2022-01-21",2)
-        # ~ cls.frans_5 = cls._create_leave(cls.employee_frans, "Leave of Absence less than 5 days" ,"2022-01-24","2022-01-26",3)
-        # ~ cls.frans_6 = cls._create_leave(cls.employee_frans, "Leave of Absence more than 5 days" ,"2022-01-27","2022-01-27",1)
-        cls.frans_4 = cls._create_leave(cls.employee_frans, "pem" ,"2022-01-20","2022-01-21",2)
-        cls.frans_5 = cls._create_leave(cls.employee_frans, "pem" ,"2022-01-24","2022-01-26",3)
-        cls.frans_6 = cls._create_leave(cls.employee_frans, "pem_5" ,"2022-01-27","2022-01-27",1)
+        cls.frans_101 = cls._create_leave(cls.employee_frans, "sjk_kar" ,"2022-01-07","2022-01-07",1)
+        cls.frans_102 = cls._create_leave(cls.employee_frans, "sjk_kar" ,"2022-01-10","2022-01-10",1)
+        cls.frans_103 = cls._create_leave(cls.employee_frans, "sjk_214" ,"2022-01-11","2022-01-12",2)
+        cls.frans_104 = cls._create_leave(cls.employee_frans, "pem" ,"2022-01-20","2022-01-21",2)
+        cls.frans_105 = cls._create_leave(cls.employee_frans, "pem" ,"2022-01-24","2022-01-26",3)
+        cls.frans_106 = cls._create_leave(cls.employee_frans, "pem_5" ,"2022-01-27","2022-01-27",1)
 
         # Doris Dahlin
         cls.employee_doris = cls.env.ref('l10n_se_hr_payroll_tiichri.hr_doris_employee')  # doris_employee
-        cls.doris_1 = cls._create_leave(cls.employee_doris, "sjk_kar" ,"2022-01-04","2022-01-04",1)
-        cls.doris_2 = cls._create_leave(cls.employee_doris, "sjk_214" ,"2022-01-05","2022-01-05",1)
-        cls.doris_3 = cls._create_leave(cls.employee_doris, "sjk_kar" ,"2022-01-10","2022-01-10",1)
-        cls.doris_4 = cls._create_leave(cls.employee_doris, "sjk_214" ,"2022-01-11","2022-01-12",2)
-        # ~ cls.doris_5 = cls._create_leave(cls.employee_doris, "Leave of Absence less than 5 days" ,"2022-01-13","2022-01-13",1)
-        cls.doris_5 = cls._create_leave(cls.employee_doris, "pem" ,"2022-01-13","2022-01-13",1)
+        cls.doris_101 = cls._create_leave(cls.employee_doris, "sjk_kar" ,"2022-01-04","2022-01-04",1)
+        cls.doris_102 = cls._create_leave(cls.employee_doris, "sjk_214" ,"2022-01-05","2022-01-05",1)
+        cls.doris_103 = cls._create_leave(cls.employee_doris, "sjk_kar" ,"2022-01-10","2022-01-10",1)
+        cls.doris_104 = cls._create_leave(cls.employee_doris, "sjk_214" ,"2022-01-11","2022-01-12",2)
+        cls.doris_105 = cls._create_leave(cls.employee_doris, "pem" ,"2022-01-13","2022-01-13",1)
 
         # Camilla Cobolt -- Låt stå! :-) Inte sjuk i januari
         cls.employee_camilla = cls.env.ref('l10n_se_hr_payroll_tiichri.hr_camilla_employee')  # camilla_employee
-        cls.camilla_1 = cls._create_leave(cls.employee_camilla, "vab" ,"2022-01-14","2022-01-14",1)
-        cls.camilla_2 = cls._create_leave(cls.employee_camilla, "vab" ,"2022-01-17","2022-01-17",1)
+        cls.camilla_101 = cls._create_leave(cls.employee_camilla, "vab" ,"2022-01-14","2022-01-14",1)
+        cls.camilla_102 = cls._create_leave(cls.employee_camilla, "vab" ,"2022-01-17","2022-01-17",1)
 
 
         # # Gustav Groth
         cls.employee_gustav = cls.env.ref('l10n_se_hr_payroll_tiichri.hr_gustav_employee')  # gustav_employee
-        cls.gustav_1 = cls._create_leave(cls.employee_gustav, "sjk_kar" ,"2022-01-07","2022-01-07",1)
-        cls.gustav_2 = cls._create_leave(cls.employee_gustav, "sjk_214" ,"2022-01-10","2022-01-14",5)
-        cls.gustav_3 = cls._create_leave(cls.employee_gustav, "sjk_214" ,"2022-01-17","2022-01-21",5)
-        cls.gustav_4 = cls._create_leave(cls.employee_gustav, "sjk_214" ,"2022-01-24","2022-01-25",2)
+        cls.gustav_101 = cls._create_leave(cls.employee_gustav, "sjk_kar" ,"2022-01-07","2022-01-07",1)
+        cls.gustav_102 = cls._create_leave(cls.employee_gustav, "sjk_214" ,"2022-01-10","2022-01-14",5)
+        cls.gustav_103 = cls._create_leave(cls.employee_gustav, "sjk_214" ,"2022-01-17","2022-01-21",5)
+        cls.gustav_104 = cls._create_leave(cls.employee_gustav, "sjk_214" ,"2022-01-24","2022-01-25",2)
         
         # # Helmer Henriksson
         cls.employee_helmer = cls.env.ref('l10n_se_hr_payroll_tiichri.hr_helmer_employee')  # helmer_employee
-        cls.helmer_1 = cls._create_leave(cls.employee_helmer, "sjk_kar" ,"2022-01-04","2022-01-04",1)
-        cls.helmer_2 = cls._create_leave(cls.employee_helmer, "sjk_214" ,"2022-01-05","2022-01-05",1)
-        cls.helmer_3 = cls._create_leave(cls.employee_helmer, "sjk_kar" ,"2022-01-12","2022-01-12",1)
-        cls.helmer_4 = cls._create_leave(cls.employee_helmer, "sjk_214" ,"2022-01-13","2022-01-14",2)
+        cls.helmer_101 = cls._create_leave(cls.employee_helmer, "sjk_kar" ,"2022-01-04","2022-01-04",1)
+        cls.helmer_102 = cls._create_leave(cls.employee_helmer, "sjk_214" ,"2022-01-05","2022-01-05",1)
+        cls.helmer_103 = cls._create_leave(cls.employee_helmer, "sjk_kar" ,"2022-01-12","2022-01-12",1)
+        cls.helmer_104 = cls._create_leave(cls.employee_helmer, "sjk_214" ,"2022-01-13","2022-01-14",2)
 
         # Karin Kullberg
         # Anställning per timme, påbörjad 2022-06-01

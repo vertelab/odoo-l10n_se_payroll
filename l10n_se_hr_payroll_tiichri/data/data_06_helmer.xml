@@ -27,7 +27,7 @@
         </record>
         <record id="contract_helmer" model="hr.contract">
             <field name="name">Helmer Henriksson Avtal</field>
-            <field name="wage">0</field>
+            <field name="wage">1</field>
             <field name="type_id" ref="hr_contract_type" />
             <field name="employee_id" ref="hr_helmer_employee" />
             <field name="schedule_pay" eval="'monthly'" />
