@@ -9,91 +9,20 @@ import datetime
 
 _logger = logging.getLogger(__name__)
 
-
-class UserPayslipLinePayroll(models.TransientModel):
-    _name = "user.payslip.line.payroll"
-    # _inherit = "hr.salary.rule"
-    _description = "Payslip Line"
-
-
-#     _order = "contract_id, sequence"
-
-#     slip_id = fields.Many2one(
-#         "hr.payslip", string="Pay Slip", required=True, ondelete="cascade"
-#     )
-# salary_rule_id = fields.Many2one("hr.salary.rule", string="Rule", required=True)
-#     employee_id = fields.Many2one("hr.employee", string="Employee", required=True)
-#     contract_id = fields.Many2one(
-#         "hr.contract", string="Contract", required=True, index=True
-#     )
-#     rate = fields.Float(string="Rate (%)", digits="Payroll Rate", default=100.0)
-#     amount = fields.Float(digits="Payroll")
-#     quantity = fields.Float(digits="Payroll", default=1.0)
-#     total = fields.Float(
-#         compute="_compute_total",
-#         string="Total",
-#         digits="Payroll",
-#         store=True,
-#     )
-
-#     @api.depends("quantity", "amount", "rate")
-#     def _compute_total(self):
-#         for line in self:
-#             line.total = float(line.quantity) * line.amount * line.rate / 100
-
-#     @api.model_create_multi
-#     def create(self, vals_list):
-#         for values in vals_list:
-#             if "employee_id" not in values or "contract_id" not in values:
-#                 payslip = self.env["hr.payslip"].browse(values.get("slip_id"))
-#                 values["employee_id"] = (
-#                     values.get("employee_id") or payslip.employee_id.id
-#                 )
-#                 values["contract_id"] = (
-#                     values.get("contract_id")
-#                     or payslip.contract_id
-#                     and payslip.contract_id.id
-#                 )
-#                 if not values["contract_id"]:
-#                     raise UserError(
-#                         _("You must set a contract to create a payslip line.")
-#                     )
-#         return super(HrPayslipLine, self).create(vals_list)
-
-# payslip_character = fields.Selection([
-#     ("minus", "Minus"),
-#     ("parentheses", "Parentheses"),
-# ],default=False)
-
-# def character_on_payslip(self):
-#     for rule in self:
-#         if rule.payslip_character == "minus":
-#             "-" + str()
-#         elif rule.payslip_character == "parentheses":
-#             "("+ str() +")"
-
-# class HRContract(models.TransientModel):
-#     _name = 'hr.contract'
-
-#     table_number = fields.Integer(string="Tax Table")
-#     is_church_deductible = fields.Boolean(string="Church Deductible")
-#     # ~ column_number = fields.Many2one('ir.model.fields', domain=[
-#     #     ~ ('model_id.model', '=', 'payroll.taxtable.line'), ('ttype', '=', 'float')
-#     # ~ ])
-#     column_number = fields.Selection([ ('column1', "Column 1"),('column2', "Column 2"),('column3', "Column 3"),('column4', "Column 4"),('column5', "Column 5"),('column6', "Column 6")],'Tax Column')
-#     has_tax_equalization = fields.Boolean(string="Tax Equalization")
-#     tax_equalization = fields.Float(string="Tax Equalization")
-#     tax_equalization_start = fields.Date(string="Start")
-#     tax_equalization_end = fields.Date(string="End")
-
-class HrPayslipline(models.TransientModel):
+class UserPayslipLine(models.TransientModel):
     _name = "user.payslip.line"
     _description = "User Payslip Line"
-    salary_rule_id = fields.Many2one("user.salary.rule", string="Rule", required=True)
+    # ~ salary_rule_id = fields.Many2one("user.salary.rule", string="Rule", required=True)
+    salary_rule = fields.Char(string='Salary Rule', size=10, trim=True, )
     code = fields.Char(string="Code")
     name = fields.Char(string="Name")
     quantity = fields.Char(string="Quantity")
     category_id = fields.Many2one("user.salary.rule.category")
+    category = fields.Char(string="Category")
+    amount = fields.Float(string='Amount')
+    sequence = fields.Integer(string='Sequence')
+    
+    
     user_payslip_id = fields.Many2one(
         "user.payslip"
     )
@@ -104,20 +33,20 @@ class HrPayslipline(models.TransientModel):
     rate = fields.Float(string="rate")
 
 
-class HrSaleryRule(models.TransientModel):
+class UserSalaryRule(models.TransientModel):
     _name = "user.salary.rule"
     _description = "User Salary Rule"
     appears_on_payslip = fields.Boolean(string="Appears on Payslip")
     salary_art = fields.Char(string="Salary art")
 
 
-class HrSaleryCategory(models.TransientModel):
+class UserSalaryCategory(models.TransientModel):
     _name = "user.salary.rule.category"
     _description = "User Salary Rule Category"
     code = fields.Char(string="Code")
 
 
-class HrContract(models.TransientModel):
+class UserContract(models.TransientModel):
     _name = "user.contract"
     _description = "User Contract"
     wage_tax_base = fields.Float(string="Lönunderlag", digits='Payroll',
@@ -147,13 +76,13 @@ class HrContract(models.TransientModel):
     # taxable_lines = fields.One2many("payroll.taxtable.line", "payroll_taxable_id", string="Taxable Lines")
 
 
-class HrCalender(models.TransientModel):
+class UserCalender(models.TransientModel):
     _name = "user.calendar"
     _description = "User Calendar"
     name = fields.Char(string="Name")
 
 
-class HrWorkdays(models.TransientModel):
+class UserWorkdays(models.TransientModel):
     _name = "user.workdays"
     _description = "User Workdays"
     name = fields.Char(string="Name")
@@ -161,7 +90,7 @@ class HrWorkdays(models.TransientModel):
     number_of_hours = fields.Float(string="Number of hours")
 
 
-class HrPayslipWorkedDays(models.TransientModel):
+class UserPayslipWorkedDays(models.TransientModel):
     _name = "user.payslip.worked_days"
     _description = "Payslip Worked Days"
     _order = "payslip_id, sequence"
@@ -184,7 +113,7 @@ class HrPayslipWorkedDays(models.TransientModel):
     )
 
 
-class HrLeave(models.TransientModel):
+class UserLeave(models.TransientModel):
     _name = "user.leave"
     _description = "User Leave"
     date_from = fields.Datetime()
@@ -198,13 +127,13 @@ class HrLeave(models.TransientModel):
     )
 
 
-class HrHolidayStatus(models.TransientModel):
+class UserHolidayStatus(models.TransientModel):
     _name = "user.holiday.status"
     _description = "User Holiday Status"
     name = fields.Char(string="name")
 
 
-class HrPayslip(models.TransientModel):
+class UserPayslip(models.TransientModel):
     _name = "user.payslip"
     _description = "User Payslip"
 
@@ -312,8 +241,6 @@ class HrPayslip(models.TransientModel):
     period_id = fields.Many2one(comodel_name='account.period', string="Period",
                                 readonly=True, )
 
-    character_id = fields.Many2one(comodel_name='user.payslip.line.payroll')
-
     # user_payslip_id2 = fields.Many2one(
     #     "user.payslip"
     # )
@@ -331,9 +258,12 @@ class HrPayslip(models.TransientModel):
                                                                                                               'amount': v.amount,
                                                                                                               'total': v.total,
                                                                                                               'amount_percentage': v.amount_percentage,
-                                                                                                              # 'payslip_character':v.character_id.payslip_character,
                                                                                                               })
-        return lines
+        if len(lines) > 0:
+            return lines
+        else:
+            return [{'amount':0,'amount_percentage': 0.0,'total': 0}]
+        
 
     @api.model
     def get_slip_line_total(self, code):
@@ -433,11 +363,11 @@ class ResUsers(models.Model):
                     'payslip_id': slip.id,
                 })
 
-                # hr_contract_id = self.env['hr.contract'].create({
-                #     'column_number':slip.column_number,
-                #     'table_number':slip.table_number
-                # })
-                # user_payslip.write({"hr_contract_ids":[(4,hr_contract_id,0)]})
+                # ~ # hr_contract_id = self.env['hr.contract'].create({
+                # ~ #     'column_number':slip.column_number,
+                # ~ #     'table_number':slip.table_number
+                # ~ # })
+                # ~ # user_payslip.write({"hr_contract_ids":[(4,hr_contract_id,0)]})
 
                 holiday_ids_ids = []
                 for holiday_id in slip.holiday_ids:
@@ -471,23 +401,26 @@ class ResUsers(models.Model):
 
                     user_payslip.contract_id = user_contract
 
-                for line in slip.line_ids:
+                for line in slip.line_ids.filtered(lambda l: l.appears_on_payslip == True):
                     # Create user line
-                    salary_category = self.env["user.salary.rule.category"].create({
-                        'code': line.category_id.code if line.category_id else False
-                    })
-                    salary_rule_id = self.env['user.salary.rule'].create({
-                        'appears_on_payslip': line.appears_on_payslip,
-                        'salary_art': line.salary_rule_id.salary_art if line.salary_rule_id else False})
-                    user_line = self.env["user.payslip.line"].create(
-                        {'code': line.code,
-                         'name': line.name,
-                         'quantity': line.quantity,
-                         'category_id': salary_category.id,
-                         'salary_rule_id': salary_rule_id.id,
+                    # ~ salary_category = self.env["user.salary.rule.category"].create({
+                        # ~ 'code': line.category_id.code if line.category_id else False
+                    # ~ })
+                    # ~ salary_rule_id = self.env['user.salary.rule'].create({
+                        # ~ 'appears_on_payslip': line.appears_on_payslip,
+                        # ~ 'salary_art': line.salary_rule_id.salary_art if line.salary_rule_id else False})
+                    user_line = self.env["user.payslip.line"].create({
+                        'code': line.code,
+                        'name': line.name,
+                        'quantity': line.quantity,
+                         # ~ 'category_id': salary_category.id,
+                         # ~ 'salary_rule_id': salary_rule_id.id,
+                         'category': line.category_id.name,
                          'rate': line.rate,
+                         'amount': line.amount,
                          'total': line.total,
-                         })
+                         'sequence': line.sequence,
+                    })
                     user_payslip.write({"line_ids": [(4, user_line.id, 0)]})
 
 

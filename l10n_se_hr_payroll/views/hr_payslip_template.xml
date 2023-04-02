@@ -5,7 +5,7 @@
         <t t-foreach="docs" t-as="o">
           <t t-call="report.external_layout">
             <div class="page">
-              <h1>Lönespecifikation</h1>
+              <h1>Lönespecifikation hr_payslip_template</h1>
               <table class="table table-bordered table-responsive">
                 <tr>
                   <td rowspan="2" width="20%">

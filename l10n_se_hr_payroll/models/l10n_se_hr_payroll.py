@@ -258,7 +258,7 @@ class hr_payslip(models.Model):
 
         if not self.period_id:
             self.period_id = self.period_id.now()
-            raise UserError('pelle %s' % self.env['account.period'].find())
+            # ~ raise UserError('pelle %s' % self.env['account.period'].find())
 
         self.date_from = self.period_id.date_start - dateutil.relativedelta.relativedelta(months=1)
         self.date_to = self.period_id.date_stop - dateutil.relativedelta.relativedelta(months=1)

@@ -305,7 +305,7 @@
                                 <tbody>
                                     <t t-foreach="o.line_ids" t-as="pa">                                    
                                         <t t-if="not int(o.get_slip_line(pa.code)[0]['amount']) == 0">
-                                        <t t-if="pa.salary_rule_id.appears_on_payslip">
+                                       
                                             <tr style="background: #eee;">
                                                 <!-- <td style="border-right: 1px solid black;">
                                                     <span>
@@ -350,7 +350,7 @@
                                                 </td>
 
                                             </tr>
-                                        </t>
+                                       
                                         </t>
                                     </t>
                                 </tbody>    
