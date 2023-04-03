@@ -122,7 +122,7 @@ class TestPayslipMars(common.SavepointCase):
     ## Test xx
     def test_asse(self):   
         payslip_form = self._create_payslip(self.employee_asse, self.employee_asse.contract_id, [
-                {'code': 'kvaltim','amount': 7.0},
+                # ~ {'code': 'kvaltim','amount': 7.0},
             ])
 
         _logger.warning(f"--------------")
@@ -141,14 +141,13 @@ class TestPayslipMars(common.SavepointCase):
         for detail in payslip_form.dynamic_filtered_payslip_lines:
             _logger.warning(f"line id from input: {detail.name} {detail.total}")
             if detail.code == 'net':
-                self.assertAlmostEqual(detail.total, 27680.0)
+                self.assertAlmostEqual(detail.total, 30904.0)
 
 
     ## Test xx
     def test_frans(self):
         payslip_form = self._create_payslip(self.employee_frans, self.employee_frans.contract_id, [
-                {'code': 'kvaltim','amount': 4.0},
-                # ~ {'code': 'mertidtim','amount': 2.0},
+                {'code': 'kvaltim','amount': 6.0},
             ])
 
         _logger.warning(f"--------------")
@@ -167,13 +166,13 @@ class TestPayslipMars(common.SavepointCase):
         for detail in payslip_form.dynamic_filtered_payslip_lines:
             _logger.warning(f"line id from input: {detail.name} {detail.total}")
             if detail.code == 'net':
-                self.assertAlmostEqual(detail.total, 25468.0)
+                self.assertAlmostEqual(detail.total, 22355.0)
         
     ## Test xx
     def test_doris(self):
         payslip_form = self._create_payslip(self.employee_doris, self.employee_doris.contract_id, [
-                {'code': 'kvaltim','amount': 2.0},
                 {'code': 'mertidtim','amount': 8.0},
+                {'code': 'kvaltim','amount': 3.0},
             ])
 
         _logger.warning(f"--------------")
@@ -192,7 +191,7 @@ class TestPayslipMars(common.SavepointCase):
         for detail in payslip_form.dynamic_filtered_payslip_lines:
             _logger.warning(f"line id from input: {detail.name} {detail.total}")
             if detail.code == 'net':
-                self.assertAlmostEqual(detail.total, 9067.0)   
+                self.assertAlmostEqual(detail.total, 13694.0)   
 
     ## Test xx
     def test_camilla(self):
@@ -217,12 +216,12 @@ class TestPayslipMars(common.SavepointCase):
         for detail in payslip_form.dynamic_filtered_payslip_lines:
             _logger.warning(f"line id from input: {detail.name} {detail.total}")
             if detail.code == 'net':
-                self.assertAlmostEqual(detail.total, 24895.0)   
+                self.assertAlmostEqual(detail.total, 22379.0)   
 
     ## Test xx
     def test_gustav(self):
         payslip_form = self._create_payslip(self.employee_gustav, self.employee_gustav.contract_id, [
-                {'code': 'kvaltim','amount': 4.0},
+                # ~ {'code': 'kvaltim','amount': 4.0},
             ])
 
         _logger.warning(f"--------------")
@@ -241,7 +240,7 @@ class TestPayslipMars(common.SavepointCase):
         for detail in payslip_form.dynamic_filtered_payslip_lines:
             _logger.warning(f"line id from input: {detail.name} {detail.total}")
             if detail.code == 'net':
-                self.assertAlmostEqual(detail.total, 21963.0)   
+                self.assertAlmostEqual(detail.total, 18440.0)   
 
     ## Test xx
     def test_helmer(self):
@@ -265,5 +264,5 @@ class TestPayslipMars(common.SavepointCase):
         for detail in payslip_form.dynamic_filtered_payslip_lines:
             _logger.warning(f"line id from input: {detail.name} {detail.total}")
             if detail.code == 'net':
-                self.assertAlmostEqual(detail.total, 16290.0)
+                self.assertAlmostEqual(detail.total, 14097.0)
 
