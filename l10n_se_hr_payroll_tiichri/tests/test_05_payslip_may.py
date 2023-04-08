@@ -16,7 +16,9 @@ _logger = logging.getLogger(__name__)
 # $ odoo -c /etc/odoo/odoo.conf -d odoo-tiichri -i l10n_se_hr_payroll_tiichri --test-enable
 #
 
-class TestPayslipMars(common.SavepointCase):
+class TestPayslipMay(common.SavepointCase):
+
+
 
     @classmethod
     def _create_leave(cls, employee_id, code, date_from, date_to, number_of_days): 
@@ -40,7 +42,7 @@ class TestPayslipMars(common.SavepointCase):
             leave_form.action_validate()
             
         return leave_form
-        
+
     @classmethod
     def _create_payslip(cls, employee_id, contract_id, input_recs): 
 
@@ -85,93 +87,53 @@ class TestPayslipMars(common.SavepointCase):
             'date_start': cls.date_start,
             'date_stop': cls.date_stop,
         })
-        
+
         # Asse Aronsson
         cls.employee_asse = cls.env.ref('l10n_se_hr_payroll_tiichri.hr_asse_employee')  # asse_employee
-        cls.asse_301 = cls._create_leave(cls.employee_asse, "sjk_kar" ,"2022-03-01","2022-03-01",1)
-        cls.asse_302 = cls._create_leave(cls.employee_asse, "sjk_214" ,"2022-03-02","2022-03-04",3)
-        cls.asse_303 = cls._create_leave(cls.employee_asse, "sjk_214" ,"2022-03-07","2022-03-09",3)
-
-        # Frans Filipsson
+        cls.asse_501 = cls._create_leave(cls.employee_asse, "sjk_kar" ,"2022-05-09","2022-05-09",1)
+        cls.asse_502 = cls._create_leave(cls.employee_asse, "sjk_214" ,"2022-05-10","2022-05-13",4)
+        cls.asse_503 = cls._create_leave(cls.employee_asse, "sjk_214" ,"2022-05-16","2022-05-18",3)
+            
+        # Frans Filipsson -- Låt stå! :-) Inte sjuk i maj
         cls.employee_frans = cls.env.ref('l10n_se_hr_payroll_tiichri.hr_frans_employee')  # frans_employee
-        cls.frans_301 = cls._create_leave(cls.employee_frans, "sjk_kar" ,"2022-03-04","2022-03-04",1)
-        cls.frans_302 = cls._create_leave(cls.employee_frans, "sjk_214" ,"2022-03-07","2022-03-11",5)
-        cls.frans_303 = cls._create_leave(cls.employee_frans, "sjk_214" ,"2022-03-14","2022-03-16",3)
+        # ~ cls.frans_kar = cls._create_leave(cls.employee_frans.id, "sjk_kar" ,"2022-05-09","2022-05-09",1)
+        # ~ cls.frans_kar = cls._create_leave(cls.employee_frans.id, "sjk_214" ,"2022-05-10","2022-05-13",4)
+        # ~ cls.frans_kar = cls._create_leave(cls.employee_frans.id, "sjk_214" ,"2022-05-16","2022-05-18",3)
 
-        # Doris Dahlin -- Låt stå! :-) Inte sjuk i mars
+        # Doris Dahlin -- Låt stå! :-) Inte sjuk i maj
         cls.employee_doris = cls.env.ref('l10n_se_hr_payroll_tiichri.hr_doris_employee')  # doris_employee
+        # ~ cls.doris_kar = cls._create_leave(cls.employee_doris.id, "sjk_kar" ,"2022-04-06","2022-04-06",1)
+        # ~ cls.doris_kar = cls._create_leave(cls.employee_doris.id, "sjk_214" ,"2022-04-07","2022-04-07",1)
+        # ~ cls.doris_kar = cls._create_leave(cls.employee_doris.id, "sjk_214" ,"2022-04-11","2022-04-13",3)
 
-        # Camilla Cobolt -- Låt stå! :-) Inte sjuk i mars
+        # Camilla Cobolt -- Låt stå! :-) Inte sjuk i maj
         cls.employee_camilla = cls.env.ref('l10n_se_hr_payroll_tiichri.hr_camilla_employee')  # camilla_employee
+        # ~ cls.camilla_kar = cls._create_leave(cls.employee_camilla.id, "sjk_kar" ,"2022-04-19","2022-04-19",1)
+        # ~ cls.camilla_kar = cls._create_leave(cls.employee_camilla.id, "sjk_214" ,"2022-04-20","2022-04-21",2)
 
-        # Gustav Groth
+        # Gustav Groth -- Låt stå! :-) Inte sjuk i maj
         cls.employee_gustav = cls.env.ref('l10n_se_hr_payroll_tiichri.hr_gustav_employee')  # gustav_employee
-        cls.gustav_301 = cls._create_leave(cls.employee_gustav, "sjk_kar" ,"2022-03-02","2022-03-02",1)
-        cls.gustav_302 = cls._create_leave(cls.employee_gustav, "sjk_214" ,"2022-03-03","2022-03-03",1)
-        
+        # ~ cls.gustav_kar = cls._create_leave(cls.employee_gustav.id, "sjk_kar" ,"2022-04-13","2022-04-13",1)
+        # ~ cls.gustav_kar = cls._create_leave(cls.employee_gustav.id, "sjk_214" ,"2022-04-14","2022-04-14",1)
+        # ~ cls.gustav_kar = cls._create_leave(cls.employee_gustav.id, "sjk_214" ,"2022-04-19","2022-04-22",4)
+        # ~ cls.gustav_kar = cls._create_leave(cls.employee_gustav.id, "sjk_214" ,"2022-04-25","2022-04-28",4)
+       
         # Helmer Henriksson
         cls.employee_helmer = cls.env.ref('l10n_se_hr_payroll_tiichri.hr_helmer_employee')  # helmer_employee
-        cls.helmer_301 = cls._create_leave(cls.employee_helmer, "sjk_kar" ,"2022-03-03","2022-03-03",1)
-        cls.helmer_302 = cls._create_leave(cls.employee_helmer, "sjk_214" ,"2022-03-04","2022-03-04",1)
-        cls.helmer_303 = cls._create_leave(cls.employee_helmer, "sjk_kar" ,"2022-03-16","2022-03-16",1)
+        cls.helmer_kar = cls._create_leave(cls.employee_helmer.id, "sjk_kar" ,"2022-05-19","2022-05-19",1)
+        cls.helmer_kar = cls._create_leave(cls.employee_helmer.id, "sjk_214" ,"2022-05-20","2022-05-20",1)
+        cls.helmer_kar = cls._create_leave(cls.employee_helmer.id, "sjk_kar" ,"2022-05-27","2022-05-27",1)
+        cls.helmer_kar = cls._create_leave(cls.employee_helmer.id, "sjk_214" ,"2022-05-30","2022-05-30",1)
 
         # Karin Kullberg
         # Anställning per timme, påbörjad 2022-06-01
         
+       
 
     ## Test xx
     def test_asse(self):   
         payslip_form = self._create_payslip(self.employee_asse, self.employee_asse.contract_id, [
-                # ~ {'code': 'kvaltim','amount': 7.0},
-            ])
-
-        _logger.warning(f"--------------")
-
-        for line in payslip_form.input_line_ids:
-            if line.amount != 0.0:
-                _logger.warning(f"{line.name=} {line.amount_qty=} {line.amount=}")
-
-        _logger.warning(f"--------------") 
-
-        for worked_day in payslip_form.worked_days_line_ids:
-            _logger.warning(f"{worked_day.name=} {worked_day.number_of_hours=}")
-
-        _logger.warning(f"--------------") 
-
-        for detail in payslip_form.dynamic_filtered_payslip_lines:
-            _logger.warning(f"line id from input: {detail.name} {detail.total}")
-            if detail.code == 'net':
-                self.assertAlmostEqual(detail.total, 30904.0)
-
-
-    ## Test xx
-    def test_frans(self):
-        payslip_form = self._create_payslip(self.employee_frans, self.employee_frans.contract_id, [
-                {'code': 'kvaltim','amount': 6.0},
-            ])
-
-        _logger.warning(f"--------------")
-
-        for line in payslip_form.input_line_ids:
-            if line.amount != 0.0:
-                _logger.warning(f"{line.name=} {line.amount_qty=} {line.amount=}")
-
-        _logger.warning(f"--------------") 
-
-        for worked_day in payslip_form.worked_days_line_ids:
-            _logger.warning(f"{worked_day.name=} {worked_day.number_of_hours=}")
-
-        _logger.warning(f"--------------") 
-
-        for detail in payslip_form.dynamic_filtered_payslip_lines:
-            _logger.warning(f"line id from input: {detail.name} {detail.total}")
-            if detail.code == 'net':
-                self.assertAlmostEqual(detail.total, 22355.0)
-        
-    ## Test xx
-    def test_doris(self):
-        payslip_form = self._create_payslip(self.employee_doris, self.employee_doris.contract_id, [
-                {'code': 'mertidtim','amount': 8.0},
+                # ~ {'code': 'mertidtim','amount': 8.0},
                 {'code': 'kvaltim','amount': 3.0},
             ])
 
@@ -181,6 +143,57 @@ class TestPayslipMars(common.SavepointCase):
             if line.amount != 0.0:
                 _logger.warning(f"{line.name=} {line.amount_qty=} {line.amount=}")
 
+        _logger.warning(f"--------------") 
+
+        for worked_day in payslip_form.worked_days_line_ids:
+            _logger.warning(f"{worked_day.name=} {worked_day.number_of_hours=}")
+
+        _logger.warning(f"--------------") 
+
+        for detail in payslip_form.dynamic_filtered_payslip_lines:
+            _logger.warning(f"line id from input: {detail.name} {detail.total}")
+            if detail.code == 'net':
+                self.assertAlmostEqual(detail.total, 33247.0)
+
+
+    ## Test xx
+    def test_frans(self):
+        payslip_form = self._create_payslip(self.employee_frans, self.employee_frans.contract_id, [
+                 # ~ {'code': 'mertidtim','amount': 8.0},
+               {'code': 'kvaltim','amount': 7.0},
+            ])
+
+        _logger.warning(f"--------------")
+
+        for line in payslip_form.input_line_ids:
+            if line.amount != 0.0:
+                _logger.warning(f"{line.name=} {line.amount_qty=} {line.amount=}")
+
+        _logger.warning(f"--------------") 
+
+        for worked_day in payslip_form.worked_days_line_ids:
+            _logger.warning(f"{worked_day.name=} {worked_day.number_of_hours=}")
+
+        _logger.warning(f"--------------") 
+
+        for detail in payslip_form.dynamic_filtered_payslip_lines:
+            _logger.warning(f"line id from input: {detail.name} {detail.total}")
+            if detail.code == 'net':
+                self.assertAlmostEqual(detail.total, 28440.0)
+        
+    ## Test xx
+    def test_doris(self):
+        payslip_form = self._create_payslip(self.employee_doris, self.employee_doris.contract_id, [
+                {'code': 'mertidtim','amount': 8.0},
+                # ~ {'code': 'kvaltim','amount': 3.0},
+            ])
+
+        _logger.warning(f"--------------")
+
+        for line in payslip_form.input_line_ids:
+            if line.amount != 0.0:
+                _logger.warning(f"{line.name=} {line.amount_qty=} {line.amount=}")
+
         _logger.warning(f"--------------")
 
         for worked_day in payslip_form.worked_days_line_ids:
@@ -191,13 +204,13 @@ class TestPayslipMars(common.SavepointCase):
         for detail in payslip_form.dynamic_filtered_payslip_lines:
             _logger.warning(f"line id from input: {detail.name} {detail.total}")
             if detail.code == 'net':
-                self.assertAlmostEqual(detail.total, 13694.0)   
+                self.assertAlmostEqual(detail.total, 16734.0)   
 
     ## Test xx
     def test_camilla(self):
         payslip_form = self._create_payslip(self.employee_camilla, self.employee_camilla.contract_id, [
-                # ~ {'code': 'kvaltim','amount': 2.0},
                 # ~ {'code': 'mertidtim','amount': 8.0},
+                # ~ {'code': 'kvaltim','amount': 5.0},
             ])
 
         _logger.warning(f"--------------")
@@ -216,12 +229,13 @@ class TestPayslipMars(common.SavepointCase):
         for detail in payslip_form.dynamic_filtered_payslip_lines:
             _logger.warning(f"line id from input: {detail.name} {detail.total}")
             if detail.code == 'net':
-                self.assertAlmostEqual(detail.total, 22379.0)   
+                self.assertAlmostEqual(detail.total, 17750.0)   
 
     ## Test xx
     def test_gustav(self):
         payslip_form = self._create_payslip(self.employee_gustav, self.employee_gustav.contract_id, [
-                # ~ {'code': 'kvaltim','amount': 4.0},
+                # ~ {'code': 'mertidtim','amount': 8.0},
+                {'code': 'kvaltim','amount': 8.0},
             ])
 
         _logger.warning(f"--------------")
@@ -240,12 +254,13 @@ class TestPayslipMars(common.SavepointCase):
         for detail in payslip_form.dynamic_filtered_payslip_lines:
             _logger.warning(f"line id from input: {detail.name} {detail.total}")
             if detail.code == 'net':
-                self.assertAlmostEqual(detail.total, 18440.0)   
+                self.assertAlmostEqual(detail.total, 19537.0)   
 
     ## Test xx
     def test_helmer(self):
         payslip_form = self._create_payslip(self.employee_helmer, self.employee_helmer.contract_id, [
-                {'code': 'kvaltim','amount': 4.0},
+                # ~ {'code': 'mertidtim','amount': 8.0},
+                {'code': 'kvaltim','amount': 8.0},
             ])
 
         _logger.warning(f"--------------")
@@ -264,5 +279,5 @@ class TestPayslipMars(common.SavepointCase):
         for detail in payslip_form.dynamic_filtered_payslip_lines:
             _logger.warning(f"line id from input: {detail.name} {detail.total}")
             if detail.code == 'net':
-                self.assertAlmostEqual(detail.total, 14097.0)
+                self.assertAlmostEqual(detail.total, 18118.0)
 
