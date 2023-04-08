@@ -289,7 +289,7 @@
                             <table class="table table-condensed" style="height:80%;">
                                 <thead>
                                     <!-- <t t-foreach="o.line_ids" t-as="pa"> -->
-                                    <tr>
+                                    <tr style="background: #eee;">
                                         <!-- <th>Löneart</th> -->
                                         <th>Kod</th>
                                         <th>Benämning</th>
@@ -306,7 +306,7 @@
                                     <t t-foreach="o.line_ids" t-as="pa">                                    
                                         <t t-if="not int(o.get_slip_line(pa.code)[0]['amount']) == 0">
                                        
-                                            <tr style="background: #eee;">
+                                            <tr >
                                                 <!-- <td style="border-right: 1px solid black;">
                                                     <span>
                                                         <t t-esc="pa.salary_rule_id.salary_art"/>
@@ -362,19 +362,26 @@
         </template>
 
 
-        <report id="l10n_se_hr_payroll.payslip" model="user.payslip" string="Payslip SE" report_type="qweb-pdf" name="l10n_se_hr_payroll.l10n_se_hr_payroll_payslip_document" file="l10n_se_hr_payroll.l10n_se_hr_payroll_payslip_document" attachment_use="True" attachment="('payslip_'+(object.number.replace('/','') if object.number else ''))+'.pdf'" />
+        <report id="l10n_se_hr_payroll.payslip" model="user.payslip"  string="Payslip SE" report_type="qweb-pdf" name="l10n_se_hr_payroll.l10n_se_hr_payroll_payslip_document" file="l10n_se_hr_payroll.l10n_se_hr_payroll_payslip_document" attachment_use="False" attachment="('payslip_'+(object.number.replace('/','') if object.number else ''))+'.pdf'" />
+
+        
 
         <record id="payslip_pdf_format" model="report.paperformat">
             <field name="name">Payslip pdf format</field>
             <field name="format">A4</field>
             <field name="orientation">Portrait</field>
             <field name="margin_top">37</field>
-            <field name="margin_bottom">95</field>
+            <field name="margin_bottom">100</field>
             <field name="margin_left">7</field>
             <field name="margin_right">7</field>
             <field name="header_spacing">35</field>
             <field name="dpi">90</field>
         </record>
+
+  <record id="payslip" model="ir.actions.report">
+            <field name="paperformat_id" ref="payslip_pdf_format"/>
+        </record>
+
 
     </data>
 </odoo>
