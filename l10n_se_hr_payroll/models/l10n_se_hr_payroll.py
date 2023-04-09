@@ -280,13 +280,22 @@ class hr_payslip(models.Model):
         return sum(self.details_by_salary_rule_category.filtered(lambda l: l.code == code).mapped('total'))
 
     @api.model
-    def get_slip_line_acc(self, code):
-        year = datetime.now().year
-        start_date = datetime(year, 1, 1)
+    def get_slip_line_acc(self, codes):
+        year = self.date_start.year
+        start_date = date(year, 1, 1)
+        stop_date = date(year,12,31)
+        res = {c:0.0 for c in codes}
+        for line in self.env['hr.payslip'].search([('employee_id', '=', self.employee_id.id)]).mapped('details_by_salary_rule_category').filtered(lambda c: c.code in codes):
+            res[line.code] += line.total
+        return res
+        raise Warning('Abe was here %s' % res)
+            # ~ [('employee_id', '=', self.employee_id.id), ('date_from', '>=', start_date),
+             # ~ ('date_to', '<=', stop_date)]).mapped('line_ids'))
         return sum(self.env['hr.payslip'].search(
-            [('employee_id', '=', self.employee_id.id), ('date_from', '>=', start_date.strftime('%Y-%m-%d')),
-             ('date_to', '<=', self.date_to)]).mapped('details_by_salary_rule_category').filtered(
+            [('employee_id', '=', self.employee_id.id), ('date_from', '>=', start_date),
+             ('date_to', '<=', stop_date)]).mapped('details_by_salary_rule_category').filtered(
             lambda l: l.code == code).mapped('total'))
+            # ~ lambda l: l.code in codes).mapped('total'))
 
     @api.model
     def get_worked_day_lines(self, contracts, date_from, date_to):

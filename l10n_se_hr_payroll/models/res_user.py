@@ -326,7 +326,7 @@ class HrPayslip(models.TransientModel):
     @api.model
     def get_slip_line_acc(self, code):
         self = self.sudo()
-        return self.payslip_id.get_slip_line_acc(code)
+        return self.payslip_id.get_slip_line_acc(['bl','gl','pre','prej','san'])
 
     def payslip_report(self):
 

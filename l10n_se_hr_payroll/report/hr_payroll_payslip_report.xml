@@ -79,6 +79,8 @@
 
         <template id="extra_info">
             <div>
+                <t t-set="acc" t-value="o.get_slip_line_acc(['bl','gl','san','net'])"/>
+
                 <table style="width:100%;">
                     <tr style = "background-color: #eee;">
                         <th style="padding:10px 0px 0px 10px;">
@@ -95,14 +97,14 @@
                         <td style = "border:1px solid #C0C0C0;">
                             <div>
                                 <span style="padding:10px 0px 0px 10px;">Bruttolön:
-                                <span class="pull-right pr-5" ><t t-esc="int(o.get_slip_line('bl')[0]['amount']) or 0" /></span></span>
+                                <span class="pull-right pr-5" ><t t-esc="int(acc['bl']) or 0" /></span></span>
                                 <br />
                                 <span style="padding:10px 0px 0px 10px;">Preliminärskatt:
-                                <span class="pull-right pr-5" ><t t-esc="int(o.get_slip_line_acc('pre')) or 0" /></span></span>
+                                <span class="pull-right pr-5" ><t t-esc="int(acc['pre']) or 0" /></span></span>
                                 <br />
                                 <span style="padding:10px 0px 0px 10px;">Sociala avgifter:
                                     <t t-esc="o.get_slip_line('san')[0]['amount_percentage']" />%
-                                    <span class="pull-right pr-3" ><t t-esc="int(o.get_slip_line('san')[0]['amount'])" /></span>
+                                    <span class="pull-right pr-3" ><t t-esc="int(acc['san']) or 0" /></span>
                                 </span>
                             </div>
                         </td>
@@ -112,7 +114,7 @@
                                 <span class="pull-right pr-5" ><t t-esc="int(o.contract_id.wage_tax_base)" /></span></span>
                                 <br />
                                 <span style="padding:10px 0px 0px 10px;">Preliminärskatt:
-                                    <span class="pull-right pr-5" ><t t-esc="int(o.get_slip_line_acc('pre')) or 0" /></span>
+                                    <span class="pull-right pr-5" ><t t-esc="int(acc['pre']) or 0" /></span>
                                 </span>
                                 <br />
                                 <span style="padding:10px 0px 0px 10px;">Skattetabell:
@@ -334,12 +336,19 @@
             <field name="format">A4</field>
             <field name="orientation">Portrait</field>
             <field name="margin_top">37</field>
-            <field name="margin_bottom">85</field>
+            <field name="margin_bottom">95</field>
             <field name="margin_left">7</field>
             <field name="margin_right">7</field>
             <field name="header_spacing">35</field>
             <field name="dpi">90</field>
         </record>
+        
+
+        <record id="payslip" model="ir.actions.report">
+            <field name="paperformat_id" ref="payslip_pdf_format"/>
+        </record>
+
+        
 
     </data>
 </odoo>
