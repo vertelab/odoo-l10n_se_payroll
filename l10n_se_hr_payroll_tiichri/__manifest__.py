@@ -32,17 +32,26 @@ We create test data to seven employees, to use while developing our own code. To
     """,
     #'sequence': '1'
     'author': 'Vertel AB',
-    'website': 'https://vertel.se/apps/l10n_se_payroll/l10n_se_hr_payroll_tiichri',
+    'website': 'https://vertel.se/apps/odoo-l10n_se_payroll/l10n_se_hr_payroll_tiichri',
     'images': ['static/description/banner.png'], # 560x280 px.
     'license': 'AGPL-3',
     'contributor': '',
     'maintainer': 'Vertel AB',
     'repository': 'https://github.com/vertelab/odoo-l10n-se-payroll',
-    'depends': ['hr_contract','l10n_se_hr_payroll', 'l10n_se_hr_holidays', 'l10n_se_hr_payroll_benefits', 'l10n_se_payroll_taxtable'],
+    'depends': ['hr_contract','l10n_se_hr_payroll', 'l10n_se_hr_holidays', 'l10n_se_hr_payroll_benefits', 'l10n_se_payroll_taxtable', ],
     'data':[
-        'data/hr_payroll_tiichri_data.xml',
+        # ~ 'data/hr_payroll_tiichri_data.xml',
+        'data/data_00_aronssons_montage.xml',
+        'data/data_01_asse.xml',
+        'data/data_02_camilla.xml',
+        'data/data_03_doris.xml',
+        'data/data_04_frans.xml',
+        'data/data_05_gustav.xml',
+        'data/data_06_helmer.xml',
+        'data/data_07_karin.xml',
+        'data/data_10_aronssons_montage.xml',
     ],
-    'auto_install': True,
+    'auto_install': False,
     'installable': True,
 }
 

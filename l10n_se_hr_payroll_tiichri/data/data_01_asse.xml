@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="0">
+        <!-- ## ASSE ARONSSON -->
+        <record id="hr_asse_partner" model="res.partner">
+            <field name="company_type">person</field>
+            <field name="name">Asse Aronsson Kontakt</field>
+            <field name="street">Tjädervägen 23</field>
+            <field name="zip">175 00</field>
+            <field name="city">Järfälla</field>
+            <field name="mobile">073-500000</field>
+            <field name="function">VD och försäljningschef</field>
+        </record>
+        <record id="bank_asse" model="res.partner.bank">
+            <field name="acc_number">4333-44444433</field>
+            <field name="partner_id" ref="hr_asse_partner" />
+        </record>
+        <record id="hr_asse_employee" model="hr.employee">
+            <field name="name">Asse Aronsson Anställd</field>
+            <field name="work_location">Rosersberg, HK</field>
+            <field name="work_phone">073-400000</field>
+            <field name="work_email">asse.aronsson@aronssons.se</field>
+            <field name="identification_id">651031-3114</field>
+            <field name="job_title">VD och försäljningschef</field>
+            <field name="address_home_id" ref="hr_asse_partner" />
+            <field name="address_id" ref="main_company_partner" />
+            <field name="tz" eval="'Europe/Stockholm'" />
+        </record>
+        <record id="contract_asse" model="hr.contract">
+            <field name="name">Asse Aronsson Avtal</field>
+            <field name="wage">52000</field>
+            <field name="type_id" ref="hr_contract_type" />
+            <field name="employee_id" ref="hr_asse_employee" />
+            <field name="schedule_pay" eval="'monthly'" />
+            <field name="state" eval="'open'" />
+            <field name="job_id" ref="job_id_president" />
+            <field name="date_start">2018-04-01</field>
+            <field name="first_contract_date">2018-04-01</field>
+            <field name="struct_id" ref="l10n_se_hr_payroll.hr_payroll_structure-tj" />
+            <field name="table_number">30</field>
+            <field name="column_number" eval="'column1'" />
+        </record>
+
+        <!-- ## HR.CONTRACT.BENEFIT -->
+        <record id="hr_benefit_asse" model="hr.contract.benefit">
+            <field name="contract_id" ref="contract_asse" />
+            <field name="name" ref="hr_benefit_forman_carbru" />
+            <field name="desc">Volvo tjänstebil</field>
+            <field name="value">4391</field>
+        </record>
+    </data>
+</odoo>

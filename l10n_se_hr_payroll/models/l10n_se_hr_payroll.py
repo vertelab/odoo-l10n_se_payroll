@@ -19,7 +19,7 @@
 #
 ##############################################################################
 from dateutil.relativedelta import relativedelta
-from odoo.exceptions import except_orm, Warning, RedirectWarning, UserError
+from odoo.exceptions import except_orm, Warning, RedirectWarning, UserError, ValidationError
 from odoo import models, fields, api, _
 from odoo.tools.safe_eval import safe_eval as eval
 from datetime import timedelta, date, datetime
@@ -31,11 +31,13 @@ import logging
 _logger = logging.getLogger(__name__)
 
 
-class ContractType(models.Model):
-    _name = "hr.contract.type"
-    _description = "Contract Type"
+class HrPayslipLine(models.Model):
+    _inherit = "hr.payslip.line"
 
-    name = fields.Char(required=True)
+    @api.depends("quantity", "amount", "rate")
+    def _compute_total(self):
+        for line in self:
+            line.total = round(float(line.quantity) * line.amount * line.rate / 100)
 
 
 class HrPayslipWorkedDays(models.Model):
@@ -48,6 +50,11 @@ class hr_salary_rule(models.Model):
     _inherit = 'hr.salary.rule'
 
     salary_art = fields.Char(string='Salary art', help="Code to interchange payslip rows with other systems")
+
+    # payslip_character = fields.Selection([
+    #     ("minus", "Minus"),
+    #     ("parentheses", "Parentheses"),
+    # ],default=False)
 
     @api.model
     def init_records(self):
@@ -99,6 +106,8 @@ class hr_contract(models.Model):
 
     # ~ office_fund = fields.Float(string='Office fund', digits_compute=dp.get_precision('Payroll'), help="Fund for
     # personal office supplies",)
+
+    # hourly_employee = fields.Float(string="Hourly employee")
 
     def _get_param(self, param, value):
         if not self.env['ir.config_parameter'].get_param(param):
@@ -189,6 +198,46 @@ class hr_payslip(models.Model):
                                                       compute='_compute_details_by_salary_rule_category',
                                                       string='Details by Salary Rule Category',
                                                       help="Details from the salary rule category")
+    
+#Work in progres
+    # allocation_display = fields.Char(related='employee_id.allocation_display') #Dont know about this one?
+    # collected_vacation_days = fields.Date(string="Collected Vacation days", compute="_compute_vacation_days")
+
+    # def _compute_vacation_days(self):
+    #     year = date.strftime(date.today().year, "%Y")
+    #     _logger.error(f"{year=}")
+    #     april = date.strftime('03-01', "%m-%d").strftime('%m-%d')
+    #     employed_days = date.today()
+    #     _logger.error(f"{date.today()=}")
+    #     _logger.error(f"{employed_days=}")
+    #     allocation = self.allocation_display
+    #     _logger.error(f"{allocation=}")
+    #     step = allocation * employed_days
+    #     _logger.error(f"{self.allocation_display=}")
+    #     _logger.error(f"{step=}")
+    #     res = step/date.year
+    #     _logger.error(f"{date.year=}")
+    #     _logger.error(f"{res=}")
+    #     return res
+
+    # last_salary_payslip = fields.Boolean(string="Last Salary", readonly=False)
+
+    # @api.onchange('last_salary_payslip')
+    # def onchange_employee_last_salary(self):
+    #     # super(hr_payslip, self).onchange_employee_last_salary()
+    #     _logger.error(f"{self.last_salary_payslip=}")
+    #     if self.last_salary_payslip == True:
+    #         self.date_from = self.period_id.date_start - dateutil.relativedelta.relativedelta(months=1)
+    #         _logger.error(f"{self.date_from=}")
+    #         if self.contract_id.date_end:
+    #             self.date_to = self.contract_id.date_end
+    #         elif self.contract_id.date_end == None:
+    #             self.date_to = self.period_id.date_stop
+    #         _logger.error(f"{self.date_to=}")
+    #         self.name = _("Salary Slip of %s for %s") % (
+    #             self.employee_id.name,
+    #             self.period_id.date_start.strftime('%B-%Y') if self.period_id else 'None',
+    #         )
 
     def get_number_of_days(self):
         year = self.date_from.year
@@ -200,39 +249,48 @@ class hr_payslip(models.Model):
         for payslip in self:
             payslip.details_by_salary_rule_category = payslip.mapped('line_ids').filtered(lambda line: line.category_id)
 
+
+
     @api.onchange('employee_id', 'period_id')
     def onchange_employee(self):
         super(hr_payslip, self).onchange_employee()
-        if self.choose_date_method == "date_then":
-            self.date_from = self.period_id.date_start - dateutil.relativedelta.relativedelta(months=1)
-            self.date_to = self.period_id.date_stop - dateutil.relativedelta.relativedelta(months=1)
-            self.name = _("Salary Slip of %s for %s") % (
-                self.employee_id.name,
-                self.period_id.date_start.strftime('%B-%Y') if self.period_id else 'None',
+        # if self.choose_date_method == "date_then" and self.period_id.date_start and self.period_id.date_stop:
+
+        if not self.period_id:
+            self.period_id = self.period_id.now()
+            # ~ raise UserError('pelle %s' % self.env['account.period'].find())
+
+        self.date_from = self.period_id.date_start - dateutil.relativedelta.relativedelta(months=1)
+        self.date_to = self.period_id.date_stop - dateutil.relativedelta.relativedelta(months=1)
+        self.name = _("Salary Slip of %s for %s") % (
+            self.employee_id.name,
+            self.period_id.date_start.strftime('%B-%Y') if self.period_id else 'None',
             )
         return
+    
+# Might be casing a problem or maby not useful for now
 
-    @api.onchange('employee_id', 'period_id')
-    def onchange_employee_date_now(self):
-        # super(hr_payslip, self).onchange_employee_date_now()
-        if self.choose_date_method == "date_now":
-            self.date_from = self.period_id.date_start
-            self.date_to = self.period_id.date_stop
-            self.name = _("Salary Slip of %s for %s") % (
-                self.employee_id.name,
-                self.period_id.date_start.strftime('%B-%Y') if self.period_id else 'None',
-            )
-        return
+    # @api.onchange('employee_id', 'period_id')
+    # def onchange_employee_date_now(self):
+    #     # super(hr_payslip, self).onchange_employee_date_now()
+    #     if self.choose_date_method == "date_now":
+    #         self.date_from = self.period_id.date_start
+    #         self.date_to = self.period_id.date_stop
+    #         self.name = _("Salary Slip of %s for %s") % (
+    #             self.employee_id.name,
+    #             self.period_id.date_start.strftime('%B-%Y') if self.period_id else 'None',
+    #         )
+    #     return
 
-    def compute_date_method(self):
-        self.choose_date_method = (
-            self.env["ir.config_parameter"].sudo().get_param("l10n_se_hr_payroll.choose_date_method")
-        )
+    # def compute_date_method(self):
+    #      self.choose_date_method = (
+    #          self.env["ir.config_parameter"].sudo().get_param("l10n_se_hr_payroll.choose_date_method")
+    #      )
 
-    choose_date_method = fields.Selection([
-        ("date_now", "Date now"),
-        ("date_then", "Date then"), ],
-        store=True, compute="compute_date_method", readonly=False, default=False)
+    # choose_date_method = fields.Selection([
+    #      ("date_now", "Same date as period"),
+    #      ("date_then", "A month after period"), ],
+    #      store=True, compute="compute_date_method", readonly=False, default="date_then")
 
     # _logger.error(f"{choose_date_method=}")
     # compute = "compute_date_method")
@@ -328,9 +386,80 @@ class hr_payslip(models.Model):
         return res
 
 
+class HrPayrollStructure(models.Model):
+    _inherit = "res.company"
 
+    def sync_hr_payroll_structure(self):
+        """FIX ME: when a copy of hr.payroll.structure is made on company B, the rule is not attached
+         to the structure"""
+        company_id = self.env.ref('base.main_company')
 
+        if self.env.company.id != company_id.id:
+            payroll_structure_ids = self.env['hr.payroll.structure'].with_company(company_id).search([
+                ('company_id', '=', company_id.id)])
+            for payroll_structure_id in payroll_structure_ids:
+                structure_id = self.env['hr.payroll.structure'].with_company(self.env.company).search([
+                    ('code', '=', payroll_structure_id.code), ('company_id', '=', self.env.company.id)])
 
+                if not structure_id:
+                    structure_id = self.env['hr.payroll.structure'].create({
+                        'name': payroll_structure_id.name,
+                        'code': payroll_structure_id.code,
+                        'company_id': self.env.company.id,
+                        'parent_id': payroll_structure_id.parent_id.id,
+                        'rule_ids': payroll_structure_id.rule_ids.ids
+                    })
+                structure_id.write({
+                    'rule_ids': [(4, rule.id) for rule in payroll_structure_id.rule_ids]
+                })
 
+    def sync_hr_payroll_salary_rule_category(self):
+        company_id = self.env.ref('base.main_company')
+        if self.env.company.id != company_id.id:
+            payroll_salary_rule_category_ids = self.env['hr.salary.rule.category'].with_company(company_id).search([
+                ('company_id', '=', company_id.id)])
+            for payroll_salary_rule_category_id in payroll_salary_rule_category_ids:
+                salary_rule_category_id = self.env['hr.salary.rule.category'].with_company(self.env.company).search([
+                    ('code', '=', payroll_salary_rule_category_id.code)])
+                if not salary_rule_category_id:
+                    self.env['hr.salary.rule.category'].create({
+                        'name': payroll_salary_rule_category_id.name,
+                        'code': payroll_salary_rule_category_id.code,
+                        'parent_id': payroll_salary_rule_category_id.parent_id.id,
+                        'note': payroll_salary_rule_category_id.note,
+                        'company_id': self.env.company.id,
+                    })
+
+    def sync_hr_payroll_salary_rule(self):
+        company_id = self.env.ref('base.main_company')
+        if self.env.company.id != company_id.id:
+            payroll_salary_rule_ids = self.env['hr.salary.rule'].with_company(company_id).search([
+                ('company_id', '=', company_id.id)])
+            for payroll_salary_rule_id in payroll_salary_rule_ids:
+                salary_rule_id = self.env['hr.salary.rule'].with_company(self.env.company).search([
+                    ('code', '=', payroll_salary_rule_id.code), ('company_id', '=', self.env.company.id)])
+
+                if not salary_rule_id:
+                    self.env['hr.salary.rule'].create({
+                        'name': payroll_salary_rule_id.name,
+                        'category_id': payroll_salary_rule_id.category_id.id,
+                        'code': payroll_salary_rule_id.code,
+                        'sequence': payroll_salary_rule_id.sequence,
+                        'active': payroll_salary_rule_id.active,
+                        'appears_on_payslip': payroll_salary_rule_id.appears_on_payslip,
+                        'company_id': self.env.company.id,
+                        'condition_select': payroll_salary_rule_id.condition_select,
+                        'condition_python': payroll_salary_rule_id.condition_python,
+                        'register_id': payroll_salary_rule_id.register_id.id,
+                        'amount_select': payroll_salary_rule_id.amount_select,
+                        'quantity': payroll_salary_rule_id.quantity,
+                        'amount_fix': payroll_salary_rule_id.amount_fix,
+                        'note': payroll_salary_rule_id.note,
+                        'parent_rule_id': payroll_salary_rule_id.parent_rule_id.id,
+                        'account_debit': payroll_salary_rule_id.account_debit.id,
+                        'account_credit': payroll_salary_rule_id.account_credit.id,
+                        'account_tax_id': payroll_salary_rule_id.account_tax_id.id,
+                        'tax_base_id': payroll_salary_rule_id.tax_base_id.id,
+                    })
 
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:

@@ -30,15 +30,14 @@ Swedish Payslip additions for Benefits
     """,
     #'sequence': '1'
     'author': 'Vertel AB',
-    'website': 'https://vertel.se/apps/l10n_se_payroll/l10n_se_hr_payroll_benefits',
-    'images': ['static/description/banner.png'], # 560x280 px.
+    'website': 'https://vertel.se/apps/odoo-l10n_se_payroll/l10n_se_hr_payroll_benefits',
+    'images': ['static/description/banner.png'],  # 560x280 px.
     'license': 'AGPL-3',
     'contributor': '',
     'maintainer': 'Vertel AB',
     'repository': 'https://github.com/vertelab/odoo-l10n-se-payroll',
-    'depends': ['l10n_se_hr_payroll','hr_payroll_benefits'],
-    #'depends': ['l10n_se_hr_payroll'],
-    'data':[
+    'depends': ['l10n_se_hr_payroll', 'hr_payroll_benefits'],
+    'data': [
         'hr_salary_rule_data.xml',
     ],
     'auto_install': True,

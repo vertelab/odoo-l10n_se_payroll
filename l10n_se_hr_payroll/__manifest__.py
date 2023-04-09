@@ -25,20 +25,23 @@
     # Version ledger: 14.0 = Odoo version. 1 = Major. Non regressionable code. 2 = Minor. New features that are regressionable. 3 = Bug fixes
     'summary': 'Swedish Payroll Rules.',
     'category': 'Payroll Localization',
-    #'sequence': '1'
     'author': 'Vertel AB',
-    'website': 'https://vertel.se/apps/l10n_se_payroll/l10n_se_hr_holidays_account',
-    'images': ['static/description/banner.png'], # 560x280 px.
+    'website': 'https://vertel.se/apps/odoo-l10n_se_payroll/l10n_se_hr_holidays_account',
+    'images': ['static/description/banner.png'],  # 560x280 px.
     'license': 'AGPL-3',
     'contributor': '',
     'maintainer': 'Vertel AB',
     'repository': 'https://github.com/vertelab/odoo-l10n-se-payroll',
+<<<<<<< HEAD
     # ~ 'depends': ['payroll','hr_contract_types','account_period','hr','hr_timesheet_sheet','hr_weekly_working_hours'],
     'depends': [
         'account_period',
         'payroll','hr','hr_timesheet_sheet',
         # 'hr_weekly_working_hours'
         ], # hr_contract_types | CybroOdoo-OpenHRMS/hr_contract_types
+=======
+    'depends': ['payroll', 'account_period', 'hr', 'hr_timesheet_sheet','hr_contract_type'],
+>>>>>>> b359d85108f379f5bb909961d5642babe87c1f1f
     'description': """
 Swedish Payroll Rules.
 ======================
@@ -52,7 +55,7 @@ Swedish Payroll Rules.
     * Integrated with Holiday Management
     """,
     'auto_install': False,
-    'data':[
+    'data': [
         'data/hr_payroll_data.xml',
         'views/hr_payroll_view.xml',
         'data/hr_payroll_data.xml',
@@ -66,12 +69,15 @@ Swedish Payroll Rules.
         'views/hr_employee_views.xml',
         'views/hr_payslip_template.xml',
         'views/hr_payslip_run_views.xml',
-        'views/res_config_settings_views.xml',
+        # 'views/res_config_settings_views.xml',
         'views/user_payslip_views.xml',
         'security/ir.model.access.csv',
+        'report/pivot_salary_views.xml',
+
+        'views/res_company.xml',
 
     ],
-    'demo':[
+    'demo': [
         # ~ 'demo/hr_payroll_demo.xml',
         'demo/hr_payroll_demo.xml',
     ],

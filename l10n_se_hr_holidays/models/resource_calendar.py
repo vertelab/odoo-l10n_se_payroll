@@ -20,6 +20,7 @@ from pytz import timezone, utc
 from odoo.addons.resource.models.resource import float_round, float_to_time, float_utils
 from odoo.osv import expression
 
+
 # Default hour per day value. The one should
 # only be used when the one from the calendar
 # is not available.
@@ -62,8 +63,7 @@ class ResourceCalendar(models.Model):
                             'hour_to': 17, 'day_period': 'afternoon', 'absent_calendar_id': self.id}),
                 ]
 
-    absent_work_days = fields.One2many('resource.calendar.attendance', 'absent_calendar_id', 'Absent Hours',
-                                       )
+    absent_work_days = fields.One2many('resource.calendar.attendance', 'absent_calendar_id', 'Absent Hours')
 
     def set_non_work_days(self):
         formatted_days_of_weeks = {}

@@ -186,7 +186,7 @@ if age > 77:
       <field name="appears_on_payslip" eval="False"/>
       <field name="condition_select">none</field>
       <field name="amount_select">code</field>
-      <field name="amount_python_compute">result = categories.BAS - categories.BRUAVG + categories.BRUTIL</field>
+      <field name="amount_python_compute">result = round(categories.BAS - categories.BRUAVG + categories.BRUTIL)</field>
       <field name="quantity">1</field>
     </record>
     <!--

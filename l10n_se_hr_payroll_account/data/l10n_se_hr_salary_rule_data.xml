@@ -2,114 +2,85 @@
 <odoo>
   <data>
     <record id="l10n_se_hr_payroll.hr_salary_rule-san" model="hr.salary.rule">
-      <field name="account_debit" search="[('code', '=', '7511')]" />
+      <field name="account_debit_char">7511</field>
     </record>
     <record id="l10n_se_hr_payroll.hr_salary_rule-san-mot" model="hr.salary.rule">
-      <field name="account_credit" search="[('code', '=', '2731')]" />
-      <field name="account_tax_id" search="[('name', '=', 'AvgHel')]" />
+      <field name="account_credit_char">2731</field>
+      <field name="account_tax_char">AvgHel</field>
     </record>
-
     <record id="7399_2017" model="account.account">
       <field name="name">Motkonto för förmåner</field>
       <field name="code">7399</field>
       <field name="user_type_id" ref="account.data_account_type_expenses"/>
     </record>
-
     <record id="l10n_se_hr_payroll.hr_salary_rule-formon-til" model="hr.salary.rule">
-
-      <field name="account_debit" search="[('code', '=', '7399')]"/>
-      <field name="account_credit" search="[('code', '=', '7388')]"/>
-
+      <field name="account_debit_char">7388</field>
+      <field name="account_credit_char">7399</field>
     </record>
-    <!-- account.data_account_type_non_current_assets -->
-    <!--
-         ===== CHILD SAP
-    -->
     <record id="l10n_se_hr_payroll.hr_salary_rule-sap" model="hr.salary.rule">
-      <field name="account_debit" search="[('code', '=', '7521')]" />
+      <field name="account_debit_char" >7521</field>
     </record>
     <record id="l10n_se_hr_payroll.hr_salary_rule-sap-mot" model="hr.salary.rule">
-      <field name="account_credit" search="[('code', '=', '2731')]" />
-      <field name="account_tax_id" search="[('name', '=', 'AvgAldersp')]" />
+      <field name="account_credit_char">2731</field>
+      <field name="account_tax_char">AvgAldersp</field>
     </record>
-<!-- 
-    <record id="l10n_se_hr_payroll.hr_salary_rule-sapx" model="hr.salary.rule">
-      <field name="account_debit" search="[('code', '=', '7534')]" />
-    </record>
-    <record id="l10n_se_hr_payroll.hr_salary_rule-sapx-mot" model="hr.salary.rule">
-      <field name="account_credit" search="[('code', '=', '2731')]" />
-      <field name="account_tax_id" search="[('name', '=', 'SkLonSarsk')]" />
-    </record>
--->
-    <!--
-         =====
-    -->
     <record id="l10n_se_hr_payroll.hr_salary_rule-prej" model="hr.salary.rule">
-      <field name="account_credit" search="[('code', '=', '2710')]" />
-      <field name="account_tax_id" search="[('name', '=', 'SkAvdrLon')]" />
+      <field name="account_credit_char">2710</field>
+      <field name="account_tax_char" >SkAvdrLon</field>
     </record>
-    <!--
-         =====
-    -->
-    <!--
-         =====
-         categories.BRUTTO - categories.NETAVG + categories.NETTIL
-    -->
     <record id="l10n_se_hr_payroll.hr_salary_rule-resmil" model="hr.salary.rule">
-      <!--
-           Väljer alltid 5800 (deb lägsta) trots att 5841 är det konto som önskas om det finns upplagt i BAS 2015
-      -->
-      <field name="account_debit" search="['|',('code', '=', '5841'),('code', '=', '5800')]" />
+      <field name="account_debit_char">5841,5800</field>
     </record>
-    <!--
-         =====
-    -->
     <record id="l10n_se_hr_payroll.hr_salary_rule-bl" model="hr.salary.rule">
-      <field name="account_debit" search="[('code', '=', '7210')]" />
-      <field name="account_tax_id" search="[('name', '=', 'UlagAvgHel')]" />
+      <field name="account_debit_char">7210</field>
+      <field name="account_tax_char">UlagAvgHel</field>
     </record>
     <record id="l10n_se_hr_payroll.hr_salary_rule-blfl" model="hr.salary.rule">
-      <field name="account_debit" search="[('code', '=', '7292')]" />
-      <field name="account_credit" search="[('code', '=', '2920')]" />
+      <field name="account_debit_char">7292</field>
+      <field name="account_credit_char">2920</field>
     </record>
     <record id="l10n_se_hr_payroll.hr_salary_rule-blflsem" model="hr.salary.rule">
-      <field name="account_debit" search="[('code', '=', '7223')]" />
-      <field name="account_tax_id" search="[('name', '=', 'UlagAvgAldersp')]" />
+      <field name="account_debit_char">7223</field>
+      <field name="account_tax_char">UlagAvgAldersp</field>
     </record>
     <record id="l10n_se_hr_payroll.hr_salary_rule-blflu" model="hr.salary.rule">
-      <field name="account_debit" search="[('code', '=', '7223')]" />
-      <field name="account_tax_id" search="[('name', '=', 'UlagAvgAldersp')]" />
+      <field name="account_debit_char">7223</field>
+      <field name="account_tax_char">UlagAvgAldersp</field>
     </record>
     <record id="l10n_se_hr_payroll.hr_salary_rule-blfln" model="hr.salary.rule">
-      <field name="account_debit" search="[('code', '=', '7221')]" />
-      <field name="account_tax_id" search="[('name', '=', 'UlagAvgHel')]" />
+      <field name="account_debit_char">7221</field>
+      <field name="account_tax_char">UlagAvgHel</field>
     </record>
     <record id="l10n_se_hr_payroll.hr_salary_rule-blflp" model="hr.salary.rule">
-      <field name="account_debit" search="[('code', '=', '7224')]" />
-      <field name="account_tax_id" search="[('name', '=', 'UlagAvgAldersp')]" />
+      <field name="account_debit_char">7224</field>
+      <field name="account_tax_char">UlagAvgAldersp</field>
     </record>
     <record id="l10n_se_hr_payroll.hr_salary_rule-blflpx" model="hr.salary.rule">
-      <field name="account_debit" search="[('code', '=', '7225')]" />
-      <field name="account_tax_id" search="[('name', '=', 'UlagSkLonSarsk')]" />
+      <field name="account_debit_char">7225</field>
+      <field name="account_tax_char">UlagSkLonSarsk</field>
     </record>
     <record id="l10n_se_hr_payroll.hr_salary_rule-sum" model="hr.salary.rule">
-      <field name="account_credit" search="[('code', '=', '2821')]" />
+      <field name="account_credit_char">2821</field>
+    </record>
+    
+    <record id="l10n_se_hr_payroll.hr_salary_rule-nettoavdr-avg" model="hr.salary.rule">
+        <field name="account_credit_char">7399</field>
     </record>
 
     <!-- Drivmedelsförmån -->
     <record id="l10n_se_hr_payroll.hr_salary_rule-fuel-deduct018" model="hr.salary.rule">
-           <field name="account_credit" search="[('code', '=', '2710')]" />
-           <field name="account_tax_id" search="[('name', '=', 'SkAvdrLon')]" />
+           <field name="account_credit_char">2710</field>
+           <field name="account_tax_char">SkAvdrLon</field>
     </record>
     <record id="l10n_se_hr_payroll.hr_salary_rule-fuel-018b" model="hr.salary.rule">
-         <field name="account_credit" search="[('code', '=', '2710')]" />
-           <field name="account_tax_id" search="[('name', '=', 'SkAvdrLon')]" />
+         <field name="account_credit_char">2710</field>
+           <field name="account_tax_char">SkAvdrLon</field>
     </record>
     <record id="l10n_se_hr_payroll.hr_salary_rule-fuel-deduct018u" model="hr.salary.rule">
-           <field name="account_credit" search="[('code', '=', '7385')]" />
+           <field name="account_credit_char">7385</field>
     </record>
     <record id="l10n_se_hr_payroll.hr_salary_rule-fuel-018bu" model="hr.salary.rule">
-         <field name="account_credit" search="[('code', '=', '7385')]" />
+         <field name="account_credit_char">7385</field>
     </record>
 
     <!--
@@ -152,5 +123,7 @@ Finns i l10n_se
     <record id="l10n_se_hr_payroll.hr_salary_rule-san-mot-SKV" model="hr.salary.rule">
       <field name="register_id" ref="l10n_se_hr_payroll_account.hr_contribution_register-SKV" />
     </record>
+    <function model="hr.salary.rule" name="set_account_tax_using_char_fields"></function>
+
   </data>
 </odoo>

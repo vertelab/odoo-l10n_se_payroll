@@ -21,7 +21,7 @@
 
 {
     'name': 'l10n_se_payroll: Swedish Holiday Schedule',
-    'version': '14.0.1.0.0',
+    'version': '14.1.1.0.0',
     # Version ledger: 14.0 = Odoo version. 1 = Major. Non regressionable code. 2 = Minor. New features that are regressionable. 3 = Bug fixes
     'summary': 'Import swedish holidays to work schedule.',
     'category': 'Payroll Localization',
@@ -30,7 +30,7 @@
     """,
     #'sequence': '1'
     'author': 'Vertel AB',
-    'website': 'https://vertel.se/apps/l10n_se_payroll/l10n_se_resource_calendar_leaves_import',
+    'website': 'https://vertel.se/apps/odoo-l10n_se_payroll/l10n_se_resource_calendar_leaves_import',
     'images': ['static/description/banner.png'], # 560x280 px.
     'license': 'AGPL-3',
     'contributor': '',
@@ -41,9 +41,13 @@
     # Check https://github.com/odoo/odoo/blob/master/openerp/addons/base/module/module_data.xml
     # for the full list
     # ~ 'depends': ['resource_calendar_leaves_import'],
-    'depends': [],
+    'depends': [
+    'ics_import_holidays'
+    ],
     'data': [
-        'resource_data.xml'
+    'views/res_config_settings_url.xml',
+        # 'data/ir_server_action.xml'
+        # 'security/ir.model.access.csv',
     ],
     'demo': [
     ],

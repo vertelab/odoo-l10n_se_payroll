@@ -36,16 +36,13 @@ This module adds a sample py3o expense reports.
     """,
     #'sequence': '1',
     'author': 'Vertel AB',
-    'website': 'https://vertel.se/apps/odoo-l10n_se_payroll',
+    'website': 'https://vertel.se/apps/odoo-l10n_se_payroll/l10n_se_payslip',
     'images': ['static/description/banner.png'], # 560x280 px.
     'license': 'AGPL-3',
     'contributor': '',
     'maintainer': 'Vertel AB',
     'repository': 'https://github.com/vertelab/odoo-l10n_se_payroll',
-    'depends': [
-        'report_py3o',
-        'l10n_se_hr_payroll',
-        ],
+    'depends': ['report_py3o','l10n_se_hr_payroll','l10n_se_hr_holidays'],
     'data': ['report.xml'],
     'installable': True,
 }

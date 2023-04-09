@@ -14,6 +14,7 @@
               <field name="allocation_type" position="after">
                   <field name="legal_leave" />
                   <field name="holiday_basis" />
+                  <field name="sick_leave" />
               </field>
           </field>
       </record>
@@ -54,3 +55,4 @@
       </record>
   </data>
 </odoo>
+

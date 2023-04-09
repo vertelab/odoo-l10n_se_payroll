@@ -39,6 +39,8 @@ class HrPayslip(models.Model):
                 amount = currency.round(slip.credit_note and -line.total or line.total)
                 if currency.is_zero(amount):
                     continue
+                    
+                # Hitta kontot för nyvarande företag
                 debit_account_id = line.salary_rule_id.account_debit.id
                 credit_account_id = line.salary_rule_id.account_credit.id
 
@@ -135,3 +137,82 @@ class HrPayslip(models.Model):
             if self.env["ir.config_parameter"].sudo().get_param("l10n_se_hr_payroll_account.payroll_account_post"):
                 move.post()
         return res
+        
+        
+        
+class HrSalaryRule(models.Model):
+    _inherit = "hr.salary.rule"
+    
+    
+    account_tax_char = fields.Char() #Used to save tax name until we know which company it is.
+    account_debit_char = fields.Char() #Used to save account code until we know which company it is.
+    account_credit_char = fields.Char() #Used to save account code until we know which company it is.
+    
+    analytic_account_id = fields.Many2one(
+        "account.analytic.account", "Analytic Account", domain = "[('company_id','=',company_id)]")
+    account_tax_id = fields.Many2one("account.tax", "Tax", domain = "[('company_id','=',company_id)]")
+    account_debit = fields.Many2one("account.account", "Debit Account", domain = "[('deprecated', '=', False),('company_id','=',company_id)]")
+    account_credit = fields.Many2one("account.account", "Credit Account", domain = "[('deprecated', '=', False),('company_id','=',company_id)]")
+    
+    def write(self,vals_list):
+        res = super().write(vals_list)
+        for record in self:
+            record.check_company_fields()
+        return res
+        
+    @api.model_create_multi    
+    def create(self,vals_list):
+        res = super().create(vals_list)
+        for record in res:
+            record.check_company_fields()
+        return res
+    
+    def check_company_fields(self):
+        all_errors = ""
+        for record in self:
+            error = ""
+            if record.company_id and record.account_debit and record.company_id != record.account_debit.company_id:
+                    error = error + f"Salary rule {record.name} has a debit account from a different company. {record.account_debit.code}. \n"
+                    
+            if record.company_id and record.account_credit and record.company_id != record.account_credit.company_id:
+                    error = error + f"Salary rule {record.name} has a credit account from a different company. {record.account_credit.code}. \n"
+                
+            if record.company_id and record.account_tax_id and record.company_id != record.account_tax_id.company_id:
+                    error = error + f"Salary rule {record.name} has a tax from a different company. {record.account_tax_id.name}. \n"
+            if len(error) > 0:
+                all_errors = all_errors + error + "\n"
+        if len(all_errors) > 0:
+            _logger.warning(f"{all_errors=}")
+            #raise UserError(all_errors)
+            
+    @api.model
+    def set_account_tax_using_char_fields(self):
+        all_rules = self.env['hr.salary.rule'].search([])
+        #Function that will be used for multicompany setups#
+        
+        for record in all_rules:
+            if record.company_id and record.account_debit_char and not record.account_debit:
+                record.account_debit = self.env["account.account"].search([("company_id","=",record.company_id.id),("code","=",record.account_debit_char)])
+            if record.company_id and record.account_credit_char and not record.account_credit:
+                _logger.warning(f'{self.env["account.account"].search([("company_id","=",record.company_id.id),("code","=",record.account_credit_char)])=}')
+                record.account_credit = self.env["account.account"].search([("company_id","=",record.company_id.id),("code","=",record.account_credit_char)])
+            if record.company_id and record.account_tax_char and not record.account_tax_id:
+                record.account_tax_id = self.env["account.tax"].search([("company_id","=",record.company_id.id),("name","=",record.account_tax_char)])
+
+    
+    
+    def fix_company_fields(self):
+        #If it uses the account or tax from another company then we try to find it for the current company#
+        for record in self:
+            if record.company_id and record.account_debit and record.company_id != record.account_debit.company_id:
+                record.account_debit = self.env["account.account"].search([("company_id","=",record.company_id.id),("code","=",record.account_debit.code)])
+            if record.company_id and record.account_credit and record.company_id != record.account_credit.company_id:
+                record.account_credit = self.env["account.account"].search([("company_id","=",record.company_id.id),("code","=",record.account_credit.code)])
+            if record.company_id and record.account_tax_id and record.company_id != record.account_tax_id.company_id:
+                record.account_tax_id = self.env["account.tax"].search([("name","=",record.account_tax_id.name),("company_id","=",record.company_id.id),("type_tax_use","=",record.account_tax_id.type_tax_use),("amount","=",record.account_tax_id.amount)])
+
+            
+                
+                
+    
+

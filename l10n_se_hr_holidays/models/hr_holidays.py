@@ -22,40 +22,52 @@ from dataclasses import field
 import odoo.exceptions
 from odoo import models, fields, api, _
 import datetime
-from datetime import timedelta, date
+from datetime import timedelta, date, datetime
 from odoo.exceptions import AccessError, UserError, ValidationError
 
 import logging
 
+from pytz import timezone, UTC
+from collections import defaultdict, namedtuple
+import math
+from odoo.tools.float_utils import float_round
 _logger = logging.getLogger(__name__)
 
+from odoo.addons.resource.models.resource import float_to_time, HOURS_PER_DAY
 
-# class hr_holidays(models.Model):
+# Used to agglomerate the attendances in order to find the hour_from and hour_to
+# See _compute_date_from_to
+DummyAttendance = namedtuple('DummyAttendance', 'hour_from, hour_to, dayofweek, day_period, week_type')
+
+
+
 class Holidays(models.Model):
-    # _inherit = "hr_holidays.holidays"
     _inherit = "hr.leave"
 
-    # ~ earning_id = fields.Many2one(comodel_name='hr.holidays.earning')
 
-    # def _timesheet_prepare_line_values(self, index, work_hours_data, day_date, work_hours_count): self.ensure_one()
-    # return { 'name': "%s (%s/%s)" % (self.holiday_status_id.name or '', index + 1, len(work_hours_data)),
-    # 'project_id': self.holiday_status_id.timesheet_project_id.id, 'task_id':
-    # self.holiday_status_id.timesheet_task_id.id, 'account_id':
-    # self.holiday_status_id.timesheet_project_id.analytic_account_id.id, 'unit_amount': work_hours_count,
-    # 'user_id': self.employee_id.user_id.id, 'date': day_date, 'holiday_id': self.id, 'employee_id':
-    # self.employee_id.id, 'company_id': self.holiday_status_id.timesheet_task_id.company_id.id or
-    # self.holiday_status_id.timesheet_project_id.company_id.id, }
+    
+    def _compute_karens(self):
+         for leave_request in self:
+            if leave_request.holiday_status_id.sick_leave:    
+                leave = self.env['hr.leave'].search([
+                 ('employee_id','=',leave_request.employee_id.id),
+                 ('date_to', '<', leave_request.date_from)],
+                 order='date_to desc', limit=1)
+      
+                if not leave or (leave_request.date_from - leave[0].date_to).days > 5:
+                    leave_request.is_deffered_period = True
+                else:
+                    leave_request.is_deffered_period = False
+            else:
+                leave_request.is_deffered_period = False
 
-    # not_paid = field.Boolean()
+        
+    is_deffered_period = fields.Boolean(string="Deffered Day", compute=_compute_karens)
+    
 
-    # unpaid = fields.Boolean('Is Unpaid', default=False)
     def _timesheet_prepare_line_values(self, index, work_hours_data, day_date, work_hours_count):
-        val_list = super(Holidays, self)._timesheet_prepare_line_values(index, work_hours_data, day_date, work_hours_count)
-        # _logger.error(f"{val_list=}")
-        # _logger.error(f"{val_list['non_billable_time']=}")
-        # val_list['non_billable_time'] = self.holiday_status_id.unpaid * val_list["unit_amount"]
-        # val_list['non_billable'] = self.holiday_status_id.unpaid
-        # _logger.error(f"{val_list=}")
+        val_list = super(Holidays, self)._timesheet_prepare_line_values(index, work_hours_data, day_date,
+                                                                        work_hours_count)
         return val_list
 
     def _get_number_of_days(self, date_from, date_to, employee_id):
@@ -68,143 +80,12 @@ class Holidays(models.Model):
         return super(Holidays, instance)._get_number_of_days(date_from, date_to, employee_id, )
 
 
-# class HolidaysType(models.Model):
-#     _inherit = "hr.leave.type"
-#     # _description = "Time Off Type"
+    def action_fetch_data(self):
+        pass
 
-#     @api.model
-#     def _model_sorting_key(self):
-#         self.unpaid = fields.Boolean('Is Unpaid', default=False)
-
-    @api.constrains('date_from', 'date_to', 'employee_id')
-    def _check_date(self):
-        if self.env.context.get('leave_skip_date_check', False):
-            return
-        for holiday in self.filtered('employee_id'):
-            domain = [
-                ('date_from', '<', holiday.date_to),
-                ('date_to', '>', holiday.date_from),
-                ('employee_id', '=', holiday.employee_id.id),
-                ('id', '!=', holiday.id),
-                ('state', 'not in', ['cancel', 'refuse']),
-            ]
-            nholidays = self.search_count(domain)
-            if nholidays:
-                return
-                # raise ValidationError(_('HELLOOOO'))
-
-    # Owerriding this function to get rid of an if case that raises a VaildationError
-    def action_validate(self):
-        current_employee = self.env.user.employee_id
-        leaves = self.filtered(lambda l: l.employee_id and not l.number_of_days)
-        if leaves:
-            return
-        #     raise ValidationError(_('The following employees are not supposed to work during that period:\n %s') % ','.join(leaves.mapped('employee_id.name')))
-
-        if any(holiday.state not in ['confirm', 'validate1'] and holiday.validation_type != 'no_validation' for holiday in self):
-            raise UserError(_('Time off request must be confirmed in order to approve it.'))
-
-        self.write({'state': 'validate'})
-        self.filtered(lambda holiday: holiday.validation_type == 'both').write({'second_approver_id': current_employee.id})
-        self.filtered(lambda holiday: holiday.validation_type != 'both').write({'first_approver_id': current_employee.id})
-
-        for holiday in self.filtered(lambda holiday: holiday.holiday_type != 'employee'):
-            if holiday.holiday_type == 'category':
-                employees = holiday.category_id.employee_ids
-            elif holiday.holiday_type == 'company':
-                employees = self.env['hr.employee'].search([('company_id', '=', holiday.mode_company_id.id)])
-            else:
-                employees = holiday.department_id.member_ids
-
-            conflicting_leaves = self.env['hr.leave'].with_context(
-                # tracking_disable=True,
-                # mail_activity_automation_skip=True,
-                # leave_fast_create=True
-            ).search([
-                ('date_from', '<=', holiday.date_to),
-                ('date_to', '>', holiday.date_from),
-                ('state', 'not in', ['cancel', 'refuse']),
-                ('holiday_type', '=', 'employee'),
-                ('employee_id', 'in', employees.ids)])
-
-            if conflicting_leaves:
-                # YTI: More complex use cases could be managed in master
-                
-                # if holiday.leave_type_request_unit != 'day' or any(l.leave_type_request_unit == 'hour' for l in conflicting_leaves):
-                #     raise ValidationError(_('You can not have 2 time off that overlaps on the same day.'))
-
-                # keep track of conflicting leaves states before refusal
-                target_states = {l.id: l.state for l in conflicting_leaves}
-                conflicting_leaves.action_refuse()
-                split_leaves_vals = []
-                for conflicting_leave in conflicting_leaves:
-                    if conflicting_leave.leave_type_request_unit == 'half_day' and conflicting_leave.request_unit_half:
-                        continue
-
-                    # Leaves in days
-                    if conflicting_leave.date_from < holiday.date_from:
-                        before_leave_vals = conflicting_leave.copy_data({
-                            'date_from': conflicting_leave.date_from.date(),
-                            'date_to': holiday.date_from.date() + timedelta(days=-1),
-                            'state': target_states[conflicting_leave.id],
-                        })[0]
-                        before_leave = self.env['hr.leave'].new(before_leave_vals)
-                        before_leave._compute_date_from_to()
-
-                        # Could happen for part-time contract, that time off is not necessary
-                        # anymore.
-                        # Imagine you work on monday-wednesday-friday only.
-                        # You take a time off on friday.
-                        # We create a company time off on friday.
-                        # By looking at the last attendance before the company time off
-                        # start date to compute the date_to, you would have a date_from > date_to.
-                        # Just don't create the leave at that time. That's the reason why we use
-                        # new instead of create. As the leave is not actually created yet, the sql
-                        # constraint didn't check date_from < date_to yet.
-                        if before_leave.date_from < before_leave.date_to:
-                            split_leaves_vals.append(before_leave._convert_to_write(before_leave._cache))
-                    if conflicting_leave.date_to > holiday.date_to:
-                        after_leave_vals = conflicting_leave.copy_data({
-                            'date_from': holiday.date_to.date() + timedelta(days=1),
-                            'date_to': conflicting_leave.date_to.date(),
-                            'state': target_states[conflicting_leave.id],
-                        })[0]
-                        after_leave = self.env['hr.leave'].new(after_leave_vals)
-                        after_leave._compute_date_from_to()
-                        # Could happen for part-time contract, that time off is not necessary
-                        # anymore.
-                        if after_leave.date_from < after_leave.date_to:
-                            split_leaves_vals.append(after_leave._convert_to_write(after_leave._cache))
-
-                split_leaves = self.env['hr.leave'].with_context(
-                    tracking_disable=True,
-                    mail_activity_automation_skip=True,
-                    leave_fast_create=True,
-                    leave_skip_state_check=True
-                ).create(split_leaves_vals)
-
-                split_leaves.filtered(lambda l: l.state in 'validate')._validate_leave_request()
-
-            values = holiday._prepare_employees_holiday_values(employees)
-            leaves = self.env['hr.leave'].with_context(
-                tracking_disable=True,
-                mail_activity_automation_skip=True,
-                leave_fast_create=True,
-                leave_skip_state_check=True,
-            ).create(values)
-
-            leaves._validate_leave_request()
-
-        employee_requests = self.filtered(lambda hol: hol.holiday_type == 'employee')
-        employee_requests._validate_leave_request()
-        if not self.env.context.get('leave_fast_create'):
-            employee_requests.filtered(lambda holiday: holiday.validation_type != 'no_validation').activity_update()
-        return True
 
 
 class hr_holidays_status(models.Model):
-    # ~ _inherit = "hr.holidays.status" looks like hr.leave.type is the replacment
-    # _inherit = ["hr.leave.type","hr.timesheet.schema"]
     _inherit = "hr.leave.type"
 
     limit = fields.Boolean('Allow to Override Limit',
@@ -218,6 +99,8 @@ class hr_holidays_status(models.Model):
                                  help='If checked, it will be included in legal leaves calculation')
     holiday_basis = fields.Boolean(string='Holiday Basis', default=False,
                                    help='If checked, this kind of holiday will be included in holiday basis calculation')
+    sick_leave = fields.Boolean(string='Sick Leave', default=False,
+                                 help='If checked, it will automatically check if any day will be a deferred period')
 
     include_weekends = fields.Boolean(string='Include Weekends', default=False,
                                       help='If enabled, weekends are counted in leave days calculation.')
@@ -259,8 +142,6 @@ class hr_holidays_status(models.Model):
             'color_name': 'red',
         })
 
-    # ~ @api.one
-    # ~ @api.depends('date_earning_start','date_earning_end','limit')
     @api.depends('date_earning_start', 'date_earning_end', 'limit')
     def _holidays_allowed(self):
         for rec in self:
@@ -319,13 +200,8 @@ class hr_employee(models.Model):
 class hr_payslip(models.Model):
     _inherit = 'hr.payslip'
 
-    # ~ @api.one
     def _holiday_ids(self):
         for rec in self:
-            # ~ rec.holiday_ids = rec.env['hr.leave'].search([('state','=','validate'),('employee_id','=',
-            # rec.employee_id.id),('type','=','remove')]).filtered(lambda h: h.date_from[:10] <= rec.date_to and
-            # h.date_from[:10] >= rec.date_from) the type field is removed in 14, i don't know what kind of after
-            # effects this will have.
             rec.holiday_ids = rec.env['hr.leave'].search(
                 [('state', '=', 'validate'), ('employee_id', '=', rec.employee_id.id)]).filtered(
                 lambda h: rec.date_to >= h.date_from.date() >= rec.date_from)
@@ -370,24 +246,12 @@ class hr_payslip(models.Model):
 
     @api.model
     def get_legal_leaves_days(self, code):
-        # ~ raise Warning(f"get_legal_leaves before {self}")
-        # _logger.warning(f"get_legal_leaves before {self}")
-        # ~ result = self.holiday_ids.filtered(lambda h: h.holiday_status_id.legal_leave == True)
         result = sum(self.worked_days_line_ids.filtered(lambda h: h.code == code).mapped('number_of_days'))
         return result
 
     def leave_number_of_days(self, holiday_status_ref):
         return sum(self.worked_days_line_ids.filtered(lambda w: w.code == self.env.ref(holiday_status_ref).name).mapped(
             'number_of_days'))
-
-    # @api.model def get_legal_leaves_consumed(self, year = False): if not year: year = datetime.datetime.now().year
-    # start_date = datetime.datetime(year,1,1) stop_date = datetime.datetime(year,12,30) return abs(sum(self.env[
-    # 'hr.leave'].search([('employee_id', '=', self.employee_id.id), ('date_from', '>=', start_date.strftime(
-    # '%Y-%m-%d')), ('date_to', '<=',stop_date.strftime('%Y-%m-%d') ), ('state', '=', 'validate')]).filtered(lambda
-    # h: h.holiday_status_id.legal_leave == True).mapped('number_of_days'))) #return abs(sum(self.env[
-    # 'hr.leave'].search([('employee_id', '=', self.employee_id.id), ('date_from', '>=', start_date.strftime(
-    # '%Y-%m-%d')), ('date_to', '<=', self.date_to), ('type', '=', 'remove'), ('state', '=', 'validate')]).filtered(
-    # lambda h: h.holiday_status_id.legal_leave == True).mapped('number_of_days')))
 
     @api.model
     def get_legal_leaves_consumed(self):
@@ -416,4 +280,18 @@ class hr_payslip(models.Model):
             days += line.number_of_days
         return days_basis / days if days > 0.0 else 0.0
 
+
+    
+    def get_sick_days(self):
+
+        pass
+
+        # ~ days = 0.0
+        # ~ for line in self.worked_days_line_ids:
+            # ~ if self.env['hr.leave.type'].search(
+                    # ~ [('name', '=', line.code), ('holiday_basis', '=', True)]) or line.code == 'WORK100':
+                # ~ days += line.number_of_days
+        # ~ return days
+
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
+

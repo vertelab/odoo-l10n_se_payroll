@@ -25,18 +25,15 @@
     'summary': 'https://skatteverket.entryscape.net/store/9/resource/1534',
     'category': 'Payroll Localization',
     'author': 'Vertel AB',
-    'website': 'https://vertel.se/apps/l10n_se_payroll/l10n_se_payroll_taxtable',
+    'website': 'https://vertel.se/apps/odoo-l10n_se_payroll/l10n_se_payroll_taxtable',
     'images': ['static/description/banner.png'], # 560x280 px.
     'license': 'AGPL-3',
     'maintainer': 'Vertel AB',
     'repository': 'https://github.com/vertelab/odoo-l10n-se-payroll',
     'depends': ['l10n_se', 'hr_contract', 'l10n_se_hr_payroll'],
     'description': """
-    To configure the tax table start with coping this link:
-    https://skatteverket.entryscape.net/store/9/resource/1534
-    Then go to Employee and chose in the sub menu Configuration.
-    Click on Sync TaxTable and insert the link.
-    Click on Sync and it's done.
+        'Compute Sheet' will fetch any data not already present in the database
+        through Skatteverket API, Taxtable lines will be gathered by year. 
     """,
     'auto_install': False,
     'demo': [],

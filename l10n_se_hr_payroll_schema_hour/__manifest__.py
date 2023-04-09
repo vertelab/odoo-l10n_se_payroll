@@ -27,7 +27,7 @@
     'category': 'Payroll Localization',
     #'sequence': '1'
     'author': 'Vertel AB',
-    'website': 'https://vertel.se/apps/l10n_se_payroll/l10n_se_hr_payroll_schema_hour',
+    'website': 'https://vertel.se/apps/odoo-l10n_se_payroll/l10n_se_hr_payroll_schema_hour',
     'images': ['static/description/banner.png'], # 560x280 px.
     'license': 'AGPL-3',
     'contributor': '',
@@ -37,8 +37,12 @@
 Hour salary rules
 =================
 """,
-    'depends': ['hr_payroll_schema_hour', 'l10n_se_hr_payroll', 'l10n_se_hr_holidays'],
-    'data': ['hr_salary_rule_data.xml'],
+    #'depends': ['hr_payroll_schema_hour', 'l10n_se_hr_payroll', 'l10n_se_hr_holidays'],
+    'depends': ['l10n_se_hr_payroll', 'l10n_se_hr_holidays', 'hr_timesheet_sheet'],
+    'data': [
+    'data/hr_salary_rule_data.xml',
+            #  'views/employee_contract_schema_hours_view.xml'
+             ], 
     'installable': True,
 }
 

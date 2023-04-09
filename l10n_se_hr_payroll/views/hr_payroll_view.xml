@@ -78,6 +78,7 @@
             <field name="arch" type="xml">
                 <field name="condition_range_min" position="after">
                     <field name="appears_on_payslip" />
+                    <!-- <field name="payslip_character"></field> -->
                     <field name="parent_rule_id" />
                     <field name="child_ids" />
                     <filter string="Appears On Payslip" name="appears_on_payslip" domain="[('appears_on_payslip','=',True)]" />
@@ -85,17 +86,31 @@
                 </field>
             </field>
         </record>
+
+        
         <!-- <record id="payslip_period_id_select" model="ir.ui.view">
             <field name="name">period_id</field>
             <field name="model">hr.payslip</field>
             <field name="inherit_id" ref="payroll.hr_payslip_view_form" />
             <field name="arch" type="xml">
-                <field name="period_id" position="before">
-                    <string><field name="choose_date_method"/></string>
+                <field name="date_from" position="before">
+                    <field name="choose_date_method"/>
                 </field>
             </field>
         </record> -->
 
+
+        <record id="last_salary_view_form" model="ir.ui.view">
+            <field name="name">last_salary</field>
+            <field name="model">hr.payslip</field>
+            <field name="inherit_id" ref="payroll.hr_payslip_view_form" />
+            <field name="arch" type="xml">
+                <field name="number" position="before">
+                    <!-- <field name="last_salary_payslip"></field> -->
+                    <!-- <field name="colected_vecation_days"></field> -->
+                </field>
+            </field>
+        </record>
 
 
 

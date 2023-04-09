@@ -27,7 +27,7 @@
     'category': 'Payroll Localization',
     #'sequence': '1'
     'author': 'Vertel AB',
-    'website': 'https://vertel.se/apps/l10n_se_payroll/l10n_se_hr_payroll_ku10',
+    'website': 'https://vertel.se/apps/odoo-l10n_se_payroll/l10n_se_hr_payroll_ku10',
     'images': ['static/description/banner.png'], # 560x280 px.
     'license': 'AGPL-3',
     'contributor': '',
