@@ -32,16 +32,7 @@
     'contributor': '',
     'maintainer': 'Vertel AB',
     'repository': 'https://github.com/vertelab/odoo-l10n-se-payroll',
-<<<<<<< HEAD
-    # ~ 'depends': ['payroll','hr_contract_types','account_period','hr','hr_timesheet_sheet','hr_weekly_working_hours'],
-    'depends': [
-        'account_period',
-        'payroll','hr','hr_timesheet_sheet',
-        # 'hr_weekly_working_hours'
-        ], # hr_contract_types | CybroOdoo-OpenHRMS/hr_contract_types
-=======
     'depends': ['payroll', 'account_period', 'hr', 'hr_timesheet_sheet','hr_contract_type'],
->>>>>>> b359d85108f379f5bb909961d5642babe87c1f1f
     'description': """
 Swedish Payroll Rules.
 ======================
