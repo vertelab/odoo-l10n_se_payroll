@@ -28,7 +28,7 @@
         </record>
         <record id="contract_karin" model="hr.contract">
             <field name="name">Karin Kullberg Avtal</field>
-            <field name="wage">0</field>
+            <field name="wage">1</field>
             <field name="type_id" ref="hr_contract_type" />
             <field name="employee_id" ref="hr_karin_employee" />
             <field name="schedule_pay" eval="'monthly'" />

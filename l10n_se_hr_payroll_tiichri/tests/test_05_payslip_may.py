@@ -18,8 +18,6 @@ _logger = logging.getLogger(__name__)
 
 class TestPayslipMay(common.SavepointCase):
 
-
-
     @classmethod
     def _create_leave(cls, employee_id, code, date_from, date_to, number_of_days): 
         cls.leave_type = cls.env["hr.leave.type"].search([('code', '=', code)])
@@ -68,8 +66,8 @@ class TestPayslipMay(common.SavepointCase):
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
-        cls.date_start = fields.Date.from_string('2022-02-01')
-        cls.date_stop = fields.Date.from_string('2022-02-28')
+        cls.date_start = fields.Date.from_string('2022-05-01')
+        cls.date_stop = fields.Date.from_string('2022-05-31')
         cls.company = cls.env['res.company'].search([('name', '=', 'Aronssons Montage AB')])
         cls.struct = cls.env['hr.payroll.structure'].search([('code', '=', 'bas2018-tj')])
 
@@ -120,10 +118,10 @@ class TestPayslipMay(common.SavepointCase):
        
         # Helmer Henriksson
         cls.employee_helmer = cls.env.ref('l10n_se_hr_payroll_tiichri.hr_helmer_employee')  # helmer_employee
-        cls.helmer_kar = cls._create_leave(cls.employee_helmer.id, "sjk_kar" ,"2022-05-19","2022-05-19",1)
-        cls.helmer_kar = cls._create_leave(cls.employee_helmer.id, "sjk_214" ,"2022-05-20","2022-05-20",1)
-        cls.helmer_kar = cls._create_leave(cls.employee_helmer.id, "sjk_kar" ,"2022-05-27","2022-05-27",1)
-        cls.helmer_kar = cls._create_leave(cls.employee_helmer.id, "sjk_214" ,"2022-05-30","2022-05-30",1)
+        cls.helmer_501 = cls._create_leave(cls.employee_helmer, "sjk_kar" ,"2022-05-19","2022-05-19",1)
+        cls.helmer_501 = cls._create_leave(cls.employee_helmer, "sjk_214" ,"2022-05-20","2022-05-20",1)
+        cls.helmer_503 = cls._create_leave(cls.employee_helmer, "sjk_kar" ,"2022-05-27","2022-05-27",1)
+        cls.helmer_504 = cls._create_leave(cls.employee_helmer, "sjk_214" ,"2022-05-30","2022-05-30",1)
 
         # Karin Kullberg
         # Anställning per timme, påbörjad 2022-06-01

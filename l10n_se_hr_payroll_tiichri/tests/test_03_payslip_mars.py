@@ -66,8 +66,8 @@ class TestPayslipMars(common.SavepointCase):
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
-        cls.date_start = fields.Date.from_string('2022-02-01')
-        cls.date_stop = fields.Date.from_string('2022-02-28')
+        cls.date_start = fields.Date.from_string('2022-03-01')
+        cls.date_stop = fields.Date.from_string('2022-03-31')
         cls.company = cls.env['res.company'].search([('name', '=', 'Aronssons Montage AB')])
         cls.struct = cls.env['hr.payroll.structure'].search([('code', '=', 'bas2018-tj')])
 
