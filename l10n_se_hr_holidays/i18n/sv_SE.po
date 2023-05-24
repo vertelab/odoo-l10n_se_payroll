@@ -1,0 +1,500 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* l10n_se_hr_holidays
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 14.0-20230516\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-05-24 12:02+0000\n"
+"PO-Revision-Date: 2023-05-24 14:32+0200\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: sv\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: \n"
+"X-Generator: Poedit 3.0.1\n"
+
+#. module: l10n_se_hr_holidays
+#: model:ir.model.fields,field_description:l10n_se_hr_holidays.field_resource_calendar__absent_work_days
+#: model_terms:ir.ui.view,arch_db:l10n_se_hr_holidays.resource_calender_form_view
+msgid "Absent Hours"
+msgstr "Frånvarande Timmar"
+
+#. module: l10n_se_hr_holidays
+#: model:ir.model.fields,field_description:l10n_se_hr_holidays.field_resource_calendar_attendance__absent_calendar_id
+msgid "Absent Resource's Calendar"
+msgstr "Frånvarande Resurskalender"
+
+#. module: l10n_se_hr_holidays
+#: model:ir.model.fields,field_description:l10n_se_hr_holidays.field_hr_leave_type__limit
+#, fuzzy
+msgid "Allow to Override Limit"
+msgstr "Tillåtelse att Överskrida Begränsning"
+
+#. module: l10n_se_hr_holidays
+#: model:ir.model.fields,field_description:l10n_se_hr_holidays.field_hr_leave_type__holidays_allowed
+#: model_terms:ir.ui.view,arch_db:l10n_se_hr_holidays.view_holidays_status_filter
+msgid "Allowed"
+msgstr "Tillåtelse"
+
+#. module: l10n_se_hr_holidays
+#: model_terms:ir.ui.view,arch_db:l10n_se_hr_holidays.view_holidays_status_filter
+msgid "Allowed legal leaves (after earning year)"
+msgstr "Tillåten frånvaro (Efter tjänsteår)"
+
+#. module: l10n_se_hr_holidays
+#: model:ir.model.fields,field_description:l10n_se_hr_holidays.field_hr_leave__is_deffered_period
+msgid "Deffered Day"
+msgstr "Uppskjuten Dag"
+
+#. module: l10n_se_hr_holidays
+#: model:ir.model.fields,field_description:l10n_se_hr_holidays.field_hr_employee__display_name
+#: model:ir.model.fields,field_description:l10n_se_hr_holidays.field_hr_leave__display_name
+#: model:ir.model.fields,field_description:l10n_se_hr_holidays.field_hr_leave_type__display_name
+#: model:ir.model.fields,field_description:l10n_se_hr_holidays.field_hr_payslip__display_name
+#: model:ir.model.fields,field_description:l10n_se_hr_holidays.field_resource_calendar__display_name
+#: model:ir.model.fields,field_description:l10n_se_hr_holidays.field_resource_calendar_attendance__display_name
+msgid "Display Name"
+msgstr "Visningsnamn"
+
+#. module: l10n_se_hr_holidays
+#: model:ir.actions.server,name:l10n_se_hr_holidays.earn_leaves_dayes
+msgid "Earn Leaves Days"
+msgstr "Intjänade dagar"
+
+#. module: l10n_se_hr_holidays
+#: code:addons/l10n_se_hr_holidays/models/hr_holidays.py:0
+#, python-format
+msgid "Earn days %s: %s (%s)"
+msgstr "Intjänade dagar %s: %s (%s)"
+
+#. module: l10n_se_hr_holidays
+#: model:ir.model.fields,field_description:l10n_se_hr_holidays.field_hr_leave_type__payslip_condition
+msgid "Earning Condition"
+msgstr "Intjänandevillkor"
+
+#. module: l10n_se_hr_holidays
+#: model:ir.model.fields,field_description:l10n_se_hr_holidays.field_hr_leave_type__payslip_rule
+msgid "Earning Rule"
+msgstr "Intjäningsregel"
+
+#. module: l10n_se_hr_holidays
+#: model:ir.model.fields,field_description:l10n_se_hr_holidays.field_hr_leave_type__date_earning_end
+msgid "Earning year ends"
+msgstr "Intjänandeår slutar"
+
+#. module: l10n_se_hr_holidays
+#: model:ir.model.fields,field_description:l10n_se_hr_holidays.field_hr_leave_type__date_earning_start
+msgid "Earning year starts"
+msgstr "Intjänandeår startar"
+
+#. module: l10n_se_hr_holidays
+#: model:ir.model,name:l10n_se_hr_holidays.model_hr_employee
+msgid "Employee"
+msgstr "Anställd"
+
+#. module: l10n_se_hr_holidays
+#: model:hr.leave.type,name:l10n_se_hr_holidays.holiday_status_furlough
+msgid "Furlough"
+msgstr "Permission"
+
+#. module: l10n_se_hr_holidays
+#: model:hr.leave.type,name:l10n_se_hr_holidays.forald_ledig_165
+#: model:hr.salary.rule,name:l10n_se_hr_holidays.hr_salary_rule-forald-ledig-165
+msgid "Föräld ledig 165"
+msgstr ""
+
+#. module: l10n_se_hr_holidays
+#: model:hr.leave.type,name:l10n_se_hr_holidays.forald_ledig_168
+#: model:hr.salary.rule,name:l10n_se_hr_holidays.hr_salary_rule-forald-ledig-168
+msgid "Föräld ledig 168"
+msgstr ""
+
+#. module: l10n_se_hr_holidays
+#: model_terms:ir.ui.view,arch_db:l10n_se_hr_holidays.resource_calender_form_view
+msgid "Get Absent Days"
+msgstr "Hämta Frånvarande Dagar"
+
+#. module: l10n_se_hr_holidays
+#: model:ir.model.fields,field_description:l10n_se_hr_holidays.field_hr_payslip__holiday_ids
+msgid "Holiday"
+msgstr "Semester"
+
+#. module: l10n_se_hr_holidays
+#: model:ir.model.fields,field_description:l10n_se_hr_holidays.field_hr_leave_type__holiday_basis
+msgid "Holiday Basis"
+msgstr "Semestergrund"
+
+#. module: l10n_se_hr_holidays
+#: model:ir.model.fields,field_description:l10n_se_hr_holidays.field_hr_payslip__holiday_status_ids
+msgid "Holiday Status"
+msgstr "Frånvarutyp"
+
+#. module: l10n_se_hr_holidays
+#: model:ir.model.fields,field_description:l10n_se_hr_holidays.field_hr_employee__id
+#: model:ir.model.fields,field_description:l10n_se_hr_holidays.field_hr_leave__id
+#: model:ir.model.fields,field_description:l10n_se_hr_holidays.field_hr_leave_type__id
+#: model:ir.model.fields,field_description:l10n_se_hr_holidays.field_hr_payslip__id
+#: model:ir.model.fields,field_description:l10n_se_hr_holidays.field_resource_calendar__id
+#: model:ir.model.fields,field_description:l10n_se_hr_holidays.field_resource_calendar_attendance__id
+msgid "ID"
+msgstr "ID"
+
+#. module: l10n_se_hr_holidays
+#: model:ir.model.fields,help:l10n_se_hr_holidays.field_hr_leave_type__sick_leave
+msgid ""
+"If checked, it will automatically check if any day will be a deferred period"
+msgstr ""
+"Om satt, kommer automatiskt att kontrollera om någon dag kommer att vara en "
+"uppskjuten period"
+
+#. module: l10n_se_hr_holidays
+#: model:ir.model.fields,help:l10n_se_hr_holidays.field_hr_leave_type__legal_leave
+msgid "If checked, it will be included in legal leaves calculation"
+msgstr "Om satt, kommer inkluderas i beräkningen av semester"
+
+#. module: l10n_se_hr_holidays
+#: model:ir.model.fields,help:l10n_se_hr_holidays.field_hr_leave_type__holiday_basis
+msgid ""
+"If checked, this kind of holiday will be included in holiday basis "
+"calculation"
+msgstr ""
+"Om satt, denna typ av semester kommer att vara inkluderad i semestergrund "
+"uträkningen"
+
+#. module: l10n_se_hr_holidays
+#: model:ir.model.fields,help:l10n_se_hr_holidays.field_hr_leave_type__include_weekends
+msgid "If enabled, weekends are counted in leave days calculation."
+msgstr "Om satt, helgdagar kommer räknas med i semesterdagar uträkningen."
+
+#. module: l10n_se_hr_holidays
+#: model:ir.model.fields,help:l10n_se_hr_holidays.field_hr_leave_type__limit
+#, fuzzy
+msgid ""
+"If you select this check box, the system allows the employees to take more "
+"leaves than the available ones for this type and will not take them into "
+"account for the \"Remaining Legal Leaves\" defined on the employee form."
+msgstr ""
+"Om denna ruta är satt, kommer system att tillåta att anställda tar mer "
+"semester än de har återstående för denna typ och kommer inte ta hänsyn till "
+"det för \"Kvarvarande Semester\" som definieras på anställda formuläret."
+
+#. module: l10n_se_hr_holidays
+#: model:ir.model.fields,field_description:l10n_se_hr_holidays.field_hr_leave_type__include_weekends
+msgid "Include Weekends"
+msgstr "Inkludera Helgdagar"
+
+#. module: l10n_se_hr_holidays
+#: model:hr.salary.rule,name:l10n_se_hr_holidays.hr_salary_rule-sjk-qualify
+msgid "Karensavdrag"
+msgstr ""
+
+#. module: l10n_se_hr_holidays
+#: model:hr.salary.rule,name:l10n_se_hr_holidays.hr_salary_rule_compensary_monetary
+msgid "Komptid i pengar"
+msgstr ""
+
+#. module: l10n_se_hr_holidays
+#: model:ir.model.fields,field_description:l10n_se_hr_holidays.field_hr_employee____last_update
+#: model:ir.model.fields,field_description:l10n_se_hr_holidays.field_hr_leave____last_update
+#: model:ir.model.fields,field_description:l10n_se_hr_holidays.field_hr_leave_type____last_update
+#: model:ir.model.fields,field_description:l10n_se_hr_holidays.field_hr_payslip____last_update
+#: model:ir.model.fields,field_description:l10n_se_hr_holidays.field_resource_calendar____last_update
+#: model:ir.model.fields,field_description:l10n_se_hr_holidays.field_resource_calendar_attendance____last_update
+msgid "Last Modified on"
+msgstr "Senast redigerad"
+
+#. module: l10n_se_hr_holidays
+#: model:hr.leave.type,name:l10n_se_hr_holidays.holiday_status_leave_of_absence_hour
+#, fuzzy
+msgid "Leave of Absence Part of day"
+msgstr "Tjänstledighet Del av dagen"
+
+#. module: l10n_se_hr_holidays
+#: model:hr.leave.type,name:l10n_se_hr_holidays.holiday_type_leave_of_absence
+msgid "Leave of Absence less than 5 days"
+msgstr "Tjänstledighet för mindre än 5 dagar"
+
+#. module: l10n_se_hr_holidays
+#: model:hr.leave.type,name:l10n_se_hr_holidays.holiday_type_leave_of_absence_5
+msgid "Leave of Absence more than 5 days"
+msgstr "Tjänstledighet för mer än 5 dagar"
+
+#. module: l10n_se_hr_holidays
+#: model:ir.model.fields,field_description:l10n_se_hr_holidays.field_hr_leave_type__legal_leave
+msgid "Legal Leave"
+msgstr "Semester"
+
+#. module: l10n_se_hr_holidays
+#: model:hr.leave.type,name:l10n_se_hr_holidays.holiday_status_cl-4
+msgid "Legal Leaves 2018"
+msgstr "Semester 2018"
+
+#. module: l10n_se_hr_holidays
+#: model:hr.leave.type,name:l10n_se_hr_holidays.holiday_status_cl-3
+msgid "Legal Leaves 2019"
+msgstr "Semester 2019"
+
+#. module: l10n_se_hr_holidays
+#: model:hr.leave.type,name:l10n_se_hr_holidays.holiday_status_cl-2
+msgid "Legal Leaves 2020"
+msgstr "Semester 2020"
+
+#. module: l10n_se_hr_holidays
+#: model:hr.leave.type,name:l10n_se_hr_holidays.holiday_status_cl-1
+msgid "Legal Leaves 2021"
+msgstr "Semester 2021"
+
+#. module: l10n_se_hr_holidays
+#: model:hr.leave.type,name:l10n_se_hr_holidays.holiday_status_cl0
+msgid "Legal Leaves 2022"
+msgstr "Semester 2022"
+
+#. module: l10n_se_hr_holidays
+#: model:hr.leave.type,name:l10n_se_hr_holidays.holiday_status_cl1
+msgid "Legal Leaves 2023"
+msgstr "Semester 2023"
+
+#. module: l10n_se_hr_holidays
+#: model:hr.leave.type,name:l10n_se_hr_holidays.holiday_status_cl2
+msgid "Legal Leaves 2024"
+msgstr "Semester 2024"
+
+#. module: l10n_se_hr_holidays
+#: model:hr.leave.type,name:l10n_se_hr_holidays.holiday_status_cl3
+msgid "Legal Leaves 2025"
+msgstr "Semester 2025"
+
+#. module: l10n_se_hr_holidays
+#: model:hr.leave.type,name:l10n_se_hr_holidays.holiday_status_cl4
+msgid "Legal Leaves unpaid"
+msgstr "Obetald Semester"
+
+#. module: l10n_se_hr_holidays
+#: model:hr.leave.type,name:l10n_se_hr_holidays.pappaledig_166
+#: model:hr.salary.rule,name:l10n_se_hr_holidays.hr_salary_rule-pappa-ledig-166
+msgid "Pappaledig 166"
+msgstr ""
+
+#. module: l10n_se_hr_holidays
+#: model:ir.model,name:l10n_se_hr_holidays.model_hr_payslip
+msgid "Payslip"
+msgstr "Lönespecifikation"
+
+#. module: l10n_se_hr_holidays
+#: model:hr.salary.rule,name:l10n_se_hr_holidays.hr_salary_rule_legal_leave_of_furlough
+msgid "Permission"
+msgstr "Tillåtelse"
+
+#. module: l10n_se_hr_holidays
+#: model:ir.model.fields,help:l10n_se_hr_holidays.field_hr_leave_type__payslip_condition
+#: model:ir.model.fields,help:l10n_se_hr_holidays.field_hr_leave_type__payslip_rule
+msgid "Python Code"
+msgstr "Python Kod"
+
+#. module: l10n_se_hr_holidays
+#: model:ir.model,name:l10n_se_hr_holidays.model_resource_calendar
+msgid "Resource Working Time"
+msgstr "Resursens arbetstid"
+
+#. module: l10n_se_hr_holidays
+#: model:ir.model.fields,field_description:l10n_se_hr_holidays.field_resource_calendar_attendance__calendar_id
+msgid "Resource's Calendar"
+msgstr "Resursens kalender"
+
+#. module: l10n_se_hr_holidays
+#: code:addons/l10n_se_hr_holidays/models/weekend_resource_calendar.py:0
+#, python-format
+msgid "Saturday Afternoon"
+msgstr "Lördag Eftermiddag"
+
+#. module: l10n_se_hr_holidays
+#: code:addons/l10n_se_hr_holidays/models/weekend_resource_calendar.py:0
+#, python-format
+msgid "Saturday Morning"
+msgstr "Lördag Förmiddag"
+
+#. module: l10n_se_hr_holidays
+#: model:hr.salary.rule,name:l10n_se_hr_holidays.hr_salary_rule_legal_leave_deduction
+msgid "Semesteravdrag 4,6%"
+msgstr ""
+
+#. module: l10n_se_hr_holidays
+#: model:hr.salary.rule,name:l10n_se_hr_holidays.hr_salary_rule-holiday-pay
+msgid "Semesterlöneskuld"
+msgstr ""
+
+#. module: l10n_se_hr_holidays
+#: model:hr.salary.rule.category,name:l10n_se_hr_holidays.hr_salary_rule_category-semesterloneskulder
+msgid "Semesterlöneskulder"
+msgstr ""
+
+#. module: l10n_se_hr_holidays
+#: model:hr.salary.rule,name:l10n_se_hr_holidays.hr_salary_rule_legal_leave_addition
+msgid "Semestertillägg 0,43%"
+msgstr ""
+
+#. module: l10n_se_hr_holidays
+#: model:hr.salary.rule,name:l10n_se_hr_holidays.hr_salary_rule_legal_leave_addition8
+msgid "Semestertillägg 0,8%"
+msgstr ""
+
+#. module: l10n_se_hr_holidays
+#: model:ir.actions.server,name:l10n_se_hr_holidays.name_equals_code
+msgid ""
+"Set code equals name, code is used for a function when calculating sick "
+"leave compensation"
+msgstr ""
+"Sätter kod samma som namn, kod används för en funktion när sjukersättning "
+"beräknas"
+
+#. module: l10n_se_hr_holidays
+#: model:ir.model.fields,field_description:l10n_se_hr_holidays.field_hr_leave_type__sick_leave
+msgid "Sick Leave"
+msgstr "Sjukfrånvarodagar"
+
+#. module: l10n_se_hr_holidays
+#: model:hr.leave.type,name:l10n_se_hr_holidays.sick_leave_qualify
+msgid "Sick Leave Qualify Period"
+msgstr "Sjukfrånvaro Karensdag"
+
+#. module: l10n_se_hr_holidays
+#: model:hr.leave.type,name:l10n_se_hr_holidays.sick_leave_146
+msgid "Sick Leave day 15-180 (100%)"
+msgstr "Sjukfrånvarodagar 15-180 (100%)"
+
+#. module: l10n_se_hr_holidays
+#: model:hr.leave.type,name:l10n_se_hr_holidays.sick_leave_148
+msgid "Sick Leave day 15-180 (25%)"
+msgstr "Sjukfrånvarodagar 15-180 (25%)"
+
+#. module: l10n_se_hr_holidays
+#: model:hr.leave.type,name:l10n_se_hr_holidays.sick_leave_147
+msgid "Sick Leave day 15-180 (50%)"
+msgstr "Sjukfrånvarodagar 15-180 (50%)"
+
+#. module: l10n_se_hr_holidays
+#: model:hr.leave.type,name:l10n_se_hr_holidays.sick_leave_1461
+msgid "Sick Leave day 15-180 (75%)"
+msgstr "Sjukfrånvarodagar 15-180 (75%)"
+
+#. module: l10n_se_hr_holidays
+#: model:hr.leave.type,name:l10n_se_hr_holidays.sick_leave_214_100
+msgid "Sick Leave day 2-14 (100% deduction)"
+msgstr "Sjukfrånvarodagar 2-14 (25% avdrag)"
+
+#. module: l10n_se_hr_holidays
+#: model:hr.leave.type,name:l10n_se_hr_holidays.sick_leave_214
+msgid "Sick Leave day 2-14 (80%)"
+msgstr "Sjukfrånvarodagar 2-14 (80%)"
+
+#. module: l10n_se_hr_holidays
+#: model:hr.salary.rule,name:l10n_se_hr_holidays.hr_salary_rule-sjk-148
+msgid "Sjuk dag 15- 25%"
+msgstr ""
+
+#. module: l10n_se_hr_holidays
+#: model:hr.salary.rule,name:l10n_se_hr_holidays.hr_salary_rule-sjk-147
+msgid "Sjuk dag 15- 50%"
+msgstr ""
+
+#. module: l10n_se_hr_holidays
+#: model:hr.salary.rule,name:l10n_se_hr_holidays.hr_salary_rule-sjk-1461
+msgid "Sjuk dag 15- 75%"
+msgstr ""
+
+#. module: l10n_se_hr_holidays
+#: model:hr.salary.rule,name:l10n_se_hr_holidays.hr_salary_rule-sjk-100
+msgid "Sjuk dag 15-180 100%"
+msgstr ""
+
+#. module: l10n_se_hr_holidays
+#: model:hr.salary.rule,name:l10n_se_hr_holidays.hr_salary_rule-sjk-214-100
+msgid "Sjuk dag 2-14 100% avdrag"
+msgstr ""
+
+#. module: l10n_se_hr_holidays
+#: model:hr.salary.rule,name:l10n_se_hr_holidays.hr_salary_rule-sjk-214
+msgid "Sjuk dag 2-14 80%"
+msgstr ""
+
+#. module: l10n_se_hr_holidays
+#: model:hr.salary.rule,name:l10n_se_hr_holidays.hr_salary_rule-sjk
+msgid "Sjukavdrag"
+msgstr ""
+
+#. module: l10n_se_hr_holidays
+#: model:hr.salary.rule,name:l10n_se_hr_holidays.hr_salary_rule-sjk-lon
+msgid "Sjuklön"
+msgstr ""
+
+#. module: l10n_se_hr_holidays
+#: model:hr.salary.rule,name:l10n_se_hr_holidays.hr_salary_rule-socav-for-sem
+msgid "Sociala avgifter för semester- och löneskulder"
+msgstr ""
+
+#. module: l10n_se_hr_holidays
+#: code:addons/l10n_se_hr_holidays/models/weekend_resource_calendar.py:0
+#, python-format
+msgid "Sunday Afternoon"
+msgstr "Söndag Eftermiddag"
+
+#. module: l10n_se_hr_holidays
+#: code:addons/l10n_se_hr_holidays/models/weekend_resource_calendar.py:0
+#, python-format
+msgid "Sunday Morning"
+msgstr "Söndag Förmiddag"
+
+#. module: l10n_se_hr_holidays
+#: model:ir.model,name:l10n_se_hr_holidays.model_hr_leave
+msgid "Time Off"
+msgstr "Frånvaro"
+
+#. module: l10n_se_hr_holidays
+#: model:ir.model,name:l10n_se_hr_holidays.model_hr_leave_type
+msgid "Time Off Type"
+msgstr "Frånvarotyp"
+
+#. module: l10n_se_hr_holidays
+#: model:hr.salary.rule,name:l10n_se_hr_holidays.hr_salary_rule_legal_leave_of_absence
+msgid "Tjänstledigt < 5 dgr"
+msgstr ""
+
+#. module: l10n_se_hr_holidays
+#: model:hr.salary.rule,name:l10n_se_hr_holidays.hr_salary_rule_legal_leave_of_absence_5
+msgid "Tjänstledigt > 5 dgr"
+msgstr ""
+
+#. module: l10n_se_hr_holidays
+#: model:hr.salary.rule,name:l10n_se_hr_holidays.hr_salary_rule_legal_leave_of_absence_hour
+msgid "Tjänstledigt del av dag"
+msgstr ""
+
+#. module: l10n_se_hr_holidays
+#: model:hr.salary.rule,name:l10n_se_hr_holidays.hr_salary_rule_legal_leave_pay
+msgid "Uttag betalda semesterdagar"
+msgstr ""
+
+#. module: l10n_se_hr_holidays
+#: model:hr.salary.rule,name:l10n_se_hr_holidays.hr_salary_rule-vab-160
+msgid "Vård av barn"
+msgstr ""
+
+#. module: l10n_se_hr_holidays
+#: model:hr.leave.type,name:l10n_se_hr_holidays.vab_160
+msgid "Vård av barn 160"
+msgstr ""
+
+#. module: l10n_se_hr_holidays
+#: code:addons/l10n_se_hr_holidays/models/weekend_resource_calendar.py:0
+#, python-format
+msgid "Weekend Hours of %s"
+msgstr "Helgtimmar %s"
+
+#. module: l10n_se_hr_holidays
+#: model:ir.model,name:l10n_se_hr_holidays.model_resource_calendar_attendance
+msgid "Work Detail"
+msgstr "Arbetsdetaljer"
