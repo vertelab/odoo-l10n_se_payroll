@@ -276,7 +276,8 @@ class UserPayslip(models.TransientModel):
         return self.payslip_id.get_slip_line_acc(['bl','gl','pre','prej','san'])
 
     def payslip_report(self):
-        return self.env.ref('l10n_se_hr_payroll.payslip').report_action(docids=[self.id], data={})
+        self.ensure_one()
+        return self.env.ref('l10n_se_hr_payroll.payslip').report_action(self, data={})
 
     # @api.model
     # def social_tax_combined(self, code):
