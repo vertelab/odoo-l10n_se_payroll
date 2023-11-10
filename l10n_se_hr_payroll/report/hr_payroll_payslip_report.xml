@@ -365,24 +365,6 @@
             </t>
         </template>
 
-        <record id="l10n_se_hr_payroll.payslip" model="ir.actions.report">
-            <field name="name">Payslip SE</field>
-            <field name="model">user.payslip</field>
-            <field name="report_type">qweb-pdf</field>
-            <field name="report_file">l10n_se_hr_payroll.l10n_se_hr_payroll_payslip_document</field>
-            <field name="report_name">l10n_se_hr_payroll.l10n_se_hr_payroll_payslip_document</field>
-        </record>
-
-
-
-<!--        <report id="l10n_se_hr_payroll.payslip" model="user.payslip"  string="Payslip SE" report_type="qweb-pdf" name="l10n_se_hr_payroll.l10n_se_hr_payroll_payslip_document" file="l10n_se_hr_payroll.l10n_se_hr_payroll_payslip_document" attachment_use="False" attachment="('payslip_'+(object.number.replace('/','') if object.number else ''))+'.pdf'" />-->
-
-
-
-<!--        <report id="l10n_se_hr_payroll.payslip" model="user.payslip"  string="Payslip SE" report_type="qweb-pdf" name="l10n_se_hr_payroll.l10n_se_hr_payroll_payslip_document" file="l10n_se_hr_payroll.l10n_se_hr_payroll_payslip_document" attachment_use="False" attachment="('payslip_'+(object.number.replace('/','') if object.number else ''))+'.pdf'" />-->
-
-<!--        -->
-
         <record id="payslip_pdf_format" model="report.paperformat">
             <field name="name">Payslip pdf format</field>
             <field name="format">A4</field>
@@ -394,22 +376,14 @@
             <field name="header_spacing">35</field>
             <field name="dpi">90</field>
         </record>
-        
 
-<!--        <record id="payslip" model="ir.actions.report">-->
-<!--            <field name="paperformat_id" ref="payslip_pdf_format"/>-->
-<!--        </record>-->
-
-
-        <record id="action_report_payslip" model="ir.actions.report">
-            <field name="name">Contact details</field>
+        <record id="l10n_se_hr_payroll.payslip" model="ir.actions.report">
+            <field name="name">Payslip SE</field>
             <field name="model">user.payslip</field>
             <field name="report_type">qweb-pdf</field>
-            <field name="report_name">l10n_se_hr_payroll.payslip_items</field>
-            <field name="report_file">l10n_se_hr_payroll.payslip_items</field>
-            <field name="print_report_name">'Contact details - %s' % (object.name or '')</field>
-            <field name="binding_type">report</field>
-            <field name="paperformat_id" ref="l10n_se_hr_payroll.payslip_pdf_format"/>
+            <field name="report_file">l10n_se_hr_payroll.l10n_se_hr_payroll_payslip_document</field>
+            <field name="report_name">l10n_se_hr_payroll.l10n_se_hr_payroll_payslip_document</field>
+            <field name="paperformat_id" ref="payslip_pdf_format"/>
         </record>
 
 
