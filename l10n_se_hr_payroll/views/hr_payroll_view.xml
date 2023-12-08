@@ -1,8 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-    <!--
-         For odoo 14 i have changed all hr_payroll to OCA payroll  
-    -->
     <data>
         <record id="hr_salary_rule_form" model="ir.ui.view">
             <field name="name">hr.salary.rule.form.inherit.l10n_se.payroll</field>
@@ -15,8 +12,7 @@
 
                 <page  position="replace">
                     <page string="General">
-                    <group>
-                        <!--<group string="Conditions" name="conditions">-->
+                        <group>
                             <field name="condition_select"/>
                             <field name="condition_python"  attrs="{'invisible':[('condition_select','!=','python')], 'required': [('condition_select','=','python')]}" widget="ace" options="{'mode': 'python'}" id="condition_python"/>
                             <field name="condition_range" attrs="{'invisible':[('condition_select','!=','range')], 'required':[('condition_select','=','range')]}"/>
@@ -29,37 +25,19 @@
                             </div>
                             <separator string="Company Contribution"/>
                             <field name="register_id"/>
-                        <!--</group>-->
-                        <!--<group string="Computation" name="computation">-->
                             <field name="amount_select"/>
                             <field name="amount_percentage_base" attrs="{'invisible':[('amount_select','!=','percentage')], 'required': [('amount_select','=','percentage')]}"/>
                             <field name="quantity" attrs="{'invisible':[('amount_select','=','code')], 'required':[('amount_select','!=','code')]}"/>
                             <field name="amount_fix" attrs="{'invisible':[('amount_select','!=','fix')], 'required':[('amount_select','=','fix')]}"/>
                             <field name="amount_python_compute" attrs="{'invisible':[('amount_select','!=','code')], 'required':[('amount_select','=','code')]}" widget="ace" options="{'mode': 'python'}" id="amount_python_compute"/>
                             <field name="amount_percentage" attrs="{'invisible':[('amount_select','!=','percentage')], 'required':[('amount_select','=','percentage')]}"/>
-                        <!--</group>-->
-                        <separator string="Notes"/>
-                        <field name="note" placeholder="Write salary rule notes or observations here..."/>
-                    </group>
+                            <separator string="Notes"/>
+                            <field name="note" placeholder="Write salary rule notes or observations here..."/>
+                        </group>
+                    </page>
                 </page>
-                </page>
-
-                <!-- <field name="appears_on_payslip" position="after">
-                    <field name="payslip_character"></field>
-                </field> -->
             </field>
         </record>
-
-        <!-- <record id="hr_salary_rule_form_payroll" model="ir.ui.view">
-            <field name="name">user.payslip.line.payroll</field>
-            <field name="model">user.payslip.line.payroll</field>
-            <field name="inherit_id" ref="payroll.hr_salary_rule_view_form" />
-            <field name="arch" type="xml">
-                <field name="appears_on_payslip" position="after">
-                    <field name="payslip_character"></field>
-                </field>
-            </field>
-        </record> -->
 
         <record id="hr_salary_rule_list" model="ir.ui.view">
             <field name="name">hr.salary.rule.list.inherit.l10n_se.payroll</field>
@@ -78,7 +56,6 @@
             <field name="arch" type="xml">
                 <field name="condition_range_min" position="after">
                     <field name="appears_on_payslip" />
-                    <!-- <field name="payslip_character"></field> -->
                     <field name="parent_rule_id" />
                     <field name="child_ids" />
                     <filter string="Appears On Payslip" name="appears_on_payslip" domain="[('appears_on_payslip','=',True)]" />
@@ -86,18 +63,6 @@
                 </field>
             </field>
         </record>
-
-        
-        <!-- <record id="payslip_period_id_select" model="ir.ui.view">
-            <field name="name">period_id</field>
-            <field name="model">hr.payslip</field>
-            <field name="inherit_id" ref="payroll.hr_payslip_view_form" />
-            <field name="arch" type="xml">
-                <field name="date_from" position="before">
-                    <field name="choose_date_method"/>
-                </field>
-            </field>
-        </record> -->
 
 
         <record id="last_salary_view_form" model="ir.ui.view">
@@ -135,10 +100,8 @@
 
         <record id="payroll.action_salary_rule_form" model="ir.actions.act_window">
             <field name="domain">[]</field>
-            <!--
-                 <field name="context">{"search_default_parent_rule_id":1}</field>
-            -->
         </record>
+
         <record id="hr_contract_form_inherit" model="ir.ui.view">
             <field name="name">hr.contract.form.inherit</field>
             <field name="model">hr.contract</field>

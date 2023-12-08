@@ -13,7 +13,6 @@ class ReportSalaryTaskUser(models.Model):
     _description = "Salary Analysis"
     _auto = False
 
-
     payslip_id = fields.Many2one(comodel_name='hr.payslip')
     date = fields.Date(string="date")
 
@@ -28,7 +27,7 @@ class ReportSalaryTaskUser(models.Model):
         string="Employee",
     )
     period_id = fields.Many2one(
-        comodel_name='account.period', 
+        comodel_name='account.period',
         string="Period",
         readonly=True,
     )
@@ -40,7 +39,7 @@ class ReportSalaryTaskUser(models.Model):
     def _select_salary(self, fields=None):
         if not fields:
             fields = {}
-        
+
         select_str = """
             t.id as id,
             t.id as payslip_id,
@@ -85,11 +84,8 @@ class ReportSalaryTaskUser(models.Model):
             fields = {}
         with_ = ("WITH %s" % with_clause) if with_clause else ""
         return '%s (SELECT %s FROM %s GROUP BY %s)' % \
-               (with_, self._select_salary(fields), self._from_sale(from_clause), self._group_by_salary(groupby))
-
+            (with_, self._select_salary(fields), self._from_sale(from_clause), self._group_by_salary(groupby))
 
     def init(self):
-        tools.drop_view_if_exists(self._cr,self._table)
+        tools.drop_view_if_exists(self._cr, self._table)
         self.env.cr.execute("""CREATE or REPLACE VIEW %s as (%s)""" % (self._table, self._query()))
-
-

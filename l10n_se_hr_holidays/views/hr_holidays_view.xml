@@ -1,58 +1,46 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <odoo>
-  <data>
-      <record model="ir.ui.view" id="edit_holiday_status_form">
-          <field name="name">hr.holidays.status.inherit.form</field>
-          <field name="model">hr.leave.type</field>
-          <field name="inherit_id" ref="hr_holidays.edit_holiday_status_form" />
-          <field name="arch" type="xml">
-              <field name="active" position="after">
-                  <field name="date_earning_start" />
-                  <field name="date_earning_end" />
-                  <field name="include_weekends" />
+    <data>
+          <record model="ir.ui.view" id="edit_holiday_status_form">
+              <field name="name">hr.holidays.status.inherit.form</field>
+              <field name="model">hr.leave.type</field>
+              <field name="inherit_id" ref="hr_holidays.edit_holiday_status_form" />
+              <field name="arch" type="xml">
+                  <field name="active" position="after">
+                      <field name="date_earning_start" />
+                      <field name="date_earning_end" />
+                      <field name="include_weekends" />
+                  </field>
+                  <field name="requires_allocation" position="after">
+                      <field name="legal_leave" />
+                      <field name="holiday_basis" />
+                      <field name="sick_leave" />
+                  </field>
               </field>
-              <field name="allocation_type" position="after">
-                  <field name="legal_leave" />
-                  <field name="holiday_basis" />
-                  <field name="sick_leave" />
-              </field>
-          </field>
-      </record>
-
-      <record model="ir.ui.view" id="view_holiday_status_normal_tree">
-          <field name="name">hr.holidays.status.normal.inherit.tree</field>
-          <field name="model">hr.leave.type</field>
-          <field name="inherit_id" ref="hr_holidays.view_holiday_status_normal_tree"/>
-          <field name="arch" type="xml">
-              <field name="allocation_type" position="after">
-                  <field name="holiday_basis"/>
-              </field>
-          </field>
-      </record>
-      <!--
-          <record model="ir.ui.view" id="edit_holiday_new">
-            <field name="name">Leave Request</field>
-            <field name="model">hr.leave</field>
-            <field name="inherit_id" ref="hr_holidays.edit_holiday_new" />
-            <field name="arch" type="xml">
-              <field name="holiday_status_id" position="attributes">
-                <attribute name="context">{'employee_id':employee_id,'search_default_allowed':1}</attribute>
-                <attribute name="domain">[('holidays_allowed','=',True)]</attribute>
-              </field>
-            </field>
           </record>
-      -->
-      <record id="view_holidays_status_filter" model="ir.ui.view">
-          <field name="name">hr.holidays.status.filter</field>
-          <field name="model">hr.leave.type</field>
-          <field name="inherit_id" ref="hr_holidays.view_holidays_status_filter" />
-          <field name="arch" type="xml">
-              <search position="inside">
-                  <field name="holidays_allowed"/>
-                  <filter name="allowed" string="Allowed" domain="[('holidays_allowed', '=', True)]" help="Allowed legal leaves (after earning year)" />
-              </search>
-          </field>
-      </record>
-  </data>
+
+          <record model="ir.ui.view" id="view_holiday_status_normal_tree">
+              <field name="name">hr.holidays.status.normal.inherit.tree</field>
+              <field name="model">hr.leave.type</field>
+              <field name="inherit_id" ref="hr_holidays.view_holiday_status_normal_tree"/>
+              <field name="arch" type="xml">
+                  <field name="requires_allocation" position="after">
+                      <field name="holiday_basis"/>
+                  </field>
+              </field>
+          </record>
+
+          <record id="view_holidays_status_filter" model="ir.ui.view">
+              <field name="name">hr.holidays.status.filter</field>
+              <field name="model">hr.leave.type</field>
+              <field name="inherit_id" ref="hr_holidays.view_holidays_status_filter" />
+              <field name="arch" type="xml">
+                  <search position="inside">
+                      <field name="holidays_allowed"/>
+                      <filter name="allowed" string="Allowed" domain="[('holidays_allowed', '=', True)]" help="Allowed legal leaves (after earning year)" />
+                  </search>
+              </field>
+          </record>
+    </data>
 </odoo>
 

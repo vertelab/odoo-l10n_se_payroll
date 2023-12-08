@@ -31,6 +31,7 @@ from pytz import timezone, UTC
 from collections import defaultdict, namedtuple
 import math
 from odoo.tools.float_utils import float_round
+
 _logger = logging.getLogger(__name__)
 
 from odoo.addons.resource.models.resource import float_to_time, HOURS_PER_DAY
@@ -40,20 +41,17 @@ from odoo.addons.resource.models.resource import float_to_time, HOURS_PER_DAY
 DummyAttendance = namedtuple('DummyAttendance', 'hour_from, hour_to, dayofweek, day_period, week_type')
 
 
-
 class Holidays(models.Model):
     _inherit = "hr.leave"
 
-
-    
     def _compute_karens(self):
-         for leave_request in self:
-            if leave_request.holiday_status_id.sick_leave:    
+        for leave_request in self:
+            if leave_request.holiday_status_id.sick_leave:
                 leave = self.env['hr.leave'].search([
-                 ('employee_id','=',leave_request.employee_id.id),
-                 ('date_to', '<', leave_request.date_from)],
-                 order='date_to desc', limit=1)
-      
+                    ('employee_id', '=', leave_request.employee_id.id),
+                    ('date_to', '<', leave_request.date_from)],
+                    order='date_to desc', limit=1)
+
                 if not leave or (leave_request.date_from - leave[0].date_to).days > 5:
                     leave_request.is_deffered_period = True
                 else:
@@ -61,9 +59,7 @@ class Holidays(models.Model):
             else:
                 leave_request.is_deffered_period = False
 
-        
     is_deffered_period = fields.Boolean(string="Deffered Day", compute=_compute_karens)
-    
 
     def _timesheet_prepare_line_values(self, index, work_hours_data, day_date, work_hours_count):
         val_list = super(Holidays, self)._timesheet_prepare_line_values(index, work_hours_data, day_date,
@@ -79,10 +75,8 @@ class Holidays(models.Model):
         instance = self.with_context(context_data)
         return super(Holidays, instance)._get_number_of_days(date_from, date_to, employee_id, )
 
-
     def action_fetch_data(self):
         pass
-
 
 
 class hr_holidays_status(models.Model):
@@ -100,44 +94,44 @@ class hr_holidays_status(models.Model):
     holiday_basis = fields.Boolean(string='Holiday Basis', default=False,
                                    help='If checked, this kind of holiday will be included in holiday basis calculation')
     sick_leave = fields.Boolean(string='Sick Leave', default=False,
-                                 help='If checked, it will automatically check if any day will be a deferred period')
+                                help='If checked, it will automatically check if any day will be a deferred period')
 
     include_weekends = fields.Boolean(string='Include Weekends', default=False,
                                       help='If enabled, weekends are counted in leave days calculation.')
 
     @api.model
     def init_records(self):
-        holiday_status_cl = self.env['ir.model.data'].get_object_reference('hr_holidays', 'holiday_status_cl')
-        self.env['hr.leave.type'].browse(holiday_status_cl[1]).write({
+        ir_model_data = self.env['ir.model.data']
+        holiday_status_cl = ir_model_data._xmlid_lookup('hr_holidays.holiday_status_cl')[2]
+        self.env['hr.leave.type'].browse(holiday_status_cl).write({
             'name': 'Legal Leaves ' + str(fields.Date.from_string(fields.Datetime.now()).year - 1),
             'legal_leave': True,
             'limit': False,
-            'allocation_type': 'fixed_allocation',
+            # 'allocation_type': 'fixed_allocation',
             'date_earning_start': fields.Date.to_string(date(date.today().year - 2, 4, 1)),
             'date_earning_end': fields.Date.to_string(date(date.today().year - 1, 3, 31)),
         })
-        holiday_status_unpaid = self.env['ir.model.data'].get_object_reference('hr_holidays', 'holiday_status_unpaid')
-        self.env['hr.leave.type'].browse(holiday_status_unpaid[1]).write({
+        holiday_status_unpaid = ir_model_data._xmlid_lookup('hr_holidays.holiday_status_unpaid')[2]
+        self.env['hr.leave.type'].browse(holiday_status_unpaid).write({
             'name': 'Legal Leaves unpaid',
             'legal_leave': False,
-            'allocation_type': 'no',
+            # 'allocation_type': 'no',
             'limit': True,
             # 'unpaid': True,
         })
-        holiday_status_sl = self.env['ir.model.data'].get_object_reference('hr_holidays', 'holiday_status_sl')
-        self.env['hr.leave.type'].browse(holiday_status_sl[1]).write({
+        holiday_status_sl = ir_model_data._xmlid_lookup('hr_holidays.holiday_status_sl')[2]
+        self.env['hr.leave.type'].browse(holiday_status_sl).write({
             'name': 'Sick Leave 100%',
             'legal_leave': False,
-            'allocation_type': 'no',
+            # 'allocation_type': 'no',
             'limit': True,
             'color_name': 'red',
         })
-        # holiday_status_comp
-        holiday_status_sl = self.env['ir.model.data'].get_object_reference('hr_holidays', 'holiday_status_sl')
-        self.env['hr.leave.type'].browse(holiday_status_sl[1]).write({
+        holiday_status_sl = ir_model_data._xmlid_lookup('hr_holidays.holiday_status_sl')[2]
+        self.env['hr.leave.type'].browse(holiday_status_sl).write({
             'name': 'Sick Leave 100%',
             'legal_leave': False,
-            'allocation_type': 'no',
+            # 'allocation_type': 'no',
             'limit': True,
             'color_name': 'red',
         })
@@ -280,18 +274,15 @@ class hr_payslip(models.Model):
             days += line.number_of_days
         return days_basis / days if days > 0.0 else 0.0
 
-
-    
     def get_sick_days(self):
 
         pass
 
         # ~ days = 0.0
         # ~ for line in self.worked_days_line_ids:
-            # ~ if self.env['hr.leave.type'].search(
-                    # ~ [('name', '=', line.code), ('holiday_basis', '=', True)]) or line.code == 'WORK100':
-                # ~ days += line.number_of_days
+        # ~ if self.env['hr.leave.type'].search(
+        # ~ [('name', '=', line.code), ('holiday_basis', '=', True)]) or line.code == 'WORK100':
+        # ~ days += line.number_of_days
         # ~ return days
 
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
-

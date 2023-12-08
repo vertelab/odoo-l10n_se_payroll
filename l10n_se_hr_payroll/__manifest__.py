@@ -21,7 +21,7 @@
 
 {
     'name': 'l10n_se_payroll: (Swedish Payroll)',
-    'version': '14.0.1.0.0',
+    'version': '16.0.1.0.0',
     # Version ledger: 14.0 = Odoo version. 1 = Major. Non regressionable code. 2 = Minor. New features that are regressionable. 3 = Bug fixes
     'summary': 'Swedish Payroll Rules.',
     'category': 'Payroll Localization',
@@ -32,7 +32,7 @@
     'contributor': '',
     'maintainer': 'Vertel AB',
     'repository': 'https://github.com/vertelab/odoo-l10n-se-payroll',
-    'depends': ['payroll', 'account_period', 'hr', 'hr_timesheet_sheet','hr_contract_type'],
+    'depends': ['payroll', 'account_period_vrtl', 'hr', 'hr_timesheet_sheet'],
     'description': """
 Swedish Payroll Rules.
 ======================

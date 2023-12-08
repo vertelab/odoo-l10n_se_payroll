@@ -198,8 +198,8 @@ class hr_payslip(models.Model):
                                                       compute='_compute_details_by_salary_rule_category',
                                                       string='Details by Salary Rule Category',
                                                       help="Details from the salary rule category")
-    
-#Work in progres
+
+    # Work in progres
     # allocation_display = fields.Char(related='employee_id.allocation_display') #Dont know about this one?
     # collected_vacation_days = fields.Date(string="Collected Vacation days", compute="_compute_vacation_days")
 
@@ -249,51 +249,22 @@ class hr_payslip(models.Model):
         for payslip in self:
             payslip.details_by_salary_rule_category = payslip.mapped('line_ids').filtered(lambda line: line.category_id)
 
-
-
     @api.onchange('employee_id', 'period_id')
     def onchange_employee(self):
         super(hr_payslip, self).onchange_employee()
-        # if self.choose_date_method == "date_then" and self.period_id.date_start and self.period_id.date_stop:
 
         if not self.period_id:
             self.period_id = self.period_id.now()
-            # ~ raise UserError('pelle %s' % self.env['account.period'].find())
 
-        self.date_from = self.period_id.date_start - dateutil.relativedelta.relativedelta(months=1)
-        self.date_to = self.period_id.date_stop - dateutil.relativedelta.relativedelta(months=1)
+        if self.period_id.date_start and self.period_id.date_stop:
+            self.date_from = self.period_id.date_start - dateutil.relativedelta.relativedelta(months=1)
+            self.date_to = self.period_id.date_stop - dateutil.relativedelta.relativedelta(months=1)
+
         self.name = _("Salary Slip of %s for %s") % (
             self.employee_id.name,
             self.period_id.date_start.strftime('%B-%Y') if self.period_id else 'None',
-            )
+        )
         return
-    
-# Might be casing a problem or maby not useful for now
-
-    # @api.onchange('employee_id', 'period_id')
-    # def onchange_employee_date_now(self):
-    #     # super(hr_payslip, self).onchange_employee_date_now()
-    #     if self.choose_date_method == "date_now":
-    #         self.date_from = self.period_id.date_start
-    #         self.date_to = self.period_id.date_stop
-    #         self.name = _("Salary Slip of %s for %s") % (
-    #             self.employee_id.name,
-    #             self.period_id.date_start.strftime('%B-%Y') if self.period_id else 'None',
-    #         )
-    #     return
-
-    # def compute_date_method(self):
-    #      self.choose_date_method = (
-    #          self.env["ir.config_parameter"].sudo().get_param("l10n_se_hr_payroll.choose_date_method")
-    #      )
-
-    # choose_date_method = fields.Selection([
-    #      ("date_now", "Same date as period"),
-    #      ("date_then", "A month after period"), ],
-    #      store=True, compute="compute_date_method", readonly=False, default="date_then")
-
-    # _logger.error(f"{choose_date_method=}")
-    # compute = "compute_date_method")
 
     def get_payslip_vals_period(self, run, employee):
         date_from = run.period_id.prev().date_start
@@ -301,9 +272,6 @@ class hr_payslip(models.Model):
 
         contract_ids = employee.contract_id.ids
 
-        # ~ contract_ids = employee._get_contracts(
-        # ~ date_from=period.date_start, date_to=period.date_stop
-        # ~ ).ids
         contract = self.env["hr.contract"].browse(contract_ids[0])
         contracts = self.env["hr.contract"].browse(contract_ids)
         return {
@@ -341,19 +309,18 @@ class hr_payslip(models.Model):
     def get_slip_line_acc(self, codes):
         year = self.date_start.year
         start_date = date(year, 1, 1)
-        stop_date = date(year,12,31)
-        res = {c:0.0 for c in codes}
-        for line in self.env['hr.payslip'].search([('employee_id', '=', self.employee_id.id)]).mapped('details_by_salary_rule_category').filtered(lambda c: c.code in codes):
+        stop_date = date(year, 12, 31)
+        res = {c: 0.0 for c in codes}
+        for line in self.env['hr.payslip'].search([('employee_id', '=', self.employee_id.id)]).mapped(
+                'details_by_salary_rule_category').filtered(lambda c: c.code in codes):
             res[line.code] += line.total
         return res
-        raise Warning('Abe was here %s' % res)
-            # ~ [('employee_id', '=', self.employee_id.id), ('date_from', '>=', start_date),
-             # ~ ('date_to', '<=', stop_date)]).mapped('line_ids'))
-        return sum(self.env['hr.payslip'].search(
-            [('employee_id', '=', self.employee_id.id), ('date_from', '>=', start_date),
-             ('date_to', '<=', stop_date)]).mapped('details_by_salary_rule_category').filtered(
-            lambda l: l.code == code).mapped('total'))
-            # ~ lambda l: l.code in codes).mapped('total'))
+        # raise Warning('Abe was here %s' % res)
+        #
+        # return sum(self.env['hr.payslip'].search(
+        #     [('employee_id', '=', self.employee_id.id), ('date_from', '>=', start_date),
+        #      ('date_to', '<=', stop_date)]).mapped('details_by_salary_rule_category').filtered(
+        #     lambda l: l.code == code).mapped('total'))
 
     @api.model
     def get_worked_day_lines(self, contracts, date_from, date_to):
@@ -461,5 +428,3 @@ class HrPayrollStructure(models.Model):
                         'account_tax_id': payroll_salary_rule_id.account_tax_id.id,
                         'tax_base_id': payroll_salary_rule_id.tax_base_id.id,
                     })
-
-# vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:

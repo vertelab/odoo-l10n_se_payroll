@@ -2,22 +2,23 @@ import urllib.request
 import json
 from odoo import models, fields, api, _
 from datetime import datetime
-from odoo.exceptions import UserError    
+from odoo.exceptions import UserError
+
 
 class PayrollTaxableWizard(models.Model):
     _name = "payroll.taxtable.wizard"
-    _description=" "
+    _description = "Payroll Taxable Wizard"
 
     taxable_url = fields.Char(string="Taxable URL")
 
     def action_sync_taxable(self):
-
-        raise UserError(_(f"action_sync_taxable is no longer implemented, odoo-l10n_se_payroll/l10n_se_payroll_taxtable/." ))
+        raise UserError(
+            _(f"action_sync_taxable is no longer implemented, odoo-l10n_se_payroll/l10n_se_payroll_taxtable/."))
 
 
 class PayrollTaxable(models.Model):
     _name = "payroll.taxtable"
-    _description=" "
+    _description = " Payroll Taxtable"
 
     name = fields.Char(string="Name")
     taxable_lines = fields.One2many("payroll.taxtable.line", "payroll_taxable_id", string="Taxable Lines")
@@ -25,8 +26,7 @@ class PayrollTaxable(models.Model):
 
 class PayrollTaxableLine(models.Model):
     _name = "payroll.taxtable.line"
-    _description=" "
-
+    _description = " "
 
     year = fields.Char(string="Year")
     number_of_days = fields.Char(string="Number of Days")
@@ -41,9 +41,6 @@ class PayrollTaxableLine(models.Model):
     column6 = fields.Float(string="Column 6")
     column7 = fields.Float(string="Column 7")
 
-    
-    name = f"Skattetabell {year}" 
+    name = f"Skattetabell {year}"
 
-    payroll_taxable_id = fields.Many2one('payroll.taxtable', string="Payroll Taxable",  ondelete="cascade")
-
-
+    payroll_taxable_id = fields.Many2one('payroll.taxtable', string="Payroll Taxable", ondelete="cascade")

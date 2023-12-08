@@ -26,7 +26,7 @@ class HRLeave(models.Model):
 
     @api.depends('request_date_from_period', 'request_hour_from', 'request_hour_to', 'request_date_from',
                  'request_date_to',
-                 'request_unit_half', 'request_unit_hours', 'request_unit_custom', 'employee_id')
+                 'request_unit_half', 'request_unit_hours', 'employee_id')
     def _compute_date_from_to(self):
         for holiday in self:
             if holiday.request_date_from and holiday.request_date_to and holiday.request_date_from > holiday.request_date_to:
@@ -107,12 +107,12 @@ class HRLeave(models.Model):
                 elif holiday.request_unit_hours:
                     hour_from = float_to_time(float(holiday.request_hour_from))
                     hour_to = float_to_time(float(holiday.request_hour_to))
-                elif holiday.request_unit_custom:
-                    hour_from = holiday.date_from.time()
-                    hour_to = holiday.date_to.time()
-                    compensated_request_date_from = holiday._adjust_date_based_on_tz(holiday.request_date_from,
-                                                                                     hour_from)
-                    compensated_request_date_to = holiday._adjust_date_based_on_tz(holiday.request_date_to, hour_to)
+                # elif holiday.request_unit_custom:
+                #     hour_from = holiday.date_from.time()
+                #     hour_to = holiday.date_to.time()
+                #     compensated_request_date_from = holiday._adjust_date_based_on_tz(holiday.request_date_from,
+                #                                                                      hour_from)
+                #     compensated_request_date_to = holiday._adjust_date_based_on_tz(holiday.request_date_to, hour_to)
                 else:
                     hour_from = float_to_time(attendance_from.hour_from)
                     hour_to = float_to_time(attendance_to.hour_to)

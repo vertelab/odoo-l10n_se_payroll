@@ -21,7 +21,7 @@
 
 {
     'name': 'l10n_se_payroll: Payroll Tax Table',
-    'version': '14.0.1.0.0',
+    'version': '16.0.1.0.0',
     'summary': 'https://skatteverket.entryscape.net/store/9/resource/1534',
     'category': 'Payroll Localization',
     'author': 'Vertel AB',

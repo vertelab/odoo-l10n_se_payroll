@@ -6,17 +6,12 @@
             <div class="header">
                 <div class="row">
                     <div class="col-6">
-                        <!-- <img t-if="company.logo" t-att-src="image_data_uri(company.logo)" alt="Logo"/> -->
                         <img src="/l10n_se_hr_payroll/static/description/icon_vertel.png" alt="Vertel"></img>
                     </div>
                     <div class="col-6 text-right" style="padding-top:2.6mm; valign: middle;">
                         <ul class="list-inline">
                             <li>
                                 <span t-field="o.name"/>
-                                <!-- &amp;bull;
-                                <span t-field="o.contract_id.name"/>
-                                &amp;bull;
-                                <span t-field="o.employee_id.job_id" /> -->
                             </li>
                         </ul>
                     </div>
@@ -163,21 +158,6 @@
                                 <!-- 2022 -->
                                 <t t-esc="h.name" />
                             </th>
-                            <!-- <th style="padding:10px 0px 0px 10px;">
-                                År 2
-                            </th>
-                            <th style="padding:10px 0px 0px 10px;">
-                                År 3
-                            </th>
-                            <th style="padding:10px 0px 0px 10px;">
-                                År 4
-                            </th>
-                            <th style="padding:10px 0px 0px 10px;">
-                                År 5
-                            </th>
-                            <th style="padding:10px 0px 0px 10px;">
-                                År 6
-                            </th> -->
                         </tr>
                     </t>
                     <!-- class="text-center" -->
@@ -188,46 +168,6 @@
                                 <t t-esc="o.allocation_display" />
                             </td>
                         </t>
-                        <!-- <t t-esc="h.remaining_leaves" /> -->
-                        <!-- <t t-foreach="o.get_slip_line('sem_bet')[0]['name']" t-as="sem">
-                        <td style = "border:1px solid #C0C0C0;" >
-                            <t t-esc="int(o.get_legal_leaves_consumed(5)" /> -->
-                            <!-- <t t-esc="int(o.get_legal_leaves(5)" /> -->
-                            <!-- <t t-esc="o.get_slip_line('sem_bet')[0]['name']" /> -->
-                            <!-- <t t-esc="sem"/> -->
-                            <!-- <span>HI</span> -->
-                            <!-- <t t-esc="o.leave_allocation_id.max_leaves"/>
-                            <t t-esc="o.leave_allocation_id.leaves_taken"/>
-                        </td> -->
-                        <!-- </t>  -->
-                        <!-- <td style = "border:1px solid #C0C0C0;" >
-                            <t t-esc="int(o.get_legal_leaves_consumed(5)" />
-                            <t t-esc="int(o.get_legal_leaves(5)" /> -->
-                            <!-- <t t-esc="o.get_slip_line('sem_bet')[0]['name']" /> -->
-                            <!-- <t t-esc="sem"/> -->
-                            <!-- <span>HI</span> -->
-                            <!-- <t t-esc="o.leave_allocation_id.max_leaves"/>/ -->
-                            <!-- <t t-esc="o.leave_allocation_id.leaves_taken"/> -->
-                        <!-- </td>
-                        <td style = "border:1px solid #C0C0C0;" >
-                            <t t-esc="int(o.get_legal_leaves_consumed(5)" />
-                            <t t-esc="int(o.get_legal_leaves(5)" /> -->
-                            <!-- <t t-esc="o.get_slip_line('sem_bet')[0]['name']" /> -->
-                            <!-- <t t-esc="sem"/> -->
-                            <!-- <span>HI</span> -->
-                            <!-- <t t-esc="o.leave_allocation_id.max_leaves"/>/ -->
-                            <!-- <t t-esc="o.leave_allocation_id.leaves_taken"/> -->
-                        <!-- </td>
-                        <td style = "border:1px solid #C0C0C0;" >
-                            <t t-esc="int(o.get_legal_leaves_consumed(5)" />
-                            <t t-esc="int(o.get_legal_leaves(5)" /> -->
-                            <!-- <t t-esc="o.get_slip_line('sem_bet')[0]['name']" /> -->
-                            <!-- <t t-esc="sem"/> -->
-                            <!-- <span>HI</span> -->
-                            <!-- <t t-esc="o.leave_allocation_id.max_leaves"/>/ -->
-                            <!-- <t t-esc="o.leave_allocation_id.leaves_taken"/> -->
-                        <!-- </td> -->
-
                     </tr>
                 </table>
             </div>
@@ -341,15 +281,6 @@
                                                     <t t-esc="int(o.get_slip_line(pa.code)[0]['amount']) if len(o.get_slip_line(pa.code)) &gt; 0 else 0"/>
                                                 </td>
                                                 <td style="text-align: right; border-left: 0.3mm solid black;">
-                                                    <!-- <t t-if="o.get_slip_line(pa.code)[0]['payslip_character'] == 'minus'">
-                                                        <span>- </span><t t-esc="str(int(o.get_slip_line(pa.code)[0]['total']))"/>
-                                                    </t>
-                                                    <t t-elif="o.get_slip_line(pa.code)[0]['payslip_character'] == 'parentheses'">
-                                                        <span>(</span><t t-esc="str(int(o.get_slip_line(pa.code)[0]['total']))"/><span>)</span>
-                                                    </t>
-                                                    <t t-else="">
-                                                        <t t-esc="str(int(o.get_slip_line(pa.code)[0]['total']))"/>
-                                                    </t> -->
                                                     <t t-esc="int(o.get_slip_line(pa.code)[0]['total'])"/>
                                                 </td>
 

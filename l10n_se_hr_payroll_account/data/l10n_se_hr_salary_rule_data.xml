@@ -1,129 +1,99 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-  <data>
-    <record id="l10n_se_hr_payroll.hr_salary_rule-san" model="hr.salary.rule">
-      <field name="account_debit_char">7511</field>
-    </record>
-    <record id="l10n_se_hr_payroll.hr_salary_rule-san-mot" model="hr.salary.rule">
-      <field name="account_credit_char">2731</field>
-      <field name="account_tax_char">AvgHel</field>
-    </record>
-    <record id="7399_2017" model="account.account">
-      <field name="name">Motkonto för förmåner</field>
-      <field name="code">7399</field>
-      <field name="user_type_id" ref="account.data_account_type_expenses"/>
-    </record>
-    <record id="l10n_se_hr_payroll.hr_salary_rule-formon-til" model="hr.salary.rule">
-      <field name="account_debit_char">7388</field>
-      <field name="account_credit_char">7399</field>
-    </record>
-    <record id="l10n_se_hr_payroll.hr_salary_rule-sap" model="hr.salary.rule">
-      <field name="account_debit_char" >7521</field>
-    </record>
-    <record id="l10n_se_hr_payroll.hr_salary_rule-sap-mot" model="hr.salary.rule">
-      <field name="account_credit_char">2731</field>
-      <field name="account_tax_char">AvgAldersp</field>
-    </record>
-    <record id="l10n_se_hr_payroll.hr_salary_rule-prej" model="hr.salary.rule">
-      <field name="account_credit_char">2710</field>
-      <field name="account_tax_char" >SkAvdrLon</field>
-    </record>
-    <record id="l10n_se_hr_payroll.hr_salary_rule-resmil" model="hr.salary.rule">
-      <field name="account_debit_char">5841,5800</field>
-    </record>
-    <record id="l10n_se_hr_payroll.hr_salary_rule-bl" model="hr.salary.rule">
-      <field name="account_debit_char">7210</field>
-      <field name="account_tax_char">UlagAvgHel</field>
-    </record>
-    <record id="l10n_se_hr_payroll.hr_salary_rule-blfl" model="hr.salary.rule">
-      <field name="account_debit_char">7292</field>
-      <field name="account_credit_char">2920</field>
-    </record>
-    <record id="l10n_se_hr_payroll.hr_salary_rule-blflsem" model="hr.salary.rule">
-      <field name="account_debit_char">7223</field>
-      <field name="account_tax_char">UlagAvgAldersp</field>
-    </record>
-    <record id="l10n_se_hr_payroll.hr_salary_rule-blflu" model="hr.salary.rule">
-      <field name="account_debit_char">7223</field>
-      <field name="account_tax_char">UlagAvgAldersp</field>
-    </record>
-    <record id="l10n_se_hr_payroll.hr_salary_rule-blfln" model="hr.salary.rule">
-      <field name="account_debit_char">7221</field>
-      <field name="account_tax_char">UlagAvgHel</field>
-    </record>
-    <record id="l10n_se_hr_payroll.hr_salary_rule-blflp" model="hr.salary.rule">
-      <field name="account_debit_char">7224</field>
-      <field name="account_tax_char">UlagAvgAldersp</field>
-    </record>
-    <record id="l10n_se_hr_payroll.hr_salary_rule-blflpx" model="hr.salary.rule">
-      <field name="account_debit_char">7225</field>
-      <field name="account_tax_char">UlagSkLonSarsk</field>
-    </record>
-    <record id="l10n_se_hr_payroll.hr_salary_rule-sum" model="hr.salary.rule">
-      <field name="account_credit_char">2821</field>
-    </record>
-    
-    <record id="l10n_se_hr_payroll.hr_salary_rule-nettoavdr-avg" model="hr.salary.rule">
-        <field name="account_credit_char">7399</field>
-    </record>
+    <data>
+        <record id="l10n_se_hr_payroll.hr_salary_rule-san" model="hr.salary.rule">
+            <field name="account_debit_char">7511</field>
+        </record>
+        <record id="l10n_se_hr_payroll.hr_salary_rule-san-mot" model="hr.salary.rule">
+            <field name="account_credit_char">2731</field>
+            <field name="account_tax_char">AvgHel</field>
+        </record>
+        <record id="7399_2017" model="account.account">
+            <field name="name">Motkonto för förmåner</field>
+            <field name="code">7399</field>
+<!--            <field name="user_type_id" ref="account.data_account_type_expenses"/>-->
+        </record>
+        <record id="l10n_se_hr_payroll.hr_salary_rule-formon-til" model="hr.salary.rule">
+            <field name="account_debit_char">7388</field>
+            <field name="account_credit_char">7399</field>
+        </record>
+        <record id="l10n_se_hr_payroll.hr_salary_rule-sap" model="hr.salary.rule">
+            <field name="account_debit_char" >7521</field>
+        </record>
+        <record id="l10n_se_hr_payroll.hr_salary_rule-sap-mot" model="hr.salary.rule">
+            <field name="account_credit_char">2731</field>
+            <field name="account_tax_char">AvgAldersp</field>
+        </record>
+        <record id="l10n_se_hr_payroll.hr_salary_rule-prej" model="hr.salary.rule">
+            <field name="account_credit_char">2710</field>
+            <field name="account_tax_char" >SkAvdrLon</field>
+        </record>
+        <record id="l10n_se_hr_payroll.hr_salary_rule-resmil" model="hr.salary.rule">
+            <field name="account_debit_char">5841,5800</field>
+        </record>
+        <record id="l10n_se_hr_payroll.hr_salary_rule-bl" model="hr.salary.rule">
+            <field name="account_debit_char">7210</field>
+            <field name="account_tax_char">UlagAvgHel</field>
+        </record>
+        <record id="l10n_se_hr_payroll.hr_salary_rule-blfl" model="hr.salary.rule">
+            <field name="account_debit_char">7292</field>
+            <field name="account_credit_char">2920</field>
+        </record>
+        <record id="l10n_se_hr_payroll.hr_salary_rule-blflsem" model="hr.salary.rule">
+            <field name="account_debit_char">7223</field>
+            <field name="account_tax_char">UlagAvgAldersp</field>
+        </record>
+        <record id="l10n_se_hr_payroll.hr_salary_rule-blflu" model="hr.salary.rule">
+            <field name="account_debit_char">7223</field>
+            <field name="account_tax_char">UlagAvgAldersp</field>
+        </record>
+        <record id="l10n_se_hr_payroll.hr_salary_rule-blfln" model="hr.salary.rule">
+            <field name="account_debit_char">7221</field>
+            <field name="account_tax_char">UlagAvgHel</field>
+        </record>
+        <record id="l10n_se_hr_payroll.hr_salary_rule-blflp" model="hr.salary.rule">
+            <field name="account_debit_char">7224</field>
+            <field name="account_tax_char">UlagAvgAldersp</field>
+        </record>
+        <record id="l10n_se_hr_payroll.hr_salary_rule-blflpx" model="hr.salary.rule">
+            <field name="account_debit_char">7225</field>
+            <field name="account_tax_char">UlagSkLonSarsk</field>
+        </record>
+        <record id="l10n_se_hr_payroll.hr_salary_rule-sum" model="hr.salary.rule">
+            <field name="account_credit_char">2821</field>
+        </record>
 
-    <!-- Drivmedelsförmån -->
-    <record id="l10n_se_hr_payroll.hr_salary_rule-fuel-deduct018" model="hr.salary.rule">
-           <field name="account_credit_char">2710</field>
-           <field name="account_tax_char">SkAvdrLon</field>
-    </record>
-    <record id="l10n_se_hr_payroll.hr_salary_rule-fuel-018b" model="hr.salary.rule">
-         <field name="account_credit_char">2710</field>
-           <field name="account_tax_char">SkAvdrLon</field>
-    </record>
-    <record id="l10n_se_hr_payroll.hr_salary_rule-fuel-deduct018u" model="hr.salary.rule">
-           <field name="account_credit_char">7385</field>
-    </record>
-    <record id="l10n_se_hr_payroll.hr_salary_rule-fuel-018bu" model="hr.salary.rule">
-         <field name="account_credit_char">7385</field>
-    </record>
+        <record id="l10n_se_hr_payroll.hr_salary_rule-nettoavdr-avg" model="hr.salary.rule">
+            <field name="account_credit_char">7399</field>
+        </record>
 
-    <!--
-         ============================== EGEN FILE ???
-    -->
-<!--
-Finns i l10n_se
-    <record id="l10n_se.k2_2821" model="account.account.template">
-      <field name="type">payable</field>
-      <field name="user_type" search="[('code', '=', 'payable')]" />
-    </record>
-    <record id="l10n_se.k2_1630" model="account.account.template">
-      <field name="type">payable</field>
-      <field name="user_type" search="[('code', '=', 'payable')]" />
-    </record>
--->
-<!--
-    <record id="hr.hr_contribution_register-SKV" model="hr.contribution.register">
-    Can't find the creation of this record in the hr module in both odoo10 and 12. I suspects it gets created here, in which case it shouldn't have the prefix "hr."
--->
-    <record id="hr_contribution_register-SKV" model="hr.contribution.register">
-      <field name="company_id" ref="base.main_company" />
-      <field name="name">Skatteverket</field>
-<!--
-        <field name="partner_id" ref="base.res_partner-SKV" />
--->
-      <field name="partner_id" ref="l10n_se.res_partner-SKV" />
-    </record>
-<!--
-    <record id="l10n_se_hr_payroll.hr_salary_rule-sau-mot" model="hr.salary.rule">
-      <field name="register_id" ref="hr.hr_contribution_register-SKV" />
-    </record>
-    <record id="l10n_se_hr_payroll.hr_salary_rule-san-mot" model="hr.salary.rule">
-      <field name="register_id" ref="hr.hr_contribution_register-SKV" />
-    </record>
-    <record id="l10n_se_hr_payroll.hr_salary_rule-sap-mot" model="hr.salary.rule">
-      <field name="register_id" ref="hr.hr_contribution_register-SKV" />
-    </record>
--->
-    <record id="l10n_se_hr_payroll.hr_salary_rule-san-mot-SKV" model="hr.salary.rule">
-      <field name="register_id" ref="l10n_se_hr_payroll_account.hr_contribution_register-SKV" />
-    </record>
-    <function model="hr.salary.rule" name="set_account_tax_using_char_fields"></function>
+        <!-- Drivmedelsförmån -->
+        <record id="l10n_se_hr_payroll.hr_salary_rule-fuel-deduct018" model="hr.salary.rule">
+            <field name="account_credit_char">2710</field>
+            <field name="account_tax_char">SkAvdrLon</field>
+        </record>
+        <record id="l10n_se_hr_payroll.hr_salary_rule-fuel-018b" model="hr.salary.rule">
+            <field name="account_credit_char">2710</field>
+            <field name="account_tax_char">SkAvdrLon</field>
+        </record>
+        <record id="l10n_se_hr_payroll.hr_salary_rule-fuel-deduct018u" model="hr.salary.rule">
+            <field name="account_credit_char">7385</field>
+        </record>
+        <record id="l10n_se_hr_payroll.hr_salary_rule-fuel-018bu" model="hr.salary.rule">
+            <field name="account_credit_char">7385</field>
+        </record>
 
-  </data>
+        <record id="hr_contribution_register-SKV" model="hr.contribution.register">
+            <field name="company_id" ref="base.main_company" />
+            <field name="name">Skatteverket</field>
+            <field name="partner_id" ref="l10n_se_extended.res_partner-SKV" />
+        </record>
+
+        <record id="l10n_se_hr_payroll.hr_salary_rule-san-mot-SKV" model="hr.salary.rule">
+            <field name="register_id" ref="l10n_se_hr_payroll_account.hr_contribution_register-SKV" />
+        </record>
+        <function model="hr.salary.rule" name="set_account_tax_using_char_fields"></function>
+
+    </data>
 </odoo>
+

@@ -1,10 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-<!--
-  For odoo 14 i have changed all hr_payroll to hr_payroll_community  
--->
     <data>
-
         <record id="view_account_journal_form_inheriet" model="ir.ui.view">
             <field name="name">account.journal.form.inherit</field>
             <field name="model">account.journal</field>
@@ -17,6 +13,5 @@
                 </xpath>
             </field>
         </record>
-
     </data>
 </odoo>
