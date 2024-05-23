@@ -19,8 +19,8 @@
             <field name="condition_python">result = contract.get_leave_days('l10n_se_hr_holidays.holiday_status_furlough', worked_days) &gt; 0.0</field>
             <field name="amount_select">code</field>
             <field name="amount_python_compute">
-                result_qty = contract.get_leave_days('l10n_se_hr_holidays.holiday_status_furlough', worked_days)
-                result = 0.0
+result_qty = contract.get_leave_days('l10n_se_hr_holidays.holiday_status_furlough', worked_days)
+result = 0.0
             </field>
             <field name="quantity">1</field>
         </record>
@@ -38,8 +38,8 @@
             <field name="condition_python">result = payslips.dict.has_legal_leaves('sem_bet')</field>
             <field name="amount_select">code</field>
             <field name="amount_python_compute">
-                result_qty = payslips.dict.get_legal_leaves_days('sem_bet') * -1
-                result = 0.0
+result_qty = payslips.dict.get_legal_leaves_days('sem_bet') * -1
+result = 0.0
             </field>
             <field name="quantity">1</field>
         </record>
@@ -56,9 +56,9 @@
             <field name="condition_python">result = payslips.dict.has_legal_leaves('sem_bet')</field>
             <field name="amount_select">code</field>
             <field name="amount_python_compute">
-                #(ML*0,008)*(VAD/VADI)
-                result_qty = payslips.dict.get_legal_leaves_days('sem_bet') * -1
-                result = contract.wage * 0.008
+#(ML*0,008)*(VAD/VADI)
+result_qty = payslips.dict.get_legal_leaves_days('sem_bet') * -1
+result = contract.wage * 0.008
             </field>
             <field name="quantity">1</field>
         </record>
@@ -73,10 +73,10 @@
             <field name="condition_python">result = payslips.dict.has_legal_leaves('sem_bet')</field>
             <field name="amount_select">code</field>
             <field name="amount_python_compute">
-                #(ML*0,008)*(VAD/VADI)
-                result_qty = payslips.dict.get_legal_leaves_days('sem_bet') * -1
-                result = contract.wage * 0.0043
-                #result = contract.wage * 0.008
+#(ML*0,008)*(VAD/VADI)
+result_qty = payslips.dict.get_legal_leaves_days('sem_bet') * -1
+result = contract.wage * 0.0043
+#result = contract.wage * 0.008
             </field>
             <field name="quantity">1</field>
         </record>
@@ -93,9 +93,9 @@
             <field name="condition_python">result = worked_days.dict.get('sem_obet',False)</field>
             <field name="amount_select">code</field>
             <field name="amount_python_compute">
-                #(ML*0,046)*(VAD/VADI)
-                result_qty = contract.get_leave_days('sem_obet',worked_days) * -1
-                result = contract.wage * 0.046
+#(ML*0,046)*(VAD/VADI)
+result_qty = contract.get_leave_days('sem_obet',worked_days) * -1
+result = contract.wage * 0.046
             </field>
             <field name="quantity">1</field>
         </record>
@@ -111,9 +111,9 @@
             <field name="condition_python">result = inputs.komp_peng.amount != 0</field>
             <field name="amount_select">code</field>
             <field name="amount_python_compute">
-                #(ML/AVTID)*(100/APR)
-                result_qty = inputs.komp_peng.amount
-                result = contract.wage / 160
+#(ML/AVTID)*(100/APR)
+result_qty = inputs.komp_peng.amount
+result = contract.wage / 160
             </field>
             <field name="quantity">1</field>
         </record>
@@ -132,9 +132,9 @@
             <field name="condition_python">result = payslips.dict.has_legal_leaves('sem_bet')</field>
             <field name="amount_select">code</field>
             <field name="amount_python_compute">
-                result_qty = payslips.dict.get_legal_leaves_days('sem_bet') * -1
-                result = 0.046*contract.wage
-                #result = contract.wage / 21
+result_qty = payslips.dict.get_legal_leaves_days('sem_bet') * -1
+result = 0.046*contract.wage
+#result = contract.wage / 21
             </field>
             <field name="quantity">1</field>
         </record>

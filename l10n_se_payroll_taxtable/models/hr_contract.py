@@ -60,13 +60,14 @@ class HRContract(models.Model):
             _logger.warning(f"Please fill these values{fails}")
             return
 
-        year = payslip.date_from.year
+        year = payslip.period_id.date_start.year
 
         taxtable_name = f"Skattetabell {year}"
         taxtable_id = self.env['payroll.taxtable'].search([('name', 'like', f'%{year}%')])
 
         taxtable_line = self.env['payroll.taxtable.line'].search([
-            ('payroll_taxable_id.name', 'like', f'%{year}%'),
+            #('payroll_taxable_id.name', 'like', f'%{year}%'),
+            ('year','ilike', year),
             ('table_number', '=', self.table_number),
             ('income_from', '<=', float(wage)),
             ('income_to', '>=', float(wage)),
@@ -82,7 +83,7 @@ class HRContract(models.Model):
         if not taxtable_id:
             taxtable_id = self.env['payroll.taxtable'].create({'name': taxtable_name})
 
-        self.fetch_entire_tablenumber_SKV_data(payslip.date_from.year)
+        self.fetch_entire_tablenumber_SKV_data(year)
 
         taxtable_line = self.env['payroll.taxtable.line'].search([
             ('payroll_taxable_id.name', 'like', f'%{year}%'),
