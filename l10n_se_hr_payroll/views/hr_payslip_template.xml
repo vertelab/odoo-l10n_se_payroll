@@ -256,5 +256,17 @@
             </t>
         </t>
     </template>
-    <report id="l10n_se_hr_payroll.payslip_2" model="hr.payslip" string="Payslip" report_type="qweb-pdf" name="l10n_se_hr_payroll.payslip_2_report" file="l10n_se_hr_payroll.payslip_2_report" attachment_use="True" attachment="('payslip_'+(object.number.replace('/','') or ''))+'.pdf'" />
+
+    <record id="l10n_se_hr_payroll.payslip_2" model="ir.actions.report">
+        <field name="name">Payslip</field>
+        <field name="model">account.move</field>
+        <field name="binding_model_id" ref="model_hr_payslip"/>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">l10n_se_hr_payroll.payslip_2_report</field>
+        <field name="report_file">l10n_se_hr_payroll.payslip_2_report</field>
+        <field name="attachment">('payslip_'+(object.number.replace('/','') or ''))+'.pdf'</field>
+        <field name="attachment_use">True</field>
+        <field name="binding_view_types">list</field>
+    </record>
+<!--    <report id="l10n_se_hr_payroll.payslip_2" model="hr.payslip" string="Payslip" report_type="qweb-pdf" name="l10n_se_hr_payroll.payslip_2_report" file="l10n_se_hr_payroll.payslip_2_report" attachment_use="True" attachment="('payslip_'+(object.number.replace('/','') or ''))+'.pdf'" />-->
 </odoo>
