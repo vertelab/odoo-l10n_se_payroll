@@ -12,5 +12,12 @@
             <field name="header_spacing">35</field>
             <field name="dpi">90</field>
         </record>
+
+        <record id="mail_activity_payslip" model="mail.activity.type">
+            <field name="name">Lönespec</field>
+            <field name="is_payslip">True</field>
+            <field name="icon">fa-envelope</field>
+            <field name="sequence">3</field>
+        </record>
     </data>
 </odoo>

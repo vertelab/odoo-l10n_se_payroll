@@ -185,6 +185,14 @@ class hr_employee(models.Model):
 class hr_payslip(models.Model):
     _inherit = 'hr.payslip'
 
+    def compute_has_activities(self):
+        for record in self:
+            if record.activity_ids:
+                record.has_activities = True
+            else:
+                record.has_activities = False
+    has_activities = fields.Boolean(compute=compute_has_activities)
+
     period_id = fields.Many2one(comodel_name='account.period', string="Period",
                                 readonly=True,
                                 required=True,
@@ -198,6 +206,30 @@ class hr_payslip(models.Model):
                                                       compute='_compute_details_by_salary_rule_category',
                                                       string='Details by Salary Rule Category',
                                                       help="Details from the salary rule category")
+
+    def move_activites_to_payslip(self):
+        for record in self:
+            activites = self.env['mail.activity'].search([
+                ('date_deadline','>=',record.period_id.date_start),
+                ('date_deadline','<=',record.period_id.date_stop), 
+                ('employee_id','=',record.employee_id.id)])
+            # raise UserError(record.__dict__)
+            for activity in activites:
+                #record.has_activities = True
+                model = self.env['ir.model'].search([('model','=','hr.payslip')])
+                activity.res_model = model.model
+                activity.res_model_id = model.id
+                activity.res_id = record.id
+            #raise UserError(f'{activites=}')
+    
+    @api.model_create_multi
+    def create(self, vals_list):
+        _logger.warning(f"{vals_list=}")
+        res = super(hr_payslip, self).create(vals_list)
+        _logger.warning(f"{res=}")        
+        res.move_activites_to_payslip()
+
+        return res
 
     # Work in progres
     # allocation_display = fields.Char(related='employee_id.allocation_display') #Dont know about this one?

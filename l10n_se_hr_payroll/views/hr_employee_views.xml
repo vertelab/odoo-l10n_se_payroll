@@ -40,5 +40,19 @@
         </record>
 
 
+        <record id="mail_activity_view_form_popup_inherit" model="ir.ui.view">
+            <field name="name">mail_activity_view_form_popup_inherit</field>
+            <field name="model">mail.activity</field>
+            <field name="inherit_id" ref="mail.mail_activity_view_form_popup" />
+            <field name="arch" type="xml">
+               <field name="activity_type_id" position="after">
+                      <field name="is_payslip" invisible="1"/>
+                      <field name="employee_id" attrs="{'invisible': [('is_payslip','=',False)]}"/>
+               </field>
+            </field>
+        </record>
+
+
+
     </data>
 </odoo>

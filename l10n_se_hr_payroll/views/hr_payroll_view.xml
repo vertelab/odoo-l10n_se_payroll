@@ -77,6 +77,38 @@
             </field>
         </record>
 
+    <record id="payroll.hr_payslip_view_tree" model="ir.ui.view">
+        <field name="name">hr.payslip.tree</field>
+        <field name="model">hr.payslip</field>
+        <field name="arch" type="xml">
+            <tree decoration-danger="has_activities == True" decoration-muted="state == 'cancel'" multi_edit="1" sample="1">
+                <field name="number" readonly="1" decoration-bf="1" />
+                 <field name="has_activities" invisible="1"/>
+                <field name="employee_id" readonly="1" />
+                <field name="name" />
+                <field name="date_from" optional="show" decoration-bf="1" />
+                <field name="date_to" optional="show" decoration-bf="1" />
+                <field name="activity_ids" widget="list_activity" optional="show" />
+                <field
+                    name="state"
+                    decoration-success="state == 'done'"
+                    decoration-warning="state == 'verify'"
+                    decoration-info="state == 'draft'"
+                    decoration-danger="state == 'cancel'"
+                    widget="badge"
+                    optional="show"
+                />
+                <field
+                    name="company_id"
+                    groups="base.group_multi_company"
+                    options="{'no_create': True}"
+                />
+                <field name="payslip_run_id" invisible="1" />
+                <field name="message_needaction" invisible="1" />
+            </tree>
+        </field>
+    </record>
+
 
 
         <record id="hr_payslip_view_form" model="ir.ui.view">
