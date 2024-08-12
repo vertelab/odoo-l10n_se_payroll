@@ -2,7 +2,7 @@
 ##############################################################################
 #
 #    Odoo SA, Open Source Management Solution, third party addon
-#    Copyright (C) 2022- Vertel AB (<https://vertel.se>).
+#    Copyright (C) 2024- Vertel AB (<https://vertel.se>).
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as
@@ -21,7 +21,7 @@
 
 {
     'name': 'l10n_se_payroll: Payroll Tax Table',
-    'version': '16.0.1.0.0',
+    'version': '0.1',
     'summary': 'https://skatteverket.entryscape.net/store/9/resource/1534',
     'category': 'Payroll Localization',
     'author': 'Vertel AB',
