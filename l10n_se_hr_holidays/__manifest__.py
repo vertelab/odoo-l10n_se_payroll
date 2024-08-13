@@ -47,6 +47,14 @@ Swedish Holidays Rules
 * Holiday earning rules can add days to an employees hr.holidays.earning
   from hr.payslip
 
+
+  This module depends on OCA:
+  git@github.com:OCA/payroll.git
+  git@github.com:OCA/timesheet.git
+  git@github.com:OCA/web.git
+  
+  
+
 """,
     'auto_install': False,
     'data': [
