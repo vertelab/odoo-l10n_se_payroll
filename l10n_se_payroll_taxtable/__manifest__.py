@@ -33,7 +33,14 @@
     'depends': ['l10n_se', 'hr_contract', 'l10n_se_hr_payroll'],
     'description': """
         'Compute Sheet' will fetch any data not already present in the database
-        through Skatteverket API, Taxtable lines will be gathered by year. 
+        through Skatteverket API, Taxtable lines will be gathered by year.
+
+
+      This module depends on OCA:
+      git@github.com:OCA/payroll.git
+      git@github.com:OCA/timesheet.git
+      git@github.com:OCA/web.git
+      
     """,
     'auto_install': False,
     'demo': [],
