@@ -28,6 +28,13 @@
     'description': """
 Accounting Data for Swedish Payroll Rules.
 ==========================================
+
+
+  This module depends on OCA:
+  git@github.com:OCA/payroll.git
+  git@github.com:OCA/timesheet.git
+  git@github.com:OCA/web.git
+  
     """,
     #'sequence': '1'
     'author': 'Vertel AB',
