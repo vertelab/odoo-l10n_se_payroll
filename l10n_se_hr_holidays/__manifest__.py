@@ -32,7 +32,7 @@
     'license': 'AGPL-3',
     'contributor': '',
     'maintainer': 'Vertel AB',
-    'repository': 'https://github.com/vertelab/odoo-l10n-se-payroll',
+    'repository': 'https://github.com/vertelab/odoo-l10n_se_payroll',
     'depends': ['l10n_se_hr_payroll', 'hr_holidays', 'l10n_se_payroll_taxtable'],
     'licence': 'AGPL-3',
     'description': """
