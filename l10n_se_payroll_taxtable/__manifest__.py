@@ -29,7 +29,7 @@
     'images': ['static/description/banner.png'], # 560x280 px.
     'license': 'AGPL-3',
     'maintainer': 'Vertel AB',
-    'repository': 'https://github.com/vertelab/odoo-l10n-se-payroll',
+    'repository': 'https://github.com/vertelab/odoo-l10n_se_payroll',
     'depends': ['l10n_se', 'hr_contract', 'l10n_se_hr_payroll'],
     'description': """
         'Compute Sheet' will fetch any data not already present in the database
