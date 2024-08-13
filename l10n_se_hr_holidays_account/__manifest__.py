@@ -37,6 +37,12 @@
     'description': """
 Accounting Data for Swedish Holiday Pay Rules.
 ==============================================
+
+  This module depends on OCA:
+  git@github.com:OCA/payroll.git
+  git@github.com:OCA/timesheet.git
+  git@github.com:OCA/web.git
+  
     """,
 
     'auto_install': True,
