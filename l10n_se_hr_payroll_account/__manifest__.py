@@ -36,7 +36,7 @@ Accounting Data for Swedish Payroll Rules.
     'license': 'AGPL-3',
     'contributor': '',
     'maintainer': 'Vertel AB',
-    'repository': 'https://github.com/vertelab/odoo-l10n-se-payroll',
+    'repository': 'https://github.com/vertelab/odoo-l10n_se_payroll',
     'depends': ['l10n_se_hr_payroll', 'payroll_account', 'l10n_se'],
     'auto_install': True,
     'demo': [],
