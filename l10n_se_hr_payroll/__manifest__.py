@@ -44,6 +44,13 @@ Swedish Payroll Rules.
     * Employee Payslip
     * Monthly Payroll Register
     * Integrated with Holiday Management
+
+
+    This module depends on OCA:
+    git@github.com:OCA/payroll.git
+    git@github.com:OCA/timesheet.git
+    git@github.com:OCA/web.git
+    
     """,
     'auto_install': False,
     'data': [
