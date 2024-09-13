@@ -1,1 +1,4 @@
 git@github.com:vertelab/odoo-account.git
+git@github.com:OCA/payroll.git
+git@github.com:OCA/timesheet.git
+git@github.com:OCA/web.git
