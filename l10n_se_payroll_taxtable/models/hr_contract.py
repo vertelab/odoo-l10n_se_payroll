@@ -50,6 +50,9 @@ class HRContract(models.Model):
     
     def l10_sum_columns_taxtable_line(self, payslip, wage):
 
+        if wage == 0.0:
+            return 0.0
+
         if self.has_tax_equalization and payslip.date_from >= self.tax_equalization_start and payslip.date_from <= self.tax_equalization_end:
             return wage * self.tax_equalization
 
@@ -61,17 +64,20 @@ class HRContract(models.Model):
             _logger.warning(f"Please fill these values{fails}")
             return
 
-        year = payslip.date_from.year
+        year = payslip.period_id.date_start.year
 
         taxtable_name = f"Skattetabell {year}"
         taxtable_id = self.env['payroll.taxtable'].search([ ('name', 'like', f'%{year}%') ])
 
         taxtable_line = self.env['payroll.taxtable.line'].search([
-            ('payroll_taxable_id.name', 'like', f'%{year}%'),
+            #('payroll_taxable_id.name', 'like', f'%{year}%'),
+            ('year','ilike', year),
             ('table_number', '=', self.table_number),
             ('income_from', '<=', float(wage)),
             ('income_to', '>=', float(wage)),
         ])
+        _logger.warning("look here"*100)
+        _logger.warning(f"{taxtable_line=}")
 
         if not taxtable_line:
             taxtable_line = self.do_api_call(taxtable_id, taxtable_name, wage, year, payslip)
@@ -84,7 +90,7 @@ class HRContract(models.Model):
         if not taxtable_id:
             taxtable_id = self.env['payroll.taxtable'].create({ 'name': taxtable_name })
 
-        self.fetch_entire_tablenumber_SKV_data(payslip.date_from.year)
+        self.fetch_entire_tablenumber_SKV_data(year)
 
         taxtable_line = self.env['payroll.taxtable.line'].search([
             ('payroll_taxable_id.name', 'like', f'%{year}%'),
@@ -416,5 +422,4 @@ class HRContract(models.Model):
             columns.append(item[f"kolumn {col}"])
 
         return columns
-
 
