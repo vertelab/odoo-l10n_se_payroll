@@ -30,7 +30,7 @@
     'license': 'AGPL-3',
     'maintainer': 'Vertel AB',
     'repository': 'https://github.com/vertelab/odoo-l10n_se_payroll',
-    'depends': ['l10n_se', 'hr_contract', 'l10n_se_hr_payroll'],
+    'depends': ['l10n_se_extended', 'hr_contract', 'l10n_se_hr_payroll'],
     'description': """
         'Compute Sheet' will fetch any data not already present in the database
         through Skatteverket API, Taxtable lines will be gathered by year.

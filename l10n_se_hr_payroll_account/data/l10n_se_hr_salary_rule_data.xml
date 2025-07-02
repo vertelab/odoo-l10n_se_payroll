@@ -86,13 +86,13 @@
         <record id="hr_contribution_register-SKV" model="hr.contribution.register">
             <field name="company_id" ref="base.main_company" />
             <field name="name">Skatteverket</field>
-            <field name="partner_id" ref="l10n_se_extended.res_partner-SKV" />
+<!--            <field name="partner_id" ref="l10n_se_extended.res_partner-SKV" />-->
         </record>
 
         <record id="l10n_se_hr_payroll.hr_salary_rule-san-mot-SKV" model="hr.salary.rule">
             <field name="register_id" ref="l10n_se_hr_payroll_account.hr_contribution_register-SKV" />
         </record>
-        <function model="hr.salary.rule" name="set_account_tax_using_char_fields"></function>
+        <function model="hr.salary.rule" name="set_account_tax_using_char_fields"/>
 
     </data>
 </odoo>

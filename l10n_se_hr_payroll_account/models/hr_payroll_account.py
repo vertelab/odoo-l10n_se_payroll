@@ -171,10 +171,10 @@ class HrSalaryRule(models.Model):
         all_errors = ""
         for record in self:
             error = ""
-            if record.company_id and record.account_debit and record.company_id != record.account_debit.company_id:
+            if record.company_id and record.account_debit and record.company_id != record.account_debit.company_ids:
                 error = error + f"Salary rule {record.name} has a debit account from a different company. {record.account_debit.code}. \n"
 
-            if record.company_id and record.account_credit and record.company_id != record.account_credit.company_id:
+            if record.company_id and record.account_credit and record.company_id != record.account_credit.company_ids:
                 error = error + f"Salary rule {record.name} has a credit account from a different company. {record.account_credit.code}. \n"
 
             if record.company_id and record.account_tax_id and record.company_id != record.account_tax_id.company_id:
@@ -193,10 +193,10 @@ class HrSalaryRule(models.Model):
         for record in all_rules:
             if record.company_id and record.account_debit_char and not record.account_debit:
                 record.account_debit = self.env["account.account"].search(
-                    [("company_id", "=", record.company_id.id), ("code", "=", record.account_debit_char)])
+                    [("company_ids", "in", record.company_id.id), ("code", "=", record.account_debit_char)])
             if record.company_id and record.account_credit_char and not record.account_credit:
                 record.account_credit = self.env["account.account"].search(
-                    [("company_id", "=", record.company_id.id), ("code", "=", record.account_credit_char)])
+                    [("company_ids", "in", record.company_id.id), ("code", "=", record.account_credit_char)])
             if record.company_id and record.account_tax_char and not record.account_tax_id:
                 record.account_tax_id = self.env["account.tax"].search(
                     [("company_id", "=", record.company_id.id), ("name", "=", record.account_tax_char)])
@@ -206,10 +206,10 @@ class HrSalaryRule(models.Model):
         for record in self:
             if record.company_id and record.account_debit and record.company_id != record.account_debit.company_id:
                 record.account_debit = self.env["account.account"].search(
-                    [("company_id", "=", record.company_id.id), ("code", "=", record.account_debit.code)])
+                    [("company_ids", "in", record.company_id.id), ("code", "=", record.account_debit.code)])
             if record.company_id and record.account_credit and record.company_id != record.account_credit.company_id:
                 record.account_credit = self.env["account.account"].search(
-                    [("company_id", "=", record.company_id.id), ("code", "=", record.account_credit.code)])
+                    [("company_ids", "in", record.company_id.id), ("code", "=", record.account_credit.code)])
             if record.company_id and record.account_tax_id and record.company_id != record.account_tax_id.company_id:
                 record.account_tax_id = self.env["account.tax"].search(
                     [("name", "=", record.account_tax_id.name), ("company_id", "=", record.company_id.id),

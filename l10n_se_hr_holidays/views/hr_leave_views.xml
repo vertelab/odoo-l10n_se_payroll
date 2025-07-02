@@ -6,15 +6,10 @@
             <field name="inherit_id" ref="hr_holidays.hr_leave_view_form"/>
             <field name="arch" type="xml">
                 <field name="request_date_to" position="replace">
-                    <field name="request_date_to" class="oe_inline"
-                        attrs="{
-                            'readonly': [('state', 'not in', ('draft', 'confirm'))],
-                            'invisible': [('request_unit_half', '=', True)],
-                            'required': ['|', ('date_from', '=', False), ('date_to', '=', False)]
-                    }"/>
+                    <field name="request_date_to" class="oe_inline" invisible="request_unit_half" readonly="state not in ['draft', 'confirm']" required="not date_from or not date_to"/>
                 </field>
                 <field name="name" position="after">
-                    <field name="is_deffered_period" readonly="1"></field>
+                    <field name="is_deffered_period" readonly="1"/>
                 </field>
             </field>
         </record>

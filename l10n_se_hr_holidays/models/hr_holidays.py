@@ -34,7 +34,7 @@ from odoo.tools.float_utils import float_round
 
 _logger = logging.getLogger(__name__)
 
-from odoo.addons.resource.models.resource import float_to_time, HOURS_PER_DAY
+from odoo.addons.resource.models.utils import float_to_time, HOURS_PER_DAY
 
 # Used to agglomerate the attendances in order to find the hour_from and hour_to
 # See _compute_date_from_to
@@ -102,7 +102,7 @@ class hr_holidays_status(models.Model):
     @api.model
     def init_records(self):
         ir_model_data = self.env['ir.model.data']
-        holiday_status_cl = ir_model_data._xmlid_lookup('hr_holidays.holiday_status_cl')[2]
+        holiday_status_cl = ir_model_data._xmlid_lookup('hr_holidays.holiday_status_cl')[1]
         self.env['hr.leave.type'].browse(holiday_status_cl).write({
             'name': 'Legal Leaves ' + str(fields.Date.from_string(fields.Datetime.now()).year - 1),
             'legal_leave': True,
@@ -111,7 +111,7 @@ class hr_holidays_status(models.Model):
             'date_earning_start': fields.Date.to_string(date(date.today().year - 2, 4, 1)),
             'date_earning_end': fields.Date.to_string(date(date.today().year - 1, 3, 31)),
         })
-        holiday_status_unpaid = ir_model_data._xmlid_lookup('hr_holidays.holiday_status_unpaid')[2]
+        holiday_status_unpaid = ir_model_data._xmlid_lookup('hr_holidays.holiday_status_unpaid')[1]
         self.env['hr.leave.type'].browse(holiday_status_unpaid).write({
             'name': 'Legal Leaves unpaid',
             'legal_leave': False,
@@ -119,21 +119,21 @@ class hr_holidays_status(models.Model):
             'limit': True,
             # 'unpaid': True,
         })
-        holiday_status_sl = ir_model_data._xmlid_lookup('hr_holidays.holiday_status_sl')[2]
+        holiday_status_sl = ir_model_data._xmlid_lookup('hr_holidays.holiday_status_sl')[1]
         self.env['hr.leave.type'].browse(holiday_status_sl).write({
             'name': 'Sick Leave 100%',
             'legal_leave': False,
             # 'allocation_type': 'no',
             'limit': True,
-            'color_name': 'red',
+            # 'color_name': 'red',
         })
-        holiday_status_sl = ir_model_data._xmlid_lookup('hr_holidays.holiday_status_sl')[2]
+        holiday_status_sl = ir_model_data._xmlid_lookup('hr_holidays.holiday_status_sl')[1]
         self.env['hr.leave.type'].browse(holiday_status_sl).write({
             'name': 'Sick Leave 100%',
             'legal_leave': False,
             # 'allocation_type': 'no',
             'limit': True,
-            'color_name': 'red',
+            # 'color_name': 'red',
         })
 
     @api.depends('date_earning_start', 'date_earning_end', 'limit')

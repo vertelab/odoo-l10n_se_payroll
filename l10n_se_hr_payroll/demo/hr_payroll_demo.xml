@@ -83,7 +83,7 @@
             <!--
                  <field name="leave_date_from">False</field>
             -->
-            <field name="address_home_id" ref="l10n_se_hr_payroll.res_partner-AW" />
+            <field name="address_id" ref="l10n_se_hr_payroll.res_partner-AW" />
         </record>
         <!--
              ==============================================================================
@@ -107,7 +107,7 @@
                  <field name="job_id" ref="hr.hr_job-7f6fa9c4-7e24-11e5-a6a2-52540087a7b7-1"/>
             -->
             <field name="name">Leif Ydreborn (ans)</field>
-            <field name="address_home_id" ref="l10n_se_hr_payroll.res_partner-LY" />
+            <field name="address_id" ref="l10n_se_hr_payroll.res_partner-LY" />
         </record>
         <!--
              ================

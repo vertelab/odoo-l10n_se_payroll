@@ -2,7 +2,7 @@
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 
 from odoo import api, models, fields, _
-from odoo.addons.resource.models.resource import Intervals
+from odoo.addons.resource.models.utils import Intervals
 
 from pytz import timezone
 import datetime
@@ -17,7 +17,7 @@ from dateutil.rrule import rrule, DAILY, WEEKLY, MONTHLY
 from functools import partial
 from itertools import chain
 from pytz import timezone, utc
-from odoo.addons.resource.models.resource import float_round, float_to_time, float_utils
+from odoo.addons.resource.models.utils import float_to_time
 from odoo.osv import expression
 
 

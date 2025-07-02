@@ -11,7 +11,7 @@
                         type="object"
                         class="oe_stat_button"
                         icon="fa-money"
-                        Xattrs="{'invisible': [('payslip_nbr','&gt;', 0)]}"
+                        invisible="payslip_nbr > 0"
                         help="Payslips">
                     <div class="o_field_widget o_stat_info">
                         <span class="o_stat_value">
@@ -31,7 +31,7 @@
         <field name="name">user.payslip.tree</field>
         <field name="model">user.payslip</field>
         <field name="arch" type="xml">
-            <tree
+            <list
                 decoration-info="state in ('confirm','hr_check','accont_check')"
                 decoration-muted="state == 'cancel'"
                 string="Payslips"
@@ -55,7 +55,7 @@
                 <field name="credit_note" optional="show" />
                 <button name="payslip_report" string="Payslip" type="object" class="o_replenish_buttons" icon="fa-refresh" />
 
-            </tree>
+            </list>
         </field>
     </record>
     <record id="user_payslip_view_search" model="ir.ui.view">

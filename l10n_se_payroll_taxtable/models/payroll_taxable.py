@@ -41,6 +41,13 @@ class PayrollTaxableLine(models.Model):
     column6 = fields.Float(string="Column 6")
     column7 = fields.Float(string="Column 7")
 
-    name = f"Skattetabell {year}"
+    @api.onchange('year')
+    def onchange_year_set_name(self):
+        if self.year:
+            self.name = f"Skattetabell {self.year}"
+        else:
+            self.name = "Skattetabell"
+
+    name = fields.Char(string="Name")
 
     payroll_taxable_id = fields.Many2one('payroll.taxtable', string="Payroll Taxable", ondelete="cascade")

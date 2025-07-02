@@ -15,21 +15,22 @@
                     <label for="tax_equalization" class="XXXoe_edit_only" />
                     <div class="o_row">
                         <field name="has_tax_equalization" nolabel="0" />
-                        <field name="tax_equalization" help="Factor to calculate tax, 0.3 is 30% tax" nolabel="0" attrs="{'invisible': [('has_tax_equalization', '=', False)], 'required': [('has_tax_equalization', '=', True)]}" />
-                        <field name="tax_equalization_start" placeholder="Start Date" class="oe_inline" nolabel="1" attrs="{'invisible': [('has_tax_equalization', '=', False)], 'required': [('has_tax_equalization', '=', True)]}" />
-                        <field name="tax_equalization_end" placeholder="End Date" class="oe_inline" nolabel="1" attrs="{'invisible': [('has_tax_equalization', '=', False)], 'required': [('has_tax_equalization', '=', True)]}" />
+                        <field name="tax_equalization" help="Factor to calculate tax, 0.3 is 30% tax" nolabel="0" invisible="not has_tax_equalization" required="has_tax_equalization" />
+                        <field name="tax_equalization_start" placeholder="Start Date" class="oe_inline" nolabel="1" invisible="not has_tax_equalization" required="has_tax_equalization" />
+                        <field name="tax_equalization_end" placeholder="End Date" class="oe_inline" nolabel="1" invisible="not has_tax_equalization" required="has_tax_equalization" />
                     </div>
                     <field name="is_church_deductible" />
 
                     <label for="one_off_tax"/>
                     <div class="o_row">
-                        <field name="has_one_off_tax" nolabel="0"></field>
-                        <field name="one_off_tax" attrs="{'invisible': [('has_one_off_tax', '=', False)], 'required': [('has_one_off_tax', '=', True)]}" widget="percentage"></field>
+                        <field name="has_one_off_tax" nolabel="0"/>
+                        <field name="one_off_tax" invisible="not has_one_off_tax" required="has_one_off_tax" widget="percentage"/>
                         <button name="fetch_taxtable_data" string="Get Taxtable" type="object" class="btn-primary"/>
                     </div>
                 </group>
             </field>
         </record>
+
         <record id="hr_contract_form_inherit" model="ir.ui.view">
             <field name="model">hr.contract</field>
             <field name="inherit_id" ref="l10n_se_hr_payroll.hr_contract_form_inherit" />
@@ -43,8 +44,8 @@
 
         <record model="ir.actions.server" id="fetch_taxtable_data">
             <field name="name">Fetch Taxtable</field>
-            <field name="model_id" ref="hr_contract.model_hr_contract"></field>
-            <field name="binding_model_id" ref="hr_contract.model_hr_contract"></field>
+            <field name="model_id" ref="hr_contract.model_hr_contract"/>
+            <field name="binding_model_id" ref="hr_contract.model_hr_contract"/>
             <field name="binding_view_types">form</field>
             <field name="binding_type">action</field>
             <field name="state">code</field>

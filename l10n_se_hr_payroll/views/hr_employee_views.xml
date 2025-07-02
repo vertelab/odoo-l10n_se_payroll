@@ -47,7 +47,7 @@
             <field name="arch" type="xml">
                <field name="activity_type_id" position="after">
                       <field name="is_payslip" invisible="1"/>
-                      <field name="employee_id" attrs="{'invisible': [('is_payslip','=',False)]}"/>
+                      <field name="employee_id" invisible="not is_payslip"/>
                </field>
             </field>
         </record>

@@ -9,7 +9,7 @@ from pytz import timezone, UTC
 
 from odoo import api, fields, models, SUPERUSER_ID, tools
 from odoo.addons.base.models.res_partner import _tz_get
-from odoo.addons.resource.models.resource import float_to_time, HOURS_PER_DAY
+from odoo.addons.resource.models.utils import float_to_time, HOURS_PER_DAY
 from odoo.exceptions import AccessError, UserError, ValidationError
 from odoo.tools import float_compare
 from odoo.tools.float_utils import float_round

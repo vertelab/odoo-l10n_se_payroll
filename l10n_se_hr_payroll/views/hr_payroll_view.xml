@@ -14,23 +14,23 @@
                     <page string="General">
                         <group>
                             <field name="condition_select"/>
-                            <field name="condition_python"  attrs="{'invisible':[('condition_select','!=','python')], 'required': [('condition_select','=','python')]}" widget="ace" options="{'mode': 'python'}" id="condition_python"/>
-                            <field name="condition_range" attrs="{'invisible':[('condition_select','!=','range')], 'required':[('condition_select','=','range')]}"/>
-                            <label string="Condition Range" attrs="{'invisible':[('condition_select','!=','range')], 'required':[('condition_select','=','range')]}" for="condition_range_min"/>
-                            <div attrs="{'invisible':[('condition_select','!=','range')], 'required':[('condition_select','=','range')]}">
+                            <field name="condition_python" invisible="condition_select != 'python'" required="condition_select == 'python'" widget="ace" options="{'mode': 'python'}" id="condition_python"/>
+                            <field name="condition_range" invisible="condition_select != 'range'" required="condition_select == 'range'"/>
+                            <label string="Condition Range" invisible="condition_select != 'range'" required="condition_select == 'range'" for="condition_range_min"/>
+                            <div invisible="condition_select != 'range'" required="condition_select == 'range'">
                                 <strong>Between </strong>
-                                <field name="condition_range_min" class="oe_inline" attrs="{'invisible':[('condition_select','!=','range')], 'required':[('condition_select','=','range')]}"/>
+                                <field name="condition_range_min" class="oe_inline" invisible="condition_select != 'range'" required="condition_select == 'range'"/>
                                 <strong> and </strong>
-                                <field name="condition_range_max" class="oe_inline" attrs="{'invisible':[('condition_select','!=','range')], 'required':[('condition_select','=','range')]}"/>
+                                <field name="condition_range_max" class="oe_inline" invisible="condition_select != 'range'" required="condition_select == 'range'"/>
                             </div>
                             <separator string="Company Contribution"/>
                             <field name="register_id"/>
                             <field name="amount_select"/>
-                            <field name="amount_percentage_base" attrs="{'invisible':[('amount_select','!=','percentage')], 'required': [('amount_select','=','percentage')]}"/>
-                            <field name="quantity" attrs="{'invisible':[('amount_select','=','code')], 'required':[('amount_select','!=','code')]}"/>
-                            <field name="amount_fix" attrs="{'invisible':[('amount_select','!=','fix')], 'required':[('amount_select','=','fix')]}"/>
-                            <field name="amount_python_compute" attrs="{'invisible':[('amount_select','!=','code')], 'required':[('amount_select','=','code')]}" widget="ace" options="{'mode': 'python'}" id="amount_python_compute"/>
-                            <field name="amount_percentage" attrs="{'invisible':[('amount_select','!=','percentage')], 'required':[('amount_select','=','percentage')]}"/>
+                            <field name="amount_percentage_base" invisible="amount_select != 'percentage'" required="amount_select == 'percentage'"/>
+                            <field name="quantity" invisible="amount_select == 'code'" required="amount_select != 'code'"/>
+                            <field name="amount_fix" invisible="amount_select != 'fix'" required="amount_select == 'fix'"/>
+                            <field name="amount_python_compute" invisible="amount_select != 'code'" required="amount_select == 'code'" widget="ace" options="{'mode': 'python'}" id="amount_python_compute"/>
+                            <field name="amount_percentage" invisible="amount_select != 'percentage'" required="amount_select == 'percentage'"/>
                             <separator string="Notes"/>
                             <field name="note" placeholder="Write salary rule notes or observations here..."/>
                         </group>
@@ -81,7 +81,7 @@
         <field name="name">hr.payslip.tree</field>
         <field name="model">hr.payslip</field>
         <field name="arch" type="xml">
-            <tree decoration-danger="has_activities == True" decoration-muted="state == 'cancel'" multi_edit="1" sample="1">
+            <list decoration-danger="has_activities == True" decoration-muted="state == 'cancel'" multi_edit="1" sample="1">
                 <field name="number" readonly="1" decoration-bf="1" />
                  <field name="has_activities" invisible="1"/>
                 <field name="employee_id" readonly="1" />
@@ -105,7 +105,7 @@
                 />
                 <field name="payslip_run_id" invisible="1" />
                 <field name="message_needaction" invisible="1" />
-            </tree>
+            </list>
         </field>
     </record>
 
@@ -121,7 +121,7 @@
                 </field>
                 <notebook position="inside">
                     <page string="Salary Details">
-                        <field name="details_by_salary_rule_category"></field>
+                        <field name="details_by_salary_rule_category"/>
                     </page>
                 </notebook>
             </field>

@@ -3,7 +3,7 @@
 import base64
 from odoo import fields, models, api, _
 
-from odoo.exceptions import UserError, ValidationError, RedirectWarning, Warning
+from odoo.exceptions import UserError, ValidationError, RedirectWarning
 import logging
 import datetime
 

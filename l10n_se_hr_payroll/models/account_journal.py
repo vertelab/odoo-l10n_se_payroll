@@ -21,7 +21,7 @@
 # ~ from odoo.modules.registry import RegistryManager
 from dateutil.relativedelta import relativedelta
 from odoo.modules.registry import Registry
-from odoo.exceptions import except_orm, Warning, RedirectWarning
+from odoo.exceptions import RedirectWarning
 from odoo import models, fields, api, _
 from odoo import http
 from odoo.http import request

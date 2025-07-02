@@ -19,7 +19,7 @@
 #
 ##############################################################################
 from dateutil.relativedelta import relativedelta
-from odoo.exceptions import except_orm, Warning, RedirectWarning, UserError, ValidationError
+from odoo.exceptions import RedirectWarning, UserError, ValidationError
 from odoo import models, fields, api, _
 from odoo.tools.safe_eval import safe_eval as eval
 from datetime import timedelta, date, datetime
@@ -163,7 +163,7 @@ class hr_contract(models.Model):
         return line.number_of_hours if line else 0.0
 
     def raisethis(self, message):
-        raise Warning(message)
+        raise ValidationError(message)
 
     def is_rule(self, rules, code):
         return rules.dict.get(code, False)
