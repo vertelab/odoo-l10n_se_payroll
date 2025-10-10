@@ -61,11 +61,6 @@ class Holidays(models.Model):
 
     is_deffered_period = fields.Boolean(string="Deffered Day", compute=_compute_karens)
 
-    def _timesheet_prepare_line_values(self, index, work_hours_data, day_date, work_hours_count):
-        val_list = super(Holidays, self)._timesheet_prepare_line_values(index, work_hours_data, day_date,
-                                                                        work_hours_count)
-        return val_list
-
     def _get_number_of_days(self, date_from, date_to, employee_id):
         context_data = {'hr_leave_request': True, 'include_weekends': False}
 

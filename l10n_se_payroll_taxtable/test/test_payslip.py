@@ -7,7 +7,8 @@
 from pytz import utc
 from datetime import date, datetime, time
 from odoo import fields
-from odoo.tests import common, Form
+from odoo.tests import Form
+from odoo.tests.common import TransactionCase
 import logging
 
 _logger = logging.getLogger(__name__)
@@ -22,7 +23,7 @@ _logger = logging.getLogger(__name__)
 
 
 
-class TestPayslipJanuary(common.SavepointCase):
+class TestPayslipJanuary(TransactionCase):
 
 
     # ~ def _create_leave(self, employee_id,code,date_from,date_to,number_of_days): 
