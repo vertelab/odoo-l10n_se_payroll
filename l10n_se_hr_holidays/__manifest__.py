@@ -22,18 +22,16 @@
 {
     'name': 'l10n_se_payroll: Holidays',
     'version': '0.1',
-    # Version ledger: XX.0 = Odoo version. 1 = Major. Non regressionable code. 2 = Minor. New features that are regressionable. 3 = Bug fixes
     'summary': 'Swedish Holiday Rules',
     'category': 'Payroll Localization',
-    #'sequence': '1'
     'author': 'Vertel AB',
     'website': 'https://vertel.se/apps/odoo-l10n_se_payroll/l10n_se_hr_holidays',
-    'images': ['static/description/banner.png'],  # 560x280 px.
+    'images': ['static/description/banner.png'],
     'license': 'AGPL-3',
     'contributor': '',
     'maintainer': 'Vertel AB',
     'repository': 'https://github.com/vertelab/odoo-l10n_se_payroll',
-    'depends': ['l10n_se_hr_payroll', 'hr_holidays', 'l10n_se_payroll_taxtable'],
+    'depends': ['l10n_se_hr_payroll', 'hr_holidays', 'l10n_se_payroll_taxtable', 'hr_work_entry_holidays'],
     'licence': 'AGPL-3',
     'description': """
 Swedish Holidays Rules
