@@ -31,7 +31,7 @@
     'contributor': '',
     'maintainer': 'Vertel AB',
     'repository': 'https://github.com/vertelab/odoo-l10n_se_payroll',
-    'depends': ['l10n_se_hr_payroll', 'hr_holidays', 'l10n_se_payroll_taxtable', 'hr_work_entry_holidays'],
+    'depends': ['l10n_se_hr_payroll', 'hr_holidays', 'l10n_se_payroll_taxtable', 'hr_work_entry_holidays', 'hr_weekly_working_hours'],
     'licence': 'AGPL-3',
     'description': """
 Swedish Holidays Rules

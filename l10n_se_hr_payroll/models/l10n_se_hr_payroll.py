@@ -125,7 +125,7 @@ class hr_contract(models.Model):
         if (rule_id and rule_id == "sem_til") or (rule_id and rule_id == "sem_bet"):
             _logger.warning(f"{rule_id=}")
             _logger.warning(f"{worked_days=}")
-            code = self.env.ref(rule_id).code if len(rule_id.split('.')) == 2 else rule_id
+            code = self.env.ref(rule_id).work_entry_type_id.code if len(rule_id.split('.')) == 2 else rule_id
             leave_lines = []
             for key, val in worked_days.dict.items():
                 _logger.warning(f"{key=} {val=}")
@@ -141,7 +141,7 @@ class hr_contract(models.Model):
                 return 0.0
         else:
             # _logger.error(f'get_leave_days: {self} {rule_id} {worked_days.dict}')
-            code = self.env.ref(rule_id).code if len(rule_id.split('.')) == 2 else rule_id
+            code = self.env.ref(rule_id).work_entry_type_id.code if len(rule_id.split('.')) == 2 else rule_id
             line = worked_days.dict.get(code, False)
             # _logger.error(f'get_leave_days: {code} {worked_days.dict}')
             # ~ _logger.error(f'get_leave_days: {line.number_of_days}')
