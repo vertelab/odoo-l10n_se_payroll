@@ -16,7 +16,7 @@
         </record>
         <record id="hr_karin_employee" model="hr.employee">
             <field name="name">Karin Kullberg Anställd</field>
-            <field name="work_location_id" ref="main_work_location" />            
+            <field name="work_location_id" ref="main_work_location" />
             <field name="work_phone">073-400000</field>
             <field name="work_email">karin.kullberg@aronssons.se</field>
             <field name="identification_id">891208-2396</field>
@@ -24,7 +24,7 @@
             <field name="private_street">Lövövägen 6</field>
             <field name="private_zip">171 00</field>
             <field name="private_city">Sollentuna</field>
-            <field name="private_phone">073-980078</field>                
+            <field name="private_phone">073-980078</field>
             <field name="address_id" ref="main_company_partner" />
             <field name="tz" eval="'Europe/Stockholm'" />
         </record>
@@ -43,5 +43,60 @@
             <field name="table_number">30</field>
             <field name="column_number" eval="'column1'"/>
         </record>
+
+        <!-- Leave February -->
+
+        <!-- Leave March -->
+
+        <!-- Leave April -->
+
+        <!-- Leave May -->
+
+        <!-- Leave June -->
+
+        <!-- Leave July -->
+
+        <record id="hr_leave_karin_701" model="hr.leave">
+            <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_karin_employee" />
+            <field name="date_from">2022-07-11</field>
+            <field name="date_to">2022-07-11</field>
+            <field name="request_date_from">2022-07-11</field>
+            <field name="request_date_to">2022-07-11</field>
+            <field name="number_of_days">1</field>
+            <field name="holiday_status_id" ref="l10n_se_hr_holidays.sick_leave_qualify" />
+        </record>
+
+        <record id="hr_leave_karin_702" model="hr.leave">
+            <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_karin_employee" />
+            <field name="date_from">2022-07-12</field>
+            <field name="date_to">2022-07-14</field>
+            <field name="request_date_from">2022-07-12</field>
+            <field name="request_date_to">2022-07-14</field>
+            <field name="number_of_days">3</field>
+            <field name="holiday_status_id" ref="l10n_se_hr_holidays.sick_leave_214" />
+        </record>
+
+        <!-- Leave August -->
+
+        <record id="hr_leave_karin_801" model="hr.leave">
+            <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_karin_employee" />
+            <field name="date_from">2022-08-08</field>
+            <field name="date_to">2022-08-08</field>
+            <field name="request_date_from">2022-08-08</field>
+            <field name="request_date_to">2022-08-08</field>
+            <field name="number_of_days">1</field>
+            <field name="holiday_status_id" ref="l10n_se_hr_holidays.sick_leave_qualify" />
+        </record>
+
+        <record id="hr_leave_karin_802" model="hr.leave">
+            <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_karin_employee" />
+            <field name="date_from">2022-08-09</field>
+            <field name="date_to">2022-08-10</field>
+            <field name="request_date_from">2022-08-09</field>
+            <field name="request_date_to">2022-08-10</field>
+            <field name="number_of_days">2</field>
+            <field name="holiday_status_id" ref="l10n_se_hr_holidays.sick_leave_214" />
+        </record>
+
     </data>
 </odoo>

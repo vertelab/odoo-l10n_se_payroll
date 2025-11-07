@@ -16,7 +16,7 @@
         </record>
         <record id="hr_gustav_employee" model="hr.employee">
             <field name="name">Gustav Groth Anställd</field>
-            <field name="work_location_id" ref="main_work_location" />            
+            <field name="work_location_id" ref="main_work_location" />
             <field name="work_phone">073-400000</field>
             <field name="work_email">gustav.groth@aronssons.se</field>
             <field name="identification_id">790124-0207</field>
@@ -24,7 +24,7 @@
             <field name="private_street">Gruvvägen 7</field>
             <field name="private_zip">171 00</field>
             <field name="private_city">Solna</field>
-            <field name="private_phone">073-700000</field>  
+            <field name="private_phone">073-700000</field>
             <field name="address_id" ref="main_company_partner" />
             <field name="tz" eval="'Europe/Stockholm'" />
         </record>
@@ -42,5 +42,242 @@
             <field name="table_number">30</field>
             <field name="column_number" eval="'column1'"/>
         </record>
+
+        <!-- Leave Janurary -->
+
+        <record id="hr_leave_gustav_101" model="hr.leave">
+            <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_gustav_employee" />
+            <field name="date_from">2022-01-07</field>
+            <field name="date_to">2022-01-07</field>
+            <field name="request_date_from">2022-01-07</field>
+            <field name="request_date_to">2022-01-07</field>
+            <field name="number_of_days">1</field>
+            <field name="holiday_status_id" ref="l10n_se_hr_holidays.sick_leave_qualify" />
+        </record>
+
+        <record id="hr_leave_gustav_102" model="hr.leave">
+            <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_gustav_employee" />
+            <field name="date_from">2022-01-10</field>
+            <field name="date_to">2022-01-14</field>
+            <field name="request_date_from">2022-01-10</field>
+            <field name="request_date_to">2022-01-14</field>
+            <field name="number_of_days">5</field>
+            <field name="holiday_status_id" ref="l10n_se_hr_holidays.sick_leave_214" />
+        </record>
+
+        <record id="hr_leave_gustav_103" model="hr.leave">
+            <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_gustav_employee" />
+            <field name="date_from">2022-01-17</field>
+            <field name="date_to">2022-01-21</field>
+            <field name="request_date_from">2022-01-17</field>
+            <field name="request_date_to">2022-01-21</field>
+            <field name="number_of_days">5</field>
+            <field name="holiday_status_id" ref="l10n_se_hr_holidays.sick_leave_214" />
+        </record>
+
+        <record id="hr_leave_gustav_104" model="hr.leave">
+            <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_gustav_employee" />
+            <field name="date_from">2022-01-24</field>
+            <field name="date_to">2022-01-25</field>
+            <field name="request_date_from">2022-01-24</field>
+            <field name="request_date_to">2022-01-25</field>
+            <field name="number_of_days">2</field>
+            <field name="holiday_status_id" ref="l10n_se_hr_holidays.sick_leave_214" />
+        </record>
+
+        <!-- Leave February -->
+
+        <!-- Leave March -->
+
+        <record id="hr_leave_gustav_301" model="hr.leave">
+            <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_gustav_employee" />
+            <field name="date_from">2022-03-02</field>
+            <field name="date_to">2022-03-02</field>
+            <field name="request_date_from">2022-03-02</field>
+            <field name="request_date_to">2022-03-02</field>
+            <field name="number_of_days">1</field>
+            <field name="holiday_status_id" ref="l10n_se_hr_holidays.sick_leave_qualify" />
+        </record>
+
+        <record id="hr_leave_gustav_302" model="hr.leave">
+            <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_gustav_employee" />
+            <field name="date_from">2022-03-03</field>
+            <field name="date_to">2022-03-03</field>
+            <field name="request_date_from">2022-03-03</field>
+            <field name="request_date_to">2022-03-03</field>
+            <field name="number_of_days">1</field>
+            <field name="holiday_status_id" ref="l10n_se_hr_holidays.sick_leave_214" />
+        </record>
+
+        <!-- Leave April -->
+
+        <record id="hr_leave_gustav_401" model="hr.leave">
+            <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_gustav_employee" />
+            <field name="date_from">2022-04-13</field>
+            <field name="date_to">2022-04-13</field>
+            <field name="request_date_from">2022-04-13</field>
+            <field name="request_date_to">2022-04-13</field>
+            <field name="number_of_days">1</field>
+            <field name="holiday_status_id" ref="l10n_se_hr_holidays.sick_leave_qualify" />
+        </record>
+
+        <record id="hr_leave_gustav_402" model="hr.leave">
+            <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_gustav_employee" />
+            <field name="date_from">2022-04-14</field>
+            <field name="date_to">2022-04-14</field>
+            <field name="request_date_from">2022-04-14</field>
+            <field name="request_date_to">2022-04-14</field>
+            <field name="number_of_days">1</field>
+            <field name="holiday_status_id" ref="l10n_se_hr_holidays.sick_leave_214" />
+        </record>
+
+        <record id="hr_leave_gustav_403" model="hr.leave">
+            <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_gustav_employee" />
+            <field name="date_from">2022-04-19</field>
+            <field name="date_to">2022-04-22</field>
+            <field name="request_date_from">2022-04-19</field>
+            <field name="request_date_to">2022-04-22</field>
+            <field name="number_of_days">4</field>
+            <field name="holiday_status_id" ref="l10n_se_hr_holidays.sick_leave_214" />
+        </record>
+
+        <record id="hr_leave_gustav_404" model="hr.leave">
+            <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_gustav_employee" />
+            <field name="date_from">2022-04-25</field>
+            <field name="date_to">2022-04-28</field>
+            <field name="request_date_from">2022-04-25</field>
+            <field name="request_date_to">2022-04-28</field>
+            <field name="number_of_days">4</field>
+            <field name="holiday_status_id" ref="l10n_se_hr_holidays.sick_leave_214" />
+        </record>
+
+        <!-- Leave May -->
+
+        <!-- Leave June -->
+
+        <record id="hr_leave_gustav_601" model="hr.leave">
+            <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_gustav_employee" />
+            <field name="date_from">2022-06-02</field>
+            <field name="date_to">2022-06-02</field>
+            <field name="request_date_from">2022-06-02</field>
+            <field name="request_date_to">2022-06-02</field>
+            <field name="number_of_days">1</field>
+            <field name="holiday_status_id" ref="l10n_se_hr_holidays.sick_leave_qualify" />
+        </record>
+
+        <record id="hr_leave_gustav_602" model="hr.leave">
+            <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_gustav_employee" />
+            <field name="date_from">2022-06-03</field>
+            <field name="date_to">2022-06-03</field>
+            <field name="request_date_from">2022-06-03</field>
+            <field name="request_date_to">2022-06-03</field>
+            <field name="number_of_days">1</field>
+            <field name="holiday_status_id" ref="l10n_se_hr_holidays.sick_leave_214" />
+        </record>
+
+        <record id="hr_leave_gustav_603" model="hr.leave">
+            <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_gustav_employee" />
+            <field name="date_from">2022-06-07</field>
+            <field name="date_to">2022-06-10</field>
+            <field name="request_date_from">2022-06-07</field>
+            <field name="request_date_to">2022-06-10</field>
+            <field name="number_of_days">1</field>
+            <field name="holiday_status_id" ref="l10n_se_hr_holidays.sick_leave_214" />
+        </record>
+
+        <record id="hr_leave_gustav_604" model="hr.leave">
+            <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_gustav_employee" />
+            <field name="date_from">2022-06-13</field>
+            <field name="date_to">2022-06-17</field>
+            <field name="request_date_from">2022-06-13</field>
+            <field name="request_date_to">2022-06-17</field>
+            <field name="number_of_days">1</field>
+            <field name="holiday_status_id" ref="l10n_se_hr_holidays.sick_leave_214" />
+        </record>
+
+        <record id="hr_leave_gustav_605" model="hr.leave">
+            <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_gustav_employee" />
+            <field name="date_from">2022-06-20</field>
+            <field name="date_to">2022-06-23</field>
+            <field name="request_date_from">2022-06-20</field>
+            <field name="request_date_to">2022-06-23</field>
+            <field name="number_of_days">1</field>
+            <field name="holiday_status_id" ref="l10n_se_hr_holidays.sick_leave_214" />
+        </record>
+
+        <record id="hr_leave_gustav_606" model="hr.leave">
+            <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_gustav_employee" />
+            <field name="date_from">2022-06-27</field>
+            <field name="date_to">2022-06-30</field>
+            <field name="request_date_from">2022-06-27</field>
+            <field name="request_date_to">2022-06-30</field>
+            <field name="number_of_days">1</field>
+            <field name="holiday_status_id" ref="l10n_se_hr_holidays.sick_leave_214" />
+        </record>
+
+        <!-- Leave July -->
+
+        <record id="hr_leave_gustav_701" model="hr.leave">
+            <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_gustav_employee" />
+            <field name="date_from">2022-07-01</field>
+            <field name="date_to">2022-07-01</field>
+            <field name="request_date_from">2022-07-01</field>
+            <field name="request_date_to">2022-07-01</field>
+            <field name="number_of_days">1</field>
+            <field name="holiday_status_id" ref="l10n_se_hr_holidays.sick_leave_214" />
+        </record>
+
+        <record id="hr_leave_gustav_702" model="hr.leave">
+            <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_gustav_employee" />
+            <field name="date_from">2022-07-05</field>
+            <field name="date_to">2022-07-08</field>
+            <field name="request_date_from">2022-07-05</field>
+            <field name="request_date_to">2022-07-08</field>
+            <field name="number_of_days">4</field>
+            <field name="holiday_status_id" ref="l10n_se_hr_holidays.sick_leave_214" />
+        </record>
+
+        <!-- Leave August -->
+
+        <record id="hr_leave_gustav_801" model="hr.leave">
+            <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_gustav_employee" />
+            <field name="date_from">2022-08-02</field>
+            <field name="date_to">2022-08-02</field>
+            <field name="request_date_from">2022-08-02</field>
+            <field name="request_date_to">2022-08-02</field>
+            <field name="number_of_days">1</field>
+            <field name="holiday_status_id" ref="l10n_se_hr_holidays.sick_leave_qualify" />
+        </record>
+
+        <record id="hr_leave_gustav_802" model="hr.leave">
+            <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_gustav_employee" />
+            <field name="date_from">2022-08-03</field>
+            <field name="date_to">2022-08-05</field>
+            <field name="request_date_from">2022-08-03</field>
+            <field name="request_date_to">2022-08-05</field>
+            <field name="number_of_days">3</field>
+            <field name="holiday_status_id" ref="l10n_se_hr_holidays.sick_leave_214" />
+        </record>
+
+        <record id="hr_leave_gustav_803" model="hr.leave">
+            <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_gustav_employee" />
+            <field name="date_from">2022-08-08</field>
+            <field name="date_to">2022-08-12</field>
+            <field name="request_date_from">2022-08-08</field>
+            <field name="request_date_to">2022-08-12</field>
+            <field name="number_of_days">5</field>
+            <field name="holiday_status_id" ref="l10n_se_hr_holidays.sick_leave_214" />
+        </record>
+
+        <record id="hr_leave_gustav_804" model="hr.leave">
+            <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_gustav_employee" />
+            <field name="date_from">2022-08-15</field>
+            <field name="date_to">2022-08-18</field>
+            <field name="request_date_from">2022-08-15</field>
+            <field name="request_date_to">2022-08-18</field>
+            <field name="number_of_days">4</field>
+            <field name="holiday_status_id" ref="l10n_se_hr_holidays.sick_leave_214" />
+        </record>
+
     </data>
 </odoo>
