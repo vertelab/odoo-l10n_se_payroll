@@ -244,9 +244,9 @@
 
         <record id="hr_leave_doris_803" model="hr.leave">
             <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_doris_employee" />
-            <field name="date_from">2022-08-15</field>
+            <field name="date_from">2022-08-16</field>
             <field name="date_to">2022-08-18</field>
-            <field name="request_date_from">2022-08-15</field>
+            <field name="request_date_from">2022-08-16</field>
             <field name="request_date_to">2022-08-18</field>
             <field name="number_of_days">3</field>
             <field name="holiday_status_id" ref="l10n_se_hr_holidays.sick_leave_214" />

@@ -194,10 +194,8 @@ class hr_payslip(models.Model):
     has_activities = fields.Boolean(compute=compute_has_activities)
 
     period_id = fields.Many2one(comodel_name='account.period', string="Period",
-                                readonly=True,
                                 required=True,
-                                default=lambda self: self.env['account.period'].date2period(fields.Date.today()),
-                                states={"draft": [("readonly", False)]},
+                                compute="_compute_period_id",
                                 tracking=1, )
     date_start = fields.Date(related='period_id.date_start')
     date_stop = fields.Date(related='period_id.date_stop')
@@ -206,6 +204,14 @@ class hr_payslip(models.Model):
                                                       compute='_compute_details_by_salary_rule_category',
                                                       string='Details by Salary Rule Category',
                                                       help="Details from the salary rule category")
+
+    @api.depends("date_from")
+    def _compute_period_id(self):
+        for payslip in self:
+            if payslip.date_from:
+                payslip.period_id = self.env['account.period'].date2period(payslip.date_from)
+            else:
+                payslip.period_id = False
 
     def move_activites_to_payslip(self):
         for record in self:

@@ -264,8 +264,8 @@
             <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_frans_employee" />
             <field name="date_from">2022-08-08</field>
             <field name="date_to">2022-08-12</field>
-            <field name="request_date_from">2022-08-04</field>
-            <field name="request_date_to">2022-08-08</field>
+            <field name="request_date_from">2022-08-08</field>
+            <field name="request_date_to">2022-08-12</field>
             <field name="number_of_days">5</field>
             <field name="holiday_status_id" ref="l10n_se_hr_holidays.sick_leave_214" />
         </record>
@@ -274,8 +274,8 @@
             <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_frans_employee" />
             <field name="date_from">2022-08-15</field>
             <field name="date_to">2022-08-19</field>
-            <field name="request_date_from">2022-08-11</field>
-            <field name="request_date_to">2022-08-12</field>
+            <field name="request_date_from">2022-08-15</field>
+            <field name="request_date_to">2022-08-19</field>
             <field name="number_of_days">5</field>
             <field name="holiday_status_id" ref="l10n_se_hr_holidays.sick_leave_214" />
         </record>

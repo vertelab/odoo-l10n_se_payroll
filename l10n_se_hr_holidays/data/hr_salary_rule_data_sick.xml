@@ -265,6 +265,7 @@ hpd = contract.resource_calendar_id.hours_per_day
 result = (contract.wage*12) / (52*contract.scheduled_working_hours) * hpd * 0.2
             </field>
         </record>
+        
         <record id="hr_salary_rule-sjk-147" model="hr.salary.rule">
             <field name="parent_rule_id" ref="hr_salary_rule-sjk" />
             <field name="category_id" ref="l10n_se_hr_payroll.hr_salary_rule_category-SYSTEM" />
@@ -360,6 +361,7 @@ result = (contract.wage*12) / (52*contract.scheduled_working_hours) * hpd
         <record model="hr.leave.type" id="vab_160">
             <field name="name" eval="'Vård av barn 160'" />
             <field name="work_entry_type_id" ref="l10n_se_hr_holidays.holiday_status_vab_code" />
+            <field name="requires_allocation">no</field>
             <field name="color">2</field>
             <field name="limit" eval="True"/>
         </record>
@@ -376,6 +378,7 @@ result = (contract.wage*12) / (52*contract.scheduled_working_hours) * hpd
         <record model="hr.leave.type" id="forald_ledig_165">
             <field name="name" eval="'Föräld ledig 165'" />
             <field name="work_entry_type_id" ref="l10n_se_hr_holidays.holiday_status_fpe_code" />
+            <field name="requires_allocation">no</field>
             <field name="color">2</field>
             <field name="limit" eval="True"/>
         </record>
@@ -392,6 +395,7 @@ result = (contract.wage*12) / (52*contract.scheduled_working_hours) * hpd
         <record model="hr.leave.type" id="forald_ledig_168">
             <field name="name" eval="'Föräld ledig 168'" />
             <field name="work_entry_type_id" ref="l10n_se_hr_holidays.holiday_status_fpe_kol_code" />
+            <field name="requires_allocation">no</field>
             <field name="color">2</field>
             <field name="limit" eval="True"/>
         </record>
@@ -408,6 +412,7 @@ result = (contract.wage*12) / (52*contract.scheduled_working_hours) * hpd
         <record model="hr.leave.type" id="pappaledig_166">
             <field name="name" eval="'Pappaledig 166'" />
             <field name="work_entry_type_id" ref="l10n_se_hr_holidays.holiday_status_pap_code" />
+            <field name="requires_allocation">no</field>
             <field name="color">2</field>
             <field name="limit" eval="True"/>
         </record>
