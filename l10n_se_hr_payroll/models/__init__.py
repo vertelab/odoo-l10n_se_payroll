@@ -23,4 +23,3 @@ from . import account_journal
 from . import hr_payslip_run
 from . import res_user
 from . import res_config_settings
-# vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:

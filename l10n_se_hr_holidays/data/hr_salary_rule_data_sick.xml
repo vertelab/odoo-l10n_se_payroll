@@ -511,6 +511,7 @@ result = contract.wage / 21
             <field name="work_entry_type_id" ref="l10n_se_hr_holidays.holiday_status_pem_code" />
             <field name="color">2</field>
             <field name="request_unit">day</field>
+            <field name="requires_allocation">no</field>
             <field name="limit" eval="False"/>
             <field name="create_calendar_meeting" eval="True"/>
         </record>
@@ -528,6 +529,7 @@ result = contract.wage / 21
             <field name="name">Leave of Absence more than 5 days</field>
             <field name="work_entry_type_id" ref="l10n_se_hr_holidays.holiday_status_pem_5_code" />
             <field name="color">2</field>
+            <field name="requires_allocation">no</field>
             <field name="request_unit">day</field>
             <field name="limit" eval="False"/>
             <field name="create_calendar_meeting" eval="True"/>

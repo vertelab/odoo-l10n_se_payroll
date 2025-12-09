@@ -116,7 +116,7 @@
             <field name="model">hr.payslip</field>
             <field name="inherit_id" ref="payroll.hr_payslip_view_form" />
             <field name="arch" type="xml">
-                <field name="date_from" position="before">
+                <field name="employee_id" position="after">
                     <field name="period_id" />
                 </field>
                 <notebook position="inside">

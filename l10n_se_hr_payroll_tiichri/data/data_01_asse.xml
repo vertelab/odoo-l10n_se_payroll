@@ -36,7 +36,7 @@
             <field name="name">Asse Aronsson Avtal</field>
             <field name="wage">52000</field>
             <field name="type_id" ref="hr_contract_type" />
-            <field name="employee_id" ref="hr_asse_employee" />
+            <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_asse_employee" />
             <field name="schedule_pay" eval="'monthly'" />
             <field name="state" eval="'open'" />
             <field name="job_id" ref="job_id_president" />
@@ -59,7 +59,7 @@
         <!-- Leave Janurary -->
 
         <record id="hr_leave_asse_101" model="hr.leave">
-            <field name="employee_id" ref="hr_asse_employee" />
+            <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_asse_employee" />
             <field name="date_from">2022-01-07</field>
             <field name="date_to">2022-01-07</field>
             <field name="request_date_from">2022-01-07</field>
@@ -69,7 +69,7 @@
         </record>
 
         <record id="hr_leave_asse_102" model="hr.leave">
-            <field name="employee_id" ref="hr_asse_employee" />
+            <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_asse_employee" />
             <field name="date_from">2022-01-12</field>
             <field name="date_to">2022-01-12</field>
             <field name="request_date_from">2022-01-12</field>
@@ -79,7 +79,7 @@
         </record>
 
         <record id="hr_leave_asse_103" model="hr.leave">
-            <field name="employee_id" ref="hr_asse_employee" />
+            <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_asse_employee" />
             <field name="date_from">2022-01-13</field>
             <field name="date_to">2022-01-13</field>
             <field name="request_date_from">2022-01-13</field>
@@ -89,7 +89,7 @@
         </record>
 
         <record id="hr_leave_asse_104" model="hr.leave">
-            <field name="employee_id" ref="hr_asse_employee" />
+            <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_asse_employee" />
             <field name="date_from">2022-01-24</field>
             <field name="date_to">2022-01-24</field>
             <field name="request_date_from">2022-01-24</field>
@@ -99,7 +99,7 @@
         </record>
 
         <record id="hr_leave_asse_105" model="hr.leave">
-            <field name="employee_id" ref="hr_asse_employee" />
+            <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_asse_employee" />
             <field name="date_from">2022-01-25</field>
             <field name="date_to">2022-01-25</field>
             <field name="request_date_from">2022-01-25</field>
@@ -109,7 +109,7 @@
         </record>
 
         <record id="hr_leave_asse_106" model="hr.leave">
-            <field name="employee_id" ref="hr_asse_employee" />
+            <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_asse_employee" />
             <field name="date_from">2022-01-26</field>
             <field name="date_to">2022-01-26</field>
             <field name="request_date_from">2022-01-26</field>
@@ -119,7 +119,7 @@
         </record>
 
         <record id="hr_leave_asse_107" model="hr.leave">
-            <field name="employee_id" ref="hr_asse_employee" />
+            <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_asse_employee" />
             <field name="date_from">2022-01-03</field>
             <field name="date_to">2022-01-03</field>
             <field name="request_date_from">2022-01-03</field>
@@ -129,7 +129,7 @@
         </record>
 
         <record id="hr_leave_asse_108" model="hr.leave">
-            <field name="employee_id" ref="hr_asse_employee" />
+            <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_asse_employee" />
             <field name="date_from">2022-01-14</field>
             <field name="date_to">2022-01-14</field>
             <field name="request_date_from">2022-01-14</field>
@@ -139,7 +139,7 @@
         </record>
 
         <record id="hr_leave_asse_109" model="hr.leave">
-            <field name="employee_id" ref="hr_asse_employee" />
+            <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_asse_employee" />
             <field name="date_from">2022-01-17</field>
             <field name="date_to">2022-01-17</field>
             <field name="request_date_from">2022-01-17</field>
@@ -149,7 +149,7 @@
         </record>
 
         <record id="hr_leave_asse_110" model="hr.leave">
-            <field name="employee_id" ref="hr_asse_employee" />
+            <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_asse_employee" />
             <field name="date_from">2022-01-18</field>
             <field name="date_to">2022-01-18</field>
             <field name="request_date_from">2022-01-18</field>
@@ -159,7 +159,7 @@
         </record>
 
         <record id="hr_leave_asse_111" model="hr.leave">
-            <field name="employee_id" ref="hr_asse_employee" />
+            <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_asse_employee" />
             <field name="date_from">2022-01-19</field>
             <field name="date_to">2022-01-19</field>
             <field name="request_date_from">2022-01-19</field>
@@ -169,7 +169,7 @@
         </record>
 
         <record id="hr_leave_asse_112" model="hr.leave">
-            <field name="employee_id" ref="hr_asse_employee" />
+            <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_asse_employee" />
             <field name="date_from">2022-01-20</field>
             <field name="date_to">2022-01-20</field>
             <field name="request_date_from">2022-01-20</field>

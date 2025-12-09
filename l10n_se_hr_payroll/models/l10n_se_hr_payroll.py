@@ -194,24 +194,17 @@ class hr_payslip(models.Model):
     has_activities = fields.Boolean(compute=compute_has_activities)
 
     period_id = fields.Many2one(comodel_name='account.period', string="Period",
+                                default=lambda self: self.env['account.period'].date2period(fields.Date.today()),
                                 required=True,
-                                compute="_compute_period_id",
-                                tracking=1, )
-    date_start = fields.Date(related='period_id.date_start')
-    date_stop = fields.Date(related='period_id.date_stop')
+                                tracking=1,)
+    date_start = fields.Date(related='period_id.date_start',readonly=True)
+    date_stop = fields.Date(related='period_id.date_stop',readonly=True)
 
     details_by_salary_rule_category = fields.One2many('hr.payslip.line',
                                                       compute='_compute_details_by_salary_rule_category',
                                                       string='Details by Salary Rule Category',
                                                       help="Details from the salary rule category")
 
-    @api.depends("date_from")
-    def _compute_period_id(self):
-        for payslip in self:
-            if payslip.date_from:
-                payslip.period_id = self.env['account.period'].date2period(payslip.date_from)
-            else:
-                payslip.period_id = False
 
     def move_activites_to_payslip(self):
         for record in self:
@@ -295,8 +288,10 @@ class hr_payslip(models.Model):
             self.period_id = self.period_id.now()
 
         if self.period_id.date_start and self.period_id.date_stop:
-            self.date_from = self.period_id.date_start - dateutil.relativedelta.relativedelta(months=1)
-            self.date_to = self.period_id.date_stop - dateutil.relativedelta.relativedelta(months=1)
+            _logger.error(f"{self.period_id.date_start=}")
+            _logger.error(f"{self.period_id.date_stop=}")
+            self.date_from = self.period_id.date_start #- dateutil.relativedelta.relativedelta(months=1)
+            self.date_to = self.period_id.date_stop #- dateutil.relativedelta.relativedelta(months=1)
 
         self.name = _("Salary Slip of %s for %s") % (
             self.employee_id.name,
