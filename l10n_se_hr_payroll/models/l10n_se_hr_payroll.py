@@ -355,6 +355,60 @@ class hr_payslip(models.Model):
         #      ('date_to', '<=', stop_date)]).mapped('details_by_salary_rule_category').filtered(
         #     lambda l: l.code == code).mapped('total'))
 
+    def _compute_leave_days(self, contract, day_from, day_to):
+        """
+        Override to fix code field handling for leaves without work_entry_type_id
+        """
+        from pytz import timezone
+        from odoo.tools.translate import _
+        
+        leaves_positive = (
+            self.env["ir.config_parameter"].sudo().get_param("payroll.leaves_positive")
+        )
+        leaves = {}
+        calendar = contract.resource_calendar_id
+        tz = timezone(calendar.tz)
+        day_leave_intervals = contract.employee_id.list_leaves(
+            day_from, day_to, calendar=contract.resource_calendar_id
+        )
+        for day, hours, leave in day_leave_intervals:
+            holiday = leave[:1].holiday_id
+            # Fix: Explicitly check if work_entry_type_id is set
+            work_entry_type = holiday.holiday_status_id.work_entry_type_id
+            if work_entry_type:
+                code = work_entry_type.code or "GLOBAL"
+                sequence = work_entry_type.sequence or 5
+            else:
+                code = "GLOBAL"
+                sequence = 5
+            
+            current_leave_struct = leaves.setdefault(
+                holiday.holiday_status_id,
+                {
+                    "name": holiday.holiday_status_id.name or _("Global Leaves"),
+                    "sequence": sequence,
+                    "code": code,
+                    "number_of_days": 0.0,
+                    "number_of_hours": 0.0,
+                    "contract_id": contract.id,
+                },
+            )
+            if leaves_positive:
+                current_leave_struct["number_of_hours"] += hours
+            else:
+                current_leave_struct["number_of_hours"] -= hours
+            work_hours = calendar.get_work_hours_count(
+                tz.localize(datetime.combine(day, datetime.min.time())),
+                tz.localize(datetime.combine(day, datetime.max.time())),
+                compute_leaves=False,
+            )
+            if work_hours:
+                if leaves_positive:
+                    current_leave_struct["number_of_days"] += hours / work_hours
+                else:
+                    current_leave_struct["number_of_days"] -= hours / work_hours
+        return leaves.values()
+
     @api.model
     def get_worked_day_lines(self, contracts, date_from, date_to):
         """
