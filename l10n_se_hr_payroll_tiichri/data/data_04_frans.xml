@@ -33,7 +33,8 @@
             <field name="name">Frans Filipsson Avtal</field>
             <field name="wage">26000</field>
             <field name="type_id" ref="hr_contract_type" />
-            <field name="employee_id" ref="hr_frans_employee" />
+            <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_frans_employee" />
+            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.main_company" />
             <field name="schedule_pay" eval="'monthly'" />
             <field name="state" eval="'open'" />
             <field name="job_id" ref="job_id_sales" />
@@ -48,6 +49,7 @@
 
         <record id="hr_leave_frans_101" model="hr.leave">
             <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_frans_employee" />
+            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.main_company" />
             <field name="date_from">2022-01-07</field>
             <field name="date_to">2022-01-07</field>
             <field name="request_date_from">2022-01-07</field>
@@ -58,6 +60,7 @@
 
         <record id="hr_leave_frans_102" model="hr.leave">
             <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_frans_employee" />
+            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.main_company" />
             <field name="date_from">2022-01-10</field>
             <field name="date_to">2022-01-10</field>
             <field name="request_date_from">2022-01-10</field>
@@ -68,6 +71,7 @@
 
         <record id="hr_leave_frans_103" model="hr.leave">
             <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_frans_employee" />
+            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.main_company" />
             <field name="date_from">2022-01-11</field>
             <field name="date_to">2022-01-12</field>
             <field name="request_date_from">2022-01-11</field>
@@ -78,6 +82,7 @@
 
         <record id="hr_leave_frans_104" model="hr.leave">
             <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_frans_employee" />
+            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.main_company" />
             <field name="date_from">2022-01-20</field>
             <field name="date_to">2022-01-21</field>
             <field name="request_date_from">2022-01-20</field>
@@ -88,6 +93,7 @@
 
         <record id="hr_leave_frans_105" model="hr.leave">
             <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_frans_employee" />
+            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.main_company" />
             <field name="date_from">2022-01-24</field>
             <field name="date_to">2022-01-26</field>
             <field name="request_date_from">2022-01-24</field>
@@ -98,6 +104,7 @@
 
         <record id="hr_leave_frans_106" model="hr.leave">
             <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_frans_employee" />
+            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.main_company" />
             <field name="date_from">2022-01-27</field>
             <field name="date_to">2022-01-27</field>
             <field name="request_date_from">2022-01-27</field>
@@ -112,6 +119,7 @@
 
         <record id="hr_leave_frans_301" model="hr.leave">
             <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_frans_employee" />
+            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.main_company" />
             <field name="date_from">2022-03-04</field>
             <field name="date_to">2022-03-04</field>
             <field name="request_date_from">2022-03-04</field>
@@ -122,6 +130,7 @@
 
         <record id="hr_leave_frans_302" model="hr.leave">
             <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_frans_employee" />
+            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.main_company" />
             <field name="date_from">2022-03-07</field>
             <field name="date_to">2022-03-11</field>
             <field name="request_date_from">2022-03-07</field>
@@ -132,6 +141,7 @@
 
         <record id="hr_leave_frans_303" model="hr.leave">
             <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_frans_employee" />
+            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.main_company" />
             <field name="date_from">2022-03-14</field>
             <field name="date_to">2022-03-16</field>
             <field name="request_date_from">2022-03-14</field>
@@ -144,6 +154,7 @@
 
         <record id="hr_leave_frans_401" model="hr.leave">
             <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_frans_employee" />
+            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.main_company" />
             <field name="date_from">2022-04-04</field>
             <field name="date_to">2022-04-04</field>
             <field name="request_date_from">2022-04-04</field>
@@ -154,6 +165,7 @@
 
         <record id="hr_leave_frans_402" model="hr.leave">
             <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_frans_employee" />
+            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.main_company" />
             <field name="date_from">2022-04-05</field>
             <field name="date_to">2022-04-06</field>
             <field name="request_date_from">2022-04-05</field>
@@ -164,6 +176,7 @@
 
         <record id="hr_leave_frans_403" model="hr.leave">
             <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_frans_employee" />
+            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.main_company" />
             <field name="date_from">2022-04-12</field>
             <field name="date_to">2022-04-12</field>
             <field name="request_date_from">2022-04-12</field>
@@ -174,6 +187,7 @@
 
         <record id="hr_leave_frans_404" model="hr.leave">
             <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_frans_employee" />
+            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.main_company" />
             <field name="date_from">2022-04-13</field>
             <field name="date_to">2022-04-13</field>
             <field name="request_date_from">2022-04-13</field>
@@ -184,6 +198,7 @@
 
         <record id="hr_leave_frans_405" model="hr.leave">
             <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_frans_employee" />
+            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.main_company" />
             <field name="date_from">2022-04-26</field>
             <field name="date_to">2022-04-26</field>
             <field name="request_date_from">2022-04-26</field>
@@ -194,6 +209,7 @@
 
         <record id="hr_leave_frans_406" model="hr.leave">
             <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_frans_employee" />
+            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.main_company" />
             <field name="date_from">2022-04-27</field>
             <field name="date_to">2022-04-28</field>
             <field name="request_date_from">2022-04-27</field>
@@ -210,6 +226,7 @@
 
         <record id="hr_leave_frans_701" model="hr.leave">
             <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_frans_employee" />
+            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.main_company" />
             <field name="date_from">2022-07-01</field>
             <field name="date_to">2022-07-01</field>
             <field name="request_date_from">2022-07-01</field>
@@ -220,6 +237,7 @@
 
         <record id="hr_leave_frans_702" model="hr.leave">
             <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_frans_employee" />
+            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.main_company" />
             <field name="date_from">2022-07-04</field>
             <field name="date_to">2022-07-08</field>
             <field name="request_date_from">2022-07-04</field>
@@ -230,6 +248,7 @@
 
         <record id="hr_leave_frans_703" model="hr.leave">
             <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_frans_employee" />
+            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.main_company" />
             <field name="date_from">2022-07-11</field>
             <field name="date_to">2022-07-12</field>
             <field name="request_date_from">2022-07-11</field>
@@ -242,6 +261,7 @@
 
         <record id="hr_leave_frans_801" model="hr.leave">
             <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_frans_employee" />
+            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.main_company" />
             <field name="date_from">2022-08-03</field>
             <field name="date_to">2022-08-03</field>
             <field name="request_date_from">2022-08-03</field>
@@ -252,6 +272,7 @@
 
         <record id="hr_leave_frans_802" model="hr.leave">
             <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_frans_employee" />
+            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.main_company" />
             <field name="date_from">2022-08-04</field>
             <field name="date_to">2022-08-05</field>
             <field name="request_date_from">2022-08-04</field>
@@ -262,6 +283,7 @@
 
         <record id="hr_leave_frans_803" model="hr.leave">
             <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_frans_employee" />
+            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.main_company" />
             <field name="date_from">2022-08-08</field>
             <field name="date_to">2022-08-12</field>
             <field name="request_date_from">2022-08-08</field>
@@ -272,6 +294,7 @@
 
         <record id="hr_leave_frans_804" model="hr.leave">
             <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_frans_employee" />
+            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.main_company" />
             <field name="date_from">2022-08-15</field>
             <field name="date_to">2022-08-19</field>
             <field name="request_date_from">2022-08-15</field>
@@ -284,6 +307,7 @@
 
         <record id="hr_leave_frans_901" model="hr.leave">
             <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_frans_employee" />
+            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.main_company" />
             <field name="date_from">2022-09-01</field>
             <field name="date_to">2022-09-01</field>
             <field name="request_date_from">2022-09-01</field>
@@ -294,6 +318,7 @@
 
         <record id="hr_leave_frans_902" model="hr.leave">
             <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_frans_employee" />
+            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.main_company" />
             <field name="date_from">2022-09-02</field>
             <field name="date_to">2022-09-02</field>
             <field name="request_date_from">2022-09-02</field>
@@ -304,6 +329,7 @@
 
         <record id="hr_leave_frans_903" model="hr.leave">
             <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_frans_employee" />
+            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.main_company" />
             <field name="date_from">2022-09-05</field>
             <field name="date_to">2022-09-09</field>
             <field name="request_date_from">2022-09-05</field>
@@ -314,6 +340,7 @@
 
         <record id="hr_leave_frans_904" model="hr.leave">
             <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_frans_employee" />
+            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.main_company" />
             <field name="date_from">2022-09-12</field>
             <field name="date_to">2022-09-16</field>
             <field name="request_date_from">2022-09-12</field>
@@ -324,6 +351,7 @@
 
         <record id="hr_leave_frans_905" model="hr.leave">
             <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_frans_employee" />
+            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.main_company" />
             <field name="date_from">2022-09-19</field>
             <field name="date_to">2022-09-22</field>
             <field name="request_date_from">2022-09-19</field>

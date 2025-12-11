@@ -32,7 +32,8 @@
             <field name="name">Karin Kullberg Avtal</field>
             <field name="wage">1</field>
             <field name="type_id" ref="hr_contract_type" />
-            <field name="employee_id" ref="hr_karin_employee" />
+            <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_karin_employee" />
+            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.main_company" />
             <field name="schedule_pay" eval="'monthly'" />
             <field name="state" eval="'open'" />
             <field name="job_id" ref="job_id_assembly" />
@@ -58,6 +59,7 @@
 
         <record id="hr_leave_karin_701" model="hr.leave">
             <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_karin_employee" />
+            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.main_company" />
             <field name="date_from">2022-07-11</field>
             <field name="date_to">2022-07-11</field>
             <field name="request_date_from">2022-07-11</field>
@@ -68,6 +70,7 @@
 
         <record id="hr_leave_karin_702" model="hr.leave">
             <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_karin_employee" />
+            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.main_company" />
             <field name="date_from">2022-07-12</field>
             <field name="date_to">2022-07-14</field>
             <field name="request_date_from">2022-07-12</field>
@@ -80,6 +83,7 @@
 
         <record id="hr_leave_karin_801" model="hr.leave">
             <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_karin_employee" />
+            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.main_company" />
             <field name="date_from">2022-08-08</field>
             <field name="date_to">2022-08-08</field>
             <field name="request_date_from">2022-08-08</field>
@@ -90,6 +94,7 @@
 
         <record id="hr_leave_karin_802" model="hr.leave">
             <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_karin_employee" />
+            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.main_company" />
             <field name="date_from">2022-08-09</field>
             <field name="date_to">2022-08-10</field>
             <field name="request_date_from">2022-08-09</field>

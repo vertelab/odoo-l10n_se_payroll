@@ -37,7 +37,8 @@
             <field name="name">Doris Dahlin Avtal</field>
             <field name="wage">17600</field>
             <field name="type_id" ref="hr_contract_type" />
-            <field name="employee_id" ref="hr_doris_employee" />
+            <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_doris_employee" />
+            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.main_company" />
             <field name="schedule_pay" eval="'monthly'" />
             <field name="state" eval="'open'" />
             <field name="job_id" ref="job_id_accounting" />
@@ -60,6 +61,7 @@
 
         <record id="hr_leave_doris_101" model="hr.leave">
             <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_doris_employee" />
+            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.main_company" />
             <field name="date_from">2022-01-04</field>
             <field name="date_to">2022-01-04</field>
             <field name="request_date_from">2022-01-04</field>
@@ -70,6 +72,7 @@
 
         <record id="hr_leave_doris_102" model="hr.leave">
             <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_doris_employee" />
+            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.main_company" />
             <field name="date_from">2022-01-05</field>
             <field name="date_to">2022-01-05</field>
             <field name="request_date_from">2022-01-05</field>
@@ -80,6 +83,7 @@
 
         <record id="hr_leave_doris_103" model="hr.leave">
             <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_doris_employee" />
+            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.main_company" />
             <field name="date_from">2022-01-10</field>
             <field name="date_to">2022-01-10</field>
             <field name="request_date_from">2022-01-10</field>
@@ -90,6 +94,7 @@
 
         <record id="hr_leave_doris_104" model="hr.leave">
             <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_doris_employee" />
+            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.main_company" />
             <field name="date_from">2022-01-11</field>
             <field name="date_to">2022-01-12</field>
             <field name="request_date_from">2022-01-11</field>
@@ -100,6 +105,7 @@
 
         <record id="hr_leave_doris_105" model="hr.leave">
             <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_doris_employee" />
+            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.main_company" />
             <field name="date_from">2022-01-13</field>
             <field name="date_to">2022-01-13</field>
             <field name="request_date_from">2022-01-13</field>
@@ -112,6 +118,7 @@
 
         <record id="hr_leave_doris_201" model="hr.leave">
             <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_doris_employee" />
+            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.main_company" />
             <field name="date_from">2022-02-01</field>
             <field name="date_to">2022-02-01</field>
             <field name="request_date_from">2022-02-01</field>
@@ -122,6 +129,7 @@
 
         <record id="hr_leave_doris_202" model="hr.leave">
             <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_doris_employee" />
+            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.main_company" />
             <field name="date_from">2022-02-02</field>
             <field name="date_to">2022-02-03</field>
             <field name="request_date_from">2022-02-02</field>
@@ -132,6 +140,7 @@
 
         <record id="hr_leave_doris_203" model="hr.leave">
             <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_doris_employee" />
+            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.main_company" />
             <field name="date_from">2022-02-07</field>
             <field name="date_to">2022-02-07</field>
             <field name="request_date_from">2022-02-07</field>
@@ -142,6 +151,7 @@
 
         <record id="hr_leave_doris_204" model="hr.leave">
             <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_doris_employee" />
+            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.main_company" />
             <field name="date_from">2022-02-08</field>
             <field name="date_to">2022-02-10</field>
             <field name="request_date_from">2022-02-08</field>
@@ -156,6 +166,7 @@
 
         <record id="hr_leave_doris_401" model="hr.leave">
             <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_doris_employee" />
+            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.main_company" />
             <field name="date_from">2022-04-06</field>
             <field name="date_to">2022-04-06</field>
             <field name="request_date_from">2022-04-06</field>
@@ -166,6 +177,7 @@
 
         <record id="hr_leave_doris_402" model="hr.leave">
             <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_doris_employee" />
+            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.main_company" />
             <field name="date_from">2022-04-07</field>
             <field name="date_to">2022-04-07</field>
             <field name="request_date_from">2022-04-07</field>
@@ -176,6 +188,7 @@
 
         <record id="hr_leave_doris_403" model="hr.leave">
             <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_doris_employee" />
+            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.main_company" />
             <field name="date_from">2022-04-11</field>
             <field name="date_to">2022-04-13</field>
             <field name="request_date_from">2022-04-11</field>
@@ -192,6 +205,7 @@
 
         <record id="hr_leave_doris_701" model="hr.leave">
             <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_doris_employee" />
+            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.main_company" />
             <field name="date_from">2022-07-04</field>
             <field name="date_to">2022-07-04</field>
             <field name="request_date_from">2022-07-04</field>
@@ -202,6 +216,7 @@
 
         <record id="hr_leave_doris_702" model="hr.leave">
             <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_doris_employee" />
+            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.main_company" />
             <field name="date_from">2022-07-05</field>
             <field name="date_to">2022-07-07</field>
             <field name="request_date_from">2022-07-05</field>
@@ -212,6 +227,7 @@
 
         <record id="hr_leave_doris_703" model="hr.leave">
             <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_doris_employee" />
+            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.main_company" />
             <field name="date_from">2022-07-11</field>
             <field name="date_to">2022-07-14</field>
             <field name="request_date_from">2022-07-11</field>
@@ -224,6 +240,7 @@
 
         <record id="hr_leave_doris_801" model="hr.leave">
             <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_doris_employee" />
+            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.main_company" />
             <field name="date_from">2022-08-11</field>
             <field name="date_to">2022-08-11</field>
             <field name="request_date_from">2022-08-11</field>
@@ -234,6 +251,7 @@
 
         <record id="hr_leave_doris_802" model="hr.leave">
             <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_doris_employee" />
+            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.main_company" />
             <field name="date_from">2022-08-15</field>
             <field name="date_to">2022-08-15</field>
             <field name="request_date_from">2022-08-15</field>
@@ -244,6 +262,7 @@
 
         <record id="hr_leave_doris_803" model="hr.leave">
             <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_doris_employee" />
+            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.main_company" />
             <field name="date_from">2022-08-16</field>
             <field name="date_to">2022-08-18</field>
             <field name="request_date_from">2022-08-16</field>
@@ -254,6 +273,7 @@
 
         <record id="hr_leave_doris_804" model="hr.leave">
             <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_doris_employee" />
+            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.main_company" />
             <field name="date_from">2022-08-29</field>
             <field name="date_to">2022-08-29</field>
             <field name="request_date_from">2022-08-29</field>
@@ -264,6 +284,7 @@
 
         <record id="hr_leave_doris_805" model="hr.leave">
             <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_doris_employee" />
+            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.main_company" />
             <field name="date_from">2022-08-30</field>
             <field name="date_to">2022-08-31</field>
             <field name="request_date_from">2022-08-30</field>
