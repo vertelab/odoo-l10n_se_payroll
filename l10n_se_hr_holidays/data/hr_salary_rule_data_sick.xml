@@ -31,6 +31,7 @@
             <field name="country_id" ref="base.se"/>
         </record>
 
+        <!-- karensavdrag -->
         <record model="hr.leave.type" id="sick_leave_qualify">
             <field name="name" eval="'Sick Leave Qualify Period'" />
             <field name="work_entry_type_id" ref="l10n_se_hr_holidays.holiday_status_sjk_kar_code" />
@@ -42,6 +43,7 @@
             <field name="limit" eval="True"/>
         </record>
 
+        <!-- sjukavdrag_1-14 -->
         <record model="hr.work.entry.type" id="holiday_status_sjk_214_100_code">
             <field name="name" eval="'Sick Leave day 2-14 (100% deduction) Code'"/>
             <field name="code">sjk_214_100</field>
@@ -62,6 +64,7 @@
             <field name="limit" eval="True"/>
         </record>
 
+        <!-- sjuklon_1-14 -->
         <record model="hr.work.entry.type" id="holiday_status_sjk_214_code">
             <field name="name" eval="'Sick Leave day 2-14 (80%) Code'"/>
             <field name="code">sjk_214</field>

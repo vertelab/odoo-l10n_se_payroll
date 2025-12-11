@@ -3,8 +3,9 @@
 from pytz import utc
 from datetime import date, datetime, time
 from odoo import fields
-from odoo.tests import Form
+from odoo.tests import Form, tagged
 from odoo.tests.common import TransactionCase
+from odoo.tests.common import tagged
 
 import logging
 _logger = logging.getLogger(__name__)
@@ -17,6 +18,7 @@ _logger = logging.getLogger(__name__)
 # $ odoo -c /etc/odoo/odoo.conf -d odoo-tiichri -i l10n_se_hr_payroll_tiichri --test-enable
 #
 
+@tagged('l10n_se_payroll_tiichri', 'july')
 class TestPayslipJuly(TransactionCase):
 
     @classmethod
@@ -45,16 +47,16 @@ class TestPayslipJuly(TransactionCase):
     @classmethod
     def _create_payslip(cls, employee_id, contract_id, input_recs): 
 
+        _logger.info(f"TEST PAYSLIP: Employee: {employee_id.name} | Period: {cls.period.name} | Inputs: {input_recs}")
         payslip_form = Form(cls.env['hr.payslip'])
         payslip_form.employee_id = employee_id
         payslip_form.date_from = cls.date_start
-        payslip_form.date_to = cls.date_stop
         payslip_form.period_id = cls.period
         payslip_form.contract_id = contract_id
-        payslip_form.struct_id = cls.struct
         payslip_form = payslip_form.save()
 
         payslip_form.action_payslip_draft()
+
         payslip_form.onchange_dates()  
         payslip_form.compute_sheet()
     
@@ -63,7 +65,6 @@ class TestPayslipJuly(TransactionCase):
             line.amount = input_rec['amount']
             line.amount_qty = input_rec['amount']              
         return payslip_form
-    
     
     @classmethod
     def setUpClass(cls):
@@ -81,11 +82,19 @@ class TestPayslipJuly(TransactionCase):
             'date_stop': cls.date_stop,
         })
 
+        cls.period_type = cls.env['date.range.type'].create({
+            'name': 'Unittest Month Type',
+            'company_id': cls.company.id,
+            'allow_overlap': True
+        })
+
         cls.period = cls.env['account.period'].create({
             'name': 'Unittest period',
+            'company_id': cls.company.id,
             'fiscalyear_id': cls.fiscal_year.id,
             'date_start': cls.date_start,
-            'date_stop': cls.date_stop,
+            'date_end': cls.date_stop,
+            'type_id': cls.period_type.id,
         })
 
         # Asse Aronsson -- Låt stå! :-) Inte sjuk i juli
@@ -95,138 +104,110 @@ class TestPayslipJuly(TransactionCase):
             
         # Frans Filipsson
         cls.employee_frans = cls.env.ref('l10n_se_hr_payroll_tiichri.hr_frans_employee')  # frans_employee
-        cls.frans_701 = cls._create_leave(cls.employee_frans, "sjk_kar" ,"2022-07-01","2022-07-01",1)
-        cls.frans_702 = cls._create_leave(cls.employee_frans, "sjk_214" ,"2022-07-04","2022-07-08",5)
-        cls.frans_703 = cls._create_leave(cls.employee_frans, "sjk_214" ,"2022-07-11","2022-07-12",2)
+        cls.frans_701 = cls.env.ref('l10n_se_hr_payroll_tiichri.hr_leave_frans_701')
+        cls.frans_702 = cls.env.ref('l10n_se_hr_payroll_tiichri.hr_leave_frans_702')
+        cls.frans_703 = cls.env.ref('l10n_se_hr_payroll_tiichri.hr_leave_frans_703')
 
         # Doris Dahlin
         cls.employee_doris = cls.env.ref('l10n_se_hr_payroll_tiichri.hr_doris_employee')  # doris_employee
-        cls.doris_701 = cls._create_leave(cls.employee_doris, "sjk_kar" ,"2022-07-04","2022-07-04",1)
-        cls.doris_702 = cls._create_leave(cls.employee_doris, "sjk_214" ,"2022-07-05","2022-07-07",3)
-        cls.doris_703 = cls._create_leave(cls.employee_doris, "sjk_214" ,"2022-07-11","2022-07-14",4)
+        cls.doris_701 = cls.env.ref('l10n_se_hr_payroll_tiichri.hr_leave_doris_701')
+        cls.doris_702 = cls.env.ref('l10n_se_hr_payroll_tiichri.hr_leave_doris_702')
+        cls.doris_703 = cls.env.ref('l10n_se_hr_payroll_tiichri.hr_leave_doris_703')
 
         # Camilla Cobolt
         cls.employee_camilla = cls.env.ref('l10n_se_hr_payroll_tiichri.hr_camilla_employee')  # camilla_employee
-        cls.camilla_701 = cls._create_leave(cls.employee_camilla, "sjk_kar" ,"2022-07-11","2022-07-11",1)
-        cls.camilla_702 = cls._create_leave(cls.employee_camilla, "sjk_kar" ,"2022-07-18","2022-07-18",1)
-        cls.camilla_703 = cls._create_leave(cls.employee_camilla, "sjk_214" ,"2022-07-19","2022-07-19",1)
+        cls.camilla_701 = cls.env.ref('l10n_se_hr_payroll_tiichri.hr_leave_camilla_701')
+        cls.camilla_702 = cls.env.ref('l10n_se_hr_payroll_tiichri.hr_leave_camilla_702')
+        cls.camilla_703 = cls.env.ref('l10n_se_hr_payroll_tiichri.hr_leave_camilla_703')
 
         # Gustav Groth
         cls.employee_gustav = cls.env.ref('l10n_se_hr_payroll_tiichri.hr_gustav_employee')  # gustav_employee
-        cls.gustav_701 = cls._create_leave(cls.employee_gustav, "sjk_214" ,"2022-07-01","2022-07-01",1)
-        cls.gustav_702 = cls._create_leave(cls.employee_gustav, "sjk_214" ,"2022-07-05","2022-07-08",4)
+        cls.gustav_701 = cls.env.ref('l10n_se_hr_payroll_tiichri.hr_leave_gustav_701')
+        cls.gustav_702 = cls.env.ref('l10n_se_hr_payroll_tiichri.hr_leave_gustav_702')
        
         # Helmer Henriksson
         cls.employee_helmer = cls.env.ref('l10n_se_hr_payroll_tiichri.hr_helmer_employee')  # helmer_employee
-        cls.helmer_701 = cls._create_leave(cls.employee_helmer, "sjk_kar" ,"2022-07-07","2022-07-07",1)
-        cls.helmer_702 = cls._create_leave(cls.employee_helmer, "sjk_214" ,"2022-07-08","2022-07-08",1)
-        cls.helmer_703 = cls._create_leave(cls.employee_helmer, "sjk_214" ,"2022-07-11","2022-07-11",1)
+        cls.helmer_701 = cls.env.ref('l10n_se_hr_payroll_tiichri.hr_leave_helmer_701')
+        cls.helmer_702 = cls.env.ref('l10n_se_hr_payroll_tiichri.hr_leave_helmer_702')
+        cls.helmer_703 = cls.env.ref('l10n_se_hr_payroll_tiichri.hr_leave_helmer_703')
 
         # Karin Kullberg
         cls.employee_karin = cls.env.ref('l10n_se_hr_payroll_tiichri.hr_karin_employee')  # karin_employee
-        cls.karin_701 = cls._create_leave(cls.employee_karin, "sjk_kar" ,"2022-07-11","2022-07-11",1)
-        cls.karin_702 = cls._create_leave(cls.employee_karin, "sjk_214" ,"2022-07-12","2022-07-14",3)
+        cls.karin_701 = cls.env.ref('l10n_se_hr_payroll_tiichri.hr_leave_karin_701')
+        cls.karin_702 = cls.env.ref('l10n_se_hr_payroll_tiichri.hr_leave_karin_702')
 
     ## Test xx
     def test_asse(self):   
         payslip_form = self._create_payslip(self.employee_asse, self.employee_asse.contract_id, [
-                # ~ {'code': 'mertidtim','amount': 8.0},
+                {'code': 'mertidtim','amount': 8.0},
                 {'code': 'kvaltim','amount': 6.0},
             ])
 
-        _logger.warning(f"--------------")
-
-        for line in payslip_form.input_line_ids:
-            if line.amount != 0.0:
-                _logger.warning(f"{line.name=} {line.amount_qty=} {line.amount=}")
-
-        _logger.warning(f"--------------") 
-
-        for worked_day in payslip_form.worked_days_line_ids:
-            _logger.warning(f"{worked_day.name=} {worked_day.number_of_hours=}")
-
-        _logger.warning(f"--------------") 
-
+        found_net = False
         for detail in payslip_form.dynamic_filtered_payslip_lines:
-            _logger.warning(f"line id from input: {detail.name} {detail.total}")
             if detail.code == 'net':
-                self.assertAlmostEqual(detail.total, 31056.0)
+                # FACIT: Ska vara 31056.0
+                self.assertAlmostEqual(detail.total, 31056.0, msg=f"Wrong net pay for Asse! Got: {detail.total}, expected 31056.0")
+                _logger.info(f"SUCCESS: Asse net pay correct: {detail.total}")
+                found_net = True
+        
+        self.assertTrue(found_net, "Could not find field 'net' for Asse.")
 
 
     ## Test xx
     def test_frans(self):
         payslip_form = self._create_payslip(self.employee_frans, self.employee_frans.contract_id, [
-                 # ~ {'code': 'mertidtim','amount': 8.0},
-               {'code': 'kvaltim','amount': 3.0},
+                {'code': 'mertidtim','amount': 8.0},
+                {'code': 'kvaltim','amount': 3.0},
             ])
 
-        _logger.warning(f"--------------")
-
-        for line in payslip_form.input_line_ids:
-            if line.amount != 0.0:
-                _logger.warning(f"{line.name=} {line.amount_qty=} {line.amount=}")
-
-        _logger.warning(f"--------------") 
-
-        for worked_day in payslip_form.worked_days_line_ids:
-            _logger.warning(f"{worked_day.name=} {worked_day.number_of_hours=}")
-
-        _logger.warning(f"--------------") 
-
+        found_net = False
         for detail in payslip_form.dynamic_filtered_payslip_lines:
-            _logger.warning(f"line id from input: {detail.name} {detail.total}")
             if detail.code == 'net':
-                self.assertAlmostEqual(detail.total, 26409.0)
+                found_net = True
+                # FACIT: Ska vara 26409.0
+                self.assertAlmostEqual(detail.total, 26409.0, msg=f"Wrong net pay for Frans! Got: {detail.total}, expected 26409.0")
+                _logger.info(f"SUCCESS: Frans net pay correct: {detail.total}")
+                found_net = True
+        
+        self.assertTrue(found_net, "Could not find field 'net' for Frans.")
         
     ## Doris xx
     def test_doris(self):
         payslip_form = self._create_payslip(self.employee_doris, self.employee_doris.contract_id, [
-                # ~ {'code': 'mertidtim','amount': 8.0},
-                # ~ {'code': 'kvaltim','amount': 2.0},
+                {'code': 'mertidtim','amount': 8.0},
+                {'code': 'kvaltim','amount': 2.0},
             ])
 
-        _logger.warning(f"--------------")
-
-        for line in payslip_form.input_line_ids:
-            if line.amount != 0.0:
-                _logger.warning(f"{line.name=} {line.amount_qty=} {line.amount=}")
-
-        _logger.warning(f"--------------")
-
-        for worked_day in payslip_form.worked_days_line_ids:
-            _logger.warning(f"{worked_day.name=} {worked_day.number_of_hours=}")
-
-        _logger.warning(f"--------------")    
-
+        found_net = False
         for detail in payslip_form.dynamic_filtered_payslip_lines:
-            _logger.warning(f"line id from input: {detail.name} {detail.total}")
             if detail.code == 'net':
-                self.assertAlmostEqual(detail.total, 13317.0)   
+                found_net = True
+                # FACIT: Ska vara 13317.0
+                self.assertAlmostEqual(detail.total, 13317.0, msg=f"Wrong net pay for Doris! Got: {detail.total}, expected 13317.0")
+                _logger.info(f"SUCCESS: Doris net pay correct: {detail.total}")
+                found_net = True
+        
+        self.assertTrue(found_net, "Could not find field 'net' for Doris.")
 
     ## Camilla xx
     def test_camilla(self):
         payslip_form = self._create_payslip(self.employee_camilla, self.employee_camilla.contract_id, [
-                # ~ {'code': 'mertidtim','amount': 8.0},
-                # ~ {'code': 'kvaltim','amount': 4.0},
+                {'code': 'mertidtim','amount': 8.0},
+                {'code': 'kvaltim','amount': 4.0},
             ])
 
-        _logger.warning(f"--------------")
-
-        for line in payslip_form.input_line_ids:
-            if line.amount != 0.0:
-                _logger.warning(f"{line.name=} {line.amount_qty=} {line.amount=}")
-
-        _logger.warning(f"--------------")
-
-        for worked_day in payslip_form.worked_days_line_ids:
-            _logger.warning(f"{worked_day.name=} {worked_day.number_of_hours=}")
-
-        _logger.warning(f"--------------")    
-
+        found_net = False
         for detail in payslip_form.dynamic_filtered_payslip_lines:
-            _logger.warning(f"line id from input: {detail.name} {detail.total}")
             if detail.code == 'net':
-                self.assertAlmostEqual(detail.total, 23915.0)   
+                found_net = True
+                # FACIT: Ska vara 23915.0
+                self.assertAlmostEqual(detail.total, 23915.0, msg=f"Wrong net pay for Camilla! Got: {detail.total}, expected 23915.0")
+                _logger.info(f"SUCCESS: Camilla net pay correct: {detail.total}")
+                found_net = True
+        
+        self.assertTrue(found_net, "Could not find field 'net' for Camilla.")
+
 
     ## Test xx
     def test_gustav(self):
@@ -235,71 +216,51 @@ class TestPayslipJuly(TransactionCase):
                 {'code': 'kvaltim','amount': 4.0},
             ])
 
-        _logger.warning(f"--------------")
-
-        for line in payslip_form.input_line_ids:
-            if line.amount != 0.0:
-                _logger.warning(f"{line.name=} {line.amount_qty=} {line.amount=}")
-
-        _logger.warning(f"--------------")
-
-        for worked_day in payslip_form.worked_days_line_ids:
-            _logger.warning(f"{worked_day.name=} {worked_day.number_of_hours=}")
-
-        _logger.warning(f"--------------")    
-
+        found_net = False
         for detail in payslip_form.dynamic_filtered_payslip_lines:
-            _logger.warning(f"line id from input: {detail.name} {detail.total}")
             if detail.code == 'net':
-                self.assertAlmostEqual(detail.total, 17981.0)   
+                found_net = True
+                # FACIT: Ska vara 17981.0
+                self.assertAlmostEqual(detail.total, 17981.0, msg=f"Wrong net pay for Gustav! Got: {detail.total}, expected 17981.0")
+                _logger.info(f"SUCCESS: Gustav net pay correct: {detail.total}")
+                found_net = True
+
+        self.assertTrue(found_net, "Could not find field 'net' for Gustav.")
+
 
     ## Test xx
     def test_helmer(self):
         payslip_form = self._create_payslip(self.employee_helmer, self.employee_helmer.contract_id, [
-                # ~ {'code': 'mertidtim','amount': 8.0},
+                {'code': 'mertidtim','amount': 8.0},
                 {'code': 'kvaltim','amount': 10.0},
             ])
 
-        _logger.warning(f"--------------")
-
-        for line in payslip_form.input_line_ids:
-            if line.amount != 0.0:
-                _logger.warning(f"{line.name=} {line.amount_qty=} {line.amount=}")
-
-        _logger.warning(f"--------------")
-
-        for worked_day in payslip_form.worked_days_line_ids:
-            _logger.warning(f"{worked_day.name=} {worked_day.number_of_hours=}")
-
-        _logger.warning(f"--------------")    
-
+        found_net = False
         for detail in payslip_form.dynamic_filtered_payslip_lines:
-            _logger.warning(f"line id from input: {detail.name} {detail.total}")
             if detail.code == 'net':
-                self.assertAlmostEqual(detail.total, 23326.0)
+                found_net = True
+                # FACIT: Ska vara 23326.0
+                self.assertAlmostEqual(detail.total, 23326.0, msg=f"Wrong net pay for Helmer! Got: {detail.total}, expected 23326.0")
+                _logger.info(f"SUCCESS: Helmer net pay correct: {detail.total}")
+                found_net = True
+
+        self.assertTrue(found_net, "Could not find field 'net' for Helmer.")
 
     ## Test xx
     def test_karin(self):
         payslip_form = self._create_payslip(self.employee_karin, self.employee_karin.contract_id, [
-                # ~ {'code': 'mertidtim','amount': 8.0},
-                # ~ {'code': 'kvaltim','amount': 8.0},
+                {'code': 'mertidtim','amount': 8.0},
+                {'code': 'kvaltim','amount': 8.0},
             ])
 
-        _logger.warning(f"--------------")
-
-        for line in payslip_form.input_line_ids:
-            if line.amount != 0.0:
-                _logger.warning(f"{line.name=} {line.amount_qty=} {line.amount=}")
-
-        _logger.warning(f"--------------")
-
-        for worked_day in payslip_form.worked_days_line_ids:
-            _logger.warning(f"{worked_day.name=} {worked_day.number_of_hours=}")
-
-        _logger.warning(f"--------------")    
-
+        found_net = False
         for detail in payslip_form.dynamic_filtered_payslip_lines:
-            _logger.warning(f"line id from input: {detail.name} {detail.total}")
             if detail.code == 'net':
-                self.assertAlmostEqual(detail.total, 12776.0)
+                found_net = True
+                # FACIT: Ska vara 12776.0
+                self.assertAlmostEqual(detail.total, 12776.0, msg=f"Wrong net pay for Karin! Got: {detail.total}, expected 12776.0")
+                _logger.info(f"SUCCESS: Karin net pay correct: {detail.total}")
+                found_net = True
+
+        self.assertTrue(found_net, "Could not find field 'net' for Karin.")
 

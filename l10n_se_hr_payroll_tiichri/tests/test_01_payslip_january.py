@@ -7,10 +7,11 @@
 from pytz import utc
 from datetime import date, datetime, time
 from odoo import fields
-from odoo.tests import Form
+from odoo.tests import Form, tagged
 from odoo.tests.common import TransactionCase
+from odoo.tests.common import tagged
+
 import logging
-   
 _logger = logging.getLogger(__name__)
 
 # Test with somthing like this
@@ -20,7 +21,7 @@ _logger = logging.getLogger(__name__)
 # $ odoo -c /etc/odoo/odoo.conf -d DATABASNAMN -i l10n_se_hr_payroll_tiichri --test-enable
 # $ odoo -c /etc/odoo/odoo.conf -d odoo-tiichri -i l10n_se_hr_payroll_tiichri --test-enable
 
-
+@tagged('l10n_se_payroll_tiichri', 'january')
 class TestPayslipJanuary(TransactionCase):
 
 
@@ -96,6 +97,8 @@ class TestPayslipJanuary(TransactionCase):
     
     @classmethod
     def _create_payslip(cls, employee_id, contract_id, input_recs): 
+
+        _logger.info(f"TEST PAYSLIP: Employee: {employee_id.name} | Period: {cls.period.name} | Inputs: {input_recs}")
         # payslip = cls.env["hr.payslip"].create({
         #                     'employee_id': employee_id.id,
         #                     'date_from': cls.date_start,
@@ -108,13 +111,12 @@ class TestPayslipJanuary(TransactionCase):
         payslip_form = Form(cls.env['hr.payslip'])
         payslip_form.employee_id = employee_id
         payslip_form.date_from = cls.date_start
-        payslip_form.date_to = cls.date_stop
         payslip_form.period_id = cls.period
         payslip_form.contract_id = contract_id
-        payslip_form.struct_id = cls.struct
         payslip_form = payslip_form.save()
 
         payslip_form.action_payslip_draft()
+
         payslip_form.onchange_dates()  
         payslip_form.compute_sheet()
 
@@ -176,66 +178,75 @@ class TestPayslipJanuary(TransactionCase):
             'date_stop': cls.date_stop,
         })
 
+        cls.period_type = cls.env['date.range.type'].create({
+            'name': 'Unittest Month Type',
+            'company_id': cls.company.id,
+            'allow_overlap': True
+        })
+
         cls.period = cls.env['account.period'].create({
             'name': 'Unittest period',
+            'company_id': cls.company.id,
             'fiscalyear_id': cls.fiscal_year.id,
             'date_start': cls.date_start,
-            'date_stop': cls.date_stop,
+            'date_end': cls.date_stop,
+            'type_id': cls.period_type.id,
         })
-        
+
+
         # ~ Leave of Absence less than 5 days = pem
         # ~ Leave of Absence more than 5 days = pem_5
         # Asse Aronsson
-        cls.employee_asse = cls.env.ref('l10n_se_hr_payroll_tiichri.hr_asse_employee')
-        cls.asse_101 = cls._create_leave(cls.employee_asse, "sjk_kar" ,"2022-01-07","2022-01-07",1)
-        cls.asse_102 = cls._create_leave(cls.employee_asse, "sjk_kar" ,"2022-01-12","2022-01-12",1)
-        cls.asse_103 = cls._create_leave(cls.employee_asse, "sjk_214" ,"2022-01-13","2022-01-13",1)
-        cls.asse_104 = cls._create_leave(cls.employee_asse, "sjk_214" ,"2022-01-24","2022-01-24",1)
-        cls.asse_105 = cls._create_leave(cls.employee_asse, "vab" ,"2022-01-25","2022-01-25",1)
-        cls.asse_106 = cls._create_leave(cls.employee_asse, "vab", "2022-01-26", "2022-01-26",1)
-        cls.asse_107 = cls._create_leave(cls.employee_asse, "pem", "2022-01-03", "2022-01-03",1)
-        cls.asse_108 = cls._create_leave(cls.employee_asse, "pem", "2022-01-14", "2022-01-14",1)
-        cls.asse_109 = cls._create_leave(cls.employee_asse, "pem", "2022-01-17", "2022-01-17",1)
-        cls.asse_110 = cls._create_leave(cls.employee_asse, "pem", "2022-01-18", "2022-01-18",1)
-        cls.asse_111 = cls._create_leave(cls.employee_asse, "pem", "2022-01-19", "2022-01-19",1)
-        cls.asse_112 = cls._create_leave(cls.employee_asse, "pem_5", "2022-01-20", "2022-01-20",1)
-            
-        # Frans Filipsson
-        cls.employee_frans = cls.env.ref('l10n_se_hr_payroll_tiichri.hr_frans_employee')  # frans_employee
-        cls.frans_101 = cls._create_leave(cls.employee_frans, "sjk_kar" ,"2022-01-07","2022-01-07",1)
-        cls.frans_102 = cls._create_leave(cls.employee_frans, "sjk_kar" ,"2022-01-10","2022-01-10",1)
-        cls.frans_103 = cls._create_leave(cls.employee_frans, "sjk_214" ,"2022-01-11","2022-01-12",2)
-        cls.frans_104 = cls._create_leave(cls.employee_frans, "pem" ,"2022-01-20","2022-01-21",2)
-        cls.frans_105 = cls._create_leave(cls.employee_frans, "pem" ,"2022-01-24","2022-01-26",3)
-        cls.frans_106 = cls._create_leave(cls.employee_frans, "pem_5" ,"2022-01-27","2022-01-27",1)
-
-        # Doris Dahlin
-        cls.employee_doris = cls.env.ref('l10n_se_hr_payroll_tiichri.hr_doris_employee')  # doris_employee
-        cls.doris_101 = cls._create_leave(cls.employee_doris, "sjk_kar" ,"2022-01-04","2022-01-04",1)
-        cls.doris_102 = cls._create_leave(cls.employee_doris, "sjk_214" ,"2022-01-05","2022-01-05",1)
-        cls.doris_103 = cls._create_leave(cls.employee_doris, "sjk_kar" ,"2022-01-10","2022-01-10",1)
-        cls.doris_104 = cls._create_leave(cls.employee_doris, "sjk_214" ,"2022-01-11","2022-01-12",2)
-        cls.doris_105 = cls._create_leave(cls.employee_doris, "pem" ,"2022-01-13","2022-01-13",1)
-
-        # Camilla Cobolt -- Låt stå! :-) Inte sjuk i januari
-        cls.employee_camilla = cls.env.ref('l10n_se_hr_payroll_tiichri.hr_camilla_employee')  # camilla_employee
-        cls.camilla_101 = cls._create_leave(cls.employee_camilla, "vab" ,"2022-01-14","2022-01-14",1)
-        cls.camilla_102 = cls._create_leave(cls.employee_camilla, "vab" ,"2022-01-17","2022-01-17",1)
-
-
-        # # Gustav Groth
-        cls.employee_gustav = cls.env.ref('l10n_se_hr_payroll_tiichri.hr_gustav_employee')  # gustav_employee
-        cls.gustav_101 = cls._create_leave(cls.employee_gustav, "sjk_kar" ,"2022-01-07","2022-01-07",1)
-        cls.gustav_102 = cls._create_leave(cls.employee_gustav, "sjk_214" ,"2022-01-10","2022-01-14",5)
-        cls.gustav_103 = cls._create_leave(cls.employee_gustav, "sjk_214" ,"2022-01-17","2022-01-21",5)
-        cls.gustav_104 = cls._create_leave(cls.employee_gustav, "sjk_214" ,"2022-01-24","2022-01-25",2)
         
-        # # Helmer Henriksson
+        cls.employee_asse = cls.env.ref('l10n_se_hr_payroll_tiichri.hr_asse_employee')
+        cls.asse_101 = cls.env.ref('l10n_se_hr_payroll_tiichri.hr_leave_asse_101')  # leave_asse_101
+        cls.asse_102 = cls.env.ref('l10n_se_hr_payroll_tiichri.hr_leave_asse_102')  # leave_asse_102
+        cls.asse_103 = cls.env.ref('l10n_se_hr_payroll_tiichri.hr_leave_asse_103')  # leave_asse_103
+        cls.asse_104 = cls.env.ref('l10n_se_hr_payroll_tiichri.hr_leave_asse_104')  # leave_asse_104
+        cls.asse_105 = cls.env.ref('l10n_se_hr_payroll_tiichri.hr_leave_asse_105')  # leave_asse_105
+        cls.asse_106 = cls.env.ref('l10n_se_hr_payroll_tiichri.hr_leave_asse_106')  # leave_asse_106
+        cls.asse_107 = cls.env.ref('l10n_se_hr_payroll_tiichri.hr_leave_asse_107')  # leave_asse_107
+        cls.asse_108 = cls.env.ref('l10n_se_hr_payroll_tiichri.hr_leave_asse_108')  # leave_asse_108
+        cls.asse_109 = cls.env.ref('l10n_se_hr_payroll_tiichri.hr_leave_asse_109')  # leave_asse_109
+        cls.asse_110 = cls.env.ref('l10n_se_hr_payroll_tiichri.hr_leave_asse_110')  # leave_asse_110
+        cls.asse_111 = cls.env.ref('l10n_se_hr_payroll_tiichri.hr_leave_asse_111')  # leave_asse_111
+        cls.asse_112 = cls.env.ref('l10n_se_hr_payroll_tiichri.hr_leave_asse_112')  # leave_asse_112
+            
+        # # Frans Filipsson
+        cls.employee_frans = cls.env.ref('l10n_se_hr_payroll_tiichri.hr_frans_employee')  # frans_employee
+        cls.frans_101 = cls.env.ref('l10n_se_hr_payroll_tiichri.hr_leave_frans_101')  # leave_frans_101
+        cls.frans_102 = cls.env.ref('l10n_se_hr_payroll_tiichri.hr_leave_frans_102')  # leave_frans_102
+        cls.frans_103 = cls.env.ref('l10n_se_hr_payroll_tiichri.hr_leave_frans_103')  # leave_frans_103
+        cls.frans_104 = cls.env.ref('l10n_se_hr_payroll_tiichri.hr_leave_frans_104')  # leave_frans_104
+        cls.frans_105 = cls.env.ref('l10n_se_hr_payroll_tiichri.hr_leave_frans_105')  # leave_frans_105
+        cls.frans_106 = cls.env.ref('l10n_se_hr_payroll_tiichri.hr_leave_frans_106')  # leave_frans_106
+
+        # # Doris Dahlin
+        cls.employee_doris = cls.env.ref('l10n_se_hr_payroll_tiichri.hr_doris_employee')  # doris_employee
+        cls.doris_101 = cls.env.ref('l10n_se_hr_payroll_tiichri.hr_leave_doris_101')  # leave_doris_101
+        cls.doris_102 = cls.env.ref('l10n_se_hr_payroll_tiichri.hr_leave_doris_102')  # leave_doris_102
+        cls.doris_103 = cls.env.ref('l10n_se_hr_payroll_tiichri.hr_leave_doris_103')  # leave_doris_103
+        cls.doris_104 = cls.env.ref('l10n_se_hr_payroll_tiichri.hr_leave_doris_104')  # leave_doris_104
+        cls.doris_105 = cls.env.ref('l10n_se_hr_payroll_tiichri.hr_leave_doris_105')  # leave_doris_105
+
+        # # Camilla Cobolt -- Låt stå! :-) Inte sjuk i januari
+        cls.employee_camilla = cls.env.ref('l10n_se_hr_payroll_tiichri.hr_camilla_employee')  # camilla_employee
+        cls.camilla_101 = cls.env.ref('l10n_se_hr_payroll_tiichri.hr_leave_camilla_101')  # leave_camilla_101
+        cls.camilla_102 = cls.env.ref('l10n_se_hr_payroll_tiichri.hr_leave_camilla_102')  # leave_camilla_102
+
+        # # # Gustav Groth
+        cls.employee_gustav = cls.env.ref('l10n_se_hr_payroll_tiichri.hr_gustav_employee')  # gustav_employee
+        cls.gustav_101 = cls.env.ref('l10n_se_hr_payroll_tiichri.hr_leave_gustav_101')  # leave_gustav_101
+        cls.gustav_102 = cls.env.ref('l10n_se_hr_payroll_tiichri.hr_leave_gustav_102')  # leave_gustav_102
+        cls.gustav_103 = cls.env.ref('l10n_se_hr_payroll_tiichri.hr_leave_gustav_103')  # leave_gustav_103
+        cls.gustav_104 = cls.env.ref('l10n_se_hr_payroll_tiichri.hr_leave_gustav_104')  # leave_gustav_104
+        
+        # # # Helmer Henriksson
         cls.employee_helmer = cls.env.ref('l10n_se_hr_payroll_tiichri.hr_helmer_employee')  # helmer_employee
-        cls.helmer_101 = cls._create_leave(cls.employee_helmer, "sjk_kar" ,"2022-01-04","2022-01-04",1)
-        cls.helmer_102 = cls._create_leave(cls.employee_helmer, "sjk_214" ,"2022-01-05","2022-01-05",1)
-        cls.helmer_103 = cls._create_leave(cls.employee_helmer, "sjk_kar" ,"2022-01-12","2022-01-12",1)
-        cls.helmer_104 = cls._create_leave(cls.employee_helmer, "sjk_214" ,"2022-01-13","2022-01-14",2)
+        cls.helmer_101 = cls.env.ref('l10n_se_hr_payroll_tiichri.hr_leave_helmer_101')  # leave_helmer_101
+        cls.helmer_102 = cls.env.ref('l10n_se_hr_payroll_tiichri.hr_leave_helmer_102')  # leave_helmer_102
+        cls.helmer_103 = cls.env.ref('l10n_se_hr_payroll_tiichri.hr_leave_helmer_103')  # leave_helmer_103
+        cls.helmer_104 = cls.env.ref('l10n_se_hr_payroll_tiichri.hr_leave_helmer_104')  # leave_helmer_104
 
         # Karin Kullberg
         # Anställning per timme, påbörjad 2022-06-01
@@ -246,23 +257,15 @@ class TestPayslipJanuary(TransactionCase):
                 {'code': 'kvaltim','amount': 4.0},
             ])
 
-        _logger.warning(f"--------------")
-
-        for line in payslip_form.input_line_ids:
-            if line.amount != 0.0:
-                _logger.warning(f"{line.name=} {line.amount_qty=} {line.amount=}")
-
-        _logger.warning(f"--------------") 
-
-        for worked_day in payslip_form.worked_days_line_ids:
-            _logger.warning(f"{worked_day.name=} {worked_day.number_of_hours=}")
-
-        _logger.warning(f"--------------") 
-
+        found_net = False
         for detail in payslip_form.dynamic_filtered_payslip_lines:
-            _logger.warning(f"line id from input: {detail.name} {detail.total}")
             if detail.code == 'net':
-                self.assertAlmostEqual(detail.total, 27734.0)
+                # FACIT: Ska vara 27734.0
+                self.assertAlmostEqual(detail.total, 27734.0, msg=f"Wrong net pay for Asse! Got: {detail.total}, expected: 27734.0.")
+                _logger.info(f"SUCCESS: Asse net pay correct: {detail.total}")
+                found_net = True
+
+        self.assertTrue(found_net, "Could not find field 'net' for Asse.")
 
               
     ## Test 4
@@ -272,23 +275,16 @@ class TestPayslipJanuary(TransactionCase):
                 {'code': 'mertidtim','amount': 2.0},
             ])
 
-        _logger.warning(f"--------------")
-
-        for line in payslip_form.input_line_ids:
-            if line.amount != 0.0:
-                _logger.warning(f"{line.name=} {line.amount_qty=} {line.amount=}")
-
-        _logger.warning(f"--------------") 
-
-        for worked_day in payslip_form.worked_days_line_ids:
-            _logger.warning(f"{worked_day.name=} {worked_day.number_of_hours=}")
-
-        _logger.warning(f"--------------") 
-
+        found_net = False
         for detail in payslip_form.dynamic_filtered_payslip_lines:
-            _logger.warning(f"line id from input: {detail.name} {detail.total}")
             if detail.code == 'net':
-                self.assertAlmostEqual(detail.total, 23008.0)   
+                # FACIT: Ska vara 23008.0
+                self.assertAlmostEqual(detail.total, 23008.0, msg=f"Wrong net pay for Frans! Got: {detail.total}, expected: 23008.0.")
+                _logger.info(f"SUCCESS: Frans net pay correct: {detail.total}")
+                found_net = True
+
+        self.assertTrue(found_net, "Could not find field 'net' for Frans.")
+
 
     ## Test 3
     def test_doris(self):
@@ -297,23 +293,16 @@ class TestPayslipJanuary(TransactionCase):
                 {'code': 'mertidtim','amount': 8.0},
             ])
 
-        _logger.warning(f"--------------")
-
-        for line in payslip_form.input_line_ids:
-            if line.amount != 0.0:
-                _logger.warning(f"{line.name=} {line.amount_qty=} {line.amount=}")
-
-        _logger.warning(f"--------------")
-
-        for worked_day in payslip_form.worked_days_line_ids:
-            _logger.warning(f"{worked_day.name=} {worked_day.number_of_hours=}")
-
-        _logger.warning(f"--------------")    
-
+        found_net = False
         for detail in payslip_form.dynamic_filtered_payslip_lines:
-            _logger.warning(f"line id from input: {detail.name} {detail.total}")
             if detail.code == 'net':
-                self.assertAlmostEqual(detail.total, 19538.0)   
+                # FACIT: Ska vara 19538.0
+                self.assertAlmostEqual(detail.total, 19538.0, msg=f"Wrong net pay for Doris! Got: {detail.total}, expected: 19538.0.")
+                _logger.info(f"SUCCESS: Doris net pay correct: {detail.total}")
+                found_net = True
+
+        self.assertTrue(found_net, "Could not find field 'net' for Doris.")
+
 
     ## Test 2
     def test_camilla(self):
@@ -322,23 +311,16 @@ class TestPayslipJanuary(TransactionCase):
                 {'code': 'mertidtim','amount': 8.0},
             ])
 
-        _logger.warning(f"--------------")
-
-        for line in payslip_form.input_line_ids:
-            if line.amount != 0.0:
-                _logger.warning(f"{line.name=} {line.amount_qty=} {line.amount=}")
-
-        _logger.warning(f"--------------")
-
-        for worked_day in payslip_form.worked_days_line_ids:
-            _logger.warning(f"{worked_day.name=} {worked_day.number_of_hours=}")
-
-        _logger.warning(f"--------------")    
-
+        found_net = False
         for detail in payslip_form.dynamic_filtered_payslip_lines:
-            _logger.warning(f"line id from input: {detail.name} {detail.total}")
             if detail.code == 'net':
-                self.assertAlmostEqual(detail.total, 15524.0)   
+                # FACIT: Ska vara 15524.0
+                self.assertAlmostEqual(detail.total, 15524.0, msg=f"Wrong net pay for Camilla! Got: {detail.total}, expected: 15524.0.")
+                _logger.info(f"SUCCESS: Camilla net pay correct: {detail.total}")
+                found_net = True
+
+        self.assertTrue(found_net, "Could not find field 'net' for Camilla.")
+
 
     ## Test 5
     def test_gustav(self):
@@ -346,24 +328,15 @@ class TestPayslipJanuary(TransactionCase):
                 {'code': 'kvaltim','amount': 4.0},
             ])
 
-        _logger.warning(f"--------------")
-
-        for line in payslip_form.input_line_ids:
-            if line.amount != 0.0:
-                _logger.warning(f"{line.name=} {line.amount_qty=} {line.amount=}")
-
-        _logger.warning(f"--------------")
-
-        for worked_day in payslip_form.worked_days_line_ids:
-            _logger.warning(f"{worked_day.name=} {worked_day.number_of_hours=}")
-
-        _logger.warning(f"--------------")    
-
+        found_net = False
         for detail in payslip_form.dynamic_filtered_payslip_lines:
-            _logger.warning(f"line id from input: {detail.name} {detail.total}")
             if detail.code == 'net':
-                self.assertAlmostEqual(detail.total, 20540.0)   
+                # FACIT: Ska vara 20540.0
+                self.assertAlmostEqual(detail.total, 20540.0, msg=f"Wrong net pay for Gustav! Got: {detail.total}, expected: 20540.0.")
+                _logger.info(f"SUCCESS: Gustav net pay correct: {detail.total}")
+                found_net = True
 
+        self.assertTrue(found_net, "Could not find field 'net' for Gustav.")
 
 
     ## Test 6
@@ -372,23 +345,17 @@ class TestPayslipJanuary(TransactionCase):
                 {'code': 'kvaltim','amount': 4.0},
             ])
 
-        _logger.warning(f"--------------")
-
-        for line in payslip_form.input_line_ids:
-            if line.amount != 0.0:
-                _logger.warning(f"{line.name=} {line.amount_qty=} {line.amount=}")
-
-        _logger.warning(f"--------------")
-
-        for worked_day in payslip_form.worked_days_line_ids:
-            _logger.warning(f"{worked_day.name=} {worked_day.number_of_hours=}")
-
-        _logger.warning(f"--------------")    
-
+        found_net = False
         for detail in payslip_form.dynamic_filtered_payslip_lines:
-            _logger.warning(f"line id from input: {detail.name} {detail.total}")
             if detail.code == 'net':
-                self.assertAlmostEqual(detail.total, 20104.0)
+                # FACIT: Ska vara 20104.0
+                self.assertAlmostEqual(detail.total, 20104.0, msg=f"Wrong net pay for Helmer! Got: {detail.total}, expected: 20104.0.")
+                _logger.info(f"SUCCESS: Helmer net pay correct: {detail.total}")
+                found_net = True
+
+        self.assertTrue(found_net, "Could not find field 'net' for Helmer.")
+
+
 
 
 

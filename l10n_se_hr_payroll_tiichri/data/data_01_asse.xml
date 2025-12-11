@@ -193,6 +193,96 @@
 
         <!-- Leave February -->
 
+        <record id="hr_leave_asse_201" model="hr.leave">
+            <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_asse_employee" />
+            <field name="date_from">2022-02-03</field>
+            <field name="date_to">2022-02-03</field>
+            <field name="request_date_from">2022-02-03</field>
+            <field name="request_date_to">2022-02-03</field>
+            <field name="number_of_days">1</field>
+            <field name="holiday_status_id" ref="l10n_se_hr_holidays.vab_160" />
+        </record>
+
+        <record id="hr_leave_asse_202" model="hr.leave">
+            <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_asse_employee" />
+            <field name="date_from">2022-02-04</field>
+            <field name="date_to">2022-02-04</field>
+            <field name="request_date_from">2022-02-04</field>
+            <field name="request_date_to">2022-02-04</field>
+            <field name="number_of_days">1</field>
+            <field name="holiday_status_id" ref="l10n_se_hr_holidays.vab_160" />
+        </record>
+
+        <record id="hr_leave_asse_203" model="hr.leave">
+            <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_asse_employee" />
+            <field name="date_from">2022-02-10</field>
+            <field name="date_to">2022-02-10</field>
+            <field name="request_date_from">2022-02-10</field>
+            <field name="request_date_to">2022-02-10</field>
+            <field name="number_of_days">1</field>
+            <field name="holiday_status_id" ref="l10n_se_hr_holidays.holiday_type_leave_of_absence" />
+        </record>
+
+        <record id="hr_leave_asse_204" model="hr.leave">
+            <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_asse_employee" />
+            <field name="date_from">2022-02-11</field>
+            <field name="date_to">2022-02-11</field>
+            <field name="request_date_from">2022-02-11</field>
+            <field name="request_date_to">2022-02-11</field>
+            <field name="number_of_days">1</field>
+            <field name="holiday_status_id" ref="l10n_se_hr_holidays.holiday_type_leave_of_absence" />
+        </record>
+
+        <record id="hr_leave_asse_205" model="hr.leave">
+            <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_asse_employee" />
+            <field name="date_from">2022-02-12</field>
+            <field name="date_to">2022-02-12</field>
+            <field name="request_date_from">2022-02-12</field>
+            <field name="request_date_to">2022-02-12</field>
+            <field name="number_of_days">1</field>
+            <field name="holiday_status_id" ref="l10n_se_hr_holidays.holiday_type_leave_of_absence" />
+        </record>
+
+        <record id="hr_leave_asse_206" model="hr.leave">
+            <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_asse_employee" />
+            <field name="date_from">2022-02-13</field>
+            <field name="date_to">2022-02-13</field>
+            <field name="request_date_from">2022-02-13</field>
+            <field name="request_date_to">2022-02-13</field>
+            <field name="number_of_days">1</field>
+            <field name="holiday_status_id" ref="l10n_se_hr_holidays.holiday_type_leave_of_absence" />
+        </record>
+
+        <record id="hr_leave_asse_207" model="hr.leave">
+            <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_asse_employee" />
+            <field name="date_from">2022-02-14</field>
+            <field name="date_to">2022-02-14</field>
+            <field name="request_date_from">2022-02-14</field>
+            <field name="request_date_to">2022-02-14</field>
+            <field name="number_of_days">1</field>
+            <field name="holiday_status_id" ref="l10n_se_hr_holidays.holiday_type_leave_of_absence" />
+        </record>
+
+        <record id="hr_leave_asse_208" model="hr.leave">
+            <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_asse_employee" />
+            <field name="date_from">2022-02-15</field>
+            <field name="date_to">2022-02-15</field>
+            <field name="request_date_from">2022-02-15</field>
+            <field name="request_date_to">2022-02-15</field>
+            <field name="number_of_days">1</field>
+            <field name="holiday_status_id" ref="l10n_se_hr_holidays.holiday_type_leave_of_absence_5" />
+        </record>
+
+        <record id="hr_leave_asse_209" model="hr.leave">
+            <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_asse_employee" />
+            <field name="date_from">2022-02-16</field>
+            <field name="date_to">2022-02-16</field>
+            <field name="request_date_from">2022-02-16</field>
+            <field name="request_date_to">2022-02-16</field>
+            <field name="number_of_days">1</field>
+            <field name="holiday_status_id" ref="l10n_se_hr_holidays.holiday_type_leave_of_absence_5" />
+        </record>
+
         <!-- Leave March -->
 
         <record id="hr_leave_asse_301" model="hr.leave">
@@ -229,6 +319,8 @@
         </record>
 
         <!-- Leave April -->
+
+        <!-- Tjänstledig 0420 - 0422 -->
 
         <!-- Leave May -->
 
@@ -277,6 +369,8 @@
             <field name="number_of_days">1</field>
             <field name="holiday_status_id" ref="l10n_se_hr_holidays.sick_leave_qualify" />
         </record>
+
+        <!-- Sjukskriven 060 -->
 
         <record id="hr_leave_asse_602" model="hr.leave">
             <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_asse_employee" />
