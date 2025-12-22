@@ -36,16 +36,31 @@
             <field name="quantity">1</field>
         </record>
 
+        <record id="hr_salary_rule_sick_leave" model="hr.salary.rule">
+            <field name="category_id" ref="tiichri_salary_rule_category_BRUTIL_ti" />
+            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons"/>
+            <field name="code">sick_leave</field>
+            <field name="salary_art">550</field>
+            <field name="name">Sjukledighet</field>
+            <field name="sequence">250</field>
+            <field name="appears_on_payslip" eval="False"/>
+            <field name="condition_select">python</field>
+            <field name="condition_python">result = worked_days.dict.get("sick_leave")</field>
+            <field name="amount_select">fix</field>
+            <field name="quantity">1</field>
+            <field name="amount_fix">0</field>
+        </record>
 
         <record id="hr_salary_rule_qualifying_deduction" model="hr.salary.rule">
             <field name="category_id" ref="tiichri_salary_rule_category_BRUAVG_ti" />
-            <field name="condition_python">result = contract.qualifying_count(payslip)</field>
+            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons"/>
+            <field name="parent_rule_id" ref="l10n_se_hr_payroll_tiichri.hr_salary_rule_sick_leave" />
             <field name="code">karensavdrag</field>
             <field name="salary_art">550</field>
             <field name="name">Karensavdrag</field>
             <field name="sequence">242</field>
-            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons"/>
             <field name="appears_on_payslip" eval="True"/>
+            <field name="condition_python">result = contract.qualifying_count(payslip)</field>
             <field name="condition_select">python</field>
             <field name="amount_select">code</field>
             <field name="amount_python_compute">
@@ -59,13 +74,14 @@ result_qty = contract.qualifying_count(payslip)
         <record id="hr_salary_rule_sick_deduction_1_14" model="hr.salary.rule">
             <field name="category_id" ref="tiichri_salary_rule_category_BRUAVG_ti" />
             <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons"/>
+            <field name="parent_rule_id" ref="l10n_se_hr_payroll_tiichri.hr_salary_rule_sick_leave" />
             <field name="code">sjukavdrag_1_14</field>
             <field name="salary_art">550</field>
             <field name="name">Sjukavdrag 1-14</field>
             <field name="sequence">243</field>
             <field name="appears_on_payslip" eval="True"/>
             <field name="condition_select">python</field>
-            <field name="condition_python">result = contract.get_sick_days(payslip) if contract.get_sick_days(payslip) &lt;= 14 else False</field>
+            <field name="condition_python">result = contract.get_sick_days(payslip) if contract.get_sick_days(payslip) &lt;= 14 and worked_days.dict.get("sick_leave") else False</field>
             <field name="amount_select">code</field>
             <field name="amount_python_compute">
 # (ML*12)/(52*VA)
@@ -77,6 +93,7 @@ result = (contract.wage*12)/(52*contract.resource_calendar_id.full_time_required
         <record id="hr_salary_rule_sick_deduction_15_90" model="hr.salary.rule">
             <field name="category_id" ref="tiichri_salary_rule_category_BRUAVG_ti" />
             <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons"/>
+            <field name="parent_rule_id" ref="l10n_se_hr_payroll_tiichri.hr_salary_rule_sick_leave" />
             <field name="code">sjukavdrag_15_90</field>
             <field name="salary_art">550</field>
             <field name="name">Sjukavdrag 15-90</field>
@@ -92,24 +109,6 @@ result_qty = contract.get_sick_days(payslip)
             </field>
         </record>
 
-        <record id="hr_salary_rule_sick_wage" model="hr.salary.rule">
-            <field name="category_id" ref="tiichri_salary_rule_category_BRUTIL_ti" />
-            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons"/>
-            <field name="code">sjuklon</field>
-            <field name="salary_art">550</field>
-            <field name="name">Sjuklön</field>
-            <field name="sequence">245</field>
-            <field name="appears_on_payslip" eval="True"/>
-            <field name="condition_select">python</field>
-            <field name="condition_python">result = contract.get_sick_days(payslip) if contract.get_sick_days(payslip) &lt;= 14 else False</field>
-            <field name="amount_select">code</field>
-            <field name="amount_python_compute">
-# (ML*12*0.8)/(52*VA)
-result_qty = worked_days.dict.get("sick_leave").number_of_hours * -1
-result = (contract.wage * 12 * 0.8) / (52 * contract.resource_calendar_id.full_time_required_hours)
-            
-            </field>
-        </record>
 
         <record id="hr_salary_rule_bl" model="hr.salary.rule">
             <field name="category_id" ref="tiichri_salary_rule_category_BRUTTO_ti" />
@@ -127,18 +126,23 @@ result = categories.BAS_ti + categories.BRUAVG_ti + categories.BRUTIL_ti
             <field name="quantity">1</field>
         </record>
 
-        <record id="hr_salary_rule_sick_leave" model="hr.salary.rule">
+        <record id="hr_salary_rule_sick_wage" model="hr.salary.rule">
             <field name="category_id" ref="tiichri_salary_rule_category_BRUTIL_ti" />
             <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons"/>
-            <field name="code">sick_leave</field>
+            <field name="parent_rule_id" ref="l10n_se_hr_payroll_tiichri.hr_salary_rule_sick_leave" />
+            <field name="code">sjuklon</field>
             <field name="salary_art">550</field>
-            <field name="name">Sjukledighet</field>
-            <field name="sequence">250</field>
-            <field name="appears_on_payslip" eval="False"/>
+            <field name="name">Sjuklön</field>
+            <field name="sequence">245</field>
+            <field name="appears_on_payslip" eval="True"/>
             <field name="condition_select">python</field>
-            <field name="condition_python">result = worked_days.dict.get("sick_leave")</field>
-            <field name="amount_select">fix</field>
-            <field name="quantity">1</field>
-            <field name="amount_fix">0</field>
+            <field name="condition_python">result = contract.get_sick_days(payslip) if contract.get_sick_days(payslip) &lt;= 14 and worked_days.dict.get("sick_leave") else False</field>
+            <field name="amount_select">code</field>
+            <field name="amount_python_compute">
+# (ML*12*0.8)/(52*VA)
+result_qty = worked_days.dict.get("sick_leave").number_of_hours * -1
+result = (contract.wage * 12 * 0.8) / (52 * contract.resource_calendar_id.full_time_required_hours)
+            
+            </field>
         </record>
 </odoo>
