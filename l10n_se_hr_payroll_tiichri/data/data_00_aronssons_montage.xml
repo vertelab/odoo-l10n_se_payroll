@@ -2,28 +2,8 @@
 <odoo>
     <data noupdate="1">
 
-        <!-- ## KONTOPLAN // FISCALYEAR -->
-        <!-- ## DO THE SELECTION TO K2! -->
-        <!-- <function model="account.chart.template" name="try_load_k2">
-            <value eval="[]"/>
-        </function> -->
-
-        <!-- ## DATABASE DEFAULT SETTINGS -->
-        <!-- https://github.com/vertelab/odoo-l10n_se/blob/14.0/l10n_se/data/fiscal_position_data.xml -->
-        <record id="main_company_year_2022" model="account.fiscalyear">
-            <field name="name">2022</field>
-            <field name="code">2022</field>
-            <field name="date_start">2022-01-01</field>
-            <field name="date_stop">2022-12-31</field>
-        </record>
-
-        <!-- ## CREATE PERIODS // 12, MONTHS -->
-        <!-- <function model="account.fiscalyear" name="create_period1">
-            <function eval="[[('state','=','draft'),('id', '=', ref('main_company_year_2022'))]]" model="account.fiscalyear" name="search" />
-        </function> -->
-
         <!-- ## COMPANY SETTNINGS -->
-        <record id="main_company_partner" model="res.partner">
+        <record id="company_aronssons_partner" model="res.partner">
             <field name="company_type">company</field>
             <field name="name">Aronssons Montage AB</field>
             <field name="street">Rosersbergsvägen 5</field>
@@ -34,7 +14,7 @@
             <field name="website">http://www.aronssons.se</field>
         </record>
 
-        <record id="main_company" model="res.company">
+        <record id="company_aronssons" model="res.company">
             <field name="name">Aronssons Montage AB</field>
             <field name="street">Rosersbergsvägen 5</field>
             <field name="zip">192 00</field>
@@ -45,10 +25,22 @@
             <field name="website">http://www.aronssons.se</field>
         </record>
 
+        <record id="company_aronssons_year_2022" model="account.fiscalyear">
+            <field name="name">2022</field>
+            <field name="code">2022</field>
+            <field name="date_start">2022-01-01</field>
+            <field name="date_stop">2022-12-31</field>
+            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons" />
+        </record>
+
+        <function model="account.fiscalyear" name="create_period1">
+            <value eval="[ref('l10n_se_hr_payroll_tiichri.company_aronssons_year_2022')]"/>
+        </function>
+
         <record id="main_work_location" model="hr.work.location">
             <field name="name">Rosersberg, HK</field>
-            <field name="address_id" ref="main_company_partner"/>
-            <field name="company_id" ref="main_company"/>
+            <field name="address_id" ref="company_aronssons_partner"/>
+            <field name="company_id" ref="company_aronssons"/>
             <field name="location_type">office</field>
         </record>
 
@@ -73,7 +65,7 @@
         </record>
 
         <!-- ## HR.BENEFIT -->
-        <record id="hr_benefit_forman_carbru" model="hr.benefit">
+        <!-- <record id="hr_benefit_forman_carbru" model="hr.benefit">
             <field name="name">hr_forman_carbru</field>
             <field name="desc">Bilförmån, brutto **</field>
         </record>
@@ -88,7 +80,7 @@
         <record id="hr_benefit_forman_bost" model="hr.benefit">
             <field name="name">hr_forman_bost</field>
             <field name="desc">hr_Bostad **</field>
-        </record>
+        </record> -->
 
     </data>
 </odoo>

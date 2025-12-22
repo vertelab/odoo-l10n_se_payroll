@@ -1,7 +1,36 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
+    <data>
+        <record id="payslip_papper_format" model="report.paperformat">
+            <field name="name">Payslip Swedish Papper Format</field>
+            <field name="format">A4</field>
+            <field name="orientation">Portrait</field>
+            <field name="margin_top">40</field>
+            <field name="margin_bottom">80</field>
+            <field name="margin_left">7</field>
+            <field name="margin_right">7</field>
+            <field name="header_spacing">35</field>
+            <field name="dpi">90</field>
+        </record>
+
+        <record id="mail_activity_payslip" model="mail.activity.type">
+            <field name="name">Lönespec</field>
+            <field name="is_payslip">True</field>
+            <field name="icon">fa-envelope</field>
+            <field name="sequence">3</field>
+        </record>
+
+
+
+    </data>
+</odoo>
+
+
+<!-- Gamla versionen, hr_payroll.tiichri_data -->
+<!-- <?xml version="1.0" encoding="utf-8"?>
+<odoo>
     <data noupdate="0">
-        <record id="main_company_partner" model="res.partner">
+        <record id="company_aronssons_partner" model="res.partner">
             <field name="company_type">company</field>
             <field name="name">Aronssons Montage AB</field>
             <field name="street">Rosersbergsvägen 5</field>
@@ -23,12 +52,12 @@
             <field name="email">info@aronssons.se</field>
             <field name="website">http://www.aronssons.se</field>
         </record>
-        <!--
+        
              <field name="country_id" ref="main_country" />
              <field name="partner_id" ref="main_partner" />
              <field name="currency_id" ref="base.EUR" />
              <field name="favicon" model="res.company" eval="obj()._get_default_favicon(original=True)" />
-        -->
+        
         <record id="hr_person1_partner" model="res.partner">
             <field name="company_type">person</field>
             <field name="name">Asse Aronsson Kontakt</field>
@@ -127,7 +156,7 @@
             <field name="identification_id">651031-3114</field>
             <field name="job_title">VD och försäljningschef</field>
             <field name="address_home_id" ref="hr_person1_partner" />
-            <field name="address_id" ref="main_company_partner" />
+            <field name="address_id" ref="company_aronssons_partner" />
             <field name="tz" eval="'Europe/Stockholm'" />
         </record>
         <record id="hr_person2_employee" model="hr.employee">
@@ -137,7 +166,7 @@
             <field name="identification_id">460507-6738</field>
             <field name="job_title">Inköpare</field>
             <field name="address_home_id" ref="hr_person2_partner" />
-            <field name="address_id" ref="main_company_partner" />
+            <field name="address_id" ref="company_aronssons_partner" />
             <field name="tz" eval="'Europe/Stockholm'" />
         </record>
         <record id="hr_person3_employee" model="hr.employee">
@@ -147,7 +176,7 @@
             <field name="identification_id">920217-2384</field>
             <field name="job_title">Lönekonsult</field>
             <field name="address_home_id" ref="hr_person3_partner" />
-            <field name="address_id" ref="main_company_partner" />
+            <field name="address_id" ref="company_aronssons_partner" />
             <field name="tz" eval="'Europe/Stockholm'" />
         </record>
         <record id="hr_person4_employee" model="hr.employee">
@@ -158,7 +187,7 @@
             <field name="identification_id">711002-1834</field>
             <field name="job_title">Logistikansvarig</field>
             <field name="address_home_id" ref="hr_person4_partner" />
-            <field name="address_id" ref="main_company_partner" />
+            <field name="address_id" ref="company_aronssons_partner" />
             <field name="tz" eval="'Europe/Stockholm'" />
         </record>
         <record id="hr_person5_employee" model="hr.employee">
@@ -168,7 +197,7 @@
             <field name="identification_id">790124-0207</field>
             <field name="job_title">Montör</field>
             <field name="address_home_id" ref="hr_person5_partner" />
-            <field name="address_id" ref="main_company_partner" />
+            <field name="address_id" ref="company_aronssons_partner" />
             <field name="tz" eval="'Europe/Stockholm'" />
         </record>
         <record id="hr_person6_employee" model="hr.employee">
@@ -178,7 +207,7 @@
             <field name="identification_id">680522-9272</field>
             <field name="job_title">Montör</field>
             <field name="address_home_id" ref="hr_person6_partner" />
-            <field name="address_id" ref="main_company_partner" />
+            <field name="address_id" ref="company_aronssons_partner" />
             <field name="tz" eval="'Europe/Stockholm'" />
         </record>
         <record id="hr_person7_employee" model="hr.employee">
@@ -188,7 +217,7 @@
             <field name="identification_id">891208-2396</field>
             <field name="job_title">Montör</field>
             <field name="address_home_id" ref="hr_person7_partner" />
-            <field name="address_id" ref="main_company_partner" />
+            <field name="address_id" ref="company_aronssons_partner" />
             <field name="tz" eval="'Europe/Stockholm'" />
         </record>
         <record id="bank_swedbank" model="res.bank">
@@ -197,7 +226,7 @@
         <record id="hr_contract_type" model="hr.contract.type">
             <field name="name">Employee</field>
         </record>
-        <!--
+
              <record id="benefits_carbru" model="hr.benefit">
              <field name="code_id" ref="hr_payroll_benefits.hr_benefit_rule_carbru" />
              <field name="name">Tjänstebil, Volvo, Brutto</field>
@@ -209,7 +238,7 @@
              <field name="desc">Tjänstebil, Volvo, Brutto</field>
              <field name="value" eval="3908" />
              </record>
-        -->
+        
         <record id="job_id_president" model="hr.job">
             <field name="name">VD och försäljningschef</field>
         </record>
@@ -274,9 +303,9 @@
             <field name="date_start">2022-01-10</field>
             <field name="first_contract_date">2022-01-10</field>
             <field name="struct_id" ref="l10n_se_hr_payroll.hr_payroll_structure-tj" />
-            <!--
+            
                  <field name="benefit_ids" ref="benefits_camilla" />
-            -->
+            
         </record>
         <record id="contract_gustav" model="hr.contract">
             <field name="name">Gustav Groth Avtal</field>
@@ -316,4 +345,4 @@
             <field name="struct_id" ref="l10n_se_hr_payroll.hr_payroll_structure-tj" />
         </record>
     </data>
-</odoo>
+</odoo> -->

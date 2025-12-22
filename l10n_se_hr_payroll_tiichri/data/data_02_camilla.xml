@@ -20,8 +20,9 @@
 
         <record id="hr_camilla_employee" model="hr.employee">
             <field name="name">Camilla Cobolt Anställd</field>
-            <field name="address_id" ref="main_company" />
+            <field name="address_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons" />
             <field name="work_location_id" ref="main_work_location" />
+            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons"/>
             <field name="work_phone">073-400000</field>
             <field name="work_email">camilla.cobolt@aronssons.se</field>
             <field name="identification_id">711002-1834</field>
@@ -30,7 +31,7 @@
             <field name="private_zip">112 00</field>
             <field name="private_city">Stockholm</field>
             <field name="private_phone">073-980001</field>
-            <field name="address_id" ref="main_company_partner" />
+            <field name="address_id" ref="company_aronssons_partner" />
             <field name="tz" eval="'Europe/Stockholm'" />
         </record>
 
@@ -39,30 +40,31 @@
             <field name="wage">30000</field>
             <field name="type_id" ref="hr_contract_type" />
             <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_camilla_employee" />
-            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.main_company" />
+            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons"/>
             <field name="schedule_pay" eval="'monthly'" />
             <field name="state" eval="'open'" />
             <field name="job_id" ref="job_id_logistics" />
             <field name="date_start">2022-01-10</field>
             <field name="first_contract_date">2022-01-10</field>
-            <field name="struct_id" ref="l10n_se_hr_payroll.hr_payroll_structure-tj" />
+            <field name="struct_id" ref="l10n_se_hr_payroll_tiichri.hr_payroll_structure_tiichri_tj" />
+            <field name="resource_calendar_id" ref="l10n_se_hr_payroll_tiichri.resource_calendar_tiichri" />
             <field name="table_number">30</field>
             <field name="column_number" eval="'column1'" />
         </record>
 
         <!-- ## HR.CONTRACT.BENEFIT -->
-        <record id="hr_benefit_camilla" model="hr.contract.benefit">
+        <!-- <record id="hr_benefit_camilla" model="hr.contract.benefit">
             <field name="contract_id" ref="contract_camilla" />
             <field name="name" ref="hr_benefit_forman_carbru" />
             <field name="desc">Tjänstebil, Volvo</field>
             <field name="value">3908</field>
-        </record>
+        </record> -->
 
         <!-- Leave Janurary -->
 
         <record id="hr_leave_camilla_101" model="hr.leave">
             <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_camilla_employee" />
-            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.main_company" />
+            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons"/>
             <field name="date_from">2022-01-14</field>
             <field name="date_to">2022-01-14</field>
             <field name="request_date_from">2022-01-14</field>
@@ -73,7 +75,7 @@
 
         <record id="hr_leave_camilla_102" model="hr.leave">
             <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_camilla_employee" />
-            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.main_company" />
+            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons"/>
             <field name="date_from">2022-01-17</field>
             <field name="date_to">2022-01-17</field>
             <field name="request_date_from">2022-01-17</field>
@@ -86,7 +88,7 @@
 
         <record id="hr_leave_camilla_201" model="hr.leave">
             <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_camilla_employee" />
-            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.main_company" />
+            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons"/>
             <field name="date_from">2022-02-03</field>
             <field name="date_to">2022-02-03</field>
             <field name="request_date_from">2022-02-03</field>
@@ -97,7 +99,7 @@
 
         <record id="hr_leave_camilla_202" model="hr.leave">
             <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_camilla_employee" />
-            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.main_company" />
+            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons"/>
             <field name="date_from">2022-02-04</field>
             <field name="date_to">2022-02-04</field>
             <field name="request_date_from">2022-02-04</field>
@@ -108,7 +110,7 @@
 
         <record id="hr_leave_camilla_203" model="hr.leave">
             <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_camilla_employee" />
-            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.main_company" />
+            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons"/>
             <field name="date_from">2022-02-07</field>
             <field name="date_to">2022-02-11</field>
             <field name="request_date_from">2022-02-07</field>
@@ -123,7 +125,7 @@
 
         <record id="hr_leave_camilla_401" model="hr.leave">
             <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_camilla_employee" />
-            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.main_company" />
+            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons"/>
             <field name="date_from">2022-04-19</field>
             <field name="date_to">2022-04-19</field>
             <field name="request_date_from">2022-04-19</field>
@@ -134,7 +136,7 @@
 
         <record id="hr_leave_camilla_402" model="hr.leave">
             <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_camilla_employee" />
-            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.main_company" />
+            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons"/>
             <field name="date_from">2022-04-20</field>
             <field name="date_to">2022-04-21</field>
             <field name="request_date_from">2022-04-20</field>
@@ -149,7 +151,7 @@
 
         <record id="hr_leave_camilla_601" model="hr.leave">
             <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_camilla_employee" />
-            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.main_company" />
+            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons"/>
             <field name="date_from">2022-06-07</field>
             <field name="date_to">2022-06-07</field>
             <field name="request_date_from">2022-06-07</field>
@@ -160,7 +162,7 @@
 
         <record id="hr_leave_camilla_602" model="hr.leave">
             <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_camilla_employee" />
-            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.main_company" />
+            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons"/>
             <field name="date_from">2022-06-08</field>
             <field name="date_to">2022-06-08</field>
             <field name="request_date_from">2022-06-08</field>
@@ -173,7 +175,7 @@
 
         <record id="hr_leave_camilla_701" model="hr.leave">
             <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_camilla_employee" />
-            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.main_company" />
+            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons"/>
             <field name="date_from">2022-07-11</field>
             <field name="date_to">2022-07-11</field>
             <field name="request_date_from">2022-07-11</field>
@@ -184,7 +186,7 @@
 
         <record id="hr_leave_camilla_702" model="hr.leave">
             <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_camilla_employee" />
-            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.main_company" />
+            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons"/>
             <field name="date_from">2022-07-18</field>
             <field name="date_to">2022-07-18</field>
             <field name="request_date_from">2022-07-18</field>
@@ -195,7 +197,7 @@
 
         <record id="hr_leave_camilla_703" model="hr.leave">
             <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_camilla_employee" />
-            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.main_company" />
+            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons"/>
             <field name="date_from">2022-07-19</field>
             <field name="date_to">2022-07-19</field>
             <field name="request_date_from">2022-07-19</field>
@@ -208,7 +210,7 @@
 
         <record id="hr_leave_camilla_801" model="hr.leave">
             <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_camilla_employee" />
-            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.main_company" />
+            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons"/>
             <field name="date_from">2022-08-01</field>
             <field name="date_to">2022-08-01</field>
             <field name="request_date_from">2022-08-01</field>
@@ -219,7 +221,7 @@
 
         <record id="hr_leave_camilla_802" model="hr.leave">
             <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_camilla_employee" />
-            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.main_company" />
+            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons"/>
             <field name="date_from">2022-08-02</field>
             <field name="date_to">2022-08-05</field>
             <field name="request_date_from">2022-08-02</field>
@@ -230,7 +232,7 @@
 
         <record id="hr_leave_camilla_803" model="hr.leave">
             <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_camilla_employee" />
-            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.main_company" />
+            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons"/>
             <field name="date_from">2022-08-08</field>
             <field name="date_to">2022-08-12</field>
             <field name="request_date_from">2022-08-08</field>
@@ -241,7 +243,7 @@
 
         <record id="hr_leave_camilla_804" model="hr.leave">
             <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_camilla_employee" />
-            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.main_company" />
+            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons"/>
             <field name="date_from">2022-08-15</field>
             <field name="date_to">2022-08-19</field>
             <field name="request_date_from">2022-08-15</field>
@@ -252,7 +254,7 @@
 
         <record id="hr_leave_camilla_805" model="hr.leave">
             <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_camilla_employee" />
-            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.main_company" />
+            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons"/>
             <field name="date_from">2022-08-22</field>
             <field name="date_to">2022-08-25</field>
             <field name="request_date_from">2022-08-22</field>
@@ -265,7 +267,7 @@
 
         <record id="hr_leave_camilla_901" model="hr.leave">
             <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_camilla_employee" />
-            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.main_company" />
+            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons"/>
             <field name="date_from">2022-09-01</field>
             <field name="date_to">2022-09-01</field>
             <field name="request_date_from">2022-09-01</field>
@@ -276,7 +278,7 @@
 
         <record id="hr_leave_camilla_902" model="hr.leave">
             <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_camilla_employee" />
-            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.main_company" />
+            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons"/>
             <field name="date_from">2022-09-02</field>
             <field name="date_to">2022-09-02</field>
             <field name="request_date_from">2022-09-02</field>
@@ -287,7 +289,7 @@
 
         <record id="hr_leave_camilla_903" model="hr.leave">
             <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_camilla_employee" />
-            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.main_company" />
+            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons"/>
             <field name="date_from">2022-09-05</field>
             <field name="date_to">2022-09-09</field>
             <field name="request_date_from">2022-09-05</field>
@@ -298,7 +300,7 @@
 
         <record id="hr_leave_camilla_904" model="hr.leave">
             <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_camilla_employee" />
-            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.main_company" />
+            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons"/>
             <field name="date_from">2022-09-12</field>
             <field name="date_to">2022-09-16</field>
             <field name="request_date_from">2022-09-12</field>
@@ -309,7 +311,7 @@
 
         <record id="hr_leave_camilla_905" model="hr.leave">
             <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_camilla_employee" />
-            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.main_company" />
+            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons"/>
             <field name="date_from">2022-09-19</field>
             <field name="date_to">2022-09-19</field>
             <field name="request_date_from">2022-09-19</field>

@@ -17,6 +17,7 @@
         <record id="hr_karin_employee" model="hr.employee">
             <field name="name">Karin Kullberg Anställd</field>
             <field name="work_location_id" ref="main_work_location" />
+            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons"/>
             <field name="work_phone">073-400000</field>
             <field name="work_email">karin.kullberg@aronssons.se</field>
             <field name="identification_id">891208-2396</field>
@@ -25,7 +26,7 @@
             <field name="private_zip">171 00</field>
             <field name="private_city">Sollentuna</field>
             <field name="private_phone">073-980078</field>
-            <field name="address_id" ref="main_company_partner" />
+            <field name="address_id" ref="company_aronssons_partner" />
             <field name="tz" eval="'Europe/Stockholm'" />
         </record>
         <record id="contract_karin" model="hr.contract">
@@ -33,14 +34,15 @@
             <field name="wage">1</field>
             <field name="type_id" ref="hr_contract_type" />
             <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_karin_employee" />
-            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.main_company" />
+            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons"/>
             <field name="schedule_pay" eval="'monthly'" />
             <field name="state" eval="'open'" />
             <field name="job_id" ref="job_id_assembly" />
             <field name="date_start">2022-06-01</field>
             <field name="date_end">2022-08-31</field>
             <field name="first_contract_date">2022-06-01</field>
-            <field name="struct_id" ref="l10n_se_hr_payroll.hr_payroll_structure-tj" />
+            <field name="struct_id" ref="l10n_se_hr_payroll_tiichri.hr_payroll_structure_tiichri_tj" />
+            <field name="resource_calendar_id" ref="l10n_se_hr_payroll_tiichri.resource_calendar_tiichri" />
             <field name="table_number">30</field>
             <field name="column_number" eval="'column1'"/>
         </record>
@@ -59,7 +61,7 @@
 
         <record id="hr_leave_karin_701" model="hr.leave">
             <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_karin_employee" />
-            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.main_company" />
+            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons"/>
             <field name="date_from">2022-07-11</field>
             <field name="date_to">2022-07-11</field>
             <field name="request_date_from">2022-07-11</field>
@@ -70,7 +72,7 @@
 
         <record id="hr_leave_karin_702" model="hr.leave">
             <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_karin_employee" />
-            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.main_company" />
+            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons"/>
             <field name="date_from">2022-07-12</field>
             <field name="date_to">2022-07-14</field>
             <field name="request_date_from">2022-07-12</field>
@@ -83,7 +85,7 @@
 
         <record id="hr_leave_karin_801" model="hr.leave">
             <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_karin_employee" />
-            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.main_company" />
+            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons"/>
             <field name="date_from">2022-08-08</field>
             <field name="date_to">2022-08-08</field>
             <field name="request_date_from">2022-08-08</field>
@@ -94,7 +96,7 @@
 
         <record id="hr_leave_karin_802" model="hr.leave">
             <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_karin_employee" />
-            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.main_company" />
+            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons"/>
             <field name="date_from">2022-08-09</field>
             <field name="date_to">2022-08-10</field>
             <field name="request_date_from">2022-08-09</field>

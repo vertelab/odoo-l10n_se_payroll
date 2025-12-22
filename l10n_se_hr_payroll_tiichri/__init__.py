@@ -1,4 +1,6 @@
-from . import tests
+#from . import tests
+
+from . import models
 
 def try_load_k2(env):
     import os

@@ -84,7 +84,7 @@ class ResourceCalendar(models.Model):
                         'hour_to': 17, 'day_period': 'afternoon', 'absent_calendar_id': self.id}),
             ]
 
-    def _attendance_intervals_batch(self, start_dt, end_dt, resources=None, domain=None, tz=None):
+    def _attendance_intervals_batch(self, start_dt, end_dt, resources=None, domain=None, tz=None, lunch=False):
         """ Return the attendance intervals in the given datetime range.
             The returned intervals are expressed in specified tz or in the resource's timezone.
         """
@@ -102,6 +102,7 @@ class ResourceCalendar(models.Model):
             ('calendar_id', '=', self.id),
             ('resource_id', 'in', resource_ids),
             ('display_type', '=', False),
+            ('day_period', '!=' if not lunch else '=', 'lunch'),
         ]])
 
         # for each attendance spec, generate the intervals in the date range
