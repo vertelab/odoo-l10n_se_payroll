@@ -159,26 +159,51 @@ class hr_contract(models.Model):
         return combined_periods
 
 
+    def get_leave_of_absence_periods(self, payslip):
+        domain = [
+            ('date_from', '<=', payslip.date_to),
+            ('date_to', '>=', payslip.date_from),
+            ('employee_id', '=', self.employee_id.id),
+            ('holiday_status_id.work_entry_type_id.code', '=', 'leave_of_absence'),
+            ('state', '=', 'validate'),
+        ]
+        _logger.info(f"Söker tjänstledighet med domän: {domain}")
+        leaves = self.env['hr.leave'].search(domain)
 
+        leave_periods = []
+        for l in leaves:
+            leave_periods.append({
+                "date_from": l.date_from,
+                "date_to": l.date_to,
+                "number_of_days": l.number_of_days,
+                "number_of_hours": l.number_of_hours,
+            })
+        return leave_periods
 
+    def split_leave_of_absence_periods(self, payslip):
 
-        # ifsats som kollar skillnaden mellan perioder och slår ihop dem
+        periods = self.get_leave_of_absence_periods(payslip)
 
-        # om sista perioen inte överskrider sista dagen i löneperioden, kolla
-        # om sista datumet i första perioden är samma som första datumet i nästa period minus 5 dagar
+        res = {
+            'hourly_leave_hours': 0.0,
+            'short_leave_days': 0.0,
+            'long_leave_calendar_days': 0.0
+        }
 
-        # om det inte finns någon tidigare periode, blir den nuvarande den period som man loopar på
-        # annars kolla skillnaden mellan perioderna
+        for p in periods:
+            # Del av dag
+            if p['number_of_days'] < 1.0:
+                res['hourly_leave_hours'] += p['number_of_hours']
+                _logger.info(f"Tjänstledighet timmar: {p['number_of_hours']}")
+            # 1-5 arbetsdaagar
+            elif 1.0 <= p['number_of_days'] <= 5.0:
+                res['short_leave_days'] += p['number_of_days']
+                _logger.info(f"Tjänstledighet 1-5 dagar: {p['number_of_days']}")
+            # Mer än 5 (kalender)dagar
+            else:
+                delta = p['date_to'].date() - p['date_from'].date()
+                calendar_days = delta.days +1
+                res['long_leave_calendar_days'] += calendar_days
+                _logger.info(f"Tjänstledighet 5+ kalenderdagar: {calendar_days}")
 
-        # om slutdatumet är större än månadens sista dag, sätt det till periodens sista dag, break
-        # vi kan inte gå in i framtiden men vi kan titta bakåt i tiden
-
-        # löneuträkningen bryr sig inte om antal dagar i perioder utan antal sjukdagar i en månad
-        # vilken lönetyp/avdrag bestäms av antal sjukdagar i månaden
-
-
-
-    # cut off date är i slutet på månaden vilket just nu är slutet på löneperioden
-    # en till domän som också skapar perioderna som är tolv månader bakåt i tiden
-    # sen kan samma metod för räkning av dagar användas för att räkna dagar i varje period
-    # måste kuna hugga av vid cut off date men behöver inte ha "real_end_date" eftersom vi inte vet framtiden i förskott. dag 13 är dag 13 oavsett om sjukperioden kommer att fortsätta till dag 45
+        return res

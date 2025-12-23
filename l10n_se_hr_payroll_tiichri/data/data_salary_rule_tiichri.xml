@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
     
+    <!-- Sjuklöneregler -->
+
         <record model="hr.work.entry.type" id="holiday_status_sick_leave_code">
             <field name="name" eval="'Sick Leave Code'"/>
             <field name="code">sick_leave</field>
@@ -115,7 +117,7 @@ result_qty = contract.get_sick_days(payslip)
             <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons"/>
             <field name="code">bl</field>
             <field name="name">Bruttolön</field>
-            <field name="sequence">300</field>
+            <field name="sequence">1000</field>
             <field name="appears_on_payslip" eval="True"/>
             <field name="condition_select">none</field>
             <field name="amount_select">code</field>
@@ -142,7 +144,158 @@ result = categories.BAS_ti + categories.BRUAVG_ti + categories.BRUTIL_ti
 # (ML*12*0.8)/(52*VA)
 result_qty = worked_days.dict.get("sick_leave").number_of_hours * -1
 result = (contract.wage * 12 * 0.8) / (52 * contract.resource_calendar_id.full_time_required_hours)
-            
             </field>
         </record>
+
+    <!-- Tjänstledighetsregler -->
+
+        <record model="hr.work.entry.type" id="holiday_status_leave_of_absence_code">
+            <field name="name" eval="'Leave of Absence Code'"/>
+            <field name="code">leave_of_absence</field>
+            <field name="external_code" eval="'l10n_se_hr_payroll_tiichri.leave_of_absence'"/>
+            <field name="color">2</field>
+            <field name="is_leave" eval="True"/>
+            <field name="country_id" ref="base.se"/>
+        </record>
+
+        <record model="hr.leave.type" id="holiday_status_leave_of_absence">
+            <field name="name" eval="'Leave of Absence'" />
+            <field name="work_entry_type_id" ref="l10n_se_hr_payroll_tiichri.holiday_status_leave_of_absence_code" />
+            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons"/>
+            <field name="color">2</field>
+            <field name="requires_allocation">no</field>
+            <field name="request_unit">hour</field>
+            <field name="limit" eval="False" />
+        </record>
+
+        <!-- Huvudregel -->
+        <record id="hr_salary_rule_leave_of_absence" model="hr.salary.rule">
+            <field name="category_id" ref="tiichri_salary_rule_category_BRUTIL_ti" />
+            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons"/>
+            <field name="code">leave_of_absence</field>
+            <field name="salary_art">190</field>
+            <field name="name">Tjänstledighet</field>
+            <field name="sequence">600</field>
+            <field name="appears_on_payslip" eval="False"/>
+            <field name="condition_select">python</field>
+            <field name="condition_python">
+res = contract.split_leave_of_absence_periods(payslip)
+result = res['hourly_leave_hours'] &gt; 0 or res['short_leave_days'] &gt; 0 or res['long_leave_calendar_days'] &gt; 0
+            </field>
+            <field name="amount_select">fix</field>
+            <field name="quantity">1</field>
+            <field name="amount_fix">0</field>
+        </record>
+
+        <!-- Tjänstledighet del av dag -->
+        <record id="hr_salary_rule_leave_of_absence_hourly" model="hr.salary.rule">
+            <field name="category_id" ref="tiichri_salary_rule_category_BRUAVG_ti" />
+            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons"/>
+            <field name="parent_rule_id" ref="l10n_se_hr_payroll_tiichri.hr_salary_rule_leave_of_absence" />
+            <field name="code">leave_of_absence_hourly</field>
+            <field name="salary_art">191</field>
+            <field name="name">Tjänstledighet del av dag</field>
+            <field name="sequence">610</field>
+            <field name="appears_on_payslip" eval="True" />
+            <field name="condition_select">python</field>
+            <field name="condition_python">
+#work_entry = worked_days.dict.get("leave_of_absence")
+#if work_entry:
+#    number_of_hours = worked_days.dict.get("leave_of_absence").number_of_hours * -1
+#    number_of_days = worked_days.dict.get("leave_of_absence").number_of_days * -1
+#    result = (number_of_hours &gt; 0) and (number_of_days &lt; 1)
+#else:
+#    number_of_hours = 0
+#    number_of_days = 0
+#    result = False
+#####
+res = contract.split_leave_of_absence_periods(payslip)
+result = res['hourly_leave_hours'] &gt; 0
+            </field>
+            <field name="amount_select">code</field>
+            <field name="amount_python_compute">
+#(ML*ANTAL TIMMAR)/175
+#result = (contract.wage / 175)
+#result_qty = worked_days.dict.get("leave_of_absence").number_of_hours
+#####
+res = contract.split_leave_of_absence_periods(payslip)
+result = (contract.wage / 175)
+result_qty = res['hourly_leave_hours'] *-1
+            </field>
+            <field name="quantity">1</field>
+        </record>
+
+        <!-- Tjänstledighet mindre än fem dagar -->
+        <record id="hr_salary_rule_leave_of_absence_less_than_5" model="hr.salary.rule">
+            <field name="category_id" ref="tiichri_salary_rule_category_BRUAVG_ti" />
+            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons"/>
+            <field name="parent_rule_id" ref="l10n_se_hr_payroll_tiichri.hr_salary_rule_leave_of_absence" />
+            <field name="code">leave_of_absence_less_than_5</field>
+            <field name="salary_art">192</field>
+            <field name="name">Tjänstledighet 1 - 5 dagar</field>
+            <field name="sequence">620</field>
+            <field name="appears_on_payslip" eval="True" />
+            <field name="condition_select">python</field>
+            <field name="condition_python">
+#work_entry = worked_days.dict.get("leave_of_absence")
+#if work_entry:
+#    number_of_days = worked_days.dict.get("leave_of_absence").number_of_days * -1
+#    result = (number_of_days &gt;= 1) and (number_of_days &lt;= 5)
+#else:
+#    number_of_days = 0
+#    result = False
+#####
+res = contract.split_leave_of_absence_periods(payslip)
+result = res['short_leave_days'] &gt; 0
+            </field>
+            <field name="amount_select">code</field>
+            <field name="amount_python_compute">
+#(ML*ANTAL DAGAR)/21
+#result = (contract.wage / 21)
+#result_qty = worked_days.dict.get("leave_of_absence").number_of_days
+#####
+res = contract.split_leave_of_absence_periods(payslip)
+result = (contract.wage / 21)
+result_qty = res['short_leave_days'] * -1
+            </field>
+            <field name="quantity">1</field>
+        </record>
+
+        <!-- Tjänstledighet mer än fem dagar -->
+        <record id="hr_salary_rule_leave_of_absence_more_than_5" model="hr.salary.rule">
+            <field name="category_id" ref="tiichri_salary_rule_category_BRUAVG_ti" />
+            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons"/>
+            <field name="parent_rule_id" ref="l10n_se_hr_payroll_tiichri.hr_salary_rule_leave_of_absence" />
+            <field name="code">leave_of_absence_more_than_5</field>
+            <field name="salary_art">193</field>
+            <field name="name">Tjänstledighet mer än fem dagar</field>
+            <field name="sequence">630</field>
+            <field name="appears_on_payslip" eval="True" />
+            <field name="condition_select">python</field>
+            <field name="condition_python">            
+#work_entry = worked_days.dict.get("leave_of_absence")
+#if work_entry:
+#    number_of_days = worked_days.dict.get("leave_of_absence").number_of_days * -1
+#    result = number_of_days &gt;= 6
+#else:
+#    number_of_days = 0
+#    result = False
+#####
+res = contract.split_leave_of_absence_periods(payslip)
+result = res['long_leave_calendar_days'] &gt; 0
+            </field>
+            <field name="amount_select">code</field>
+            <field name="amount_python_compute">
+#(ML*12)*(ANTAL KALENDERDAGAR)/365
+#result = (contract.wage * 12) / 365
+#result_qty = worked_days.dict.get("leave_of_absence").number_of_days
+#####
+res = contract.split_leave_of_absence_periods(payslip)
+result = (contract.wage * 12) / 365
+result_qty = res['long_leave_calendar_days'] * -1
+            </field>
+            <field name="quantity">1</field>
+        </record>
+
+
 </odoo>

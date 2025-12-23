@@ -1,0 +1,30 @@
+<odoo>
+    <record model="ir.ui.view" id="hr_contract_view_form">
+        <field name="name">hr.contract.payday.field.form</field>
+        <field name="model">hr.contract</field>
+        <field name="inherit_id" ref="hr_contract.hr_contract_view_form" />
+        <field name="arch" type="xml">
+            <field name="schedule_pay" position="after">
+                <field name="day_of_pay" invisible="schedule_pay != 'monthly'" />
+            </field>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="hr_payroll_structure_view_form">
+        <field name="name">hr.payroll.structure.const</field>
+        <field name="model">hr.payroll.structure</field>
+        <field name="inherit_id" ref="payroll.hr_payroll_structure_view_form" />
+        <field name="arch" type="xml">
+            <notebook position="inside">
+                <page name="Constant" id="const">
+                    <field name="const_ids">
+                        <list editable="bottom">
+                            <field name="code" />
+                            <field name="constant" />
+                        </list>
+                    </field>
+                </page>
+            </notebook>
+        </field>
+    </record>
+</odoo>

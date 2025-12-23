@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+  <record id="action_delete_leaves" model="ir.actions.server">
+    <field name="name">Delete leaves</field>
+    <field name="model_id" ref="l10n_se_hr_holidays.model_hr_leave"/>
+    <field name="binding_model_id" ref="l10n_se_hr_holidays.model_hr_leave"/>
+    <field name="binding_view_types">list, form</field>
+    <field name="state">code</field>
+    <field name="code">
+for rec in records:
+    if rec.state == "validate":
+        rec.write({"state" : "confirm"})
+    rec.unlink()
+    </field>
+  </record>
+</odoo>
+
+
+
+
+
+
