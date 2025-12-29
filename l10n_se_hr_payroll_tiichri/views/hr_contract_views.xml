@@ -19,6 +19,7 @@
                 <page name="Constant" id="const">
                     <field name="const_ids">
                         <list editable="bottom">
+                            <field name="name" />
                             <field name="code" />
                             <field name="constant" />
                         </list>

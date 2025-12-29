@@ -87,8 +87,9 @@ result_qty = contract.qualifying_count(payslip)
             <field name="amount_select">code</field>
             <field name="amount_python_compute">
 # (ML*12)/(52*VA)
+VA = payslip.struct_id.get_constant('VA')
 result_qty = worked_days.dict.get("sick_leave").number_of_hours
-result = (contract.wage*12)/(52*contract.resource_calendar_id.full_time_required_hours)
+result = (contract.wage*12)/(52*VA)
             </field>
         </record>
 
@@ -142,8 +143,9 @@ result = categories.BAS_ti + categories.BRUAVG_ti + categories.BRUTIL_ti
             <field name="amount_select">code</field>
             <field name="amount_python_compute">
 # (ML*12*0.8)/(52*VA)
+VA = payslip.struct_id.get_constant('VA')
 result_qty = worked_days.dict.get("sick_leave").number_of_hours * -1
-result = (contract.wage * 12 * 0.8) / (52 * contract.resource_calendar_id.full_time_required_hours)
+result = (contract.wage * 12 * 0.8) / (52 * VA)
             </field>
         </record>
 
@@ -199,27 +201,15 @@ result = res['hourly_leave_hours'] &gt; 0 or res['short_leave_days'] &gt; 0 or r
             <field name="appears_on_payslip" eval="True" />
             <field name="condition_select">python</field>
             <field name="condition_python">
-#work_entry = worked_days.dict.get("leave_of_absence")
-#if work_entry:
-#    number_of_hours = worked_days.dict.get("leave_of_absence").number_of_hours * -1
-#    number_of_days = worked_days.dict.get("leave_of_absence").number_of_days * -1
-#    result = (number_of_hours &gt; 0) and (number_of_days &lt; 1)
-#else:
-#    number_of_hours = 0
-#    number_of_days = 0
-#    result = False
-#####
 res = contract.split_leave_of_absence_periods(payslip)
 result = res['hourly_leave_hours'] &gt; 0
             </field>
             <field name="amount_select">code</field>
             <field name="amount_python_compute">
 #(ML*ANTAL TIMMAR)/175
-#result = (contract.wage / 175)
-#result_qty = worked_days.dict.get("leave_of_absence").number_of_hours
-#####
+MAT = payslip.struct_id.get_constant('MAT')
 res = contract.split_leave_of_absence_periods(payslip)
-result = (contract.wage / 175)
+result = (contract.wage / MAT)
 result_qty = res['hourly_leave_hours'] *-1
             </field>
             <field name="quantity">1</field>
@@ -237,26 +227,17 @@ result_qty = res['hourly_leave_hours'] *-1
             <field name="appears_on_payslip" eval="True" />
             <field name="condition_select">python</field>
             <field name="condition_python">
-#work_entry = worked_days.dict.get("leave_of_absence")
-#if work_entry:
-#    number_of_days = worked_days.dict.get("leave_of_absence").number_of_days * -1
-#    result = (number_of_days &gt;= 1) and (number_of_days &lt;= 5)
-#else:
-#    number_of_days = 0
-#    result = False
-#####
 res = contract.split_leave_of_absence_periods(payslip)
 result = res['short_leave_days'] &gt; 0
             </field>
             <field name="amount_select">code</field>
             <field name="amount_python_compute">
 #(ML*ANTAL DAGAR)/21
-#result = (contract.wage / 21)
-#result_qty = worked_days.dict.get("leave_of_absence").number_of_days
-#####
+MAD = payslip.struct_id.get_constant('MAD')
 res = contract.split_leave_of_absence_periods(payslip)
-result = (contract.wage / 21)
+result = (contract.wage / MAD)
 result_qty = res['short_leave_days'] * -1
+            
             </field>
             <field name="quantity">1</field>
         </record>
@@ -273,23 +254,13 @@ result_qty = res['short_leave_days'] * -1
             <field name="appears_on_payslip" eval="True" />
             <field name="condition_select">python</field>
             <field name="condition_python">            
-#work_entry = worked_days.dict.get("leave_of_absence")
-#if work_entry:
-#    number_of_days = worked_days.dict.get("leave_of_absence").number_of_days * -1
-#    result = number_of_days &gt;= 6
-#else:
-#    number_of_days = 0
-#    result = False
-#####
 res = contract.split_leave_of_absence_periods(payslip)
 result = res['long_leave_calendar_days'] &gt; 0
             </field>
             <field name="amount_select">code</field>
             <field name="amount_python_compute">
 #(ML*12)*(ANTAL KALENDERDAGAR)/365
-#result = (contract.wage * 12) / 365
-#result_qty = worked_days.dict.get("leave_of_absence").number_of_days
-#####
+
 res = contract.split_leave_of_absence_periods(payslip)
 result = (contract.wage * 12) / 365
 result_qty = res['long_leave_calendar_days'] * -1

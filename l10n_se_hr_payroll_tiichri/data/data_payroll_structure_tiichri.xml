@@ -12,7 +12,7 @@
   ref('l10n_se_hr_payroll_tiichri.hr_salary_rule_sick_wage'),
   ref('l10n_se_hr_payroll_tiichri.hr_salary_rule_leave_of_absence_hourly'),
   ref('l10n_se_hr_payroll_tiichri.hr_salary_rule_leave_of_absence_less_than_5'),
-  ref('l10n_se_hr_payroll_tiichri.hr_salary_rule_leave_of_absence_more_than_5),
+  ref('l10n_se_hr_payroll_tiichri.hr_salary_rule_leave_of_absence_more_than_5'),
   ref('l10n_se_hr_payroll_tiichri.hr_salary_rule_bl')])]" name="rule_ids" />
         </record>
 
@@ -21,9 +21,23 @@
             <field name="name">Lön tjänsteman test</field>
             <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons"/>
             <field name="parent_id" ref="hr_payroll_structure_tiichri_gl_test" />
-            <field eval="[(4, ref('l10n_se_hr_payroll_tiichri.hr_salary_rule_sick_leave'),
-                                ref('l10n_se_hr_payroll_tiichri_hr_salary_rule_leave_of_absence'))]" name="rule_ids" />
+            <field name="rule_ids" eval="[
+                (4, ref('l10n_se_hr_payroll_tiichri.hr_salary_rule_sick_leave')),
+                (4, ref('l10n_se_hr_payroll_tiichri.hr_salary_rule_leave_of_absence'))
+            ]" />
+
+            <field name="const_ids" eval="[
+                (0, 0, {'name': 'Månadsarbetstid i dagar', 'code': 'MAD', 'constant': 21.0}), 
+                (0, 0, {'name': 'Månadsarbetstid i timmar', 'code': 'MAT', 'constant': 175.0}),
+                (0, 0, {'name': 'Veckoarbetstid i timmar', 'code': 'VA', 'constant': 40.0}),
+                (0, 0, {'name': 'Divisor för enkel övertid', 'code': 'EO', 'constant': 94.0}),
+                (0, 0, {'name': 'Divisor för kvalificerad övertid', 'code': 'KO', 'constant': 72.0}),
+                (0, 0, {'name': 'Prisbasbelopp', 'code': 'PBB', 'constant': 48300.00})
+            ]" />
+        
         </record>
-<!-- Funktion som hämtar konstanten (get_constant, hämtar veckolön) -->
+
+
+
     </data>
 </odoo>
