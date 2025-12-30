@@ -6,14 +6,18 @@
             <field name="name">Bas för löneavtal (Ska ej användas i avtal)</field>
             <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons"/>
             <field eval="[(6,0,[ref('l10n_se_hr_payroll_tiichri.hr_salary_rule_base'),
-  ref('l10n_se_hr_payroll_tiichri.hr_salary_rule_qualifying_deduction'),
-  ref('l10n_se_hr_payroll_tiichri.hr_salary_rule_sick_deduction_1_14'),
-  ref('l10n_se_hr_payroll_tiichri.hr_salary_rule_sick_deduction_15_90'),
-  ref('l10n_se_hr_payroll_tiichri.hr_salary_rule_sick_wage'),
-  ref('l10n_se_hr_payroll_tiichri.hr_salary_rule_leave_of_absence_hourly'),
-  ref('l10n_se_hr_payroll_tiichri.hr_salary_rule_leave_of_absence_less_than_5'),
-  ref('l10n_se_hr_payroll_tiichri.hr_salary_rule_leave_of_absence_more_than_5'),
-  ref('l10n_se_hr_payroll_tiichri.hr_salary_rule_bl')])]" name="rule_ids" />
+    ref('l10n_se_hr_payroll_tiichri.hr_salary_rule_qualifying_deduction'),
+    ref('l10n_se_hr_payroll_tiichri.hr_salary_rule_sick_deduction_1_14'),
+    ref('l10n_se_hr_payroll_tiichri.hr_salary_rule_sick_deduction_15_90'),
+    ref('l10n_se_hr_payroll_tiichri.hr_salary_rule_sick_wage'),
+    ref('l10n_se_hr_payroll_tiichri.hr_salary_rule_vab'),    
+    ref('l10n_se_hr_payroll_tiichri.hr_salary_rule_leave_of_absence_hourly'),
+    ref('l10n_se_hr_payroll_tiichri.hr_salary_rule_leave_of_absence_less_than_5'),
+    ref('l10n_se_hr_payroll_tiichri.hr_salary_rule_leave_of_absence_more_than_5'),
+    ref('l10n_se_hr_payroll_tiichri.hr_salary_rule_kval'),
+    ref('l10n_se_hr_payroll_tiichri.hr_salary_rule_otid'),
+    ref('l10n_se_hr_payroll_tiichri.hr_salary_rule_mertid'),
+    ref('l10n_se_hr_payroll_tiichri.hr_salary_rule_bl')])]" name="rule_ids" />
         </record>
 
         <record id="hr_payroll_structure_tiichri_tj" model="hr.payroll.structure">

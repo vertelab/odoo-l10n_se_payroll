@@ -362,5 +362,13 @@
             <field name="holiday_status_id" ref="l10n_se_hr_payroll_tiichri.holiday_status_sick_leave" />
         </record>
 
+        <!-- Lönespec -->
+
+        <!-- <record id="hr_payslip_asse_01" model="hr.payslip">
+            <field name="period_id" ref="period_01_2022" />
+            <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_asse_employee" />
+
+        </record> -->
+
     </data>
 </odoo>

@@ -1,8 +1,85 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-    
-    <!-- Sjuklöneregler -->
+    <!-- Övertidsregler -->
+        <record id="hr_salary_rule_kval" model="hr.salary.rule">
+            <field name="category_id" ref="tiichri_salary_rule_category_BRUTIL_ti" />
+            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons"/>
+            <field name="code">kval</field>
+            <field name="salary_art">111</field>
+            <field name="name">Kvalificerad övertid</field>
+            <field name="sequence">115</field>
+            <field name="appears_on_payslip" eval="True"/>
+            <field name="condition_select">python</field>
+            <field name="condition_python">result = (inputs and inputs.kvaltim and inputs.kvaltim.amount_qty != 0) or False</field>
+            <field name="amount_select">code</field>
+            <field name="amount_python_compute">
+#ML / KO * Antal Kvaltid-timmar
+KO = payslip.struct_id.get_constant('KO')
+result_qty = inputs.kvaltim.amount_qty
+result = contract.wage / KO
+            </field>
+            <field name="quantity">1</field>
+        </record>
 
+        <record id="hr_rule_input_kvaltim" model="hr.rule.input">
+            <field name="code">kvaltim</field>
+            <field name="name">Kvalificerad övertid (antal timmar)</field>
+            <field name="input_id" ref="hr_salary_rule_kval" />
+        </record>
+
+        <!-- Enkel övertid -->
+        <record id="hr_salary_rule_otid" model="hr.salary.rule">
+            <field name="category_id" ref="tiichri_salary_rule_category_BRUTIL_ti" />
+            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons"/>
+            <field name="code">otid</field>
+            <field name="salary_art">111</field>
+            <field name="name">Enkel övertid</field>
+            <field name="sequence">115</field>
+            <field name="appears_on_payslip" eval="True"/>
+            <field name="condition_select">python</field>
+            <field name="condition_python">result = (inputs and inputs.otidtim and inputs.otidtim.amount_qty != 0) or False</field>
+            <field name="amount_select">code</field>
+            <field name="amount_python_compute">
+#ML/EO / Antal otid-timmar
+EO = payslip.struct_id.get_constant('EO')
+result_qty = inputs.otidtim.amount_qty
+result = contract.wage / EO
+            </field>
+            <field name="quantity">1</field>
+        </record>
+        <record id="hr_rule_input_otidtim" model="hr.rule.input">
+            <field name="code">otidtim</field>
+            <field name="name">Beordrad övertid (antal timmar)</field>
+            <field name="input_id" ref="hr_salary_rule_otid" />
+        </record>
+
+        <!-- Mertid -->
+        <record id="hr_salary_rule_mertid" model="hr.salary.rule">
+            <field name="category_id" ref="tiichri_salary_rule_category_BRUTIL_ti" />
+            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons"/>
+            <field name="code">mertid</field>
+            <field name="salary_art">111</field>
+            <field name="name">Mertid</field>
+            <field name="sequence">115</field>
+            <field name="appears_on_payslip" eval="True"/>
+            <field name="condition_select">python</field>
+            <field name="condition_python">result = (inputs and inputs.mertidtim and inputs.mertidtim.amount_qty != 0) or False</field>
+            <field name="amount_select">code</field>
+            <field name="amount_python_compute">
+#ML/EO / Antal otid-timmar
+VA = payslip.struct_id.get_constant('VA')
+result_qty = inputs.mertidtim.amount_qty
+result = contract.wage / (3.5 * VA)
+            </field>
+            <field name="quantity">1</field>
+        </record>
+        <record id="hr_rule_input_mertid" model="hr.rule.input">
+            <field name="code">mertidtim</field>
+            <field name="name">Mertid (antal timmar)</field>
+            <field name="input_id" ref="hr_salary_rule_mertid" />
+        </record>
+
+    <!-- Sjuklöneregler -->
         <record model="hr.work.entry.type" id="holiday_status_sick_leave_code">
             <field name="name" eval="'Sick Leave Code'"/>
             <field name="code">sick_leave</field>
@@ -72,7 +149,6 @@ result_qty = contract.qualifying_count(payslip)
             </field>
         </record>
 
-
         <record id="hr_salary_rule_sick_deduction_1_14" model="hr.salary.rule">
             <field name="category_id" ref="tiichri_salary_rule_category_BRUAVG_ti" />
             <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons"/>
@@ -112,7 +188,6 @@ result_qty = contract.get_sick_days(payslip)
             </field>
         </record>
 
-
         <record id="hr_salary_rule_bl" model="hr.salary.rule">
             <field name="category_id" ref="tiichri_salary_rule_category_BRUTTO_ti" />
             <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons"/>
@@ -146,6 +221,47 @@ result = categories.BAS_ti + categories.BRUAVG_ti + categories.BRUTIL_ti
 VA = payslip.struct_id.get_constant('VA')
 result_qty = worked_days.dict.get("sick_leave").number_of_hours * -1
 result = (contract.wage * 12 * 0.8) / (52 * VA)
+            </field>
+        </record>
+
+    <!-- VAB -->
+
+        <record model="hr.work.entry.type" id="holiday_status_vab_code">
+            <field name="name" eval="'Vab Code'"/>
+            <field name="code">vab_code</field>
+            <field name="external_code" eval="'l10n_se_hr_payroll_tiichri.vab_code'"/>
+            <field name="color">2</field>
+            <field name="is_leave" eval="True"/>
+            <field name="country_id" ref="base.se"/>
+        </record>
+
+        <record model="hr.leave.type" id="vab">
+            <field name="name" eval="'Vård av barn'" />
+            <field name="work_entry_type_id" ref="l10n_se_hr_payroll_tiichri.holiday_status_vab_code" />
+            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons"/>
+            <field name="color">2</field>
+            <field name="leave_validation_type">no_validation</field>
+            <field name="requires_allocation">no</field>
+            <field name="request_unit">hour</field>
+            <field name="limit" eval="True"/>
+        </record>
+
+        <record id="hr_salary_rule_vab" model="hr.salary.rule">
+            <field name="category_id" ref="tiichri_salary_rule_category_BRUAVG_ti" />
+            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons"/>
+            <field name="code">vab_avdrag</field>
+            <field name="name">Vård av barn</field>
+            <field name="salary_art">160</field>
+            <field name="sequence">40</field>
+            <field name="appears_on_payslip" eval="True" />
+            <field name="condition_select">python</field>
+            <field name="condition_python">result = worked_days.dict.get('vab_code',False)</field>
+            <field name="amount_select">code</field>
+            <field name="amount_python_compute">
+# ML * 12 / (52 * VA)
+VA = payslip.struct_id.get_constant('VA')
+result_qty = worked_days.dict.get("vab_code").number_of_hours * -1
+result = (contract.wage * 12) / (52 * VA)
             </field>
         </record>
 
