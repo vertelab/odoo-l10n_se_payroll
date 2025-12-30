@@ -196,7 +196,8 @@ class hr_payslip(models.Model):
     period_id = fields.Many2one(comodel_name='account.period', string="Period",
                                 default=lambda self: self.env['account.period'].date2period(fields.Date.today()),
                                 required=True,
-                                tracking=1,)
+                                tracking=1,
+                                check_company=True)
     date_start = fields.Date(related='period_id.date_start',readonly=True)
     date_stop = fields.Date(related='period_id.date_stop',readonly=True)
 

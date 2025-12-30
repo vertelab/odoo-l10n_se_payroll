@@ -16,7 +16,8 @@ class HrPayslipRun(models.Model):
                                 required=True,
                                 default=lambda self: self.env['account.period'].date2period(fields.Date.today()),
                                 states={"draft": [("readonly", False)]},
-                                tracking=1, )
+                                tracking=1, 
+                                check_company=True)
     date_start = fields.Date(related="period_id.date_start",store=True)
     date_end = fields.Date(related="period_id.date_end",store=True)
 
