@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
     <data noupdate="1">
-        <record id="hr_karin_partner" model="res.partner">
+        <!-- <record id="hr_karin_partner" model="res.partner">
             <field name="company_type">person</field>
             <field name="name">Karin Kullberg Kontakt</field>
             <field name="street">Lövövägen 6</field>
@@ -9,15 +9,17 @@
             <field name="city">Sollentuna</field>
             <field name="mobile">073-980078</field>
             <field name="function">Montör</field>
-        </record>
-        <record id="bank_karin" model="res.partner.bank">
+            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons"/>
+        </record> -->
+
+        <!-- <record id="bank_karin" model="res.partner.bank">
             <field name="acc_number">4133-98765</field>
             <field name="partner_id" ref="hr_karin_partner" />
-        </record>
+        </record> -->
+
         <record id="hr_karin_employee" model="hr.employee">
             <field name="name">Karin Kullberg Anställd</field>
             <field name="work_location_id" ref="main_work_location" />
-            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons"/>
             <field name="work_phone">073-400000</field>
             <field name="work_email">karin.kullberg@aronssons.se</field>
             <field name="identification_id">891208-2396</field>
@@ -25,10 +27,13 @@
             <field name="private_street">Lövövägen 6</field>
             <field name="private_zip">171 00</field>
             <field name="private_city">Sollentuna</field>
+            <field name="country_id" ref="base.se"/>
             <field name="private_phone">073-980078</field>
-            <field name="address_id" ref="company_aronssons_partner" />
             <field name="tz" eval="'Europe/Stockholm'" />
+            <field name="address_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons_partner" />
+            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons" />
         </record>
+
         <record id="contract_karin" model="hr.contract">
             <field name="name">Karin Kullberg Avtal</field>
             <field name="wage">1</field>
@@ -41,7 +46,7 @@
             <field name="date_start">2022-06-01</field>
             <field name="date_end">2022-08-31</field>
             <field name="first_contract_date">2022-06-01</field>
-            <field name="struct_id" ref="l10n_se_hr_payroll_tiichri.hr_payroll_structure_tiichri_tj" />
+            <field name="struct_id" ref="l10n_se_hr_payroll_tiichri.hr_payroll_structure_tj_tiichri" />
             <field name="resource_calendar_id" ref="l10n_se_hr_payroll_tiichri.resource_calendar_tiichri" />
             <field name="table_number">30</field>
             <field name="column_number" eval="'column1'"/>
@@ -58,7 +63,7 @@
         <!-- Leave June -->
 
         <!-- Leave July -->
-
+<!-- 
         <record id="hr_leave_karin_701" model="hr.leave">
             <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_karin_employee" />
             <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons"/>
@@ -79,10 +84,10 @@
             <field name="request_date_to">2022-07-14</field>
             <field name="number_of_days">3</field>
             <field name="holiday_status_id" ref="l10n_se_hr_holidays.sick_leave_214" />
-        </record>
+        </record> -->
 
         <!-- Leave August -->
-
+<!-- 
         <record id="hr_leave_karin_801" model="hr.leave">
             <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_karin_employee" />
             <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons"/>
@@ -103,7 +108,7 @@
             <field name="request_date_to">2022-08-10</field>
             <field name="number_of_days">2</field>
             <field name="holiday_status_id" ref="l10n_se_hr_holidays.sick_leave_214" />
-        </record>
+        </record> -->
 
     </data>
 </odoo>

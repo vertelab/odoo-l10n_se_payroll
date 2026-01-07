@@ -53,7 +53,7 @@ class hr_contract(models.Model):
             ('date_to', '<=', payslip_id.date_to),
 
             ('employee_id', '=', self.employee_id.id), 
-            ('holiday_status_id.sick_leave', '=', True),
+            ('holiday_status_id.work_entry_type_id.code', '=', 'sjk'),
         ]
 
         leaves = self.env['hr.leave'].search(domain)
@@ -81,7 +81,7 @@ class hr_contract(models.Model):
                 ('date_to','<=', payslip_id.date_to), 
                         
             ('employee_id', '=', self.employee_id.id), 
-            ('holiday_status_id.sick_leave', '=', True)
+            ('holiday_status_id.work_entry_type_id.code', '=', 'sjk')
         ]
         
         leaves = self.env['hr.leave'].search(domain)
@@ -164,7 +164,7 @@ class hr_contract(models.Model):
             ('date_from', '<=', payslip.date_to),
             ('date_to', '>=', payslip.date_from),
             ('employee_id', '=', self.employee_id.id),
-            ('holiday_status_id.work_entry_type_id.code', '=', 'leave_of_absence'),
+            ('holiday_status_id.work_entry_type_id.code', '=', 'tjl'),
             ('state', '=', 'validate'),
         ]
         _logger.info(f"Söker tjänstledighet med domän: {domain}")

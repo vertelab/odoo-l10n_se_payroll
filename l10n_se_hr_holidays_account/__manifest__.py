@@ -48,7 +48,7 @@ Accounting Data for Swedish Holiday Pay Rules.
     'auto_install': True,
     'demo': [],
     'data':[
-        'data/l10n_se_hr_salary_rule_data.xml',
+        # 'data/l10n_se_hr_salary_rule_data.xml',
     ],
     'installable': True
 }

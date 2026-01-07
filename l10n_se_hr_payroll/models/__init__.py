@@ -23,3 +23,6 @@ from . import account_journal
 from . import hr_payslip_run
 from . import res_user
 from . import res_config_settings
+from . import hr_contract
+from . import hr_payroll_structure
+from . import hr_payslip

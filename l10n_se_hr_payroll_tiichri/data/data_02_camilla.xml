@@ -3,6 +3,7 @@
     <data noupdate="1">
 
         <!-- CAMILLA COBOLT -->
+<!-- 
         <record id="hr_camilla_partner" model="res.partner">
             <field name="company_type">person</field>
             <field name="name">Camilla Cobolt Kontakt</field>
@@ -11,18 +12,17 @@
             <field name="city">Stockholm</field>
             <field name="mobile">073-980001</field>
             <field name="function">Logistikansvarig</field>
+            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons"/>
         </record>
 
         <record id="bank_camilla" model="res.partner.bank">
             <field name="acc_number">4132-123123</field>
             <field name="partner_id" ref="hr_camilla_partner" />
-        </record>
+        </record> -->
 
         <record id="hr_camilla_employee" model="hr.employee">
             <field name="name">Camilla Cobolt Anställd</field>
-            <field name="address_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons" />
             <field name="work_location_id" ref="main_work_location" />
-            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons"/>
             <field name="work_phone">073-400000</field>
             <field name="work_email">camilla.cobolt@aronssons.se</field>
             <field name="identification_id">711002-1834</field>
@@ -30,9 +30,11 @@
             <field name="private_street">Sveavägen 7</field>
             <field name="private_zip">112 00</field>
             <field name="private_city">Stockholm</field>
+            <field name="country_id" ref="base.se"/>
             <field name="private_phone">073-980001</field>
-            <field name="address_id" ref="company_aronssons_partner" />
             <field name="tz" eval="'Europe/Stockholm'" />
+            <field name="address_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons_partner" />
+            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons" />
         </record>
 
         <record id="contract_camilla" model="hr.contract">
@@ -46,8 +48,8 @@
             <field name="job_id" ref="job_id_logistics" />
             <field name="date_start">2022-01-10</field>
             <field name="first_contract_date">2022-01-10</field>
-            <field name="struct_id" ref="l10n_se_hr_payroll_tiichri.hr_payroll_structure_tiichri_tj" />
             <field name="resource_calendar_id" ref="l10n_se_hr_payroll_tiichri.resource_calendar_tiichri" />
+            <field name="struct_id" ref="l10n_se_hr_payroll_tiichri.hr_payroll_structure_tj_tiichri" />
             <field name="table_number">30</field>
             <field name="column_number" eval="'column1'" />
         </record>
@@ -62,6 +64,7 @@
 
         <!-- Leave Janurary -->
 
+        <!-- VAB -->
         <record id="hr_leave_camilla_101" model="hr.leave">
             <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_camilla_employee" />
             <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons"/>
@@ -69,8 +72,8 @@
             <field name="date_to">2022-01-14</field>
             <field name="request_date_from">2022-01-14</field>
             <field name="request_date_to">2022-01-14</field>
-            <field name="number_of_days">1</field>
-            <field name="holiday_status_id" ref="l10n_se_hr_holidays.vab_160" />
+            <field name="number_of_hours">1</field>
+            <field name="holiday_status_id" ref="l10n_se_hr_payroll.leave_type_vab" />
         </record>
 
         <record id="hr_leave_camilla_102" model="hr.leave">
@@ -80,8 +83,8 @@
             <field name="date_to">2022-01-17</field>
             <field name="request_date_from">2022-01-17</field>
             <field name="request_date_to">2022-01-17</field>
-            <field name="number_of_days">1</field>
-            <field name="holiday_status_id" ref="l10n_se_hr_holidays.vab_160" />
+            <field name="number_of_hours">1</field>
+            <field name="holiday_status_id" ref="l10n_se_hr_payroll.leave_type_vab" />
         </record>
 
         <!-- Leave February -->
@@ -90,33 +93,22 @@
             <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_camilla_employee" />
             <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons"/>
             <field name="date_from">2022-02-03</field>
-            <field name="date_to">2022-02-03</field>
+            <field name="date_to">2022-02-04</field>
             <field name="request_date_from">2022-02-03</field>
-            <field name="request_date_to">2022-02-03</field>
-            <field name="number_of_days">1</field>
-            <field name="holiday_status_id" ref="l10n_se_hr_holidays.sick_leave_qualify" />
+            <field name="request_date_to">2022-02-04</field>
+            <field name="number_of_hours">16</field>
+            <field name="holiday_status_id" ref="l10n_se_hr_payroll.leave_type_sick" />
         </record>
 
         <record id="hr_leave_camilla_202" model="hr.leave">
-            <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_camilla_employee" />
-            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons"/>
-            <field name="date_from">2022-02-04</field>
-            <field name="date_to">2022-02-04</field>
-            <field name="request_date_from">2022-02-04</field>
-            <field name="request_date_to">2022-02-04</field>
-            <field name="number_of_days">1</field>
-            <field name="holiday_status_id" ref="l10n_se_hr_holidays.sick_leave_214" />
-        </record>
-
-        <record id="hr_leave_camilla_203" model="hr.leave">
             <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_camilla_employee" />
             <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons"/>
             <field name="date_from">2022-02-07</field>
             <field name="date_to">2022-02-11</field>
             <field name="request_date_from">2022-02-07</field>
             <field name="request_date_to">2022-02-11</field>
-            <field name="number_of_days">5</field>
-            <field name="holiday_status_id" ref="l10n_se_hr_holidays.sick_leave_214" />
+            <field name="number_of_hours">40</field>
+            <field name="holiday_status_id" ref="l10n_se_hr_payroll.leave_type_sick" />
         </record>
 
         <!-- Leave March -->
@@ -127,22 +119,11 @@
             <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_camilla_employee" />
             <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons"/>
             <field name="date_from">2022-04-19</field>
-            <field name="date_to">2022-04-19</field>
-            <field name="request_date_from">2022-04-19</field>
-            <field name="request_date_to">2022-04-19</field>
-            <field name="number_of_days">1</field>
-            <field name="holiday_status_id" ref="l10n_se_hr_holidays.sick_leave_qualify" />
-        </record>
-
-        <record id="hr_leave_camilla_402" model="hr.leave">
-            <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_camilla_employee" />
-            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons"/>
-            <field name="date_from">2022-04-20</field>
             <field name="date_to">2022-04-21</field>
-            <field name="request_date_from">2022-04-20</field>
+            <field name="request_date_from">2022-04-19</field>
             <field name="request_date_to">2022-04-21</field>
-            <field name="number_of_days">2</field>
-            <field name="holiday_status_id" ref="l10n_se_hr_holidays.sick_leave_214" />
+            <field name="number_of_hours">24</field>
+            <field name="holiday_status_id" ref="l10n_se_hr_payroll.leave_type_sick" />
         </record>
 
         <!-- Leave May -->
@@ -153,22 +134,11 @@
             <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_camilla_employee" />
             <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons"/>
             <field name="date_from">2022-06-07</field>
-            <field name="date_to">2022-06-07</field>
-            <field name="request_date_from">2022-06-07</field>
-            <field name="request_date_to">2022-06-07</field>
-            <field name="number_of_days">1</field>
-            <field name="holiday_status_id" ref="l10n_se_hr_holidays.sick_leave_qualify" />
-        </record>
-
-        <record id="hr_leave_camilla_602" model="hr.leave">
-            <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_camilla_employee" />
-            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons"/>
-            <field name="date_from">2022-06-08</field>
             <field name="date_to">2022-06-08</field>
-            <field name="request_date_from">2022-06-08</field>
+            <field name="request_date_from">2022-06-07</field>
             <field name="request_date_to">2022-06-08</field>
-            <field name="number_of_days">1</field>
-            <field name="holiday_status_id" ref="l10n_se_hr_holidays.sick_leave_214" />
+            <field name="number_of_hours">16</field>
+            <field name="holiday_status_id" ref="l10n_se_hr_payroll.leave_type_sick" />
         </record>
 
         <!-- Leave July -->
@@ -180,30 +150,19 @@
             <field name="date_to">2022-07-11</field>
             <field name="request_date_from">2022-07-11</field>
             <field name="request_date_to">2022-07-11</field>
-            <field name="number_of_days">1</field>
-            <field name="holiday_status_id" ref="l10n_se_hr_holidays.sick_leave_qualify" />
+            <field name="number_of_hours">8</field>
+            <field name="holiday_status_id" ref="l10n_se_hr_payroll.leave_type_sick" />
         </record>
 
         <record id="hr_leave_camilla_702" model="hr.leave">
             <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_camilla_employee" />
             <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons"/>
             <field name="date_from">2022-07-18</field>
-            <field name="date_to">2022-07-18</field>
-            <field name="request_date_from">2022-07-18</field>
-            <field name="request_date_to">2022-07-18</field>
-            <field name="number_of_days">1</field>
-            <field name="holiday_status_id" ref="l10n_se_hr_holidays.sick_leave_qualify" />
-        </record>
-
-        <record id="hr_leave_camilla_703" model="hr.leave">
-            <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_camilla_employee" />
-            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons"/>
-            <field name="date_from">2022-07-19</field>
             <field name="date_to">2022-07-19</field>
-            <field name="request_date_from">2022-07-19</field>
+            <field name="request_date_from">2022-07-18</field>
             <field name="request_date_to">2022-07-19</field>
-            <field name="number_of_days">1</field>
-            <field name="holiday_status_id" ref="l10n_se_hr_holidays.sick_leave_214" />
+            <field name="number_of_hours">16</field>
+            <field name="holiday_status_id" ref="l10n_se_hr_payroll.leave_type_sick" />
         </record>
 
         <!-- Leave August -->
@@ -212,56 +171,13 @@
             <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_camilla_employee" />
             <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons"/>
             <field name="date_from">2022-08-01</field>
-            <field name="date_to">2022-08-01</field>
-            <field name="request_date_from">2022-08-01</field>
-            <field name="request_date_to">2022-08-01</field>
-            <field name="number_of_days">1</field>
-            <field name="holiday_status_id" ref="l10n_se_hr_holidays.sick_leave_qualify" />
-        </record>
-
-        <record id="hr_leave_camilla_802" model="hr.leave">
-            <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_camilla_employee" />
-            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons"/>
-            <field name="date_from">2022-08-02</field>
-            <field name="date_to">2022-08-05</field>
-            <field name="request_date_from">2022-08-02</field>
-            <field name="request_date_to">2022-08-05</field>
-            <field name="number_of_days">4</field>
-            <field name="holiday_status_id" ref="l10n_se_hr_holidays.sick_leave_qualify" />
-        </record>
-
-        <record id="hr_leave_camilla_803" model="hr.leave">
-            <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_camilla_employee" />
-            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons"/>
-            <field name="date_from">2022-08-08</field>
-            <field name="date_to">2022-08-12</field>
-            <field name="request_date_from">2022-08-08</field>
-            <field name="request_date_to">2022-08-12</field>
-            <field name="number_of_days">5</field>
-            <field name="holiday_status_id" ref="l10n_se_hr_holidays.sick_leave_214" />
-        </record>
-
-        <record id="hr_leave_camilla_804" model="hr.leave">
-            <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_camilla_employee" />
-            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons"/>
-            <field name="date_from">2022-08-15</field>
-            <field name="date_to">2022-08-19</field>
-            <field name="request_date_from">2022-08-15</field>
-            <field name="request_date_to">2022-08-19</field>
-            <field name="number_of_days">5</field>
-            <field name="holiday_status_id" ref="l10n_se_hr_holidays.sick_leave_214" />
-        </record>
-
-        <record id="hr_leave_camilla_805" model="hr.leave">
-            <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_camilla_employee" />
-            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons"/>
-            <field name="date_from">2022-08-22</field>
             <field name="date_to">2022-08-25</field>
-            <field name="request_date_from">2022-08-22</field>
+            <field name="request_date_from">2022-08-01</field>
             <field name="request_date_to">2022-08-25</field>
-            <field name="number_of_days">4</field>
-            <field name="holiday_status_id" ref="l10n_se_hr_holidays.sick_leave_214" />
+            <field name="number_of_hours">152</field>
+            <field name="holiday_status_id" ref="l10n_se_hr_payroll.leave_type_sick" />
         </record>
+
 
         <!-- Leave September -->
 
@@ -269,55 +185,11 @@
             <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_camilla_employee" />
             <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons"/>
             <field name="date_from">2022-09-01</field>
-            <field name="date_to">2022-09-01</field>
-            <field name="request_date_from">2022-09-01</field>
-            <field name="request_date_to">2022-09-01</field>
-            <field name="number_of_days">1</field>
-            <field name="holiday_status_id" ref="l10n_se_hr_holidays.sick_leave_qualify" />
-        </record>
-
-        <record id="hr_leave_camilla_902" model="hr.leave">
-            <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_camilla_employee" />
-            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons"/>
-            <field name="date_from">2022-09-02</field>
-            <field name="date_to">2022-09-02</field>
-            <field name="request_date_from">2022-09-02</field>
-            <field name="request_date_to">2022-09-02</field>
-            <field name="number_of_days">1</field>
-            <field name="holiday_status_id" ref="l10n_se_hr_holidays.sick_leave_qualify" />
-        </record>
-
-        <record id="hr_leave_camilla_903" model="hr.leave">
-            <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_camilla_employee" />
-            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons"/>
-            <field name="date_from">2022-09-05</field>
-            <field name="date_to">2022-09-09</field>
-            <field name="request_date_from">2022-09-05</field>
-            <field name="request_date_to">2022-09-09</field>
-            <field name="number_of_days">5</field>
-            <field name="holiday_status_id" ref="l10n_se_hr_holidays.sick_leave_qualify" />
-        </record>
-
-        <record id="hr_leave_camilla_904" model="hr.leave">
-            <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_camilla_employee" />
-            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons"/>
-            <field name="date_from">2022-09-12</field>
-            <field name="date_to">2022-09-16</field>
-            <field name="request_date_from">2022-09-12</field>
-            <field name="request_date_to">2022-09-16</field>
-            <field name="number_of_days">5</field>
-            <field name="holiday_status_id" ref="l10n_se_hr_holidays.sick_leave_qualify" />
-        </record>
-
-        <record id="hr_leave_camilla_905" model="hr.leave">
-            <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_camilla_employee" />
-            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons"/>
-            <field name="date_from">2022-09-19</field>
             <field name="date_to">2022-09-19</field>
-            <field name="request_date_from">2022-09-19</field>
+            <field name="request_date_from">2022-09-01</field>
             <field name="request_date_to">2022-09-19</field>
-            <field name="number_of_days">1</field>
-            <field name="holiday_status_id" ref="l10n_se_hr_holidays.sick_leave_qualify" />
+            <field name="number_of_hours">104</field>
+            <field name="holiday_status_id" ref="l10n_se_hr_payroll.leave_type_sick" />
         </record>
 
     </data>

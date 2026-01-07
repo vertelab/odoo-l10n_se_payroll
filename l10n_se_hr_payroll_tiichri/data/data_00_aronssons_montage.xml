@@ -9,6 +9,7 @@
             <field name="street">Rosersbergsvägen 5</field>
             <field name="zip">192 00</field>
             <field name="city">Rosersberg</field>
+            <field name="country_id" ref="base.se"/>
             <field name="email">info@aronssons.se</field>
             <field name="phone">07</field>
             <field name="website">http://www.aronssons.se</field>
@@ -20,22 +21,33 @@
             <field name="zip">192 00</field>
             <field name="city">Rosersberg</field>
             <field name="vat">SE123456789701</field>
+            <field name="country_id" ref="base.se"/>
             <field name="company_registry">556060-0000</field>
             <field name="email">info@aronssons.se</field>
             <field name="website">http://www.aronssons.se</field>
+            <field name="partner_id" ref="company_aronssons_partner" />
         </record>
 
-        <!-- <record id="company_aronssons_year_2022" model="account.fiscalyear">
+        <record id="company_aronssons_year_2022" model="account.fiscalyear">
             <field name="name">2022</field>
             <field name="code">2022</field>
             <field name="date_start">2022-01-01</field>
             <field name="date_stop">2022-12-31</field>
             <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons" />
-        </record> -->
+        </record>
 
-        <!-- <function model="account.fiscalyear" name="create_period1">
+        <function model="account.fiscalyear" name="create_period1">
             <value eval="[ref('l10n_se_hr_payroll_tiichri.company_aronssons_year_2022')]"/>
-        </function> -->
+        </function>
+
+        <record id="base.user_admin" model="res.users">
+            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons" />
+            <field name="company_ids" eval="[
+                (4, ref('l10n_se_hr_payroll_tiichri.company_aronssons')),
+                (4, ref('base.main_company')),
+            ]" />
+        </record>
+
 <!-- 
         <record id="period_01_2022" model="account.period">
             <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons" />

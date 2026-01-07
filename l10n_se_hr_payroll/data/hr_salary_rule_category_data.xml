@@ -1,7 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
     <data noupdate="1">
-        <record id="hr_salary_rule_category-SYSTEM" model="hr.salary.rule.category">
+        <record id="hr_salary_rule_category_BAS" model="hr.salary.rule.category">
+            <field name="code">BAS</field>
+            <field name="name">BAS</field>
+            <field name="note">Grundlön</field>
+            <field name="company_id" eval="False"/>
+        </record>
+
+        <record id="hr_salary_rule_category_BRUAVG" model="hr.salary.rule.category">
+            <field name="code">BRUAVG</field>
+            <field name="name">Bruttoavdrag</field>
+            <field name="note">Sjukfrånvaro</field>
+            <field name="company_id" eval="False"/>
+        </record>
+
+        <record id="hr_salary_rule_category_BRUTIL" model="hr.salary.rule.category">
+            <field name="code">BRUTIL</field>
+            <field name="name">Bruttotillägg</field>
+            <field name="note">Övertid</field>
+            <field name="company_id" eval="False"/>
+        </record>
+
+        <record id="hr_salary_rule_category_BRUTTO" model="hr.salary.rule.category">
+            <field name="code">BRUTTO</field>
+            <field name="name">Brutto</field>
+            <field name="note">Grundlön plus brutto-avdrag plus brutto-tillägg.</field>
+            <field name="company_id" eval="False"/>
+        </record>
+
+        <!-- <record id="hr_salary_rule_category-SYSTEM" model="hr.salary.rule.category">
             <field name="code">SYSTEM</field>
             <field name="name">System</field>
             <field name="note">Används till regler som är verktyg</field>
@@ -71,6 +99,6 @@
             <field name="code">FORMAN</field>
             <field name="name">Förmån</field>
             <field name="note">Utgivna förmåner</field>
-        </record>
+        </record> -->
     </data>
 </odoo>

@@ -2,6 +2,7 @@
 <odoo>
     <data noupdate="1">
         <!-- ## FRANS FILIPSSON -->
+<!--
         <record id="hr_frans_partner" model="res.partner">
             <field name="company_type">person</field>
             <field name="name">Frans Filipsson Kontakt</field>
@@ -10,15 +11,18 @@
             <field name="city">Älvsjö</field>
             <field name="mobile">073-6000000</field>
             <field name="function">Inköpare</field>
+            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons"/>
+
         </record>
-        <record id="bank_frans" model="res.partner.bank">
+
+         <record id="bank_frans" model="res.partner.bank">
             <field name="acc_number">4333-44444444</field>
             <field name="partner_id" ref="hr_frans_partner" />
-        </record>
+        </record> -->
+
         <record id="hr_frans_employee" model="hr.employee">
             <field name="name">Frans Filipsson Anställd</field>
             <field name="work_location_id" ref="main_work_location" />
-            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons"/>
             <field name="work_phone">073-400000</field>
             <field name="work_email">frans.filipsson@aronssons.se</field>
             <field name="identification_id">460507-6738</field>
@@ -26,10 +30,13 @@
             <field name="private_street">Högbyvägen 34</field>
             <field name="private_zip">127 00</field>
             <field name="private_city">Älvsjö</field>
+            <field name="country_id" ref="base.se"/>
             <field name="private_phone">073-6000000</field>
-            <field name="address_id" ref="company_aronssons_partner" />
             <field name="tz" eval="'Europe/Stockholm'" />
+            <field name="address_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons_partner" />
+            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons" />
         </record>
+
         <record id="contract_frans" model="hr.contract">
             <field name="name">Frans Filipsson Avtal</field>
             <field name="wage">26000</field>
@@ -41,8 +48,8 @@
             <field name="job_id" ref="job_id_sales" />
             <field name="date_start">2002-01-01</field>
             <field name="first_contract_date">2002-01-01</field>
-            <field name="struct_id" ref="l10n_se_hr_payroll_tiichri.hr_payroll_structure_tiichri_tj" />
             <field name="resource_calendar_id" ref="l10n_se_hr_payroll_tiichri.resource_calendar_tiichri" />
+            <field name="struct_id" ref="l10n_se_hr_payroll_tiichri.hr_payroll_structure_tj_tiichri" />
             <field name="table_number">30</field>
             <field name="column_number" eval="'column1'"/>
         </record>
@@ -56,63 +63,31 @@
             <field name="date_to">2022-01-07</field>
             <field name="request_date_from">2022-01-07</field>
             <field name="request_date_to">2022-01-07</field>
-            <field name="number_of_days">1</field>
-            <field name="holiday_status_id" ref="l10n_se_hr_holidays.sick_leave_qualify" />
+            <field name="number_of_hours">8</field>
+            <field name="holiday_status_id" ref="l10n_se_hr_payroll.leave_type_sick" />
         </record>
 
         <record id="hr_leave_frans_102" model="hr.leave">
             <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_frans_employee" />
             <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons"/>
             <field name="date_from">2022-01-10</field>
-            <field name="date_to">2022-01-10</field>
+            <field name="date_to">2022-01-12</field>
             <field name="request_date_from">2022-01-10</field>
-            <field name="request_date_to">2022-01-10</field>
-            <field name="number_of_days">1</field>
-            <field name="holiday_status_id" ref="l10n_se_hr_holidays.sick_leave_qualify" />
+            <field name="request_date_to">2022-01-12</field>
+            <field name="number_of_hours">24</field>
+            <field name="holiday_status_id" ref="l10n_se_hr_payroll.leave_type_sick" />
         </record>
+
 
         <record id="hr_leave_frans_103" model="hr.leave">
             <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_frans_employee" />
             <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons"/>
-            <field name="date_from">2022-01-11</field>
-            <field name="date_to">2022-01-12</field>
-            <field name="request_date_from">2022-01-11</field>
-            <field name="request_date_to">2022-01-12</field>
-            <field name="number_of_days">2</field>
-            <field name="holiday_status_id" ref="l10n_se_hr_holidays.sick_leave_214" />
-        </record>
-
-        <record id="hr_leave_frans_104" model="hr.leave">
-            <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_frans_employee" />
-            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons"/>
             <field name="date_from">2022-01-20</field>
-            <field name="date_to">2022-01-21</field>
-            <field name="request_date_from">2022-01-20</field>
-            <field name="request_date_to">2022-01-21</field>
-            <field name="number_of_days">2</field>
-            <field name="holiday_status_id" ref="l10n_se_hr_holidays.holiday_type_leave_of_absence" />
-        </record>
-
-        <record id="hr_leave_frans_105" model="hr.leave">
-            <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_frans_employee" />
-            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons"/>
-            <field name="date_from">2022-01-24</field>
-            <field name="date_to">2022-01-26</field>
-            <field name="request_date_from">2022-01-24</field>
-            <field name="request_date_to">2022-01-26</field>
-            <field name="number_of_days">3</field>
-            <field name="holiday_status_id" ref="l10n_se_hr_holidays.holiday_type_leave_of_absence" />
-        </record>
-
-        <record id="hr_leave_frans_106" model="hr.leave">
-            <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_frans_employee" />
-            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons"/>
-            <field name="date_from">2022-01-27</field>
             <field name="date_to">2022-01-27</field>
-            <field name="request_date_from">2022-01-27</field>
+            <field name="request_date_from">2022-01-20</field>
             <field name="request_date_to">2022-01-27</field>
-            <field name="number_of_days">1</field>
-            <field name="holiday_status_id" ref="l10n_se_hr_holidays.holiday_type_leave_of_absence_5" />
+            <field name="number_of_hours">48</field>
+            <field name="holiday_status_id" ref="l10n_se_hr_payroll.leave_type_loa" />
         </record>
 
         <!-- Leave February -->
@@ -123,34 +98,13 @@
             <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_frans_employee" />
             <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons"/>
             <field name="date_from">2022-03-04</field>
-            <field name="date_to">2022-03-04</field>
-            <field name="request_date_from">2022-03-04</field>
-            <field name="request_date_to">2022-03-04</field>
-            <field name="number_of_days">1</field>
-            <field name="holiday_status_id" ref="l10n_se_hr_holidays.sick_leave_qualify" />
-        </record>
-
-        <record id="hr_leave_frans_302" model="hr.leave">
-            <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_frans_employee" />
-            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons"/>
-            <field name="date_from">2022-03-07</field>
-            <field name="date_to">2022-03-11</field>
-            <field name="request_date_from">2022-03-07</field>
-            <field name="request_date_to">2022-03-11</field>
-            <field name="number_of_days">5</field>
-            <field name="holiday_status_id" ref="l10n_se_hr_holidays.sick_leave_214" />
-        </record>
-
-        <record id="hr_leave_frans_303" model="hr.leave">
-            <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_frans_employee" />
-            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons"/>
-            <field name="date_from">2022-03-14</field>
             <field name="date_to">2022-03-16</field>
-            <field name="request_date_from">2022-03-14</field>
+            <field name="request_date_from">2022-03-04</field>
             <field name="request_date_to">2022-03-16</field>
-            <field name="number_of_days">3</field>
-            <field name="holiday_status_id" ref="l10n_se_hr_holidays.sick_leave_214" />
+            <field name="number_of_hours">72</field>
+            <field name="holiday_status_id" ref="l10n_se_hr_payroll.leave_type_sick" />
         </record>
+
 
         <!-- Leave April -->
 
@@ -158,66 +112,33 @@
             <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_frans_employee" />
             <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons"/>
             <field name="date_from">2022-04-04</field>
-            <field name="date_to">2022-04-04</field>
+            <field name="date_to">2022-04-06</field>
             <field name="request_date_from">2022-04-04</field>
-            <field name="request_date_to">2022-04-04</field>
-            <field name="number_of_days">1</field>
-            <field name="holiday_status_id" ref="l10n_se_hr_holidays.sick_leave_qualify" />
+            <field name="request_date_to">2022-04-06</field>
+            <field name="number_of_hours">24</field>
+            <field name="holiday_status_id" ref="l10n_se_hr_payroll.leave_type_sick" />
         </record>
 
         <record id="hr_leave_frans_402" model="hr.leave">
             <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_frans_employee" />
             <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons"/>
-            <field name="date_from">2022-04-05</field>
-            <field name="date_to">2022-04-06</field>
-            <field name="request_date_from">2022-04-05</field>
-            <field name="request_date_to">2022-04-06</field>
-            <field name="number_of_days">2</field>
-            <field name="holiday_status_id" ref="l10n_se_hr_holidays.sick_leave_214" />
+            <field name="date_from">2022-04-12</field>
+            <field name="date_to">2022-04-13</field>
+            <field name="request_date_from">2022-04-12</field>
+            <field name="request_date_to">2022-04-13</field>
+            <field name="number_of_hours">16</field>
+            <field name="holiday_status_id" ref="l10n_se_hr_payroll.leave_type_sick" />
         </record>
 
         <record id="hr_leave_frans_403" model="hr.leave">
             <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_frans_employee" />
             <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons"/>
-            <field name="date_from">2022-04-12</field>
-            <field name="date_to">2022-04-12</field>
-            <field name="request_date_from">2022-04-12</field>
-            <field name="request_date_to">2022-04-12</field>
-            <field name="number_of_days">1</field>
-            <field name="holiday_status_id" ref="l10n_se_hr_holidays.sick_leave_qualify" />
-        </record>
-
-        <record id="hr_leave_frans_404" model="hr.leave">
-            <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_frans_employee" />
-            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons"/>
-            <field name="date_from">2022-04-13</field>
-            <field name="date_to">2022-04-13</field>
-            <field name="request_date_from">2022-04-13</field>
-            <field name="request_date_to">2022-04-13</field>
-            <field name="number_of_days">1</field>
-            <field name="holiday_status_id" ref="l10n_se_hr_holidays.sick_leave_214" />
-        </record>
-
-        <record id="hr_leave_frans_405" model="hr.leave">
-            <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_frans_employee" />
-            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons"/>
             <field name="date_from">2022-04-26</field>
-            <field name="date_to">2022-04-26</field>
-            <field name="request_date_from">2022-04-26</field>
-            <field name="request_date_to">2022-04-26</field>
-            <field name="number_of_days">1</field>
-            <field name="holiday_status_id" ref="l10n_se_hr_holidays.sick_leave_qualify" />
-        </record>
-
-        <record id="hr_leave_frans_406" model="hr.leave">
-            <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_frans_employee" />
-            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons"/>
-            <field name="date_from">2022-04-27</field>
             <field name="date_to">2022-04-28</field>
-            <field name="request_date_from">2022-04-27</field>
+            <field name="request_date_from">2022-04-26</field>
             <field name="request_date_to">2022-04-28</field>
-            <field name="number_of_days">2</field>
-            <field name="holiday_status_id" ref="l10n_se_hr_holidays.sick_leave_214" />
+            <field name="number_of_hours">24</field>
+            <field name="holiday_status_id" ref="l10n_se_hr_payroll.leave_type_sick" />
         </record>
 
         <!-- Leave May -->
@@ -230,33 +151,11 @@
             <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_frans_employee" />
             <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons"/>
             <field name="date_from">2022-07-01</field>
-            <field name="date_to">2022-07-01</field>
-            <field name="request_date_from">2022-07-01</field>
-            <field name="request_date_to">2022-07-01</field>
-            <field name="number_of_days">1</field>
-            <field name="holiday_status_id" ref="l10n_se_hr_holidays.sick_leave_qualify" />
-        </record>
-
-        <record id="hr_leave_frans_702" model="hr.leave">
-            <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_frans_employee" />
-            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons"/>
-            <field name="date_from">2022-07-04</field>
-            <field name="date_to">2022-07-08</field>
-            <field name="request_date_from">2022-07-04</field>
-            <field name="request_date_to">2022-07-08</field>
-            <field name="number_of_days">5</field>
-            <field name="holiday_status_id" ref="l10n_se_hr_holidays.sick_leave_214" />
-        </record>
-
-        <record id="hr_leave_frans_703" model="hr.leave">
-            <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_frans_employee" />
-            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons"/>
-            <field name="date_from">2022-07-11</field>
             <field name="date_to">2022-07-12</field>
-            <field name="request_date_from">2022-07-11</field>
+            <field name="request_date_from">2022-07-01</field>
             <field name="request_date_to">2022-07-12</field>
-            <field name="number_of_days">2</field>
-            <field name="holiday_status_id" ref="l10n_se_hr_holidays.sick_leave_214" />
+            <field name="number_of_hours">64</field>
+            <field name="holiday_status_id" ref="l10n_se_hr_payroll.leave_type_sick" />
         </record>
 
         <!-- Leave August -->
@@ -265,44 +164,11 @@
             <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_frans_employee" />
             <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons"/>
             <field name="date_from">2022-08-03</field>
-            <field name="date_to">2022-08-03</field>
-            <field name="request_date_from">2022-08-03</field>
-            <field name="request_date_to">2022-08-03</field>
-            <field name="number_of_days">1</field>
-            <field name="holiday_status_id" ref="l10n_se_hr_holidays.sick_leave_qualify" />
-        </record>
-
-        <record id="hr_leave_frans_802" model="hr.leave">
-            <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_frans_employee" />
-            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons"/>
-            <field name="date_from">2022-08-04</field>
-            <field name="date_to">2022-08-05</field>
-            <field name="request_date_from">2022-08-04</field>
-            <field name="request_date_to">2022-08-05</field>
-            <field name="number_of_days">2</field>
-            <field name="holiday_status_id" ref="l10n_se_hr_holidays.sick_leave_214" />
-        </record>
-
-        <record id="hr_leave_frans_803" model="hr.leave">
-            <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_frans_employee" />
-            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons"/>
-            <field name="date_from">2022-08-08</field>
-            <field name="date_to">2022-08-12</field>
-            <field name="request_date_from">2022-08-08</field>
-            <field name="request_date_to">2022-08-12</field>
-            <field name="number_of_days">5</field>
-            <field name="holiday_status_id" ref="l10n_se_hr_holidays.sick_leave_214" />
-        </record>
-
-        <record id="hr_leave_frans_804" model="hr.leave">
-            <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_frans_employee" />
-            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons"/>
-            <field name="date_from">2022-08-15</field>
             <field name="date_to">2022-08-19</field>
-            <field name="request_date_from">2022-08-15</field>
+            <field name="request_date_from">2022-08-03</field>
             <field name="request_date_to">2022-08-19</field>
-            <field name="number_of_days">5</field>
-            <field name="holiday_status_id" ref="l10n_se_hr_holidays.sick_leave_214" />
+            <field name="number_of_hours">104</field>
+            <field name="holiday_status_id" ref="l10n_se_hr_payroll.leave_type_sick" />
         </record>
 
         <!-- Leave September -->
@@ -311,55 +177,11 @@
             <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_frans_employee" />
             <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons"/>
             <field name="date_from">2022-09-01</field>
-            <field name="date_to">2022-09-01</field>
-            <field name="request_date_from">2022-09-01</field>
-            <field name="request_date_to">2022-09-01</field>
-            <field name="number_of_days">1</field>
-            <field name="holiday_status_id" ref="l10n_se_hr_holidays.sick_leave_qualify" />
-        </record>
-
-        <record id="hr_leave_frans_902" model="hr.leave">
-            <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_frans_employee" />
-            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons"/>
-            <field name="date_from">2022-09-02</field>
-            <field name="date_to">2022-09-02</field>
-            <field name="request_date_from">2022-09-02</field>
-            <field name="request_date_to">2022-09-02</field>
-            <field name="number_of_days">1</field>
-            <field name="holiday_status_id" ref="l10n_se_hr_holidays.sick_leave_214" />
-        </record>
-
-        <record id="hr_leave_frans_903" model="hr.leave">
-            <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_frans_employee" />
-            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons"/>
-            <field name="date_from">2022-09-05</field>
-            <field name="date_to">2022-09-09</field>
-            <field name="request_date_from">2022-09-05</field>
-            <field name="request_date_to">2022-09-09</field>
-            <field name="number_of_days">5</field>
-            <field name="holiday_status_id" ref="l10n_se_hr_holidays.sick_leave_214" />
-        </record>
-
-        <record id="hr_leave_frans_904" model="hr.leave">
-            <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_frans_employee" />
-            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons"/>
-            <field name="date_from">2022-09-12</field>
-            <field name="date_to">2022-09-16</field>
-            <field name="request_date_from">2022-09-12</field>
-            <field name="request_date_to">2022-09-16</field>
-            <field name="number_of_days">5</field>
-            <field name="holiday_status_id" ref="l10n_se_hr_holidays.sick_leave_214" />
-        </record>
-
-        <record id="hr_leave_frans_905" model="hr.leave">
-            <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_frans_employee" />
-            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons"/>
-            <field name="date_from">2022-09-19</field>
             <field name="date_to">2022-09-22</field>
-            <field name="request_date_from">2022-09-19</field>
+            <field name="request_date_from">2022-09-01</field>
             <field name="request_date_to">2022-09-22</field>
-            <field name="number_of_days">4</field>
-            <field name="holiday_status_id" ref="l10n_se_hr_holidays.sick_leave_214" />
+            <field name="number_of_hours">128</field>
+            <field name="holiday_status_id" ref="l10n_se_hr_payroll.leave_type_sick" />
         </record>
 
     </data>

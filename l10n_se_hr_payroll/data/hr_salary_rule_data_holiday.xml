@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
     <data noupdate="0">
+    <!-- Ej i manifest än. TODO: Gå igenom, uppdatera, implementera och rensa -->
 
         <record id="hr_salary_rule_legal_leave_of_furlough" model="hr.salary.rule">
             <field name="category_id" ref="l10n_se_hr_payroll.hr_salary_rule_category-BRUAVG" />
