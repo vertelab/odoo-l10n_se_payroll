@@ -88,7 +88,7 @@
         </record>
 
         <!-- Leave March -->
-        
+
         <record id="hr_leave_helmer_301" model="hr.leave">
             <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_helmer_employee" />
             <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons"/>
@@ -133,10 +133,10 @@
             <field name="request_date_to">2022-04-20</field>
             <field name="number_of_hours">16</field>
             <field name="holiday_status_id" ref="l10n_se_hr_payroll.leave_type_sick" />
-        </record> 
+        </record>
 
         <!-- Leave May -->
-<!-- 
+        <!-- 
         <record id="hr_leave_helmer_501" model="hr.leave">
             <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_helmer_employee" />
             <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons"/>
@@ -182,7 +182,7 @@
         </record> -->
 
         <!-- Leave June -->
-<!-- 
+        <!-- 
         <record id="hr_leave_helmer_601" model="hr.leave">
             <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_helmer_employee" />
             <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons"/>
@@ -217,7 +217,7 @@
         </record> -->
 
         <!-- Leave July -->
-<!-- 
+        <!-- 
         <record id="hr_leave_helmer_701" model="hr.leave">
             <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_helmer_employee" />
             <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons"/>
@@ -252,7 +252,7 @@
         </record> -->
 
         <!-- Leave August -->
-<!-- 
+        <!-- 
         <record id="hr_leave_helmer_801" model="hr.leave">
             <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_helmer_employee" />
             <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons"/>
@@ -307,6 +307,208 @@
             <field name="number_of_hours">3</field>
             <field name="holiday_status_id" ref="l10n_se_hr_payroll.leave_type_sick" />
         </record> -->
+
+
+
+        <!-- End leaves and salary/wage related inputs -->
+        <!-- <function model="hr.leave" name="validate_leaves"/> -->
+
+
+
+
+
+
+        <!-- Payslips Helmer -->
+
+        <record id="hr_payslip_helmer_01" model="hr.payslip">
+            <field name="name">Lönespecifikation för Januari - Helmer Henriksson</field>
+            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons" />
+            <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_helmer_employee" />
+            <field name="period_id" ref="period_01_2022" />
+            <field name="date_from">2022-01-01</field>
+            <field name="date_to">2022-01-31</field>
+            <field name="struct_id" ref="l10n_se_hr_payroll_tiichri.hr_payroll_structure_tj_tiichri" />
+        </record>
+
+        <record id="hr_payslip_helmer_02" model="hr.payslip">
+            <field name="name">Lönespecifikation för Februari - Helmer Henriksson</field>
+            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons" />
+            <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_helmer_employee" />
+            <field name="period_id" ref="period_02_2022" />
+            <field name="date_from">2022-02-01</field>
+            <field name="date_to">2022-02-28</field>
+            <field name="struct_id" ref="l10n_se_hr_payroll_tiichri.hr_payroll_structure_tj_tiichri" />
+        </record>
+
+        <record id="hr_payslip_helmer_03" model="hr.payslip">
+            <field name="name">Lönespecifikation för Mars - Helmer Henriksson</field>
+            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons" />
+            <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_helmer_employee" />
+            <field name="period_id" ref="period_03_2022" />
+            <field name="date_from">2022-03-01</field>
+            <field name="date_to">2022-03-31</field>
+            <field name="struct_id" ref="l10n_se_hr_payroll_tiichri.hr_payroll_structure_tj_tiichri" />
+        </record>
+
+        <record id="hr_payslip_helmer_04" model="hr.payslip">
+            <field name="name">Lönespecifikation för April - Helmer Henriksson</field>
+            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons" />
+            <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_helmer_employee" />
+            <field name="period_id" ref="period_04_2022" />
+            <field name="date_from">2022-04-01</field>
+            <field name="date_to">2022-04-30</field>
+            <field name="struct_id" ref="l10n_se_hr_payroll_tiichri.hr_payroll_structure_tj_tiichri" />
+        </record>
+
+        <record id="hr_payslip_helmer_05" model="hr.payslip">
+            <field name="name">Lönespecifikation för Maj - Helmer Henriksson</field>
+            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons" />
+            <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_helmer_employee" />
+            <field name="period_id" ref="period_05_2022" />
+            <field name="date_from">2022-05-01</field>
+            <field name="date_to">2022-05-31</field>
+            <field name="struct_id" ref="l10n_se_hr_payroll_tiichri.hr_payroll_structure_tj_tiichri" />
+        </record>
+
+        <record id="hr_payslip_helmer_06" model="hr.payslip">
+            <field name="name">Lönespecifikation för Juni - Helmer Henriksson</field>
+            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons" />
+            <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_helmer_employee" />
+            <field name="period_id" ref="period_06_2022" />
+            <field name="date_from">2022-06-01</field>
+            <field name="date_to">2022-06-30</field>
+            <field name="struct_id" ref="l10n_se_hr_payroll_tiichri.hr_payroll_structure_tj_tiichri" />
+        </record>
+
+        <record id="hr_payslip_helmer_07" model="hr.payslip">
+            <field name="name">Lönespecifikation för Juli - Helmer Henriksson</field>
+            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons" />
+            <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_helmer_employee" />
+            <field name="period_id" ref="period_07_2022" />
+            <field name="date_from">2022-07-01</field>
+            <field name="date_to">2022-07-31</field>
+            <field name="struct_id" ref="l10n_se_hr_payroll_tiichri.hr_payroll_structure_tj_tiichri" />
+        </record>
+
+        <record id="hr_payslip_helmer_08" model="hr.payslip">
+            <field name="name">Lönespecifikation för Augusti - Helmer Henriksson</field>
+            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons" />
+            <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_helmer_employee" />
+            <field name="period_id" ref="period_08_2022" />
+            <field name="date_from">2022-08-01</field>
+            <field name="date_to">2022-08-31</field>
+            <field name="struct_id" ref="l10n_se_hr_payroll_tiichri.hr_payroll_structure_tj_tiichri" />
+        </record>
+
+        <record id="hr_payslip_helmer_09" model="hr.payslip">
+            <field name="name">Lönespecifikation för September - Helmer Henriksson</field>
+            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons" />
+            <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_helmer_employee" />
+            <field name="period_id" ref="period_09_2022" />
+            <field name="date_from">2022-09-01</field>
+            <field name="date_to">2022-09-30</field>
+            <field name="struct_id" ref="l10n_se_hr_payroll_tiichri.hr_payroll_structure_tj_tiichri" />
+        </record>
+
+        <record id="hr_payslip_helmer_10" model="hr.payslip">
+            <field name="name">Lönespecifikation för Oktober - Helmer Henriksson</field>
+            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons" />
+            <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_helmer_employee" />
+            <field name="period_id" ref="period_10_2022" />
+            <field name="date_from">2022-10-01</field>
+            <field name="date_to">2022-10-31</field>
+            <field name="struct_id" ref="l10n_se_hr_payroll_tiichri.hr_payroll_structure_tj_tiichri" />
+        </record>
+
+        <record id="hr_payslip_helmer_11" model="hr.payslip">
+            <field name="name">Lönespecifikation för November - Helmer Henriksson</field>
+            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons" />
+            <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_helmer_employee" />
+            <field name="period_id" ref="period_11_2022" />
+            <field name="date_from">2022-11-01</field>
+            <field name="date_to">2022-11-30</field>
+            <field name="struct_id" ref="l10n_se_hr_payroll_tiichri.hr_payroll_structure_tj_tiichri" />
+        </record>
+
+        <record id="hr_payslip_helmer_12" model="hr.payslip">
+            <field name="name">Lönespecifikation för December - Helmer Henriksson</field>
+            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons" />
+            <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_helmer_employee" />
+            <field name="period_id" ref="period_12_2022" />
+            <field name="date_from">2022-12-01</field>
+            <field name="date_to">2022-12-31</field>
+            <field name="struct_id" ref="l10n_se_hr_payroll_tiichri.hr_payroll_structure_tj_tiichri" />
+        </record>
+
+
+
+        <function model="hr.payslip" name="onchange_employee">
+            <value eval="[ref('l10n_se_hr_payroll_tiichri.hr_payslip_helmer_01')]"/>
+        </function>
+
+        <function model="hr.payslip" name="onchange_employee">
+            <value eval="[ref('l10n_se_hr_payroll_tiichri.hr_payslip_helmer_02')]"/>
+        </function>
+
+        <function model="hr.payslip" name="onchange_employee">
+            <value eval="[ref('l10n_se_hr_payroll_tiichri.hr_payslip_helmer_03')]"/>
+        </function>
+
+        <function model="hr.payslip" name="onchange_employee">
+            <value eval="[ref('l10n_se_hr_payroll_tiichri.hr_payslip_helmer_04')]"/>
+        </function>
+
+        <function model="hr.payslip" name="onchange_employee">
+            <value eval="[ref('l10n_se_hr_payroll_tiichri.hr_payslip_helmer_05')]"/>
+        </function>
+
+        <function model="hr.payslip" name="onchange_employee">
+            <value eval="[ref('l10n_se_hr_payroll_tiichri.hr_payslip_helmer_06')]"/>
+        </function>
+
+        <function model="hr.payslip" name="onchange_employee">
+            <value eval="[ref('l10n_se_hr_payroll_tiichri.hr_payslip_helmer_07')]"/>
+        </function>
+
+        <function model="hr.payslip" name="onchange_employee">
+            <value eval="[ref('l10n_se_hr_payroll_tiichri.hr_payslip_helmer_08')]"/>
+        </function>
+
+        <function model="hr.payslip" name="onchange_employee">
+            <value eval="[ref('l10n_se_hr_payroll_tiichri.hr_payslip_helmer_09')]"/>
+        </function>
+
+        <function model="hr.payslip" name="onchange_employee">
+            <value eval="[ref('l10n_se_hr_payroll_tiichri.hr_payslip_helmer_10')]"/>
+        </function>
+
+        <function model="hr.payslip" name="onchange_employee">
+            <value eval="[ref('l10n_se_hr_payroll_tiichri.hr_payslip_helmer_11')]"/>
+        </function>
+
+        <function model="hr.payslip" name="onchange_employee">
+            <value eval="[ref('l10n_se_hr_payroll_tiichri.hr_payslip_helmer_12')]"/>
+        </function>
+
+        <function model="hr.payslip" name="compute_sheet">
+            <value eval="[
+                ref('l10n_se_hr_payroll_tiichri.hr_payslip_helmer_01'), 
+                ref('l10n_se_hr_payroll_tiichri.hr_payslip_helmer_02'), 
+                ref('l10n_se_hr_payroll_tiichri.hr_payslip_helmer_03'),
+                ref('l10n_se_hr_payroll_tiichri.hr_payslip_helmer_04'), 
+                ref('l10n_se_hr_payroll_tiichri.hr_payslip_helmer_05'), 
+                ref('l10n_se_hr_payroll_tiichri.hr_payslip_helmer_06'),
+                ref('l10n_se_hr_payroll_tiichri.hr_payslip_helmer_07'), 
+                ref('l10n_se_hr_payroll_tiichri.hr_payslip_helmer_08'), 
+                ref('l10n_se_hr_payroll_tiichri.hr_payslip_helmer_09'),
+                ref('l10n_se_hr_payroll_tiichri.hr_payslip_helmer_10'), 
+                ref('l10n_se_hr_payroll_tiichri.hr_payslip_helmer_11'), 
+                ref('l10n_se_hr_payroll_tiichri.hr_payslip_helmer_12')
+            ]"/>
+        </function>
+
+
+
 
     </data>
 </odoo>

@@ -63,7 +63,7 @@
         <!-- Leave June -->
 
         <!-- Leave July -->
-<!-- 
+        <!-- 
         <record id="hr_leave_karin_701" model="hr.leave">
             <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_karin_employee" />
             <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons"/>
@@ -87,7 +87,7 @@
         </record> -->
 
         <!-- Leave August -->
-<!-- 
+        <!-- 
         <record id="hr_leave_karin_801" model="hr.leave">
             <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_karin_employee" />
             <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons"/>
@@ -109,6 +109,74 @@
             <field name="number_of_days">2</field>
             <field name="holiday_status_id" ref="l10n_se_hr_holidays.sick_leave_214" />
         </record> -->
+
+
+        <!-- End leaves and salary/wage related inputs -->
+        <!-- <function model="hr.leave" name="validate_leaves"/> -->
+
+
+
+
+
+
+        <!-- Payslips Karin -->
+
+
+        <record id="hr_payslip_karin_06" model="hr.payslip">
+            <field name="name">Lönespecifikation för Juni - Karin Kullberg</field>
+            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons" />
+            <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_karin_employee" />
+            <field name="period_id" ref="period_06_2022" />
+            <field name="date_from">2022-06-01</field>
+            <field name="date_to">2022-06-30</field>
+            <field name="struct_id" ref="l10n_se_hr_payroll_tiichri.hr_payroll_structure_tj_tiichri" />
+        </record>
+
+        <record id="hr_payslip_karin_07" model="hr.payslip">
+            <field name="name">Lönespecifikation för Juli - Karin Kullberg</field>
+            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons" />
+            <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_karin_employee" />
+            <field name="period_id" ref="period_07_2022" />
+            <field name="date_from">2022-07-01</field>
+            <field name="date_to">2022-07-31</field>
+            <field name="struct_id" ref="l10n_se_hr_payroll_tiichri.hr_payroll_structure_tj_tiichri" />
+        </record>
+
+        <record id="hr_payslip_karin_08" model="hr.payslip">
+            <field name="name">Lönespecifikation för Augusti - Karin Kullberg</field>
+            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons" />
+            <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_karin_employee" />
+            <field name="period_id" ref="period_08_2022" />
+            <field name="date_from">2022-08-01</field>
+            <field name="date_to">2022-08-31</field>
+            <field name="struct_id" ref="l10n_se_hr_payroll_tiichri.hr_payroll_structure_tj_tiichri" />
+        </record>
+
+
+
+        <function model="hr.payslip" name="onchange_employee">
+            <value eval="[ref('l10n_se_hr_payroll_tiichri.hr_payslip_karin_06')]"/>
+        </function>
+
+        <function model="hr.payslip" name="onchange_employee">
+            <value eval="[ref('l10n_se_hr_payroll_tiichri.hr_payslip_karin_07')]"/>
+        </function>
+
+        <function model="hr.payslip" name="onchange_employee">
+            <value eval="[ref('l10n_se_hr_payroll_tiichri.hr_payslip_karin_08')]"/>
+        </function>
+
+
+        <function model="hr.payslip" name="compute_sheet">
+            <value eval="[ 
+                ref('l10n_se_hr_payroll_tiichri.hr_payslip_karin_06'),
+                ref('l10n_se_hr_payroll_tiichri.hr_payslip_karin_07'), 
+                ref('l10n_se_hr_payroll_tiichri.hr_payslip_karin_08')
+            ]"/>
+        </function>
+
+
+
 
     </data>
 </odoo>

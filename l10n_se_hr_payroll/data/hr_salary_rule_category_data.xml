@@ -29,15 +29,17 @@
             <field name="company_id" eval="False"/>
         </record>
 
+        <record id="hr_salary_rule_category_PARENT" model="hr.salary.rule.category">
+            <field name="code">PARENT</field>
+            <field name="name">Grupp</field>
+            <field name="note">Används för en regel som inhåller själva reglerna</field>
+            <field name="company_id" eval="False"/>
+        </record>
+        
         <!-- <record id="hr_salary_rule_category-SYSTEM" model="hr.salary.rule.category">
             <field name="code">SYSTEM</field>
             <field name="name">System</field>
             <field name="note">Används till regler som är verktyg</field>
-        </record>
-        <record id="hr_salary_rule_category-PARENT" model="hr.salary.rule.category">
-            <field name="code">PARENT</field>
-            <field name="name">Grupp</field>
-            <field name="note">Används för en regel som inhåller själva reglerna</field>
         </record>
         <record id="hr_salary_rule_category-HANDLER" model="hr.salary.rule.category">
             <field name="code">HANDLER</field>

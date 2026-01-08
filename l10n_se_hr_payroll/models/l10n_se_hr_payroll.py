@@ -123,19 +123,19 @@ class hr_contract(models.Model):
     def get_leave_days(self, rule_id, worked_days):
 
         if (rule_id and rule_id == "sem_til") or (rule_id and rule_id == "sem_bet"):
-            _logger.warning(f"{rule_id=}")
-            _logger.warning(f"{worked_days=}")
+            #_logger.warning(f"{rule_id=}")
+            #_logger.warning(f"{worked_days=}")
             code = self.env.ref(rule_id).work_entry_type_id.code if len(rule_id.split('.')) == 2 else rule_id
             leave_lines = []
             for key, val in worked_days.dict.items():
-                _logger.warning(f"{key=} {val=}")
+                #_logger.warning(f"{key=} {val=}")
                 if "sem_bet" in key:
                     leave_lines.append(val)
             if len(leave_lines) > 0:
                 number_of_days = 0
                 for line in leave_lines:
                     number_of_days += line.number_of_days
-                    _logger.warning(f"{number_of_days=}")
+                    #_logger.warning(f"{number_of_days=}")
                 return number_of_days
             else:
                 return 0.0
@@ -158,7 +158,7 @@ class hr_contract(models.Model):
     def get_leave_hours(self, rule_id, worked_days):
         code = self.env.ref(rule_id).code if len(rule_id.split('.')) == 2 else rule_id
         line = worked_days.dict.get(code, False)
-        _logger.error(f'get_leave_hours: {code} {worked_days.dict}')
+        #_logger.error(f'get_leave_hours: {code} {worked_days.dict}')
         # ~ _logger.error(f'get_leave_days: {line.number_of_days}')
         return line.number_of_hours if line else 0.0
 
@@ -224,9 +224,9 @@ class hr_payslip(models.Model):
     
     @api.model_create_multi
     def create(self, vals_list):
-        _logger.warning(f"{vals_list=}")
+        #_logger.warning(f"{vals_list=}")
         res = super(hr_payslip, self).create(vals_list)
-        _logger.warning(f"{res=}")        
+        #_logger.warning(f"{res=}")        
         res.move_activites_to_payslip()
 
         return res
@@ -289,8 +289,8 @@ class hr_payslip(models.Model):
             self.period_id = self.period_id.now()
 
         if self.period_id.date_start and self.period_id.date_stop:
-            _logger.error(f"{self.period_id.date_start=}")
-            _logger.error(f"{self.period_id.date_stop=}")
+            #_logger.error(f"{self.period_id.date_start=}")
+            #_logger.error(f"{self.period_id.date_stop=}")
             self.date_from = self.period_id.date_start #- dateutil.relativedelta.relativedelta(months=1)
             self.date_to = self.period_id.date_stop #- dateutil.relativedelta.relativedelta(months=1)
 

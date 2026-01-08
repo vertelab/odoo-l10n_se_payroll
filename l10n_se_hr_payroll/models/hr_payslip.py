@@ -52,7 +52,7 @@ class hr_payslip(models.Model):
             rec.holiday_status_ids = rec.env['hr.leave.type'].search([('active', '=', True), ('limit', '=', False)])
             rec.holiday_status_ids += rec.env['hr.leave.type'].search([('id', 'in', [
                 rec.env.ref('l10n_se_hr_payroll.leave_type_sick').id,
-                rec.env.ref('l10n_se_hr_payroll.leave_type_sick').id,
+                rec.env.ref('l10n_se_hr_payroll.leave_type_vab').id,
                 rec.env.ref('l10n_se_hr_payroll.leave_type_loa').id])])
 
     holiday_status_ids = fields.Many2many(comodel_name="hr.leave.type", compute="_holiday_status_ids")

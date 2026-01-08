@@ -357,13 +357,209 @@
             <field name="holiday_status_id" ref="l10n_se_hr_payroll.leave_type_sick" />
         </record>
 
-        <!-- Lönespec -->
 
-        <!-- <record id="hr_payslip_asse_01" model="hr.payslip">
-            <field name="period_id" ref="period_01_2022" />
+
+        <!-- End leaves and salary/wage related inputs -->
+
+        <!-- Validate leave of absence -->
+        <function model="hr.leave" name="action_validate">
+            <value eval="[
+                ref('hr_leave_asse_104'), ref('hr_leave_asse_105'),
+                ref('hr_leave_asse_201'), ref('hr_leave_asse_202'),
+                ref('hr_leave_asse_302'), ref('hr_leave_asse_401'),
+                ref('hr_leave_asse_402'), ref('hr_leave_asse_602'),
+                ref('hr_leave_asse_702'), ref('hr_leave_asse_1002')
+            ]"/>
+        </function>
+
+        <!-- Payslips Asse -->
+        <record id="hr_payslip_asse_01" model="hr.payslip">
+            <field name="name">Lönespecifikation för Januari - Asse Aronsson</field>
+            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons" />
             <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_asse_employee" />
+            <field name="period_id" ref="period_01_2022" />
+            <field name="date_from">2022-01-01</field>
+            <field name="date_to">2022-01-31</field>
+            <field name="struct_id" ref="l10n_se_hr_payroll_tiichri.hr_payroll_structure_tj_tiichri" />
+        </record>
 
-        </record> -->
+        <record id="hr_payslip_asse_02" model="hr.payslip">
+            <field name="name">Lönespecifikation för Februari - Asse Aronsson</field>
+            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons" />
+            <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_asse_employee" />
+            <field name="period_id" ref="period_02_2022" />
+            <field name="date_from">2022-02-01</field>
+            <field name="date_to">2022-02-28</field>
+            <field name="struct_id" ref="l10n_se_hr_payroll_tiichri.hr_payroll_structure_tj_tiichri" />
+        </record>
+
+        <record id="hr_payslip_asse_03" model="hr.payslip">
+            <field name="name">Lönespecifikation för Mars - Asse Aronsson</field>
+            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons" />
+            <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_asse_employee" />
+            <field name="period_id" ref="period_03_2022" />
+            <field name="date_from">2022-03-01</field>
+            <field name="date_to">2022-03-31</field>
+            <field name="struct_id" ref="l10n_se_hr_payroll_tiichri.hr_payroll_structure_tj_tiichri" />
+        </record>
+
+        <record id="hr_payslip_asse_04" model="hr.payslip">
+            <field name="name">Lönespecifikation för April - Asse Aronsson</field>
+            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons" />
+            <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_asse_employee" />
+            <field name="period_id" ref="period_04_2022" />
+            <field name="date_from">2022-04-01</field>
+            <field name="date_to">2022-04-30</field>
+            <field name="struct_id" ref="l10n_se_hr_payroll_tiichri.hr_payroll_structure_tj_tiichri" />
+        </record>
+
+        <record id="hr_payslip_asse_05" model="hr.payslip">
+            <field name="name">Lönespecifikation för Maj - Asse Aronsson</field>
+            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons" />
+            <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_asse_employee" />
+            <field name="period_id" ref="period_05_2022" />
+            <field name="date_from">2022-05-01</field>
+            <field name="date_to">2022-05-31</field>
+            <field name="struct_id" ref="l10n_se_hr_payroll_tiichri.hr_payroll_structure_tj_tiichri" />
+        </record>
+
+        <record id="hr_payslip_asse_06" model="hr.payslip">
+            <field name="name">Lönespecifikation för Juni - Asse Aronsson</field>
+            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons" />
+            <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_asse_employee" />
+            <field name="period_id" ref="period_06_2022" />
+            <field name="date_from">2022-06-01</field>
+            <field name="date_to">2022-06-30</field>
+            <field name="struct_id" ref="l10n_se_hr_payroll_tiichri.hr_payroll_structure_tj_tiichri" />
+        </record>
+
+        <record id="hr_payslip_asse_07" model="hr.payslip">
+            <field name="name">Lönespecifikation för Juli - Asse Aronsson</field>
+            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons" />
+            <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_asse_employee" />
+            <field name="period_id" ref="period_07_2022" />
+            <field name="date_from">2022-07-01</field>
+            <field name="date_to">2022-07-31</field>
+            <field name="struct_id" ref="l10n_se_hr_payroll_tiichri.hr_payroll_structure_tj_tiichri" />
+        </record>
+
+        <record id="hr_payslip_asse_08" model="hr.payslip">
+            <field name="name">Lönespecifikation för Augusti - Asse Aronsson</field>
+            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons" />
+            <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_asse_employee" />
+            <field name="period_id" ref="period_08_2022" />
+            <field name="date_from">2022-08-01</field>
+            <field name="date_to">2022-08-31</field>
+            <field name="struct_id" ref="l10n_se_hr_payroll_tiichri.hr_payroll_structure_tj_tiichri" />
+        </record>
+
+        <record id="hr_payslip_asse_09" model="hr.payslip">
+            <field name="name">Lönespecifikation för September - Asse Aronsson</field>
+            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons" />
+            <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_asse_employee" />
+            <field name="period_id" ref="period_09_2022" />
+            <field name="date_from">2022-09-01</field>
+            <field name="date_to">2022-09-30</field>
+            <field name="struct_id" ref="l10n_se_hr_payroll_tiichri.hr_payroll_structure_tj_tiichri" />
+        </record>
+
+        <record id="hr_payslip_asse_10" model="hr.payslip">
+            <field name="name">Lönespecifikation för Oktober - Asse Aronsson</field>
+            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons" />
+            <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_asse_employee" />
+            <field name="period_id" ref="period_10_2022" />
+            <field name="date_from">2022-10-01</field>
+            <field name="date_to">2022-10-31</field>
+            <field name="struct_id" ref="l10n_se_hr_payroll_tiichri.hr_payroll_structure_tj_tiichri" />
+        </record>
+
+        <record id="hr_payslip_asse_11" model="hr.payslip">
+            <field name="name">Lönespecifikation för November - Asse Aronsson</field>
+            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons" />
+            <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_asse_employee" />
+            <field name="period_id" ref="period_11_2022" />
+            <field name="date_from">2022-11-01</field>
+            <field name="date_to">2022-11-30</field>
+            <field name="struct_id" ref="l10n_se_hr_payroll_tiichri.hr_payroll_structure_tj_tiichri" />
+        </record>
+
+        <record id="hr_payslip_asse_12" model="hr.payslip">
+            <field name="name">Lönespecifikation för December - Asse Aronsson</field>
+            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons" />
+            <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_asse_employee" />
+            <field name="period_id" ref="period_12_2022" />
+            <field name="date_from">2022-12-01</field>
+            <field name="date_to">2022-12-31</field>
+            <field name="struct_id" ref="l10n_se_hr_payroll_tiichri.hr_payroll_structure_tj_tiichri" />
+        </record>
+
+
+
+        <function model="hr.payslip" name="onchange_employee">
+            <value eval="[ref('l10n_se_hr_payroll_tiichri.hr_payslip_asse_01')]"/>
+        </function>
+
+        <function model="hr.payslip" name="onchange_employee">
+            <value eval="[ref('l10n_se_hr_payroll_tiichri.hr_payslip_asse_02')]"/>
+        </function>
+
+        <function model="hr.payslip" name="onchange_employee">
+            <value eval="[ref('l10n_se_hr_payroll_tiichri.hr_payslip_asse_03')]"/>
+        </function>
+
+        <function model="hr.payslip" name="onchange_employee">
+            <value eval="[ref('l10n_se_hr_payroll_tiichri.hr_payslip_asse_04')]"/>
+        </function>
+
+        <function model="hr.payslip" name="onchange_employee">
+            <value eval="[ref('l10n_se_hr_payroll_tiichri.hr_payslip_asse_05')]"/>
+        </function>
+
+        <function model="hr.payslip" name="onchange_employee">
+            <value eval="[ref('l10n_se_hr_payroll_tiichri.hr_payslip_asse_06')]"/>
+        </function>
+
+        <function model="hr.payslip" name="onchange_employee">
+            <value eval="[ref('l10n_se_hr_payroll_tiichri.hr_payslip_asse_07')]"/>
+        </function>
+
+        <function model="hr.payslip" name="onchange_employee">
+            <value eval="[ref('l10n_se_hr_payroll_tiichri.hr_payslip_asse_08')]"/>
+        </function>
+
+        <function model="hr.payslip" name="onchange_employee">
+            <value eval="[ref('l10n_se_hr_payroll_tiichri.hr_payslip_asse_09')]"/>
+        </function>
+
+        <function model="hr.payslip" name="onchange_employee">
+            <value eval="[ref('l10n_se_hr_payroll_tiichri.hr_payslip_asse_10')]"/>
+        </function>
+
+        <function model="hr.payslip" name="onchange_employee">
+            <value eval="[ref('l10n_se_hr_payroll_tiichri.hr_payslip_asse_11')]"/>
+        </function>
+
+        <function model="hr.payslip" name="onchange_employee">
+            <value eval="[ref('l10n_se_hr_payroll_tiichri.hr_payslip_asse_12')]"/>
+        </function>
+
+        <function model="hr.payslip" name="compute_sheet">
+            <value eval="[
+                ref('l10n_se_hr_payroll_tiichri.hr_payslip_asse_01'), 
+                ref('l10n_se_hr_payroll_tiichri.hr_payslip_asse_02'), 
+                ref('l10n_se_hr_payroll_tiichri.hr_payslip_asse_03'),
+                ref('l10n_se_hr_payroll_tiichri.hr_payslip_asse_04'), 
+                ref('l10n_se_hr_payroll_tiichri.hr_payslip_asse_05'), 
+                ref('l10n_se_hr_payroll_tiichri.hr_payslip_asse_06'),
+                ref('l10n_se_hr_payroll_tiichri.hr_payslip_asse_07'), 
+                ref('l10n_se_hr_payroll_tiichri.hr_payslip_asse_08'), 
+                ref('l10n_se_hr_payroll_tiichri.hr_payslip_asse_09'),
+                ref('l10n_se_hr_payroll_tiichri.hr_payslip_asse_10'), 
+                ref('l10n_se_hr_payroll_tiichri.hr_payslip_asse_11'), 
+                ref('l10n_se_hr_payroll_tiichri.hr_payslip_asse_12')
+            ]"/>
+        </function>
+
 
     </data>
 </odoo>

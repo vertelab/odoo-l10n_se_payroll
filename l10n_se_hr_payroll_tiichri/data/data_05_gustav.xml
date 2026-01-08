@@ -12,7 +12,7 @@
             <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons"/>
 
         </record> -->
-<!-- 
+        <!-- 
         <record id="bank_gustav" model="res.partner.bank">
             <field name="acc_number">4333-7777777</field>
             <field name="partner_id" ref="hr_gustav_partner" />
@@ -33,7 +33,7 @@
             <field name="address_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons_partner" />
             <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons" />
         </record>
-        
+
         <record id="contract_gustav" model="hr.contract">
             <field name="name">Gustav Groth Avtal</field>
             <field name="wage">30000</field>
@@ -167,6 +167,205 @@
             <field name="number_of_hours">104</field>
             <field name="holiday_status_id" ref="l10n_se_hr_payroll.leave_type_sick" />
         </record>
+
+        <!-- End leaves and salary/wage related inputs -->
+        <!-- <function model="hr.leave" name="validate_leaves"/> -->
+
+
+
+
+
+
+        <!-- Payslips Gustav -->
+        <record id="hr_payslip_gustav_01" model="hr.payslip">
+            <field name="name">Lönespecifikation för Januari - Gustav Groth</field>
+            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons" />
+            <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_gustav_employee" />
+            <field name="period_id" ref="period_01_2022" />
+            <field name="date_from">2022-01-01</field>
+            <field name="date_to">2022-01-31</field>
+            <field name="struct_id" ref="l10n_se_hr_payroll_tiichri.hr_payroll_structure_tj_tiichri" />
+        </record>
+
+        <record id="hr_payslip_gustav_02" model="hr.payslip">
+            <field name="name">Lönespecifikation för Februari - Gustav Groth</field>
+            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons" />
+            <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_gustav_employee" />
+            <field name="period_id" ref="period_02_2022" />
+            <field name="date_from">2022-02-01</field>
+            <field name="date_to">2022-02-28</field>
+            <field name="struct_id" ref="l10n_se_hr_payroll_tiichri.hr_payroll_structure_tj_tiichri" />
+        </record>
+
+        <record id="hr_payslip_gustav_03" model="hr.payslip">
+            <field name="name">Lönespecifikation för Mars - Gustav Groth</field>
+            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons" />
+            <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_gustav_employee" />
+            <field name="period_id" ref="period_03_2022" />
+            <field name="date_from">2022-03-01</field>
+            <field name="date_to">2022-03-31</field>
+            <field name="struct_id" ref="l10n_se_hr_payroll_tiichri.hr_payroll_structure_tj_tiichri" />
+        </record>
+
+        <record id="hr_payslip_gustav_04" model="hr.payslip">
+            <field name="name">Lönespecifikation för April - Gustav Groth</field>
+            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons" />
+            <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_gustav_employee" />
+            <field name="period_id" ref="period_04_2022" />
+            <field name="date_from">2022-04-01</field>
+            <field name="date_to">2022-04-30</field>
+            <field name="struct_id" ref="l10n_se_hr_payroll_tiichri.hr_payroll_structure_tj_tiichri" />
+        </record>
+
+        <record id="hr_payslip_gustav_05" model="hr.payslip">
+            <field name="name">Lönespecifikation för Maj - Gustav Groth</field>
+            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons" />
+            <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_gustav_employee" />
+            <field name="period_id" ref="period_05_2022" />
+            <field name="date_from">2022-05-01</field>
+            <field name="date_to">2022-05-31</field>
+            <field name="struct_id" ref="l10n_se_hr_payroll_tiichri.hr_payroll_structure_tj_tiichri" />
+        </record>
+
+        <record id="hr_payslip_gustav_06" model="hr.payslip">
+            <field name="name">Lönespecifikation för Juni - Gustav Groth</field>
+            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons" />
+            <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_gustav_employee" />
+            <field name="period_id" ref="period_06_2022" />
+            <field name="date_from">2022-06-01</field>
+            <field name="date_to">2022-06-30</field>
+            <field name="struct_id" ref="l10n_se_hr_payroll_tiichri.hr_payroll_structure_tj_tiichri" />
+        </record>
+
+        <record id="hr_payslip_gustav_07" model="hr.payslip">
+            <field name="name">Lönespecifikation för Juli - Gustav Groth</field>
+            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons" />
+            <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_gustav_employee" />
+            <field name="period_id" ref="period_07_2022" />
+            <field name="date_from">2022-07-01</field>
+            <field name="date_to">2022-07-31</field>
+            <field name="struct_id" ref="l10n_se_hr_payroll_tiichri.hr_payroll_structure_tj_tiichri" />
+        </record>
+
+        <record id="hr_payslip_gustav_08" model="hr.payslip">
+            <field name="name">Lönespecifikation för Augusti - Gustav Groth</field>
+            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons" />
+            <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_gustav_employee" />
+            <field name="period_id" ref="period_08_2022" />
+            <field name="date_from">2022-08-01</field>
+            <field name="date_to">2022-08-31</field>
+            <field name="struct_id" ref="l10n_se_hr_payroll_tiichri.hr_payroll_structure_tj_tiichri" />
+        </record>
+
+        <record id="hr_payslip_gustav_09" model="hr.payslip">
+            <field name="name">Lönespecifikation för September - Gustav Groth</field>
+            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons" />
+            <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_gustav_employee" />
+            <field name="period_id" ref="period_09_2022" />
+            <field name="date_from">2022-09-01</field>
+            <field name="date_to">2022-09-30</field>
+            <field name="struct_id" ref="l10n_se_hr_payroll_tiichri.hr_payroll_structure_tj_tiichri" />
+        </record>
+
+        <record id="hr_payslip_gustav_10" model="hr.payslip">
+            <field name="name">Lönespecifikation för Oktober - Gustav Groth</field>
+            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons" />
+            <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_gustav_employee" />
+            <field name="period_id" ref="period_10_2022" />
+            <field name="date_from">2022-10-01</field>
+            <field name="date_to">2022-10-31</field>
+            <field name="struct_id" ref="l10n_se_hr_payroll_tiichri.hr_payroll_structure_tj_tiichri" />
+        </record>
+
+        <record id="hr_payslip_gustav_11" model="hr.payslip">
+            <field name="name">Lönespecifikation för November - Gustav Groth</field>
+            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons" />
+            <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_gustav_employee" />
+            <field name="period_id" ref="period_11_2022" />
+            <field name="date_from">2022-11-01</field>
+            <field name="date_to">2022-11-30</field>
+            <field name="struct_id" ref="l10n_se_hr_payroll_tiichri.hr_payroll_structure_tj_tiichri" />
+        </record>
+
+        <record id="hr_payslip_gustav_12" model="hr.payslip">
+            <field name="name">Lönespecifikation för December - Gustav Groth</field>
+            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons" />
+            <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_gustav_employee" />
+            <field name="period_id" ref="period_12_2022" />
+            <field name="date_from">2022-12-01</field>
+            <field name="date_to">2022-12-31</field>
+            <field name="struct_id" ref="l10n_se_hr_payroll_tiichri.hr_payroll_structure_tj_tiichri" />
+        </record>
+
+
+
+
+        <function model="hr.payslip" name="onchange_employee">
+            <value eval="[ref('l10n_se_hr_payroll_tiichri.hr_payslip_gustav_01')]"/>
+        </function>
+
+        <function model="hr.payslip" name="onchange_employee">
+            <value eval="[ref('l10n_se_hr_payroll_tiichri.hr_payslip_gustav_02')]"/>
+        </function>
+
+        <function model="hr.payslip" name="onchange_employee">
+            <value eval="[ref('l10n_se_hr_payroll_tiichri.hr_payslip_gustav_03')]"/>
+        </function>
+
+        <function model="hr.payslip" name="onchange_employee">
+            <value eval="[ref('l10n_se_hr_payroll_tiichri.hr_payslip_gustav_04')]"/>
+        </function>
+
+        <function model="hr.payslip" name="onchange_employee">
+            <value eval="[ref('l10n_se_hr_payroll_tiichri.hr_payslip_gustav_05')]"/>
+        </function>
+
+        <function model="hr.payslip" name="onchange_employee">
+            <value eval="[ref('l10n_se_hr_payroll_tiichri.hr_payslip_gustav_06')]"/>
+        </function>
+
+        <function model="hr.payslip" name="onchange_employee">
+            <value eval="[ref('l10n_se_hr_payroll_tiichri.hr_payslip_gustav_07')]"/>
+        </function>
+
+        <function model="hr.payslip" name="onchange_employee">
+            <value eval="[ref('l10n_se_hr_payroll_tiichri.hr_payslip_gustav_08')]"/>
+        </function>
+
+        <function model="hr.payslip" name="onchange_employee">
+            <value eval="[ref('l10n_se_hr_payroll_tiichri.hr_payslip_gustav_09')]"/>
+        </function>
+
+        <function model="hr.payslip" name="onchange_employee">
+            <value eval="[ref('l10n_se_hr_payroll_tiichri.hr_payslip_gustav_10')]"/>
+        </function>
+
+        <function model="hr.payslip" name="onchange_employee">
+            <value eval="[ref('l10n_se_hr_payroll_tiichri.hr_payslip_gustav_11')]"/>
+        </function>
+
+        <function model="hr.payslip" name="onchange_employee">
+            <value eval="[ref('l10n_se_hr_payroll_tiichri.hr_payslip_gustav_12')]"/>
+        </function>
+
+        <function model="hr.payslip" name="compute_sheet">
+            <value eval="[
+                ref('l10n_se_hr_payroll_tiichri.hr_payslip_gustav_01'), 
+                ref('l10n_se_hr_payroll_tiichri.hr_payslip_gustav_02'), 
+                ref('l10n_se_hr_payroll_tiichri.hr_payslip_gustav_03'),
+                ref('l10n_se_hr_payroll_tiichri.hr_payslip_gustav_04'), 
+                ref('l10n_se_hr_payroll_tiichri.hr_payslip_gustav_05'), 
+                ref('l10n_se_hr_payroll_tiichri.hr_payslip_gustav_06'),
+                ref('l10n_se_hr_payroll_tiichri.hr_payslip_gustav_07'), 
+                ref('l10n_se_hr_payroll_tiichri.hr_payslip_gustav_08'), 
+                ref('l10n_se_hr_payroll_tiichri.hr_payslip_gustav_09'),
+                ref('l10n_se_hr_payroll_tiichri.hr_payslip_gustav_10'), 
+                ref('l10n_se_hr_payroll_tiichri.hr_payslip_gustav_11'), 
+                ref('l10n_se_hr_payroll_tiichri.hr_payslip_gustav_12')
+            ]"/>
+        </function>
+
+
 
 
     </data>

@@ -113,9 +113,9 @@ class hr_contract(models.Model):
             current_start = leave["date_from"]
             previous_end = leave["date_to"]
             number_of_days = previous_end.day - current_start.day + 1
-            _logger.error(f"{number_of_days=}")
+            #_logger.error(f"{number_of_days=}")
             total_days += number_of_days - leave["non_sick_days"]
-            _logger.error(f"{total_days=}")
+            #_logger.error(f"{total_days=}")
         return total_days
 
 
@@ -123,7 +123,7 @@ class hr_contract(models.Model):
         current_start = leave["date_from"]
         previous_end = leave["date_to"]
         number_of_days = previous_end.day - current_start.day 
-        _logger.error(f"Sick: {number_of_days}")
+        #_logger.error(f"Sick: {number_of_days}")
         return number_of_days    
 
 
@@ -167,7 +167,6 @@ class hr_contract(models.Model):
             ('holiday_status_id.work_entry_type_id.code', '=', 'tjl'),
             ('state', '=', 'validate'),
         ]
-        _logger.info(f"Söker tjänstledighet med domän: {domain}")
         leaves = self.env['hr.leave'].search(domain)
 
         leave_periods = []
@@ -194,16 +193,16 @@ class hr_contract(models.Model):
             # Del av dag
             if p['number_of_days'] < 1.0:
                 res['hourly_leave_hours'] += p['number_of_hours']
-                _logger.info(f"Tjänstledighet timmar: {p['number_of_hours']}")
+                #_logger.info(f"Tjänstledighet timmar: {p['number_of_hours']}")
             # 1-5 arbetsdaagar
             elif 1.0 <= p['number_of_days'] <= 5.0:
                 res['short_leave_days'] += p['number_of_days']
-                _logger.info(f"Tjänstledighet 1-5 dagar: {p['number_of_days']}")
+                #_logger.info(f"Tjänstledighet 1-5 dagar: {p['number_of_days']}")
             # Mer än 5 (kalender)dagar
             else:
                 delta = p['date_to'].date() - p['date_from'].date()
                 calendar_days = delta.days +1
                 res['long_leave_calendar_days'] += calendar_days
-                _logger.info(f"Tjänstledighet 5+ kalenderdagar: {calendar_days}")
+                #_logger.info(f"Tjänstledighet 5+ kalenderdagar: {calendar_days}")
 
         return res
