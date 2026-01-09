@@ -247,7 +247,7 @@ result = v_kar + v_114 + v_1590 + v_lon
             <field name="name">Karensavdrag</field>
             <field name="sequence">242</field>
             <field name="appears_on_payslip" eval="True"/>
-            <field name="condition_python">result = contract.qualifying_count(payslip)</field>
+            <field name="condition_python">result = contract.qualifying_count(payslip) &gt; 0</field>
             <field name="condition_select">python</field>
             <field name="amount_select">code</field>
             <field name="amount_python_compute">
@@ -267,13 +267,20 @@ result_qty = contract.qualifying_count(payslip)
             <field name="sequence">243</field>
             <field name="appears_on_payslip" eval="True"/>
             <field name="condition_select">python</field>
-            <field name="condition_python">result = contract.get_sick_days(payslip) if contract.get_sick_days(payslip) &lt;= 14 and worked_days.dict.get("sjk") else False</field>
+            <field name="condition_python">
+#result = contract.get_sick_days(payslip) if contract.get_sick_days(payslip) &lt;= 14 and worked_days.dict.get("sjk") else False
+result = contract.get_sick_pay_data(payslip)['hours_1_14'] &gt; 0
+            </field>
             <field name="amount_select">code</field>
             <field name="amount_python_compute">
 # (ML*12)/(52*VA)
 VA = payslip.struct_id.get_constant('VA')
-result_qty = worked_days.dict.get("sjk").number_of_hours
-result = (contract.wage*12)/(52*VA)
+sick_data = contract.get_sick_pay_data(payslip)
+result_qty = sick_data['hours_1_14']
+result = (contract.wage * 12) / (52 * VA) * -1
+
+#result_qty = worked_days.dict.get("sjk").number_of_hours
+#result = (contract.wage*12)/(52*VA)
             </field>
         </record>
 
@@ -287,12 +294,19 @@ result = (contract.wage*12)/(52*VA)
             <field name="sequence">244</field>
             <field name="appears_on_payslip" eval="True"/>
             <field name="condition_select">python</field>
-            <field name="condition_python">result = contract.get_sick_days(payslip) if contract.get_sick_days(payslip) &gt;= 15 and worked_days.dict.get("sjk") else False</field>
+            <field name="condition_python">
+#result = contract.get_sick_days(payslip) if contract.get_sick_days(payslip) &gt;= 15 and worked_days.dict.get("sjk") else False
+result = contract.get_sick_pay_data(payslip)['days_15_90'] &gt; 0
+            </field>
             <field name="amount_select">code</field>
             <field name="amount_python_compute">
 #(ML*12)/365
-result_qty = worked_days.dict.get("sjk").number_of_days
-result = (contract.wage*12)/365
+#result_qty = worked_days.dict.get("sjk").number_of_days
+#result = (contract.wage*12)/365
+sick_data = contract.get_sick_pay_data(payslip)
+result_qty = sick_data['days_15_90']
+result = (contract.wage * 12) / 365 * -1
+
             </field>
         </record>
 
@@ -306,13 +320,19 @@ result = (contract.wage*12)/365
             <field name="sequence">245</field>
             <field name="appears_on_payslip" eval="True"/>
             <field name="condition_select">python</field>
-            <field name="condition_python">result = contract.get_sick_days(payslip) if contract.get_sick_days(payslip) &lt;= 14 and worked_days.dict.get("sjk") else False</field>
+            <field name="condition_python">
+#result = contract.get_sick_days(payslip) if contract.get_sick_days(payslip) &lt;= 14 and worked_days.dict.get("sjk") else False
+result = contract.get_sick_pay_data(payslip)['hours_1_14'] &gt; 0       
+            </field>
             <field name="amount_select">code</field>
             <field name="amount_python_compute">
 # (ML*12*0.8)/(52*VA)
 VA = payslip.struct_id.get_constant('VA')
-result_qty = worked_days.dict.get("sjk").number_of_hours * -1
+sick_data = contract.get_sick_pay_data(payslip)
+result_qty = sick_data['hours_1_14']
 result = (contract.wage * 12 * 0.8) / (52 * VA)
+
+#result_qty = worked_days.dict.get("sjk").number_of_hours * -1
             </field>
         </record>
 
@@ -488,3 +508,624 @@ result_qty = res['long_leave_calendar_days'] * -1
 </odoo>
 
 
+<!-- GAMLA LÖNEREGLER för referens: -->
+
+<!-- 
+
+        <record id="res_partner-FSK" model="res.partner">
+            <field name="company_id" ref="base.main_company" />
+            <field name="name">Försäkringskassan</field>
+            <field name="tz">Europe/Stockholm</field>
+            <field name="is_company">True</field>
+        </record>
+
+        <record id="contrib_register_FSK" model="hr.contribution.register">
+            <field name="name">Försäkringskassan</field>
+            <field name="partner_id" ref="l10n_se_hr_holidays.res_partner-FSK" />
+        </record>
+
+
+
+
+        <record model="hr.work.entry.type" id="holiday_status_sjk_kar_code">
+            <field name="name" eval="'Sick Leave Qualify Period Code'"/>
+            <field name="code">sjk_kar</field>
+            <field name="external_code" eval="'l10n_se_hr_holidays.sjk_kar'"/>
+            <field name="color">2</field>
+            <field name="is_leave" eval="True"/>
+            <field name="country_id" ref="base.se"/>
+        </record>
+
+
+        <record model="hr.leave.type" id="sick_leave_qualify">
+            <field name="name" eval="'Sick Leave Qualify Period'" />
+            <field name="work_entry_type_id" ref="l10n_se_hr_holidays.holiday_status_sjk_kar_code" />
+            <field name="color">2</field>
+            <field name="leave_validation_type">no_validation</field>
+            <field name="requires_allocation">no</field>
+            <field name="request_unit">day</field>
+            <field name="create_calendar_meeting" eval="True"/>
+            <field name="limit" eval="True"/>
+        </record>
+
+
+        <record model="hr.work.entry.type" id="holiday_status_sjk_214_100_code">
+            <field name="name" eval="'Sick Leave day 2-14 (100% deduction) Code'"/>
+            <field name="code">sjk_214_100</field>
+            <field name="external_code" eval="'l10n_se_hr_holidays.sjk_214_100'"/>
+            <field name="color">2</field>
+            <field name="is_leave" eval="True"/>
+            <field name="country_id" ref="base.se"/>
+        </record>
+
+        <record model="hr.leave.type" id="sick_leave_214_100">
+            <field name="name" eval="'Sick Leave day 2-14 (100% deduction)'" />
+            <field name="work_entry_type_id" ref="l10n_se_hr_holidays.holiday_status_sjk_214_100_code" />
+            <field name="color">2</field>
+            <field name="leave_validation_type">no_validation</field>
+            <field name="requires_allocation">no</field>
+            <field name="request_unit">day</field>
+            <field name="create_calendar_meeting" eval="True"/>
+            <field name="limit" eval="True"/>
+        </record>
+
+
+        <record model="hr.work.entry.type" id="holiday_status_sjk_214_code">
+            <field name="name" eval="'Sick Leave day 2-14 (80%) Code'"/>
+            <field name="code">sjk_214</field>
+            <field name="external_code" eval="'l10n_se_hr_holidays.sjk_214'"/>
+            <field name="color">2</field>
+            <field name="is_leave" eval="True"/>
+            <field name="country_id" ref="base.se"/>
+        </record>
+
+        <record model="hr.leave.type" id="sick_leave_214">
+            <field name="name" eval="'Sick Leave day 2-14 (80%)'" />
+            <field name="work_entry_type_id" ref="l10n_se_hr_holidays.holiday_status_sjk_214_code" />
+            <field name="color">2</field>
+            <field name="leave_validation_type">no_validation</field>
+            <field name="requires_allocation">no</field>
+            <field name="request_unit">day</field>
+            <field name="create_calendar_meeting" eval="True"/>
+            <field name="limit" eval="True"/>
+        </record>
+
+        <record model="hr.work.entry.type" id="holiday_status_sjk_15180_50_code">
+            <field name="name" eval="'Sick Leave day 15-180 (50%) Code'"/>
+            <field name="code">sjk_15180_50</field>
+            <field name="external_code" eval="'l10n_se_hr_holidays.sjk_15180_50'"/>
+            <field name="color">2</field>
+            <field name="is_leave" eval="True"/>
+            <field name="country_id" ref="base.se"/>
+        </record>
+
+        <record model="hr.leave.type" id="sick_leave_147">
+            <field name="name" eval="'Sick Leave day 15-180 (50%)'" />
+            <field name="work_entry_type_id" ref="l10n_se_hr_holidays.holiday_status_sjk_15180_50_code" />
+            <field name="color">2</field>
+            <field name="leave_validation_type">no_validation</field>
+            <field name="requires_allocation">no</field>
+            <field name="request_unit">day</field>
+            <field name="create_calendar_meeting" eval="True"/>
+            <field name="limit" eval="True"/>
+        </record>
+
+        <record model="hr.work.entry.type" id="holiday_status_sjk_15180_75_code">
+            <field name="name" eval="'Sick Leave day 15-180 (75%) Code'"/>
+            <field name="code">sjk_15180_75</field>
+            <field name="external_code" eval="'l10n_se_hr_holidays.sjk_15180_75'"/>
+            <field name="color">2</field>
+            <field name="is_leave" eval="True"/>
+            <field name="country_id" ref="base.se"/>
+        </record>
+
+        <record model="hr.leave.type" id="sick_leave_1461">
+            <field name="name" eval="'Sick Leave day 15-180 (75%)'" />
+            <field name="work_entry_type_id" ref="l10n_se_hr_holidays.holiday_status_sjk_15180_75_code" />
+            <field name="color">2</field>
+            <field name="leave_validation_type">no_validation</field>
+            <field name="requires_allocation">no</field>
+            <field name="request_unit">day</field>
+            <field name="create_calendar_meeting" eval="True"/>
+            <field name="limit" eval="True"/>
+        </record>
+
+        <record model="hr.work.entry.type" id="holiday_status_sjk_15180_25_code">
+            <field name="name" eval="'Sick Leave day 15-180 (25%) Code'"/>
+            <field name="code">sjk_15180_25</field>
+            <field name="external_code" eval="'l10n_se_hr_holidays.sjk_15180_25'"/>
+            <field name="color">2</field>
+            <field name="is_leave" eval="True"/>
+            <field name="country_id" ref="base.se"/>
+        </record>
+
+        <record model="hr.leave.type" id="sick_leave_148">
+            <field name="name" eval="'Sick Leave day 15-180 (25%)'" />
+            <field name="work_entry_type_id" ref="l10n_se_hr_holidays.holiday_status_sjk_15180_25_code" />
+            <field name="color">2</field>
+            <field name="leave_validation_type">no_validation</field>
+            <field name="requires_allocation">no</field>
+            <field name="request_unit">day</field>
+            <field name="create_calendar_meeting" eval="True"/>
+            <field name="limit" eval="True"/>
+        </record>
+
+        <record model="hr.work.entry.type" id="holiday_status_sjk_15180_100_code">
+            <field name="name" eval="'Sick Leave day 15-180 (100%) Code'"/>
+            <field name="code">sjk_15180_100</field>
+            <field name="external_code" eval="'l10n_se_hr_holidays.sjk_15180_100'"/>
+            <field name="color">2</field>
+            <field name="is_leave" eval="True"/>
+            <field name="country_id" ref="base.se"/>
+        </record>
+
+        <record model="hr.leave.type" id="sick_leave_146">
+            <field name="name" eval="'Sick Leave day 15-180 (100%)'" />
+            <field name="work_entry_type_id" ref="l10n_se_hr_holidays.holiday_status_sjk_15180_100_code" />
+            <field name="color">2</field>
+            <field name="leave_validation_type">no_validation</field>
+            <field name="requires_allocation">no</field>
+            <field name="request_unit">day</field>
+            <field name="create_calendar_meeting" eval="True"/>
+            <field name="limit" eval="True"/>
+        </record>
+
+
+
+        <record id="hr_salary_rule-sjk" model="hr.salary.rule">
+            <field name="category_id" ref="l10n_se_hr_payroll.hr_salary_rule_category-BRUAVG" />
+            <field name="code">sjk</field>
+            <field name="name">Sjukavdrag</field>
+            <field name="sequence">210</field>
+            <field name="appears_on_payslip" eval="False"/>
+            <field name="condition_select">none</field>
+            <field name="amount_select">fix</field>
+            <field name="amount_fix">0.0</field>
+            <field name="quantity">1</field>
+        </record>
+
+        <record id="hr_salary_rule-sjk-qualify" model="hr.salary.rule">
+            <field name="parent_rule_id" ref="hr_salary_rule-sjk" />
+            <field name="category_id" ref="l10n_se_hr_payroll.hr_salary_rule_category-BRUAVG" />
+            <field name="code">sjk_kar</field>
+            <field name="name">Karensavdrag</field>
+            <field name="salary_art">140</field>
+            <field name="sequence">15</field>
+            <field name="appears_on_payslip" eval="True" />
+            <field name="condition_select">python</field>
+            <field name="condition_python">result = worked_days.dict.get('sjk_kar', False)</field>
+            <field name="amount_select">code</field>
+            <field name="amount_python_compute">
+#(ML*12)/(52*VA) dock inte mer än 20 % av veckoarbetstiden
+result_qty = contract.get_leave_days('sjk_kar', worked_days) * -1
+# result_rate = 150
+#result = (contract.wage * 12) / (52*contract.scheduled_working_hours) * min(0.2,8/contract.scheduled_working_hours) * contract.scheduled_working_hours
+hpd = contract.resource_calendar_id.hours_per_day
+result = (contract.wage*12) / (52*contract.scheduled_working_hours) * min(0.2,hpd/contract.scheduled_working_hours) * contract.scheduled_working_hours
+#result = contract.wage / 21
+# (ML*12)/(52*VA) / h day 1 and rest day 2 (8 hours)
+            </field>
+        </record>
+
+
+        <record id="hr_salary_rule-sjk-lon" model="hr.salary.rule">
+            <field name="parent_rule_id" ref="hr_salary_rule-sjk" />
+            <field name="category_id" ref="l10n_se_hr_payroll.hr_salary_rule_category-SYSTEM"/>
+            <field name="code">sjk_lon</field>
+            <field name="name">Sjuklön</field>
+            <field name="salary_art">140</field>
+            <field name="sequence">15</field>
+            <field name="appears_on_payslip" eval="True" />
+            <field name="register_id" ref="l10n_se_hr_holidays.contrib_register_FSK" />
+            <field name="condition_select">python</field>
+            <field name="condition_python">result = worked_days.dict.get('sjk_214',False)</field>
+            <field name="amount_select">code</field>
+            <field name="amount_python_compute">
+#(ML*12)/(52*VA)
+result_qty = contract.get_leave_days('sjk_214', worked_days)  * -1
+# result_rate = 150
+#result = (contract.wage * 12) / (52*contract.scheduled_working_hours) * 8 * 1.3142
+hpd = contract.resource_calendar_id.hours_per_day
+result = (contract.wage*12) / (52*contract.scheduled_working_hours) * hpd * 1.3142
+# Ink arbetsgivaravg
+            </field>
+        </record>
+
+
+
+
+        <record id="hr_salary_rule-sjk-214-100" model="hr.salary.rule">
+            <field name="parent_rule_id" ref="hr_salary_rule-sjk" />
+            <field name="category_id" ref="l10n_se_hr_payroll.hr_salary_rule_category-BRUAVG" />
+            <field name="code">sjk_214_100</field>
+            <field name="name">Sjuk dag 2-14 100% avdrag</field>
+            <field name="salary_art">141</field>
+            <field name="sequence">20</field>
+            <field name="appears_on_payslip" eval="True" />
+            <field name="condition_select">python</field>
+            <field name="condition_python">result = worked_days.dict.get('sjk_214_100', False)</field>
+            <field name="amount_select">code</field>
+            <field name="amount_python_compute">
+#(ML*12)/(52*VA)
+result_qty = contract.get_leave_days('sjk_214_100', worked_days)
+result_rate = 100
+result = contract.wage / 20
+
+            </field>
+        </record>
+
+        <record id="hr_salary_rule-sjk-214" model="hr.salary.rule">
+            <field name="parent_rule_id" ref="hr_salary_rule-sjk" />
+            <field name="category_id" ref="l10n_se_hr_payroll.hr_salary_rule_category-BRUAVG" />
+            <field name="code">sjk_214</field>
+            <field name="name">Sjuk dag 2-14 80%</field>
+            <field name="salary_art">142</field>
+            <field name="sequence">20</field>
+            <field name="appears_on_payslip" eval="True" />
+            <field name="condition_select">python</field>
+            <field name="condition_python">result = worked_days.dict.get('sjk_214', False)</field>
+            <field name="amount_select">code</field>
+            <field name="amount_python_compute">
+#0,80*(ML*12)/(52*VA)
+result_qty = contract.get_leave_days('sjk_214', worked_days) * -1
+#result_rate = 20
+hpd = contract.resource_calendar_id.hours_per_day
+result = (contract.wage*12) / (52*contract.scheduled_working_hours) * hpd * 0.2
+            </field>
+        </record>
+        
+        <record id="hr_salary_rule-sjk-147" model="hr.salary.rule">
+            <field name="parent_rule_id" ref="hr_salary_rule-sjk" />
+            <field name="category_id" ref="l10n_se_hr_payroll.hr_salary_rule_category-SYSTEM" />
+            <field name="code">sjk_147</field>
+            <field name="name">Sjuk dag 15- 50%</field>
+            <field name="salary_art">147</field>
+            <field name="sequence">20</field>
+            <field name="appears_on_payslip" eval="True" />
+            <field name="condition_select">python</field>
+            <field name="condition_python">result = worked_days.dict.get('sjk_147', False)</field>
+            <field name="amount_select">code</field>
+            <field name="amount_python_compute">
+#??0,80*(ML*12)/(52*VA)
+result_qty = contract.get_leave_days('sjk_147', worked_days)
+result_rate = 50
+hpd = contract.resource_calendar_id.hours_per_day
+result = (contract.wage*12) / (52*contract.scheduled_working_hours) * hpd
+            </field>
+        </record>
+        <record id="hr_salary_rule-sjk-1461" model="hr.salary.rule">
+            <field name="parent_rule_id" ref="hr_salary_rule-sjk" />
+            <field name="category_id" ref="l10n_se_hr_payroll.hr_salary_rule_category-BRUAVG" />
+            <field name="code">sjk_1461</field>
+            <field name="name">Sjuk dag 15- 75%</field>
+            <field name="salary_art">1461</field>
+            <field name="sequence">20</field>
+            <field name="appears_on_payslip" eval="True" />
+            <field name="condition_select">python</field>
+            <field name="condition_python">result = worked_days.dict.get('sjk_1461', False)</field>
+            <field name="amount_select">code</field>
+            <field name="amount_python_compute">
+#??0,80*(ML*12)/(52*VA)
+result_qty = contract.get_leave_days('l10n_se_hr_holidays.sick_leave_1461', worked_days)
+result_rate = 25
+hpd = contract.resource_calendar_id.hours_per_day
+result = (contract.wage*12) / (52*contract.scheduled_working_hours) * hpd
+            </field>
+        </record>
+        <record id="hr_salary_rule-sjk-148" model="hr.salary.rule">
+            <field name="parent_rule_id" ref="hr_salary_rule-sjk" />
+            <field name="category_id" ref="l10n_se_hr_payroll.hr_salary_rule_category-BRUAVG" />
+            <field name="code">sjk_148</field>
+            <field name="name">Sjuk dag 15- 25%</field>
+            <field name="salary_art">148</field>
+            <field name="sequence">20</field>
+            <field name="appears_on_payslip" eval="True" />
+            <field name="condition_select">python</field>
+            <field name="condition_python">result = worked_days.dict.get('sjk_148', False)</field>
+            <field name="amount_select">code</field>
+            <field name="amount_python_compute">
+#0,80*(ML*12)/(52*VA)
+result_qty = contract.get_leave_days('l10n_se_hr_holidays.sick_leave_148', worked_days)
+result_rate = 20
+hpd = contract.resource_calendar_id.hours_per_day
+result = (contract.wage*12) / (52*contract.scheduled_working_hours) * hpd
+            </field>
+        </record>
+
+        <record id="hr_salary_rule-sjk-100" model="hr.salary.rule">
+            <field name="parent_rule_id" ref="hr_salary_rule-sjk" />
+            <field name="category_id" ref="l10n_se_hr_payroll.hr_salary_rule_category-BRUAVG" />
+            <field name="code">sjk_100</field>
+            <field name="name">Sjuk dag 15-180 100%</field>
+            <field name="salary_art">146</field>
+            <field name="sequence">30</field>
+            <field name="appears_on_payslip" eval="True" />
+            <field name="condition_select">python</field>
+            <field name="condition_python">result = worked_days.dict.get('sjk_100', False)</field>
+            <field name="amount_select">code</field>
+            <field name="amount_python_compute">
+#(ML*12)/(52*VA)
+#Användarfall arbeta 40 h 5 dagar i veckan
+#Användarfall arbeta 32 h 4 dagar i veckan
+#Användarfall arbeta 32 h 5 dagar i veckan
+result_qty = contract.get_leave_days('l10n_se_hr_holidays.sick_leave_146', worked_days)
+#result = contract.wage / (52 * contract.weekly_working_hours / contract.wwh_days_intermittent)
+hpd = contract.resource_calendar_id.hours_per_day
+result = (contract.wage*12) / (52*contract.scheduled_working_hours) * hpd
+            </field>
+        </record>
+
+
+
+        <record model="hr.work.entry.type" id="holiday_status_vab_code">
+            <field name="name" eval="'Vård av barn 160 Code'"/>
+            <field name="code">vab</field>
+            <field name="external_code" eval="'l10n_se_hr_holidays.vab'"/>
+            <field name="color">2</field>
+            <field name="is_leave" eval="True"/>
+            <field name="country_id" ref="base.se"/>
+        </record>
+
+        <record model="hr.leave.type" id="vab_160">
+            <field name="name" eval="'Vård av barn 160'" />
+            <field name="work_entry_type_id" ref="l10n_se_hr_holidays.holiday_status_vab_code" />
+            <field name="requires_allocation">no</field>
+            <field name="color">2</field>
+            <field name="limit" eval="True"/>
+        </record>
+
+        <record model="hr.work.entry.type" id="holiday_status_fpe_code">
+            <field name="name" eval="'Föräld ledig 165 Code'"/>
+            <field name="code">fpe</field>
+            <field name="external_code" eval="'l10n_se_hr_holidays.fpe'"/>
+            <field name="color">2</field>
+            <field name="is_leave" eval="True"/>
+            <field name="country_id" ref="base.se"/>
+        </record>
+
+        <record model="hr.leave.type" id="forald_ledig_165">
+            <field name="name" eval="'Föräld ledig 165'" />
+            <field name="work_entry_type_id" ref="l10n_se_hr_holidays.holiday_status_fpe_code" />
+            <field name="requires_allocation">no</field>
+            <field name="color">2</field>
+            <field name="limit" eval="True"/>
+        </record>
+
+        <record model="hr.work.entry.type" id="holiday_status_fpe_kol_code">
+            <field name="name" eval="'Föräld ledig 168 Code'"/>
+            <field name="code">fpe_kol</field>
+            <field name="external_code" eval="'l10n_se_hr_holidays.fpe_kol'"/>
+            <field name="color">2</field>
+            <field name="is_leave" eval="True"/>
+            <field name="country_id" ref="base.se"/>
+        </record>
+
+        <record model="hr.leave.type" id="forald_ledig_168">
+            <field name="name" eval="'Föräld ledig 168'" />
+            <field name="work_entry_type_id" ref="l10n_se_hr_holidays.holiday_status_fpe_kol_code" />
+            <field name="requires_allocation">no</field>
+            <field name="color">2</field>
+            <field name="limit" eval="True"/>
+        </record>
+
+        <record model="hr.work.entry.type" id="holiday_status_pap_code">
+            <field name="name" eval="'Pappaledig 166 Code'"/>
+            <field name="code">pap</field>
+            <field name="external_code" eval="'l10n_se_hr_holidays.pap'"/>
+            <field name="color">2</field>
+            <field name="is_leave" eval="True"/>
+            <field name="country_id" ref="base.se"/>
+        </record>
+
+        <record model="hr.leave.type" id="pappaledig_166">
+            <field name="name" eval="'Pappaledig 166'" />
+            <field name="work_entry_type_id" ref="l10n_se_hr_holidays.holiday_status_pap_code" />
+            <field name="requires_allocation">no</field>
+            <field name="color">2</field>
+            <field name="limit" eval="True"/>
+        </record>
+
+
+
+        <record id="hr_salary_rule-vab-160" model="hr.salary.rule">
+            <field name="parent_rule_id" ref="hr_salary_rule-sjk" />
+            <field name="category_id" ref="l10n_se_hr_payroll.hr_salary_rule_category-BRUAVG" />
+            <field name="code">vab</field>
+            <field name="name">Vård av barn</field>
+            <field name="salary_art">160</field>
+            <field name="sequence">40</field>
+            <field name="appears_on_payslip" eval="True" />
+            <field name="condition_select">python</field>
+            <field name="condition_python">result = worked_days.dict.get('vab',False)</field>
+            <field name="amount_select">code</field>
+            <field name="amount_python_compute">
+# ML / 21
+result_qty = contract.get_leave_days('vab', worked_days) * -1
+result_rate = 100
+result = contract.wage / 21
+            </field>
+        </record>
+
+        <record id="hr_salary_rule-forald-ledig-165" model="hr.salary.rule">
+            <field name="parent_rule_id" ref="hr_salary_rule-sjk" />
+            <field name="category_id" ref="l10n_se_hr_payroll.hr_salary_rule_category-BRUAVG" />
+            <field name="code">fpe</field>
+            <field name="name">Föräld ledig 165</field>
+            <field name="salary_art">165</field>
+            <field name="sequence">50</field>
+            <field name="appears_on_payslip" eval="True" />
+            <field name="condition_select">python</field>
+            <field name="condition_python">result = worked_days.dict.get('fpe',False)</field>
+            <field name="amount_select">code</field>
+            <field name="amount_python_compute">
+#ML*12/365
+result_qty = contract.get_leave_days('fpe', worked_days) * -1
+result_rate = 100
+result = contract.wage / 21
+            </field>
+        </record>
+
+        <record id="hr_salary_rule-forald-ledig-168" model="hr.salary.rule">
+            <field name="parent_rule_id" ref="hr_salary_rule-sjk" />
+            <field name="category_id" ref="l10n_se_hr_payroll.hr_salary_rule_category-BRUAVG" />
+            <field name="code">fpe_kol</field>
+            <field name="name">Föräld ledig 168</field>
+            <field name="salary_art">168</field>
+            <field name="sequence">60</field>
+            <field name="appears_on_payslip" eval="True" />
+            <field name="condition_select">python</field>
+            <field name="condition_python">result = worked_days.dict.get('fpe_kol',False)</field>
+            <field name="amount_select">code</field>
+            <field name="amount_python_compute">
+#ML/21*(VAD/VADI)
+result_qty = contract.get_leave_days('fpe_kol', worked_days) * -1
+result_rate = 100
+result = contract.wage / 21
+            </field>
+        </record>
+
+        <record id="hr_salary_rule-pappa-ledig-166" model="hr.salary.rule">
+            <field name="parent_rule_id" ref="hr_salary_rule-sjk" />
+            <field name="category_id" ref="l10n_se_hr_payroll.hr_salary_rule_category-BRUAVG" />
+            <field name="code">pap</field>
+            <field name="name">Pappaledig 166</field>
+            <field name="salary_art">166</field>
+            <field name="sequence">70</field>
+            <field name="appears_on_payslip" eval="True" />
+            <field name="condition_select">python</field>
+            <field name="condition_python">result = worked_days.dict.get('pap',False)</field>
+            <field name="amount_select">code</field>
+            <field name="amount_python_compute">
+result_qty = contract.get_leave_days('pap', worked_days) * -1
+result_rate = 100
+result = contract.wage / 21
+            </field>
+        </record>
+
+
+
+
+        <record model="hr.work.entry.type" id="holiday_status_pem_code">
+            <field name="name" eval="'Leave of Absence less than 5 days Code'"/>
+            <field name="code">pem</field>
+            <field name="external_code" eval="'l10n_se_hr_holidays.pem'"/>
+            <field name="color">2</field>
+            <field name="is_leave" eval="True"/>
+            <field name="country_id" ref="base.se"/>
+        </record>
+
+        <record model="hr.leave.type" id="holiday_type_leave_of_absence">
+            <field name="name">Leave of Absence less than 5 days</field>
+            <field name="work_entry_type_id" ref="l10n_se_hr_holidays.holiday_status_pem_code" />
+            <field name="color">2</field>
+            <field name="request_unit">day</field>
+            <field name="requires_allocation">no</field>
+            <field name="limit" eval="False"/>
+            <field name="create_calendar_meeting" eval="True"/>
+        </record>
+
+        <record model="hr.work.entry.type" id="holiday_status_pem_5_code">
+            <field name="name" eval="'Leave of Absence more than 5 days Code'"/>
+            <field name="code">pem_5</field>
+            <field name="external_code" eval="'l10n_se_hr_holidays.pem_5'"/>
+            <field name="color">2</field>
+            <field name="is_leave" eval="True"/>
+            <field name="country_id" ref="base.se"/>
+        </record>
+
+        <record model="hr.leave.type" id="holiday_type_leave_of_absence_5">
+            <field name="name">Leave of Absence more than 5 days</field>
+            <field name="work_entry_type_id" ref="l10n_se_hr_holidays.holiday_status_pem_5_code" />
+            <field name="color">2</field>
+            <field name="requires_allocation">no</field>
+            <field name="request_unit">day</field>
+            <field name="limit" eval="False"/>
+            <field name="create_calendar_meeting" eval="True"/>
+        </record>
+
+        <record model="hr.work.entry.type" id="holiday_status_pem_h_code">
+            <field name="name" eval="'Leave of Absence Part of day Code'"/>
+            <field name="code">pem_h</field>
+            <field name="external_code" eval="'l10n_se_hr_holidays.pem_h'"/>
+            <field name="color">2</field>
+            <field name="is_leave" eval="True"/>
+            <field name="country_id" ref="base.se"/>
+        </record>
+
+        <record model="hr.leave.type" id="holiday_status_leave_of_absence_hour">
+            <field name="name">Leave of Absence Part of day</field>
+            <field name="work_entry_type_id" ref="l10n_se_hr_holidays.holiday_status_pem_h_code" />
+            <field name="color">2</field>
+            <field name="request_unit">hour</field>
+            <field name="limit" eval="False"/>
+            <field name="create_calendar_meeting" eval="True"/>
+        </record>
+
+
+
+        <record id="hr_salary_rule_legal_leave_of_absence_hour" model="hr.salary.rule">
+            <field name="category_id" ref="l10n_se_hr_payroll.hr_salary_rule_category-BRUAVG" />
+            <field name="code">pem_h</field>
+            <field name="salary_art">190</field>
+            <field name="name">Tjänstledigt del av dag</field>
+            <field name="sequence">230</field>
+            <field name="appears_on_payslip" eval="True"/>
+            <field name="condition_select">python</field>
+            <field name="condition_python">result = contract.get_leave_days('l10n_se_hr_holidays.holiday_status_leave_of_absence_hour', worked_days) &gt; 0.0</field>
+            <field name="amount_select">code</field>
+            <field name="amount_python_compute">
+# https://norian.se/tjanstledighetsavdrag/
+#(ML/21)*(VAD/VADI)
+result_qty = contract.get_leave_days('l10n_se_hr_holidays.holiday_status_leave_of_absence_hour', worked_days)
+result = contract.wage * 12 / (52*contract.scheduled_working_hours)
+            </field>
+            <field name="quantity">1</field>
+        </record>
+
+
+        <record id="hr_salary_rule_legal_leave_of_absence" model="hr.salary.rule">
+            <field name="category_id" ref="l10n_se_hr_payroll.hr_salary_rule_category-BRUAVG" />
+            <field name="code">pem</field>
+            <field name="salary_art">191</field>
+            <field name="name">Tjänstledigt &lt; 5 dgr</field>
+            <field name="sequence">230</field>
+            <field name="appears_on_payslip" eval="True"/>
+            <field name="condition_select">python</field>
+            <field name="condition_python">result = contract.get_leave_days('l10n_se_hr_holidays.holiday_type_leave_of_absence', worked_days) &gt; 0.0</field>
+            <field name="amount_select">code</field>
+            <field name="amount_python_compute">
+# https://norian.se/tjanstledighetsavdrag/
+#(ML/21)*(VAD/VADI)
+result_qty = contract.get_leave_days('l10n_se_hr_holidays.holiday_type_leave_of_absence', worked_days)
+result = contract.wage / 21
+            </field>
+            <field name="quantity">1</field>
+        </record>
+
+        <record id="hr_salary_rule_legal_leave_of_absence_5" model="hr.salary.rule">
+            <field name="category_id" ref="l10n_se_hr_payroll.hr_salary_rule_category-BRUAVG" />
+            <field name="code">pem_5</field>
+            <field name="salary_art">192</field>
+            <field name="name">Tjänstledigt &gt; 5 dgr</field>
+            <field name="sequence">230</field>
+            <field name="appears_on_payslip" eval="True"/>
+            <field name="condition_select">python</field>
+            <field name="condition_python">result = contract.get_leave_days('l10n_se_hr_holidays.holiday_type_leave_of_absence_5', worked_days) &gt; 0.0</field>
+            <field name="amount_select">code</field>
+            <field name="amount_python_compute">
+#ML*12/365
+result_qty = contract.get_leave_days('l10n_se_hr_holidays.holiday_type_leave_of_absence_5', worked_days)
+result = contract.wage *12/365
+            </field>
+            <field name="quantity">1</field>
+        </record>
+
+        <record id="l10n_se_hr_payroll.hr_payroll_structure-gl" model="hr.payroll.structure">
+            <field name="rule_ids" eval="[(4, ref('l10n_se_hr_holidays.hr_salary_rule-sjk')), (4, ref('l10n_se_hr_holidays.hr_salary_rule_legal_leave_of_absence')),
+  (4, ref('l10n_se_hr_holidays.hr_salary_rule_legal_leave_of_absence_5')),
+  (4, ref('l10n_se_hr_holidays.hr_salary_rule_legal_leave_of_absence_hour')),
+  (4, ref('l10n_se_hr_holidays.hr_salary_rule_legal_leave_of_absence')),
+  ]" />
+        </record>
+
+ -->

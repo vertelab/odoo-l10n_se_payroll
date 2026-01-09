@@ -62,7 +62,7 @@
             <field name="value">3908</field>
         </record> -->
 
-        <!-- Leave Janurary -->
+        <!-- ================================ January ================================ -->
 
         <!-- VAB -->
         <record id="hr_leave_camilla_101" model="hr.leave">
@@ -72,7 +72,7 @@
             <field name="date_to">2022-01-14</field>
             <field name="request_date_from">2022-01-14</field>
             <field name="request_date_to">2022-01-14</field>
-            <field name="number_of_hours">1</field>
+            <field name="number_of_hours">8</field>
             <field name="holiday_status_id" ref="l10n_se_hr_payroll.leave_type_vab" />
         </record>
 
@@ -83,38 +83,145 @@
             <field name="date_to">2022-01-17</field>
             <field name="request_date_from">2022-01-17</field>
             <field name="request_date_to">2022-01-17</field>
-            <field name="number_of_hours">1</field>
+            <field name="number_of_hours">4</field>
             <field name="holiday_status_id" ref="l10n_se_hr_payroll.leave_type_vab" />
         </record>
 
-        <!-- Leave February -->
+        <!-- Saknas: -->
+        <!-- Daglön (?) -->
+        <!-- Restidsersättning vardag -->
+        <!-- Restidsersättning helg -->
+        <!-- Lunchkuponger förmånsvärde -->
+        <!-- Avdrag lunchkuponger -->
 
+        <!-- Skatt -->
+        <!-- Arbetsgivaravgift -->
+
+        <!-- Generate payslip -->
+        <record id="hr_payslip_camilla_01" model="hr.payslip">
+            <field name="name">Lönespecifikation för Januari - Camilla Cobolt</field>
+            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons" />
+            <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_camilla_employee" />
+            <field name="period_id" ref="period_01_2022" />
+            <field name="date_from">2022-01-01</field>
+            <field name="date_to">2022-01-31</field>
+            <field name="struct_id" ref="l10n_se_hr_payroll_tiichri.hr_payroll_structure_tj_tiichri" />
+        </record>
+
+        <!-- Manual input -->
+        <function model="hr.payslip" name="onchange_employee">
+            <value eval="[ref('l10n_se_hr_payroll_tiichri.hr_payslip_camilla_01')]"/>
+        </function>
+
+        <function model="hr.payslip.input" name="write">
+            <value model="hr.payslip.input" search="[('payslip_id', '=', ref('hr_payslip_camilla_01')), ('code', '=', 'otidtim')]"/>
+            <value eval="{'amount_qty': 2.0}"/>
+        </function>
+
+        <function model="hr.payslip.input" name="write">
+            <value model="hr.payslip.input" search="[('payslip_id', '=', ref('hr_payslip_camilla_01')), ('code', '=', 'kvaltim')]"/>
+            <value eval="{'amount_qty': 2.0}"/>
+        </function>
+
+        <function model="hr.payslip" name="compute_sheet">
+            <value eval="[ref('l10n_se_hr_payroll_tiichri.hr_payslip_camilla_01')]"/>
+        </function>
+
+
+        <!-- ================================ February ================================ -->
+
+        <!-- Sick leave -->
         <record id="hr_leave_camilla_201" model="hr.leave">
             <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_camilla_employee" />
             <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons"/>
             <field name="date_from">2022-02-03</field>
-            <field name="date_to">2022-02-04</field>
+            <field name="date_to">2022-02-11</field>
             <field name="request_date_from">2022-02-03</field>
-            <field name="request_date_to">2022-02-04</field>
-            <field name="number_of_hours">16</field>
+            <field name="request_date_to">2022-02-11</field>
+            <field name="number_of_hours">52</field>
             <field name="holiday_status_id" ref="l10n_se_hr_payroll.leave_type_sick" />
         </record>
 
-        <record id="hr_leave_camilla_202" model="hr.leave">
+        <!-- Saknas: -->
+        <!-- Bilförmån -->
+        <!-- Förmån hushållsnära tjänster, arbetskostnad -->
+        <!-- Skattereduktion hushållsnära tjänster -->
+        <!-- Övrig nettoersättning (kvitto gymkort) -->
+        <!-- Milersättning för bensin vid tjänstekörning -->
+        <!-- Milersättning tjänstebil skattepliktig -->
+
+        <!-- Skatt -->
+        <!-- Arbetsgivaravgift -->
+
+
+        <!-- Generate Payslip -->
+        <record id="hr_payslip_camilla_02" model="hr.payslip">
+            <field name="name">Lönespecifikation för Februari - Camilla Cobolt</field>
+            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons" />
+            <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_camilla_employee" />
+            <field name="period_id" ref="period_02_2022" />
+            <field name="date_from">2022-02-01</field>
+            <field name="date_to">2022-02-28</field>
+            <field name="struct_id" ref="l10n_se_hr_payroll_tiichri.hr_payroll_structure_tj_tiichri" />
+        </record>
+
+        <!-- Manual input -->
+        <function model="hr.payslip" name="onchange_employee">
+            <value eval="[ref('l10n_se_hr_payroll_tiichri.hr_payslip_camilla_02')]"/>
+        </function>
+
+        <function model="hr.payslip" name="compute_sheet">
+            <value eval="[ref('l10n_se_hr_payroll_tiichri.hr_payslip_camilla_02')]"/>
+        </function>
+
+        <!-- ================================ March ================================ -->
+
+        <!-- VAB -->
+        <record id="hr_leave_camilla_301" model="hr.leave">
             <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_camilla_employee" />
             <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons"/>
-            <field name="date_from">2022-02-07</field>
-            <field name="date_to">2022-02-11</field>
-            <field name="request_date_from">2022-02-07</field>
-            <field name="request_date_to">2022-02-11</field>
-            <field name="number_of_hours">40</field>
-            <field name="holiday_status_id" ref="l10n_se_hr_payroll.leave_type_sick" />
+            <field name="date_from">2022-03-10</field>
+            <field name="date_to">2022-03-14</field>
+            <field name="request_date_from">2022-03-10</field>
+            <field name="request_date_to">2022-03-14</field>
+            <field name="number_of_hours">24</field>
+            <field name="holiday_status_id" ref="l10n_se_hr_payroll.leave_type_vab" />
         </record>
 
-        <!-- Leave March -->
+        <!-- Saknas: -->
+        <!-- Bilförmån -->
+        <!-- Förmån hushållsnära tjänster, arbetskostnad -->
+        <!-- Skattereduktion hushållsnära tjänster -->
+        <!-- Övrig nettoersättning (kiropraktor) -->
+        <!-- Milersättning för bensin vid tjänstekörning -->
+        <!-- Milersättning tjänstebil skattepliktig -->
 
-        <!-- Leave April -->
+        <!-- Skatt -->
+        <!-- Arbetsgivaravgift -->
 
+        <!-- Generate payslip -->
+        <record id="hr_payslip_camilla_03" model="hr.payslip">
+            <field name="name">Lönespecifikation för Mars - Camilla Cobolt</field>
+            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons" />
+            <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_camilla_employee" />
+            <field name="period_id" ref="period_03_2022" />
+            <field name="date_from">2022-03-01</field>
+            <field name="date_to">2022-03-31</field>
+            <field name="struct_id" ref="l10n_se_hr_payroll_tiichri.hr_payroll_structure_tj_tiichri" />
+        </record>
+
+        <!-- Manual input -->
+        <function model="hr.payslip" name="onchange_employee">
+            <value eval="[ref('l10n_se_hr_payroll_tiichri.hr_payslip_camilla_03')]"/>
+        </function>
+
+        <function model="hr.payslip" name="compute_sheet">
+            <value eval="[ref('l10n_se_hr_payroll_tiichri.hr_payslip_camilla_03')]"/>
+        </function>
+
+        <!-- ================================ April ================================ -->
+
+        <!-- Sick leave -->
         <record id="hr_leave_camilla_401" model="hr.leave">
             <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_camilla_employee" />
             <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons"/>
@@ -126,10 +233,114 @@
             <field name="holiday_status_id" ref="l10n_se_hr_payroll.leave_type_sick" />
         </record>
 
-        <!-- Leave May -->
+        <!-- Saknas: -->
+        <!-- Bilförmån -->
+        <!-- Förmån hushållsnära tjänster, arbetskostnad -->
+        <!-- Skattereduktion hushållsnära tjänster -->
+        <!-- Representation, ej avdragsgill -->
+        <!-- Utlägg resekostnader -->
+        <!-- Restidsersättning helg -->
+        <!-- Utlandstraktamente ej skattepliktigt -->
+        <!-- Kostförmån lunch -->
+        <!-- Kostavdrag frukost 15% utland -->
+        <!-- Kostavdrag lunch 35% utland -->
+        <!-- Kostavdrag middag 35% utland -->
+        <!-- Milersättning för bensin vid tjänstekörning -->
+        <!-- Milersättning tjänstebil skattepliktig -->
 
-        <!-- Leave June -->
+        <!-- Skatt -->
+        <!-- Arbetsgivaravgift -->
 
+        <!-- Generate payslip -->
+        <record id="hr_payslip_camilla_04" model="hr.payslip">
+            <field name="name">Lönespecifikation för April - Camilla Cobolt</field>
+            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons" />
+            <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_camilla_employee" />
+            <field name="period_id" ref="period_04_2022" />
+            <field name="date_from">2022-04-01</field>
+            <field name="date_to">2022-04-30</field>
+            <field name="struct_id" ref="l10n_se_hr_payroll_tiichri.hr_payroll_structure_tj_tiichri" />
+        </record>
+
+        <!-- Manual input -->
+        <function model="hr.payslip" name="onchange_employee">
+            <value eval="[ref('l10n_se_hr_payroll_tiichri.hr_payslip_camilla_04')]"/>
+        </function>
+
+        <function model="hr.payslip.input" name="write">
+            <value model="hr.payslip.input" search="[('payslip_id', '=', ref('hr_payslip_camilla_04')), ('code', '=', 'otidtim')]"/>
+            <value eval="{'amount_qty': 2.0}"/>
+        </function>
+
+        <function model="hr.payslip.input" name="write">
+            <value model="hr.payslip.input" search="[('payslip_id', '=', ref('hr_payslip_camilla_04')), ('code', '=', 'kvaltim')]"/>
+            <value eval="{'amount_qty': 3.0}"/>
+        </function>
+
+        <function model="hr.payslip" name="compute_sheet">
+            <value eval="[ref('l10n_se_hr_payroll_tiichri.hr_payslip_camilla_04')]"/>
+        </function>
+
+        <!-- ================================ May ================================ -->
+
+        <!-- Leave of absence -->
+        <record id="hr_leave_camilla_501" model="hr.leave">
+            <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_camilla_employee" />
+            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons"/>
+            <field name="date_from">2022-05-04</field>
+            <field name="date_to">2022-05-10</field>
+            <field name="request_date_from">2022-05-04</field>
+            <field name="request_date_to">2022-05-10</field>
+            <field name="number_of_hours">40</field>
+            <field name="holiday_status_id" ref="l10n_se_hr_payroll.leave_type_loa" />
+        </record>
+
+        <!-- Validate leave of absence -->
+        <function model="hr.leave" name="action_validate">
+            <value eval="[ref('hr_leave_camilla_501')]"/>
+        </function>
+
+        <!-- Saknas: -->
+        <!-- Bilförmån -->
+        <!-- Förmån hushållsnära tjänster, arbetskostnad -->
+        <!-- Skattereduktion hushållsnära tjänster -->
+        <!-- Utlägg resekostnader -->
+        <!-- Traktamente helt -->
+        <!-- Traktamente halvt -->
+        <!-- Traktamente skattepliktigt -->
+        <!-- Kostförmån middag -->
+        <!-- Kostavdrag frukost -->
+        <!-- Kostavdrag lunch eller middag -->
+        <!-- Milersättning för bensin vid tjänstekörning -->
+        <!-- Milersättning tjänstebil skattepliktig -->
+        <!-- Bostadsförmån ej småhus (lån av fjällstuga) -->
+
+        <!-- Skatt -->
+        <!-- Arbetsgivaravgift -->
+
+        <!-- Generate payslip -->
+        <record id="hr_payslip_camilla_05" model="hr.payslip">
+            <field name="name">Lönespecifikation för Maj - Camilla Cobolt</field>
+            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons" />
+            <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_camilla_employee" />
+            <field name="period_id" ref="period_05_2022" />
+            <field name="date_from">2022-05-01</field>
+            <field name="date_to">2022-05-31</field>
+            <field name="struct_id" ref="l10n_se_hr_payroll_tiichri.hr_payroll_structure_tj_tiichri" />
+        </record>
+
+        <!-- Manual input -->
+        <function model="hr.payslip" name="onchange_employee">
+            <value eval="[ref('l10n_se_hr_payroll_tiichri.hr_payslip_camilla_05')]"/>
+        </function>
+
+        <function model="hr.payslip" name="compute_sheet">
+            <value eval="[ref('l10n_se_hr_payroll_tiichri.hr_payslip_camilla_05')]"/>
+        </function>
+
+        <!-- ================================ June ================================ -->
+
+        <!-- Sick leave -->
         <record id="hr_leave_camilla_601" model="hr.leave">
             <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_camilla_employee" />
             <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons"/>
@@ -141,8 +352,54 @@
             <field name="holiday_status_id" ref="l10n_se_hr_payroll.leave_type_sick" />
         </record>
 
-        <!-- Leave July -->
+        <!-- Saknas: -->
+        <!-- Bilförmån -->
+        <!-- Förmån hushållsnära tjänster, arbetskostnad -->
+        <!-- Skattereduktion hushållsnära tjänster -->
+        <!-- Uttag betalda semesterdagar, månadsavlönad -->
+        <!-- Semesterlön betald -->
+        <!-- Semestertillägg betalda semesterdagar -->
+        <!-- Semesteravdrag betald -->
+        <!-- Uttag förskottssemester, månadsavlönad -->
+        <!-- Milersättning för bensin vid tjänstekörning -->
+        <!-- Milersättning tjänstebil skattepliktig -->
 
+        <!-- Skatt -->
+        <!-- Arbetsgivaravgift -->
+
+        <!-- Generate payslip -->
+        <record id="hr_payslip_camilla_06" model="hr.payslip">
+            <field name="name">Lönespecifikation för Juni - Camilla Cobolt</field>
+            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons" />
+            <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_camilla_employee" />
+            <field name="period_id" ref="period_06_2022" />
+            <field name="date_from">2022-06-01</field>
+            <field name="date_to">2022-06-30</field>
+            <field name="struct_id" ref="l10n_se_hr_payroll_tiichri.hr_payroll_structure_tj_tiichri" />
+        </record>
+
+        <!-- Manual input -->
+        <function model="hr.payslip" name="onchange_employee">
+            <value eval="[ref('l10n_se_hr_payroll_tiichri.hr_payslip_camilla_06')]"/>
+        </function>
+
+        <function model="hr.payslip.input" name="write">
+            <value model="hr.payslip.input" search="[('payslip_id', '=', ref('hr_payslip_camilla_06')), ('code', '=', 'otidtim')]"/>
+            <value eval="{'amount_qty': 2.0}"/>
+        </function>
+
+        <function model="hr.payslip.input" name="write">
+            <value model="hr.payslip.input" search="[('payslip_id', '=', ref('hr_payslip_camilla_06')), ('code', '=', 'kvaltim')]"/>
+            <value eval="{'amount_qty': 2.0}"/>
+        </function>
+
+        <function model="hr.payslip" name="compute_sheet">
+            <value eval="[ref('l10n_se_hr_payroll_tiichri.hr_payslip_camilla_06')]"/>
+        </function>
+
+        <!-- ================================ July ================================ -->
+
+        <!-- Sick Leave -->
         <record id="hr_leave_camilla_701" model="hr.leave">
             <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_camilla_employee" />
             <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons"/>
@@ -165,8 +422,42 @@
             <field name="holiday_status_id" ref="l10n_se_hr_payroll.leave_type_sick" />
         </record>
 
-        <!-- Leave August -->
+        <!-- Saknas: -->
+        <!-- Bilförmån -->
+        <!-- Förmån hushållsnära tjänster, arbetskostnad -->
+        <!-- Skattereduktion hushållsnära tjänster -->
+        <!-- Uttag förskottssemester, månadsavlönad -->
+        <!-- Bonus-->
+        <!-- Milersättning för bensin vid tjänstekörning -->
+        <!-- Milersättning tjänstebil skattepliktig -->
 
+        <!-- Skatt -->
+        <!-- Arbetsgivaravgift -->
+
+        <!-- Generate payslip -->
+        <record id="hr_payslip_camilla_07" model="hr.payslip">
+            <field name="name">Lönespecifikation för Juli - Camilla Cobolt</field>
+            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons" />
+            <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_camilla_employee" />
+            <field name="period_id" ref="period_07_2022" />
+            <field name="date_from">2022-07-01</field>
+            <field name="date_to">2022-07-31</field>
+            <field name="struct_id" ref="l10n_se_hr_payroll_tiichri.hr_payroll_structure_tj_tiichri" />
+        </record>
+
+        <!-- Manual input -->
+        <function model="hr.payslip" name="onchange_employee">
+            <value eval="[ref('l10n_se_hr_payroll_tiichri.hr_payslip_camilla_07')]"/>
+        </function>
+
+        <function model="hr.payslip" name="compute_sheet">
+            <value eval="[ref('l10n_se_hr_payroll_tiichri.hr_payslip_camilla_07')]"/>
+        </function>
+
+
+        <!-- ================================ August ================================ -->
+
+        <!-- Sick leave -->
         <record id="hr_leave_camilla_801" model="hr.leave">
             <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_camilla_employee" />
             <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons"/>
@@ -178,9 +469,37 @@
             <field name="holiday_status_id" ref="l10n_se_hr_payroll.leave_type_sick" />
         </record>
 
+        <!-- Saknas: -->
+        <!-- Bilförmån -->
+        <!-- Förmån hushållsnära tjänster, arbetskostnad -->
+        <!-- Skattereduktion hushållsnära tjänster -->
 
-        <!-- Leave September -->
+        <!-- Skatt -->
+        <!-- Arbetsgivaravgift -->
 
+        <!-- Generate payslip -->
+        <record id="hr_payslip_camilla_08" model="hr.payslip">
+            <field name="name">Lönespecifikation för Augusti - Camilla Cobolt</field>
+            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons" />
+            <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_camilla_employee" />
+            <field name="period_id" ref="period_08_2022" />
+            <field name="date_from">2022-08-01</field>
+            <field name="date_to">2022-08-31</field>
+            <field name="struct_id" ref="l10n_se_hr_payroll_tiichri.hr_payroll_structure_tj_tiichri" />
+        </record>
+
+        <!-- Manual input -->
+        <function model="hr.payslip" name="onchange_employee">
+            <value eval="[ref('l10n_se_hr_payroll_tiichri.hr_payslip_camilla_08')]"/>
+        </function>
+
+        <function model="hr.payslip" name="compute_sheet">
+            <value eval="[ref('l10n_se_hr_payroll_tiichri.hr_payslip_camilla_08')]"/>
+        </function>
+
+        <!-- ================================ September ================================ -->
+
+        <!-- Sick leave -->
         <record id="hr_leave_camilla_901" model="hr.leave">
             <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_camilla_employee" />
             <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons"/>
@@ -192,97 +511,19 @@
             <field name="holiday_status_id" ref="l10n_se_hr_payroll.leave_type_sick" />
         </record>
 
+        <!-- Saknas: -->
+        <!-- Bilförmån -->
+        <!-- Förmån hushållsnära tjänster, arbetskostnad -->
+        <!-- Skattereduktion hushållsnära tjänster -->
+        <!-- Uttag förskottssemester, månadsavlönad -->
+        <!-- Milersättning för bensin vid tjänstekörning -->
+        <!-- Milersättning tjänstebil skattepliktig -->
 
-        <!-- End leaves and salary/wage related inputs -->
-        <!-- <function model="hr.leave" name="validate_leaves"/>
- -->
+        <!-- Skatt -->
+        <!-- Arbetsgivaravgift -->
 
 
-
-
-
-        <!-- Payslips Camilla -->
-
-        <record id="hr_payslip_camilla_01" model="hr.payslip">
-            <field name="name">Lönespecifikation för Januari - Camilla Cobolt</field>
-            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons" />
-            <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_camilla_employee" />
-            <field name="period_id" ref="period_01_2022" />
-            <field name="date_from">2022-01-01</field>
-            <field name="date_to">2022-01-31</field>
-            <field name="struct_id" ref="l10n_se_hr_payroll_tiichri.hr_payroll_structure_tj_tiichri" />
-        </record>
-
-        <record id="hr_payslip_camilla_02" model="hr.payslip">
-            <field name="name">Lönespecifikation för Februari - Camilla Cobolt</field>
-            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons" />
-            <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_camilla_employee" />
-            <field name="period_id" ref="period_02_2022" />
-            <field name="date_from">2022-02-01</field>
-            <field name="date_to">2022-02-28</field>
-            <field name="struct_id" ref="l10n_se_hr_payroll_tiichri.hr_payroll_structure_tj_tiichri" />
-        </record>
-
-        <record id="hr_payslip_camilla_03" model="hr.payslip">
-            <field name="name">Lönespecifikation för Mars - Camilla Cobolt</field>
-            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons" />
-            <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_camilla_employee" />
-            <field name="period_id" ref="period_03_2022" />
-            <field name="date_from">2022-03-01</field>
-            <field name="date_to">2022-03-31</field>
-            <field name="struct_id" ref="l10n_se_hr_payroll_tiichri.hr_payroll_structure_tj_tiichri" />
-        </record>
-
-        <record id="hr_payslip_camilla_04" model="hr.payslip">
-            <field name="name">Lönespecifikation för April - Camilla Cobolt</field>
-            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons" />
-            <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_camilla_employee" />
-            <field name="period_id" ref="period_04_2022" />
-            <field name="date_from">2022-04-01</field>
-            <field name="date_to">2022-04-30</field>
-            <field name="struct_id" ref="l10n_se_hr_payroll_tiichri.hr_payroll_structure_tj_tiichri" />
-        </record>
-
-        <record id="hr_payslip_camilla_05" model="hr.payslip">
-            <field name="name">Lönespecifikation för Maj - Camilla Cobolt</field>
-            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons" />
-            <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_camilla_employee" />
-            <field name="period_id" ref="period_05_2022" />
-            <field name="date_from">2022-05-01</field>
-            <field name="date_to">2022-05-31</field>
-            <field name="struct_id" ref="l10n_se_hr_payroll_tiichri.hr_payroll_structure_tj_tiichri" />
-        </record>
-
-        <record id="hr_payslip_camilla_06" model="hr.payslip">
-            <field name="name">Lönespecifikation för Juni - Camilla Cobolt</field>
-            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons" />
-            <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_camilla_employee" />
-            <field name="period_id" ref="period_06_2022" />
-            <field name="date_from">2022-06-01</field>
-            <field name="date_to">2022-06-30</field>
-            <field name="struct_id" ref="l10n_se_hr_payroll_tiichri.hr_payroll_structure_tj_tiichri" />
-        </record>
-
-        <record id="hr_payslip_camilla_07" model="hr.payslip">
-            <field name="name">Lönespecifikation för Juli - Camilla Cobolt</field>
-            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons" />
-            <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_camilla_employee" />
-            <field name="period_id" ref="period_07_2022" />
-            <field name="date_from">2022-07-01</field>
-            <field name="date_to">2022-07-31</field>
-            <field name="struct_id" ref="l10n_se_hr_payroll_tiichri.hr_payroll_structure_tj_tiichri" />
-        </record>
-
-        <record id="hr_payslip_camilla_08" model="hr.payslip">
-            <field name="name">Lönespecifikation för Augusti - Camilla Cobolt</field>
-            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons" />
-            <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_camilla_employee" />
-            <field name="period_id" ref="period_08_2022" />
-            <field name="date_from">2022-08-01</field>
-            <field name="date_to">2022-08-31</field>
-            <field name="struct_id" ref="l10n_se_hr_payroll_tiichri.hr_payroll_structure_tj_tiichri" />
-        </record>
-
+        <!-- Generate payslip -->
         <record id="hr_payslip_camilla_09" model="hr.payslip">
             <field name="name">Lönespecifikation för September - Camilla Cobolt</field>
             <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons" />
@@ -293,6 +534,85 @@
             <field name="struct_id" ref="l10n_se_hr_payroll_tiichri.hr_payroll_structure_tj_tiichri" />
         </record>
 
+        <!-- Manual input -->
+        <function model="hr.payslip" name="onchange_employee">
+            <value eval="[ref('l10n_se_hr_payroll_tiichri.hr_payslip_camilla_09')]"/>
+        </function>
+
+        <function model="hr.payslip" name="compute_sheet">
+            <value eval="[ref('l10n_se_hr_payroll_tiichri.hr_payslip_camilla_09')]"/>
+        </function>
+
+        <!-- ================================ October ================================ -->
+
+
+        <!-- Leave of absence -->
+        <record id="hr_leave_camilla_1001" model="hr.leave">
+            <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_camilla_employee" />
+            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons"/>
+            <field name="date_from">2022-10-03</field>
+            <field name="date_to">2022-10-13</field>
+            <field name="request_date_from">2022-10-03</field>
+            <field name="request_date_to">2022-10-13</field>
+            <field name="number_of_hours">72</field>
+            <field name="holiday_status_id" ref="l10n_se_hr_payroll.leave_type_loa" />
+        </record>
+
+        <record id="hr_leave_camilla_1002" model="hr.leave">
+            <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_camilla_employee" />
+            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons"/>
+            <field name="date_from">2022-10-21</field>
+            <field name="date_to">2022-10-21</field>
+            <field name="request_date_from">2022-10-21</field>
+            <field name="request_date_to">2022-10-21</field>
+            <field name="number_of_hours">8</field>
+            <field name="holiday_status_id" ref="l10n_se_hr_payroll.leave_type_loa" />
+        </record>
+
+        <record id="hr_leave_camilla_1003" model="hr.leave">
+            <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_camilla_employee" />
+            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons"/>
+            <field name="date_from">2022-10-24</field>
+            <field name="date_to">2022-10-24</field>
+            <field name="request_date_from">2022-10-24</field>
+            <field name="request_date_to">2022-10-24</field>
+            <field name="number_of_hours">3</field>
+            <field name="holiday_status_id" ref="l10n_se_hr_payroll.leave_type_loa" />
+        </record>
+
+        <record id="hr_leave_camilla_1004" model="hr.leave">
+            <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_camilla_employee" />
+            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons"/>
+            <field name="date_from">2022-10-25</field>
+            <field name="date_to">2022-10-25</field>
+            <field name="request_date_from">2022-10-25</field>
+            <field name="request_date_to">2022-10-25</field>
+            <field name="number_of_hours">8</field>
+            <field name="holiday_status_id" ref="l10n_se_hr_payroll.leave_type_loa" />
+        </record>
+
+        <!-- Validate leave of absence -->
+        <function model="hr.leave" name="action_validate">
+            <value eval="[ref('hr_leave_camilla_1001'), 
+                ref('hr_leave_camilla_1002'), 
+                ref('hr_leave_camilla_1003'), 
+                ref('hr_leave_camilla_1004')]"
+            />
+        </function>
+
+
+        <!-- Saknas: -->
+        <!-- Bilförmån -->
+        <!-- Förmån hushållsnära tjänster, arbetskostnad -->
+        <!-- Skattereduktion hushållsnära tjänster -->
+        <!-- Milersättning för bensin vid tjänstekörning -->
+        <!-- Milersättning tjänstebil skattepliktig -->
+
+        <!-- Skatt -->
+        <!-- Arbetsgivaravgift -->
+
+
+        <!-- Generate payslip -->
         <record id="hr_payslip_camilla_10" model="hr.payslip">
             <field name="name">Lönespecifikation för Oktober - Camilla Cobolt</field>
             <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons" />
@@ -303,6 +623,40 @@
             <field name="struct_id" ref="l10n_se_hr_payroll_tiichri.hr_payroll_structure_tj_tiichri" />
         </record>
 
+        <!-- Manual input -->
+        <function model="hr.payslip" name="onchange_employee">
+            <value eval="[ref('l10n_se_hr_payroll_tiichri.hr_payslip_camilla_10')]"/>
+        </function>
+
+        <function model="hr.payslip" name="compute_sheet">
+            <value eval="[ref('l10n_se_hr_payroll_tiichri.hr_payslip_camilla_10')]"/>
+        </function>
+
+        <!-- ================================ November ================================ -->
+
+        <!-- Sick leave -->
+        <record id="hr_leave_camilla_1101" model="hr.leave">
+            <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_camilla_employee" />
+            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons"/>
+            <field name="date_from">2022-11-01</field>
+            <field name="date_to">2022-12-02</field>
+            <field name="request_date_from">2022-11-01</field>
+            <field name="request_date_to">2022-12-02</field>
+            <field name="number_of_hours">192</field>
+            <field name="holiday_status_id" ref="l10n_se_hr_payroll.leave_type_sick" />
+        </record>
+
+        <!-- Saknas: -->
+        <!-- Bilförmån -->
+        <!-- Förmån hushållsnära tjänster, arbetskostnad -->
+        <!-- Skattereduktion hushållsnära tjänster -->
+        <!-- Övrig nettoersättning (Husläkare) -->
+        <!-- Övriga förmåner, tabellskatt (Husläkare) -->
+
+        <!-- Skatt -->
+        <!-- Arbetsgivaravgift -->
+
+        <!-- Generate payslip -->
         <record id="hr_payslip_camilla_11" model="hr.payslip">
             <field name="name">Lönespecifikation för November - Camilla Cobolt</field>
             <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons" />
@@ -313,6 +667,41 @@
             <field name="struct_id" ref="l10n_se_hr_payroll_tiichri.hr_payroll_structure_tj_tiichri" />
         </record>
 
+        <!-- Manual input -->
+        <function model="hr.payslip" name="onchange_employee">
+            <value eval="[ref('l10n_se_hr_payroll_tiichri.hr_payslip_camilla_11')]"/>
+        </function>
+
+        <function model="hr.payslip" name="compute_sheet">
+            <value eval="[ref('l10n_se_hr_payroll_tiichri.hr_payslip_camilla_11')]"/>
+        </function>
+
+        <!-- ================================ December ================================ -->
+
+        <!-- Sick leave -->
+        <record id="hr_leave_camilla_1201" model="hr.leave">
+            <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_camilla_employee" />
+            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons"/>
+            <field name="date_from">2022-12-06</field>
+            <field name="date_to">2022-12-31</field>
+            <field name="request_date_from">2022-12-06</field>
+            <field name="request_date_to">2022-12-31</field>
+            <field name="number_of_hours">144</field>
+            <field name="holiday_status_id" ref="l10n_se_hr_payroll.leave_type_sick" />
+        </record>
+
+        <!-- Saknas: -->
+        <!-- Bilförmån -->
+        <!-- Förmån hushållsnära tjänster, arbetskostnad -->
+        <!-- Skattereduktion hushållsnära tjänster -->
+        <!-- Övrig nettoersättning (Husläkare) -->
+        <!-- Övriga förmåner, tabellskatt (Husläkare) -->
+
+        <!-- Skatt -->
+        <!-- Arbetsgivaravgift -->
+
+
+        <!-- Generate payslip -->
         <record id="hr_payslip_camilla_12" model="hr.payslip">
             <field name="name">Lönespecifikation för December - Camilla Cobolt</field>
             <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons" />
@@ -323,73 +712,14 @@
             <field name="struct_id" ref="l10n_se_hr_payroll_tiichri.hr_payroll_structure_tj_tiichri" />
         </record>
 
-
-
-        <function model="hr.payslip" name="onchange_employee">
-            <value eval="[ref('l10n_se_hr_payroll_tiichri.hr_payslip_camilla_01')]"/>
-        </function>
-
-        <function model="hr.payslip" name="onchange_employee">
-            <value eval="[ref('l10n_se_hr_payroll_tiichri.hr_payslip_camilla_02')]"/>
-        </function>
-
-        <function model="hr.payslip" name="onchange_employee">
-            <value eval="[ref('l10n_se_hr_payroll_tiichri.hr_payslip_camilla_03')]"/>
-        </function>
-
-        <function model="hr.payslip" name="onchange_employee">
-            <value eval="[ref('l10n_se_hr_payroll_tiichri.hr_payslip_camilla_04')]"/>
-        </function>
-
-        <function model="hr.payslip" name="onchange_employee">
-            <value eval="[ref('l10n_se_hr_payroll_tiichri.hr_payslip_camilla_05')]"/>
-        </function>
-
-        <function model="hr.payslip" name="onchange_employee">
-            <value eval="[ref('l10n_se_hr_payroll_tiichri.hr_payslip_camilla_06')]"/>
-        </function>
-
-        <function model="hr.payslip" name="onchange_employee">
-            <value eval="[ref('l10n_se_hr_payroll_tiichri.hr_payslip_camilla_07')]"/>
-        </function>
-
-        <function model="hr.payslip" name="onchange_employee">
-            <value eval="[ref('l10n_se_hr_payroll_tiichri.hr_payslip_camilla_08')]"/>
-        </function>
-
-        <function model="hr.payslip" name="onchange_employee">
-            <value eval="[ref('l10n_se_hr_payroll_tiichri.hr_payslip_camilla_09')]"/>
-        </function>
-
-        <function model="hr.payslip" name="onchange_employee">
-            <value eval="[ref('l10n_se_hr_payroll_tiichri.hr_payslip_camilla_10')]"/>
-        </function>
-
-        <function model="hr.payslip" name="onchange_employee">
-            <value eval="[ref('l10n_se_hr_payroll_tiichri.hr_payslip_camilla_11')]"/>
-        </function>
-
+        <!-- Manual input -->
         <function model="hr.payslip" name="onchange_employee">
             <value eval="[ref('l10n_se_hr_payroll_tiichri.hr_payslip_camilla_12')]"/>
         </function>
 
         <function model="hr.payslip" name="compute_sheet">
-            <value eval="[
-                ref('l10n_se_hr_payroll_tiichri.hr_payslip_camilla_01'), 
-                ref('l10n_se_hr_payroll_tiichri.hr_payslip_camilla_02'), 
-                ref('l10n_se_hr_payroll_tiichri.hr_payslip_camilla_03'),
-                ref('l10n_se_hr_payroll_tiichri.hr_payslip_camilla_04'), 
-                ref('l10n_se_hr_payroll_tiichri.hr_payslip_camilla_05'), 
-                ref('l10n_se_hr_payroll_tiichri.hr_payslip_camilla_06'),
-                ref('l10n_se_hr_payroll_tiichri.hr_payslip_camilla_07'), 
-                ref('l10n_se_hr_payroll_tiichri.hr_payslip_camilla_08'), 
-                ref('l10n_se_hr_payroll_tiichri.hr_payslip_camilla_09'),
-                ref('l10n_se_hr_payroll_tiichri.hr_payslip_camilla_10'), 
-                ref('l10n_se_hr_payroll_tiichri.hr_payslip_camilla_11'), 
-                ref('l10n_se_hr_payroll_tiichri.hr_payslip_camilla_12')
-            ]"/>
+            <value eval="[ref('l10n_se_hr_payroll_tiichri.hr_payslip_camilla_12')]"/>
         </function>
-
 
     </data>
 </odoo>

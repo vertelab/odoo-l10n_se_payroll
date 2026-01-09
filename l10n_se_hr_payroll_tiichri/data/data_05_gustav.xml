@@ -51,8 +51,9 @@
             <field name="column_number" eval="'column1'"/>
         </record>
 
-        <!-- Leave Janurary -->
+        <!-- ================================ January ================================ -->
 
+        <!-- Sick leave -->
         <record id="hr_leave_gustav_101" model="hr.leave">
             <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_gustav_employee" />
             <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons"/>
@@ -64,11 +65,53 @@
             <field name="holiday_status_id" ref="l10n_se_hr_payroll.leave_type_sick" />
         </record>
 
+        <!-- Generate payslip -->
+        <record id="hr_payslip_gustav_01" model="hr.payslip">
+            <field name="name">Lönespecifikation för Januari - Gustav Groth</field>
+            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons" />
+            <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_gustav_employee" />
+            <field name="period_id" ref="period_01_2022" />
+            <field name="date_from">2022-01-01</field>
+            <field name="date_to">2022-01-31</field>
+            <field name="struct_id" ref="l10n_se_hr_payroll_tiichri.hr_payroll_structure_tj_tiichri" />
+        </record>
 
-        <!-- Leave February -->
+        <!-- Manual input -->
+        <!-- Ingen övertid denna måbad -->
+        <function model="hr.payslip" name="onchange_employee">
+            <value eval="[ref('l10n_se_hr_payroll_tiichri.hr_payslip_gustav_01')]"/>
+        </function>
 
-        <!-- Leave March -->
+        <function model="hr.payslip" name="compute_sheet">
+            <value eval="[ref('l10n_se_hr_payroll_tiichri.hr_payslip_gustav_01')]"/>
+        </function>
 
+        <!-- ================================ February ================================ -->
+
+        <!-- Generate payslip -->
+        <record id="hr_payslip_gustav_02" model="hr.payslip">
+            <field name="name">Lönespecifikation för Februari - Gustav Groth</field>
+            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons" />
+            <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_gustav_employee" />
+            <field name="period_id" ref="period_02_2022" />
+            <field name="date_from">2022-02-01</field>
+            <field name="date_to">2022-02-28</field>
+            <field name="struct_id" ref="l10n_se_hr_payroll_tiichri.hr_payroll_structure_tj_tiichri" />
+        </record>
+
+        <!-- Manual input -->
+        <!-- Ingen övertid denna måbad -->
+        <function model="hr.payslip" name="onchange_employee">
+            <value eval="[ref('l10n_se_hr_payroll_tiichri.hr_payslip_gustav_02')]"/>
+        </function>
+
+        <function model="hr.payslip" name="compute_sheet">
+            <value eval="[ref('l10n_se_hr_payroll_tiichri.hr_payslip_gustav_02')]"/>
+        </function>
+
+        <!-- ================================ March ================================ -->
+
+        <!-- Sick leave -->
         <record id="hr_leave_gustav_301" model="hr.leave">
             <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_gustav_employee" />
             <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons"/>
@@ -80,8 +123,30 @@
             <field name="holiday_status_id" ref="l10n_se_hr_payroll.leave_type_sick" />
         </record>
 
-        <!-- Leave April -->
+        <!-- Generate payslip -->
+        <record id="hr_payslip_gustav_03" model="hr.payslip">
+            <field name="name">Lönespecifikation för Mars - Gustav Groth</field>
+            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons" />
+            <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_gustav_employee" />
+            <field name="period_id" ref="period_03_2022" />
+            <field name="date_from">2022-03-01</field>
+            <field name="date_to">2022-03-31</field>
+            <field name="struct_id" ref="l10n_se_hr_payroll_tiichri.hr_payroll_structure_tj_tiichri" />
+        </record>
 
+        <!-- Manual input -->
+        <!-- Ingen övertid denna måbad -->
+        <function model="hr.payslip" name="onchange_employee">
+            <value eval="[ref('l10n_se_hr_payroll_tiichri.hr_payslip_gustav_03')]"/>
+        </function>
+
+        <function model="hr.payslip" name="compute_sheet">
+            <value eval="[ref('l10n_se_hr_payroll_tiichri.hr_payslip_gustav_03')]"/>
+        </function>
+
+        <!-- ================================ April ================================ -->
+
+        <!-- Sick leave -->
         <record id="hr_leave_gustav_401" model="hr.leave">
             <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_gustav_employee" />
             <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons"/>
@@ -104,10 +169,53 @@
             <field name="holiday_status_id" ref="l10n_se_hr_payroll.leave_type_sick" />
         </record>
 
-        <!-- Leave May -->
+        <!-- Generate payslip -->
+        <record id="hr_payslip_gustav_04" model="hr.payslip">
+            <field name="name">Lönespecifikation för April - Gustav Groth</field>
+            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons" />
+            <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_gustav_employee" />
+            <field name="period_id" ref="period_04_2022" />
+            <field name="date_from">2022-04-01</field>
+            <field name="date_to">2022-04-30</field>
+            <field name="struct_id" ref="l10n_se_hr_payroll_tiichri.hr_payroll_structure_tj_tiichri" />
+        </record>
 
-        <!-- Leave June -->
+        <!-- Manual input -->
+        <!-- Ingen övertid denna måbad -->
+        <function model="hr.payslip" name="onchange_employee">
+            <value eval="[ref('l10n_se_hr_payroll_tiichri.hr_payslip_gustav_04')]"/>
+        </function>
 
+        <function model="hr.payslip" name="compute_sheet">
+            <value eval="[ref('l10n_se_hr_payroll_tiichri.hr_payslip_gustav_04')]"/>
+        </function>
+
+        <!-- ================================ May ================================ -->
+
+        <!-- Generate payslip -->
+        <record id="hr_payslip_gustav_05" model="hr.payslip">
+            <field name="name">Lönespecifikation för Maj - Gustav Groth</field>
+            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons" />
+            <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_gustav_employee" />
+            <field name="period_id" ref="period_05_2022" />
+            <field name="date_from">2022-05-01</field>
+            <field name="date_to">2022-05-31</field>
+            <field name="struct_id" ref="l10n_se_hr_payroll_tiichri.hr_payroll_structure_tj_tiichri" />
+        </record>
+
+        <!-- Manual input -->
+        <!-- Ingen övertid denna måbad -->
+        <function model="hr.payslip" name="onchange_employee">
+            <value eval="[ref('l10n_se_hr_payroll_tiichri.hr_payslip_gustav_05')]"/>
+        </function>
+
+        <function model="hr.payslip" name="compute_sheet">
+            <value eval="[ref('l10n_se_hr_payroll_tiichri.hr_payslip_gustav_05')]"/>
+        </function>
+
+        <!-- ================================ June ================================ -->
+
+        <!-- Sick leave -->
         <record id="hr_leave_gustav_601" model="hr.leave">
             <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_gustav_employee" />
             <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons"/>
@@ -130,8 +238,30 @@
             <field name="holiday_status_id" ref="l10n_se_hr_payroll.leave_type_sick" />
         </record>
 
+        <!-- Generate payslip -->
+        <record id="hr_payslip_gustav_06" model="hr.payslip">
+            <field name="name">Lönespecifikation för Juni - Gustav Groth</field>
+            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons" />
+            <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_gustav_employee" />
+            <field name="period_id" ref="period_06_2022" />
+            <field name="date_from">2022-06-01</field>
+            <field name="date_to">2022-06-30</field>
+            <field name="struct_id" ref="l10n_se_hr_payroll_tiichri.hr_payroll_structure_tj_tiichri" />
+        </record>
 
-        <!-- Leave July -->
+        <!-- Manual input -->
+        <!-- Ingen övertid denna måbad -->
+        <function model="hr.payslip" name="onchange_employee">
+            <value eval="[ref('l10n_se_hr_payroll_tiichri.hr_payslip_gustav_06')]"/>
+        </function>
+
+        <function model="hr.payslip" name="compute_sheet">
+            <value eval="[ref('l10n_se_hr_payroll_tiichri.hr_payslip_gustav_06')]"/>
+        </function>
+
+        <!-- ================================ July ================================ -->
+
+        <!-- Sick leave -->
         <record id="hr_leave_gustav_701" model="hr.leave">
             <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_gustav_employee" />
             <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons"/>
@@ -154,9 +284,30 @@
             <field name="holiday_status_id" ref="l10n_se_hr_payroll.leave_type_sick" />
         </record>
 
+        <!-- Generate payslip -->
+        <record id="hr_payslip_gustav_07" model="hr.payslip">
+            <field name="name">Lönespecifikation för Juli - Gustav Groth</field>
+            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons" />
+            <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_gustav_employee" />
+            <field name="period_id" ref="period_07_2022" />
+            <field name="date_from">2022-07-01</field>
+            <field name="date_to">2022-07-31</field>
+            <field name="struct_id" ref="l10n_se_hr_payroll_tiichri.hr_payroll_structure_tj_tiichri" />
+        </record>
 
-        <!-- Leave August -->
+        <!-- Manual input -->
+        <!-- Ingen övertid denna måbad -->
+        <function model="hr.payslip" name="onchange_employee">
+            <value eval="[ref('l10n_se_hr_payroll_tiichri.hr_payslip_gustav_07')]"/>
+        </function>
 
+        <function model="hr.payslip" name="compute_sheet">
+            <value eval="[ref('l10n_se_hr_payroll_tiichri.hr_payslip_gustav_07')]"/>
+        </function>
+
+        <!-- ================================ August ================================ -->
+
+        <!-- Sick leave -->
         <record id="hr_leave_gustav_801" model="hr.leave">
             <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_gustav_employee" />
             <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons"/>
@@ -168,85 +319,7 @@
             <field name="holiday_status_id" ref="l10n_se_hr_payroll.leave_type_sick" />
         </record>
 
-        <!-- End leaves and salary/wage related inputs -->
-        <!-- <function model="hr.leave" name="validate_leaves"/> -->
-
-
-
-
-
-
-        <!-- Payslips Gustav -->
-        <record id="hr_payslip_gustav_01" model="hr.payslip">
-            <field name="name">Lönespecifikation för Januari - Gustav Groth</field>
-            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons" />
-            <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_gustav_employee" />
-            <field name="period_id" ref="period_01_2022" />
-            <field name="date_from">2022-01-01</field>
-            <field name="date_to">2022-01-31</field>
-            <field name="struct_id" ref="l10n_se_hr_payroll_tiichri.hr_payroll_structure_tj_tiichri" />
-        </record>
-
-        <record id="hr_payslip_gustav_02" model="hr.payslip">
-            <field name="name">Lönespecifikation för Februari - Gustav Groth</field>
-            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons" />
-            <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_gustav_employee" />
-            <field name="period_id" ref="period_02_2022" />
-            <field name="date_from">2022-02-01</field>
-            <field name="date_to">2022-02-28</field>
-            <field name="struct_id" ref="l10n_se_hr_payroll_tiichri.hr_payroll_structure_tj_tiichri" />
-        </record>
-
-        <record id="hr_payslip_gustav_03" model="hr.payslip">
-            <field name="name">Lönespecifikation för Mars - Gustav Groth</field>
-            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons" />
-            <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_gustav_employee" />
-            <field name="period_id" ref="period_03_2022" />
-            <field name="date_from">2022-03-01</field>
-            <field name="date_to">2022-03-31</field>
-            <field name="struct_id" ref="l10n_se_hr_payroll_tiichri.hr_payroll_structure_tj_tiichri" />
-        </record>
-
-        <record id="hr_payslip_gustav_04" model="hr.payslip">
-            <field name="name">Lönespecifikation för April - Gustav Groth</field>
-            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons" />
-            <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_gustav_employee" />
-            <field name="period_id" ref="period_04_2022" />
-            <field name="date_from">2022-04-01</field>
-            <field name="date_to">2022-04-30</field>
-            <field name="struct_id" ref="l10n_se_hr_payroll_tiichri.hr_payroll_structure_tj_tiichri" />
-        </record>
-
-        <record id="hr_payslip_gustav_05" model="hr.payslip">
-            <field name="name">Lönespecifikation för Maj - Gustav Groth</field>
-            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons" />
-            <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_gustav_employee" />
-            <field name="period_id" ref="period_05_2022" />
-            <field name="date_from">2022-05-01</field>
-            <field name="date_to">2022-05-31</field>
-            <field name="struct_id" ref="l10n_se_hr_payroll_tiichri.hr_payroll_structure_tj_tiichri" />
-        </record>
-
-        <record id="hr_payslip_gustav_06" model="hr.payslip">
-            <field name="name">Lönespecifikation för Juni - Gustav Groth</field>
-            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons" />
-            <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_gustav_employee" />
-            <field name="period_id" ref="period_06_2022" />
-            <field name="date_from">2022-06-01</field>
-            <field name="date_to">2022-06-30</field>
-            <field name="struct_id" ref="l10n_se_hr_payroll_tiichri.hr_payroll_structure_tj_tiichri" />
-        </record>
-
-        <record id="hr_payslip_gustav_07" model="hr.payslip">
-            <field name="name">Lönespecifikation för Juli - Gustav Groth</field>
-            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons" />
-            <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_gustav_employee" />
-            <field name="period_id" ref="period_07_2022" />
-            <field name="date_from">2022-07-01</field>
-            <field name="date_to">2022-07-31</field>
-            <field name="struct_id" ref="l10n_se_hr_payroll_tiichri.hr_payroll_structure_tj_tiichri" />
-        </record>
-
+        <!-- Generate payslip -->
         <record id="hr_payslip_gustav_08" model="hr.payslip">
             <field name="name">Lönespecifikation för Augusti - Gustav Groth</field>
             <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons" />
@@ -257,6 +330,19 @@
             <field name="struct_id" ref="l10n_se_hr_payroll_tiichri.hr_payroll_structure_tj_tiichri" />
         </record>
 
+        <!-- Manual input -->
+        <!-- Ingen övertid denna måbad -->
+        <function model="hr.payslip" name="onchange_employee">
+            <value eval="[ref('l10n_se_hr_payroll_tiichri.hr_payslip_gustav_08')]"/>
+        </function>
+
+        <function model="hr.payslip" name="compute_sheet">
+            <value eval="[ref('l10n_se_hr_payroll_tiichri.hr_payslip_gustav_08')]"/>
+        </function>
+
+        <!-- ================================ September ================================ -->
+
+        <!-- Generate payslip -->
         <record id="hr_payslip_gustav_09" model="hr.payslip">
             <field name="name">Lönespecifikation för September - Gustav Groth</field>
             <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons" />
@@ -267,6 +353,19 @@
             <field name="struct_id" ref="l10n_se_hr_payroll_tiichri.hr_payroll_structure_tj_tiichri" />
         </record>
 
+        <!-- Manual input -->
+        <!-- Ingen övertid denna måbad -->
+        <function model="hr.payslip" name="onchange_employee">
+            <value eval="[ref('l10n_se_hr_payroll_tiichri.hr_payslip_gustav_09')]"/>
+        </function>
+
+        <function model="hr.payslip" name="compute_sheet">
+            <value eval="[ref('l10n_se_hr_payroll_tiichri.hr_payslip_gustav_09')]"/>
+        </function>
+
+        <!-- ================================ October ================================ -->
+
+        <!-- Generate payslip -->
         <record id="hr_payslip_gustav_10" model="hr.payslip">
             <field name="name">Lönespecifikation för Oktober - Gustav Groth</field>
             <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons" />
@@ -277,6 +376,19 @@
             <field name="struct_id" ref="l10n_se_hr_payroll_tiichri.hr_payroll_structure_tj_tiichri" />
         </record>
 
+        <!-- Manual input -->
+        <!-- Ingen övertid denna måbad -->
+        <function model="hr.payslip" name="onchange_employee">
+            <value eval="[ref('l10n_se_hr_payroll_tiichri.hr_payslip_gustav_10')]"/>
+        </function>
+
+        <function model="hr.payslip" name="compute_sheet">
+            <value eval="[ref('l10n_se_hr_payroll_tiichri.hr_payslip_gustav_10')]"/>
+        </function>
+
+        <!-- ================================ November ================================ -->
+
+        <!-- Generate payslip -->
         <record id="hr_payslip_gustav_11" model="hr.payslip">
             <field name="name">Lönespecifikation för November - Gustav Groth</field>
             <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons" />
@@ -287,6 +399,19 @@
             <field name="struct_id" ref="l10n_se_hr_payroll_tiichri.hr_payroll_structure_tj_tiichri" />
         </record>
 
+        <!-- Manual input -->
+        <!-- Ingen övertid denna måbad -->
+        <function model="hr.payslip" name="onchange_employee">
+            <value eval="[ref('l10n_se_hr_payroll_tiichri.hr_payslip_gustav_11')]"/>
+        </function>
+
+        <function model="hr.payslip" name="compute_sheet">
+            <value eval="[ref('l10n_se_hr_payroll_tiichri.hr_payslip_gustav_11')]"/>
+        </function>
+
+        <!-- ================================ December ================================ -->
+
+        <!-- Generate payslip -->
         <record id="hr_payslip_gustav_12" model="hr.payslip">
             <field name="name">Lönespecifikation för December - Gustav Groth</field>
             <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons" />
@@ -297,75 +422,15 @@
             <field name="struct_id" ref="l10n_se_hr_payroll_tiichri.hr_payroll_structure_tj_tiichri" />
         </record>
 
-
-
-
-        <function model="hr.payslip" name="onchange_employee">
-            <value eval="[ref('l10n_se_hr_payroll_tiichri.hr_payslip_gustav_01')]"/>
-        </function>
-
-        <function model="hr.payslip" name="onchange_employee">
-            <value eval="[ref('l10n_se_hr_payroll_tiichri.hr_payslip_gustav_02')]"/>
-        </function>
-
-        <function model="hr.payslip" name="onchange_employee">
-            <value eval="[ref('l10n_se_hr_payroll_tiichri.hr_payslip_gustav_03')]"/>
-        </function>
-
-        <function model="hr.payslip" name="onchange_employee">
-            <value eval="[ref('l10n_se_hr_payroll_tiichri.hr_payslip_gustav_04')]"/>
-        </function>
-
-        <function model="hr.payslip" name="onchange_employee">
-            <value eval="[ref('l10n_se_hr_payroll_tiichri.hr_payslip_gustav_05')]"/>
-        </function>
-
-        <function model="hr.payslip" name="onchange_employee">
-            <value eval="[ref('l10n_se_hr_payroll_tiichri.hr_payslip_gustav_06')]"/>
-        </function>
-
-        <function model="hr.payslip" name="onchange_employee">
-            <value eval="[ref('l10n_se_hr_payroll_tiichri.hr_payslip_gustav_07')]"/>
-        </function>
-
-        <function model="hr.payslip" name="onchange_employee">
-            <value eval="[ref('l10n_se_hr_payroll_tiichri.hr_payslip_gustav_08')]"/>
-        </function>
-
-        <function model="hr.payslip" name="onchange_employee">
-            <value eval="[ref('l10n_se_hr_payroll_tiichri.hr_payslip_gustav_09')]"/>
-        </function>
-
-        <function model="hr.payslip" name="onchange_employee">
-            <value eval="[ref('l10n_se_hr_payroll_tiichri.hr_payslip_gustav_10')]"/>
-        </function>
-
-        <function model="hr.payslip" name="onchange_employee">
-            <value eval="[ref('l10n_se_hr_payroll_tiichri.hr_payslip_gustav_11')]"/>
-        </function>
-
+        <!-- Manual input -->
+        <!-- Ingen övertid denna måbad -->
         <function model="hr.payslip" name="onchange_employee">
             <value eval="[ref('l10n_se_hr_payroll_tiichri.hr_payslip_gustav_12')]"/>
         </function>
 
         <function model="hr.payslip" name="compute_sheet">
-            <value eval="[
-                ref('l10n_se_hr_payroll_tiichri.hr_payslip_gustav_01'), 
-                ref('l10n_se_hr_payroll_tiichri.hr_payslip_gustav_02'), 
-                ref('l10n_se_hr_payroll_tiichri.hr_payslip_gustav_03'),
-                ref('l10n_se_hr_payroll_tiichri.hr_payslip_gustav_04'), 
-                ref('l10n_se_hr_payroll_tiichri.hr_payslip_gustav_05'), 
-                ref('l10n_se_hr_payroll_tiichri.hr_payslip_gustav_06'),
-                ref('l10n_se_hr_payroll_tiichri.hr_payslip_gustav_07'), 
-                ref('l10n_se_hr_payroll_tiichri.hr_payslip_gustav_08'), 
-                ref('l10n_se_hr_payroll_tiichri.hr_payslip_gustav_09'),
-                ref('l10n_se_hr_payroll_tiichri.hr_payslip_gustav_10'), 
-                ref('l10n_se_hr_payroll_tiichri.hr_payslip_gustav_11'), 
-                ref('l10n_se_hr_payroll_tiichri.hr_payslip_gustav_12')
-            ]"/>
+            <value eval="[ref('l10n_se_hr_payroll_tiichri.hr_payslip_gustav_12')]"/>
         </function>
-
-
 
 
     </data>

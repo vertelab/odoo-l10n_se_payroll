@@ -34,8 +34,7 @@
     'repository': 'https://github.com/vertelab/odoo-l10n_se_payroll',
     'depends': [
         'payroll',
-        'account_period_vrtl',
-        'hr',
+        'account_period_vrtl', 
         'hr_timesheet_sheet',
     ],
     'description': """

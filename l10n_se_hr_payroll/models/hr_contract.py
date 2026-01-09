@@ -42,27 +42,32 @@ class hr_contract(models.Model):
         qualifying_periods = self.get_qualifying_sick_leave_periods(payslip_id) 
         combined_qualifying_periods = self.combine_sick_leave_periods(qualifying_periods)
 
-        return len(combined_qualifying_periods)
+        new_deductions_this_month = 0
+        for period in combined_qualifying_periods:
+            if payslip_id.date_from <= period['date_from'] <= payslip_id.date_to:
+                new_deductions_this_month += 1
+
+        return new_deductions_this_month
 
 
     def get_qualifying_sick_leave_periods(self, payslip_id):
         twelve_months_ago = payslip_id.date_from - relativedelta(months = 12)
 
         domain = [
-            ('date_from', '>=', twelve_months_ago),
-            ('date_to', '<=', payslip_id.date_to),
-
+            ('date_from', '<=', payslip_id.date_to),
+            ('date_to', '>=', twelve_months_ago),
             ('employee_id', '=', self.employee_id.id), 
             ('holiday_status_id.work_entry_type_id.code', '=', 'sjk'),
+            ('state', 'in', ['confirm', 'validate']),
         ]
 
         leaves = self.env['hr.leave'].search(domain)
         
-        leaves_mapped = list(map(lambda l: dict(date_from = l.date_from.date(), date_to = l.date_to.date()) ,leaves))
+        #leaves_mapped = list(map(lambda l: dict(date_from = l.date_from.date(), date_to = l.date_to.date()) ,leaves))
 
-        return leaves_mapped
-
-
+        #return leaves_mapped
+        return [{'date_from': l.date_from.date(), 'date_to': l.date_to.date()} for l in leaves]
+        
     def get_monthly_sick_leave_periods(self, payslip_id):
 
         domain = [
@@ -112,9 +117,9 @@ class hr_contract(models.Model):
         for leave in leaves: 
             current_start = leave["date_from"]
             previous_end = leave["date_to"]
-            number_of_days = previous_end.day - current_start.day + 1
+            number_of_days = (previous_end - current_start).days + 1
             #_logger.error(f"{number_of_days=}")
-            total_days += number_of_days - leave["non_sick_days"]
+            total_days += number_of_days - leave.get("non_sick_days", 0)
             #_logger.error(f"{total_days=}")
         return total_days
 
@@ -122,11 +127,12 @@ class hr_contract(models.Model):
     def get_non_sick_days(self, leave):
         current_start = leave["date_from"]
         previous_end = leave["date_to"]
-        number_of_days = previous_end.day - current_start.day 
+        #number_of_days = previous_end.day - current_start.day 
         #_logger.error(f"Sick: {number_of_days}")
-        return number_of_days    
+        return (previous_end - current_start).days
 
 
+    # Kombinerar perioder som ligger inom fem dagar från varandra så att de räknas till samma sjukperiod
     def combine_sick_leave_periods(self, leaves):
         sorted_leaves = sorted(leaves, key=lambda l: l["date_from"])
         combined_periods = []
@@ -147,17 +153,53 @@ class hr_contract(models.Model):
                 )
             else: 
                 previous_end = combined_periods[-1]["date_to"]
-                if current_start.day - previous_end.day <= 5: 
-                    combined_periods[-1]["non_sick_days"] += current_start.day - previous_end.day -1
-
-                    combined_periods[-1]["date_to"] = current_end
+                if (current_start - previous_end).days <= 5: 
+                    combined_periods[-1]["date_to"] = max(previous_end, current_end)
                 else: 
-                    combined_periods.append(
-                        {"date_from": current_start, "date_to": current_end, "non_sick_days": 0}
-                    )
-
+                    combined_periods.append({"date_from": current_start, "date_to": current_end})
         return combined_periods
 
+    def get_sick_pay_data(self, payslip):
+        # Kolla sex mån bakåt för att lämna utrymme för 5-dagarsregeln
+        date_from_history = payslip.date_from - relativedelta(months=6)
+        domain = [
+            ('date_from', '<=', payslip.date_to),
+            ('date_to', '>=', date_from_history),
+            ('employee_id', '=', self.employee_id.id),
+            ('holiday_status_id.work_entry_type_id.code', '=', 'sjk'),
+            ('state', 'in', ['confirm', 'validate']),
+        ]
+        leaves = self.env['hr.leave'].search(domain)
+        
+        leaves_mapped = [{'date_from': l.date_from.date(), 'date_to': l.date_to.date()} for l in leaves]
+        combined_periods = self.combine_sick_leave_periods(leaves_mapped)
+
+        res = {
+            'hours_1_14': 0.0,
+            'days_15_90': 0.0,
+            'days_91_plus': 0.0
+        }
+
+        for period in combined_periods:
+            loop_date = period['date_from']
+            while loop_date <= period['date_to']:
+                day_index = (loop_date - period['date_from']).days + 1
+                
+                if payslip.date_from <= loop_date <= payslip.date_to:
+                    is_actual_sick_day = any(l['date_from'] <= loop_date <= l['date_to'] for l in leaves_mapped)
+                    
+                    if is_actual_sick_day:
+                        if day_index <= 14:
+                            day_start = fields.Datetime.to_datetime(loop_date)
+                            day_end = day_start + relativedelta(days=1, seconds=-1)
+                            res['hours_1_14'] += self.resource_calendar_id.get_work_hours_count(day_start, day_end, compute_leaves=False)
+                        elif 15 <= day_index <= 90:
+                            res['days_15_90'] += 1.0
+                        else:
+                            res['days_91_plus'] += 1.0
+            
+                loop_date += relativedelta(days=1)
+        return res
 
     def get_leave_of_absence_periods(self, payslip):
         domain = [

@@ -74,7 +74,10 @@
         </record> -->
 
 
-        <!-- Leave Janurary -->
+        <!-- !TODO: Uppdatera alla leaves som har en del av dag till att följa samma format som 
+        tjänstledighet del av dag exempel hr_leave_asse_104! -->
+
+        <!-- ================================ January ================================ -->
 
         <!-- Sick leave: -->
         <record id="hr_leave_asse_101" model="hr.leave">
@@ -114,10 +117,11 @@
         <record id="hr_leave_asse_104" model="hr.leave">
             <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_asse_employee" />
             <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons"/>
-            <field name="date_from">2022-01-03</field>
-            <field name="date_to">2022-01-03</field>
             <field name="request_date_from">2022-01-03</field>
             <field name="request_date_to">2022-01-03</field>
+            <field name="request_unit_hours" eval="True"/>
+            <field name="request_hour_from">8</field>
+            <field name="request_hour_to">12</field>
             <field name="number_of_hours">4</field>
             <field name="holiday_status_id" ref="l10n_se_hr_payroll.leave_type_loa" />
         </record>
@@ -141,21 +145,67 @@
             <field name="date_to">2022-01-26</field>
             <field name="request_date_from">2022-01-25</field>
             <field name="request_date_to">2022-01-26</field>
-            <field name="number_of_hours">16</field>
+            <field name="number_of_hours">12</field>
             <field name="holiday_status_id" ref="l10n_se_hr_payroll.leave_type_vab" />
         </record>
 
-        <!-- Leave February -->
+        <!-- Saknas: -->
+        <!-- Bilförmån -->
+        <!-- Förmån av fritt drivmedel vid tjänstebil -->
+        <!-- Upphöjt värde av förmån fritt drivmedel -->
+        <!-- Bonus -->
 
-        <!-- Sick Leave: -->
-        <!-- Leave of absence: -->
+        <!-- Skatt -->
+        <!-- Arbetsgivaravgift -->
+
+        <!-- Validate leave of absences -->
+        <function model="hr.leave" name="action_validate">
+            <value eval="[ref('hr_leave_asse_104'), ref('hr_leave_asse_105')]"/>
+        </function>
+
+        <!-- Generate payslip -->
+        <record id="hr_payslip_asse_01" model="hr.payslip">
+            <field name="name">Lönespecifikation för Januari - Asse Aronsson</field>
+            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons" />
+            <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_asse_employee" />
+            <field name="period_id" ref="period_01_2022" />
+            <field name="date_from">2022-01-01</field>
+            <field name="date_to">2022-01-31</field>
+            <field name="struct_id" ref="l10n_se_hr_payroll_tiichri.hr_payroll_structure_tj_tiichri" />
+        </record>
+
+        <!-- Manual input -->
+
+        <function model="hr.payslip" name="onchange_employee">
+            <value eval="[ref('l10n_se_hr_payroll_tiichri.hr_payslip_asse_01')]"/>
+        </function>
+
+        <function model="hr.payslip.input" name="write">
+            <value model="hr.payslip.input" search="[('payslip_id', '=', ref('hr_payslip_asse_01')), ('code', '=', 'otidtim')]"/>
+            <value eval="{'amount_qty': 1.0}"/>
+        </function>
+
+        <function model="hr.payslip.input" name="write">
+            <value model="hr.payslip.input" search="[('payslip_id', '=', ref('hr_payslip_asse_01')), ('code', '=', 'kvaltim')]"/>
+            <value eval="{'amount_qty': 1.0}"/>
+        </function>
+
+        <function model="hr.payslip" name="compute_sheet">
+            <value eval="[ref('l10n_se_hr_payroll_tiichri.hr_payslip_asse_01')]"/>
+        </function>
+
+        <!-- ================================ February ================================ -->
+
+        <!-- Leave of Absence -->
+
         <record id="hr_leave_asse_201" model="hr.leave">
             <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_asse_employee" />
             <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons"/>
-            <field name="date_from">2022-02-07</field>
-            <field name="date_to">2022-02-07</field>
             <field name="request_date_from">2022-02-07</field>
             <field name="request_date_to">2022-02-07</field>
+            <field name="request_unit_hours" eval="True"/>
+            <field name="request_hour_from">8</field>
+            <field name="request_hour_to">11</field>
             <field name="number_of_hours">3</field>
             <field name="holiday_status_id" ref="l10n_se_hr_payroll.leave_type_loa" />
         </record>
@@ -171,9 +221,7 @@
             <field name="holiday_status_id" ref="l10n_se_hr_payroll.leave_type_loa" />
         </record>
 
-
         <!-- VAB -->
-
         <record id="hr_leave_asse_203" model="hr.leave">
             <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_asse_employee" />
             <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons"/>
@@ -185,8 +233,54 @@
             <field name="holiday_status_id" ref="l10n_se_hr_payroll.leave_type_vab" />
         </record>
 
-        <!-- Leave March -->
-        <!-- Sick Leave: -->
+        <!-- Saknas: -->
+        <!-- Bilförmån -->
+        <!-- Förmån av fritt drivmedel vid tjänstebil -->
+        <!-- Upphöjt värde av förmån fritt drivmedel -->
+        <!-- Övriga nettoavdrag (gymkort) -->
+
+        <!-- Skatt -->
+        <!-- Arbetsgivaravgift -->
+
+        <!-- Validate Leave of Absence -->
+        <function model="hr.leave" name="action_validate">
+            <value eval="[ref('hr_leave_asse_201'), ref('hr_leave_asse_202')]"/>
+        </function>
+
+        <!-- Generate Payslip -->
+        <record id="hr_payslip_asse_02" model="hr.payslip">
+            <field name="name">Lönespecifikation för Februari - Asse Aronsson</field>
+            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons" />
+            <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_asse_employee" />
+            <field name="period_id" ref="period_02_2022" />
+            <field name="date_from">2022-02-01</field>
+            <field name="date_to">2022-02-28</field>
+            <field name="struct_id" ref="l10n_se_hr_payroll_tiichri.hr_payroll_structure_tj_tiichri" />
+        </record>
+
+        <!-- Manual input -->
+
+        <function model="hr.payslip" name="onchange_employee">
+            <value eval="[ref('hr_payslip_asse_02')]"/>
+        </function>
+
+        <function model="hr.payslip.input" name="write">
+            <value model="hr.payslip.input" search="[('payslip_id', '=', ref('hr_payslip_asse_02')), ('code', '=', 'otidtim')]"/>
+            <value eval="{'amount_qty': 4.0}"/>
+        </function>
+
+        <function model="hr.payslip.input" name="write">
+            <value model="hr.payslip.input" search="[('payslip_id', '=', ref('hr_payslip_asse_02')), ('code', '=', 'kvaltim')]"/>
+            <value eval="{'amount_qty': 3.0}"/>
+        </function>
+
+        <function model="hr.payslip" name="compute_sheet">
+            <value eval="[ref('hr_payslip_asse_02')]"/>
+        </function>
+
+        <!-- ================================ March ================================ -->
+
+        <!-- Sick leave -->
         <record id="hr_leave_asse_301" model="hr.leave">
             <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_asse_employee" />
             <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons"/>
@@ -198,28 +292,67 @@
             <field name="holiday_status_id" ref="l10n_se_hr_payroll.leave_type_sick" />
         </record>
 
-        <!-- Leave of Absence: -->
+        <!-- Leave of absenece -->
         <record id="hr_leave_asse_302" model="hr.leave">
             <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_asse_employee" />
             <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons"/>
-            <field name="date_from">2022-03-18</field>
-            <field name="date_to">2022-03-18</field>
             <field name="request_date_from">2022-03-18</field>
             <field name="request_date_to">2022-03-18</field>
+            <field name="request_unit_hours" eval="True"/>
+            <field name="request_hour_from">8</field>
+            <field name="request_hour_to">12</field>
             <field name="number_of_hours">4</field>
             <field name="holiday_status_id" ref="l10n_se_hr_payroll.leave_type_loa" />
         </record>
 
+        <!-- Saknas: -->
+        <!-- Bilförmån -->
+        <!-- Förmån av fritt drivmedel vid tjänstebil -->
+        <!-- Upphöjt värde av förmån fritt drivmedel -->
+        <!-- Avdrag lönveväxling -->
+        <!-- Restitdsersättning vardag -->
+        <!-- Restitdsersättning helg -->
 
-        <!-- Leave April -->
-        <!-- Leave of Absence: -->
+        <!-- Skatt -->
+        <!-- Arbetsgivaravgift -->
+
+        <!-- Validate LOA -->
+        <function model="hr.leave" name="action_validate">
+            <value eval="[ref('hr_leave_asse_302')]"/>
+        </function>
+
+        <!-- Generate payslip -->
+        <record id="hr_payslip_asse_03" model="hr.payslip">
+            <field name="name">Lönespecifikation för Mars - Asse Aronsson</field>
+            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons" />
+            <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_asse_employee" />
+            <field name="period_id" ref="period_03_2022" />
+            <field name="date_from">2022-03-01</field>
+            <field name="date_to">2022-03-31</field>
+            <field name="struct_id" ref="l10n_se_hr_payroll_tiichri.hr_payroll_structure_tj_tiichri" />
+        </record>
+
+        <!-- Manual input -->
+        <!-- Ingen ÖT denna mån -->
+
+        <function model="hr.payslip" name="onchange_employee">
+            <value eval="[ref('hr_payslip_asse_03')]"/>
+        </function>
+        <function model="hr.payslip" name="compute_sheet">
+            <value eval="[ref('hr_payslip_asse_03')]"/>
+        </function>
+
+        <!-- ================================ April ================================ -->
+
+        <!-- Leave of absence -->
         <record id="hr_leave_asse_401" model="hr.leave">
             <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_asse_employee" />
             <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons"/>
-            <field name="date_from">2022-04-19</field>
-            <field name="date_to">2022-04-19</field>
             <field name="request_date_from">2022-04-19</field>
             <field name="request_date_to">2022-04-19</field>
+            <field name="request_unit_hours" eval="True"/>
+            <field name="request_hour_from">8</field>
+            <field name="request_hour_to">11</field>
             <field name="number_of_hours">3</field>
             <field name="holiday_status_id" ref="l10n_se_hr_payroll.leave_type_loa" />
         </record>
@@ -235,9 +368,62 @@
             <field name="holiday_status_id" ref="l10n_se_hr_payroll.leave_type_loa" />
         </record>
 
+        <!-- Saknas: -->
+        <!-- Bilförmån -->
+        <!-- Förmån av fritt drivmedel vid tjänstebil -->
+        <!-- Upphöjt värde av förmån fritt drivmedel -->
+        <!-- Avdrag lönveväxling -->
+        <!-- Utlägg resekostnader -->
+        <!-- Restitdsersättning vardag -->
+        <!-- Restitdsersättning helg -->
+        <!-- Traktamente helt -->
+        <!-- Traktamente halvt -->
+        <!-- Kostförmån lunch -->
+        <!-- Kostavdrag frukost -->
+        <!-- Kostavdrag lunch eller middag -->
 
-        <!-- Leave May -->
-        <!-- Sick Leave: -->
+        <!-- Skatt -->
+        <!-- Arbetsgivaravgift -->
+
+        <!-- Validate leave of absence -->
+        <function model="hr.leave" name="action_validate">
+            <value eval="[ref('hr_leave_asse_401'), ref('hr_leave_asse_402')]"/>
+        </function>
+
+        <!-- Validate payslip -->
+        <record id="hr_payslip_asse_04" model="hr.payslip">
+            <field name="name">Lönespecifikation för April - Asse Aronsson</field>
+            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons" />
+            <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_asse_employee" />
+            <field name="period_id" ref="period_04_2022" />
+            <field name="date_from">2022-04-01</field>
+            <field name="date_to">2022-04-30</field>
+            <field name="struct_id" ref="l10n_se_hr_payroll_tiichri.hr_payroll_structure_tj_tiichri" />
+        </record>
+
+        <function model="hr.payslip" name="onchange_employee">
+            <value eval="[ref('hr_payslip_asse_04')]"/>
+        </function>
+
+        <!-- Manual input -->
+        <function model="hr.payslip.input" name="write">
+            <value model="hr.payslip.input" search="[('payslip_id', '=', ref('hr_payslip_asse_04')), ('code', '=', 'otidtim')]"/>
+            <value eval="{'amount_qty': 3.0}"/>
+        </function>
+
+        <function model="hr.payslip.input" name="write">
+            <value model="hr.payslip.input" search="[('payslip_id', '=', ref('hr_payslip_asse_04')), ('code', '=', 'kvaltim')]"/>
+            <value eval="{'amount_qty': 3.0}"/>
+        </function>
+
+        <function model="hr.payslip" name="compute_sheet">
+            <value eval="[ref('hr_payslip_asse_04')]"/>
+        </function>
+
+
+        <!-- ================================ May ================================ -->
+
+        <!-- Sick leave -->
         <record id="hr_leave_asse_501" model="hr.leave">
             <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_asse_employee" />
             <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons"/>
@@ -249,9 +435,59 @@
             <field name="holiday_status_id" ref="l10n_se_hr_payroll.leave_type_sick" />
         </record>
 
+        <!-- Saknas: -->
+        <!-- Bilförmån -->
+        <!-- Förmån av fritt drivmedel vid tjänstebil -->
+        <!-- Upphöjt värde av förmån fritt drivmedel -->
+        <!-- Avdrag lönveväxling -->
+        <!-- Traktamente skattepliktigt -->
+        <!-- Utlandstraktamente ej skattepliktigt -->
+        <!-- Kostavdrag frukost 15%, utland -->
+        <!-- Kostavdrag lunch 30%, utland -->
+        <!-- Utlägg resekostnader -->
+        <!-- Utlandstraktamente ej skattepliktigt -->
+        <!-- Kostförmån lunch -->
+        <!-- Kostavdrag middag -->
+        <!-- Kostavdrag frukost 15% utland -->
+        <!-- Kostavdrag lunch 35% utland -->
+        <!-- Kostavdrag middag 35% utland -->
 
-        <!-- Leave June -->
-        <!-- Sick Leave: -->
+        <!-- Skatt -->
+        <!-- Arbetsgivaravgift -->
+
+        <!-- Generate payslip -->
+        <record id="hr_payslip_asse_05" model="hr.payslip">
+            <field name="name">Lönespecifikation för Maj - Asse Aronsson</field>
+            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons" />
+            <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_asse_employee" />
+            <field name="period_id" ref="period_05_2022" />
+            <field name="date_from">2022-05-01</field>
+            <field name="date_to">2022-05-31</field>
+            <field name="struct_id" ref="l10n_se_hr_payroll_tiichri.hr_payroll_structure_tj_tiichri" />
+        </record>
+
+        <function model="hr.payslip" name="onchange_employee">
+            <value eval="[ref('hr_payslip_asse_05')]"/>
+        </function>
+
+        <!-- Manual input -->
+        <function model="hr.payslip.input" name="write">
+            <value model="hr.payslip.input" search="[('payslip_id', '=', ref('hr_payslip_asse_05')), ('code', '=', 'otidtim')]"/>
+            <value eval="{'amount_qty': 2.0}"/>
+        </function>
+
+        <function model="hr.payslip.input" name="write">
+            <value model="hr.payslip.input" search="[('payslip_id', '=', ref('hr_payslip_asse_05')), ('code', '=', 'kvaltim')]"/>
+            <value eval="{'amount_qty': 1.0}"/>
+        </function>
+
+        <function model="hr.payslip" name="compute_sheet">
+            <value eval="[ref('hr_payslip_asse_05')]"/>
+        </function>
+
+        <!-- ================================ June ================================ -->
+
+        <!-- Sick leave -->
         <record id="hr_leave_asse_601" model="hr.leave">
             <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_asse_employee" />
             <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons"/>
@@ -263,7 +499,7 @@
             <field name="holiday_status_id" ref="l10n_se_hr_payroll.leave_type_sick" />
         </record>
 
-        <!-- Leave of Absence: -->
+        <!-- Leave of absence -->
         <record id="hr_leave_asse_602" model="hr.leave">
             <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_asse_employee" />
             <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons"/>
@@ -275,9 +511,49 @@
             <field name="holiday_status_id" ref="l10n_se_hr_payroll.leave_type_loa" />
         </record>
 
+        <!-- Saknas: -->
+        <!-- Bilförmån -->
+        <!-- Förmån av fritt drivmedel vid tjänstebil -->
+        <!-- Upphöjt värde av förmån fritt drivmedel -->
+        <!-- Avdrag lönveväxling -->
+        <!-- Uttag semesterdagar, månadsavlönad -->
+        <!-- Semesterlön betald -->
+        <!-- Semestertillägg betalda semesterdagar -->
+        <!-- Semesteravdrag betald -->
+        <!-- Bostadsförmån ej småhus (lån av fjällstugan) -->
 
-        <!-- Leave July -->
-        <!-- Sick Leave: -->
+        <!-- Skatt -->
+        <!-- Arbetsgivaravgift -->
+
+
+        <!-- Validate leave of absence -->
+        <function model="hr.leave" name="action_validate">
+            <value eval="[ref('hr_leave_asse_602')]"/>
+        </function>
+
+        <!-- Generate payslip -->
+        <record id="hr_payslip_asse_06" model="hr.payslip">
+            <field name="name">Lönespecifikation för Juni - Asse Aronsson</field>
+            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons" />
+            <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_asse_employee" />
+            <field name="period_id" ref="period_06_2022" />
+            <field name="date_from">2022-06-01</field>
+            <field name="date_to">2022-06-30</field>
+            <field name="struct_id" ref="l10n_se_hr_payroll_tiichri.hr_payroll_structure_tj_tiichri" />
+        </record>
+
+        <!-- Manual input -->
+        <!-- Ingen otid dnna mån -->
+        <function model="hr.payslip" name="onchange_employee">
+            <value eval="[ref('hr_payslip_asse_06')]"/>
+        </function>
+        <function model="hr.payslip" name="compute_sheet">
+            <value eval="[ref('hr_payslip_asse_06')]"/>
+        </function>
+
+        <!-- ================================ July ================================ -->
+
+        <!-- Sick leave -->
         <record id="hr_leave_asse_701" model="hr.leave">
             <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_asse_employee" />
             <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons"/>
@@ -289,7 +565,7 @@
             <field name="holiday_status_id" ref="l10n_se_hr_payroll.leave_type_sick" />
         </record>
 
-        <!-- Leave of Absence: -->
+        <!-- Leave of absence -->
         <record id="hr_leave_asse_702" model="hr.leave">
             <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_asse_employee" />
             <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons"/>
@@ -301,9 +577,72 @@
             <field name="holiday_status_id" ref="l10n_se_hr_payroll.leave_type_loa" />
         </record>
 
+        <!-- VAB -->
+        <record id="hr_leave_asse_703" model="hr.leave">
+            <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_asse_employee" />
+            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons"/>
+            <field name="date_from">2022-07-05</field>
+            <field name="date_to">2022-07-06</field>
+            <field name="request_date_from">2022-07-05</field>
+            <field name="request_date_to">2022-07-06</field>
+            <field name="number_of_hours">16</field>
+            <field name="holiday_status_id" ref="l10n_se_hr_payroll.leave_type_vab" />
+        </record>
 
-        <!-- Leave August-September -->
-        <!-- Sick Leave: -->
+
+        <!-- Saknas: -->
+        <!-- Bilförmån -->
+        <!-- Förmån av fritt drivmedel vid tjänstebil -->
+        <!-- Upphöjt värde av förmån fritt drivmedel -->
+        <!-- Avdrag lönveväxling -->
+        <!-- Uttag betalda semesterdagar, månadsavlönad -->
+        <!-- Semesterlön betald -->
+        <!-- Semestertillägg betalda semesterdagar -->
+        <!-- Semesteravdrag betald -->
+        <!-- Bonus -->
+
+        <!-- Skatt -->
+        <!-- Arbetsgivaravgift -->
+
+
+        <!-- Validate leave of absence -->
+        <function model="hr.leave" name="action_validate">
+            <value eval="[ref('hr_leave_asse_702')]"/>
+        </function>
+
+        <!-- Generate payslip -->
+        <record id="hr_payslip_asse_07" model="hr.payslip">
+            <field name="name">Lönespecifikation för Juli - Asse Aronsson</field>
+            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons" />
+            <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_asse_employee" />
+            <field name="period_id" ref="period_07_2022" />
+            <field name="date_from">2022-07-01</field>
+            <field name="date_to">2022-07-31</field>
+            <field name="struct_id" ref="l10n_se_hr_payroll_tiichri.hr_payroll_structure_tj_tiichri" />
+        </record>
+
+        <function model="hr.payslip" name="onchange_employee">
+            <value eval="[ref('hr_payslip_asse_07')]"/>
+        </function>
+
+        <!-- Manual input -->
+        <function model="hr.payslip.input" name="write">
+            <value model="hr.payslip.input" search="[('payslip_id', '=', ref('hr_payslip_asse_07')), ('code', '=', 'otidtim')]"/>
+            <value eval="{'amount_qty': 4.0}"/>
+        </function>
+
+        <function model="hr.payslip.input" name="write">
+            <value model="hr.payslip.input" search="[('payslip_id', '=', ref('hr_payslip_asse_07')), ('code', '=', 'kvaltim')]"/>
+            <value eval="{'amount_qty': 2.0}"/>
+        </function>
+
+        <function model="hr.payslip" name="compute_sheet">
+            <value eval="[ref('hr_payslip_asse_07')]"/>
+        </function>
+
+        <!-- ================================ August ================================ -->
+
+        <!-- Sick leave -->
         <record id="hr_leave_asse_801" model="hr.leave">
             <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_asse_employee" />
             <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons"/>
@@ -311,13 +650,57 @@
             <field name="date_to">2022-09-01</field>
             <field name="request_date_from">2022-08-12</field>
             <field name="request_date_to">2022-09-01</field>
-            <field name="number_of_hours">136</field>
+            <field name="number_of_hours">120</field>
             <field name="holiday_status_id" ref="l10n_se_hr_payroll.leave_type_sick" />
         </record>
 
+        <!-- Saknas: -->
+        <!-- Bilförmån -->
+        <!-- Förmån av fritt drivmedel vid tjänstebil -->
+        <!-- Upphöjt värde av förmån fritt drivmedel -->
+        <!-- Avdrag lönveväxling -->
+        <!-- Uttag semesterdagar, månadsavlönad -->
+        <!-- Semesterlön betald -->
+        <!-- Semestertillägg betalda semesterdagar -->
+        <!-- Semesteravdrag betald -->
+        <!-- Bonus -->
 
-        <!-- Leave September -->
-        <!-- Sick Leave: -->
+        <!-- Skatt -->
+        <!-- Arbetsgivaravgift -->
+
+        <!-- Generate payslip -->
+        <record id="hr_payslip_asse_08" model="hr.payslip">
+            <field name="name">Lönespecifikation för Augusti - Asse Aronsson</field>
+            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons" />
+            <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_asse_employee" />
+            <field name="period_id" ref="period_08_2022" />
+            <field name="date_from">2022-08-01</field>
+            <field name="date_to">2022-08-31</field>
+            <field name="struct_id" ref="l10n_se_hr_payroll_tiichri.hr_payroll_structure_tj_tiichri" />
+        </record>
+
+        <function model="hr.payslip" name="onchange_employee">
+            <value eval="[ref('hr_payslip_asse_08')]"/>
+        </function>
+
+        <!-- Manual input -->
+        <function model="hr.payslip.input" name="write">
+            <value model="hr.payslip.input" search="[('payslip_id', '=', ref('hr_payslip_asse_08')), ('code', '=', 'otidtim')]"/>
+            <value eval="{'amount_qty': 1.0}"/>
+        </function>
+
+        <function model="hr.payslip.input" name="write">
+            <value model="hr.payslip.input" search="[('payslip_id', '=', ref('hr_payslip_asse_08')), ('code', '=', 'kvaltim')]"/>
+            <value eval="{'amount_qty': 1.0}"/>
+        </function>
+
+        <function model="hr.payslip" name="compute_sheet">
+            <value eval="[ref('hr_payslip_asse_08')]"/>
+        </function>
+
+        <!-- ================================ September ================================ -->
+
+        <!-- Sick leave -->
         <record id="hr_leave_asse_901" model="hr.leave">
             <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_asse_employee" />
             <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons"/>
@@ -329,23 +712,110 @@
             <field name="holiday_status_id" ref="l10n_se_hr_payroll.leave_type_sick" />
         </record>
 
+        <!-- Saknas: -->
+        <!-- Bilförmån -->
+        <!-- Förmån av fritt drivmedel vid tjänstebil -->
+        <!-- Upphöjt värde av förmån fritt drivmedel -->
+        <!-- Avdrag lönveväxling -->
+        <!-- Uttag semesterdagar, månadsavlönad -->
+        <!-- Semesterlön betald -->
+        <!-- Semestertillägg betalda semesterdagar -->
+        <!-- Semesteravdrag betald -->
 
-        <!-- Leave October -->
-        <!-- Leave of Absence: -->
+        <!-- Skatt -->
+        <!-- Arbetsgivaravgift -->
+
+
+        <!-- Generate payslip -->
+        <record id="hr_payslip_asse_09" model="hr.payslip">
+            <field name="name">Lönespecifikation för September - Asse Aronsson</field>
+            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons" />
+            <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_asse_employee" />
+            <field name="period_id" ref="period_09_2022" />
+            <field name="date_from">2022-09-01</field>
+            <field name="date_to">2022-09-30</field>
+            <field name="struct_id" ref="l10n_se_hr_payroll_tiichri.hr_payroll_structure_tj_tiichri" />
+        </record>
+
+        <!-- Manual input -->
+        <!-- Ingen övertid -->
+
+        <function model="hr.payslip" name="onchange_employee">
+            <value eval="[ref('hr_payslip_asse_09')]"/>
+        </function>
+        <function model="hr.payslip" name="compute_sheet">
+            <value eval="[ref('hr_payslip_asse_09')]"/>
+        </function>
+
+        <!-- ================================ October ================================ -->
+
+        <!-- Leave of absence -->
         <record id="hr_leave_asse_1002" model="hr.leave">
             <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_asse_employee" />
             <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons"/>
-            <field name="date_from">2022-10-14</field>
-            <field name="date_to">2022-10-14</field>
             <field name="request_date_from">2022-10-14</field>
             <field name="request_date_to">2022-10-14</field>
+            <field name="request_unit_hours" eval="True"/>
+            <field name="request_hour_from">8</field>
+            <field name="request_hour_to">12</field>
             <field name="number_of_hours">4</field>
             <field name="holiday_status_id" ref="l10n_se_hr_payroll.leave_type_loa" />
         </record>
 
+        <!-- Saknas: -->
+        <!-- Bilförmån -->
+        <!-- Förmån av fritt drivmedel vid tjänstebil -->
+        <!-- Upphöjt värde av förmån fritt drivmedel -->
+        <!-- Avdrag lönveväxling -->
+        <!-- Föräldraledighet kalenderdagsavdrag -->
+        <!-- Uttag betalda semesterdagar, månadsavlönad -->
+        <!-- Semesterlön betald -->
+        <!-- Semestertillägg betalda semesterdagar -->
+        <!-- Semesteravdrag betald -->
+        <!-- Lunchkuponger förmånsvärde -->
+        <!-- Avdrag lunchkuponger -->
 
-        <!-- Leave November -->
-        <!-- Sick leave: -->
+        <!-- Skatt -->
+        <!-- Arbetsgivaravgift -->
+
+        <!-- Validate leave of absence -->
+        <function model="hr.leave" name="action_validate">
+            <value eval="[ref('hr_leave_asse_1002')]"/>
+        </function>
+
+        <!-- Generate payslip -->
+        <record id="hr_payslip_asse_10" model="hr.payslip">
+            <field name="name">Lönespecifikation för Oktober - Asse Aronsson</field>
+            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons" />
+            <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_asse_employee" />
+            <field name="period_id" ref="period_10_2022" />
+            <field name="date_from">2022-10-01</field>
+            <field name="date_to">2022-10-31</field>
+            <field name="struct_id" ref="l10n_se_hr_payroll_tiichri.hr_payroll_structure_tj_tiichri" />
+        </record>
+
+        <!-- Manual input -->
+        <function model="hr.payslip" name="onchange_employee">
+            <value eval="[ref('hr_payslip_asse_10')]"/>
+        </function>
+
+        <function model="hr.payslip.input" name="write">
+            <value model="hr.payslip.input" search="[('payslip_id', '=', ref('hr_payslip_asse_10')), ('code', '=', 'otidtim')]"/>
+            <value eval="{'amount_qty': 2.0}"/>
+        </function>
+
+        <function model="hr.payslip.input" name="write">
+            <value model="hr.payslip.input" search="[('payslip_id', '=', ref('hr_payslip_asse_10')), ('code', '=', 'kvaltim')]"/>
+            <value eval="{'amount_qty': 2.0}"/>
+        </function>
+
+        <function model="hr.payslip" name="compute_sheet">
+            <value eval="[ref('hr_payslip_asse_10')]"/>
+        </function>
+
+        <!-- ================================ November ================================ -->
+
+        <!-- Sick leave -->
         <record id="hr_leave_asse_1101" model="hr.leave">
             <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_asse_employee" />
             <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons"/>
@@ -357,122 +827,33 @@
             <field name="holiday_status_id" ref="l10n_se_hr_payroll.leave_type_sick" />
         </record>
 
-
-
-        <!-- End leaves and salary/wage related inputs -->
-
-        <!-- Validate leave of absence -->
-        <function model="hr.leave" name="action_validate">
-            <value eval="[
-                ref('hr_leave_asse_104'), ref('hr_leave_asse_105'),
-                ref('hr_leave_asse_201'), ref('hr_leave_asse_202'),
-                ref('hr_leave_asse_302'), ref('hr_leave_asse_401'),
-                ref('hr_leave_asse_402'), ref('hr_leave_asse_602'),
-                ref('hr_leave_asse_702'), ref('hr_leave_asse_1002')
-            ]"/>
-        </function>
-
-        <!-- Payslips Asse -->
-        <record id="hr_payslip_asse_01" model="hr.payslip">
-            <field name="name">Lönespecifikation för Januari - Asse Aronsson</field>
-            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons" />
+        <!-- VAB -->
+        <record id="hr_leave_asse_1103" model="hr.leave">
             <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_asse_employee" />
-            <field name="period_id" ref="period_01_2022" />
-            <field name="date_from">2022-01-01</field>
-            <field name="date_to">2022-01-31</field>
-            <field name="struct_id" ref="l10n_se_hr_payroll_tiichri.hr_payroll_structure_tj_tiichri" />
+            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons"/>
+            <field name="date_from">2022-11-01</field>
+            <field name="date_to">2022-11-02</field>
+            <field name="request_date_from">2022-11-01</field>
+            <field name="request_date_to">2022-11-02</field>
+            <field name="number_of_hours">12</field>
+            <field name="holiday_status_id" ref="l10n_se_hr_payroll.leave_type_vab" />
         </record>
 
-        <record id="hr_payslip_asse_02" model="hr.payslip">
-            <field name="name">Lönespecifikation för Februari - Asse Aronsson</field>
-            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons" />
-            <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_asse_employee" />
-            <field name="period_id" ref="period_02_2022" />
-            <field name="date_from">2022-02-01</field>
-            <field name="date_to">2022-02-28</field>
-            <field name="struct_id" ref="l10n_se_hr_payroll_tiichri.hr_payroll_structure_tj_tiichri" />
-        </record>
+        <!-- Saknas: -->
+        <!-- Bilförmån -->
+        <!-- Förmån av fritt drivmedel vid tjänstebil -->
+        <!-- Upphöjt värde av förmån fritt drivmedel -->
+        <!-- Avdrag lönveväxling -->
+        <!-- Uttag semesterdagar, månadsavlönad -->
+        <!-- Semesterlön betald -->
+        <!-- Semestertillägg betalda semesterdagar -->
+        <!-- Semesteravdrag betald -->
 
-        <record id="hr_payslip_asse_03" model="hr.payslip">
-            <field name="name">Lönespecifikation för Mars - Asse Aronsson</field>
-            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons" />
-            <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_asse_employee" />
-            <field name="period_id" ref="period_03_2022" />
-            <field name="date_from">2022-03-01</field>
-            <field name="date_to">2022-03-31</field>
-            <field name="struct_id" ref="l10n_se_hr_payroll_tiichri.hr_payroll_structure_tj_tiichri" />
-        </record>
+        <!-- Skatt -->
+        <!-- Arbetsgivaravgift -->
 
-        <record id="hr_payslip_asse_04" model="hr.payslip">
-            <field name="name">Lönespecifikation för April - Asse Aronsson</field>
-            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons" />
-            <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_asse_employee" />
-            <field name="period_id" ref="period_04_2022" />
-            <field name="date_from">2022-04-01</field>
-            <field name="date_to">2022-04-30</field>
-            <field name="struct_id" ref="l10n_se_hr_payroll_tiichri.hr_payroll_structure_tj_tiichri" />
-        </record>
 
-        <record id="hr_payslip_asse_05" model="hr.payslip">
-            <field name="name">Lönespecifikation för Maj - Asse Aronsson</field>
-            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons" />
-            <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_asse_employee" />
-            <field name="period_id" ref="period_05_2022" />
-            <field name="date_from">2022-05-01</field>
-            <field name="date_to">2022-05-31</field>
-            <field name="struct_id" ref="l10n_se_hr_payroll_tiichri.hr_payroll_structure_tj_tiichri" />
-        </record>
-
-        <record id="hr_payslip_asse_06" model="hr.payslip">
-            <field name="name">Lönespecifikation för Juni - Asse Aronsson</field>
-            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons" />
-            <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_asse_employee" />
-            <field name="period_id" ref="period_06_2022" />
-            <field name="date_from">2022-06-01</field>
-            <field name="date_to">2022-06-30</field>
-            <field name="struct_id" ref="l10n_se_hr_payroll_tiichri.hr_payroll_structure_tj_tiichri" />
-        </record>
-
-        <record id="hr_payslip_asse_07" model="hr.payslip">
-            <field name="name">Lönespecifikation för Juli - Asse Aronsson</field>
-            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons" />
-            <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_asse_employee" />
-            <field name="period_id" ref="period_07_2022" />
-            <field name="date_from">2022-07-01</field>
-            <field name="date_to">2022-07-31</field>
-            <field name="struct_id" ref="l10n_se_hr_payroll_tiichri.hr_payroll_structure_tj_tiichri" />
-        </record>
-
-        <record id="hr_payslip_asse_08" model="hr.payslip">
-            <field name="name">Lönespecifikation för Augusti - Asse Aronsson</field>
-            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons" />
-            <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_asse_employee" />
-            <field name="period_id" ref="period_08_2022" />
-            <field name="date_from">2022-08-01</field>
-            <field name="date_to">2022-08-31</field>
-            <field name="struct_id" ref="l10n_se_hr_payroll_tiichri.hr_payroll_structure_tj_tiichri" />
-        </record>
-
-        <record id="hr_payslip_asse_09" model="hr.payslip">
-            <field name="name">Lönespecifikation för September - Asse Aronsson</field>
-            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons" />
-            <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_asse_employee" />
-            <field name="period_id" ref="period_09_2022" />
-            <field name="date_from">2022-09-01</field>
-            <field name="date_to">2022-09-30</field>
-            <field name="struct_id" ref="l10n_se_hr_payroll_tiichri.hr_payroll_structure_tj_tiichri" />
-        </record>
-
-        <record id="hr_payslip_asse_10" model="hr.payslip">
-            <field name="name">Lönespecifikation för Oktober - Asse Aronsson</field>
-            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons" />
-            <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_asse_employee" />
-            <field name="period_id" ref="period_10_2022" />
-            <field name="date_from">2022-10-01</field>
-            <field name="date_to">2022-10-31</field>
-            <field name="struct_id" ref="l10n_se_hr_payroll_tiichri.hr_payroll_structure_tj_tiichri" />
-        </record>
-
+        <!-- Generate payslip -->
         <record id="hr_payslip_asse_11" model="hr.payslip">
             <field name="name">Lönespecifikation för November - Asse Aronsson</field>
             <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons" />
@@ -482,6 +863,23 @@
             <field name="date_to">2022-11-30</field>
             <field name="struct_id" ref="l10n_se_hr_payroll_tiichri.hr_payroll_structure_tj_tiichri" />
         </record>
+
+        <!-- Manual input -->
+        <!-- Ingen övertid -->
+
+        <function model="hr.payslip" name="onchange_employee">
+            <value eval="[ref('hr_payslip_asse_11')]"/>
+        </function>
+        <function model="hr.payslip" name="compute_sheet">
+            <value eval="[ref('hr_payslip_asse_11')]"/>
+        </function>
+
+        <!-- ================================ December ================================ -->
+
+        <!-- Saknas: -->
+        <!-- Föräldraledighet hel måånad -->
+        <!-- Föräldratillägg över 10 PBB 150dgr -->
+
 
         <record id="hr_payslip_asse_12" model="hr.payslip">
             <field name="name">Lönespecifikation för December - Asse Aronsson</field>
@@ -493,71 +891,14 @@
             <field name="struct_id" ref="l10n_se_hr_payroll_tiichri.hr_payroll_structure_tj_tiichri" />
         </record>
 
-
-
-        <function model="hr.payslip" name="onchange_employee">
-            <value eval="[ref('l10n_se_hr_payroll_tiichri.hr_payslip_asse_01')]"/>
-        </function>
+        <!-- Manual input -->
+        <!-- Ingne övertid -->
 
         <function model="hr.payslip" name="onchange_employee">
-            <value eval="[ref('l10n_se_hr_payroll_tiichri.hr_payslip_asse_02')]"/>
+            <value eval="[ref('hr_payslip_asse_12')]"/>
         </function>
-
-        <function model="hr.payslip" name="onchange_employee">
-            <value eval="[ref('l10n_se_hr_payroll_tiichri.hr_payslip_asse_03')]"/>
-        </function>
-
-        <function model="hr.payslip" name="onchange_employee">
-            <value eval="[ref('l10n_se_hr_payroll_tiichri.hr_payslip_asse_04')]"/>
-        </function>
-
-        <function model="hr.payslip" name="onchange_employee">
-            <value eval="[ref('l10n_se_hr_payroll_tiichri.hr_payslip_asse_05')]"/>
-        </function>
-
-        <function model="hr.payslip" name="onchange_employee">
-            <value eval="[ref('l10n_se_hr_payroll_tiichri.hr_payslip_asse_06')]"/>
-        </function>
-
-        <function model="hr.payslip" name="onchange_employee">
-            <value eval="[ref('l10n_se_hr_payroll_tiichri.hr_payslip_asse_07')]"/>
-        </function>
-
-        <function model="hr.payslip" name="onchange_employee">
-            <value eval="[ref('l10n_se_hr_payroll_tiichri.hr_payslip_asse_08')]"/>
-        </function>
-
-        <function model="hr.payslip" name="onchange_employee">
-            <value eval="[ref('l10n_se_hr_payroll_tiichri.hr_payslip_asse_09')]"/>
-        </function>
-
-        <function model="hr.payslip" name="onchange_employee">
-            <value eval="[ref('l10n_se_hr_payroll_tiichri.hr_payslip_asse_10')]"/>
-        </function>
-
-        <function model="hr.payslip" name="onchange_employee">
-            <value eval="[ref('l10n_se_hr_payroll_tiichri.hr_payslip_asse_11')]"/>
-        </function>
-
-        <function model="hr.payslip" name="onchange_employee">
-            <value eval="[ref('l10n_se_hr_payroll_tiichri.hr_payslip_asse_12')]"/>
-        </function>
-
         <function model="hr.payslip" name="compute_sheet">
-            <value eval="[
-                ref('l10n_se_hr_payroll_tiichri.hr_payslip_asse_01'), 
-                ref('l10n_se_hr_payroll_tiichri.hr_payslip_asse_02'), 
-                ref('l10n_se_hr_payroll_tiichri.hr_payslip_asse_03'),
-                ref('l10n_se_hr_payroll_tiichri.hr_payslip_asse_04'), 
-                ref('l10n_se_hr_payroll_tiichri.hr_payslip_asse_05'), 
-                ref('l10n_se_hr_payroll_tiichri.hr_payslip_asse_06'),
-                ref('l10n_se_hr_payroll_tiichri.hr_payslip_asse_07'), 
-                ref('l10n_se_hr_payroll_tiichri.hr_payslip_asse_08'), 
-                ref('l10n_se_hr_payroll_tiichri.hr_payslip_asse_09'),
-                ref('l10n_se_hr_payroll_tiichri.hr_payslip_asse_10'), 
-                ref('l10n_se_hr_payroll_tiichri.hr_payslip_asse_11'), 
-                ref('l10n_se_hr_payroll_tiichri.hr_payslip_asse_12')
-            ]"/>
+            <value eval="[ref('hr_payslip_asse_12')]"/>
         </function>
 
 

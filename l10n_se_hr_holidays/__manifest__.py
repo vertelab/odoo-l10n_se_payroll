@@ -33,7 +33,7 @@
     'repository': 'https://github.com/vertelab/odoo-l10n_se_payroll',
     'depends': [
         'l10n_se_hr_payroll',  
-        'hr_holidays',
+        #'hr_holidays',
         'hr_work_entry_holidays',
         # 'l10n_se_payroll_taxtable',
         # 'hr_weekly_working_hours',
@@ -67,7 +67,7 @@ Swedish Holidays Rules
         'views/hr_holidays_view.xml',
         'views/hr_leave_views.xml',
         'views/resource_calendar_view.xml',
-        'data/hr_holidays_data.xml',
+        #'data/hr_holidays_data.xml',
         #'data/hr_salary_rule_category_data.xml',
         #'report/hr_payroll_payslip_report.xml',
         #'data/hr_salary_rule_data_sick.xml',
