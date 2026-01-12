@@ -54,6 +54,41 @@
             <field name="column_number" eval="'column1'"/>
         </record>
 
+
+        <!--==========================INSTRUKTIONER FÖR TESTDATA======================
+
+               PAYSLIP SKAPAS I ORDNINGEN:
+    
+               1. Frånvaro-records
+               2. Eventuell validering av tjänstledighet
+               3. Payslip-record
+               4. Hämta data till payslip med onchange-funktion
+               5. Eventuell write-funktion på inputfält för övertid
+               6. Beräkna lönespec med compute_sheet-funktion
+ 
+               ATT SKAPA LEDIGHETSRECORDS:
+    
+               • Enstaka eller flera hela dagar: en enda record
+                 Exempel: hr_leave_doris_801
+                 HELTID 100% (Övriga): 1 hel dag = 8 timmar.
+                 DELTID 80% (Doris + Karin): Jobbar mån-tor. 1 hel dag = 8 timmar.                                     
+                                                                                           
+               • Halva dagar: en enda record MEN måste innehålla tider
+                 Exempel: hr_leave_doris_901
+                                                                                           
+               • Flera dagar som börjar/slutar med halvdag: TVÅ records
+                 Exempel: hr_leave_doris_101 + hr_leave_doris_101_02
+                                                                                           
+                 VIKTIGT: Tjänstledighet (leave_type_loa) måste valideras
+                 INNAN den aktuella månadens payslip genereras!
+                 VIKTIGT: Just nu hanteras INTE röda dagar automatiskt, utan måste 
+                 exkluderas genom att skapa flera records när frånvaro sammanfaller med
+                 en röd dag. 
+
+        ==============================================================================-->
+
+
+
         <!-- ================================ January ================================ -->
 
         <!-- Sjukfrånvaro -->
@@ -68,7 +103,7 @@
             <field name="holiday_status_id" ref="l10n_se_hr_payroll.leave_type_sick" />
         </record>
 
-        <record id="hr_leave_frans_102" model="hr.leave">
+        <record id="hr_leave_frans_101_02" model="hr.leave">
             <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_frans_employee" />
             <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons"/>
             <field name="date_from">2022-01-10</field>
@@ -80,7 +115,7 @@
         </record>
 
         <!-- Tjänstledighet -->
-        <record id="hr_leave_frans_103" model="hr.leave">
+        <record id="hr_leave_frans_102" model="hr.leave">
             <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_frans_employee" />
             <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons"/>
             <field name="date_from">2022-01-20</field>
@@ -91,12 +126,22 @@
             <field name="holiday_status_id" ref="l10n_se_hr_payroll.leave_type_loa" />
         </record>
 
-        <!-- Validate Tjänstledighet -->
-        <function model="hr.leave" name="action_validate">
-            <value eval="[ref('hr_leave_frans_103')]"/>
+        <!-- Validera Tjänstledighet -->
+        <function model="hr.leave" name="action_Validera">
+            <value eval="[ref('hr_leave_frans_102')]"/>
         </function>
 
-        <!-- Generate payslip -->
+        <!-- Saknas: -->
+        <!-- Lunchkuponger förmånsvärde -->
+        <!-- Avdrag lunchkuponger -->
+        <!-- Bonus -->
+        <!-- Övrig nettoersättning (husläkare) -->
+        <!-- Övrig förmåner, tabellskatt (husläkare) -->
+
+        <!-- Skatt -->
+        <!-- Arbetsgivaravgift -->
+
+        <!-- Generera lönespec (payslip) -->
         <record id="hr_payslip_frans_01" model="hr.payslip">
             <field name="name">Lönespecifikation för Januari - Frans Filipsson</field>
             <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons" />
@@ -108,9 +153,18 @@
         </record>
 
         <!-- Manual input -->
-        <!-- Ingen övertid denna måbad -->
         <function model="hr.payslip" name="onchange_employee">
             <value eval="[ref('l10n_se_hr_payroll_tiichri.hr_payslip_frans_01')]"/>
+        </function>
+
+        <function model="hr.payslip.input" name="write">
+            <value model="hr.payslip.input" search="[('payslip_id', '=', ref('hr_payslip_frans_01')), ('code', '=', 'otidtim')]"/>
+            <value eval="{'amount_qty': 2.0}"/>
+        </function>
+
+        <function model="hr.payslip.input" name="write">
+            <value model="hr.payslip.input" search="[('payslip_id', '=', ref('hr_payslip_frans_01')), ('code', '=', 'kvaltim')]"/>
+            <value eval="{'amount_qty': 1.0}"/>
         </function>
 
         <function model="hr.payslip" name="compute_sheet">
@@ -119,7 +173,35 @@
 
         <!-- ================================ February ================================ -->
 
-        <!-- Generate payslip -->
+        <!-- Tjänstledighet -->
+        <record id="hr_leave_frans_201" model="hr.leave">
+            <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_frans_employee" />
+            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons"/>
+            <field name="date_from">2022-02-03</field>
+            <field name="date_to">2022-02-10</field>
+            <field name="request_date_from">2022-02-03</field>
+            <field name="request_date_to">2022-02-10</field>
+            <field name="number_of_hours">48</field>
+            <field name="holiday_status_id" ref="l10n_se_hr_payroll.leave_type_loa" />
+        </record>
+
+        <!-- Saknas: -->
+        <!-- Övrig nettoersättning (gymkort) -->
+        <!-- Övrig nettoersättning (Terminalglasögon) -->
+        <!-- Milersättning, skattefri enl. schablon -->
+        <!-- Milersättning, skattepliktig -->
+        <!-- Lunchkuponger förmånsvärde -->
+        <!-- Avdrag lunchkuponger -->
+
+        <!-- Skatt -->
+        <!-- Arbetsgivaravgift -->
+
+        <!-- Validate Tjänstledighet -->
+        <function model="hr.leave" name="action_validate">
+            <value eval="[ref('hr_leave_frans_201')]"/>
+        </function>
+
+        <!-- Generera lönespec (payslip) -->
         <record id="hr_payslip_frans_02" model="hr.payslip">
             <field name="name">Lönespecifikation för Februari - Frans Filipsson</field>
             <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons" />
@@ -131,9 +213,18 @@
         </record>
 
         <!-- Manual input -->
-        <!-- Ingen övertid denna måbad -->
         <function model="hr.payslip" name="onchange_employee">
             <value eval="[ref('l10n_se_hr_payroll_tiichri.hr_payslip_frans_02')]"/>
+        </function>
+
+        <function model="hr.payslip.input" name="write">
+            <value model="hr.payslip.input" search="[('payslip_id', '=', ref('hr_payslip_frans_02')), ('code', '=', 'otidtim')]"/>
+            <value eval="{'amount_qty': 2.0}"/>
+        </function>
+
+        <function model="hr.payslip.input" name="write">
+            <value model="hr.payslip.input" search="[('payslip_id', '=', ref('hr_payslip_frans_02')), ('code', '=', 'kvaltim')]"/>
+            <value eval="{'amount_qty': 2.0}"/>
         </function>
 
         <function model="hr.payslip" name="compute_sheet">
@@ -154,7 +245,31 @@
             <field name="holiday_status_id" ref="l10n_se_hr_payroll.leave_type_sick" />
         </record>
 
-        <!-- Generate payslip -->
+        <record id="hr_leave_frans_302" model="hr.leave">
+            <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_frans_employee" />
+            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons"/>
+            <field name="date_from">2022-03-29</field>
+            <field name="date_to">2022-03-29</field>
+            <field name="request_date_from">2022-03-29</field>
+            <field name="request_date_to">2022-03-29</field>
+            <field name="number_of_hours">8</field>
+            <field name="holiday_status_id" ref="l10n_se_hr_payroll.leave_type_sick" />
+        </record>
+
+
+        <!-- Saknas: -->
+        <!-- Milersättning, skattefri enl. schablon -->
+        <!-- Milersättning, skattepliktig -->
+        <!-- Lunchkuponger förmånsvärde -->
+        <!-- Avdrag lunchkuponger -->
+        <!-- Förmån hushållsnära tjänster, arbetskostnad -->
+        <!-- Skattereduktion hushållsnära tjänster -->
+
+        <!-- Skatt -->
+        <!-- Arbetsgivaravgift -->
+
+
+        <!-- Generera lönespec (payslip) -->
         <record id="hr_payslip_frans_03" model="hr.payslip">
             <field name="name">Lönespecifikation för Mars - Frans Filipsson</field>
             <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons" />
@@ -166,9 +281,18 @@
         </record>
 
         <!-- Manual input -->
-        <!-- Ingen övertid denna måbad -->
         <function model="hr.payslip" name="onchange_employee">
             <value eval="[ref('l10n_se_hr_payroll_tiichri.hr_payslip_frans_03')]"/>
+        </function>
+
+        <function model="hr.payslip.input" name="write">
+            <value model="hr.payslip.input" search="[('payslip_id', '=', ref('hr_payslip_frans_03')), ('code', '=', 'otidtim')]"/>
+            <value eval="{'amount_qty': 4.0}"/>
+        </function>
+
+        <function model="hr.payslip.input" name="write">
+            <value model="hr.payslip.input" search="[('payslip_id', '=', ref('hr_payslip_frans_03')), ('code', '=', 'kvaltim')]"/>
+            <value eval="{'amount_qty': 2.0}"/>
         </function>
 
         <function model="hr.payslip" name="compute_sheet">
@@ -178,19 +302,34 @@
         <!-- ================================ April ================================ -->
 
         <!-- Sjukfrånvaro -->
+
         <record id="hr_leave_frans_401" model="hr.leave">
-            <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_frans_employee" />
+            <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_doris_employee" />
             <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons"/>
             <field name="date_from">2022-04-04</field>
-            <field name="date_to">2022-04-06</field>
+            <field name="date_to">2022-04-04</field>
             <field name="request_date_from">2022-04-04</field>
+            <field name="request_date_to">2022-04-04</field>
+            <field name="request_unit_hours" eval="True"/>
+            <field name="request_hour_from">13</field>
+            <field name="request_hour_to">17</field>
+            <field name="number_of_hours">4</field>
+            <field name="holiday_status_id" ref="l10n_se_hr_payroll.leave_type_sick" />
+        </record>
+
+        <record id="hr_leave_frans_401_02" model="hr.leave">
+            <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_doris_employee" />
+            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons"/>
+            <field name="date_from">2022-04-05</field>
+            <field name="date_to">2022-04-06</field>
+            <field name="request_date_from">2022-04-05</field>
             <field name="request_date_to">2022-04-06</field>
-            <field name="number_of_hours">24</field>
+            <field name="number_of_hours">16</field>
             <field name="holiday_status_id" ref="l10n_se_hr_payroll.leave_type_sick" />
         </record>
 
         <record id="hr_leave_frans_402" model="hr.leave">
-            <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_frans_employee" />
+            <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_doris_employee" />
             <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons"/>
             <field name="date_from">2022-04-12</field>
             <field name="date_to">2022-04-13</field>
@@ -201,7 +340,7 @@
         </record>
 
         <record id="hr_leave_frans_403" model="hr.leave">
-            <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_frans_employee" />
+            <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_doris_employee" />
             <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons"/>
             <field name="date_from">2022-04-26</field>
             <field name="date_to">2022-04-28</field>
@@ -211,7 +350,39 @@
             <field name="holiday_status_id" ref="l10n_se_hr_payroll.leave_type_sick" />
         </record>
 
-        <!-- Generate payslip -->
+        <!-- Tjänstledighet -->
+        <record id="hr_leave_frans_404" model="hr.leave">
+            <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_frans_employee" />
+            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons"/>
+            <field name="date_from">2022-04-29</field>
+            <field name="date_to">2022-04-29</field>
+            <field name="request_date_from">2022-04-29</field>
+            <field name="request_date_to">2022-04-29</field>
+            <field name="request_unit_hours" eval="True"/>
+            <field name="request_hour_from">13</field>
+            <field name="request_hour_to">17</field>
+            <field name="number_of_hours">4</field>
+            <field name="holiday_status_id" ref="l10n_se_hr_payroll.leave_type_loa" />
+        </record>
+
+        <!-- Saknas: -->
+        <!-- Lunchkuponger förmånsvärde -->
+        <!-- Avdrag lunchkuponger -->
+        <!-- Milersättning, skattefri enl. schablon -->
+        <!-- Milersättning, skattepliktig -->
+        <!-- Övrig nettoersättning (husläkare) -->
+        <!-- Övriga förmåner, tabellskatt (husläkare) -->
+
+        <!-- Skatt -->
+        <!-- Arbetsgivaravgift -->
+
+        <!-- Validate Tjänstledighet -->
+        <function model="hr.leave" name="action_validate">
+            <value eval="[ref('hr_leave_frans_404')]"/>
+        </function>
+
+
+        <!-- Generera lönespec (payslip) -->
         <record id="hr_payslip_frans_04" model="hr.payslip">
             <field name="name">Lönespecifikation för April - Frans Filipsson</field>
             <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons" />
@@ -228,13 +399,59 @@
             <value eval="[ref('l10n_se_hr_payroll_tiichri.hr_payslip_frans_04')]"/>
         </function>
 
+        <function model="hr.payslip.input" name="write">
+            <value model="hr.payslip.input" search="[('payslip_id', '=', ref('hr_payslip_frans_04')), ('code', '=', 'otidtim')]"/>
+            <value eval="{'amount_qty': 4.0}"/>
+        </function>
+
+        <function model="hr.payslip.input" name="write">
+            <value model="hr.payslip.input" search="[('payslip_id', '=', ref('hr_payslip_frans_04')), ('code', '=', 'kvaltim')]"/>
+            <value eval="{'amount_qty': 1.0}"/>
+        </function>
+
         <function model="hr.payslip" name="compute_sheet">
             <value eval="[ref('l10n_se_hr_payroll_tiichri.hr_payslip_frans_04')]"/>
         </function>
 
         <!-- ================================ May ================================ -->
 
-        <!-- Generate payslip -->
+        <!-- Tjänstledighet -->
+        <record id="hr_leave_frans_501" model="hr.leave">
+            <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_frans_employee" />
+            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons"/>
+            <field name="date_from">2022-05-10</field>
+            <field name="date_to">2022-05-10</field>
+            <field name="request_date_from">2022-05-10</field>
+            <field name="request_date_to">2022-05-10</field>
+            <field name="request_unit_hours" eval="True"/>
+            <field name="request_hour_from">13</field>
+            <field name="request_hour_to">17</field>
+            <field name="number_of_hours">4</field>
+            <field name="holiday_status_id" ref="l10n_se_hr_payroll.leave_type_loa" />
+        </record>
+
+
+        <!-- Saknas: -->
+        <!-- Representation, ej avdragsgill -->
+        <!-- Utlägg resekostnader -->
+        <!-- Milersättning, skattefri enl. schablon -->
+        <!-- Milersättning, skattepliktig -->
+        <!-- Nattraktamente -->
+        <!-- Traktamente helt -->
+        <!-- Traktamente halvt -->
+        <!-- Traktamente skattepliktigt -->
+        <!-- Kostavdrag frukost -->
+        <!-- Kostavdrag lunch eller middag -->
+
+        <!-- Skatt -->
+        <!-- Arbetsgivaravgift -->
+
+        <!-- Validate Tjänstledighet -->
+        <function model="hr.leave" name="action_validate">
+            <value eval="[ref('hr_leave_frans_501')]"/>
+        </function>
+
+        <!-- Generera lönespec (payslip) -->
         <record id="hr_payslip_frans_05" model="hr.payslip">
             <field name="name">Lönespecifikation för Maj - Frans Filipsson</field>
             <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons" />
@@ -251,13 +468,38 @@
             <value eval="[ref('l10n_se_hr_payroll_tiichri.hr_payslip_frans_05')]"/>
         </function>
 
+        <function model="hr.payslip.input" name="write">
+            <value model="hr.payslip.input" search="[('payslip_id', '=', ref('hr_payslip_frans_05')), ('code', '=', 'otidtim')]"/>
+            <value eval="{'amount_qty': 5.0}"/>
+        </function>
+
+        <function model="hr.payslip.input" name="write">
+            <value model="hr.payslip.input" search="[('payslip_id', '=', ref('hr_payslip_frans_05')), ('code', '=', 'kvaltim')]"/>
+            <value eval="{'amount_qty': 2.0}"/>
+        </function>
+
         <function model="hr.payslip" name="compute_sheet">
             <value eval="[ref('l10n_se_hr_payroll_tiichri.hr_payslip_frans_05')]"/>
         </function>
 
         <!-- ================================ June ================================ -->
 
-        <!-- Generate payslip -->
+
+
+        <!-- Saknas: -->
+        <!-- Uttag betalda semesterdagar, månadsavlönad -->
+        <!-- Semesterlön, betald -->
+        <!-- Semestertillägg betalda semesterdagar -->
+        <!-- Semesteravdrag betald -->
+        <!-- Uttag betalda semesterdagar, månadsavlönad -->
+        <!-- Semesterlön, betald -->
+        <!-- Semestertillägg betalda semesterdagar -->
+        <!-- Semesteravdrag betald -->
+
+        <!-- Skatt -->
+        <!-- Arbetsgivaravgift -->
+
+        <!-- Generera lönespec (payslip) -->
         <record id="hr_payslip_frans_06" model="hr.payslip">
             <field name="name">Lönespecifikation för Juni - Frans Filipsson</field>
             <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons" />
@@ -272,6 +514,16 @@
         <!-- Ingen övertid denna måbad -->
         <function model="hr.payslip" name="onchange_employee">
             <value eval="[ref('l10n_se_hr_payroll_tiichri.hr_payslip_frans_06')]"/>
+        </function>
+
+        <function model="hr.payslip.input" name="write">
+            <value model="hr.payslip.input" search="[('payslip_id', '=', ref('hr_payslip_frans_06')), ('code', '=', 'otidtim')]"/>
+            <value eval="{'amount_qty': 4.0}"/>
+        </function>
+
+        <function model="hr.payslip.input" name="write">
+            <value model="hr.payslip.input" search="[('payslip_id', '=', ref('hr_payslip_frans_06')), ('code', '=', 'kvaltim')]"/>
+            <value eval="{'amount_qty': 3.0}"/>
         </function>
 
         <function model="hr.payslip" name="compute_sheet">
@@ -292,7 +544,7 @@
             <field name="holiday_status_id" ref="l10n_se_hr_payroll.leave_type_sick" />
         </record>
 
-        <!-- Generate payslip -->
+        <!-- Generera lönespec (payslip) -->
         <record id="hr_payslip_frans_07" model="hr.payslip">
             <field name="name">Lönespecifikation för Juli - Frans Filipsson</field>
             <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons" />
@@ -327,7 +579,7 @@
             <field name="holiday_status_id" ref="l10n_se_hr_payroll.leave_type_sick" />
         </record>
 
-        <!-- Generate payslip -->
+        <!-- Generera lönespec (payslip) -->
         <record id="hr_payslip_frans_08" model="hr.payslip">
             <field name="name">Lönespecifikation för Augusti - Frans Filipsson</field>
             <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons" />
@@ -362,7 +614,7 @@
             <field name="holiday_status_id" ref="l10n_se_hr_payroll.leave_type_sick" />
         </record>
 
-        <!-- Generate payslip -->
+        <!-- Generera lönespec (payslip) -->
         <record id="hr_payslip_frans_09" model="hr.payslip">
             <field name="name">Lönespecifikation för September - Frans Filipsson</field>
             <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons" />
@@ -385,7 +637,7 @@
 
         <!-- ================================ October ================================ -->
 
-        <!-- Generate payslip -->
+        <!-- Generera lönespec (payslip) -->
         <record id="hr_payslip_frans_10" model="hr.payslip">
             <field name="name">Lönespecifikation för Oktober - Frans Filipsson</field>
             <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons" />
@@ -408,7 +660,7 @@
 
         <!-- ================================ November ================================ -->
 
-        <!-- Generate payslip -->
+        <!-- Generera lönespec (payslip) -->
         <record id="hr_payslip_frans_11" model="hr.payslip">
             <field name="name">Lönespecifikation för November - Frans Filipsson</field>
             <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons" />
@@ -431,7 +683,7 @@
 
         <!-- ================================ December ================================ -->
 
-        <!-- Generate payslip -->
+        <!-- Generera lönespec (payslip) -->
         <record id="hr_payslip_frans_12" model="hr.payslip">
             <field name="name">Lönespecifikation för December - Frans Filipsson</field>
             <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons" />

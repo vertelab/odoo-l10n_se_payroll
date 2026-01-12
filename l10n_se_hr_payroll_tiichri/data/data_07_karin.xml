@@ -54,6 +54,42 @@
 
 
 
+        <!--==========================INSTRUKTIONER FÖR TESTDATA======================
+
+               PAYSLIP SKAPAS I ORDNINGEN:                                                 
+    
+               1. Frånvaro-records                                                         
+               2. Eventuell validering av tjänstledighet                                   
+               3. Payslip-record                                                           
+               4. Hämta data till payslip med onchange-funktion                            
+               5. Eventuell write-funktion på inputfält för övertid                        
+               6. Beräkna lönespec med compute_sheet-funktion                              
+ 
+               ATT SKAPA LEDIGHETSRECORDS:                                                 
+    
+               • Enstaka eller flera hela dagar: en enda record                                       
+                 Exempel: hr_leave_asse_103        
+                 OBS: En hel dag kan variera beroende på schema
+                 HELTID 100% (Övriga): 1 hel dag = 8 timmar.
+                 DELTID 80% (Doris + Karin): Jobbar mån-tor. 1 hel dag = 8 timmar.                                                                                   
+                                                                                           
+               • Halva dagar: en enda record MEN måste innehålla tider                     
+                 Exempel: hr_leave_asse_101                                                
+                                                                                           
+               • Flera dagar som börjar/slutar med halvdag: TVÅ records                    
+                 Exempel: hr_leave_asse_106 + hr_leave_asse_106_02                         
+                                                                                           
+                 VIKTIGT: Tjänstledighet (leave_type_loa) måste valideras                
+                 INNAN den aktuella månadens payslip genereras!  
+                 VIKTIGT: Just nu hanteras INTE röda dagar automatiskt, utan måste 
+                 exkluderas genom att skapa flera records när frånvaro sammanfaller med
+                 en röd dag.                   
+
+        ==============================================================================-->
+
+
+
+
         <!-- ================================ June ================================ -->
 
         <!-- Generate payslip -->
