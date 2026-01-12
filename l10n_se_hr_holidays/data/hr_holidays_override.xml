@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- 
+        "Overridear" leave types som kommer in pga hr_work_entry_holidays dependency (som vi behöver)
+        och stör funktionen för våra egna som skapas i l10n_se_hr_payroll/data/hr_salary_rule_data.xml. 
+        Tex:
+        - l10n_se_hr_payroll.leave_type_sick (Sjukfrånvaro)
+        - l10n_se_hr_payroll.leave_type_vab (VAB)
+        - l10n_se_hr_payroll.leave_type_loa (Tjänstledighet)
+    -->
+
+    <record id="hr_holidays.holiday_status_sl" model="hr.leave.type">
+        <field name="active" eval="False"/>
+    </record>
+
+    <record id="hr_holidays.holiday_status_unpaid" model="hr.leave.type">
+        <field name="active" eval="False"/>
+    </record>
+
+    <record id="hr_holidays.holiday_status_cl" model="hr.leave.type">
+        <field name="active" eval="False"/>
+    </record>
+
+    <record id="hr_holidays.holiday_status_comp" model="hr.leave.type">
+        <field name="active" eval="False"/>
+    </record>
+
+</odoo>

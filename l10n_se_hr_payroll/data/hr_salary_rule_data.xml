@@ -214,6 +214,7 @@ result = contract.wage / (3.5 * VA)
             <field name="color">2</field>
             <field name="request_unit">hour</field>
             <field name="leave_validation_type">no_validation</field>
+            <field name="requires_allocation">no</field>
         </record>
 
         <!-- Parent -->
