@@ -48,7 +48,7 @@
             <field name="job_id" ref="job_id_sales" />
             <field name="date_start">2002-01-01</field>
             <field name="first_contract_date">2002-01-01</field>
-            <field name="resource_calendar_id" ref="l10n_se_hr_payroll_tiichri.resource_calendar_tiichri" />
+            <field name="resource_calendar_id" ref="l10n_se_hr_payroll_tiichri.resource_calendar_standard_tiichri" />
             <field name="struct_id" ref="l10n_se_hr_payroll_tiichri.hr_payroll_structure_tj_tiichri" />
             <field name="table_number">30</field>
             <field name="column_number" eval="'column1'"/>
@@ -56,7 +56,7 @@
 
         <!-- ================================ January ================================ -->
 
-        <!-- Sick leave -->
+        <!-- Sjukfrånvaro -->
         <record id="hr_leave_frans_101" model="hr.leave">
             <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_frans_employee" />
             <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons"/>
@@ -79,7 +79,7 @@
             <field name="holiday_status_id" ref="l10n_se_hr_payroll.leave_type_sick" />
         </record>
 
-        <!-- Leave of absence -->
+        <!-- Tjänstledighet -->
         <record id="hr_leave_frans_103" model="hr.leave">
             <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_frans_employee" />
             <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons"/>
@@ -91,7 +91,7 @@
             <field name="holiday_status_id" ref="l10n_se_hr_payroll.leave_type_loa" />
         </record>
 
-        <!-- Validate leave of absence -->
+        <!-- Validate Tjänstledighet -->
         <function model="hr.leave" name="action_validate">
             <value eval="[ref('hr_leave_frans_103')]"/>
         </function>
@@ -142,7 +142,7 @@
 
         <!-- ================================ March ================================ -->
 
-        <!-- Sick leave -->
+        <!-- Sjukfrånvaro -->
         <record id="hr_leave_frans_301" model="hr.leave">
             <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_frans_employee" />
             <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons"/>
@@ -177,7 +177,7 @@
 
         <!-- ================================ April ================================ -->
 
-        <!-- SIck leave -->
+        <!-- Sjukfrånvaro -->
         <record id="hr_leave_frans_401" model="hr.leave">
             <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_frans_employee" />
             <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons"/>
@@ -280,7 +280,7 @@
 
         <!-- ================================ July ================================ -->
 
-        <!-- Sick leave -->
+        <!-- Sjukfrånvaro -->
         <record id="hr_leave_frans_701" model="hr.leave">
             <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_frans_employee" />
             <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons"/>
@@ -315,7 +315,7 @@
 
         <!-- ================================ August ================================ -->
 
-        <!-- Sick leave -->
+        <!-- Sjukfrånvaro -->
         <record id="hr_leave_frans_801" model="hr.leave">
             <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_frans_employee" />
             <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons"/>
@@ -350,7 +350,7 @@
 
         <!-- ================================ September ================================ -->
 
-        <!-- Sick leave -->
+        <!-- Sjukfrånvaro -->
         <record id="hr_leave_frans_901" model="hr.leave">
             <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_frans_employee" />
             <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons"/>

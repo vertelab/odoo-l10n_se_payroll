@@ -59,7 +59,7 @@
             <field name="job_id" ref="job_id_president" />
             <field name="date_start">2018-04-01</field>
             <field name="first_contract_date">2018-04-01</field>
-            <field name="resource_calendar_id" ref="l10n_se_hr_payroll_tiichri.resource_calendar_tiichri" />
+            <field name="resource_calendar_id" ref="l10n_se_hr_payroll_tiichri.resource_calendar_standard_tiichri" />
             <field name="struct_id" ref="l10n_se_hr_payroll_tiichri.hr_payroll_structure_tj_tiichri" />
             <field name="table_number">30</field>
             <field name="column_number" eval="'column1'" />
@@ -87,11 +87,11 @@
  
                ATT SKAPA LEDIGHETSRECORDS:                                                 
     
-               • Enstaka hela dagar: en enda record                                        
-                 Exempel: hr_leave_asse_103                                                
-                                                                                           
-               • Flera hela dagar: en enda record                                          
-                 Exempel: hr_leave_asse_102                                                
+               • Enstaka eller flera hela dagar: en enda record                                       
+                 Exempel: hr_leave_asse_103        
+                 OBS: En hel dag kan variera beroende på schema
+                 HELTID 100% (Övriga): 1 hel dag = 8 timmar.
+                 DELTID 80% (Doris + Karin): Jobbar mån-tor. 1 hel dag = 8 timmar.                                                                                   
                                                                                            
                • Halva dagar: en enda record MEN måste innehålla tider                     
                  Exempel: hr_leave_asse_101                                                
@@ -100,7 +100,10 @@
                  Exempel: hr_leave_asse_106 + hr_leave_asse_106_02                         
                                                                                            
                  VIKTIGT: Tjänstledighet (leave_type_loa) måste valideras                
-                 INNAN den aktuella månadens payslip genereras!                    
+                 INNAN den aktuella månadens payslip genereras!  
+                 VIKTIGT: Just nu hanteras INTE röda dagar automatiskt, utan måste 
+                 exkluderas genom att skapa flera records när frånvaro sammanfaller med
+                 en röd dag.                   
 
         ==============================================================================-->
 
@@ -112,6 +115,8 @@
         <record id="hr_leave_asse_101" model="hr.leave">
             <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_asse_employee" />
             <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons"/>
+            <field name="date_from">2022-01-07</field>
+            <field name="date_to">2022-01-07</field>
             <field name="request_date_from">2022-01-07</field>
             <field name="request_date_to">2022-01-07</field>
             <field name="request_unit_hours" eval="True"/>
@@ -147,6 +152,8 @@
         <record id="hr_leave_asse_104" model="hr.leave">
             <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_asse_employee" />
             <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons"/>
+            <field name="date_from">2022-01-03</field>
+            <field name="date_to">2022-01-03</field>
             <field name="request_date_from">2022-01-03</field>
             <field name="request_date_to">2022-01-03</field>
             <field name="request_unit_hours" eval="True"/>
@@ -171,6 +178,8 @@
         <record id="hr_leave_asse_106" model="hr.leave">
             <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_asse_employee" />
             <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons"/>
+            <field name="date_from">2022-01-25</field>
+            <field name="date_to">2022-01-25</field>
             <field name="request_date_from">2022-01-25</field>
             <field name="request_date_to">2022-01-25</field>
             <field name="number_of_hours">8</field>
@@ -180,6 +189,8 @@
         <record id="hr_leave_asse_106_02" model="hr.leave">
             <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_asse_employee" />
             <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons"/>
+            <field name="date_from">2022-01-26</field>
+            <field name="date_to">2022-01-26</field>
             <field name="request_date_from">2022-01-26</field>
             <field name="request_date_to">2022-01-26</field>
             <field name="request_unit_hours" eval="True"/>
@@ -241,6 +252,8 @@
         <record id="hr_leave_asse_201" model="hr.leave">
             <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_asse_employee" />
             <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons"/>
+            <field name="date_from">2022-02-07</field>
+            <field name="date_to">2022-02-07</field>
             <field name="request_date_from">2022-02-07</field>
             <field name="request_date_to">2022-02-07</field>
             <field name="request_unit_hours" eval="True"/>
@@ -324,6 +337,8 @@
         <record id="hr_leave_asse_301" model="hr.leave">
             <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_asse_employee" />
             <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons"/>
+            <field name="date_from">2022-03-01</field>
+            <field name="date_to">2022-03-08</field>
             <field name="request_date_from">2022-03-01</field>
             <field name="request_date_to">2022-03-08</field>
             <field name="number_of_hours">48</field>
@@ -333,6 +348,8 @@
         <record id="hr_leave_asse_301_02" model="hr.leave">
             <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_asse_employee" />
             <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons"/>
+            <field name="date_from">2022-03-09</field>
+            <field name="date_to">2022-03-09</field>
             <field name="request_date_from">2022-03-09</field>
             <field name="request_date_to">2022-03-09</field>
             <field name="request_unit_hours" eval="True"/>
@@ -346,6 +363,8 @@
         <record id="hr_leave_asse_302" model="hr.leave">
             <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_asse_employee" />
             <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons"/>
+            <field name="date_from">2022-03-18</field>
+            <field name="date_to">2022-03-18</field>
             <field name="request_date_from">2022-03-18</field>
             <field name="request_date_to">2022-03-18</field>
             <field name="request_unit_hours" eval="True"/>
@@ -398,6 +417,8 @@
         <record id="hr_leave_asse_401" model="hr.leave">
             <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_asse_employee" />
             <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons"/>
+            <field name="date_from">2022-04-19</field>
+            <field name="date_to">2022-04-19</field>
             <field name="request_date_from">2022-04-19</field>
             <field name="request_date_to">2022-04-19</field>
             <field name="request_unit_hours" eval="True"/>
@@ -477,6 +498,8 @@
         <record id="hr_leave_asse_501" model="hr.leave">
             <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_asse_employee" />
             <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons"/>
+            <field name="date_from">2022-05-09</field>
+            <field name="date_to">2022-05-17</field>
             <field name="request_date_from">2022-05-09</field>
             <field name="request_date_to">2022-05-17</field>
             <field name="number_of_hours">56</field>
@@ -486,6 +509,8 @@
         <record id="hr_leave_asse_501_02" model="hr.leave">
             <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_asse_employee" />
             <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons"/>
+            <field name="date_from">2022-05-18</field>
+            <field name="date_to">2022-05-18</field>
             <field name="request_date_from">2022-05-18</field>
             <field name="request_date_to">2022-05-18</field>
             <field name="request_unit_hours" eval="True"/>
@@ -813,6 +838,8 @@
         <record id="hr_leave_asse_1001" model="hr.leave">
             <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_asse_employee" />
             <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons"/>
+            <field name="date_from">2022-10-14</field>
+            <field name="date_to">2022-10-14</field>
             <field name="request_date_from">2022-10-14</field>
             <field name="request_date_to">2022-10-14</field>
             <field name="request_unit_hours" eval="True"/>
@@ -879,6 +906,8 @@
         <record id="hr_leave_asse_1101" model="hr.leave">
             <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_asse_employee" />
             <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons"/>
+            <field name="date_from">2022-11-10</field>
+            <field name="date_to">2022-11-21</field>
             <field name="request_date_from">2022-11-10</field>
             <field name="request_date_to">2022-11-21</field>
             <field name="number_of_hours">64</field>
@@ -888,6 +917,8 @@
         <record id="hr_leave_asse_1101_02" model="hr.leave">
             <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_asse_employee" />
             <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons"/>
+            <field name="date_from">2022-11-22</field>
+            <field name="date_to">2022-11-22</field>
             <field name="request_date_from">2022-11-22</field>
             <field name="request_date_to">2022-11-22</field>
             <field name="request_unit_hours" eval="True"/>
@@ -901,6 +932,8 @@
         <record id="hr_leave_asse_1102" model="hr.leave">
             <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_asse_employee" />
             <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons"/>
+            <field name="date_from">2022-11-01</field>
+            <field name="date_to">2022-11-01</field>
             <field name="request_date_from">2022-11-01</field>
             <field name="request_date_to">2022-11-01</field>
             <field name="number_of_hours">8</field>
@@ -910,6 +943,8 @@
         <record id="hr_leave_asse_1102_02" model="hr.leave">
             <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_asse_employee" />
             <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons"/>
+            <field name="date_from">2022-11-02</field>
+            <field name="date_to">2022-11-02</field>
             <field name="request_date_from">2022-11-02</field>
             <field name="request_date_to">2022-11-02</field>
             <field name="request_unit_hours" eval="True"/>

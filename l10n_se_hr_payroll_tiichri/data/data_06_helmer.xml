@@ -45,7 +45,7 @@
             <field name="job_id" ref="job_id_assembly" />
             <field name="date_start">2011-04-01</field>
             <field name="first_contract_date">2011-04-01</field>
-            <field name="resource_calendar_id" ref="l10n_se_hr_payroll_tiichri.resource_calendar_tiichri" />
+            <field name="resource_calendar_id" ref="l10n_se_hr_payroll_tiichri.resource_calendar_standard_tiichri" />
             <field name="struct_id" ref="l10n_se_hr_payroll_tiichri.hr_payroll_structure_tj_tiichri" />
             <field name="table_number">30</field>
             <field name="column_number" eval="'column1'" />
@@ -53,7 +53,7 @@
 
         <!-- ================================ January ================================ -->
 
-        <!-- Sick leave -->
+        <!-- Sjukfrånvaro -->
         <record id="hr_leave_helmer_101" model="hr.leave">
             <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_helmer_employee" />
             <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons"/>
@@ -99,7 +99,7 @@
 
         <!-- ================================ February ================================ -->
 
-        <!-- Sick leave -->
+        <!-- Sjukfrånvaro -->
         <record id="hr_leave_helmer_201" model="hr.leave">
             <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_helmer_employee" />
             <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons"/>
@@ -134,7 +134,7 @@
 
         <!-- ================================ March ================================ -->
 
-        <!-- Sick leave -->
+        <!-- Sjukfrånvaro -->
         <record id="hr_leave_helmer_301" model="hr.leave">
             <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_helmer_employee" />
             <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons"/>
@@ -180,7 +180,7 @@
 
         <!-- ================================ April ================================ -->
 
-        <!-- Sick leave -->
+        <!-- Sjukfrånvaro -->
         <record id="hr_leave_helmer_401" model="hr.leave">
             <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_helmer_employee" />
             <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons"/>
