@@ -51,6 +51,41 @@
             <field name="column_number" eval="'column1'"/>
         </record>
 
+
+        <!--==========================INSTRUKTIONER FÖR TESTDATA======================
+
+               PAYSLIP SKAPAS I ORDNINGEN:
+
+               1. Frånvaro-records
+               2. Eventuell validering av tjänstledighet
+               3. Payslip-record
+               4. Hämta data till payslip med onchange-funktion
+               5. Eventuell write-funktion på inputfält för övertid
+               6. Beräkna lönespec med compute_sheet-funktion
+
+               ATT SKAPA LEDIGHETSRECORDS:
+
+               • Enstaka eller flera hela dagar: en enda record
+                 Exempel: hr_leave_frans_801
+                 HELTID 100% (Övriga): 1 hel dag = 8 timmar.
+                 DELTID 80% (Doris + Karin): Jobbar mån-tor. 1 hel dag = 8 timmar.
+
+               • Halva dagar: en enda record MEN måste innehålla tider
+                 Exempel: hr_leave_frans_901
+
+               • Flera dagar som börjar/slutar med halvdag: TVÅ records
+                 Exempel: hr_leave_frans_101 + hr_leave_frans_101_02
+
+                 VIKTIGT: Tjänstledighet (leave_type_loa) måste valideras
+                 INNAN den aktuella månadens payslip genereras!
+                 VIKTIGT: Just nu hanteras INTE röda dagar automatiskt, utan måste
+                 exkluderas genom att skapa flera records när frånvaro sammanfaller med
+                 en röd dag.
+
+        ==============================================================================-->
+
+
+
         <!-- ================================ January ================================ -->
 
         <!-- Sjukfrånvaro -->
@@ -65,6 +100,17 @@
             <field name="holiday_status_id" ref="l10n_se_hr_payroll.leave_type_sick" />
         </record>
 
+
+        <!-- Saknas: -->
+        <!-- Lunchkuponger förmånsvärde -->
+        <!-- Avdrag lunchkuponger -->
+        <!-- Bonus -->
+        <!-- Övrig nettoersättning (husläkare) -->
+        <!-- Övrig förmåner, tabellskatt (husläkare) -->
+
+        <!-- Skatt -->
+        <!-- Arbetsgivaravgift -->
+
         <!-- Generate payslip -->
         <record id="hr_payslip_gustav_01" model="hr.payslip">
             <field name="name">Lönespecifikation för Januari - Gustav Groth</field>
@@ -77,10 +123,28 @@
         </record>
 
         <!-- Manual input -->
-        <!-- Ingen övertid denna måbad -->
         <function model="hr.payslip" name="onchange_employee">
             <value eval="[ref('l10n_se_hr_payroll_tiichri.hr_payslip_gustav_01')]"/>
         </function>
+
+        <!-- 
+        Gustav är heltidsanställd men har 
+            "Övertid 1, månadsavlönad 50%", 
+            "Grundtimlön vid övertid, månadsavlönade",
+            "Övertid 3, månadsavlönad, 100%",
+            "Grundtimlön vid övertid, månadsavlönade",
+        Pga arbetaravtal??
+        -->
+
+        <!-- <function model="hr.payslip.input" name="write">
+            <value model="hr.payslip.input" search="[('payslip_id', '=', ref('hr_payslip_gustav_01')), ('code', '=', 'otidtim')]"/>
+            <value eval="{'amount_qty': 2.0}"/>
+        </function>
+
+        <function model="hr.payslip.input" name="write">
+            <value model="hr.payslip.input" search="[('payslip_id', '=', ref('hr_payslip_gustav_01')), ('code', '=', 'kvaltim')]"/>
+            <value eval="{'amount_qty': 2.0}"/>
+        </function> -->
 
         <function model="hr.payslip" name="compute_sheet">
             <value eval="[ref('l10n_se_hr_payroll_tiichri.hr_payslip_gustav_01')]"/>
