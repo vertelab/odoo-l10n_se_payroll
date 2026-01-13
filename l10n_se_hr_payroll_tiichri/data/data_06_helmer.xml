@@ -999,7 +999,7 @@
         </record>
          
         <!-- Semester 2 dgr, 16 timmar -->
-        <record id="hr_leave_helmer_1003" model="hr.leave">
+        <record id="hr_leave_helmer_1104" model="hr.leave">
             <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_helmer_employee" />
             <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons"/>
             <field name="date_from">2022-11-25</field>
@@ -1080,7 +1080,7 @@
         </record>
 
         <!-- Semester 2 dgr, 16 timmar -->
-        <record id="hr_leave_helmer_1003" model="hr.leave">
+        <record id="hr_leave_helmer_1203" model="hr.leave">
             <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_helmer_employee" />
             <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons"/>
             <field name="date_from">2022-12-13</field>
