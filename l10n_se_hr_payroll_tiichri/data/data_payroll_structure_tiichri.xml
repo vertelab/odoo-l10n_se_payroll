@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
     <data noupdate="0">
-        <record id="hr_payroll_structure_gl_tiichri" model="hr.payroll.structure">
-            <field name="code">bas_test</field>
+        <!-- Grundlönestruktur - gemensam för alla -->
+        <record id="hr_payroll_structure_gl_full_tiichri" model="hr.payroll.structure">
+            <field name="code">bas</field>
             <field name="name">Bas för löneavtal (Ska ej användas i avtal)</field>
             <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons" />
             <field eval="[(6,0,[ref('l10n_se_hr_payroll.hr_salary_rule_gl'),
@@ -20,9 +21,10 @@
     ref('l10n_se_hr_payroll.hr_salary_rule_brutto')])]" name="rule_ids" />
         </record>
 
-        <record id="hr_payroll_structure_tj_tiichri" model="hr.payroll.structure">
-            <field name="code">bas_test_tj</field>
-            <field name="name">Lön tjänsteman test</field>
+        <!-- Tjänsteman heltid -->
+        <record id="hr_payroll_structure_tj_full_tiichri" model="hr.payroll.structure">
+            <field name="code">bas_tj_full</field>
+            <field name="name">Lön tjänsteman heltid</field>
             <field name="parent_id" ref="hr_payroll_structure_gl_tiichri" />
             <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons" />
             <field name="rule_ids" eval="[
@@ -38,9 +40,79 @@
                 (0, 0, {'name': 'Divisor för kvalificerad övertid', 'code': 'KO', 'constant': 72.0}),
                 (0, 0, {'name': 'Prisbasbelopp', 'code': 'PBB', 'constant': 48300.00})
             ]" />
-        
         </record>
 
+        <!-- Tjänsteman deltid 80% -->
+        <record id="hr_payroll_structure_tj_part_tiichri" model="hr.payroll.structure">
+            <field name="code">bas_tj_part</field>
+            <field name="name">Lön tjänsteman deltid 80%</field>
+            <field name="parent_id" ref="hr_payroll_structure_gl_tiichri" />
+            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons" />
+            <field name="rule_ids" eval="[
+                (4, ref('l10n_se_hr_payroll.hr_salary_rule_sick_leave')),
+                (4, ref('l10n_se_hr_payroll.hr_salary_rule_leave_of_absence'))
+            ]" />
+
+            <field name="const_ids" eval="[
+                (0, 0, {'name': 'Månadsarbetstid i dagar', 'code': 'MAD', 'constant': 16.8}), 
+                (0, 0, {'name': 'Månadsarbetstid i timmar', 'code': 'MAT', 'constant': 140.0}),
+                (0, 0, {'name': 'Veckoarbetstid i timmar', 'code': 'VA', 'constant': 32.0}),
+                (0, 0, {'name': 'Divisor för enkel övertid', 'code': 'EO', 'constant': 94.0}),
+                (0, 0, {'name': 'Divisor för kvalificerad övertid', 'code': 'KO', 'constant': 72.0}),
+                (0, 0, {'name': 'Prisbasbelopp', 'code': 'PBB', 'constant': 48300.00})
+            ]" />
+        </record>
+
+        <!-- Företagsledare -->
+        <record id="hr_payroll_structure_fl_tiichri" model="hr.payroll.structure">
+            <field name="code">bas_fl</field>
+            <field name="name">Lön företagsledare</field>
+            <field name="parent_id" ref="hr_payroll_structure_gl_tiichri" />
+            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons" />
+            <field eval="[]" name="rule_ids" />
+
+            <field name="const_ids" eval="[
+                (0, 0, {'name': 'Månadsarbetstid i dagar', 'code': 'MAD', 'constant': 21.0}), 
+                (0, 0, {'name': 'Månadsarbetstid i timmar', 'code': 'MAT', 'constant': 175.0}),
+                (0, 0, {'name': 'Veckoarbetstid i timmar', 'code': 'VA', 'constant': 40.0}),
+                (0, 0, {'name': 'Divisor för enkel övertid', 'code': 'EO', 'constant': 94.0}),
+                (0, 0, {'name': 'Divisor för kvalificerad övertid', 'code': 'KO', 'constant': 72.0}),
+                (0, 0, {'name': 'Prisbasbelopp', 'code': 'PBB', 'constant': 48300.00})
+            ]" />
+        </record>
+
+        <!-- Kollektivanställd (arbetare) -->
+        <record id="hr_payroll_structure_kl_tiichri" model="hr.payroll.structure">
+            <field name="code">bas_kl</field>
+            <field name="name">Lön kollektivanställd</field>
+            <field name="parent_id" ref="hr_payroll_structure_gl_tiichri" />
+            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons" />
+            <field eval="[]" name="rule_ids" />
+
+            <field name="const_ids" eval="[
+                (0, 0, {'name': 'Månadsarbetstid i dagar', 'code': 'MAD', 'constant': 21.0}), 
+                (0, 0, {'name': 'Månadsarbetstid i timmar', 'code': 'MAT', 'constant': 173.0}),
+                (0, 0, {'name': 'Veckoarbetstid i timmar', 'code': 'VA', 'constant': 40.0}),
+                (0, 0, {'name': 'Prisbasbelopp', 'code': 'PBB', 'constant': 48300.00})
+            ]" />
+            <!-- (0, 0, {'name': 'Divisor för enkel övertid', 'code': 'EO', 'constant': 94.0}),
+                (0, 0, {'name': 'Divisor för kvalificerad övertid', 'code': 'KO', 'constant': 72.0}), -->
+        </record>
+
+        <record id="hr_payroll_structure_tim_tiichri" model="hr.payroll.structure">
+            <field name="code">bas_tim</field>
+            <field name="name">Timanställd</field>
+            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons" />
+            <field name="parent_id" ref="hr_payroll_structure-gl" />
+        </record>
+
+        <record id="hr_payroll_structure_tjun_tiichri" model="hr.payroll.structure">
+            <field name="code">bas_tjun</field>
+            <field name="name">Lön tjänsteman (utan närvaro)</field>
+            <field name="parent_id" ref="hr_payroll_structure_gl_tiichri" />
+            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons" />
+            <field eval="[]" name="rule_ids" />
+        </record>
 
         <!-- <record id="hr_payroll_structure-gl" model="hr.payroll.structure">
             <field name="code">bas2018</field>
