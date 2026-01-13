@@ -132,8 +132,21 @@ result = categories.BAS + categories.BRUAVG + categories.BRUTIL
             <field name="amount_python_compute">
 #ML / KO * Antal Kvaltid-timmar
 KO = payslip.struct_id.get_constant('KO')
-result_qty = inputs.kvaltim.amount_qty
-result = contract.wage / KO
+
+if struct_code == 'tj_tim':
+    # Timanställd tjänsteman: Timlön * Multiplikator (t.ex. 2.0)
+    # OBS: Om KO i dina konstanter är 72 (divisor), använd ett fast tal här eller ny konstant
+    result = ML * 2.0 
+elif struct_code == 'arb_tim':
+    # Timanställd arbetare: Timlön * Multiplikator
+    result = ML * KO
+elif struct_code == 'tj':
+    result = ML / KO
+elif struct_code == 'arb':
+    MAT = payslip.struct_id.get_constant('MAT')
+    result = (ML / MAT) * KO
+else:
+    result = ML / KO
             </field>
         </record>
 
@@ -253,7 +266,18 @@ result = v_kar + v_114 + v_1590 + v_lon
             <field name="amount_select">code</field>
             <field name="amount_python_compute">
 # (ML*12)/52 * 0.2 * 0.8
-result = (contract.wage*12)/52 * 0.2 * 0.8 * -1
+# (Timlön * VA) * 0.2 * 0.8 för timanställd
+struct_code = contract.struct_id.code
+ML = contract.wage
+VA = payslip.struct_id.get_constant('VA')
+
+if struct_code in ['tj_tim', 'arb_tim']:
+    # Timanställd: Baseras på timlön * veckoarbetstid
+    result = (ML * VA) * 0.2 * 0.8 * -1
+else:
+    # Månadsavlönad
+    result = (ML * 12) / 52 * 0.2 * 0.8 * -1
+
 result_qty = contract.qualifying_count(payslip)
             </field>
         </record>
@@ -275,13 +299,18 @@ result = contract.get_sick_pay_data(payslip)['hours_1_14'] &gt; 0
             <field name="amount_select">code</field>
             <field name="amount_python_compute">
 # (ML*12)/(52*VA)
+struct_code = contract.struct_id.code
+ML = contract.wage
 VA = payslip.struct_id.get_constant('VA')
 sick_data = contract.get_sick_pay_data(payslip)
 result_qty = sick_data['hours_1_14']
-result = (contract.wage * 12) / (52 * VA) * -1
 
-#result_qty = worked_days.dict.get("sjk").number_of_hours
-#result = (contract.wage*12)/(52*VA)
+if struct_code in ['tj_tim', 'arb_tim']:
+    # Timanställd: Inget avdrag (lönen uteblir från grundlönen istället)
+    result = 0.0
+else:
+    # Månadsavlönad: (ML * 12) / (52 * VA)
+    result = (ML * 12) / (52 * VA) * -1
             </field>
         </record>
 
@@ -328,12 +357,50 @@ result = contract.get_sick_pay_data(payslip)['hours_1_14'] &gt; 0
             <field name="amount_select">code</field>
             <field name="amount_python_compute">
 # (ML*12*0.8)/(52*VA)
+struct_code = contract.struct_id.code
+ML = contract.wage
 VA = payslip.struct_id.get_constant('VA')
 sick_data = contract.get_sick_pay_data(payslip)
 result_qty = sick_data['hours_1_14']
-result = (contract.wage * 12 * 0.8) / (52 * VA)
 
-#result_qty = worked_days.dict.get("sjk").number_of_hours * -1
+if struct_code in ['tj_tim', 'arb_tim']:
+    # Timanställd: 80% av timlönen
+    result = ML * 0.8
+else:
+    # Månadsavlönad: (ML * 12 * 0.8) / (52 * VA)
+    result = (ML * 12 * 0.8) / (52 * VA)
+            </field>
+        </record>
+
+        <!-- Sjuklön dag 15 - 90 tjÄNSTEMÄN -->
+        <record id="hr_salary_rule_sick_pay_15_90_tj" model="hr.salary.rule">
+            <field name="category_id" ref="l10n_se_hr_payroll.hr_salary_rule_category_BRUTIL" />
+            <field name="company_id" eval="False"/>
+            <field name="parent_rule_id" ref="hr_salary_rule_sick_leave" />
+            <field name="code">sjk_lon_1590</field>
+            <field name="name">Sjuklön 15-90</field>
+            <field name="sequence">246</field>
+            <field name="appears_on_payslip" eval="True"/>
+            <field name="condition_select">python</field>
+            <field name="condition_python">
+result = (contract.get_sick_pay_data(payslip)['days_15_90'] &gt; 0 and 
+          contract.struct_id.code in ['tj', 'tj_tim'])
+            </field>
+            <field name="amount_select">code</field>
+            <field name="amount_python_compute">
+# Tjänsteman: 
+ML = contract.wage
+PBB = payslip.struct_id.get_constant('PBB')
+sick_data = contract.get_sick_pay_data(payslip)
+
+if ML &lt; 40250:
+    # 10% av ML per dag
+    result = (ML * 12 * 0.10) / 365
+else:
+    # 10% av PBB + 90% av belopp som är över PBB
+    result = (0.10 * PBB / 365) + (0.9 * (ML * 12 - PBB) / 365)
+
+result_qty = sick_data['days_15_90']
             </field>
         </record>
 
