@@ -37,7 +37,7 @@
 
         <record id="contract_helmer" model="hr.contract">
             <field name="name">Helmer Henriksson Avtal</field>
-            <field name="wage">1</field>
+            <field name="wage">130</field>            <!-- Annat fält för timlön eller hanteras från struct? -->
             <field name="type_id" ref="hr_contract_type" />
             <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_helmer_employee" />
             <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons"/>
@@ -55,18 +55,31 @@
         <!-- ================================ January ================================ -->
 
         <!-- Sjukfrånvaro -->
-        <!-- 4 + 8 timmar -->
         <record id="hr_leave_helmer_101" model="hr.leave">
             <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_helmer_employee" />
             <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons"/>
             <field name="date_from">2022-01-04</field>
-            <field name="date_to">2022-01-05</field>
+            <field name="date_to">2022-01-04</field>
             <field name="request_date_from">2022-01-04</field>
-            <field name="request_date_to">2022-01-05</field>
-            <field name="number_of_hours">12</field>
+            <field name="request_date_to">2022-01-04</field>
+            <field name="request_unit_hours" eval="True"/>
+            <field name="request_hour_from">8</field>
+            <field name="request_hour_to">12</field>
+            <field name="number_of_hours">4</field>
             <field name="holiday_status_id" ref="l10n_se_hr_payroll.leave_type_sick" />
         </record>
-        <!-- 24 timmar, 3dgr -->
+
+        <record id="hr_leave_helmer_101_02" model="hr.leave">
+            <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_helmer_employee" />
+            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons"/>
+            <field name="date_from">2022-01-05</field>
+            <field name="date_to">2022-01-05</field>
+            <field name="request_date_from">2022-01-05</field>
+            <field name="request_date_to">2022-01-05</field>
+            <field name="number_of_hours">8</field>
+            <field name="holiday_status_id" ref="l10n_se_hr_payroll.leave_type_sick" />
+        </record>
+
         <record id="hr_leave_helmer_102" model="hr.leave">
             <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_helmer_employee" />
             <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons"/>
@@ -78,7 +91,27 @@
             <field name="holiday_status_id" ref="l10n_se_hr_payroll.leave_type_sick" />
         </record>
 
-        <!-- Generate payslip -->
+        <!-- VAB -->
+        <record id="hr_leave_helmer_103" model="hr.leave">
+            <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_helmer_employee" />
+            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons"/>
+            <field name="date_from">2022-01-25</field>
+            <field name="date_to">2022-01-26</field>
+            <field name="request_date_from">2022-01-25</field>
+            <field name="request_date_to">2022-01-26</field>
+            <field name="number_of_hours">16</field>
+            <field name="holiday_status_id" ref="l10n_se_hr_payroll.leave_type_vab" />
+        </record>
+
+        <!-- Saknas: -->
+        <!-- Lunchkuponger förmånsvärde -->
+        <!-- Avdrag lunchkuponger -->
+        <!-- Bonus -->
+
+        <!-- Skatt -->
+        <!-- Arbetsgivaravgift -->
+
+        <!-- Generera lönespec (payslip)-->
         <record id="hr_payslip_helmer_01" model="hr.payslip">
             <field name="name">Lönespecifikation för Januari - Helmer Henriksson</field>
             <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons" />
@@ -89,10 +122,18 @@
             <field name="struct_id" ref="l10n_se_hr_payroll_tiichri.hr_payroll_structure_tj_tiichri" />
         </record>
 
-        <!-- Manual input -->
-        <!-- Ingen övertid denna månad -->
+        <!-- Manuell input -->
         <function model="hr.payslip" name="onchange_employee">
             <value eval="[ref('l10n_se_hr_payroll_tiichri.hr_payslip_helmer_01')]"/>
+        </function>
+
+        <function model="hr.payslip.input" name="write">
+            <value model="hr.payslip.input" search="[('payslip_id', '=', ref('hr_payslip_helmer_01')), ('code', '=', 'otidtim')]"/>
+            <value eval="{'amount_qty': 2.0}"/>
+        </function>
+        <function model="hr.payslip.input" name="write">
+            <value model="hr.payslip.input" search="[('payslip_id', '=', ref('hr_payslip_helmer_01')), ('code', '=', 'kvaltim')]"/>
+            <value eval="{'amount_qty': 2.0}"/>
         </function>
 
         <function model="hr.payslip" name="compute_sheet">
@@ -114,7 +155,46 @@
             <field name="holiday_status_id" ref="l10n_se_hr_payroll.leave_type_sick" />
         </record>
 
-        <!-- Generate payslip -->
+        <!-- VAB -->
+        <record id="hr_leave_helmer_202" model="hr.leave">
+            <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_helmer_employee" />
+            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons"/>
+            <field name="date_from">2022-02-21</field>
+            <field name="date_to">2022-02-21</field>
+            <field name="request_date_from">2022-02-21</field>
+            <field name="request_date_to">2022-02-21</field>
+            <field name="number_of_hours">8</field>
+            <field name="holiday_status_id" ref="l10n_se_hr_payroll.leave_type_vab" />
+        </record>
+
+        <!-- Tjänstledighet -->
+        <record id="hr_leave_helmer_203" model="hr.leave">
+            <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_helmer_employee" />
+            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons"/>
+            <field name="date_from">2022-02-15</field>
+            <field name="date_to">2022-02-18</field>
+            <field name="request_date_from">2022-02-15</field>
+            <field name="request_date_to">2022-02-18</field>
+            <field name="number_of_hours">32</field>
+            <field name="holiday_status_id" ref="l10n_se_hr_payroll.leave_type_loa" />
+        </record>
+
+        <!--Validera tjänstledighet-->
+        <function model="hr.leave" name="action_validate">
+            <value eval="[ref('hr_leave_helmer_203')]"/>
+        </function>
+
+        <!-- Saknas: -->
+        <!-- Övrig nettoersättning (Friskis & svettis-kort) -->
+        <!-- Milersättning skattefri enl. schablon -->
+        <!-- Milersättning skattepliktig -->
+        <!-- Lunchkuponger förmånsvärde -->
+        <!-- Avdrag lunchkuponger -->
+
+        <!-- Skatt -->
+        <!-- Arbetsgivaravgift -->
+
+        <!-- Generera lönespec (payslip)-->
         <record id="hr_payslip_helmer_02" model="hr.payslip">
             <field name="name">Lönespecifikation för Februari - Helmer Henriksson</field>
             <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons" />
@@ -125,10 +205,18 @@
             <field name="struct_id" ref="l10n_se_hr_payroll_tiichri.hr_payroll_structure_tj_tiichri" />
         </record>
 
-        <!-- Manual input -->
-        <!-- Ingen övertid denna månad -->
+        <!-- Manuell input -->
         <function model="hr.payslip" name="onchange_employee">
             <value eval="[ref('l10n_se_hr_payroll_tiichri.hr_payslip_helmer_02')]"/>
+        </function>
+
+        <function model="hr.payslip.input" name="write">
+            <value model="hr.payslip.input" search="[('payslip_id', '=', ref('hr_payslip_helmer_02')), ('code', '=', 'otidtim')]"/>
+            <value eval="{'amount_qty': 3.0}"/>
+        </function>
+        <function model="hr.payslip.input" name="write">
+            <value model="hr.payslip.input" search="[('payslip_id', '=', ref('hr_payslip_helmer_02')), ('code', '=', 'kvaltim')]"/>
+            <value eval="{'amount_qty': 1.0}"/>
         </function>
 
         <function model="hr.payslip" name="compute_sheet">
@@ -160,7 +248,45 @@
             <field name="holiday_status_id" ref="l10n_se_hr_payroll.leave_type_sick" />
         </record>
 
-        <!-- Generate payslip -->
+        <!-- VAB -->
+        <record id="hr_leave_helmer_303" model="hr.leave">
+            <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_helmer_employee" />
+            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons"/>
+            <field name="date_from">2022-03-17</field>
+            <field name="date_to">2022-03-18</field>
+            <field name="request_date_from">2022-03-17</field>
+            <field name="request_date_to">2022-03-18</field>
+            <field name="number_of_hours">16</field>
+            <field name="holiday_status_id" ref="l10n_se_hr_payroll.leave_type_vab" />
+        </record>
+
+        <!-- Tjänstledighet -->
+        <record id="hr_leave_helmer_304" model="hr.leave">
+            <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_helmer_employee" />
+            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons"/>
+            <field name="date_from">2022-03-21</field>
+            <field name="date_to">2022-03-23</field>
+            <field name="request_date_from">2022-03-21</field>
+            <field name="request_date_to">2022-03-23</field>
+            <field name="number_of_hours">24</field>
+            <field name="holiday_status_id" ref="l10n_se_hr_payroll.leave_type_loa" />
+        </record>
+
+        <!--Validera tjänstledighet-->
+        <function model="hr.leave" name="action_validate">
+            <value eval="[ref('hr_leave_helmer_304')]"/>
+        </function>
+
+        <!-- Saknas: -->
+        <!-- Lunchkuponger förmånsvärde -->
+        <!-- Avdrag lunchkuponger -->
+        <!-- Milersättning skattefri enl. schablon -->
+        <!-- Milersättning skattepliktig -->
+
+        <!-- Skatt -->
+        <!-- Arbetsgivaravgift -->
+
+        <!-- Generera lönespec (payslip)-->
         <record id="hr_payslip_helmer_03" model="hr.payslip">
             <field name="name">Lönespecifikation för Mars - Helmer Henriksson</field>
             <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons" />
@@ -171,10 +297,19 @@
             <field name="struct_id" ref="l10n_se_hr_payroll_tiichri.hr_payroll_structure_tj_tiichri" />
         </record>
 
-        <!-- Manual input -->
-        <!-- Ingen övertid denna månad -->
+        <!-- Manuell input -->
         <function model="hr.payslip" name="onchange_employee">
             <value eval="[ref('l10n_se_hr_payroll_tiichri.hr_payslip_helmer_03')]"/>
+        </function>
+
+        <function model="hr.payslip.input" name="write">
+            <value model="hr.payslip.input" search="[('payslip_id', '=', ref('hr_payslip_helmer_03')), ('code', '=', 'otidtim')]"/>
+            <value eval="{'amount_qty': 3.0}"/>
+        </function>
+
+        <function model="hr.payslip.input" name="write">
+            <value model="hr.payslip.input" search="[('payslip_id', '=', ref('hr_payslip_helmer_03')), ('code', '=', 'kvaltim')]"/>
+            <value eval="{'amount_qty': 1.0}"/>
         </function>
 
         <function model="hr.payslip" name="compute_sheet">
@@ -206,7 +341,17 @@
             <field name="holiday_status_id" ref="l10n_se_hr_payroll.leave_type_sick" />
         </record>
 
-        <!-- Generate payslip -->
+        <!-- Saknas: -->
+        <!-- Övrig nettoersättning (terminalglasögon) -->
+        <!-- Lunchkuponger förmånsvärde -->
+        <!-- Avdrag lunchkuponger -->
+        <!-- Förmån hushållsnära tjänster, arbetskostnad -->
+        <!-- Skattereduktion hushållsnära tjänster -->
+
+        <!-- Skatt -->
+        <!-- Arbetsgivaravgift -->
+
+        <!-- Generera lönespec (payslip)-->
         <record id="hr_payslip_helmer_04" model="hr.payslip">
             <field name="name">Lönespecifikation för April - Helmer Henriksson</field>
             <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons" />
@@ -217,10 +362,18 @@
             <field name="struct_id" ref="l10n_se_hr_payroll_tiichri.hr_payroll_structure_tj_tiichri" />
         </record>
 
-        <!-- Manual input -->
-        <!-- Ingen övertid denna månad -->
+        <!-- Manuell input -->
         <function model="hr.payslip" name="onchange_employee">
             <value eval="[ref('l10n_se_hr_payroll_tiichri.hr_payslip_helmer_04')]"/>
+        </function>
+
+        <function model="hr.payslip.input" name="write">
+            <value model="hr.payslip.input" search="[('payslip_id', '=', ref('hr_payslip_helmer_04')), ('code', '=', 'otidtim')]"/>
+            <value eval="{'amount_qty': 2.0}"/>
+        </function>
+        <function model="hr.payslip.input" name="write">
+            <value model="hr.payslip.input" search="[('payslip_id', '=', ref('hr_payslip_helmer_04')), ('code', '=', 'kvaltim')]"/>
+            <value eval="{'amount_qty': 2.0}"/>
         </function>
 
         <function model="hr.payslip" name="compute_sheet">
@@ -228,8 +381,76 @@
         </function>
 
         <!-- ================================ May ================================ -->
-        
-        <!-- Generate payslip -->
+
+        <!-- Sjukfrånvaro -->
+        <record id="hr_leave_helmer_501" model="hr.leave">
+            <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_helmer_employee" />
+            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons"/>
+            <field name="date_from">2022-05-19</field>
+            <field name="date_to">2022-05-19</field>
+            <field name="request_date_from">2022-05-19</field>
+            <field name="request_date_to">2022-05-19</field>
+            <field name="request_unit_hours" eval="True"/>
+            <field name="request_hour_from">8</field>
+            <field name="request_hour_to">12</field>
+            <field name="number_of_hours">4</field>
+            <field name="holiday_status_id" ref="l10n_se_hr_payroll.leave_type_sick" />
+        </record>
+
+        <record id="hr_leave_helmer_501_02" model="hr.leave">
+            <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_helmer_employee" />
+            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons"/>
+            <field name="date_from">2022-05-20</field>
+            <field name="date_to">2022-05-20</field>
+            <field name="request_date_from">2022-05-20</field>
+            <field name="request_date_to">2022-05-20</field>
+            <field name="number_of_hours">8</field>
+            <field name="holiday_status_id" ref="l10n_se_hr_payroll.leave_type_sick" />
+        </record>
+
+        <record id="hr_leave_helmer_502" model="hr.leave">
+            <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_helmer_employee" />
+            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons"/>
+            <field name="date_from">2022-05-27</field>
+            <field name="date_to">2022-05-30</field>
+            <field name="request_date_from">2022-05-27</field>
+            <field name="request_date_to">2022-05-30</field>
+            <field name="number_of_hours">16</field>
+            <field name="holiday_status_id" ref="l10n_se_hr_payroll.leave_type_sick" />
+        </record>
+
+        <!-- Tjänstledighet -->
+        <record id="hr_leave_helmer_503" model="hr.leave">
+            <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_helmer_employee" />
+            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons"/>
+            <field name="date_from">2022-05-16</field>
+            <field name="date_to">2022-05-16</field>
+            <field name="request_date_from">2022-05-16</field>
+            <field name="request_date_to">2022-05-16</field>
+            <field name="number_of_hours">8</field>
+            <field name="holiday_status_id" ref="l10n_se_hr_payroll.leave_type_loa" />
+        </record>
+
+        <!--Validera tjänstledighet-->
+        <function model="hr.leave" name="action_validate">
+            <value eval="[ref('hr_leave_helmer_503')]"/>
+        </function>
+
+        <!-- Saknas: -->
+        <!-- Utlägg resekostnader -->
+        <!-- Nattraktamente -->
+        <!-- Traktamente halvt -->
+        <!-- Utlandstraktamente ej skattepliktigt -->
+        <!-- Traktamente skattepliktigt -->
+        <!-- Kostförmån lunch -->
+        <!-- Kostavdrag frukost 15% utland -->
+        <!-- Kostavdrag lunch 35% utland -->
+        <!-- Kostavdrag middag 35% utland -->
+
+        <!-- Skatt -->
+        <!-- Arbetsgivaravgift -->
+
+        <!-- Generera lönespec (payslip)-->
         <record id="hr_payslip_helmer_05" model="hr.payslip">
             <field name="name">Lönespecifikation för Maj - Helmer Henriksson</field>
             <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons" />
@@ -240,10 +461,18 @@
             <field name="struct_id" ref="l10n_se_hr_payroll_tiichri.hr_payroll_structure_tj_tiichri" />
         </record>
 
-        <!-- Manual input -->
-        <!-- Ingen övertid denna månad -->
+        <!-- Manuell input -->
         <function model="hr.payslip" name="onchange_employee">
             <value eval="[ref('l10n_se_hr_payroll_tiichri.hr_payslip_helmer_05')]"/>
+        </function>
+
+        <function model="hr.payslip.input" name="write">
+            <value model="hr.payslip.input" search="[('payslip_id', '=', ref('hr_payslip_helmer_05')), ('code', '=', 'otidtim')]"/>
+            <value eval="{'amount_qty': 6.0}"/>
+        </function>
+        <function model="hr.payslip.input" name="write">
+            <value model="hr.payslip.input" search="[('payslip_id', '=', ref('hr_payslip_helmer_05')), ('code', '=', 'kvaltim')]"/>
+            <value eval="{'amount_qty': 2.0}"/>
         </function>
 
         <function model="hr.payslip" name="compute_sheet">
@@ -252,7 +481,65 @@
 
         <!-- ================================ June ================================ -->
 
-        <!-- Generate payslip -->
+        <!-- Sjukfrånvaro -->
+        <record id="hr_leave_helmer_601" model="hr.leave">
+            <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_helmer_employee" />
+            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons"/>
+            <field name="date_from">2022-06-08</field>
+            <field name="date_to">2022-06-08</field>
+            <field name="request_date_from">2022-06-08</field>
+            <field name="request_date_to">2022-06-08</field>
+            <field name="request_unit_hours" eval="True"/>
+            <field name="request_hour_from">8</field>
+            <field name="request_hour_to">12</field>
+            <field name="number_of_hours">4</field>
+            <field name="holiday_status_id" ref="l10n_se_hr_payroll.leave_type_sick" />
+        </record>
+
+        <record id="hr_leave_helmer_601_02" model="hr.leave">
+            <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_helmer_employee" />
+            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons"/>
+            <field name="date_from">2022-06-09</field>
+            <field name="date_to">2022-06-10</field>
+            <field name="request_date_from">2022-06-09</field>
+            <field name="request_date_to">2022-06-10</field>
+            <field name="number_of_hours">16</field>
+            <field name="holiday_status_id" ref="l10n_se_hr_payroll.leave_type_sick" />
+        </record>
+
+        <record id="hr_leave_helmer_602" model="hr.leave">
+            <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_helmer_employee" />
+            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons"/>
+            <field name="date_from">2022-06-14</field>
+            <field name="date_to">2022-06-14</field>
+            <field name="request_date_from">2022-06-14</field>
+            <field name="request_date_to">2022-06-14</field>
+            <field name="number_of_hours">8</field>
+            <field name="holiday_status_id" ref="l10n_se_hr_payroll.leave_type_sick" />
+        </record>
+
+        <!-- VAB -->
+        <record id="hr_leave_helmer_603" model="hr.leave">
+            <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_helmer_employee" />
+            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons"/>
+            <field name="date_from">2022-06-17</field>
+            <field name="date_to">2022-06-17</field>
+            <field name="request_date_from">2022-06-17</field>
+            <field name="request_date_to">2022-06-17</field>
+            <field name="number_of_hours">8</field>
+            <field name="holiday_status_id" ref="l10n_se_hr_payroll.leave_type_vab" />
+        </record>
+
+        <!-- Saknas: -->
+        <!-- Uttag betalda semesterdagar, timavlönad -->
+        <!-- Semesterdaglön betald, timavlönad -->
+        <!-- Milersättning, skattefri enl. schablon -->
+        <!-- Milersättning skattepliktig -->
+
+        <!-- Skatt -->
+        <!-- Arbetsgivaravgift -->
+
+        <!-- Generera lönespec (payslip)-->
         <record id="hr_payslip_helmer_06" model="hr.payslip">
             <field name="name">Lönespecifikation för Juni - Helmer Henriksson</field>
             <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons" />
@@ -263,10 +550,18 @@
             <field name="struct_id" ref="l10n_se_hr_payroll_tiichri.hr_payroll_structure_tj_tiichri" />
         </record>
 
-        <!-- Manual input -->
-        <!-- Ingen övertid denna månad -->
+        <!-- Manuell input -->
         <function model="hr.payslip" name="onchange_employee">
             <value eval="[ref('l10n_se_hr_payroll_tiichri.hr_payslip_helmer_06')]"/>
+        </function>
+
+        <function model="hr.payslip.input" name="write">
+            <value model="hr.payslip.input" search="[('payslip_id', '=', ref('hr_payslip_helmer_06')), ('code', '=', 'otidtim')]"/>
+            <value eval="{'amount_qty': 6.0}"/>
+        </function>
+        <function model="hr.payslip.input" name="write">
+            <value model="hr.payslip.input" search="[('payslip_id', '=', ref('hr_payslip_helmer_06')), ('code', '=', 'kvaltim')]"/>
+            <value eval="{'amount_qty': 6.0}"/>
         </function>
 
         <function model="hr.payslip" name="compute_sheet">
@@ -275,7 +570,43 @@
 
         <!-- ================================ July ================================ -->
 
-        <!-- Generate payslip -->
+        <!-- Sjukfrånvaro -->
+        <record id="hr_leave_helmer_701" model="hr.leave">
+            <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_helmer_employee" />
+            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons"/>
+            <field name="date_from">2022-07-07</field>
+            <field name="date_to">2022-07-07</field>
+            <field name="request_date_from">2022-07-07</field>
+            <field name="request_date_to">2022-07-07</field>
+            <field name="request_unit_hours" eval="True"/>
+            <field name="request_hour_from">8</field>
+            <field name="request_hour_to">12</field>
+            <field name="number_of_hours">4</field>
+            <field name="holiday_status_id" ref="l10n_se_hr_payroll.leave_type_sick" />
+        </record>
+
+        <record id="hr_leave_helmer_701_02" model="hr.leave">
+            <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_helmer_employee" />
+            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons"/>
+            <field name="date_from">2022-07-08</field>
+            <field name="date_to">2022-07-11</field>
+            <field name="request_date_from">2022-07-08</field>
+            <field name="request_date_to">2022-07-11</field>
+            <field name="number_of_hours">16</field>
+            <field name="holiday_status_id" ref="l10n_se_hr_payroll.leave_type_sick" />
+        </record>
+
+        <!-- Saknas: -->
+        <!-- Uttag betalda semesterdagar, timavlönad -->
+        <!-- Semesterdaglön betald, timavlönad -->
+        <!-- Bonus -->
+        <!-- Milersättning, skattefri enl. schablon -->
+        <!-- Milersättning skattepliktig -->
+
+        <!-- Skatt -->
+        <!-- Arbetsgivaravgift -->
+
+        <!-- Generera lönespec (payslip)-->
         <record id="hr_payslip_helmer_07" model="hr.payslip">
             <field name="name">Lönespecifikation för Juli - Helmer Henriksson</field>
             <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons" />
@@ -286,10 +617,18 @@
             <field name="struct_id" ref="l10n_se_hr_payroll_tiichri.hr_payroll_structure_tj_tiichri" />
         </record>
 
-        <!-- Manual input -->
-        <!-- Ingen övertid denna månad -->
+        <!-- Manuell input -->
         <function model="hr.payslip" name="onchange_employee">
             <value eval="[ref('l10n_se_hr_payroll_tiichri.hr_payslip_helmer_07')]"/>
+        </function>
+
+        <function model="hr.payslip.input" name="write">
+            <value model="hr.payslip.input" search="[('payslip_id', '=', ref('hr_payslip_helmer_07')), ('code', '=', 'otidtim')]"/>
+            <value eval="{'amount_qty': 6.0}"/>
+        </function>
+        <function model="hr.payslip.input" name="write">
+            <value model="hr.payslip.input" search="[('payslip_id', '=', ref('hr_payslip_helmer_07')), ('code', '=', 'kvaltim')]"/>
+            <value eval="{'amount_qty': 4.0}"/>
         </function>
 
         <function model="hr.payslip" name="compute_sheet">
@@ -298,7 +637,53 @@
 
         <!-- ================================ August ================================ -->
 
-        <!-- Generate payslip -->
+        <!-- Sjukfrånvaro -->
+        <record id="hr_leave_helmer_801" model="hr.leave">
+            <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_helmer_employee" />
+            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons"/>
+            <field name="date_from">2022-08-09</field>
+            <field name="date_to">2022-08-22</field>
+            <field name="request_date_from">2022-08-09</field>
+            <field name="request_date_to">2022-08-22</field>
+            <field name="number_of_hours">80</field>
+            <field name="holiday_status_id" ref="l10n_se_hr_payroll.leave_type_sick" />
+        </record>
+
+        <record id="hr_leave_helmer_801_02" model="hr.leave">
+            <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_helmer_employee" />
+            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons"/>
+            <field name="date_from">2022-08-23</field>
+            <field name="date_to">2022-08-31</field>
+            <field name="request_date_from">2022-08-23</field>
+            <field name="request_date_to">2022-08-31</field>
+            <field name="number_of_hours">56</field>
+            <field name="holiday_status_id" ref="l10n_se_hr_payroll.leave_type_sick" />
+        </record>
+
+        <!-- Tjänstledighet -->
+        <record id="hr_leave_helmer_802" model="hr.leave">
+            <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_helmer_employee" />
+            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons"/>
+            <field name="date_from">2022-08-03</field>
+            <field name="date_to">2022-08-05</field>
+            <field name="request_date_from">2022-08-03</field>
+            <field name="request_date_to">2022-08-05</field>
+            <field name="number_of_hours">24</field>
+            <field name="holiday_status_id" ref="l10n_se_hr_payroll.leave_type_loa" />
+        </record>
+
+        <function model="hr.leave" name="action_validate">
+            <value eval="[ref('hr_leave_helmer_802')]"/>
+        </function>
+
+        <!-- Saknas: -->
+        <!-- Uttag betalda semesterdagar, timavlönad -->
+        <!-- Semesterdaglön betald, timavlönad -->
+
+        <!-- Skatt -->
+        <!-- Arbetsgivaravgift -->
+
+        <!-- Generera lönespec (payslip)-->
         <record id="hr_payslip_helmer_08" model="hr.payslip">
             <field name="name">Lönespecifikation för Augusti - Helmer Henriksson</field>
             <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons" />
@@ -309,10 +694,18 @@
             <field name="struct_id" ref="l10n_se_hr_payroll_tiichri.hr_payroll_structure_tj_tiichri" />
         </record>
 
-        <!-- Manual input -->
-        <!-- Ingen övertid denna månad -->
+        <!-- Manuell input -->
         <function model="hr.payslip" name="onchange_employee">
             <value eval="[ref('l10n_se_hr_payroll_tiichri.hr_payslip_helmer_08')]"/>
+        </function>
+
+        <function model="hr.payslip.input" name="write">
+            <value model="hr.payslip.input" search="[('payslip_id', '=', ref('hr_payslip_helmer_08')), ('code', '=', 'otidtim')]"/>
+            <value eval="{'amount_qty': 4.0}"/>
+        </function>
+        <function model="hr.payslip.input" name="write">
+            <value model="hr.payslip.input" search="[('payslip_id', '=', ref('hr_payslip_helmer_08')), ('code', '=', 'kvaltim')]"/>
+            <value eval="{'amount_qty': 4.0}"/>
         </function>
 
         <function model="hr.payslip" name="compute_sheet">
@@ -321,7 +714,81 @@
 
         <!-- ================================ September ================================ -->
 
-        <!-- Generate payslip -->
+        <!-- Sjukfrånvaro -->
+        <record id="hr_leave_helmer_901" model="hr.leave">
+            <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_helmer_employee" />
+            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons"/>
+            <field name="date_from">2022-09-01</field>
+            <field name="date_to">2022-09-02</field>
+            <field name="request_date_from">2022-09-01</field>
+            <field name="request_date_to">2022-09-02</field>
+            <field name="number_of_hours">16</field>
+            <field name="holiday_status_id" ref="l10n_se_hr_payroll.leave_type_sick" />
+        </record>
+
+        <!-- VAB -->
+        <record id="hr_leave_helmer_902" model="hr.leave">
+            <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_helmer_employee" />
+            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons"/>
+            <field name="date_from">2022-09-05</field>
+            <field name="date_to">2022-09-05</field>
+            <field name="request_date_from">2022-09-05</field>
+            <field name="request_date_to">2022-09-05</field>
+            <field name="number_of_hours">8</field>
+            <field name="holiday_status_id" ref="l10n_se_hr_payroll.leave_type_vab" />
+        </record>
+
+        <record id="hr_leave_helmer_903" model="hr.leave">
+            <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_helmer_employee" />
+            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons"/>
+            <field name="date_from">2022-09-13</field>
+            <field name="date_to">2022-09-13</field>
+            <field name="request_date_from">2022-09-13</field>
+            <field name="request_date_to">2022-09-13</field>
+            <field name="request_unit_hours" eval="True"/>
+            <field name="request_hour_from">8</field>
+            <field name="request_hour_to">12</field>
+            <field name="number_of_hours">4</field>
+            <field name="holiday_status_id" ref="l10n_se_hr_payroll.leave_type_vab" />
+        </record>
+
+        <record id="hr_leave_helmer_903_02" model="hr.leave">
+            <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_helmer_employee" />
+            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons"/>
+            <field name="date_from">2022-09-14</field>
+            <field name="date_to">2022-09-15</field>
+            <field name="request_date_from">2022-09-14</field>
+            <field name="request_date_to">2022-09-15</field>
+            <field name="number_of_hours">16</field>
+            <field name="holiday_status_id" ref="l10n_se_hr_payroll.leave_type_vab" />
+        </record>
+
+        <!-- Tjänstledighet -->
+        <record id="hr_leave_helmer_904" model="hr.leave">
+            <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_helmer_employee" />
+            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons"/>
+            <field name="date_from">2022-09-23</field>
+            <field name="date_to">2022-09-23</field>
+            <field name="request_date_from">2022-09-23</field>
+            <field name="request_date_to">2022-09-23</field>
+            <field name="number_of_hours">8</field>
+            <field name="holiday_status_id" ref="l10n_se_hr_payroll.leave_type_loa" />
+        </record>
+
+        <function model="hr.leave" name="action_validate">
+            <value eval="[ref('hr_leave_helmer_904')]"/>
+        </function>
+
+        <!-- Saknas: -->
+        <!-- Uttag betalda semesterdagar, timavlönad -->
+        <!-- Semesterdaglön betald, timavlönad -->
+        <!-- Lunchkuponger förmånsvärde -->
+        <!-- Avdrag lunchkuponger -->
+
+        <!-- Skatt -->
+        <!-- Arbetsgivaravgift -->
+
+        <!-- Generera lönespec (payslip)-->
         <record id="hr_payslip_helmer_09" model="hr.payslip">
             <field name="name">Lönespecifikation för September - Helmer Henriksson</field>
             <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons" />
@@ -332,10 +799,18 @@
             <field name="struct_id" ref="l10n_se_hr_payroll_tiichri.hr_payroll_structure_tj_tiichri" />
         </record>
 
-        <!-- Manual input -->
-        <!-- Ingen övertid denna månad -->
+        <!-- Manuell input -->
         <function model="hr.payslip" name="onchange_employee">
             <value eval="[ref('l10n_se_hr_payroll_tiichri.hr_payslip_helmer_09')]"/>
+        </function>
+
+        <function model="hr.payslip.input" name="write">
+            <value model="hr.payslip.input" search="[('payslip_id', '=', ref('hr_payslip_helmer_09')), ('code', '=', 'otidtim')]"/>
+            <value eval="{'amount_qty': 1.0}"/>
+        </function>
+        <function model="hr.payslip.input" name="write">
+            <value model="hr.payslip.input" search="[('payslip_id', '=', ref('hr_payslip_helmer_09')), ('code', '=', 'kvaltim')]"/>
+            <value eval="{'amount_qty': 1.0}"/>
         </function>
 
         <function model="hr.payslip" name="compute_sheet">
@@ -344,7 +819,43 @@
 
         <!-- ================================ October ================================ -->
 
-        <!-- Generate payslip -->
+        <!-- VAB -->
+        <record id="hr_leave_helmer_1001" model="hr.leave">
+            <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_helmer_employee" />
+            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons"/>
+            <field name="date_from">2022-10-05</field>
+            <field name="date_to">2022-10-06</field>
+            <field name="request_date_from">2022-10-05</field>
+            <field name="request_date_to">2022-10-06</field>
+            <field name="number_of_hours">16</field>
+            <field name="holiday_status_id" ref="l10n_se_hr_payroll.leave_type_vab" />
+        </record>
+
+        <!-- Sjukfrånvaro -->
+        <record id="hr_leave_helmer_1002" model="hr.leave">
+            <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_helmer_employee" />
+            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons"/>
+            <field name="date_from">2022-10-24</field>
+            <field name="date_to">2022-10-25</field>
+            <field name="request_date_from">2022-10-24</field>
+            <field name="request_date_to">2022-10-25</field>
+            <field name="number_of_hours">16</field>
+            <field name="holiday_status_id" ref="l10n_se_hr_payroll.leave_type_loa" />
+        </record>
+
+        <function model="hr.payslip" name="compute_sheet">
+            <value eval="[ref('hr_payslip_helmer_10')]"/>
+        </function>
+
+        <!-- Saknas: -->
+        <!-- Uttag betalda semesterdagar, timavlönad -->
+        <!-- Semesterdaglön betald, timavlönad -->
+        <!-- Utmätning av lön -->
+
+        <!-- Skatt -->
+        <!-- Arbetsgivaravgift -->
+
+        <!-- Generera lönespec (payslip)-->
         <record id="hr_payslip_helmer_10" model="hr.payslip">
             <field name="name">Lönespecifikation för Oktober - Helmer Henriksson</field>
             <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons" />
@@ -355,10 +866,18 @@
             <field name="struct_id" ref="l10n_se_hr_payroll_tiichri.hr_payroll_structure_tj_tiichri" />
         </record>
 
-        <!-- Manual input -->
-        <!-- Ingen övertid denna månad -->
+        <!-- Manuell input -->
         <function model="hr.payslip" name="onchange_employee">
             <value eval="[ref('l10n_se_hr_payroll_tiichri.hr_payslip_helmer_10')]"/>
+        </function>
+
+        <function model="hr.payslip.input" name="write">
+            <value model="hr.payslip.input" search="[('payslip_id', '=', ref('hr_payslip_helmer_10')), ('code', '=', 'otidtim')]"/>
+            <value eval="{'amount_qty': 4.0}"/>
+        </function>
+        <function model="hr.payslip.input" name="write">
+            <value model="hr.payslip.input" search="[('payslip_id', '=', ref('hr_payslip_helmer_10')), ('code', '=', 'kvaltim')]"/>
+            <value eval="{'amount_qty': 2.0}"/>
         </function>
 
         <function model="hr.payslip" name="compute_sheet">
@@ -367,7 +886,71 @@
 
         <!-- ================================ November ================================ -->
 
-        <!-- Generate payslip -->
+        <!-- Sjukfrånvaro -->
+        <record id="hr_leave_helmer_1101" model="hr.leave">
+            <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_helmer_employee" />
+            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons"/>
+            <field name="date_from">2022-11-11</field>
+            <field name="date_to">2022-11-11</field>
+            <field name="request_date_from">2022-11-11</field>
+            <field name="request_date_to">2022-11-11</field>
+            <field name="request_unit_hours" eval="True"/>
+            <field name="request_hour_from">8</field>
+            <field name="request_hour_to">12</field>
+            <field name="number_of_hours">4</field>
+            <field name="holiday_status_id" ref="l10n_se_hr_payroll.leave_type_sick" />
+        </record>
+
+        <record id="hr_leave_helmer_1101_02" model="hr.leave">
+            <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_helmer_employee" />
+            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons"/>
+            <field name="date_from">2022-11-12</field>
+            <field name="date_to">2022-11-18</field>
+            <field name="request_date_from">2022-11-12</field>
+            <field name="request_date_to">2022-11-18</field>
+            <field name="number_of_hours">40</field>
+            <field name="holiday_status_id" ref="l10n_se_hr_payroll.leave_type_sick" />
+        </record>
+
+        <!-- VAB -->
+        <record id="hr_leave_helmer_1102" model="hr.leave">
+            <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_helmer_employee" />
+            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons"/>
+            <field name="date_from">2022-11-22</field>
+            <field name="date_to">2022-11-23</field>
+            <field name="request_date_from">2022-11-22</field>
+            <field name="request_date_to">2022-11-23</field>
+            <field name="number_of_hours">16</field>
+            <field name="holiday_status_id" ref="l10n_se_hr_payroll.leave_type_vab" />
+        </record>
+
+        <!-- Tjänstledighet -->
+        <record id="hr_leave_helmer_1103" model="hr.leave">
+            <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_helmer_employee" />
+            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons"/>
+            <field name="date_from">2022-11-03</field>
+            <field name="date_to">2022-11-04</field>
+            <field name="request_date_from">2022-11-03</field>
+            <field name="request_date_to">2022-11-04</field>
+            <field name="number_of_hours">16</field>
+            <field name="holiday_status_id" ref="l10n_se_hr_payroll.leave_type_loa" />
+        </record>
+
+        <function model="hr.leave" name="action_validate">
+            <value eval="[ref('hr_leave_helmer_1103')]"/>
+        </function>
+
+        <!-- Saknas: -->
+        <!-- Uttag betalda semesterdagar, timavlönad -->
+        <!-- Semesterdaglön betald, timavlönad -->
+        <!-- Lunchkuponger förmånsvärde-->
+        <!-- Avdrag lunchkuponger-->
+        <!-- Utmätning av lön -->
+
+        <!-- Skatt -->
+        <!-- Arbetsgivaravgift -->
+
+        <!-- Generera lönespec (payslip)-->
         <record id="hr_payslip_helmer_11" model="hr.payslip">
             <field name="name">Lönespecifikation för November - Helmer Henriksson</field>
             <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons" />
@@ -378,10 +961,18 @@
             <field name="struct_id" ref="l10n_se_hr_payroll_tiichri.hr_payroll_structure_tj_tiichri" />
         </record>
 
-        <!-- Manual input -->
-        <!-- Ingen övertid denna månad -->
+        <!-- Manuell input -->
         <function model="hr.payslip" name="onchange_employee">
             <value eval="[ref('l10n_se_hr_payroll_tiichri.hr_payslip_helmer_11')]"/>
+        </function>
+
+        <function model="hr.payslip.input" name="write">
+            <value model="hr.payslip.input" search="[('payslip_id', '=', ref('hr_payslip_helmer_11')), ('code', '=', 'otidtim')]"/>
+            <value eval="{'amount_qty': 1.0}"/>
+        </function>
+        <function model="hr.payslip.input" name="write">
+            <value model="hr.payslip.input" search="[('payslip_id', '=', ref('hr_payslip_helmer_11')), ('code', '=', 'kvaltim')]"/>
+            <value eval="{'amount_qty': 2.0}"/>
         </function>
 
         <function model="hr.payslip" name="compute_sheet">
@@ -390,7 +981,45 @@
 
         <!-- ================================ December ================================ -->
 
-        <!-- Generate payslip -->
+        <!-- Sjukfrånvaro -->
+        <record id="hr_leave_helmer_1201" model="hr.leave">
+            <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_helmer_employee" />
+            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons"/>
+            <field name="date_from">2022-12-02</field>
+            <field name="date_to">2022-12-08</field>
+            <field name="request_date_from">2022-12-02</field>
+            <field name="request_date_to">2022-12-08</field>
+            <field name="number_of_hours">40</field>
+            <field name="holiday_status_id" ref="l10n_se_hr_payroll.leave_type_sick" />
+        </record>
+
+        <!-- Tjänstledighet -->
+        <record id="hr_leave_helmer_1202" model="hr.leave">
+            <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_helmer_employee" />
+            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons"/>
+            <field name="date_from">2022-12-27</field>
+            <field name="date_to">2022-12-27</field>
+            <field name="request_date_from">2022-12-27</field>
+            <field name="request_date_to">2022-12-27</field>
+            <field name="number_of_hours">8</field>
+            <field name="holiday_status_id" ref="l10n_se_hr_payroll.leave_type_loa" />
+        </record>
+
+        <function model="hr.leave" name="action_validate">
+            <value eval="[ref('hr_leave_helmer_1202')]"/>
+        </function>
+
+        <!-- Saknas: -->
+        <!-- Uttag betalda semesterdagar, timavlönad -->
+        <!-- Semesterdaglön betald, timavlönad -->
+        <!-- Lunchkuponger förmånsvärde-->
+        <!-- Avdrag lunchkuponger-->
+        <!-- Utmätning av lön -->
+
+        <!-- Skatt -->
+        <!-- Arbetsgivaravgift -->
+
+        <!-- Generera lönespec (payslip)-->
         <record id="hr_payslip_helmer_12" model="hr.payslip">
             <field name="name">Lönespecifikation för December - Helmer Henriksson</field>
             <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons" />
@@ -401,7 +1030,7 @@
             <field name="struct_id" ref="l10n_se_hr_payroll_tiichri.hr_payroll_structure_tj_tiichri" />
         </record>
 
-        <!-- Manual input -->
+        <!-- Manuell input -->
         <!-- Ingen övertid denna månad -->
         <function model="hr.payslip" name="onchange_employee">
             <value eval="[ref('l10n_se_hr_payroll_tiichri.hr_payslip_helmer_12')]"/>

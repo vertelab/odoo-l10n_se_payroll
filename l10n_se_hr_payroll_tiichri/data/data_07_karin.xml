@@ -36,7 +36,7 @@
 
         <record id="contract_karin" model="hr.contract">
             <field name="name">Karin Kullberg Avtal</field>
-            <field name="wage">1</field>
+            <field name="wage">115</field>
             <field name="type_id" ref="hr_contract_type" />
             <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_karin_employee" />
             <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons"/>
@@ -116,41 +116,6 @@
         <!-- ================================ July ================================ -->
 
         <!-- Sjukfrånvaro -->
-        <record id="hr_leave_karin_701" model="hr.leave">
-            <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_karin_employee" />
-            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons"/>
-            <field name="date_from">2022-07-11</field>
-            <field name="date_to">2022-07-11</field>
-            <field name="request_date_from">2022-07-11</field>
-            <field name="request_date_to">2022-07-11</field>
-            <field name="number_of_hours">8</field>
-            <field name="holiday_status_id" ref="l10n_se_hr_payroll.leave_type_sick" />
-        </record>
-
-        <record id="hr_leave_karin_702" model="hr.leave">
-            <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_karin_employee" />
-            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons"/>
-            <field name="date_from">2022-07-12</field>
-            <field name="date_to">2022-07-14</field>
-            <field name="request_date_from">2022-07-12</field>
-            <field name="request_date_to">2022-07-14</field>
-            <field name="number_of_hours">24</field>
-            <field name="holiday_status_id" ref="l10n_se_hr_payroll.leave_type_sick" />
-        </record>
-
-        <!-- Semesterersättning, tabellskatt, 1 dag -->
-        <record id="hr_leave_karin_XXX" model="hr.leave">
-            <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_karin_employee" />
-            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons"/>
-            <field name="date_from">2022-07-31</field>
-            <field name="date_to">2022-07-31</field>
-            <field name="request_date_from">2022-07-31</field>
-            <field name="request_date_to">2022-07-31</field>
-            <field name="number_of_hours">8</field>
-            <field name="holiday_status_id" ref="l10n_se_hr_payroll.leave_type_xxxxxxxsick" />
-        </record>
-
-        <!-- Sjuk korttid dag 1-14, timavlönad, 32 timmar-->
         <record id="hr_leave_karin_701" model="hr.leave">
             <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_karin_employee" />
             <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons"/>

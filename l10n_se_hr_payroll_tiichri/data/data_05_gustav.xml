@@ -614,6 +614,10 @@
         <!-- Skatt -->
         <!-- Arbetsgivaravgift -->
 
+        <function model="hr.leave" name="action_validate">
+            <value eval="[ref('hr_leave_gustav_902')]"/>
+        </function>
+
         <!-- Generate payslip -->
         <record id="hr_payslip_gustav_09" model="hr.payslip">
             <field name="name">Lönespecifikation för September - Gustav Groth</field>
