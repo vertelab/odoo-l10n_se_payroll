@@ -215,11 +215,11 @@
         </function>
 
         <!-- Generera lönespec (payslip) -->
-        <record id="hr_payslip_asse_02" model="hr.payslip">
+        <record id="hr_payslip_asse_01" model="hr.payslip">
             <field name="name">Lönespecifikation för Januari - Asse Aronsson</field>
             <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons" />
             <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_asse_employee" />
-            <field name="period_id" ref="period_02_2022" />
+            <field name="period_id" ref="period_01_2022" />
             <field name="date_from">2022-01-01</field>
             <field name="date_to">2022-01-31</field>
             <field name="struct_id" ref="l10n_se_hr_payroll_tiichri.hr_payroll_structure_tj_tiichri" />
@@ -228,21 +228,21 @@
         <!-- Manuell input -->
 
         <function model="hr.payslip" name="onchange_employee">
-            <value eval="[ref('hr_payslip_asse_02')]"/>
+            <value eval="[ref('hr_payslip_asse_01')]"/>
         </function>
 
         <function model="hr.payslip.input" name="write">
-            <value model="hr.payslip.input" search="[('payslip_id', '=', ref('hr_payslip_asse_02')), ('code', '=', 'otidtim')]"/>
-            <value eval="{'amount_qty': 1.0}"/>
+            <value model="hr.payslip.input" search="[('payslip_id', '=', ref('hr_payslip_asse_01')), ('code', '=', 'otidtim')]"/>
+            <value eval="{'amount_qty': 2.0}"/>
         </function>
 
         <function model="hr.payslip.input" name="write">
-            <value model="hr.payslip.input" search="[('payslip_id', '=', ref('hr_payslip_asse_02')), ('code', '=', 'kvaltim')]"/>
-            <value eval="{'amount_qty': 1.0}"/>
+            <value model="hr.payslip.input" search="[('payslip_id', '=', ref('hr_payslip_asse_01')), ('code', '=', 'kvaltim')]"/>
+            <value eval="{'amount_qty': 2.0}"/>
         </function>
 
         <function model="hr.payslip" name="compute_sheet">
-            <value eval="[ref('hr_payslip_asse_02')]"/>
+            <value eval="[ref('hr_payslip_asse_01')]"/>
         </function>
 
         <!-- ================================ February ================================ -->

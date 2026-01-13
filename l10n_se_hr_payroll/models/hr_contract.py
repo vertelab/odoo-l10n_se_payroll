@@ -171,7 +171,7 @@ class hr_contract(models.Model):
         ]
         leaves = self.env['hr.leave'].search(domain)
         
-        leaves_mapped = [{'date_from': l.date_from.date(), 'date_to': l.date_to.date()} for l in leaves]
+        leaves_mapped = [{'date_from': l.date_from.date(), 'date_to': l.date_to.date(), 'obj': l} for l in leaves]
         combined_periods = self.combine_sick_leave_periods(leaves_mapped)
 
         res = {
@@ -186,13 +186,17 @@ class hr_contract(models.Model):
                 day_index = (loop_date - period['date_from']).days + 1
                 
                 if payslip.date_from <= loop_date <= payslip.date_to:
-                    is_actual_sick_day = any(l['date_from'] <= loop_date <= l['date_to'] for l in leaves_mapped)
+                    actual_leaves_this_day = [l['obj'] for l in leaves_mapped if l['date_from'] <= loop_date <= l['date_to']]
                     
-                    if is_actual_sick_day:
+                    if actual_leaves_this_day:
                         if day_index <= 14:
-                            day_start = fields.Datetime.to_datetime(loop_date)
-                            day_end = day_start + relativedelta(days=1, seconds=-1)
-                            res['hours_1_14'] += self.resource_calendar_id.get_work_hours_count(day_start, day_end, compute_leaves=False)
+                            for leave in actual_leaves_this_day:
+                                if leave.request_unit_hours:
+                                    res['hours_1_14'] += leave.number_of_hours
+                                else:
+                                    day_start = fields.Datetime.to_datetime(loop_date)
+                                    day_end = day_start + relativedelta(days=1, seconds=-1)
+                                    res['hours_1_14'] += self.resource_calendar_id.get_work_hours_count(day_start, day_end, compute_leaves=False)
                         elif 15 <= day_index <= 90:
                             res['days_15_90'] += 1.0
                         else:
