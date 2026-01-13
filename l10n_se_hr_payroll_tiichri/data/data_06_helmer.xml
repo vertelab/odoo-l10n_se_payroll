@@ -103,6 +103,8 @@
             <field name="holiday_status_id" ref="l10n_se_hr_payroll.leave_type_vab" />
         </record>
 
+
+
         <!-- Saknas: -->
         <!-- Lunchkuponger förmånsvärde -->
         <!-- Avdrag lunchkuponger -->
@@ -529,6 +531,18 @@
             <field name="number_of_hours">8</field>
             <field name="holiday_status_id" ref="l10n_se_hr_payroll.leave_type_vab" />
         </record>
+        
+        <!-- Semester 40 timmar, 5 dgr -->
+        <record id="hr_leave_helmer_604" model="hr.leave">
+            <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_helmer_employee" />
+            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons"/>
+            <field name="date_from">2022-06-20</field>
+            <field name="date_to">2022-06-27</field>
+            <field name="request_date_from">2022-06-20</field>
+            <field name="request_date_to">2022-06-27</field>
+            <field name="number_of_hours">40</field>
+            <field name="holiday_status_id" ref="l10n_se_hr_holidays.leave_type_vacation" />
+        </record>
 
         <!-- Saknas: -->
         <!-- Uttag betalda semesterdagar, timavlönad -->
@@ -594,6 +608,18 @@
             <field name="request_date_to">2022-07-11</field>
             <field name="number_of_hours">16</field>
             <field name="holiday_status_id" ref="l10n_se_hr_payroll.leave_type_sick" />
+        </record>
+
+        <!-- Semester 4 dgr, 32 timmar -->
+        <record id="hr_leave_helmer_702" model="hr.leave">
+            <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_helmer_employee" />
+            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons"/>
+            <field name="date_from">2022-07-18</field>
+            <field name="date_to">2022-07-21</field>
+            <field name="request_date_from">2022-07-18</field>
+            <field name="request_date_to">2022-07-21</field>
+            <field name="number_of_hours">32</field>
+            <field name="holiday_status_id" ref="l10n_se_hr_holidays.leave_type_vacation" />
         </record>
 
         <!-- Saknas: -->
@@ -672,6 +698,18 @@
             <field name="holiday_status_id" ref="l10n_se_hr_payroll.leave_type_loa" />
         </record>
 
+        <!-- Semester 1 dgr, 8 timmar -->
+        <record id="hr_leave_helmer_803" model="hr.leave">
+            <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_helmer_employee" />
+            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons"/>
+            <field name="date_from">2022-08-08</field>
+            <field name="date_to">2022-08-08</field>
+            <field name="request_date_from">2022-08-08</field>
+            <field name="request_date_to">2022-08-08</field>
+            <field name="number_of_hours">8</field>
+            <field name="holiday_status_id" ref="l10n_se_hr_holidays.leave_type_vacation" />
+        </record>
+        
         <function model="hr.leave" name="action_validate">
             <value eval="[ref('hr_leave_helmer_802')]"/>
         </function>
@@ -775,6 +813,18 @@
             <field name="holiday_status_id" ref="l10n_se_hr_payroll.leave_type_loa" />
         </record>
 
+        <!-- Semester 4 dgr, 32 timmar -->
+        <record id="hr_leave_helmer_905" model="hr.leave">
+            <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_helmer_employee" />
+            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons"/>
+            <field name="date_from">2022-09-19</field>
+            <field name="date_to">2022-09-19</field>
+            <field name="request_date_from">2022-09-19</field>
+            <field name="request_date_to">2022-09-19</field>
+            <field name="number_of_hours">32</field>
+            <field name="holiday_status_id" ref="l10n_se_hr_holidays.leave_type_vacation" />
+        </record>
+        
         <function model="hr.leave" name="action_validate">
             <value eval="[ref('hr_leave_helmer_904')]"/>
         </function>
@@ -841,6 +891,18 @@
             <field name="request_date_to">2022-10-25</field>
             <field name="number_of_hours">16</field>
             <field name="holiday_status_id" ref="l10n_se_hr_payroll.leave_type_loa" />
+        </record>
+
+        <!-- Semester 3 dgr, 24 timmar -->
+        <record id="hr_leave_helmer_1003" model="hr.leave">
+            <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_helmer_employee" />
+            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons"/>
+            <field name="date_from">2022-10-12</field>
+            <field name="date_to">2022-10-14</field>
+            <field name="request_date_from">2022-10-12</field>
+            <field name="request_date_to">2022-10-14</field>
+            <field name="number_of_hours">24</field>
+            <field name="holiday_status_id" ref="l10n_se_hr_holidays.leave_type_vacation" />
         </record>
 
         <function model="hr.payslip" name="compute_sheet">
@@ -935,6 +997,18 @@
             <field name="number_of_hours">16</field>
             <field name="holiday_status_id" ref="l10n_se_hr_payroll.leave_type_loa" />
         </record>
+         
+        <!-- Semester 2 dgr, 16 timmar -->
+        <record id="hr_leave_helmer_1003" model="hr.leave">
+            <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_helmer_employee" />
+            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons"/>
+            <field name="date_from">2022-11-25</field>
+            <field name="date_to">2022-11-28</field>
+            <field name="request_date_from">2022-11-25</field>
+            <field name="request_date_to">2022-11-28</field>
+            <field name="number_of_hours">16</field>
+            <field name="holiday_status_id" ref="l10n_se_hr_holidays.leave_type_vacation" />
+        </record>
 
         <function model="hr.leave" name="action_validate">
             <value eval="[ref('hr_leave_helmer_1103')]"/>
@@ -1003,6 +1077,18 @@
             <field name="request_date_to">2022-12-27</field>
             <field name="number_of_hours">8</field>
             <field name="holiday_status_id" ref="l10n_se_hr_payroll.leave_type_loa" />
+        </record>
+
+        <!-- Semester 2 dgr, 16 timmar -->
+        <record id="hr_leave_helmer_1003" model="hr.leave">
+            <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_helmer_employee" />
+            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons"/>
+            <field name="date_from">2022-12-13</field>
+            <field name="date_to">2022-12-14</field>
+            <field name="request_date_from">2022-12-13</field>
+            <field name="request_date_to">2022-12-14</field>
+            <field name="number_of_hours">16</field>
+            <field name="holiday_status_id" ref="l10n_se_hr_holidays.leave_type_vacation" />
         </record>
 
         <function model="hr.leave" name="action_validate">
