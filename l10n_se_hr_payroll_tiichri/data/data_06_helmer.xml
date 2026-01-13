@@ -17,6 +17,7 @@
             <field name="partner_id" ref="hr_helmer_partner" />
         </record> -->
 
+
         <record id="hr_helmer_employee" model="hr.employee">
             <field name="name">Helmer Henriksson Anställd</field>
             <field name="work_location_id" ref="main_work_location" />
@@ -54,6 +55,7 @@
         <!-- ================================ January ================================ -->
 
         <!-- Sjukfrånvaro -->
+        <!-- 4 + 8 timmar -->
         <record id="hr_leave_helmer_101" model="hr.leave">
             <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_helmer_employee" />
             <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons"/>
@@ -61,10 +63,10 @@
             <field name="date_to">2022-01-05</field>
             <field name="request_date_from">2022-01-04</field>
             <field name="request_date_to">2022-01-05</field>
-            <field name="number_of_hours">16</field>
+            <field name="number_of_hours">12</field>
             <field name="holiday_status_id" ref="l10n_se_hr_payroll.leave_type_sick" />
         </record>
-
+        <!-- 24 timmar, 3dgr -->
         <record id="hr_leave_helmer_102" model="hr.leave">
             <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_helmer_employee" />
             <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons"/>
@@ -100,14 +102,15 @@
         <!-- ================================ February ================================ -->
 
         <!-- Sjukfrånvaro -->
+        <!-- 32 timmar, 4 dgr -->
         <record id="hr_leave_helmer_201" model="hr.leave">
             <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_helmer_employee" />
             <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons"/>
-            <field name="date_from">2022-02-03</field>
-            <field name="date_to">2022-02-04</field>
-            <field name="request_date_from">2022-02-03</field>
-            <field name="request_date_to">2022-02-04</field>
-            <field name="number_of_hours">16</field>
+            <field name="date_from">2022-02-07</field>
+            <field name="date_to">2022-02-10</field>
+            <field name="request_date_from">2022-02-07</field>
+            <field name="request_date_to">2022-02-10</field>
+            <field name="number_of_hours">32</field>
             <field name="holiday_status_id" ref="l10n_se_hr_payroll.leave_type_sick" />
         </record>
 
@@ -410,3 +413,4 @@
 
     </data>
 </odoo>
+
