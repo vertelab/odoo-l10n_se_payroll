@@ -170,6 +170,13 @@
             <value eval="[ref('hr_payslip_doris_01')]"/>
         </function>
 
+        <!--  Lunchkuponger  -->
+        <function model="hr.payslip.input" name="write">
+            <value model="hr.payslip.input" search="[('payslip_id', '=', ref('hr_payslip_doris_01')), ('code', '=', 'lunch')]"/>
+            <value eval="{'amount_qty': 1.0, 'amount': 900}"/>
+        </function>
+
+
         <function model="hr.payslip.input" name="write">
             <value model="hr.payslip.input" search="[('payslip_id', '=', ref('hr_payslip_doris_01')), ('code', '=', 'otidtim')]"/>
             <value eval="{'amount_qty': 1.0}"/>
@@ -244,6 +251,13 @@
             <value eval="[ref('hr_payslip_doris_02')]"/>
         </function>
 
+        <!--  Lunchkuponger  -->
+        <function model="hr.payslip.input" name="write">
+            <value model="hr.payslip.input" search="[('payslip_id', '=', ref('hr_payslip_doris_02')), ('code', '=', 'lunch')]"/>
+            <value eval="{'amount_qty': 1.0, 'amount': 900}"/>
+        </function>
+        
+<!--
         <function model="hr.payslip.input" name="write">
             <value model="hr.payslip.input" search="[('payslip_id', '=', ref('hr_payslip_doris_02')), ('code', '=', 'otidtim')]"/>
             <value eval="{'amount_qty': 2.0}"/>
@@ -253,6 +267,7 @@
             <value model="hr.payslip.input" search="[('payslip_id', '=', ref('hr_payslip_doris_02')), ('code', '=', 'mertidtim')]"/>
             <value eval="{'amount_qty': 8.0}"/>
         </function>
+-->
 
         <function model="hr.payslip" name="compute_sheet">
             <value eval="[ref('hr_payslip_doris_02')]"/>
@@ -292,6 +307,22 @@
             <value eval="[ref('hr_payslip_doris_03')]"/>
         </function>
 
+        <!--  Lunchkuponger  -->
+        <function model="hr.payslip.input" name="write">
+            <value model="hr.payslip.input" search="[('payslip_id', '=', ref('hr_payslip_doris_03')), ('code', '=', 'lunch')]"/>
+            <value eval="{'amount_qty': 1.0, 'amount': 900}"/>
+        </function>
+
+        <!-- Restidersättning, vardag 3 hrs, helg 1 hrs -->
+        <function model="hr.payslip.input" name="write">
+            <value model="hr.payslip.input" search="[('payslip_id', '=', ref('hr_payslip_doris_03')), ('code', '=', 'res_vardag')]"/>
+            <value eval="{'amount_qty': 3, 'amount': 91.67}"/>
+        </function>
+        <function model="hr.payslip.input" name="write">
+            <value model="hr.payslip.input" search="[('payslip_id', '=', ref('hr_payslip_doris_03')), ('code', '=', 'res_helg')]"/>
+            <value eval="{'amount_qty': 1, 'amount': 115.79}"/>
+        </function>
+        
         <function model="hr.payslip.input" name="write">
             <value model="hr.payslip.input" search="[('payslip_id', '=', ref('hr_payslip_doris_03')), ('code', '=', 'otidtim')]"/>
             <value eval="{'amount_qty': 2.0}"/>
@@ -373,6 +404,30 @@
             <value eval="[ref('hr_payslip_doris_04')]"/>
         </function>
 
+        <!--  Lunchkuponger  -->
+        <function model="hr.payslip.input" name="write">
+            <value model="hr.payslip.input" search="[('payslip_id', '=', ref('hr_payslip_doris_04')), ('code', '=', 'lunch')]"/>
+            <value eval="{'amount_qty': 1.0, 'amount': 900}"/>
+        </function>
+
+        <!--  Traktamente, natt  -->
+        <function model="hr.payslip.input" name="write">
+            <value model="hr.payslip.input" search="[('payslip_id', '=', ref('hr_payslip_doris_04')), ('code', '=', 'trakt_natt')]"/>
+            <value eval="{'amount_qty': 1.0, 'amount': 120}"/>
+        </function>
+        <!--  Traktamente, helt  -->
+        <function model="hr.payslip.input" name="write">
+            <value model="hr.payslip.input" search="[('payslip_id', '=', ref('hr_payslip_doris_04')), ('code', '=', 'trakt_helt')]"/>
+            <value eval="{'amount_qty': 2.0, 'amount': 240}"/>
+        </function>
+        <!--  Traktamente, halvt  -->
+        <function model="hr.payslip.input" name="write">
+            <value model="hr.payslip.input" search="[('payslip_id', '=', ref('hr_payslip_doris_04')), ('code', '=', 'trakt_halvt')]"/>
+            <value eval="{'amount_qty': 1.0, 'amount': 120}"/>
+        </function>
+
+
+
         <function model="hr.payslip" name="compute_sheet">
             <value eval="[ref('hr_payslip_doris_04')]"/>
         </function>
@@ -409,11 +464,40 @@
             <field name="date_to">2022-05-31</field>
             <field name="struct_id" ref="l10n_se_hr_payroll_tiichri.hr_payroll_structure_tj_tiichri" />
         </record>
-
+        
         <!-- Manuell input -->
         <function model="hr.payslip" name="onchange_employee">
             <value eval="[ref('hr_payslip_doris_05')]"/>
         </function>
+
+        <!--  Lunchkuponger  -->
+        <function model="hr.payslip.input" name="write">
+            <value model="hr.payslip.input" search="[('payslip_id', '=', ref('hr_payslip_doris_05')), ('code', '=', 'lunch')]"/>
+            <value eval="{'amount_qty': 1.0, 'amount': 900}"/>
+        </function>
+
+        <!--  Milersättning 900 x 1.15 skatt  -->
+        <function model="hr.payslip.input" name="write">
+            <value model="hr.payslip.input" search="[('payslip_id', '=', ref('hr_payslip_doris_05')), ('code', '=', 'mil_skatt')]"/>
+            <value eval="{'amount_qty': 900, 'amount': 1.15}"/>
+        </function>
+
+        <!--  Traktamente, helt  -->
+        <function model="hr.payslip.input" name="write">
+            <value model="hr.payslip.input" search="[('payslip_id', '=', ref('hr_payslip_doris_05')), ('code', '=', 'trakt_helt')]"/>
+            <value eval="{'amount_qty': 3.0, 'amount': 240}"/>
+        </function>
+        <!--  Traktamente, halvt  -->
+        <function model="hr.payslip.input" name="write">
+            <value model="hr.payslip.input" search="[('payslip_id', '=', ref('hr_payslip_doris_05')), ('code', '=', 'trakt_halvt')]"/>
+            <value eval="{'amount_qty': 1.0, 'amount': 120}"/>
+        </function>
+        <!--  Traktamente, skatt  -->
+        <function model="hr.payslip.input" name="write">
+            <value model="hr.payslip.input" search="[('payslip_id', '=', ref('hr_payslip_doris_05')), ('code', '=', 'trakt_skatt')]"/>
+            <value eval="{'amount_qty': 3.5, 'amount': 80}"/>
+        </function>
+
 
         <function model="hr.payslip.input" name="write">
             <value model="hr.payslip.input" search="[('payslip_id', '=', ref('hr_payslip_doris_05')), ('code', '=', 'mertidtim')]"/>
@@ -451,6 +535,18 @@
             <field name="struct_id" ref="l10n_se_hr_payroll_tiichri.hr_payroll_structure_tj_tiichri" />
         </record>
 
+        <!-- Semester 8 dgr, 48 timmar -->
+        <record id="hr_leave_doris_601" model="hr.leave">
+            <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_doris_employee" />
+            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons"/>
+            <field name="date_from">2022-06-07</field>
+            <field name="date_to">2022-06-30</field>
+            <field name="request_date_from">2022-06-07</field>
+            <field name="request_date_to">2022-06-07</field>
+            <field name="number_of_hours">64</field>
+            <field name="holiday_status_id" ref="l10n_se_hr_holidays.leave_type_vacation" />
+        </record>
+
         <!-- Manuell input -->
         <!-- Ingen överitd denna månad -->
         <function model="hr.payslip" name="onchange_employee">
@@ -483,6 +579,18 @@
             <field name="request_date_to">2022-07-14</field>
             <field name="number_of_hours">64</field>
             <field name="holiday_status_id" ref="l10n_se_hr_payroll.leave_type_sick" />
+        </record>
+        
+        <!-- Semester 4 dgr, 32 timmar -->
+        <record id="hr_leave_doris_702" model="hr.leave">
+            <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_doris_employee" />
+            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons"/>
+            <field name="date_from">2022-07-18</field>
+            <field name="date_to">2022-07-21</field>
+            <field name="request_date_from">2022-07-21</field>
+            <field name="request_date_to">2022-07-21</field>
+            <field name="number_of_hours">32</field>
+            <field name="holiday_status_id" ref="l10n_se_hr_holidays.leave_type_vacation" />
         </record>
 
         <!-- Saknas: -->
@@ -530,6 +638,18 @@
             <field name="request_date_to">2022-08-31</field>
             <field name="number_of_hours">96</field>
             <field name="holiday_status_id" ref="l10n_se_hr_payroll.leave_type_sick" />
+        </record>
+
+        <!-- Semester 6 dgr, 48 timmar -->
+        <record id="hr_leave_doris_802" model="hr.leave">
+            <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_doris_employee" />
+            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons"/>
+            <field name="date_from">2022-08-01</field>
+            <field name="date_to">2022-08-09</field>
+            <field name="request_date_from">2022-08-01</field>
+            <field name="request_date_to">2022-08-09</field>
+            <field name="number_of_hours">48</field>
+            <field name="holiday_status_id" ref="l10n_se_hr_holidays.leave_type_vacation" />
         </record>
 
         <!-- Saknas: -->
@@ -582,6 +702,18 @@
             <field name="holiday_status_id" ref="l10n_se_hr_payroll.leave_type_loa" />
         </record>
 
+        <!-- Semester 2 dgr, 16 timmar -->
+        <record id="hr_leave_doris_902" model="hr.leave">
+            <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_doris_employee" />
+            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons"/>
+            <field name="date_from">2022-09-12</field>
+            <field name="date_to">2022-09-13</field>
+            <field name="request_date_from">2022-09-12</field>
+            <field name="request_date_to">2022-09-13</field>
+            <field name="number_of_hours">16</field>
+            <field name="holiday_status_id" ref="l10n_se_hr_holidays.leave_type_vacation" />
+        </record>
+
         <!-- Saknas: -->
         <!-- Bostadsförmån småhus -->
         <!-- Övriga förmåner, tabellskatt (möbelförmån)-->
@@ -614,7 +746,18 @@
         <function model="hr.payslip" name="onchange_employee">
             <value eval="[ref('hr_payslip_doris_09')]"/>
         </function>
-
+        
+        <!-- Milersättning, mil_fri, 500 x 1.85 -->
+        <function model="hr.payslip.input" name="write">
+            <value model="hr.payslip.input" search="[('payslip_id', '=', ref('hr_payslip_doris_09')), ('code', '=', 'mil_fri')]"/>
+            <value eval="{'amount_qty': 500, 'amount': 1.85}"/>
+        </function>
+        <!-- Milersättning, mil_skatt, 500 x 1.15 -->
+        <function model="hr.payslip.input" name="write">
+            <value model="hr.payslip.input" search="[('payslip_id', '=', ref('hr_payslip_doris_09')), ('code', '=', 'mil_skatt')]"/>
+            <value eval="{'amount_qty': 500, 'amount': 1.55}"/>
+        </function>
+        
         <function model="hr.payslip.input" name="write">
             <value model="hr.payslip.input" search="[('payslip_id', '=', ref('hr_payslip_doris_09')), ('code', '=', 'otidtim')]"/>
             <value eval="{'amount_qty': 1.0}"/>
@@ -721,6 +864,22 @@
         <!-- Ingen överitd denna månad -->
         <function model="hr.payslip" name="onchange_employee">
             <value eval="[ref('hr_payslip_doris_10')]"/>
+        </function>
+
+        <!--  Lunschkuponger  -->
+        <function model="hr.payslip.input" name="write">
+            <value model="hr.payslip.input" search="[('payslip_id', '=', ref('hr_payslip_doris_10')), ('code', '=', 'lunch')]"/>
+            <value eval="{'amount_qty': 1.0, 'amount': 900}"/>
+        </function>
+
+        <!-- Milersättningen -->
+        <function model="hr.payslip.input" name="write">
+            <value model="hr.payslip.input" search="[('payslip_id', '=', ref('hr_payslip_doris_10')), ('code', '=', 'mil_fri')]"/>
+            <value eval="{'amount_qty': 300.0, 'amount': 1.85}"/>
+        </function>
+        <function model="hr.payslip.input" name="write">
+            <value model="hr.payslip.input" search="[('payslip_id', '=', ref('hr_payslip_doris_10')), ('code', '=', 'mil_skatt')]"/>
+            <value eval="{'amount_qty': 300.0, 'amount': 1.15}"/>
         </function>
 
         <function model="hr.payslip" name="compute_sheet">

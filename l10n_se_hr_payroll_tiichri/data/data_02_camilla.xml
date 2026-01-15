@@ -432,6 +432,18 @@
             <field name="struct_id" ref="l10n_se_hr_payroll_tiichri.hr_payroll_structure_tj_tiichri" />
         </record>
 
+        <!-- Semester 6 dgr, 48 timmar -->
+        <record id="hr_leave_camilla_601" model="hr.leave">
+            <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_camilla_employee" />
+            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons"/>
+            <field name="date_from">2022-06-09</field>
+            <field name="date_to">2022-06-16</field>
+            <field name="request_date_from">2022-06-09</field>
+            <field name="request_date_to">2022-06-16</field>
+            <field name="number_of_hours">48</field>
+            <field name="holiday_status_id" ref="l10n_se_hr_holidays.leave_type_vacation" />
+        </record>
+
         <!-- Manuell input -->
         <function model="hr.payslip" name="onchange_employee">
             <value eval="[ref('l10n_se_hr_payroll_tiichri.hr_payslip_camilla_06')]"/>

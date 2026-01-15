@@ -508,6 +508,30 @@
             <field name="date_to">2022-06-30</field>
             <field name="struct_id" ref="l10n_se_hr_payroll_tiichri.hr_payroll_structure_tj_tiichri" />
         </record>
+        
+        <!-- Semester 3 dgr, 24 timmar -->
+        <record id="hr_leave_frans_601" model="hr.leave">
+            <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_frans_employee" />
+            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons"/>
+            <field name="date_from">2022-06-07</field>
+            <field name="date_to">2022-06-09</field>
+            <field name="request_date_from">2022-06-07</field>
+            <field name="request_date_to">2022-06-09</field>
+            <field name="number_of_hours">24</field>
+            <field name="holiday_status_id" ref="l10n_se_hr_holidays.leave_type_vacation" />
+        </record>
+        
+        <!-- Semester 3 dgr, 24 timmar -->
+        <record id="hr_leave_frans_602" model="hr.leave">
+            <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_frans_employee" />
+            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons"/>
+            <field name="date_from">2022-06-20</field>
+            <field name="date_to">2022-06-22</field>
+            <field name="request_date_from">2022-06-20</field>
+            <field name="request_date_to">2022-06-22</field>
+            <field name="number_of_hours">24</field>
+            <field name="holiday_status_id" ref="l10n_se_hr_holidays.leave_type_vacation" />
+        </record>
 
         <!-- Manuell input-->
         <!-- Ingen övertid denna måbad -->
@@ -543,6 +567,17 @@
             <field name="holiday_status_id" ref="l10n_se_hr_payroll.leave_type_sick" />
         </record>
 
+        <!-- Semester 6 dgr, 48 timmar -->
+        <record id="hr_leave_frans_702" model="hr.leave">
+            <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_frans_employee" />
+            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons"/>
+            <field name="date_from">2022-07-11</field>
+            <field name="date_to">2022-07-18</field>
+            <field name="request_date_from">2022-07-11</field>
+            <field name="request_date_to">2022-07-18</field>
+            <field name="number_of_hours">48</field>
+            <field name="holiday_status_id" ref="l10n_se_hr_holidays.leave_type_vacation" />
+        </record>
 
         <!-- Saknas: -->
         <!-- Uttag betalda semesterdagar, månadsavlönad -->
@@ -624,7 +659,31 @@
             <field name="holiday_status_id" ref="l10n_se_hr_payroll.leave_type_sick" />
         </record>
 
+        <!-- Semester 2 dgr, 16 timmar -->
+        <record id="hr_leave_frans_803" model="hr.leave">
+            <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_frans_employee" />
+            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons"/>
+            <field name="date_from">2022-08-01</field>
+            <field name="date_to">2022-08-02</field>
+            <field name="request_date_from">2022-08-01</field>
+            <field name="request_date_to">2022-08-02</field>
+            <field name="number_of_hours">16</field>
+            <field name="holiday_status_id" ref="l10n_se_hr_holidays.leave_type_vacation" />
+        </record>
 
+        <!-- Semester 2 dgr, 16 timmar -->
+        <record id="hr_leave_frans_804" model="hr.leave">
+            <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_frans_employee" />
+            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons"/>
+            <field name="date_from">2022-08-25</field>
+            <field name="date_to">2022-08-26</field>
+            <field name="request_date_from">2022-08-25</field>
+            <field name="request_date_to">2022-08-26</field>
+            <field name="number_of_hours">16</field>
+            <field name="holiday_status_id" ref="l10n_se_hr_holidays.leave_type_vacation" />
+        </record>
+
+        
         <!-- Saknas: -->
         <!-- Uttag betalda semesterdagar, månadsavlönad -->
         <!-- Semesterlön, betald -->
@@ -718,7 +777,18 @@
             <field name="number_of_hours">48</field>
             <field name="holiday_status_id" ref="l10n_se_hr_payroll.leave_type_sick" />
         </record>
-
+        
+        <!-- Semester 2 dgr, 16 timmar -->
+        <record id="hr_leave_frans_904" model="hr.leave">
+            <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_frans_employee" />
+            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons"/>
+            <field name="date_from">2022-09-29</field>
+            <field name="date_to">2022-09-30</field>
+            <field name="request_date_from">2022-09-29</field>
+            <field name="request_date_to">2022-09-30</field>
+            <field name="number_of_hours">16</field>
+            <field name="holiday_status_id" ref="l10n_se_hr_holidays.leave_type_vacation" />
+        </record>
 
         <!-- Saknas: -->
         <!-- Uttag betalda semesterdagar, månadsavlönad -->
