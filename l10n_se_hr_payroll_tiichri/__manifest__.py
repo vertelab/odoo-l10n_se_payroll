@@ -37,11 +37,11 @@ We create test data to seven employees, to use while developing our own code. To
     'maintainer': 'Vertel AB',
     'repository': 'https://github.com/vertelab/odoo-l10n-se-payroll',
     'depends': [
+        'l10n_se_hr_holidays',  
         #'l10n_se_hr_payroll',
         'hr_contract',
         #'payroll',
         #'hr_holidays',
-        'l10n_se_hr_holidays',  
         'l10n_se_payroll_taxtable',
     ],
     'data':[

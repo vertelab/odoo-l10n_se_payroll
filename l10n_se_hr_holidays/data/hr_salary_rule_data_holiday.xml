@@ -2,7 +2,12 @@
 <odoo>
     <data noupdate="0">
 
-        <!-- Semester -->
+
+        <!-- ============================================ -->
+        <!-- Arbetstyper & Frånvarotyper                  -->
+        <!-- ============================================ -->
+
+        <!-- Semester betald -->
         <record model="hr.work.entry.type" id="work_entry_type_vacation">
             <field name="name" eval="'Semester'"/>
             <field name="code">sem_bet</field>
@@ -12,89 +17,295 @@
             <field name="country_id" ref="base.se"/>
         </record>
 
-        <!-- Frånvarotyp -->
         <record model="hr.leave.type" id="leave_type_vacation">
             <field name="name" eval="'Semester'" />
             <field name="company_id" eval="False"/>
             <field name="work_entry_type_id" ref="work_entry_type_vacation" />
             <field name="color">2</field>
             <field name="request_unit">hour</field>
+            <field name="requires_allocation">no</field>
             <field name="leave_validation_type">hr</field>
-            <!-- <field name="requires_allocation">no</field> ?? -->
+            <field name="legal_leave" eval="True"/>
         </record>
 
-        <record id="hr_salary_rule_legal_leave_pay" model="hr.salary.rule">
-            <field name="category_id" ref="l10n_se_hr_payroll.hr_salary_rule_category-BRUAVG" />
+        <!-- Semester obetald -->
+        <record model="hr.work.entry.type" id="work_entry_type_vacation_unpaid">
+            <field name="name" eval="'Semester obetald'"/>
+            <field name="code">sem_obet</field>
+            <field name="external_code" eval="'l10n_se_hr_holidays.sem_obet'"/>
+            <field name="color">2</field>
+            <field name="is_leave" eval="True"/>
+            <field name="country_id" ref="base.se"/>
+        </record>
+
+        <record model="hr.leave.type" id="leave_type_vacation_unpaid">
+            <field name="name" eval="'Semester obetald'" />
+            <field name="company_id" eval="False"/>
+            <field name="work_entry_type_id" ref="work_entry_type_vacation_unpaid" />
+            <field name="color">2</field>
+            <field name="request_unit">hour</field>
+            <field name="requires_allocation">no</field>
+            <field name="leave_validation_type">hr</field>
+            <field name="legal_leave" eval="True"/>
+        </record>
+
+        <!-- Förskottssemester -->
+        <record model="hr.work.entry.type" id="work_entry_type_vacation_advance">
+            <field name="name" eval="'Förskottssemester'"/>
+            <field name="code">sem_forsk_dagar</field>
+            <field name="external_code" eval="'l10n_se_hr_holidays.sem_forsk'"/>
+            <field name="color">3</field>
+            <field name="is_leave" eval="True"/>
+            <field name="country_id" ref="base.se"/>
+        </record>
+
+        <record model="hr.leave.type" id="leave_type_vacation_advance">
+            <field name="name" eval="'Förskottssemester'" />
+            <field name="company_id" eval="False"/>
+            <field name="work_entry_type_id" ref="work_entry_type_vacation_advance" />
+            <field name="color">3</field>
+            <field name="request_unit">hour</field>
+            <field name="requires_allocation">no</field>
+            <field name="leave_validation_type">hr</field>
+            <field name="legal_leave" eval="True"/>
+        </record>
+
+        <!-- ============================================ -->
+        <!-- SEMESTERREGLER                              -->
+        <!-- ============================================ -->
+
+        <!-- Uttag betalda semesterdagar (parent) -->
+        <record id="hr_salary_rule_legal_leave" model="hr.salary.rule">
+            <field name="company_id" eval="False"/>
+            <field name="category_id" ref="l10n_se_hr_payroll.hr_salary_rule_category_BRUAVG" />
             <field name="code">sem_bet</field>
-            <field name="salary_art">550</field>
             <field name="name">Uttag betalda semesterdagar</field>
-            <field name="sequence">240</field>
+            <field name="sequence">700</field>
             <field name="appears_on_payslip" eval="True"/>
             <field name="condition_select">python</field>
-            <field name="condition_python">result = payslips.dict.has_legal_leaves('sem_bet')</field>
+            <field name="condition_python">
+result = worked_days.dict.get('sem_bet')
+            </field>
             <field name="amount_select">code</field>
             <field name="amount_python_compute">
-result_qty = payslips.dict.get_legal_leaves_days('sem_bet') * -1
-result = 0.0
+# Summerar semester
+v_til8 = result_rules.sem_til8.total if result_rules.sem_til8 else 0.0
+v_arb = result_rules.sem_lon_arb.total if result_rules.sem_lon_arb else 0.0
+v_tj_var = result_rules.sem_lon_tj.total if result_rules.sem_lon_tj else 0.0
+v_avg_tim = result_rules.sem_avg_tim.total if result_rules.sem_avg_tim else 0.0
+v_avg_mon = result_rules.sem_avg_mon.total if result_rules.sem_avg_mon else 0.0
+
+result = v_til8 + v_arb + v_tj_var + v_avg_tim + v_avg_mon
+result_qty = 1
             </field>
-            <field name="quantity">1</field>
         </record>
 
         <record id="hr_salary_rule_legal_leave_addition8" model="hr.salary.rule">
-            <field name="category_id" ref="l10n_se_hr_payroll.hr_salary_rule_category-BRUTIL" />
+            <field name="company_id" eval="False"/>
+            <field name="category_id" ref="l10n_se_hr_payroll.hr_salary_rule_category_BRUTIL" />
+            <field name="parent_rule_id" ref="hr_salary_rule_legal_leave" />
             <field name="code">sem_til8</field>
             <field name="salary_art">122</field>
             <field name="name">Semestertillägg 0,8%</field>
-            <field name="sequence">240</field>
-            <field name="active" eval="False"/>
+            <field name="sequence">650</field>
             <field name="appears_on_payslip" eval="True"/>
             <field name="condition_select">python</field>
-            <field name="condition_python">result = payslips.dict.has_legal_leaves('sem_bet')</field>
+            <field name="condition_python">
+result = worked_days.dict.get('sem_bet') and contract.struct_id.code in ['tj', 'tj_tim']
+            </field>
             <field name="amount_select">code</field>
             <field name="amount_python_compute">
-#(ML*0,008)*(VAD/VADI)
-result_qty = payslips.dict.get_legal_leaves_days('sem_bet') * -1
-result = contract.wage * 0.008
+historical_rate = contract.get_historical_employment_rate(payslip)
+effective_wage = (contract.wage - contract.wage_exchange_amount)
+result_qty = worked_days.dict.get('sem_bet').number_of_days
+# Räknar ut 0,8% av den historiska sysselsättningsgraden
+result = effective_wage * historical_rate * 0.008
             </field>
-            <field name="quantity">1</field>
         </record>
 
-        <record id="hr_salary_rule_legal_leave_addition" model="hr.salary.rule">
-            <field name="category_id" ref="l10n_se_hr_payroll.hr_salary_rule_category-BRUTIL" />
-            <field name="code">sem_til</field>
-            <field name="salary_art">122</field>
-            <field name="name">Semestertillägg 0,43%</field>
-            <field name="sequence">240</field>
+        <record id="hr_salary_rule_legal_leave_pay_arb" model="hr.salary.rule">
+            <field name="company_id" eval="False"/>
+            <field name="category_id" ref="l10n_se_hr_payroll.hr_salary_rule_category_BRUTIL"/>
+            <field name="parent_rule_id" ref="hr_salary_rule_legal_leave" />
+            <field name="code">sem_lon_arb</field>
+            <field name="salary_art">220</field>
+            <field name="name">Semesterlön arbetare</field>
+            <field name="sequence">655</field>
             <field name="appears_on_payslip" eval="True"/>
             <field name="condition_select">python</field>
-            <field name="condition_python">result = payslips.dict.has_legal_leaves('sem_bet')</field>
+            <field name="condition_python">
+result = worked_days.dict.get('sem_bet') and contract.struct_id.code in ['arb', 'arb_tim']
+            </field>
             <field name="amount_select">code</field>
             <field name="amount_python_compute">
-#(ML*0,008)*(VAD/VADI)
-result_qty = payslips.dict.get_legal_leaves_days('sem_bet') * -1
-result = contract.wage * 0.0043
-#result = contract.wage * 0.008
+SEML = payslip.struct_id.get_constant('SEML') or 0.0
+result_qty = worked_days.dict.get('sem_bet').number_of_days if worked_days.dict.get('sem_bet') else 0.0
+result = SEML * -1
             </field>
-            <field name="quantity">1</field>
         </record>
 
+        <record id="hr_salary_rule_legal_leave_pay_tj" model="hr.salary.rule">
+            <field name="company_id" eval="False"/>
+            <field name="category_id" ref="l10n_se_hr_payroll.hr_salary_rule_category_BRUTIL"/>
+            <field name="parent_rule_id" ref="hr_salary_rule_legal_leave" />
+            <field name="code">sem_lon_tj</field>
+            <field name="name">Semesterlön varierande syssesättningsgrad</field>
+            <field name="sequence">656</field>
+            <field name="appears_on_payslip" eval="True"/>
+            <field name="condition_select">python</field>
+            <field name="condition_python">
+historical_rate = contract.get_historical_employment_rate(payslip)
+current_rate = contract.resource_calendar_id.work_time_rate / 100.0 if contract.resource_calendar_id else 1.0
+# Körs endast om SSG har ändrats mer än 0,5%
+result = worked_days.dict.get('sem_bet') and contract.struct_id.code == 'tj' and abs(historical_rate - current_rate) &gt; 0.005
+            </field>
+            <field name="amount_select">code</field>
+            <field name="amount_python_compute">
+historical_rate = contract.get_historical_employment_rate(payslip)
+effective_wage = (contract.wage - contract.wage_exchange_amount)
+result_qty = worked_days.dict.get('sem_bet').number_of_days
 
-        <record id="hr_salary_rule_legal_leave_deduction" model="hr.salary.rule">
-            <field name="category_id" ref="l10n_se_hr_payroll.hr_salary_rule_category-BRUAVG" />
+result = effective_wage * historical_rate * 0.046 * -1
+            </field>
+        </record>
+
+        <record id="hr_salary_rule_legal_leave_deduction_hourly" model="hr.salary.rule">
+            <field name="company_id" eval="False"/>
+            <field name="category_id" ref="l10n_se_hr_payroll.hr_salary_rule_category_BRUAVG" />
+            <field name="parent_rule_id" ref="hr_salary_rule_legal_leave" />
+            <field name="code">sem_avg_tim</field>
+            <field name="name">Semesteravdrag timavlönad</field>
+            <field name="sequence">660</field>
+            <field name="appears_on_payslip" eval="True"/>
+            <field name="condition_select">python</field>
+            <field name="condition_python">
+result = worked_days.dict.get('sem_bet') is not None and contract.struct_id.code in ['arb_tim', 'tj_tim']
+            </field>
+            <field name="amount_select">code</field>
+            <field name="amount_python_compute">
+# Om timavlönad dra bort lika många timmar som frånvaron är från lönen
+effective_wage = (contract.wage - contract.wage_exchange_amount)
+
+result_qty = worked_days.dict.get('sem_bet').number_of_hours
+result = effective_wage * -1
+            </field>
+        </record>
+
+        <record id="hr_salary_rule_legal_leave_deduction_monthly" model="hr.salary.rule">
+            <field name="company_id" eval="False"/>
+            <field name="category_id" ref="l10n_se_hr_payroll.hr_salary_rule_category_BRUAVG" />
+            <field name="parent_rule_id" ref="hr_salary_rule_legal_leave" />
+            <field name="code">sem_avg_mon</field>
+            <field name="name">Semesteravdrag månadsavlönad</field>
+            <field name="sequence">661</field>
+            <field name="appears_on_payslip" eval="True"/>
+            <field name="condition_select">python</field>
+            <field name="condition_python">
+historical_rate = contract.get_historical_employment_rate(payslip)
+current_rate = contract.resource_calendar_id.work_time_rate / 100.0 if contract.resource_calendar_id else 1.0
+
+result = worked_days.dict.get('sem_bet') and contract.struct_id.code == 'tj' and abs(historical_rate - current_rate) &gt; 0.005
+            </field>
+            <field name="amount_select">code</field>
+            <field name="amount_python_compute">
+effective_wage = (contract.wage - contract.wage_exchange_amount)
+result_qty = worked_days.dict.get('sem_bet').number_of_days
+
+result = effective_wage * 0.046
+            </field>
+        </record>
+
+        <record id="hr_salary_rule_legal_leave_unpaid" model="hr.salary.rule">
+            <field name="company_id" eval="False"/>
+            <field name="category_id" ref="l10n_se_hr_payroll.hr_salary_rule_category_BRUAVG" />
             <field name="code">sem_obet</field>
-            <field name="salary_art">221</field>
-            <field name="name">Semesteravdrag 4,6%</field>
-            <field name="sequence">240</field>
+            <field name="name">Uttag obetald semester</field>
+            <field name="sequence">665</field>
             <field name="appears_on_payslip" eval="True"/>
             <field name="condition_select">python</field>
-            <field name="condition_python">result = worked_days.dict.get('sem_obet',False)</field>
+            <field name="condition_python">
+result = worked_days.dict.get('sem_obet') is not None
+            </field>
             <field name="amount_select">code</field>
             <field name="amount_python_compute">
-#(ML*0,046)*(VAD/VADI)
-result_qty = contract.get_leave_days('sem_obet',worked_days) * -1
-result = contract.wage * 0.046
+effective_wage = (contract.wage - contract.wage_exchange_amount)
+
+result_qty = worked_days.dict.get('sem_obet').number_of_days
+result = effective_wage * 0.046
             </field>
-            <field name="quantity">1</field>
+        </record>
+
+        <record id="hr_salary_rule_saved_leave" model="hr.salary.rule">
+            <field name="company_id" eval="False"/>
+            <field name="category_id" ref="l10n_se_hr_payroll.hr_salary_rule_category_BRUTIL"/>
+            <field name="code">sem_spar</field>
+            <field name="salary_art">220</field>
+            <field name="name">Sparad semester</field>
+            <field name="sequence">670</field>
+            <field name="appears_on_payslip" eval="True"/>
+            <field name="condition_select">python</field>
+            <field name="condition_python">
+result = (inputs and inputs.sem_spar and inputs.sem_spar.amount_qty != 0) or False
+            </field>
+            <field name="amount_select">code</field>
+            <field name="amount_python_compute">
+effective_wage = (contract.wage - contract.wage_exchange_amount)
+
+result_qty = inputs.dict.get('sem_spar').amount_qty if inputs.dict.get('sem_spar') else 0.0
+result = effective_wage / 21
+            </field>
+        </record>
+
+        <record id="hr_rule_input_saved_leave" model="hr.rule.input">
+            <field name="code">sem_spar</field>
+            <field name="name">Sparad semester (dagar)</field>
+            <field name="input_id" ref="hr_salary_rule_saved_leave"/>
+        </record>
+
+        <record id="hr_salary_rule_advance_leave" model="hr.salary.rule">
+            <field name="company_id" eval="False"/>
+            <field name="category_id" ref="l10n_se_hr_payroll.hr_salary_rule_category_BRUAVG"/>
+            <field name="code">sem_forsk</field>
+            <field name="salary_art">221</field>
+            <field name="name">Förskottssemester avdrag</field>
+            <field name="sequence">675</field>
+            <field name="appears_on_payslip" eval="True"/>
+            <field name="condition_select">python</field>
+            <field name="condition_python">
+result = (inputs and inputs.sem_forsk and inputs.sem_forsk.amount_qty &gt; 0)
+            </field>
+            <field name="amount_select">code</field>
+            <field name="amount_python_compute">
+effective_wage = (contract.wage - contract.wage_exchange_amount)
+
+result_qty = inputs.dict.get('sem_forsk').amount_qty if inputs.dict.get('sem_forsk') else 0.0
+result = effective_wage * 0.046
+            </field>
+        </record>
+
+        <record id="hr_rule_input_advance_leave" model="hr.rule.input">
+            <field name="code">sem_forsk</field>
+            <field name="name">Förskottssemester (dagar)</field>
+            <field name="input_id" ref="hr_salary_rule_advance_leave"/>
+        </record>
+
+        <!-- Regel för att kunna visa förskottsemestern på lönespecen. -->
+        <record id="hr_salary_rule_advance_leave_display" model="hr.salary.rule">
+            <field name="company_id" eval="False"/>
+            <field name="category_id" ref="l10n_se_hr_payroll.hr_salary_rule_category_BRUAVG"/>
+            <field name="code">sem_forsk_info</field>
+            <field name="name">Uttag förskottssemester (info)</field>
+            <field name="sequence">674</field>
+            <field name="appears_on_payslip" eval="True"/>
+            <field name="condition_select">python</field>
+            <field name="condition_python">
+result = worked_days.dict.get('sem_forsk_dagar')
+            </field>
+            <field name="amount_select">code</field>
+            <field name="amount_python_compute">
+result_qty = worked_days.dict.get('sem_forsk_dagar').number_of_days
+result = 0.0
+            </field>
         </record>
 
 
@@ -145,10 +356,10 @@ result = contract.wage / 160
             <field name="sequence">410</field>
             <field name="appears_on_payslip" eval="True"/>
             <field name="condition_select">python</field>
-            <field name="condition_python">result = payslips.dict.has_legal_leaves('sem_bet')</field>
+            <field name="condition_python">result = payslip.dict.has_legal_leaves('sem_bet')</field>
             <field name="amount_select">code</field>
             <field name="amount_python_compute">
-result_qty = payslips.dict.get_legal_leaves_days('sem_bet') * -1
+result_qty = payslip.dict.get_legal_leaves_days('sem_bet') * -1
 result = 0.046*contract.wage
 #result = contract.wage / 21
             </field>
@@ -180,7 +391,7 @@ result = 0.046*contract.wage
             <field name="sequence">420</field>
             <field name="appears_on_payslip" eval="True"/>
             <field name="condition_select">python</field>
-            <field name="condition_python">result = payslips.dict.has_legal_leaves('sem_bet')</field>
+            <field name="condition_python">result = payslip.dict.has_legal_leaves('sem_bet')</field>
             <field name="amount_select">code</field>
             <field name="amount_python_compute">result = categories.SEMSK * 0.3142</field>
             <field name="quantity">1</field>
@@ -193,7 +404,7 @@ result = 0.046*contract.wage
         </record>
 
         <record id="l10n_se_hr_payroll.hr_payroll_structure-gl" model="hr.payroll.structure">
-            <field name="rule_ids" eval="[(4, ref('l10n_se_hr_holidays.hr_salary_rule_legal_leave_pay')), (4, ref('l10n_se_hr_holidays.hr_salary_rule_legal_leave_addition')), (4, ref('l10n_se_hr_holidays.hr_salary_rule_legal_leave_deduction'), ref('l10n_se_hr_holidays.hr_salary_rule_compensary_monetary')), (4, ref('l10n_se_hr_holidays.hr_salary_rule_legal_leave_of_furlough'))]" />
+            <field name="rule_ids" eval="[(4, ref('l10n_se_hr_holidays.hr_salary_rule_legal_leave')), (4, ref('l10n_se_hr_holidays.hr_salary_rule_legal_leave_addition')), (4, ref('l10n_se_hr_holidays.hr_salary_rule_legal_leave_deduction'), ref('l10n_se_hr_holidays.hr_salary_rule_compensary_monetary')), (4, ref('l10n_se_hr_holidays.hr_salary_rule_legal_leave_of_furlough'))]" />
         </record> -->
 
     </data>

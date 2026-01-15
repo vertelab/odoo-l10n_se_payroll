@@ -97,8 +97,8 @@ class hr_holidays_status(models.Model):
     @api.model
     def init_records(self):
         ir_model_data = self.env['ir.model.data']
-        holiday_status_cl = ir_model_data._xmlid_lookup('hr_holidays.holiday_status_cl')[1]
-        self.env['hr.leave.type'].browse(holiday_status_cl).write({
+        leave_type_vacation = ir_model_data._xmlid_lookup('l10n_se_hr_holidays.leave_type_vacation')[1]
+        self.env['hr.leave.type'].browse(leave_type_vacation).write({
             'name': 'Legal Leaves ' + str(fields.Date.from_string(fields.Datetime.now()).year - 1),
             'legal_leave': True,
             'limit': False,
@@ -106,8 +106,8 @@ class hr_holidays_status(models.Model):
             'date_earning_start': fields.Date.to_string(date(date.today().year - 2, 4, 1)),
             'date_earning_end': fields.Date.to_string(date(date.today().year - 1, 3, 31)),
         })
-        holiday_status_unpaid = ir_model_data._xmlid_lookup('hr_holidays.holiday_status_unpaid')[1]
-        self.env['hr.leave.type'].browse(holiday_status_unpaid).write({
+        leave_type_vacation_unpaid = ir_model_data._xmlid_lookup('l10n_se_hr_holidays.leave_type_vacation_unpaid')[1]
+        self.env['hr.leave.type'].browse(leave_type_vacation_unpaid).write({
             'name': 'Legal Leaves unpaid',
             'legal_leave': False,
             # 'allocation_type': 'no',

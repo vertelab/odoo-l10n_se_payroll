@@ -11,16 +11,17 @@
             <field name="rule_ids" eval="[(6,0,[
                 ref('l10n_se_hr_payroll.hr_salary_rule_gl'),
                 ref('l10n_se_hr_payroll.hr_salary_rule_brutto'),
+                ref('l10n_se_hr_payroll.hr_salary_rule_wage_exchange'),
 
+                ref('l10n_se_hr_payroll.hr_salary_rule_sick_leave'),
                 ref('l10n_se_hr_payroll.hr_salary_rule_qualifying_deduction'),
                 ref('l10n_se_hr_payroll.hr_salary_rule_sick_deduction_1_14'),
                 ref('l10n_se_hr_payroll.hr_salary_rule_sick_wage'),
-                
-                ref('l10n_se_hr_payroll.hr_salary_rule_sick_deduction_15_90_arb'),
+                ref('l10n_se_hr_payroll.hr_salary_rule_sick_deduction_15_90'),
                 ref('l10n_se_hr_payroll.hr_salary_rule_sick_pay_15_90_tj'),
-
                 ref('l10n_se_hr_payroll.hr_salary_rule_vab'),
 
+                ref('l10n_se_hr_payroll.hr_salary_rule_leave_of_absence'),
                 ref('l10n_se_hr_payroll.hr_salary_rule_leave_of_absence_hourly'),
                 ref('l10n_se_hr_payroll.hr_salary_rule_leave_of_absence_less_than_5'),
                 ref('l10n_se_hr_payroll.hr_salary_rule_leave_of_absence_more_than_5'),
@@ -28,13 +29,26 @@
                 ref('l10n_se_hr_payroll.hr_salary_rule_kval_otid'),
                 ref('l10n_se_hr_payroll.hr_salary_rule_enkel_otid'),
                 ref('l10n_se_hr_payroll.hr_salary_rule_mertid'),
+                ref('l10n_se_hr_payroll.hr_salary_rule_bonus'),
+
+                ref('l10n_se_hr_holidays.hr_salary_rule_legal_leave'),
+                ref('l10n_se_hr_holidays.hr_salary_rule_legal_leave_addition8'),
+                ref('l10n_se_hr_holidays.hr_salary_rule_legal_leave_pay_arb'),
+                ref('l10n_se_hr_holidays.hr_salary_rule_legal_leave_pay_tj'),
+                ref('l10n_se_hr_holidays.hr_salary_rule_saved_leave'),
+
+                ref('l10n_se_hr_holidays.hr_salary_rule_legal_leave_deduction_hourly'),
+                ref('l10n_se_hr_holidays.hr_salary_rule_legal_leave_deduction_monthly'),
+                ref('l10n_se_hr_holidays.hr_salary_rule_legal_leave_unpaid'),
+                ref('l10n_se_hr_holidays.hr_salary_rule_advance_leave'),
+                ref('l10n_se_hr_holidays.hr_salary_rule_advance_leave_display'),
 
             ])]" />
 
         </record>
 
         <!-- ============================================ -->
-        <!-- TJÄNSTEMAN - Månadsavlönad                  -->
+        <!-- TJÄNSTEMAN - Månadsavlönad                   -->
         <!-- ============================================ -->
         <record id="hr_payroll_structure_tj_tiichri" model="hr.payroll.structure">
             <field name="code">tj</field>
@@ -62,14 +76,15 @@
             <field name="name">Månadslön arbetare</field>
             <field name="parent_id" ref="hr_payroll_structure_gl_tiichri" />
             <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons" />
-            <field name="rule_ids" eval="[()]" />
+            <field name="rule_ids" eval="[]" />
 
             <field name="const_ids" eval="[
                 (0, 0, {'name': 'Månadsarbetstid i dagar', 'code': 'MAD', 'constant': 21.0}), 
                 (0, 0, {'name': 'Månadsarbetstid i timmar', 'code': 'MAT', 'constant': 173.0}),
                 (0, 0, {'name': 'Veckoarbetstid i timmar', 'code': 'VA', 'constant': 40.0}),
                 (0, 0, {'name': 'Divisor för enkel övertid', 'code': 'EO', 'constant': 1.5}),
-                (0, 0, {'name': 'Divisor för kvalificerad övertid', 'code': 'KO', 'constant': 2.0})
+                (0, 0, {'name': 'Divisor för kvalificerad övertid', 'code': 'KO', 'constant': 2.0}),
+                (0, 0, {'name': 'Semesterlön bas', 'code': 'SEML', 'constant': 1210.0})
             ]" />
         </record>
 
@@ -81,7 +96,7 @@
             <field name="name">Timanställd tjänsteman</field>
             <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons" />
             <field name="parent_id" ref="hr_payroll_structure_gl_tiichri" />
-            <field name="rule_ids" eval="[()]" />
+            <field name="rule_ids" eval="[]" />
             <field name="const_ids" eval="[
                 (0, 0, {'name': 'Månadsarbetstid i timmar', 'code': 'MAT', 'constant': 175.0}),
                 (0, 0, {'name': 'Veckoarbetstid timmar', 'code': 'VA', 'constant': 40.0}),
@@ -98,14 +113,15 @@
             <field name="name">Timanställd arbetare</field>
             <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons" />
             <field name="parent_id" ref="hr_payroll_structure_gl_tiichri" />
-            <field name="rule_ids" eval="[()]" />
+            <field name="rule_ids" eval="[]" />
 
             <field name="const_ids" eval="[
                 (0, 0, {'name': 'Månadsarbetstid i timmar', 'code': 'MAT', 'constant': 173.0}),
                 (0, 0, {'name': 'Månadsarbetstid i dagar', 'code': 'MAD', 'constant': 21.0}),
                 (0, 0, {'name': 'Veckoarbetstid timmar', 'code': 'VA', 'constant': 40.0}),
                 (0, 0, {'name': 'Divisor för enkel övertid', 'code': 'EO', 'constant': 1.5}),
-                (0, 0, {'name': 'Divisor för kvalificerad övertid', 'code': 'KO', 'constant': 2.0})
+                (0, 0, {'name': 'Divisor för kvalificerad övertid', 'code': 'KO', 'constant': 2.0}),
+                (0, 0, {'name': 'Semesterlön bas', 'code': 'SEML', 'constant': 1210.0})
             ]" />
         </record>
 

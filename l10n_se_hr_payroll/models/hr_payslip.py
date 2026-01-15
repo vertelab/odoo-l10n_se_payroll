@@ -51,6 +51,8 @@ class hr_payslip(models.Model):
         for rec in self:
             rec.holiday_status_ids = rec.env['hr.leave.type'].search([('active', '=', True), ('limit', '=', False)])
             rec.holiday_status_ids += rec.env['hr.leave.type'].search([('id', 'in', [
+                rec.env.ref('l10n_se_hr_holidays.leave_type_vacation').id,
+                rec.env.ref('l10n_se_hr_holidays.leave_type_vacation_unpaid').id,
                 rec.env.ref('l10n_se_hr_payroll.leave_type_sick').id,
                 rec.env.ref('l10n_se_hr_payroll.leave_type_vab').id,
                 rec.env.ref('l10n_se_hr_payroll.leave_type_loa').id])])
@@ -77,16 +79,6 @@ class hr_payslip(models.Model):
                 self.env.ref('hr_holidays.holiday_status_comp').id]).sorted(key=lambda h: h.sequence)
         return result
 
-    @api.model
-    def has_legal_leaves(self, code):
-        result = self.worked_days_line_ids.filtered(lambda h: h.code == code).mapped('number_of_days')
-        return len(result) > 0
-
-    @api.model
-    def get_legal_leaves_days(self, code):
-        result = sum(self.worked_days_line_ids.filtered(lambda h: h.code == code).mapped('number_of_days'))
-        return result
-
     def leave_number_of_days(self, holiday_status_ref):
         return sum(self.worked_days_line_ids.filtered(lambda w: w.code == self.env.ref(holiday_status_ref).name).mapped(
             'number_of_days'))
@@ -99,24 +91,6 @@ class hr_payslip(models.Model):
             [('employee_id', '=', self.employee_id.id), ('date_from', '>=', start_date.strftime('%Y-%m-%d')),
              ('date_to', '<=', self.date_to), ('state', '=', 'validate')]).filtered(
             lambda h: h.holiday_status_id.legal_leave).mapped('number_of_days')))
-
-    def get_holiday_basis_days(self):
-        days = 0.0
-        for line in self.worked_days_line_ids:
-            if self.env['hr.leave.type'].search(
-                    [('name', '=', line.code), ('holiday_basis', '=', True)]) or line.code == 'WORK100':
-                days += line.number_of_days
-        return days
-
-    def get_holiday_basis_percent(self):
-        days = 0.0
-        days_basis = 0.0
-        for line in self.worked_days_line_ids:
-            if self.env['hr.leave.type'].search(
-                    [('name', '=', line.code), ('holiday_basis', '=', True)]) or line.code == 'WORK100':
-                days_basis += line.number_of_days
-            days += line.number_of_days
-        return days_basis / days if days > 0.0 else 0.0
 
     def get_sick_days(self):
 

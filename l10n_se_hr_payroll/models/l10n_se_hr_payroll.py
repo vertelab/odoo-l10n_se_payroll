@@ -125,23 +125,21 @@ class hr_contract(models.Model):
         if (rule_id and rule_id == "sem_til") or (rule_id and rule_id == "sem_bet"):
             #_logger.warning(f"{rule_id=}")
             #_logger.warning(f"{worked_days=}")
-            code = self.env.ref(rule_id).work_entry_type_id.code if len(rule_id.split('.')) == 2 else rule_id
+            #code = self.env.ref(rule_id).work_entry_type_id.code if len(rule_id.split('.')) == 2 else rule_id
             leave_lines = []
             for key, val in worked_days.dict.items():
                 #_logger.warning(f"{key=} {val=}")
-                if "sem_bet" in key:
+                if "sem_bet" in key or (hasattr(val, 'work_entry_type_id') and 
+                    val.work_entry_type_id and val.work_entry_type_id.code == 'sem_bet'):
                     leave_lines.append(val)
             if len(leave_lines) > 0:
-                number_of_days = 0
-                for line in leave_lines:
-                    number_of_days += line.number_of_days
-                    #_logger.warning(f"{number_of_days=}")
+                number_of_days = sum(line.number_of_days for line in leave_lines)
                 return number_of_days
             else:
                 return 0.0
         else:
             # _logger.error(f'get_leave_days: {self} {rule_id} {worked_days.dict}')
-            code = self.env.ref(rule_id).work_entry_type_id.code if len(rule_id.split('.')) == 2 else rule_id
+            code = self.env.ref(rule_id).work_entry_type_id.code if len(rule_id.split('.')) == 2 else rule_id            
             line = worked_days.dict.get(code, False)
             # _logger.error(f'get_leave_days: {code} {worked_days.dict}')
             # ~ _logger.error(f'get_leave_days: {line.number_of_days}')
@@ -283,22 +281,22 @@ class hr_payslip(models.Model):
 
     @api.onchange('employee_id', 'period_id')
     def onchange_employee(self):
+        manual_inputs = {line.code: line.amount_qty for line in self.input_line_ids if line.code}
+
         super(hr_payslip, self).onchange_employee()
 
-        if not self.period_id:
-            self.period_id = self.period_id.now()
+        for line in self.input_line_ids:
+            if line.code in manual_inputs:
+                line.amount_qty = manual_inputs[line.code]
 
-        if self.period_id.date_start and self.period_id.date_stop:
-            #_logger.error(f"{self.period_id.date_start=}")
-            #_logger.error(f"{self.period_id.date_stop=}")
-            self.date_from = self.period_id.date_start #- dateutil.relativedelta.relativedelta(months=1)
-            self.date_to = self.period_id.date_stop #- dateutil.relativedelta.relativedelta(months=1)
-
-        self.name = _("Salary Slip of %s for %s") % (
-            self.employee_id.name,
-            self.period_id.date_start.strftime('%B-%Y') if self.period_id else 'None',
-        )
-        return
+        if self.period_id:
+            self.date_from = self.period_id.date_start
+            self.date_to = self.period_id.date_stop
+            
+            self.name = _("Salary Slip of %s for %s") % (
+                self.employee_id.name,
+                self.period_id.date_start.strftime('%B-%Y')
+            )
 
     def get_payslip_vals_period(self, run, employee):
         date_from = run.period_id.prev().date_start

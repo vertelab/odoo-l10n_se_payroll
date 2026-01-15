@@ -64,6 +64,7 @@ Swedish Holidays Rules
     'auto_install': False,
     'data': [
         'data/hr_holidays_override.xml',
+        'data/hr_salary_rule_data_holiday.xml',
         'views/hr_employee_view.xml',
         'views/hr_holidays_view.xml',
         'views/hr_leave_views.xml',

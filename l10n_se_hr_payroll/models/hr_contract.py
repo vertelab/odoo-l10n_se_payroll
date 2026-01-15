@@ -1,5 +1,6 @@
 import logging
 from dateutil.relativedelta import relativedelta
+from datetime import datetime, time, date
 
 from odoo import models, fields, api, _
 
@@ -26,6 +27,8 @@ _logger = logging.getLogger(__name__)
 
 class hr_contract(models.Model):
     _inherit = "hr.contract"
+
+    wage_exchange_amount = fields.Float(string="Löneväxlingssumma", defaul=0)
 
     day_of_pay = fields.Integer(string="Lönedag", default=25)
 
@@ -252,3 +255,79 @@ class hr_contract(models.Model):
                 #_logger.info(f"Tjänstledighet 5+ kalenderdagar: {calendar_days}")
 
         return res
+    
+    def get_vacation_days(self, payslip_id):
+        domain = [
+            ('date_from', '<=', payslip_id.date_to),
+            ('date_to', '>=', payslip_id.date_from),
+            ('employee_id', '=', self.employee_id.id),
+            ('holiday_status_id.work_entry_type_id.code', '=', 'sem_bet'),
+            ('state', '=', 'validate'),
+        ]
+        
+        leaves = self.env['hr.leave'].search(domain)
+        total_days = sum(leave.number_of_days for leave in leaves)
+        
+        return total_days
+    
+    def get_actual_work_hours(self, payslip):
+        self.ensure_one()
+        
+        start_dt = datetime.combine(payslip.date_from, time.min)
+        end_dt = datetime.combine(payslip.date_to, time.max)
+
+        total_scheduled = self.resource_calendar_id.get_work_hours_count(
+            start_dt, end_dt, compute_leaves=False
+        )
+
+        absence_codes = ['vab', 'tjl_tim', 'tjl_kort', 'tjl_lang' 'sem_bet', 'sem_obet', 'sjk_1_14', 'sjk_15_90']
+        absence_hours = sum(
+            abs(line.number_of_hours) 
+            for line in payslip.worked_days_line_ids 
+            if line.code and line.code.lower() in absence_codes
+        )
+
+        return max(0.0, total_scheduled - absence_hours)
+
+    def get_historical_employment_rate(self, payslip):
+        self.ensure_one()
+
+        current_date = payslip.date_from
+        if current_date.month >= 4:
+            earning_year_start = date(current_date.year - 1, 4, 1)
+            earning_year_end = date(current_date.year, 3, 31)
+        else:
+            earning_year_start = date(current_date.year - 2, 4, 1)
+            earning_year_end = date(current_date.year - 1, 3, 31)
+
+        contracts = self.env['hr.contract'].search([
+            ('employee_id', '=', self.employee_id.id),
+            ('date_start', '<=', earning_year_end),
+            '|', ('date_end', '>=', earning_year_start), ('date_end', '=', False),
+        ])
+
+        total_average_rate = 0.0
+        total_days_employed = 0
+
+        for ct in contracts:
+            overlap_start = max(ct.date_start, earning_year_start)
+            overlap_end = min(ct.date_end or earning_year_end, earning_year_end)
+
+            if overlap_start > overlap_end:
+                continue
+            
+            duration = (overlap_end - overlap_start).days + 1
+
+            cal = ct.resource_calendar_id
+            if cal and cal.full_time_required_hours > 0:
+                weekly_hours = sum(line.hour_to - line.hour_from for line in cal.attendance_ids if line.day_period != 'lunch')
+                rate = weekly_hours / cal.full_time_required_hours
+            else:
+                rate = 1.0
+            
+            total_average_rate += (rate * duration)
+            total_days_employed += duration
+        
+        if total_days_employed > 0:
+            return total_average_rate / total_days_employed
+        return 1.0

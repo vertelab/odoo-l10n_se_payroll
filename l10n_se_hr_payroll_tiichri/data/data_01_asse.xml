@@ -47,17 +47,53 @@
             <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons" />
         </record>
 
-
-        <record id="contract_asse" model="hr.contract">
-            <field name="name">Asse Aronsson Avtal</field>
+        <record id="contract_asse_1" model="hr.contract">
+            <field name="name">Asse Aronsson Heltidsavtal 1</field>
             <field name="wage">52000</field>
+            <field name="type_id" ref="hr_contract_type" />
+            <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_asse_employee" />
+            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons" />
+            <field name="schedule_pay" eval="'monthly'" />
+            <field name="state" eval="'close'" />
+            <field name="job_id" ref="job_id_president" />
+            <field name="date_start">2018-04-01</field>
+            <field name="date_end">2021-03-31</field>
+            <field name="first_contract_date">2018-04-01</field>
+            <field name="resource_calendar_id" ref="l10n_se_hr_payroll_tiichri.resource_calendar_standard_tiichri" />
+            <field name="struct_id" ref="l10n_se_hr_payroll_tiichri.hr_payroll_structure_tj_tiichri" />
+            <field name="table_number">30</field>
+            <field name="column_number" eval="'column1'" />
+        </record>
+
+        <record id="contract_asse_2" model="hr.contract">
+            <field name="name">Asse Aronsson Deltidsavtal</field>
+            <field name="wage">39000</field>
+            <field name="type_id" ref="hr_contract_type" />
+            <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_asse_employee" />
+            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons" />
+            <field name="schedule_pay" eval="'monthly'" />
+            <field name="state" eval="'close'" />
+            <field name="job_id" ref="job_id_president" />
+            <field name="date_start">2021-04-01</field>
+            <field name="date_end">2022-03-31</field>
+            <field name="first_contract_date">2018-04-01</field>
+            <field name="resource_calendar_id" ref="l10n_se_hr_payroll_tiichri.resource_calendar_part_time_75_tiichri" />
+            <field name="struct_id" ref="l10n_se_hr_payroll_tiichri.hr_payroll_structure_tj_tiichri" />
+            <field name="table_number">30</field>
+            <field name="column_number" eval="'column1'" />
+        </record>
+
+        <record id="contract_asse_3" model="hr.contract">
+            <field name="name">Asse Aronsson Heltidsavtal 2</field>
+            <field name="wage">52000</field>
+            <field name="wage_exchange_amount">4000</field>
             <field name="type_id" ref="hr_contract_type" />
             <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_asse_employee" />
             <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons" />
             <field name="schedule_pay" eval="'monthly'" />
             <field name="state" eval="'open'" />
             <field name="job_id" ref="job_id_president" />
-            <field name="date_start">2018-04-01</field>
+            <field name="date_start">2022-04-01</field>
             <field name="first_contract_date">2018-04-01</field>
             <field name="resource_calendar_id" ref="l10n_se_hr_payroll_tiichri.resource_calendar_standard_tiichri" />
             <field name="struct_id" ref="l10n_se_hr_payroll_tiichri.hr_payroll_structure_tj_tiichri" />
