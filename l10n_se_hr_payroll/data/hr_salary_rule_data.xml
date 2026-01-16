@@ -15,13 +15,13 @@
             <field name="condition_select">none</field>
             <field name="amount_select">code</field>
             <field name="amount_python_compute">
-if contract.struct_id.code in ['tj_tim', 'arb_tim']:
-    actual_hours = contract.get_actual_work_hours(payslip)
-    result_qty = actual_hours
+if 'tim' in contract.struct_id.code:
+    result_qty = contract.get_actual_work_hours(payslip)
     result = contract.wage
 else:
     result_qty = 1
     result = contract.wage
+            
             </field>
         </record>
 
@@ -82,20 +82,18 @@ result = contract.wage_exchange_amount * -1
             <field name="amount_python_compute">
 struct_code = contract.struct_id.code
 effective_wage = (contract.wage - contract.wage_exchange_amount)
-EO = payslip.struct_id.get_constant('EO')
 
 result_qty = inputs.otidtim.amount_qty if inputs.otidtim else 0.0
 
 if struct_code == 'tj':
-    result = effective_wage / EO # effective_wage / 94
+    result = effective_wage / 94 # effective_wage / 94
 elif struct_code == 'arb':
-    MAT = payslip.struct_id.get_constant('MAT')
-    result = (effective_wage / MAT) * EO # (effective_wage / 173) * 1.5
-elif struct_code in ['tj_tim', 'arb_tim']:
-    result = effective_wage * EO 
+    MAT = 173
+    result = (effective_wage / MAT) * 1.5 # (effective_wage / 173) * 1.5
+elif struct_code in ['arb_tim']:
+    result = effective_wage * 1.5 
 else:
-    result = effective_wage / EO
-            
+    result = effective_wage / 94
             </field>
         </record>
 
@@ -120,7 +118,6 @@ else:
             <field name="amount_python_compute">
 struct_code = contract.struct_id.code
 effective_wage = (contract.wage - contract.wage_exchange_amount)
-KO = payslip.struct_id.get_constant('KO')
 
 result_qty = inputs.kvaltim.amount_qty if inputs.kvaltim else 0.0
 
@@ -128,13 +125,12 @@ if struct_code == 'tj_tim':
     # Timanställd tjänsteman: Timlön * 2.0
     result = effective_wage * 2.0 
 elif struct_code == 'arb_tim':
-    # Timanställd arbetare: Timlön * 2.0 (om KO är 2)
-    result = effective_wage * KO
+    # Timanställd arbetare: Timlön * 2.0 
+    result = effective_wage * 2.0
 elif struct_code == 'tj':
-    result = effective_wage / KO
+    result = effective_wage / 72
 elif struct_code == 'arb':
-    MAT = payslip.struct_id.get_constant('MAT')
-    result = (effective_wage / MAT) * KO
+    result = (effective_wage / 173) * 2
 else:
     result = effective_wage / KO
             </field>
@@ -156,13 +152,19 @@ else:
             <field name="sequence">115</field>
             <field name="appears_on_payslip" eval="True"/>
             <field name="condition_select">python</field>
-            <field name="condition_python">result = (inputs and inputs.mertidtim and inputs.mertidtim.amount_qty != 0) or False</field>
+            <field name="condition_python">result = (inputs and inputs.mertidtim and inputs.mertidtim.amount_qty != 0)</field>
             <field name="amount_select">code</field>
             <field name="amount_python_compute">
 #ML/(3.5*VA)
-VA = payslip.struct_id.get_constant('VA')
-result_qty = inputs.mertidtim.amount_qty
-result = contract.wage / (3.5 * VA)
+va = (contract.resource_calendar_id.full_time_required_hours * contract.resource_calendar_id.work_time_rate) / 100.0
+effective_wage = (contract.wage - contract.wage_exchange_amount)
+
+if va &gt; 0:
+    result = effective_wage / (3.5 * va)
+else:
+    result = 0.0
+
+result_qty = inputs.mertidtim.amount_qty if inputs.mertidtim else 0.0
             </field>
         </record>
 
@@ -260,17 +262,13 @@ result = v_kar + v_114 + v_1590_arb + v_lon + v_lon_1590
             <field name="amount_python_compute">
 # (ML*12)/52 * 0.2 * 0.8
 # (Timlön * VA) * 0.2 * 0.8 för timanställd
-struct_code = contract.struct_id.code
 effective_wage = (contract.wage - contract.wage_exchange_amount)
-VA = payslip.struct_id.get_constant('VA')
-
-if struct_code in ['tj_tim', 'arb_tim']:
-    # Timanställd: Baseras på timlön * veckoarbetstid
-    result = (effective_wage * VA) * 0.2 * 0.8 * -1
+if 'tim' in contract.struct_id.code:
+    va = (contract.resource_calendar_id.full_time_required_hours * contract.resource_calendar_id.work_time_rate) / 100.0
+    result = (effective_wage * va) * (0.2 * 0.8) *-1
 else:
-    # Månadsavlönad
     result = (effective_wage * 12) / 52 * 0.2 * 0.8 * -1
-
+    
 result_qty = contract.qualifying_count(payslip)
             </field>
         </record>
@@ -290,18 +288,19 @@ result = contract.get_sick_pay_data(payslip)['hours_1_14'] &gt; 0
             </field>
             <field name="amount_select">code</field>
             <field name="amount_python_compute">
-# (effective_wage*12)/(52*VA)
-struct_code = contract.struct_id.code
+# (ML*12)/(52*VA)
 effective_wage = (contract.wage - contract.wage_exchange_amount)
-VA = payslip.struct_id.get_constant('VA')
+va = (contract.resource_calendar_id.full_time_required_hours * contract.resource_calendar_id.work_time_rate) / 100.0
+
 sick_data = contract.get_sick_pay_data(payslip)
 result_qty = sick_data['hours_1_14']
 
-if struct_code in ['tj_tim', 'arb_tim']:
+if 'tim' in contract.struct_id.code:
     result = effective_wage * -1
 else:
-    # Månadsavlönad: (effective_wage * 12) / (52 * VA)
-    result = (effective_wage * 12) / (52 * VA) * -1
+    result = (effective_wage * 12) / (52 * va) * -1
+
+
             </field>
         </record>
 
@@ -311,25 +310,20 @@ else:
             <field name="company_id" eval="False"/>
             <field name="parent_rule_id" ref="hr_salary_rule_sick_leave" />
             <field name="code">sjk_15_90_arb</field>
-            <field name="name">Sjukavdrag 15-90</field>
+            <field name="name">Sjukavdrag 15-90 arbetare</field>
             <field name="sequence">244</field>
             <field name="appears_on_payslip" eval="True"/>
             <field name="condition_select">python</field>
             <field name="condition_python">
-result = (contract.get_sick_pay_data(payslip)['days_15_90'] &gt; 0 and 
-contract.struct_id.code in ['arb', 'arb_tim'])
+result = contract.get_sick_pay_data(payslip)['days_15_90'] &gt; 0
             </field>
             <field name="amount_select">code</field>
             <field name="amount_python_compute">
-struct_code = contract.struct_id.code
 effective_wage = (contract.wage - contract.wage_exchange_amount)
 sick_data = contract.get_sick_pay_data(payslip)
-result_qty = sick_data['days_15_90']
 
-if struct_code in ['tj_tim', 'arb_tim']:
-    result = 0.0
-else:
-    result = ((effective_wage * 12) / 365) * -1
+result = ((effective_wage * 12) / 365) * -1
+result_qty = sick_data['days_15_90']
             </field>
         </record>
 
@@ -349,18 +343,15 @@ result = contract.get_sick_pay_data(payslip)['hours_1_14'] &gt; 0
             <field name="amount_select">code</field>
             <field name="amount_python_compute">
 # (ML*12*0.8)/(52*VA)
-struct_code = contract.struct_id.code
 effective_wage = (contract.wage - contract.wage_exchange_amount)
-VA = payslip.struct_id.get_constant('VA')
-sick_data = contract.get_sick_pay_data(payslip)
+va = (contract.resource_calendar_id.full_time_required_hours * contract.resource_calendar_id.work_time_rate) / 100.0
 result_qty = sick_data['hours_1_14']
 
-if struct_code in ['tj_tim', 'arb_tim']:
-    # Timanställd: 80% av timlönen
+if 'tim' in contract.struct_id.code:
     result = effective_wage * 0.8
 else:
-    # Månadsavlönad: (ML * 12 * 0.8) / (52 * VA)
-    result = (effective_wage * 12 * 0.8) / (52 * VA)
+    result = (effective_wage * 12 * 0.8) / (52 * va)
+
             </field>
         </record>
 
@@ -370,19 +361,18 @@ else:
             <field name="company_id" eval="False"/>
             <field name="parent_rule_id" ref="hr_salary_rule_sick_leave" />
             <field name="code">sjk_lon_1590</field>
-            <field name="name">Sjuklön 15-90</field>
+            <field name="name">Sjuklön 15-90 Tjänstemän</field>
             <field name="sequence">246</field>
             <field name="appears_on_payslip" eval="True"/>
             <field name="condition_select">python</field>
             <field name="condition_python">
-result = (contract.get_sick_pay_data(payslip)['days_15_90'] &gt; 0 and 
-contract.struct_id.code in ['tj', 'tj_tim'])
+result = contract.get_sick_pay_data(payslip)['days_15_90'] &gt; 0
             </field>
             <field name="amount_select">code</field>
             <field name="amount_python_compute">
 # Tjänsteman: 
 effective_wage = (contract.wage - contract.wage_exchange_amount)
-PBB = payslip.struct_id.get_constant('PBB')
+PBB = payslip.struct_id.get_constant('PBB') or (payslip.struct_id.parent_id and payslip.struct_id.parent_id.get_constant('PBB')) or 43200
 sick_data = contract.get_sick_pay_data(payslip)
 
 if effective_wage &lt; 40250:
@@ -393,6 +383,7 @@ else:
     result = (0.10 * PBB / 365) + (0.9 * (effective_wage * 12 - PBB) / 365)
 
 result_qty = sick_data['days_15_90']
+            
             </field>
         </record>
 
@@ -429,12 +420,14 @@ result_qty = sick_data['days_15_90']
             <field name="condition_python">result = worked_days.dict.get('vab',False)</field>
             <field name="amount_select">code</field>
             <field name="amount_python_compute">
-# ML * 12 / (52 * VA)
-effective_wage = (contract.wage - contract.wage_exchange_amount)
 
-VA = payslip.struct_id.get_constant('VA')
-result_qty = worked_days.dict.get("vab").number_of_hours
-result = (effective_wage * 12) / (52 * VA)
+effective_wage = (contract.wage - contract.wage_exchange_amount)
+va = (contract.resource_calendar_id.full_time_required_hours * contract.resource_calendar_id.work_time_rate) / 100.0
+result_qty = worked_days.dict.get('vab').number_of_hours if worked_days.dict.get('vab') else 0.0
+if 'tim' in contract.struct_id.code:
+    result = 0.0
+else:
+    result = (effective_wage * 12) / (52 * va)
             </field>
         </record>
 
@@ -503,12 +496,12 @@ result = res['hourly_leave_hours'] &gt; 0
             <field name="amount_select">code</field>
             <field name="amount_python_compute">
 #(ML*ANTAL TIMMAR)/175
-MAT = payslip.struct_id.get_constant('MAT')
+MAT = payslip.struct_id.get_constant('MAT') or (payslip.struct_id.parent_id and payslip.struct_id.parent_id.get_constant('MAT')) or 175
 res = contract.split_leave_of_absence_periods(payslip)
 effective_wage = (contract.wage - contract.wage_exchange_amount)
 
 result = (effective_wage / MAT)
-result_qty = res['hourly_leave_hours'] *-1
+result_qty = res['hourly_leave_hours'] * -1
             </field>
         </record>
 
@@ -529,18 +522,29 @@ result = res['short_leave_days'] &gt; 0
             <field name="amount_select">code</field>
             <field name="amount_python_compute">
 #(ML*ANTAL DAGAR)/MAD
-effective_wage = (contract.wage - contract.wage_exchange_amount)
-struct_code = contract.struct_id.code
-if struct_code in ['tj_tim', 'arb_tim']:
+#effective_wage = (contract.wage - contract.wage_exchange_amount)
+#struct_code = contract.struct_id.code
+#if struct_code in ['tj_tim', 'arb_tim']:
     # Timanställda får inget avdrag, de får bara 0 kr i grundlön för dessa timmar
-    result = 0
-    result_qty = 0
-else:
+    #result = 0
+    #result_qty = 0
+#else:
     # Månadsavlönad: (ML / MAD) * Antal dagar
-    MAD = payslip.struct_id.get_constant('MAD')
-    res = contract.split_leave_of_absence_periods(payslip)
-    result = (effective_wage / MAD)
-    result_qty = res['short_leave_days'] * -1
+    #MAD = payslip.struct_id.get_constant('MAD')
+    #res = contract.split_leave_of_absence_periods(payslip)
+    #result = (effective_wage / MAD)
+    #result_qty = res['short_leave_days'] * -1
+#############
+#(ML*ANTAL DAGAR)/MAD
+mad_full = payslip.struct_id.get_constant('MAD') or (payslip.struct_id.parent_id and payslip.struct_id.parent_id.get_constant('MAD'))
+rate = contract.resource_calendar_id.work_time_rate / 100.0
+
+effective_mad = mad_full * rate
+effective_wage = (contract.wage - contract.wage_exchange_amount)
+res = contract.split_leave_of_absence_periods(payslip)
+
+result = (effective_wage / effective_mad)
+result_qty = res['short_leave_days'] * -1
             </field>
         </record>
 

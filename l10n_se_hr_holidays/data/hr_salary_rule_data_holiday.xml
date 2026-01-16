@@ -100,6 +100,8 @@ result_qty = 1
             </field>
         </record>
 
+        <!-- Tillägget fungerar för alla tjänstemän, oavsett varierad
+             sysselsättningsgrad eller är timanställda -->
         <record id="hr_salary_rule_legal_leave_addition8" model="hr.salary.rule">
             <field name="company_id" eval="False"/>
             <field name="category_id" ref="l10n_se_hr_payroll.hr_salary_rule_category_BRUTIL" />
@@ -111,36 +113,15 @@ result_qty = 1
             <field name="appears_on_payslip" eval="True"/>
             <field name="condition_select">python</field>
             <field name="condition_python">
-result = worked_days.dict.get('sem_bet') and contract.struct_id.code in ['tj', 'tj_tim']
+result = worked_days.dict.get('sem_bet') and 'tj' in contract.struct_id.code
             </field>
             <field name="amount_select">code</field>
             <field name="amount_python_compute">
 historical_rate = contract.get_historical_employment_rate(payslip)
 effective_wage = (contract.wage - contract.wage_exchange_amount)
 result_qty = worked_days.dict.get('sem_bet').number_of_days
-# Räknar ut 0,8% av den historiska sysselsättningsgraden
+# Räknar ut 0,8% av den historiska sysselsättningsgraden för att ta hänsyn till både
 result = effective_wage * historical_rate * 0.008
-            </field>
-        </record>
-
-        <record id="hr_salary_rule_legal_leave_pay_arb" model="hr.salary.rule">
-            <field name="company_id" eval="False"/>
-            <field name="category_id" ref="l10n_se_hr_payroll.hr_salary_rule_category_BRUTIL"/>
-            <field name="parent_rule_id" ref="hr_salary_rule_legal_leave" />
-            <field name="code">sem_lon_arb</field>
-            <field name="salary_art">220</field>
-            <field name="name">Semesterlön arbetare</field>
-            <field name="sequence">655</field>
-            <field name="appears_on_payslip" eval="True"/>
-            <field name="condition_select">python</field>
-            <field name="condition_python">
-result = worked_days.dict.get('sem_bet') and contract.struct_id.code in ['arb', 'arb_tim']
-            </field>
-            <field name="amount_select">code</field>
-            <field name="amount_python_compute">
-SEML = payslip.struct_id.get_constant('SEML') or 0.0
-result_qty = worked_days.dict.get('sem_bet').number_of_days if worked_days.dict.get('sem_bet') else 0.0
-result = SEML * -1
             </field>
         </record>
 
@@ -155,9 +136,9 @@ result = SEML * -1
             <field name="condition_select">python</field>
             <field name="condition_python">
 historical_rate = contract.get_historical_employment_rate(payslip)
-current_rate = contract.resource_calendar_id.work_time_rate / 100.0 if contract.resource_calendar_id else 1.0
+current_rate = contract.resource_calendar_id.work_time_rate / 100.0
 # Körs endast om SSG har ändrats mer än 0,5%
-result = worked_days.dict.get('sem_bet') and contract.struct_id.code == 'tj' and abs(historical_rate - current_rate) &gt; 0.005
+result = worked_days.dict.get('sem_bet') and 'tj' in contract.struct_id.code and abs(historical_rate - current_rate) &gt; 0.005
             </field>
             <field name="amount_select">code</field>
             <field name="amount_python_compute">
@@ -169,28 +150,8 @@ result = effective_wage * historical_rate * 0.046 * -1
             </field>
         </record>
 
-        <record id="hr_salary_rule_legal_leave_deduction_hourly" model="hr.salary.rule">
-            <field name="company_id" eval="False"/>
-            <field name="category_id" ref="l10n_se_hr_payroll.hr_salary_rule_category_BRUAVG" />
-            <field name="parent_rule_id" ref="hr_salary_rule_legal_leave" />
-            <field name="code">sem_avg_tim</field>
-            <field name="name">Semesteravdrag timavlönad</field>
-            <field name="sequence">660</field>
-            <field name="appears_on_payslip" eval="True"/>
-            <field name="condition_select">python</field>
-            <field name="condition_python">
-result = worked_days.dict.get('sem_bet') is not None and contract.struct_id.code in ['arb_tim', 'tj_tim']
-            </field>
-            <field name="amount_select">code</field>
-            <field name="amount_python_compute">
-# Om timavlönad dra bort lika många timmar som frånvaron är från lönen
-effective_wage = (contract.wage - contract.wage_exchange_amount)
-
-result_qty = worked_days.dict.get('sem_bet').number_of_hours
-result = effective_wage * -1
-            </field>
-        </record>
-
+        <!-- Avdraget fungerar för alla månadsavlönade, oavsett om de är tjänstemän eller
+        arbetare, och oavsett om de har varierad sysselsättningsgrad -->
         <record id="hr_salary_rule_legal_leave_deduction_monthly" model="hr.salary.rule">
             <field name="company_id" eval="False"/>
             <field name="category_id" ref="l10n_se_hr_payroll.hr_salary_rule_category_BRUAVG" />
@@ -202,18 +163,68 @@ result = effective_wage * -1
             <field name="condition_select">python</field>
             <field name="condition_python">
 historical_rate = contract.get_historical_employment_rate(payslip)
-current_rate = contract.resource_calendar_id.work_time_rate / 100.0 if contract.resource_calendar_id else 1.0
+current_rate = contract.resource_calendar_id.work_time_rate / 100.0
 
-result = worked_days.dict.get('sem_bet') and contract.struct_id.code == 'tj' and abs(historical_rate - current_rate) &gt; 0.005
+is_arb_man = contract.struct_id.code == 'arb_man'
+
+is_tj = 'tj' in contract.struct_id.code and abs(historical_rate - current_rate) &gt; 0.005
+
+result = worked_days.dict.get('sem_bet') and (is_arb_man or is_tj_var)
             </field>
             <field name="amount_select">code</field>
             <field name="amount_python_compute">
 effective_wage = (contract.wage - contract.wage_exchange_amount)
 result_qty = worked_days.dict.get('sem_bet').number_of_days
 
-result = effective_wage * 0.046
+result = effective_wage * 0.046 * -1
             </field>
         </record>
+
+        <!-- Gäller alla arbetare oavsett vad -->
+        <record id="hr_salary_rule_legal_leave_pay_arb" model="hr.salary.rule">
+            <field name="company_id" eval="False"/>
+            <field name="category_id" ref="l10n_se_hr_payroll.hr_salary_rule_category_BRUTIL"/>
+            <field name="parent_rule_id" ref="hr_salary_rule_legal_leave" />
+            <field name="code">sem_lon_arb</field>
+            <field name="salary_art">220</field>
+            <field name="name">Semesterlön arbetare</field>
+            <field name="sequence">655</field>
+            <field name="appears_on_payslip" eval="True"/>
+            <field name="condition_select">python</field>
+            <field name="condition_python">
+result = worked_days.dict.get('sem_bet') and 'arb' in contract.struct_id.code
+            </field>
+            <field name="amount_select">code</field>
+            <field name="amount_python_compute">
+SEML = payslip.struct_id.get_constant('SEML') or (payslip.struct_id.parent and payslip.struct_id.parent.get_constant('SEML')) or 1210.0
+result_qty = worked_days.dict.get('sem_bet').number_of_days
+result = SEML
+            </field>
+        </record>
+
+        <!-- För att plocka bort från grundlönen -->
+        <record id="hr_salary_rule_legal_leave_deduction_hourly" model="hr.salary.rule">
+            <field name="company_id" eval="False"/>
+            <field name="category_id" ref="l10n_se_hr_payroll.hr_salary_rule_category_BRUAVG" />
+            <field name="parent_rule_id" ref="hr_salary_rule_legal_leave" />
+            <field name="code">sem_avg_tim</field>
+            <field name="name">Semesteravdrag timavlönad</field>
+            <field name="sequence">660</field>
+            <field name="appears_on_payslip" eval="True"/>
+            <field name="condition_select">python</field>
+            <field name="condition_python">
+result = worked_days.dict.get('sem_bet') is not None and 'tim' in contract.struct_id.code
+            </field>
+            <field name="amount_select">code</field>
+            <field name="amount_python_compute">
+# Om timavlönad dra bort lika många timmar som frånvaron är från lönen
+effective_wage = (contract.wage - contract.wage_exchange_amount)
+
+result_qty = worked_days.dict.get('sem_bet').number_of_hours
+result = effective_wage * -1
+            </field>
+        </record>
+
 
         <record id="hr_salary_rule_legal_leave_unpaid" model="hr.salary.rule">
             <field name="company_id" eval="False"/>
@@ -224,7 +235,7 @@ result = effective_wage * 0.046
             <field name="appears_on_payslip" eval="True"/>
             <field name="condition_select">python</field>
             <field name="condition_python">
-result = worked_days.dict.get('sem_obet') is not None
+result = worked_days.dict.get('sem_obet')
             </field>
             <field name="amount_select">code</field>
             <field name="amount_python_compute">

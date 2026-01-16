@@ -47,7 +47,32 @@
             <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons" />
         </record>
 
+        <!-- För att få till historisk lägre sysselesättningsgrad.
+             Facit säger att han hade sysselsättninggrad 75% under
+             intjänandeåret 2021-04-01 till 2022-03-31, men alla 
+             beräkningar i facit, hans schemaläggning och grund-
+             lön på lönespecar indikerar att han jobbade heltid
+             hela 2022.  -->
         <record id="contract_asse_1" model="hr.contract">
+            <field name="name">Asse Aronsson Deltidsavtal 1</field>
+            <field name="wage">39000</field>
+            <field name="type_id" ref="hr_contract_type" />
+            <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_asse_employee" />
+            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons" />
+            <field name="schedule_pay" eval="'monthly'" />
+            <field name="state" eval="'close'" />
+            <field name="job_id" ref="job_id_president" />
+            <field name="date_start">2018-04-01</field>
+            <field name="date_end">2021-12-31</field>
+            <field name="first_contract_date">2018-04-01</field>
+            <field name="resource_calendar_id" ref="l10n_se_hr_payroll_tiichri.resource_calendar_part_time_66_tiichri" />
+            <field name="struct_id" ref="l10n_se_hr_payroll_tiichri.hr_payroll_structure_tj_man" />
+            <field name="table_number">30</field>
+            <field name="column_number" eval="'column1'" />
+        </record>
+
+        <!-- Ett "mittemellan-kontrakt" då han inte börjar med löneväxling förrän i april -->
+        <record id="contract_asse_2" model="hr.contract">
             <field name="name">Asse Aronsson Heltidsavtal 1</field>
             <field name="wage">52000</field>
             <field name="type_id" ref="hr_contract_type" />
@@ -56,29 +81,11 @@
             <field name="schedule_pay" eval="'monthly'" />
             <field name="state" eval="'close'" />
             <field name="job_id" ref="job_id_president" />
-            <field name="date_start">2018-04-01</field>
-            <field name="date_end">2021-03-31</field>
-            <field name="first_contract_date">2018-04-01</field>
-            <field name="resource_calendar_id" ref="l10n_se_hr_payroll_tiichri.resource_calendar_standard_tiichri" />
-            <field name="struct_id" ref="l10n_se_hr_payroll_tiichri.hr_payroll_structure_tj_tiichri" />
-            <field name="table_number">30</field>
-            <field name="column_number" eval="'column1'" />
-        </record>
-
-        <record id="contract_asse_2" model="hr.contract">
-            <field name="name">Asse Aronsson Deltidsavtal</field>
-            <field name="wage">39000</field>
-            <field name="type_id" ref="hr_contract_type" />
-            <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_asse_employee" />
-            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons" />
-            <field name="schedule_pay" eval="'monthly'" />
-            <field name="state" eval="'close'" />
-            <field name="job_id" ref="job_id_president" />
-            <field name="date_start">2021-04-01</field>
+            <field name="date_start">2022-01-01</field>
             <field name="date_end">2022-03-31</field>
             <field name="first_contract_date">2018-04-01</field>
-            <field name="resource_calendar_id" ref="l10n_se_hr_payroll_tiichri.resource_calendar_part_time_75_tiichri" />
-            <field name="struct_id" ref="l10n_se_hr_payroll_tiichri.hr_payroll_structure_tj_tiichri" />
+            <field name="resource_calendar_id" ref="l10n_se_hr_payroll_tiichri.resource_calendar_standard_tiichri" />
+            <field name="struct_id" ref="l10n_se_hr_payroll_tiichri.hr_payroll_structure_tj_man" />
             <field name="table_number">30</field>
             <field name="column_number" eval="'column1'" />
         </record>
@@ -96,10 +103,11 @@
             <field name="date_start">2022-04-01</field>
             <field name="first_contract_date">2018-04-01</field>
             <field name="resource_calendar_id" ref="l10n_se_hr_payroll_tiichri.resource_calendar_standard_tiichri" />
-            <field name="struct_id" ref="l10n_se_hr_payroll_tiichri.hr_payroll_structure_tj_tiichri" />
+            <field name="struct_id" ref="l10n_se_hr_payroll_tiichri.hr_payroll_structure_tj_man" />
             <field name="table_number">30</field>
             <field name="column_number" eval="'column1'" />
         </record>
+
 
         <!-- ## HR.CONTRACT.BENEFIT -->
         <!-- <record id="hr_benefit_asse" model="hr.contract.benefit">
@@ -258,7 +266,8 @@
             <field name="period_id" ref="period_01_2022" />
             <field name="date_from">2022-01-01</field>
             <field name="date_to">2022-01-31</field>
-            <field name="struct_id" ref="l10n_se_hr_payroll_tiichri.hr_payroll_structure_tj_tiichri" />
+            <field name="contract_id" ref="l10n_se_hr_payroll_tiichri.contract_asse_2" />
+            <field name="struct_id" ref="l10n_se_hr_payroll_tiichri.hr_payroll_structure_tj_man" />
         </record>
 
         <!-- Manuell input -->
@@ -354,7 +363,8 @@
             <field name="period_id" ref="period_02_2022" />
             <field name="date_from">2022-02-01</field>
             <field name="date_to">2022-02-28</field>
-            <field name="struct_id" ref="l10n_se_hr_payroll_tiichri.hr_payroll_structure_tj_tiichri" />
+            <field name="contract_id" ref="l10n_se_hr_payroll_tiichri.contract_asse_2" />
+            <field name="struct_id" ref="l10n_se_hr_payroll_tiichri.hr_payroll_structure_tj_man" />
         </record>
 
         <!-- Manuell input -->
@@ -455,7 +465,8 @@
             <field name="period_id" ref="period_03_2022" />
             <field name="date_from">2022-03-01</field>
             <field name="date_to">2022-03-31</field>
-            <field name="struct_id" ref="l10n_se_hr_payroll_tiichri.hr_payroll_structure_tj_tiichri" />
+            <field name="contract_id" ref="l10n_se_hr_payroll_tiichri.contract_asse_2" />
+            <field name="struct_id" ref="l10n_se_hr_payroll_tiichri.hr_payroll_structure_tj_man" />
         </record>
 
         <!-- Manuell input -->
@@ -539,7 +550,7 @@
             <field name="period_id" ref="period_04_2022" />
             <field name="date_from">2022-04-01</field>
             <field name="date_to">2022-04-30</field>
-            <field name="struct_id" ref="l10n_se_hr_payroll_tiichri.hr_payroll_structure_tj_tiichri" />
+            <field name="struct_id" ref="l10n_se_hr_payroll_tiichri.hr_payroll_structure_tj_man" />
         </record>
 
         <function model="hr.payslip" name="onchange_employee">
@@ -630,7 +641,7 @@
             <field name="period_id" ref="period_05_2022" />
             <field name="date_from">2022-05-01</field>
             <field name="date_to">2022-05-31</field>
-            <field name="struct_id" ref="l10n_se_hr_payroll_tiichri.hr_payroll_structure_tj_tiichri" />
+            <field name="struct_id" ref="l10n_se_hr_payroll_tiichri.hr_payroll_structure_tj_man" />
         </record>
 
         <function model="hr.payslip" name="onchange_employee">
@@ -717,7 +728,7 @@
             <field name="period_id" ref="period_06_2022" />
             <field name="date_from">2022-06-01</field>
             <field name="date_to">2022-06-30</field>
-            <field name="struct_id" ref="l10n_se_hr_payroll_tiichri.hr_payroll_structure_tj_tiichri" />
+            <field name="struct_id" ref="l10n_se_hr_payroll_tiichri.hr_payroll_structure_tj_man" />
         </record>
 
         <!-- Manuell input -->
@@ -808,7 +819,7 @@
             <field name="period_id" ref="period_07_2022" />
             <field name="date_from">2022-07-01</field>
             <field name="date_to">2022-07-31</field>
-            <field name="struct_id" ref="l10n_se_hr_payroll_tiichri.hr_payroll_structure_tj_tiichri" />
+            <field name="struct_id" ref="l10n_se_hr_payroll_tiichri.hr_payroll_structure_tj_man" />
         </record>
 
         <function model="hr.payslip" name="onchange_employee">
@@ -877,7 +888,7 @@
             <field name="period_id" ref="period_08_2022" />
             <field name="date_from">2022-08-01</field>
             <field name="date_to">2022-08-31</field>
-            <field name="struct_id" ref="l10n_se_hr_payroll_tiichri.hr_payroll_structure_tj_tiichri" />
+            <field name="struct_id" ref="l10n_se_hr_payroll_tiichri.hr_payroll_structure_tj_man" />
         </record>
 
         <function model="hr.payslip" name="onchange_employee">
@@ -946,7 +957,7 @@
             <field name="period_id" ref="period_09_2022" />
             <field name="date_from">2022-09-01</field>
             <field name="date_to">2022-09-30</field>
-            <field name="struct_id" ref="l10n_se_hr_payroll_tiichri.hr_payroll_structure_tj_tiichri" />
+            <field name="struct_id" ref="l10n_se_hr_payroll_tiichri.hr_payroll_structure_tj_man" />
         </record>
 
         <!-- Manuell input -->
@@ -1016,7 +1027,7 @@
             <field name="period_id" ref="period_10_2022" />
             <field name="date_from">2022-10-01</field>
             <field name="date_to">2022-10-31</field>
-            <field name="struct_id" ref="l10n_se_hr_payroll_tiichri.hr_payroll_structure_tj_tiichri" />
+            <field name="struct_id" ref="l10n_se_hr_payroll_tiichri.hr_payroll_structure_tj_man" />
         </record>
 
         <!-- Manuell input -->
@@ -1126,7 +1137,7 @@
             <field name="period_id" ref="period_11_2022" />
             <field name="date_from">2022-11-01</field>
             <field name="date_to">2022-11-30</field>
-            <field name="struct_id" ref="l10n_se_hr_payroll_tiichri.hr_payroll_structure_tj_tiichri" />
+            <field name="struct_id" ref="l10n_se_hr_payroll_tiichri.hr_payroll_structure_tj_man" />
         </record>
 
         <!-- Manuell input -->
@@ -1164,7 +1175,7 @@
             <field name="period_id" ref="period_12_2022" />
             <field name="date_from">2022-12-01</field>
             <field name="date_to">2022-12-31</field>
-            <field name="struct_id" ref="l10n_se_hr_payroll_tiichri.hr_payroll_structure_tj_tiichri" />
+            <field name="struct_id" ref="l10n_se_hr_payroll_tiichri.hr_payroll_structure_tj_man" />
         </record>
 
         <!-- Manuell input -->

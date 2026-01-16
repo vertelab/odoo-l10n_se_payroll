@@ -2,7 +2,7 @@
 <odoo>
     <data noupdate="0">
         <!-- ============================================ -->
-        <!-- GRUNDSTRUKTUR - BAS (Gemensamt för alla)    -->
+        <!-- GRUNDSTRUKTUR - BAS (Gemensamt för alla)     -->
         <!-- ============================================ -->
         <record id="hr_payroll_structure_gl_tiichri" model="hr.payroll.structure">
             <field name="code">bas</field>
@@ -17,8 +17,8 @@
                 ref('l10n_se_hr_payroll.hr_salary_rule_qualifying_deduction'),
                 ref('l10n_se_hr_payroll.hr_salary_rule_sick_deduction_1_14'),
                 ref('l10n_se_hr_payroll.hr_salary_rule_sick_wage'),
-                ref('l10n_se_hr_payroll.hr_salary_rule_sick_deduction_15_90'),
-                ref('l10n_se_hr_payroll.hr_salary_rule_sick_pay_15_90_tj'),
+
+
                 ref('l10n_se_hr_payroll.hr_salary_rule_vab'),
 
                 ref('l10n_se_hr_payroll.hr_salary_rule_leave_of_absence'),
@@ -32,9 +32,6 @@
                 ref('l10n_se_hr_payroll.hr_salary_rule_bonus'),
 
                 ref('l10n_se_hr_holidays.hr_salary_rule_legal_leave'),
-                ref('l10n_se_hr_holidays.hr_salary_rule_legal_leave_addition8'),
-                ref('l10n_se_hr_holidays.hr_salary_rule_legal_leave_pay_arb'),
-                ref('l10n_se_hr_holidays.hr_salary_rule_legal_leave_pay_tj'),
                 ref('l10n_se_hr_holidays.hr_salary_rule_saved_leave'),
 
                 ref('l10n_se_hr_holidays.hr_salary_rule_legal_leave_deduction_hourly'),
@@ -48,81 +45,112 @@
         </record>
 
         <!-- ============================================ -->
+        <!-- TJÄNSTEMAN BAS (parent)                      -->
+        <!-- ============================================ -->
+        <!-- Konstanterna är satta utifrån heltid, och kommer 
+             att justeras av en löneregel när någon har annan 
+             sysselsättninggrad.                          -->
+        <record id="hr_payroll_structure_tj_base" model="hr.payroll.structure">
+            <field name="code">tj_bas</field>
+            <field name="name">Tjänsteman Bas</field>
+            <field name="parent_id" ref="hr_payroll_structure_gl_tiichri" />
+            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons" />
+            <field name="rule_ids" eval="[(6,0,[
+                ref('l10n_se_hr_payroll.hr_salary_rule_sick_pay_15_90_tj'),
+                ref('l10n_se_hr_holidays.hr_salary_rule_legal_leave_addition8'),
+                ref('l10n_se_hr_holidays.hr_salary_rule_legal_leave_pay_tj'),
+
+
+            ])]" />
+            <field name="const_ids" eval="[
+                (0, 0, {'name': 'Månadsarbetstid i timmar heltid', 'code': 'MAT', 'constant': 175.0}),
+                (0, 0, {'name': 'Månadsarbetstid i dagar heltid', 'code': 'MAD', 'constant': 21.0}),
+                (0, 0, {'name': 'Divisor enkel övertid', 'code': 'EO', 'constant': 94.0}),
+                (0, 0, {'name': 'Divisor kvalificerad övertid', 'code': 'KO', 'constant': 72.0}),
+                (0, 0, {'name': 'Prisbasbelopp', 'code': 'PBB', 'constant': 48300.0})
+            ]" />
+        </record>
+
+        <!-- ============================================ -->
         <!-- TJÄNSTEMAN - Månadsavlönad                   -->
         <!-- ============================================ -->
-        <record id="hr_payroll_structure_tj_tiichri" model="hr.payroll.structure">
-            <field name="code">tj</field>
-            <field name="name">Tjänsteman </field>
-            <field name="parent_id" ref="hr_payroll_structure_gl_tiichri" />
+        <record id="hr_payroll_structure_tj_man" model="hr.payroll.structure">
+            <field name="code">tj_man</field>
+            <field name="name">Tjänsteman månadsavlönad</field>
+            <field name="parent_id" ref="hr_payroll_structure_tj_base" />
             <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons" />
-            <field name="rule_ids" eval="[
-            ]" />
-
-            <field name="const_ids" eval="[
-                (0, 0, {'name': 'Månadsarbetstid i dagar', 'code': 'MAD', 'constant': 21.0}), 
-                (0, 0, {'name': 'Månadsarbetstid i timmar', 'code': 'MAT', 'constant': 175.0}),
-                (0, 0, {'name': 'Veckoarbetstid i timmar', 'code': 'VA', 'constant': 40.0}),
-                (0, 0, {'name': 'Divisor för enkel övertid', 'code': 'EO', 'constant': 94.0}),
-                (0, 0, {'name': 'Divisor för kvalificerad övertid', 'code': 'KO', 'constant': 72.0}),
-                (0, 0, {'name': 'Prisbasbelopp', 'code': 'PBB', 'constant': 48300.00})
-            ]" />
+            <field name="rule_ids" eval="[(6,0,[
+                        
+            ])]" />
+            <field name="const_ids" eval="[]" />
         </record>
 
         <!-- ============================================ -->
-        <!-- ARBETARE - Månadsavlönad                    -->
+        <!-- TJÄNSTEMAN - Timavlönad                      -->
         <!-- ============================================ -->
-        <record id="hr_payroll_structure_arb_tiichri" model="hr.payroll.structure">
-            <field name="code">arb</field>
-            <field name="name">Månadslön arbetare</field>
-            <field name="parent_id" ref="hr_payroll_structure_gl_tiichri" />
-            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons" />
-            <field name="rule_ids" eval="[]" />
-
-            <field name="const_ids" eval="[
-                (0, 0, {'name': 'Månadsarbetstid i dagar', 'code': 'MAD', 'constant': 21.0}), 
-                (0, 0, {'name': 'Månadsarbetstid i timmar', 'code': 'MAT', 'constant': 173.0}),
-                (0, 0, {'name': 'Veckoarbetstid i timmar', 'code': 'VA', 'constant': 40.0}),
-                (0, 0, {'name': 'Divisor för enkel övertid', 'code': 'EO', 'constant': 1.5}),
-                (0, 0, {'name': 'Divisor för kvalificerad övertid', 'code': 'KO', 'constant': 2.0}),
-                (0, 0, {'name': 'Semesterlön bas', 'code': 'SEML', 'constant': 1210.0})
-            ]" />
-        </record>
-
-        <!-- ============================================ -->
-        <!-- TIMANSTÄLLD TJÄNSTEMAN                      -->
-        <!-- ============================================ -->
-        <record id="hr_payroll_structure_tj_tim_tiichri" model="hr.payroll.structure">
+        <record id="hr_payroll_structure_tj_tim" model="hr.payroll.structure">
             <field name="code">tj_tim</field>
-            <field name="name">Timanställd tjänsteman</field>
+            <field name="name">Tjänsteman timavlönad</field>
+            <field name="parent_id" ref="hr_payroll_structure_tj_base" />
             <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons" />
+            <field name="rule_ids" eval="[(6,0,[
+                        
+            ])]" />
+            <field name="const_ids" eval="[]" />
+        </record>
+
+        <!-- ============================================ -->
+        <!-- ARBETARE BAS (parent)                        -->
+        <!-- ============================================ -->
+        <!-- Konstanterna är satta utifrån heltid, och kommer 
+             att justeras i reglerna när någon har en annan 
+             sysselsättninggrad.                          -->
+        <record id="hr_payroll_structure_arb_basee" model="hr.payroll.structure">
+            <field name="code">arb_bas</field>
+            <field name="name">Arbetare bas</field>
             <field name="parent_id" ref="hr_payroll_structure_gl_tiichri" />
-            <field name="rule_ids" eval="[]" />
+            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons" />
+            <field name="rule_ids" eval="[(6,0,[
+                ref('l10n_se_hr_payroll.hr_salary_rule_sick_deduction_15_90'),
+                ref('l10n_se_hr_holidays.hr_salary_rule_legal_leave_pay_arb'),
+
+            ])]" />
             <field name="const_ids" eval="[
-                (0, 0, {'name': 'Månadsarbetstid i timmar', 'code': 'MAT', 'constant': 175.0}),
-                (0, 0, {'name': 'Veckoarbetstid timmar', 'code': 'VA', 'constant': 40.0}),
-                (0, 0, {'name': 'Divisor för enkel övertid', 'code': 'EO', 'constant': 94.0}),
-                (0, 0, {'name': 'Divisor för kvalificerad övertid', 'code': 'KO', 'constant': 72.0})
+                (0, 0, {'name': 'Månadsarbetstid i timmar heltid', 'code': 'MAT', 'constant': 173.0}),
+                (0, 0, {'name': 'Månadsarbetstid i dagar heltid', 'code': 'MAD', 'constant': 21.0}),
+                (0, 0, {'name': 'Faktor enkel övertid', 'code': 'EO', 'constant': 1.5}),
+                (0, 0, {'name': 'Faktor kvalificerad övertid', 'code': 'KO', 'constant': 2.0}),
+                (0, 0, {'name': 'Prisbasbelopp', 'code': 'PBB', 'constant': 48300.0})
             ]" />
         </record>
 
         <!-- ============================================ -->
-        <!-- TIMANSTÄLLD ARBETARE                        -->
+        <!-- ARBETARE - Månadsavlönad                     -->
         <!-- ============================================ -->
-        <record id="hr_payroll_structure_arb_tim_tiichri" model="hr.payroll.structure">
-            <field name="code">arb_tim</field>
-            <field name="name">Timanställd arbetare</field>
+        <record id="hr_payroll_structure_arb_man" model="hr.payroll.structure">
+            <field name="code">arb_man</field>
+            <field name="name">Arbetare månadsavlönad</field>
+            <field name="parent_id" ref="hr_payroll_structure_arb_basee" />
             <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons" />
-            <field name="parent_id" ref="hr_payroll_structure_gl_tiichri" />
-            <field name="rule_ids" eval="[]" />
+            <field name="rule_ids" eval="[(6,0,[
+                                        
 
-            <field name="const_ids" eval="[
-                (0, 0, {'name': 'Månadsarbetstid i timmar', 'code': 'MAT', 'constant': 173.0}),
-                (0, 0, {'name': 'Månadsarbetstid i dagar', 'code': 'MAD', 'constant': 21.0}),
-                (0, 0, {'name': 'Veckoarbetstid timmar', 'code': 'VA', 'constant': 40.0}),
-                (0, 0, {'name': 'Divisor för enkel övertid', 'code': 'EO', 'constant': 1.5}),
-                (0, 0, {'name': 'Divisor för kvalificerad övertid', 'code': 'KO', 'constant': 2.0}),
-                (0, 0, {'name': 'Semesterlön bas', 'code': 'SEML', 'constant': 1210.0})
-            ]" />
+            ])]" />
+            <field name="const_ids" eval="[]" />
+        </record>
+
+        <!-- ============================================ -->
+        <!-- Arbetere - Timavlönad                        -->
+        <!-- ============================================ -->
+        <record id="hr_payroll_structure_arb_tim" model="hr.payroll.structure">
+            <field name="code">arb_tim</field>
+            <field name="name">Arbetare timavlönad</field>
+            <field name="parent_id" ref="hr_payroll_structure_arb_basee" />
+            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons" />
+            <field name="rule_ids" eval="[(6,0,[
+                        
+            ])]" />
+            <field name="const_ids" eval="[]" />
         </record>
 
     </data>

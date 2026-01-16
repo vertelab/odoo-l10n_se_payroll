@@ -46,7 +46,7 @@
             <field name="date_start">2022-06-01</field>
             <field name="date_end">2022-08-31</field>
             <field name="first_contract_date">2022-06-01</field>
-            <field name="struct_id" ref="l10n_se_hr_payroll_tiichri.hr_payroll_structure_arb_tim_tiichri" />
+            <field name="struct_id" ref="l10n_se_hr_payroll_tiichri.hr_payroll_structure_arb_tim" />
             <field name="resource_calendar_id" ref="l10n_se_hr_payroll_tiichri.resource_calendar_part_time_80_tiichri" />
             <field name="table_number">30</field>
             <field name="column_number" eval="'column1'"/>
@@ -100,7 +100,7 @@
             <field name="period_id" ref="period_06_2022" />
             <field name="date_from">2022-06-01</field>
             <field name="date_to">2022-06-30</field>
-            <field name="struct_id" ref="l10n_se_hr_payroll_tiichri.hr_payroll_structure_arb_tim_tiichri" />
+            <field name="struct_id" ref="l10n_se_hr_payroll_tiichri.hr_payroll_structure_arb_tim" />
         </record>
 
         <!-- Manual input -->
@@ -135,7 +135,7 @@
             <field name="period_id" ref="period_07_2022" />
             <field name="date_from">2022-07-01</field>
             <field name="date_to">2022-07-31</field>
-            <field name="struct_id" ref="l10n_se_hr_payroll_tiichri.hr_payroll_structure_arb_tim_tiichri" />
+            <field name="struct_id" ref="l10n_se_hr_payroll_tiichri.hr_payroll_structure_arb_tim" />
         </record>
 
         <!-- Manual input -->
@@ -170,7 +170,7 @@
             <field name="period_id" ref="period_08_2022" />
             <field name="date_from">2022-08-01</field>
             <field name="date_to">2022-08-31</field>
-            <field name="struct_id" ref="l10n_se_hr_payroll_tiichri.hr_payroll_structure_arb_tim_tiichri" />
+            <field name="struct_id" ref="l10n_se_hr_payroll_tiichri.hr_payroll_structure_arb_tim" />
         </record>
 
         <!-- Manual input -->

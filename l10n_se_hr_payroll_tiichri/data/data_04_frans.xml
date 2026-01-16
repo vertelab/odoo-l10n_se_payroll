@@ -37,8 +37,33 @@
             <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons" />
         </record>
 
-        <record id="contract_frans" model="hr.contract">
-            <field name="name">Frans Filipsson Avtal</field>
+        <!-- För att få till historisk lägre sysselesättningsgrad.
+             Facit säger att han hade sysselsättninggrad 80% under
+             intjänandeåret 2021-04-01 till 2022-03-31, men alla 
+             beräkningar i facit, hans schemaläggning och grund-
+             lön på lönespecar indikerar att han jobbade heltid
+             hela 2022.  -->
+        <record id="contract_frans_1" model="hr.contract">
+            <field name="name">Frans Filipsson Heltidsavtal 1</field>
+            <field name="wage">20800</field>
+            <field name="type_id" ref="hr_contract_type" />
+            <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_frans_employee" />
+            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons"/>
+            <field name="schedule_pay" eval="'monthly'" />
+            <field name="state" eval="'close'" />
+            <field name="job_id" ref="job_id_sales" />
+            <field name="date_start">2002-01-01</field>
+            <field name="date_end">2021-12-31</field>
+            <field name="first_contract_date">2002-01-01</field>
+            <field name="resource_calendar_id" ref="l10n_se_hr_payroll_tiichri.resource_calendar_part_time_73_tiichri" />
+            <field name="struct_id" ref="l10n_se_hr_payroll_tiichri.hr_payroll_structure_tj_man" />
+            <field name="table_number">30</field>
+            <field name="column_number" eval="'column1'"/>
+        </record>
+
+
+        <record id="contract_frans_2" model="hr.contract">
+            <field name="name">Frans Filipsson Heltidsavtal 2</field>
             <field name="wage">26000</field>
             <field name="type_id" ref="hr_contract_type" />
             <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_frans_employee" />
@@ -46,12 +71,12 @@
             <field name="schedule_pay" eval="'monthly'" />
             <field name="state" eval="'open'" />
             <field name="job_id" ref="job_id_sales" />
-            <field name="date_start">2002-01-01</field>
+            <field name="date_start">2022-01-01</field>
             <field name="first_contract_date">2002-01-01</field>
             <field name="resource_calendar_id" ref="l10n_se_hr_payroll_tiichri.resource_calendar_standard_tiichri" />
-            <field name="struct_id" ref="l10n_se_hr_payroll_tiichri.hr_payroll_structure_tj_tiichri" />
+            <field name="struct_id" ref="l10n_se_hr_payroll_tiichri.hr_payroll_structure_tj_man" />
             <field name="table_number">30</field>
-            <field name="column_number" eval="'column1'"/>
+            <field name="column_number" eval="'column1'" />
         </record>
 
 
@@ -99,7 +124,7 @@
             <field name="date_to">2022-01-07</field>
             <field name="request_date_from">2022-01-07</field>
             <field name="request_date_to">2022-01-07</field>
-            <field name="number_of_hours">8</field>
+            <field name="number_of_hours">4</field>
             <field name="holiday_status_id" ref="l10n_se_hr_payroll.leave_type_sick" />
         </record>
 
@@ -149,7 +174,7 @@
             <field name="period_id" ref="period_01_2022" />
             <field name="date_from">2022-01-01</field>
             <field name="date_to">2022-01-31</field>
-            <field name="struct_id" ref="l10n_se_hr_payroll_tiichri.hr_payroll_structure_tj_tiichri" />
+            <field name="struct_id" ref="l10n_se_hr_payroll_tiichri.hr_payroll_structure_tj_man" />
         </record>
 
         <!-- Manuell input-->
@@ -209,7 +234,7 @@
             <field name="period_id" ref="period_02_2022" />
             <field name="date_from">2022-02-01</field>
             <field name="date_to">2022-02-28</field>
-            <field name="struct_id" ref="l10n_se_hr_payroll_tiichri.hr_payroll_structure_tj_tiichri" />
+            <field name="struct_id" ref="l10n_se_hr_payroll_tiichri.hr_payroll_structure_tj_man" />
         </record>
 
         <!-- Manuell input-->
@@ -277,7 +302,7 @@
             <field name="period_id" ref="period_03_2022" />
             <field name="date_from">2022-03-01</field>
             <field name="date_to">2022-03-31</field>
-            <field name="struct_id" ref="l10n_se_hr_payroll_tiichri.hr_payroll_structure_tj_tiichri" />
+            <field name="struct_id" ref="l10n_se_hr_payroll_tiichri.hr_payroll_structure_tj_man" />
         </record>
 
         <!-- Manuell input-->
@@ -390,7 +415,7 @@
             <field name="period_id" ref="period_04_2022" />
             <field name="date_from">2022-04-01</field>
             <field name="date_to">2022-04-30</field>
-            <field name="struct_id" ref="l10n_se_hr_payroll_tiichri.hr_payroll_structure_tj_tiichri" />
+            <field name="struct_id" ref="l10n_se_hr_payroll_tiichri.hr_payroll_structure_tj_man" />
         </record>
 
         <!-- Manuell input-->
@@ -459,7 +484,7 @@
             <field name="period_id" ref="period_05_2022" />
             <field name="date_from">2022-05-01</field>
             <field name="date_to">2022-05-31</field>
-            <field name="struct_id" ref="l10n_se_hr_payroll_tiichri.hr_payroll_structure_tj_tiichri" />
+            <field name="struct_id" ref="l10n_se_hr_payroll_tiichri.hr_payroll_structure_tj_man" />
         </record>
 
         <!-- Manuell input-->
@@ -506,11 +531,11 @@
             <field name="period_id" ref="period_06_2022" />
             <field name="date_from">2022-06-01</field>
             <field name="date_to">2022-06-30</field>
-            <field name="struct_id" ref="l10n_se_hr_payroll_tiichri.hr_payroll_structure_tj_tiichri" />
+            <field name="struct_id" ref="l10n_se_hr_payroll_tiichri.hr_payroll_structure_tj_man" />
         </record>
-        
+
         <!-- Semester 3 dgr, 24 timmar -->
-        <record id="hr_leave_frans_601" model="hr.leave">
+        <!-- <record id="hr_leave_frans_601" model="hr.leave">
             <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_frans_employee" />
             <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons"/>
             <field name="date_from">2022-06-07</field>
@@ -519,10 +544,10 @@
             <field name="request_date_to">2022-06-09</field>
             <field name="number_of_hours">24</field>
             <field name="holiday_status_id" ref="l10n_se_hr_holidays.leave_type_vacation" />
-        </record>
-        
+        </record> -->
+
         <!-- Semester 3 dgr, 24 timmar -->
-        <record id="hr_leave_frans_602" model="hr.leave">
+        <!-- <record id="hr_leave_frans_602" model="hr.leave">
             <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_frans_employee" />
             <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons"/>
             <field name="date_from">2022-06-20</field>
@@ -531,7 +556,7 @@
             <field name="request_date_to">2022-06-22</field>
             <field name="number_of_hours">24</field>
             <field name="holiday_status_id" ref="l10n_se_hr_holidays.leave_type_vacation" />
-        </record>
+        </record> -->
 
         <!-- Manuell input-->
         <!-- Ingen övertid denna måbad -->
@@ -568,7 +593,7 @@
         </record>
 
         <!-- Semester 6 dgr, 48 timmar -->
-        <record id="hr_leave_frans_702" model="hr.leave">
+        <!-- <record id="hr_leave_frans_702" model="hr.leave">
             <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_frans_employee" />
             <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons"/>
             <field name="date_from">2022-07-11</field>
@@ -577,7 +602,7 @@
             <field name="request_date_to">2022-07-18</field>
             <field name="number_of_hours">48</field>
             <field name="holiday_status_id" ref="l10n_se_hr_holidays.leave_type_vacation" />
-        </record>
+        </record> -->
 
         <!-- Saknas: -->
         <!-- Uttag betalda semesterdagar, månadsavlönad -->
@@ -600,7 +625,7 @@
             <field name="period_id" ref="period_07_2022" />
             <field name="date_from">2022-07-01</field>
             <field name="date_to">2022-07-31</field>
-            <field name="struct_id" ref="l10n_se_hr_payroll_tiichri.hr_payroll_structure_tj_tiichri" />
+            <field name="struct_id" ref="l10n_se_hr_payroll_tiichri.hr_payroll_structure_tj_man" />
         </record>
 
         <!-- Manuell input-->
@@ -660,7 +685,7 @@
         </record>
 
         <!-- Semester 2 dgr, 16 timmar -->
-        <record id="hr_leave_frans_803" model="hr.leave">
+        <!-- <record id="hr_leave_frans_803" model="hr.leave">
             <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_frans_employee" />
             <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons"/>
             <field name="date_from">2022-08-01</field>
@@ -669,10 +694,10 @@
             <field name="request_date_to">2022-08-02</field>
             <field name="number_of_hours">16</field>
             <field name="holiday_status_id" ref="l10n_se_hr_holidays.leave_type_vacation" />
-        </record>
+        </record> -->
 
         <!-- Semester 2 dgr, 16 timmar -->
-        <record id="hr_leave_frans_804" model="hr.leave">
+        <!-- <record id="hr_leave_frans_804" model="hr.leave">
             <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_frans_employee" />
             <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons"/>
             <field name="date_from">2022-08-25</field>
@@ -681,9 +706,9 @@
             <field name="request_date_to">2022-08-26</field>
             <field name="number_of_hours">16</field>
             <field name="holiday_status_id" ref="l10n_se_hr_holidays.leave_type_vacation" />
-        </record>
+        </record> -->
 
-        
+
         <!-- Saknas: -->
         <!-- Uttag betalda semesterdagar, månadsavlönad -->
         <!-- Semesterlön, betald -->
@@ -706,7 +731,7 @@
             <field name="period_id" ref="period_08_2022" />
             <field name="date_from">2022-08-01</field>
             <field name="date_to">2022-08-31</field>
-            <field name="struct_id" ref="l10n_se_hr_payroll_tiichri.hr_payroll_structure_tj_tiichri" />
+            <field name="struct_id" ref="l10n_se_hr_payroll_tiichri.hr_payroll_structure_tj_man" />
         </record>
 
         <!-- Manuell input-->
@@ -777,9 +802,9 @@
             <field name="number_of_hours">48</field>
             <field name="holiday_status_id" ref="l10n_se_hr_payroll.leave_type_sick" />
         </record>
-        
+
         <!-- Semester 2 dgr, 16 timmar -->
-        <record id="hr_leave_frans_904" model="hr.leave">
+        <!-- <record id="hr_leave_frans_904" model="hr.leave">
             <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_frans_employee" />
             <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons"/>
             <field name="date_from">2022-09-29</field>
@@ -788,7 +813,7 @@
             <field name="request_date_to">2022-09-30</field>
             <field name="number_of_hours">16</field>
             <field name="holiday_status_id" ref="l10n_se_hr_holidays.leave_type_vacation" />
-        </record>
+        </record> -->
 
         <!-- Saknas: -->
         <!-- Uttag betalda semesterdagar, månadsavlönad -->
@@ -814,7 +839,7 @@
             <field name="period_id" ref="period_09_2022" />
             <field name="date_from">2022-09-01</field>
             <field name="date_to">2022-09-30</field>
-            <field name="struct_id" ref="l10n_se_hr_payroll_tiichri.hr_payroll_structure_tj_tiichri" />
+            <field name="struct_id" ref="l10n_se_hr_payroll_tiichri.hr_payroll_structure_tj_man" />
         </record>
 
         <!-- Manuell input-->
@@ -846,7 +871,7 @@
             <field name="period_id" ref="period_10_2022" />
             <field name="date_from">2022-10-01</field>
             <field name="date_to">2022-10-31</field>
-            <field name="struct_id" ref="l10n_se_hr_payroll_tiichri.hr_payroll_structure_tj_tiichri" />
+            <field name="struct_id" ref="l10n_se_hr_payroll_tiichri.hr_payroll_structure_tj_man" />
         </record>
 
         <!-- Manuell input-->
@@ -887,7 +912,7 @@
             <field name="period_id" ref="period_11_2022" />
             <field name="date_from">2022-11-01</field>
             <field name="date_to">2022-11-30</field>
-            <field name="struct_id" ref="l10n_se_hr_payroll_tiichri.hr_payroll_structure_tj_tiichri" />
+            <field name="struct_id" ref="l10n_se_hr_payroll_tiichri.hr_payroll_structure_tj_man" />
         </record>
 
         <!-- Manuell input-->
