@@ -6,6 +6,12 @@
         <field name="arch" type="xml">
             <field name="schedule_pay" position="after">
                 <field name="day_of_pay" invisible="schedule_pay != 'monthly'" />
+
+                <separator string="Löneväxling" colspan="2" />
+                <field name="wage_exchange_amount" />
+                <field name="wage_exchange_start" />
+                <field name="wage_exchange_end" placeholder="Tillsvidare..." />
+                <separator colspan="2" />
             </field>
         </field>
     </record>

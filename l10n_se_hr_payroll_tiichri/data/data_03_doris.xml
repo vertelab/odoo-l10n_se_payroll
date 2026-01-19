@@ -176,6 +176,12 @@
             <value eval="{'amount_qty': 1.0, 'amount': 900}"/>
         </function> -->
 
+        
+        <function model="hr.payslip.input" name="write">
+            <value model="hr.payslip.input" search="[('payslip_id', '=', ref('hr_payslip_doris_01')), ('code', '=', 'bonus')]"/>
+            <value eval="{'amount_qty': 1.0, 'amount': 10000.0}"/>
+        </function>
+
 
         <function model="hr.payslip.input" name="write">
             <value model="hr.payslip.input" search="[('payslip_id', '=', ref('hr_payslip_doris_01')), ('code', '=', 'otidtim')]"/>
@@ -257,7 +263,6 @@
             <value eval="{'amount_qty': 1.0, 'amount': 900}"/>
         </function> -->
 
-        <!--
         <function model="hr.payslip.input" name="write">
             <value model="hr.payslip.input" search="[('payslip_id', '=', ref('hr_payslip_doris_02')), ('code', '=', 'otidtim')]"/>
             <value eval="{'amount_qty': 2.0}"/>
@@ -267,7 +272,6 @@
             <value model="hr.payslip.input" search="[('payslip_id', '=', ref('hr_payslip_doris_02')), ('code', '=', 'mertidtim')]"/>
             <value eval="{'amount_qty': 8.0}"/>
         </function>
--->
 
         <function model="hr.payslip" name="compute_sheet">
             <value eval="[ref('hr_payslip_doris_02')]"/>

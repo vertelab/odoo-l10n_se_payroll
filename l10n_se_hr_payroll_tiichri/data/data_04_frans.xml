@@ -181,6 +181,11 @@
         <function model="hr.payslip" name="onchange_employee">
             <value eval="[ref('l10n_se_hr_payroll_tiichri.hr_payslip_frans_01')]"/>
         </function>
+        
+        <function model="hr.payslip.input" name="write">
+            <value model="hr.payslip.input" search="[('payslip_id', '=', ref('hr_payslip_frans_01')), ('code', '=', 'bonus')]"/>
+            <value eval="{'amount_qty': 1.0, 'amount': 10000.0}"/>
+        </function>
 
         <function model="hr.payslip.input" name="write">
             <value model="hr.payslip.input" search="[('payslip_id', '=', ref('hr_payslip_frans_01')), ('code', '=', 'otidtim')]"/>

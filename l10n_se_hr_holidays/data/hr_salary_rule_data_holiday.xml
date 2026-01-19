@@ -77,7 +77,7 @@
         <!-- Uttag betalda semesterdagar (parent) -->
         <record id="hr_salary_rule_legal_leave" model="hr.salary.rule">
             <field name="company_id" eval="False"/>
-            <field name="category_id" ref="l10n_se_hr_payroll.hr_salary_rule_category_BRUAVG" />
+            <field name="category_id" ref="l10n_se_hr_payroll.hr_salary_rule_category_PARENT" />
             <field name="code">sem_bet</field>
             <field name="name">Uttag betalda semesterdagar</field>
             <field name="sequence">700</field>
@@ -119,10 +119,11 @@ result = worked_days.dict.get('sem_bet') and 'tj' in contract.struct_id.code
             <field name="amount_python_compute">
 historical_rate = contract.get_historical_employment_rate(payslip)
 effective_wage = contract.get_effective_wage(payslip)
-result_qty = worked_days.dict.get('sem_bet').number_of_days
+result_qty = worked_days.dict.get('sem_bet').number_of_days * -1
 
 # Räknar ut 0,8% av den historiska sysselsättningsgraden för att hantera varierad sysselsättninggrad
 result = effective_wage * historical_rate * 0.008
+            
             </field>
         </record>
 
@@ -178,7 +179,7 @@ result = worked_days.dict.get('sem_bet') and (is_arb_man or is_tj_var)
 effective_wage = contract.get_effective_wage(payslip)
 result_qty = worked_days.dict.get('sem_bet').number_of_days
 
-result = effective_wage * 0.046 * -1
+result = effective_wage * 0.046
             </field>
         </record>
 
@@ -206,7 +207,7 @@ result = SEML * -1
 
         <record id="hr_salary_rule_legal_leave_unpaid" model="hr.salary.rule">
             <field name="company_id" eval="False"/>
-            <field name="category_id" ref="l10n_se_hr_payroll.hr_salary_rule_category_BRUAVG" />
+            <field name="category_id" ref="l10n_se_hr_payroll.hr_salary_rule_category_PARENT" />
             <field name="code">sem_obet</field>
             <field name="name">Uttag obetald semester</field>
             <field name="sequence">665</field>
@@ -282,7 +283,7 @@ result = effective_wage * 0.046
         <!-- Regel för att kunna visa förskottsemestern på lönespecen. -->
         <record id="hr_salary_rule_advance_leave_display" model="hr.salary.rule">
             <field name="company_id" eval="False"/>
-            <field name="category_id" ref="l10n_se_hr_payroll.hr_salary_rule_category_BRUAVG"/>
+            <field name="category_id" ref="l10n_se_hr_payroll.hr_salary_rule_category_DUMMY"/>
             <field name="code">sem_forsk_info</field>
             <field name="name">Uttag förskottssemester (info)</field>
             <field name="sequence">674</field>

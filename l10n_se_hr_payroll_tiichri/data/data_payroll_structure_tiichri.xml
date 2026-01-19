@@ -11,6 +11,7 @@
             <field name="rule_ids" eval="[(6,0,[
                 ref('l10n_se_hr_payroll.hr_salary_rule_gl'),
                 ref('l10n_se_hr_payroll.hr_salary_rule_brutto'),
+                ref('l10n_se_hr_payroll.hr_salary_rule_netto'),
                 ref('l10n_se_hr_payroll.hr_salary_rule_wage_exchange'),
 
                 ref('l10n_se_hr_payroll.hr_salary_rule_sick_leave'),
@@ -27,6 +28,12 @@
                 ref('l10n_se_hr_payroll.hr_salary_rule_kval_otid'),
                 ref('l10n_se_hr_payroll.hr_salary_rule_enkel_otid'),
                 ref('l10n_se_hr_payroll.hr_salary_rule_bonus'),
+                ref('l10n_se_hr_payroll.hr_salary_rule_lunch_parent'),
+                ref('l10n_se_hr_payroll.hr_salary_rule_lunch_fmn'),
+                ref('l10n_se_hr_payroll.hr_salary_rule_lunch'),
+                ref('l10n_se_hr_payroll.hr_salary_rule_reimbursment_parent'),
+                ref('l10n_se_hr_payroll.hr_salary_rule_reimbursment'),
+
 
                 ref('l10n_se_hr_holidays.hr_salary_rule_legal_leave'),
                 ref('l10n_se_hr_holidays.hr_salary_rule_saved_leave'),
@@ -64,7 +71,7 @@
                 (0, 0, {'name': 'Månadsarbetstid i dagar heltid', 'code': 'MAD', 'constant': 21.0}),
                 (0, 0, {'name': 'Divisor enkel övertid', 'code': 'EO', 'constant': 94.0}),
                 (0, 0, {'name': 'Divisor kvalificerad övertid', 'code': 'KO', 'constant': 72.0}),
-                (0, 0, {'name': 'Prisbasbelopp', 'code': 'PBB', 'constant': 48300.0})
+                (0, 0, {'name': 'Prisbasbelopp', 'code': 'PBB', 'constant': 483000.0})
             ]" />
         </record>
 

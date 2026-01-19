@@ -28,7 +28,7 @@ _logger = logging.getLogger(__name__)
 class hr_contract(models.Model):
     _inherit = "hr.contract"
 
-    wage_exchange_amount = fields.Float(string="Löneväxlingssumma", defaul=0)
+    wage_exchange_amount = fields.Float(string="Löneväxlingssumma", defaul=0.0)
     wage_exchange_start = fields.Date(string="Startdatum löneväxling")
     wage_exchange_end = fields.Date(string="Slutdatum löneväxling", help="Lämna tom om växlingen är pågående")
 
@@ -55,6 +55,16 @@ class hr_contract(models.Model):
         self.ensure_one()
         exchange = self.get_current_wage_exchange(payslip)
         return self.wage - exchange
+
+    def get_full_time_wage(self, payslip):
+        # Funktion för att räkna upp deltidslön till heltidslön
+        # behövs vid bl.a. övertidsberäkning
+        self.ensure_one()
+        current_wage = self.get_effective_wage(payslip)
+
+        rate = (self.resource_calendar_id.work_time_rate or 100.0) / 100.0
+        
+        return current_wage / rate if rate > 0 else current_wage
 
     # 1-14 + 15-90
     def get_sick_days(self, payslip_id):
