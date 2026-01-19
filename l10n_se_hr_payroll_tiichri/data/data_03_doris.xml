@@ -410,6 +410,18 @@
             <value eval="{'amount_qty': 1.0, 'amount': 900}"/>
         </function> -->
 
+
+        <!--  Övertid 1, 2 x 234.94  -->
+        <!-- <function model="hr.payslip.input" name="write">
+            <value model="hr.payslip.input" search="[('payslip_id', '=', ref('hr_payslip_doris_04')), ('code', '=', 'OB1')]"/>
+            <value eval="{'amount_qty': 2, 'amount': 234.04}"/>
+        </function> -->
+        <!--  Övertid 2, 1 x 305.56  -->
+        <!-- <function model="hr.payslip.input" name="write">
+            <value model="hr.payslip.input" search="[('payslip_id', '=', ref('hr_payslip_doris_04')), ('code', '=', 'OB2')]"/>
+            <value eval="{'amount_qty': 1, 'amount': 305.56}"/>
+        </function> -->
+
         <!--  Traktamente, natt  -->
         <!-- <function model="hr.payslip.input" name="write">
             <value model="hr.payslip.input" search="[('payslip_id', '=', ref('hr_payslip_doris_04')), ('code', '=', 'trakt_natt')]"/>
@@ -470,10 +482,15 @@
             <value eval="[ref('hr_payslip_doris_05')]"/>
         </function>
 
-        <!--  Lunchkuponger  -->
+        <!--  Restidersättning vardag 4 x 91,67  -->
         <!-- <function model="hr.payslip.input" name="write">
-            <value model="hr.payslip.input" search="[('payslip_id', '=', ref('hr_payslip_doris_05')), ('code', '=', 'lunch')]"/>
-            <value eval="{'amount_qty': 1.0, 'amount': 900}"/>
+            <value model="hr.payslip.input" search="[('payslip_id', '=', ref('hr_payslip_doris_05')), ('code', '=', 'reseers_vardag')]"/>
+            <value eval="{'amount_qty': 4, 'amount': 91.67}"/>
+        </function> -->
+        <!--  Restidersättning helg 2 x 115,79  -->
+        <!-- <function model="hr.payslip.input" name="write">
+            <value model="hr.payslip.input" search="[('payslip_id', '=', ref('hr_payslip_doris_05')), ('code', '=', 'reseers_helg')]"/>
+            <value eval="{'amount_qty': 2, 'amount': 115.79}"/>
         </function> -->
 
         <!--  Milersättning 900 x 1.15 skatt  -->
@@ -499,6 +516,32 @@
         </function> -->
 
 
+        <!--  Kostförmån lunch 3 x 100 -->
+        <!-- <function model="hr.payslip.input" name="write">
+            <value model="hr.payslip.input" search="[('payslip_id', '=', ref('hr_payslip_doris_05')), ('code', '=', 'kost_lunch')]"/>
+            <value eval="{'amount_qty': 3, 'amount': 100}"/>
+        </function> -->
+        <!--  Kostförmån frukost 3 x 48 -->
+        <!-- <function model="hr.payslip.input" name="write">
+            <value model="hr.payslip.input" search="[('payslip_id', '=', ref('hr_payslip_doris_05')), ('code', '=', 'kost_lunch')]"/>
+            <value eval="{'amount_qty': 3, 'amount': 48}"/>
+        </function> -->
+        
+        <!--  Kostavdrag lunch eller middag 5 x 84 -->
+        <!-- <function model="hr.payslip.input" name="write">
+            <value model="hr.payslip.input" search="[('payslip_id', '=', ref('hr_payslip_doris_05')), ('code', '=', 'avdrag_lunch_middag')]"/>
+            <value eval="{'amount_qty': 5, 'amount': 84}"/>
+        </function> -->
+
+        
+        <!--  Mertid, månadslön 8 x 157.14  -->
+        <!-- <function model="hr.payslip.input" name="write">
+            <value model="hr.payslip.input" search="[('payslip_id', '=', ref('hr_payslip_doris_05')), ('code', '=', 'mertid')]"/>
+            <value eval="{'amount_qty': 8, 'amount': 157.14}"/>
+        </function> -->
+        
+        
+        
         <function model="hr.payslip.input" name="write">
             <value model="hr.payslip.input" search="[('payslip_id', '=', ref('hr_payslip_doris_05')), ('code', '=', 'mertidtim')]"/>
             <value eval="{'amount_qty': 8.0}"/>

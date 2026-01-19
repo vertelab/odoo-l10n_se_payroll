@@ -801,6 +801,18 @@
         </record>
 
         <!-- Manuell input -->
+
+        <!-- Milersättning bensin, 500 x 0.95 -->
+        <!-- <function model="hr.payslip.input" name="write">
+            <value model="hr.payslip.input" search="[('payslip_id', '=', ref('hr_payslip_camilla_05')), ('code', '=', 'milers_bensin')]"/>
+            <value eval="{'amount_qty 500, 'amount': 0.95}"/>
+        </function> -->
+        <!-- Milersättning, skattepliktigt, 500 x 0.55 -->
+        <!-- <function model="hr.payslip.input" name="write">
+            <value model="hr.payslip.input" search="[('payslip_id', '=', ref('hr_payslip_camilla_05')), ('code', '=', 'milers_skatt')]"/>
+            <value eval="{'amount_qty': 500, 'amount': 0.55}"/>
+        </function> -->
+
         <function model="hr.payslip" name="onchange_employee">
             <value eval="[ref('l10n_se_hr_payroll_tiichri.hr_payslip_camilla_10')]"/>
         </function>
