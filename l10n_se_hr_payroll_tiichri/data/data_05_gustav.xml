@@ -351,7 +351,7 @@
             <field name="holiday_status_id" ref="l10n_se_hr_payroll.leave_type_vab" />
         </record>
 
-        <record id="hr_leave_gustav_502_0" model="hr.leave">
+        <record id="hr_leave_gustav_502_01" model="hr.leave">
             <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_gustav_employee" />
             <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons"/>
             <field name="date_from">2022-05-17</field>
@@ -420,7 +420,7 @@
         </record>
 
         <!-- Semester 1 dgr, 8 timmar -->
-        <!-- <record id="hr_leave_gustav_602" model="hr.leave">
+        <record id="hr_leave_gustav_602" model="hr.leave">
             <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_gustav_employee" />
             <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons"/>
             <field name="date_from">2022-06-01</field>
@@ -429,7 +429,11 @@
             <field name="request_date_to">2022-06-01</field>
             <field name="number_of_hours">8</field>
             <field name="holiday_status_id" ref="l10n_se_hr_holidays.leave_type_vacation" />
-        </record> -->
+        </record>
+
+        <function model="hr.leave" name="action_validate">
+            <value eval="[ref('hr_leave_gustav_602')]"/>
+        </function>
 
         <!-- Saknas: -->
         <!-- Uttag betalda semesterdagar, månadsavlönad -->
@@ -486,7 +490,7 @@
         </record>
 
         <!-- Semester 6 dgr, 48 timmar -->
-        <!-- <record id="hr_leave_gustav_703" model="hr.leave">
+        <record id="hr_leave_gustav_703" model="hr.leave">
             <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_gustav_employee" />
             <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons"/>
             <field name="date_from">2022-07-11</field>
@@ -495,7 +499,11 @@
             <field name="request_date_to">2022-07-18</field>
             <field name="number_of_hours">48</field>
             <field name="holiday_status_id" ref="l10n_se_hr_holidays.leave_type_vacation" />
-        </record> -->
+        </record>
+
+        <function model="hr.leave" name="action_validate">
+            <value eval="[ref('hr_leave_gustav_703')]"/>
+        </function>
 
         <!-- Saknas: -->
         <!-- Uttag betalda semesterdagar, månadsavlönad -->
@@ -550,16 +558,32 @@
         </record>
 
         <!-- Semester 1 dgr, 8 timmar -->
-        <!-- <record id="hr_leave_gustav_802" model="hr.leave">
+        <record id="hr_leave_gustav_802" model="hr.leave">
             <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_gustav_employee" />
             <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons"/>
-            <field name="date_from">2022-08-08</field>
-            <field name="date_to">2022-08-08</field>
-            <field name="request_date_from">2022-08-08</field>
-            <field name="request_date_to">2022-08-08</field>
+            <field name="date_from">2022-08-01</field>
+            <field name="date_to">2022-08-01</field>
+            <field name="request_date_from">2022-08-01</field>
+            <field name="request_date_to">2022-08-01</field>
             <field name="number_of_hours">8</field>
             <field name="holiday_status_id" ref="l10n_se_hr_holidays.leave_type_vacation" />
-        </record> -->
+        </record>
+
+        <!-- Semester 2 dagar -->
+        <record id="hr_leave_gustav_803" model="hr.leave">
+            <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_gustav_employee" />
+            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons"/>
+            <field name="date_from">2022-08-22</field>
+            <field name="date_to">2022-08-23</field>
+            <field name="request_date_from">2022-08-22</field>
+            <field name="request_date_to">2022-08-23</field>
+            <field name="number_of_hours">16</field>
+            <field name="holiday_status_id" ref="l10n_se_hr_holidays.leave_type_vacation" />
+        </record>
+
+        <function model="hr.leave" name="action_validate">
+            <value eval="[ref('hr_leave_gustav_802'),ref('hr_leave_gustav_803')]"/>
+        </function>
 
         <!-- Saknas: -->
         <!-- Uttag betalda semesterdagar, månadsavlönad -->
@@ -639,7 +663,7 @@
         </record>
 
         <!-- Semester 1 dgr, 8 timmar -->
-        <!-- <record id="hr_leave_gustav_903" model="hr.leave">
+        <record id="hr_leave_gustav_903" model="hr.leave">
             <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_gustav_employee" />
             <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons"/>
             <field name="date_from">2022-09-01</field>
@@ -648,10 +672,10 @@
             <field name="request_date_to">2022-09-01</field>
             <field name="number_of_hours">8</field>
             <field name="holiday_status_id" ref="l10n_se_hr_holidays.leave_type_vacation" />
-        </record> -->
+        </record>
 
         <!-- Semester 1 dgr, 8 timmar -->
-        <!-- <record id="hr_leave_gustav_904" model="hr.leave">
+        <record id="hr_leave_gustav_904" model="hr.leave">
             <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_gustav_employee" />
             <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons"/>
             <field name="date_from">2022-09-26</field>
@@ -660,7 +684,11 @@
             <field name="request_date_to">2022-09-26</field>
             <field name="number_of_hours">8</field>
             <field name="holiday_status_id" ref="l10n_se_hr_holidays.leave_type_vacation" />
-        </record> -->
+        </record>
+
+        <function model="hr.leave" name="action_validate">
+            <value eval="[ref('hr_leave_gustav_902'),ref('hr_leave_gustav_903'),ref('hr_leave_gustav_904')]"/>
+        </function>
 
         <!-- Saknas: -->
         <!-- Uttag betalda semesterdagar, månadsavlönad -->
@@ -673,9 +701,6 @@
         <!-- Skatt -->
         <!-- Arbetsgivaravgift -->
 
-        <function model="hr.leave" name="action_validate">
-            <value eval="[ref('hr_leave_gustav_902')]"/>
-        </function>
 
         <!-- Generate payslip -->
         <record id="hr_payslip_gustav_09" model="hr.payslip">
@@ -752,7 +777,7 @@
         </record>
 
         <!-- Semester 1 dgr, 8 timmar -->
-        <!-- <record id="hr_leave_gustav_1003" model="hr.leave">
+        <record id="hr_leave_gustav_1003" model="hr.leave">
             <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_gustav_employee" />
             <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons"/>
             <field name="date_from">2022-10-20</field>
@@ -761,7 +786,11 @@
             <field name="request_date_to">2022-10-20</field>
             <field name="number_of_hours">8</field>
             <field name="holiday_status_id" ref="l10n_se_hr_holidays.leave_type_vacation" />
-        </record> -->
+        </record>
+
+        <function model="hr.leave" name="action_validate">
+            <value eval="[ref('hr_leave_gustav_1003')]"/>
+        </function>
 
         <!-- Saknas: -->
         <!-- Uttag betalda semesterdagar, månadsavlönad -->
@@ -875,9 +904,9 @@
             <field name="number_of_hours">24</field>
             <field name="holiday_status_id" ref="l10n_se_hr_payroll.leave_type_sick" />
         </record>
-        
+
         <!-- Semester 1 dgr, 8 timmar -->
-        <!-- <record id="hr_leave_gustav_1203" model="hr.leave">
+        <record id="hr_leave_gustav_1203" model="hr.leave">
             <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_gustav_employee" />
             <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons"/>
             <field name="date_from">2022-12-23</field>
@@ -886,9 +915,13 @@
             <field name="request_date_to">2022-12-23</field>
             <field name="number_of_hours">8</field>
             <field name="holiday_status_id" ref="l10n_se_hr_holidays.leave_type_vacation" />
-        </record> -->
-        
-        
+        </record>
+
+        <function model="hr.leave" name="action_validate">
+            <value eval="[ref('hr_leave_gustav_1203')]"/>
+        </function>
+
+
         <!-- Saknas: -->
         <!-- Uttag betalda semesterdagar, månadsavlönad -->
         <!-- Semesterdaglön betald -->

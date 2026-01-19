@@ -118,9 +118,10 @@ result = worked_days.dict.get('sem_bet') and 'tj' in contract.struct_id.code
             <field name="amount_select">code</field>
             <field name="amount_python_compute">
 historical_rate = contract.get_historical_employment_rate(payslip)
-effective_wage = (contract.wage - contract.wage_exchange_amount)
+effective_wage = contract.get_effective_wage(payslip)
 result_qty = worked_days.dict.get('sem_bet').number_of_days
-# Räknar ut 0,8% av den historiska sysselsättningsgraden för att ta hänsyn till både
+
+# Räknar ut 0,8% av den historiska sysselsättningsgraden för att hantera varierad sysselsättninggrad
 result = effective_wage * historical_rate * 0.008
             </field>
         </record>
@@ -137,13 +138,14 @@ result = effective_wage * historical_rate * 0.008
             <field name="condition_python">
 historical_rate = contract.get_historical_employment_rate(payslip)
 current_rate = contract.resource_calendar_id.work_time_rate / 100.0
+
 # Körs endast om SSG har ändrats mer än 0,5%
 result = worked_days.dict.get('sem_bet') and 'tj' in contract.struct_id.code and abs(historical_rate - current_rate) &gt; 0.005
             </field>
             <field name="amount_select">code</field>
             <field name="amount_python_compute">
 historical_rate = contract.get_historical_employment_rate(payslip)
-effective_wage = (contract.wage - contract.wage_exchange_amount)
+effective_wage = contract.get_effective_wage(payslip)
 result_qty = worked_days.dict.get('sem_bet').number_of_days
 
 result = effective_wage * historical_rate * 0.046 * -1
@@ -167,13 +169,13 @@ current_rate = contract.resource_calendar_id.work_time_rate / 100.0
 
 is_arb_man = contract.struct_id.code == 'arb_man'
 
-is_tj = 'tj' in contract.struct_id.code and abs(historical_rate - current_rate) &gt; 0.005
+is_tj_var = 'tj' in contract.struct_id.code and abs(historical_rate - current_rate) &gt; 0.005
 
 result = worked_days.dict.get('sem_bet') and (is_arb_man or is_tj_var)
             </field>
             <field name="amount_select">code</field>
             <field name="amount_python_compute">
-effective_wage = (contract.wage - contract.wage_exchange_amount)
+effective_wage = contract.get_effective_wage(payslip)
 result_qty = worked_days.dict.get('sem_bet').number_of_days
 
 result = effective_wage * 0.046 * -1
@@ -196,35 +198,11 @@ result = worked_days.dict.get('sem_bet') and 'arb' in contract.struct_id.code
             </field>
             <field name="amount_select">code</field>
             <field name="amount_python_compute">
-SEML = payslip.struct_id.get_constant('SEML') or (payslip.struct_id.parent and payslip.struct_id.parent.get_constant('SEML')) or 1210.0
+SEML = payslip.struct_id.get_constant('SEML') or 1210.0
 result_qty = worked_days.dict.get('sem_bet').number_of_days
-result = SEML
+result = SEML * -1
             </field>
         </record>
-
-        <!-- För att plocka bort från grundlönen -->
-        <record id="hr_salary_rule_legal_leave_deduction_hourly" model="hr.salary.rule">
-            <field name="company_id" eval="False"/>
-            <field name="category_id" ref="l10n_se_hr_payroll.hr_salary_rule_category_BRUAVG" />
-            <field name="parent_rule_id" ref="hr_salary_rule_legal_leave" />
-            <field name="code">sem_avg_tim</field>
-            <field name="name">Semesteravdrag timavlönad</field>
-            <field name="sequence">660</field>
-            <field name="appears_on_payslip" eval="True"/>
-            <field name="condition_select">python</field>
-            <field name="condition_python">
-result = worked_days.dict.get('sem_bet') is not None and 'tim' in contract.struct_id.code
-            </field>
-            <field name="amount_select">code</field>
-            <field name="amount_python_compute">
-# Om timavlönad dra bort lika många timmar som frånvaron är från lönen
-effective_wage = (contract.wage - contract.wage_exchange_amount)
-
-result_qty = worked_days.dict.get('sem_bet').number_of_hours
-result = effective_wage * -1
-            </field>
-        </record>
-
 
         <record id="hr_salary_rule_legal_leave_unpaid" model="hr.salary.rule">
             <field name="company_id" eval="False"/>
@@ -239,7 +217,7 @@ result = worked_days.dict.get('sem_obet')
             </field>
             <field name="amount_select">code</field>
             <field name="amount_python_compute">
-effective_wage = (contract.wage - contract.wage_exchange_amount)
+effective_wage = contract.get_effective_wage(payslip)
 
 result_qty = worked_days.dict.get('sem_obet').number_of_days
 result = effective_wage * 0.046
@@ -256,14 +234,15 @@ result = effective_wage * 0.046
             <field name="appears_on_payslip" eval="True"/>
             <field name="condition_select">python</field>
             <field name="condition_python">
-result = (inputs and inputs.sem_spar and inputs.sem_spar.amount_qty != 0) or False
+result = (inputs and inputs.sem_spar and inputs.sem_spar.amount_qty != 0)
             </field>
             <field name="amount_select">code</field>
             <field name="amount_python_compute">
-effective_wage = (contract.wage - contract.wage_exchange_amount)
+effective_wage = contract.get_effective_wage(payslip)
+MAD = payslip.struct_id.get_constant('MAD')
 
 result_qty = inputs.dict.get('sem_spar').amount_qty if inputs.dict.get('sem_spar') else 0.0
-result = effective_wage / 21
+result = effective_wage / MAD
             </field>
         </record>
 
@@ -287,7 +266,7 @@ result = (inputs and inputs.sem_forsk and inputs.sem_forsk.amount_qty &gt; 0)
             </field>
             <field name="amount_select">code</field>
             <field name="amount_python_compute">
-effective_wage = (contract.wage - contract.wage_exchange_amount)
+effective_wage = contract.get_effective_wage(payslip)
 
 result_qty = inputs.dict.get('sem_forsk').amount_qty if inputs.dict.get('sem_forsk') else 0.0
 result = effective_wage * 0.046

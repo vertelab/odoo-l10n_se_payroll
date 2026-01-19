@@ -112,7 +112,7 @@
             <field name="number_of_hours">8</field>
             <field name="holiday_status_id" ref="l10n_se_hr_payroll.leave_type_vab" />
         </record>
-        
+
         <record id="hr_leave_camilla_102" model="hr.leave">
             <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_camilla_employee" />
             <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons"/>
@@ -154,11 +154,11 @@
         </function>
 
         <!-- Lunchkuponger, 600 x 1-->
-        <function model="hr.payslip.input" name="write">
+        <!-- <function model="hr.payslip.input" name="write">
             <value model="hr.payslip.input" search="[('payslip_id', '=', ref('hr_payslip_camilla_01')), ('code', '=', 'lunch')]"/>
             <value eval="{'amount_qty': 600, 'amount': 1}"/>
-        </function>
-        
+        </function> -->
+
         <function model="hr.payslip.input" name="write">
             <value model="hr.payslip.input" search="[('payslip_id', '=', ref('hr_payslip_camilla_01')), ('code', '=', 'otidtim')]"/>
             <value eval="{'amount_qty': 2.0}"/>
@@ -231,16 +231,16 @@
         </function>
 
         <!-- Förmån fritt drivmedel, 300 x 0.95 -->
-        <function model="hr.payslip.input" name="write">
+        <!-- <function model="hr.payslip.input" name="write">
             <value model="hr.payslip.input" search="[('payslip_id', '=', ref('hr_payslip_camilla_02')), ('code', '=', 'drivm_fritt')]"/>
             <value eval="{'amount_qty': 300, 'amount': 0.95}"/>
-        </function>
+        </function> -->
         <!-- Förmån fritt drivmedel, upphöjt, 300 x 0.55 -->
-        <function model="hr.payslip.input" name="write">
+        <!-- <function model="hr.payslip.input" name="write">
             <value model="hr.payslip.input" search="[('payslip_id', '=', ref('hr_payslip_camilla_02')), ('code', '=', 'drivm_fritt_upp')]"/>
             <value eval="{'amount_qty': 300, 'amount': 0.55}"/>
-        </function>
-        
+        </function> -->
+
         <function model="hr.payslip" name="compute_sheet">
             <value eval="[ref('l10n_se_hr_payroll_tiichri.hr_payslip_camilla_02')]"/>
         </function>
@@ -283,15 +283,15 @@
 
         <!-- Manuell input -->
         <!-- Förmån fritt drivmedel, 800 x 0.95 -->
-        <function model="hr.payslip.input" name="write">
+        <!-- <function model="hr.payslip.input" name="write">
             <value model="hr.payslip.input" search="[('payslip_id', '=', ref('hr_payslip_camilla_03')), ('code', '=', 'drivm_fritt')]"/>
             <value eval="{'amount_qty': 800, 'amount': 0.95}"/>
-        </function>
+        </function> -->
         <!-- Förmån fritt drivmedel, upphöjt, 800 x 0.55 -->
-        <function model="hr.payslip.input" name="write">
+        <!-- <function model="hr.payslip.input" name="write">
             <value model="hr.payslip.input" search="[('payslip_id', '=', ref('hr_payslip_camilla_03')), ('code', '=', 'drivm_fritt_upp')]"/>
             <value eval="{'amount_qty': 800, 'amount': 0.55}"/>
-        </function>
+        </function> -->
 
 
         <function model="hr.payslip" name="onchange_employee">
@@ -351,31 +351,31 @@
         </function>
 
         <!-- Förmån fritt drivmedel, 2600 x 0.95 -->
-        <function model="hr.payslip.input" name="write">
+        <!-- <function model="hr.payslip.input" name="write">
             <value model="hr.payslip.input" search="[('payslip_id', '=', ref('hr_payslip_camilla_04')), ('code', '=', 'drivm_fritt')]"/>
             <value eval="{'amount_qty': 2600, 'amount': 0.95}"/>
-        </function>
+        </function> -->
         <!-- Förmån fritt drivmedel, upphöjt, 2600 x 0.55 -->
-        <function model="hr.payslip.input" name="write">
+        <!-- <function model="hr.payslip.input" name="write">
             <value model="hr.payslip.input" search="[('payslip_id', '=', ref('hr_payslip_camilla_04')), ('code', '=', 'drivm_fritt_upp')]"/>
             <value eval="{'amount_qty': 2600, 'amount': 0.55}"/>
-        </function>
+        </function> -->
 
         <!-- Kostavdrag frukost 15%, utland, 1.5 x 85.20 -->
-        <function model="hr.payslip.input" name="write">
+        <!-- <function model="hr.payslip.input" name="write">
             <value model="hr.payslip.input" search="[('payslip_id', '=', ref('hr_payslip_camilla_04')), ('code', '=', 'frukost_utland')]"/>
             <value eval="{'amount_qty': 1.5, 'amount': 85.2}"/>
-        </function>
+        </function> -->
         <!-- Kostavdrag lunch 35%, utland, 2.5 x 198.80 -->
-        <function model="hr.payslip.input" name="write">
+        <!-- <function model="hr.payslip.input" name="write">
             <value model="hr.payslip.input" search="[('payslip_id', '=', ref('hr_payslip_camilla_04')), ('code', '=', 'lunch_utland')]"/>
             <value eval="{'amount_qty': 2.5, 'amount': 198.8}"/>
-        </function>
+        </function> -->
         <!-- Kostavdrag middag 35%, utland, 2 x 198.80 -->
-        <function model="hr.payslip.input" name="write">
+        <!-- <function model="hr.payslip.input" name="write">
             <value model="hr.payslip.input" search="[('payslip_id', '=', ref('hr_payslip_camilla_04')), ('code', '=', 'middag_utland')]"/>
             <value eval="{'amount_qty': 2, 'amount': 198.8}"/>
-        </function>
+        </function> -->
 
 
         <function model="hr.payslip.input" name="write">
@@ -463,6 +463,22 @@
             <field name="holiday_status_id" ref="l10n_se_hr_payroll.leave_type_sick" />
         </record>
 
+        <!-- Semester 6 dgr, 48 timmar -->
+        <record id="hr_leave_camilla_602" model="hr.leave">
+            <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_camilla_employee" />
+            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons"/>
+            <field name="date_from">2022-06-09</field>
+            <field name="date_to">2022-06-16</field>
+            <field name="request_date_from">2022-06-09</field>
+            <field name="request_date_to">2022-06-16</field>
+            <field name="number_of_hours">48</field>
+            <field name="holiday_status_id" ref="l10n_se_hr_holidays.leave_type_vacation" />
+        </record>
+
+        <function model="hr.leave" name="action_validate">
+            <value eval="[ref('hr_leave_camilla_602')]"/>
+        </function>
+
         <!-- Saknas: -->
         <!-- Bilförmån -->
         <!-- Förmån hushållsnära tjänster, arbetskostnad -->
@@ -489,17 +505,6 @@
             <field name="struct_id" ref="l10n_se_hr_payroll_tiichri.hr_payroll_structure_tj_man" />
         </record>
 
-        <!-- Semester 6 dgr, 48 timmar -->
-        <!-- <record id="hr_leave_camilla_601" model="hr.leave">
-            <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_camilla_employee" />
-            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons"/>
-            <field name="date_from">2022-06-09</field>
-            <field name="date_to">2022-06-16</field>
-            <field name="request_date_from">2022-06-09</field>
-            <field name="request_date_to">2022-06-16</field>
-            <field name="number_of_hours">48</field>
-            <field name="holiday_status_id" ref="l10n_se_hr_holidays.leave_type_vacation" />
-        </record> -->
 
         <!-- Manuell input -->
         <function model="hr.payslip" name="onchange_employee">
@@ -722,8 +727,7 @@
             <value eval="[ref('hr_leave_camilla_1001'), 
                 ref('hr_leave_camilla_1002'), 
                 ref('hr_leave_camilla_1003'), 
-                ref('hr_leave_camilla_1004')]"
-            />
+                ref('hr_leave_camilla_1004')]" />
         </function>
 
 

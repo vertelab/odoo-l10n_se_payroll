@@ -73,34 +73,17 @@
 
         <!-- Ett "mittemellan-kontrakt" då han inte börjar med löneväxling förrän i april -->
         <record id="contract_asse_2" model="hr.contract">
-            <field name="name">Asse Aronsson Heltidsavtal 1</field>
-            <field name="wage">52000</field>
-            <field name="type_id" ref="hr_contract_type" />
-            <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_asse_employee" />
-            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons" />
-            <field name="schedule_pay" eval="'monthly'" />
-            <field name="state" eval="'close'" />
-            <field name="job_id" ref="job_id_president" />
-            <field name="date_start">2022-01-01</field>
-            <field name="date_end">2022-03-31</field>
-            <field name="first_contract_date">2018-04-01</field>
-            <field name="resource_calendar_id" ref="l10n_se_hr_payroll_tiichri.resource_calendar_standard_tiichri" />
-            <field name="struct_id" ref="l10n_se_hr_payroll_tiichri.hr_payroll_structure_tj_man" />
-            <field name="table_number">30</field>
-            <field name="column_number" eval="'column1'" />
-        </record>
-
-        <record id="contract_asse_3" model="hr.contract">
-            <field name="name">Asse Aronsson Heltidsavtal 2</field>
+            <field name="name">Asse Aronsson Heltidsavtal</field>
             <field name="wage">52000</field>
             <field name="wage_exchange_amount">4000</field>
+            <field name="wage_exchange_start">2022-03-01</field>
             <field name="type_id" ref="hr_contract_type" />
             <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_asse_employee" />
             <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons" />
             <field name="schedule_pay" eval="'monthly'" />
             <field name="state" eval="'open'" />
             <field name="job_id" ref="job_id_president" />
-            <field name="date_start">2022-04-01</field>
+            <field name="date_start">2022-01-01</field>
             <field name="first_contract_date">2018-04-01</field>
             <field name="resource_calendar_id" ref="l10n_se_hr_payroll_tiichri.resource_calendar_standard_tiichri" />
             <field name="struct_id" ref="l10n_se_hr_payroll_tiichri.hr_payroll_structure_tj_man" />
@@ -276,15 +259,15 @@
         </function>
 
         <!-- Förmån fritt drivmedel, 1.007,50 x 1.0 -->
-        <function model="hr.payslip.input" name="write">
+        <!-- <function model="hr.payslip.input" name="write">
             <value model="hr.payslip.input" search="[('payslip_id', '=', ref('hr_payslip_asse_01')), ('code', '=', 'drivm_fritt')]"/>
             <value eval="{'amount_qty': 1.007.5, 'amount': 1}"/>
-        </function>
+        </function> -->
         <!-- Förmån fritt drivmedel, upphöjt, 1.007,50 x 0.2 -->
-        <function model="hr.payslip.input" name="write">
+        <!-- <function model="hr.payslip.input" name="write">
             <value model="hr.payslip.input" search="[('payslip_id', '=', ref('hr_payslip_asse_01')), ('code', '=', 'drivm_fritt_upp')]"/>
             <value eval="{'amount_qty': 1.007.5, 'amount': 0.2}"/>
-        </function>
+        </function> -->
 
         <function model="hr.payslip.input" name="write">
             <value model="hr.payslip.input" search="[('payslip_id', '=', ref('hr_payslip_asse_01')), ('code', '=', 'otidtim')]"/>
@@ -330,17 +313,31 @@
         </record>
 
         <!-- VAB -->
+
         <record id="hr_leave_asse_203" model="hr.leave">
             <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_asse_employee" />
             <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons"/>
             <field name="date_from">2022-02-03</field>
-            <field name="date_to">2022-02-04</field>
+            <field name="date_to">2022-02-03</field>
             <field name="request_date_from">2022-02-03</field>
-            <field name="request_date_to">2022-02-04</field>
-            <field name="number_of_hours">16</field>
+            <field name="request_date_to">2022-02-03</field>
+            <field name="request_unit_hours" eval="True"/>
+            <field name="request_hour_from">13</field>
+            <field name="request_hour_to">17</field>
+            <field name="number_of_hours">4</field>
             <field name="holiday_status_id" ref="l10n_se_hr_payroll.leave_type_vab" />
         </record>
 
+        <record id="hr_leave_asse_203_02" model="hr.leave">
+            <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_asse_employee" />
+            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons"/>
+            <field name="date_from">2022-02-04</field>
+            <field name="date_to">2022-02-04</field>
+            <field name="request_date_from">2022-02-04</field>
+            <field name="request_date_to">2022-02-04</field>
+            <field name="number_of_hours">8</field>
+            <field name="holiday_status_id" ref="l10n_se_hr_payroll.leave_type_vab" />
+        </record>
         <!-- Saknas: -->
         <!-- Bilförmån -->
         <!-- Förmån av fritt drivmedel vid tjänstebil -->
@@ -368,21 +365,20 @@
         </record>
 
         <!-- Manuell input -->
-
         <function model="hr.payslip" name="onchange_employee">
             <value eval="[ref('hr_payslip_asse_02')]"/>
         </function>
 
         <!-- Förmån fritt drivmedel, 900 x 1.0 -->
-        <function model="hr.payslip.input" name="write">
+        <!-- <function model="hr.payslip.input" name="write">
             <value model="hr.payslip.input" search="[('payslip_id', '=', ref('hr_payslip_asse_02')), ('code', '=', 'drivm_fritt')]"/>
             <value eval="{'amount_qty': 900, 'amount': 1}"/>
-        </function>
+        </function> -->
         <!-- Förmån fritt drivmedel, upphöjt, 900 x 0.2 -->
-        <function model="hr.payslip.input" name="write">
+        <!-- <function model="hr.payslip.input" name="write">
             <value model="hr.payslip.input" search="[('payslip_id', '=', ref('hr_payslip_asse_02')), ('code', '=', 'drivm_fritt_upp')]"/>
             <value eval="{'amount_qty': 900, 'amount': 0.2}"/>
-        </function>
+        </function> -->
 
         <function model="hr.payslip.input" name="write">
             <value model="hr.payslip.input" search="[('payslip_id', '=', ref('hr_payslip_asse_02')), ('code', '=', 'otidtim')]"/>
@@ -472,15 +468,15 @@
         <!-- Manuell input -->
 
         <!-- Förmån fritt drivmedel, 775 x 1.0 -->
-        <function model="hr.payslip.input" name="write">
+        <!-- <function model="hr.payslip.input" name="write">
             <value model="hr.payslip.input" search="[('payslip_id', '=', ref('hr_payslip_asse_03')), ('code', '=', 'drivm_fritt')]"/>
             <value eval="{'amount_qty': 775, 'amount': 1}"/>
-        </function>
+        </function> -->
         <!-- Förmån fritt drivmedel, upphöjt, 775 x 0.2 -->
-        <function model="hr.payslip.input" name="write">
+        <!-- <function model="hr.payslip.input" name="write">
             <value model="hr.payslip.input" search="[('payslip_id', '=', ref('hr_payslip_asse_03')), ('code', '=', 'drivm_fritt_upp')]"/>
             <value eval="{'amount_qty': 775, 'amount': 0.2}"/>
-        </function>
+        </function> -->
 
 
         <!-- Ingen ÖT denna mån -->
@@ -560,15 +556,15 @@
         <!-- Manuell input -->
 
         <!-- Förmån fritt drivmedel, 805 x 1.0 -->
-        <function model="hr.payslip.input" name="write">
+        <!-- <function model="hr.payslip.input" name="write">
             <value model="hr.payslip.input" search="[('payslip_id', '=', ref('hr_payslip_asse_04')), ('code', '=', 'drivm_fritt')]"/>
             <value eval="{'amount_qty': 805, 'amount': 1}"/>
-        </function>
+        </function> -->
         <!-- Förmån fritt drivmedel, upphöjt, 805 x 0.2 -->
-        <function model="hr.payslip.input" name="write">
+        <!-- <function model="hr.payslip.input" name="write">
             <value model="hr.payslip.input" search="[('payslip_id', '=', ref('hr_payslip_asse_04')), ('code', '=', 'drivm_fritt_upp')]"/>
             <value eval="{'amount_qty': 805, 'amount': 0.2}"/>
-        </function>
+        </function> -->
 
         <function model="hr.payslip.input" name="write">
             <value model="hr.payslip.input" search="[('payslip_id', '=', ref('hr_payslip_asse_04')), ('code', '=', 'otidtim')]"/>
@@ -650,16 +646,16 @@
 
         <!-- Manuell input -->
         <!-- Förmån fritt drivmedel, 930 x 1.0 -->
-        <function model="hr.payslip.input" name="write">
+        <!-- <function model="hr.payslip.input" name="write">
             <value model="hr.payslip.input" search="[('payslip_id', '=', ref('hr_payslip_asse_05')), ('code', '=', 'drivm_fritt')]"/>
             <value eval="{'amount_qty': 930, 'amount': 1}"/>
-        </function>
+        </function> -->
         <!-- Förmån fritt drivmedel, upphöjt, 930 x 0.2 -->
-        <function model="hr.payslip.input" name="write">
+        <!-- <function model="hr.payslip.input" name="write">
             <value model="hr.payslip.input" search="[('payslip_id', '=', ref('hr_payslip_asse_05')), ('code', '=', 'drivm_fritt_upp')]"/>
             <value eval="{'amount_qty': 930, 'amount': 0.2}"/>
-        </function>
-        
+        </function> -->
+
         <function model="hr.payslip.input" name="write">
             <value model="hr.payslip.input" search="[('payslip_id', '=', ref('hr_payslip_asse_05')), ('code', '=', 'otidtim')]"/>
             <value eval="{'amount_qty': 2.0}"/>
@@ -733,17 +729,17 @@
 
         <!-- Manuell input -->
         <!-- Förmån fritt drivmedel, 891 x 1.0 -->
-        <function model="hr.payslip.input" name="write">
+        <!-- <function model="hr.payslip.input" name="write">
             <value model="hr.payslip.input" search="[('payslip_id', '=', ref('hr_payslip_asse_06')), ('code', '=', 'drivm_fritt')]"/>
             <value eval="{'amount_qty': 891, 'amount': 1}"/>
-        </function>
+        </function> -->
         <!-- Förmån fritt drivmedel, upphöjt, 891 x 0.2 -->
-        <function model="hr.payslip.input" name="write">
+        <!-- <function model="hr.payslip.input" name="write">
             <value model="hr.payslip.input" search="[('payslip_id', '=', ref('hr_payslip_asse_06')), ('code', '=', 'drivm_fritt_upp')]"/>
             <value eval="{'amount_qty': 891, 'amount': 0.2}"/>
-        </function>
+        </function> -->
 
-        
+
         <!-- Ingen ÖT dnna mån -->
         <function model="hr.payslip" name="onchange_employee">
             <value eval="[ref('hr_payslip_asse_06')]"/>
@@ -828,15 +824,15 @@
 
         <!-- Manuell input -->
         <!-- Förmån fritt drivmedel, 642 x 1.0 -->
-        <function model="hr.payslip.input" name="write">
+        <!-- <function model="hr.payslip.input" name="write">
             <value model="hr.payslip.input" search="[('payslip_id', '=', ref('hr_payslip_asse_07')), ('code', '=', 'drivm_fritt')]"/>
             <value eval="{'amount_qty': 642, 'amount': 1}"/>
-        </function>
+        </function> -->
         <!-- Förmån fritt drivmedel, upphöjt, 642 x 0.2 -->
-        <function model="hr.payslip.input" name="write">
+        <!-- <function model="hr.payslip.input" name="write">
             <value model="hr.payslip.input" search="[('payslip_id', '=', ref('hr_payslip_asse_07')), ('code', '=', 'drivm_fritt_upp')]"/>
             <value eval="{'amount_qty': 642, 'amount': 0.2}"/>
-        </function>
+        </function> -->
 
         <function model="hr.payslip.input" name="write">
             <value model="hr.payslip.input" search="[('payslip_id', '=', ref('hr_payslip_asse_07')), ('code', '=', 'otidtim')]"/>
@@ -897,15 +893,15 @@
 
         <!-- Manuell input -->
         <!-- Förmån fritt drivmedel, 624 x 1.0 -->
-        <function model="hr.payslip.input" name="write">
+        <!-- <function model="hr.payslip.input" name="write">
             <value model="hr.payslip.input" search="[('payslip_id', '=', ref('hr_payslip_asse_08')), ('code', '=', 'drivm_fritt')]"/>
             <value eval="{'amount_qty': 624, 'amount': 1}"/>
-        </function>
+        </function> -->
         <!-- Förmån fritt drivmedel, upphöjt, 624 x 0.2 -->
-        <function model="hr.payslip.input" name="write">
+        <!-- <function model="hr.payslip.input" name="write">
             <value model="hr.payslip.input" search="[('payslip_id', '=', ref('hr_payslip_asse_08')), ('code', '=', 'drivm_fritt_upp')]"/>
             <value eval="{'amount_qty': 624, 'amount': 0.2}"/>
-        </function>
+        </function> -->
 
         <function model="hr.payslip.input" name="write">
             <value model="hr.payslip.input" search="[('payslip_id', '=', ref('hr_payslip_asse_08')), ('code', '=', 'otidtim')]"/>
@@ -962,15 +958,15 @@
 
         <!-- Manuell input -->
         <!-- Förmån fritt drivmedel, 906 x 1.0 -->
-        <function model="hr.payslip.input" name="write">
+        <!-- <function model="hr.payslip.input" name="write">
             <value model="hr.payslip.input" search="[('payslip_id', '=', ref('hr_payslip_asse_09')), ('code', '=', 'drivm_fritt')]"/>
             <value eval="{'amount_qty': 906, 'amount': 1}"/>
-        </function>
+        </function> -->
         <!-- Förmån fritt drivmedel, upphöjt, 906 x 0.2 -->
-        <function model="hr.payslip.input" name="write">
+        <!-- <function model="hr.payslip.input" name="write">
             <value model="hr.payslip.input" search="[('payslip_id', '=', ref('hr_payslip_asse_09')), ('code', '=', 'drivm_fritt_upp')]"/>
             <value eval="{'amount_qty': 906, 'amount': 0.2}"/>
-        </function>
+        </function> -->
 
         <!-- Ingen övertid -->
 
@@ -1036,15 +1032,15 @@
         </function>
 
         <!-- Förmån fritt drivmedel, 630 x 1.0 -->
-        <function model="hr.payslip.input" name="write">
+        <!-- <function model="hr.payslip.input" name="write">
             <value model="hr.payslip.input" search="[('payslip_id', '=', ref('hr_payslip_asse_10')), ('code', '=', 'drivm_fritt')]"/>
             <value eval="{'amount_qty': 630, 'amount': 1}"/>
-        </function>
+        </function> -->
         <!-- Förmån fritt drivmedel, upphöjt, 630 x 0.2 -->
-        <function model="hr.payslip.input" name="write">
+        <!-- <function model="hr.payslip.input" name="write">
             <value model="hr.payslip.input" search="[('payslip_id', '=', ref('hr_payslip_asse_10')), ('code', '=', 'drivm_fritt_upp')]"/>
             <value eval="{'amount_qty': 630, 'amount': 0.2}"/>
-        </function>
+        </function> -->
 
 
         <function model="hr.payslip.input" name="write">
@@ -1142,15 +1138,15 @@
 
         <!-- Manuell input -->
         <!-- Förmån fritt drivmedel, 561,75 x 1.0 -->
-        <function model="hr.payslip.input" name="write">
+        <!-- <function model="hr.payslip.input" name="write">
             <value model="hr.payslip.input" search="[('payslip_id', '=', ref('hr_payslip_asse_11')), ('code', '=', 'drivm_fritt')]"/>
             <value eval="{'amount_qty': 561.75, 'amount': 1}"/>
-        </function>
+        </function> -->
         <!-- Förmån fritt drivmedel, upphöjt, 561,75 x 0.2 -->
-        <function model="hr.payslip.input" name="write">
+        <!-- <function model="hr.payslip.input" name="write">
             <value model="hr.payslip.input" search="[('payslip_id', '=', ref('hr_payslip_asse_11')), ('code', '=', 'drivm_fritt_upp')]"/>
             <value eval="{'amount_qty': 561,75, 'amount': 0.2}"/>
-        </function>
+        </function> -->
 
         <!-- Ingen övertid -->
 

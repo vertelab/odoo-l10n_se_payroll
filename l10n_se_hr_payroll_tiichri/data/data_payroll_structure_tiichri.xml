@@ -15,9 +15,7 @@
 
                 ref('l10n_se_hr_payroll.hr_salary_rule_sick_leave'),
                 ref('l10n_se_hr_payroll.hr_salary_rule_qualifying_deduction'),
-                ref('l10n_se_hr_payroll.hr_salary_rule_sick_deduction_1_14'),
                 ref('l10n_se_hr_payroll.hr_salary_rule_sick_wage'),
-
 
                 ref('l10n_se_hr_payroll.hr_salary_rule_vab'),
 
@@ -28,13 +26,11 @@
 
                 ref('l10n_se_hr_payroll.hr_salary_rule_kval_otid'),
                 ref('l10n_se_hr_payroll.hr_salary_rule_enkel_otid'),
-                ref('l10n_se_hr_payroll.hr_salary_rule_mertid'),
                 ref('l10n_se_hr_payroll.hr_salary_rule_bonus'),
 
                 ref('l10n_se_hr_holidays.hr_salary_rule_legal_leave'),
                 ref('l10n_se_hr_holidays.hr_salary_rule_saved_leave'),
 
-                ref('l10n_se_hr_holidays.hr_salary_rule_legal_leave_deduction_hourly'),
                 ref('l10n_se_hr_holidays.hr_salary_rule_legal_leave_deduction_monthly'),
                 ref('l10n_se_hr_holidays.hr_salary_rule_legal_leave_unpaid'),
                 ref('l10n_se_hr_holidays.hr_salary_rule_advance_leave'),
@@ -59,6 +55,7 @@
                 ref('l10n_se_hr_payroll.hr_salary_rule_sick_pay_15_90_tj'),
                 ref('l10n_se_hr_holidays.hr_salary_rule_legal_leave_addition8'),
                 ref('l10n_se_hr_holidays.hr_salary_rule_legal_leave_pay_tj'),
+                ref('l10n_se_hr_payroll.hr_salary_rule_mertid'),
 
 
             ])]" />
@@ -80,9 +77,14 @@
             <field name="parent_id" ref="hr_payroll_structure_tj_base" />
             <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons" />
             <field name="rule_ids" eval="[(6,0,[
-                        
+                        ref('l10n_se_hr_payroll.hr_salary_rule_sick_deduction_1_14'),
             ])]" />
-            <field name="const_ids" eval="[]" />
+            <field name="const_ids" eval="[
+                (0, 0, {'name': 'Månadsarbetstid i timmar heltid', 'code': 'MAT', 'constant': 175.0}),
+                (0, 0, {'name': 'Månadsarbetstid i dagar heltid', 'code': 'MAD', 'constant': 21.0}),
+                (0, 0, {'name': 'Divisor enkel övertid', 'code': 'EO', 'constant': 94.0}),
+                (0, 0, {'name': 'Divisor kvalificerad övertid', 'code': 'KO', 'constant': 72.0}),
+                (0, 0, {'name': 'Prisbasbelopp', 'code': 'PBB', 'constant': 483000.0})]" />
         </record>
 
         <!-- ============================================ -->
@@ -96,7 +98,13 @@
             <field name="rule_ids" eval="[(6,0,[
                         
             ])]" />
-            <field name="const_ids" eval="[]" />
+            <field name="const_ids" eval="[
+                (0, 0, {'name': 'Månadsarbetstid i timmar heltid', 'code': 'MAT', 'constant': 175.0}),
+                (0, 0, {'name': 'Månadsarbetstid i dagar heltid', 'code': 'MAD', 'constant': 21.0}),
+                (0, 0, {'name': 'Divisor enkel övertid', 'code': 'EO', 'constant': 94.0}),
+                (0, 0, {'name': 'Divisor kvalificerad övertid', 'code': 'KO', 'constant': 72.0}),
+                (0, 0, {'name': 'Prisbasbelopp', 'code': 'PBB', 'constant': 483000.0})
+            ]" />
         </record>
 
         <!-- ============================================ -->
@@ -120,7 +128,7 @@
                 (0, 0, {'name': 'Månadsarbetstid i dagar heltid', 'code': 'MAD', 'constant': 21.0}),
                 (0, 0, {'name': 'Faktor enkel övertid', 'code': 'EO', 'constant': 1.5}),
                 (0, 0, {'name': 'Faktor kvalificerad övertid', 'code': 'KO', 'constant': 2.0}),
-                (0, 0, {'name': 'Prisbasbelopp', 'code': 'PBB', 'constant': 48300.0})
+                (0, 0, {'name': 'Prisbasbelopp', 'code': 'PBB', 'constant': 483000.0})
             ]" />
         </record>
 
@@ -133,10 +141,16 @@
             <field name="parent_id" ref="hr_payroll_structure_arb_basee" />
             <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons" />
             <field name="rule_ids" eval="[(6,0,[
-                                        
+                    ref('l10n_se_hr_payroll.hr_salary_rule_sick_deduction_1_14'),
 
             ])]" />
-            <field name="const_ids" eval="[]" />
+            <field name="const_ids" eval="[
+                (0, 0, {'name': 'Månadsarbetstid i timmar heltid', 'code': 'MAT', 'constant': 173.0}),
+                (0, 0, {'name': 'Månadsarbetstid i dagar heltid', 'code': 'MAD', 'constant': 21.0}),
+                (0, 0, {'name': 'Faktor enkel övertid', 'code': 'EO', 'constant': 1.5}),
+                (0, 0, {'name': 'Faktor kvalificerad övertid', 'code': 'KO', 'constant': 2.0}),
+                (0, 0, {'name': 'Prisbasbelopp', 'code': 'PBB', 'constant': 483000.0})
+            ]" />
         </record>
 
         <!-- ============================================ -->
@@ -150,7 +164,13 @@
             <field name="rule_ids" eval="[(6,0,[
                         
             ])]" />
-            <field name="const_ids" eval="[]" />
+            <field name="const_ids" eval="[
+                (0, 0, {'name': 'Månadsarbetstid i timmar heltid', 'code': 'MAT', 'constant': 173.0}),
+                (0, 0, {'name': 'Månadsarbetstid i dagar heltid', 'code': 'MAD', 'constant': 21.0}),
+                (0, 0, {'name': 'Faktor enkel övertid', 'code': 'EO', 'constant': 1.5}),
+                (0, 0, {'name': 'Faktor kvalificerad övertid', 'code': 'KO', 'constant': 2.0}),
+                (0, 0, {'name': 'Prisbasbelopp', 'code': 'PBB', 'constant': 483000.0})
+            ]" />
         </record>
 
     </data>

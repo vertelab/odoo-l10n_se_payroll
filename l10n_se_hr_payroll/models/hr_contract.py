@@ -29,8 +29,32 @@ class hr_contract(models.Model):
     _inherit = "hr.contract"
 
     wage_exchange_amount = fields.Float(string="Löneväxlingssumma", defaul=0)
+    wage_exchange_start = fields.Date(string="Startdatum löneväxling")
+    wage_exchange_end = fields.Date(string="Slutdatum löneväxling", help="Lämna tom om växlingen är pågående")
 
     day_of_pay = fields.Integer(string="Lönedag", default=25)
+
+    def get_current_wage_exchange(self, payslip):
+        self.ensure_one()
+
+        if not self.wage_exchange_amount:
+            return 0.0
+
+        if not self.wage_exchange_start:
+            return 0.0
+        
+        starts_before_end = self.wage_exchange_start <= payslip.date_to
+        ends_after_start = not self.wage_exchange_end or self.wage_exchange_end >= payslip.date_from
+
+        if starts_before_end and ends_after_start:
+            return self.wage_exchange_amount
+
+        return 0.0
+
+    def get_effective_wage(self, payslip):
+        self.ensure_one()
+        exchange = self.get_current_wage_exchange(payslip)
+        return self.wage - exchange
 
     # 1-14 + 15-90
     def get_sick_days(self, payslip_id):
@@ -280,7 +304,7 @@ class hr_contract(models.Model):
             start_dt, end_dt, compute_leaves=False
         )
 
-        absence_codes = ['vab', 'tjl_tim', 'tjl_kort', 'tjl_lang' 'sem_bet', 'sem_obet', 'sjk_1_14', 'sjk_15_90']
+        absence_codes = ['vab', 'sjk', 'tjl_tim', 'tjl_kort', 'tjl_lang', 'sem_bet', 'sem_obet', 'sjk_1_14', 'sjk_15_90']
         absence_hours = sum(
             abs(line.number_of_hours) 
             for line in payslip.worked_days_line_ids 
