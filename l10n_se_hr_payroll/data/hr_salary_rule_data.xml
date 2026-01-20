@@ -534,12 +534,13 @@ result_qty = inputs.res_helg_tim.amount_qty
             <field name="name">Traktamente inrikes, skattefritt</field>
             <field name="sequence">920</field>
             <field name="condition_select">python</field>
-            <field name="condition_python">result = inputs.trakt_hel_dagar or inputs.trakt_halv_dagar or inputs.trakt_natt</field>
+            <field name="condition_python">result = inputs.trakt_hel_dagar or inputs.trakt_halv_dagar or inputs.trakt_natt or inputs.trakt_skatt</field>
             <field name="amount_select">code</field>
             <field name="amount_python_compute">
 hel = (inputs.trakt_hel_dagar.amount_qty * 240.0) if inputs.trakt_hel_dagar else 0.0
 halv = (inputs.trakt_halv_dagar.amount_qty * 120.0) if inputs.trakt_halv_dagar else 0.0
 natt = (inputs.trakt_natt.amount_qty * 120.0) if inputs.trakt_natt else 0.0
+skatt = (inputs.trakt_skatt.amount_qty * 120.0) if inputs.trakt_skatt else 0.0
 result = hel + halv + natt
             </field>
         </record>
@@ -548,6 +549,28 @@ result = hel + halv + natt
             <field name="code">trakt_hel_dagar</field>
             <field name="name">Traktamente helt (antal dagar)</field>
             <field name="input_id" ref="hr_salary_rule_trakt_inrikes" />
+        </record>        
+        
+        <record id="hr_salary_rule_trakt_inrikes_skatt" model="hr.salary.rule">
+            <field name="category_id" ref="l10n_se_hr_payroll.hr_salary_rule_category_BRUAVG" />
+            <field name="parent_rule_id" ref="hr_salary_rule_travel_parent" />
+            <field name="company_id" eval="False"/>
+            <field name="code">trakt_skatt</field>
+            <field name="name">Traktamente inrikes, skattepliktigt</field>
+            <field name="sequence">920</field>
+            <field name="condition_select">python</field>
+            <field name="condition_python">result = inputs.trakt_skatt</field>
+            <field name="amount_select">code</field>
+            <field name="amount_python_compute">
+result = inputs.trakt_skatt.amount
+result_qty = inputs.res_helg_tim.amount_qty
+            </field>
+        </record>
+
+        <record id="hr_rule_input_trakt_skatt" model="hr.rule.input">
+            <field name="code">trakt_skatt</field>
+            <field name="name">Traktamente skattepliktigt</field>
+            <field name="input_id" ref="hr_salary_rule_trakt_inrikes_skatt" />
         </record>
 
         <record id="hr_rule_input_trakt_halv_dagar" model="hr.rule.input">

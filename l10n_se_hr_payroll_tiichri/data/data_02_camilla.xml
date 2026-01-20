@@ -128,11 +128,8 @@
         </record>
 
         <!-- Saknas: -->
-        <!-- Daglön (?) -->
         <!-- Restidsersättning vardag -->
         <!-- Restidsersättning helg -->
-        <!-- Lunchkuponger förmånsvärde -->
-        <!-- Avdrag lunchkuponger -->
 
         <!-- Skatt -->
         <!-- Arbetsgivaravgift -->
@@ -203,12 +200,9 @@
         </record>
 
         <!-- Saknas: -->
-        <!-- Bilförmån -->
         <!-- Förmån hushållsnära tjänster, arbetskostnad -->
         <!-- Skattereduktion hushållsnära tjänster -->
         <!-- Övrig nettoersättning (kvitto gymkort) -->
-        <!-- Milersättning för bensin vid tjänstekörning -->
-        <!-- Milersättning tjänstebil skattepliktig -->
 
         <!-- Skatt -->
         <!-- Arbetsgivaravgift -->
@@ -255,12 +249,9 @@
         </record>
 
         <!-- Saknas: -->
-        <!-- Bilförmån -->
         <!-- Förmån hushållsnära tjänster, arbetskostnad -->
         <!-- Skattereduktion hushållsnära tjänster -->
         <!-- Övrig nettoersättning (kiropraktor) -->
-        <!-- Milersättning för bensin vid tjänstekörning -->
-        <!-- Milersättning tjänstebil skattepliktig -->
 
         <!-- Skatt -->
         <!-- Arbetsgivaravgift -->
@@ -307,7 +298,6 @@
         </record>
 
         <!-- Saknas: -->
-        <!-- Bilförmån -->
         <!-- Förmån hushållsnära tjänster, arbetskostnad -->
         <!-- Skattereduktion hushållsnära tjänster -->
         <!-- Representation, ej avdragsgill -->
@@ -318,8 +308,6 @@
         <!-- Kostavdrag frukost 15% utland -->
         <!-- Kostavdrag lunch 35% utland -->
         <!-- Kostavdrag middag 35% utland -->
-        <!-- Milersättning för bensin vid tjänstekörning -->
-        <!-- Milersättning tjänstebil skattepliktig -->
 
         <!-- Skatt -->
         <!-- Arbetsgivaravgift -->
@@ -400,7 +388,6 @@
         </function>
 
         <!-- Saknas: -->
-        <!-- Bilförmån -->
         <!-- Förmån hushållsnära tjänster, arbetskostnad -->
         <!-- Skattereduktion hushållsnära tjänster -->
         <!-- Utlägg resekostnader -->
@@ -410,8 +397,6 @@
         <!-- Kostförmån middag -->
         <!-- Kostavdrag frukost -->
         <!-- Kostavdrag lunch eller middag -->
-        <!-- Milersättning för bensin vid tjänstekörning -->
-        <!-- Milersättning tjänstebil skattepliktig -->
         <!-- Bostadsförmån ej småhus (lån av fjällstuga) -->
 
         <!-- Skatt -->
@@ -474,16 +459,9 @@
         </function>
 
         <!-- Saknas: -->
-        <!-- Bilförmån -->
         <!-- Förmån hushållsnära tjänster, arbetskostnad -->
         <!-- Skattereduktion hushållsnära tjänster -->
-        <!-- Uttag betalda semesterdagar, månadsavlönad -->
-        <!-- Semesterlön betald -->
-        <!-- Semestertillägg betalda semesterdagar -->
-        <!-- Semesteravdrag betald -->
         <!-- Uttag förskottssemester, månadsavlönad -->
-        <!-- Milersättning för bensin vid tjänstekörning -->
-        <!-- Milersättning tjänstebil skattepliktig -->
 
         <!-- Skatt -->
         <!-- Arbetsgivaravgift -->
@@ -554,13 +532,10 @@
         </record>
 
         <!-- Saknas: -->
-        <!-- Bilförmån -->
         <!-- Förmån hushållsnära tjänster, arbetskostnad -->
         <!-- Skattereduktion hushållsnära tjänster -->
         <!-- Uttag förskottssemester, månadsavlönad -->
         <!-- Bonus-->
-        <!-- Milersättning för bensin vid tjänstekörning -->
-        <!-- Milersättning tjänstebil skattepliktig -->
 
         <!-- Skatt -->
         <!-- Arbetsgivaravgift -->
@@ -577,7 +552,6 @@
         </record>
 
         <!-- Manuell input -->
-
 
         <function model="hr.payslip" name="onchange_employee">
             <value eval="[ref('l10n_se_hr_payroll_tiichri.hr_payslip_camilla_07')]"/>
@@ -609,7 +583,6 @@
         </record>
 
         <!-- Saknas: -->
-        <!-- Bilförmån -->
         <!-- Förmån hushållsnära tjänster, arbetskostnad -->
         <!-- Skattereduktion hushållsnära tjänster -->
 
@@ -651,12 +624,9 @@
         </record>
 
         <!-- Saknas: -->
-        <!-- Bilförmån -->
         <!-- Förmån hushållsnära tjänster, arbetskostnad -->
         <!-- Skattereduktion hushållsnära tjänster -->
         <!-- Uttag förskottssemester, månadsavlönad -->
-        <!-- Milersättning för bensin vid tjänstekörning -->
-        <!-- Milersättning tjänstebil skattepliktig -->
 
         <!-- Skatt -->
         <!-- Arbetsgivaravgift -->
@@ -750,11 +720,8 @@
 
 
         <!-- Saknas: -->
-        <!-- Bilförmån -->
         <!-- Förmån hushållsnära tjänster, arbetskostnad -->
         <!-- Skattereduktion hushållsnära tjänster -->
-        <!-- Milersättning för bensin vid tjänstekörning -->
-        <!-- Milersättning tjänstebil skattepliktig -->
 
         <!-- Skatt -->
         <!-- Arbetsgivaravgift -->
@@ -802,7 +769,6 @@
         </record>
 
         <!-- Saknas: -->
-        <!-- Bilförmån -->
         <!-- Förmån hushållsnära tjänster, arbetskostnad -->
         <!-- Skattereduktion hushållsnära tjänster -->
         <!-- Övrig nettoersättning (Husläkare) -->
@@ -846,7 +812,6 @@
         </record>
 
         <!-- Saknas: -->
-        <!-- Bilförmån -->
         <!-- Förmån hushållsnära tjänster, arbetskostnad -->
         <!-- Skattereduktion hushållsnära tjänster -->
         <!-- Övrig nettoersättning (Husläkare) -->

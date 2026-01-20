@@ -337,10 +337,6 @@
             <field name="holiday_status_id" ref="l10n_se_hr_payroll.leave_type_vab" />
         </record>
         <!-- Saknas: -->
-        <!-- Bilförmån -->
-        <!-- Förmån av fritt drivmedel vid tjänstebil -->
-        <!-- Upphöjt värde av förmån fritt drivmedel -->
-        <!-- Övriga nettoavdrag (gymkort) -->
 
         <!-- Skatt -->
         <!-- Arbetsgivaravgift -->
@@ -438,10 +434,6 @@
         </record>
 
         <!-- Saknas: -->
-        <!-- Bilförmån -->
-        <!-- Förmån av fritt drivmedel vid tjänstebil -->
-        <!-- Upphöjt värde av förmån fritt drivmedel -->
-        <!-- Avdrag lönveväxling -->
         <!-- Restitdsersättning vardag -->
         <!-- Restitdsersättning helg -->
 
@@ -512,10 +504,6 @@
         </record>
 
         <!-- Saknas: -->
-        <!-- Bilförmån -->
-        <!-- Förmån av fritt drivmedel vid tjänstebil -->
-        <!-- Upphöjt värde av förmån fritt drivmedel -->
-        <!-- Avdrag lönveväxling -->
         <!-- Utlägg resekostnader -->
         <!-- Restitdsersättning vardag -->
         <!-- Restitdsersättning helg -->
@@ -600,10 +588,6 @@
         </record>
 
         <!-- Saknas: -->
-        <!-- Bilförmån -->
-        <!-- Förmån av fritt drivmedel vid tjänstebil -->
-        <!-- Upphöjt värde av förmån fritt drivmedel -->
-        <!-- Avdrag lönveväxling -->
         <!-- Traktamente skattepliktigt -->
         <!-- Utlandstraktamente ej skattepliktigt -->
         <!-- Kostavdrag frukost 15%, utland -->
@@ -695,10 +679,6 @@
         </record>
 
         <!-- Saknas: -->
-        <!-- Bilförmån -->
-        <!-- Förmån av fritt drivmedel vid tjänstebil -->
-        <!-- Upphöjt värde av förmån fritt drivmedel -->
-        <!-- Avdrag lönveväxling -->
         <!-- Uttag semesterdagar, månadsavlönad -->
         <!-- Semesterlön betald -->
         <!-- Semestertillägg betalda semesterdagar -->
@@ -782,10 +762,6 @@
 
 
         <!-- Saknas: -->
-        <!-- Bilförmån -->
-        <!-- Förmån av fritt drivmedel vid tjänstebil -->
-        <!-- Upphöjt värde av förmån fritt drivmedel -->
-        <!-- Avdrag lönveväxling -->
         <!-- Uttag betalda semesterdagar, månadsavlönad -->
         <!-- Semesterlön betald -->
         <!-- Semestertillägg betalda semesterdagar -->
@@ -853,10 +829,6 @@
         </record>
 
         <!-- Saknas: -->
-        <!-- Bilförmån -->
-        <!-- Förmån av fritt drivmedel vid tjänstebil -->
-        <!-- Upphöjt värde av förmån fritt drivmedel -->
-        <!-- Avdrag lönveväxling -->
         <!-- Uttag semesterdagar, månadsavlönad -->
         <!-- Semesterlön betald -->
         <!-- Semestertillägg betalda semesterdagar -->
@@ -918,10 +890,6 @@
         </record>
 
         <!-- Saknas: -->
-        <!-- Bilförmån -->
-        <!-- Förmån av fritt drivmedel vid tjänstebil -->
-        <!-- Upphöjt värde av förmån fritt drivmedel -->
-        <!-- Avdrag lönveväxling -->
         <!-- Uttag semesterdagar, månadsavlönad -->
         <!-- Semesterlön betald -->
         <!-- Semestertillägg betalda semesterdagar -->
@@ -977,10 +945,6 @@
         </record>
 
         <!-- Saknas: -->
-        <!-- Bilförmån -->
-        <!-- Förmån av fritt drivmedel vid tjänstebil -->
-        <!-- Upphöjt värde av förmån fritt drivmedel -->
-        <!-- Avdrag lönveväxling -->
         <!-- Föräldraledighet kalenderdagsavdrag -->
         <!-- Uttag betalda semesterdagar, månadsavlönad -->
         <!-- Semesterlön betald -->
@@ -1088,10 +1052,6 @@
         </record>
 
         <!-- Saknas: -->
-        <!-- Bilförmån -->
-        <!-- Förmån av fritt drivmedel vid tjänstebil -->
-        <!-- Upphöjt värde av förmån fritt drivmedel -->
-        <!-- Avdrag lönveväxling -->
         <!-- Uttag semesterdagar, månadsavlönad -->
         <!-- Semesterlön betald -->
         <!-- Semestertillägg betalda semesterdagar -->
