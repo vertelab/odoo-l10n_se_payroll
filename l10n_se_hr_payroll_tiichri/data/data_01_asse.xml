@@ -363,7 +363,6 @@
             <field name="period_id" ref="period_02_2022" />
             <field name="date_from">2022-02-01</field>
             <field name="date_to">2022-02-28</field>
-            <!-- <field name="contract_id" ref="l10n_se_hr_payroll_tiichri.contract_asse_2" /> -->
             <field name="struct_id" ref="l10n_se_hr_payroll_tiichri.hr_payroll_structure_tj_man" />
         </record>
 
@@ -464,7 +463,6 @@
             <field name="period_id" ref="period_03_2022" />
             <field name="date_from">2022-03-01</field>
             <field name="date_to">2022-03-31</field>
-            <!-- <field name="contract_id" ref="l10n_se_hr_payroll_tiichri.contract_asse_2" /> -->
             <field name="struct_id" ref="l10n_se_hr_payroll_tiichri.hr_payroll_structure_tj_man" />
         </record>
 
@@ -1177,7 +1175,6 @@
         <!-- Saknas: -->
         <!-- Föräldraledighet hel måånad -->
         <!-- Föräldratillägg över 10 PBB 150dgr -->
-
 
         <record id="hr_payslip_asse_12" model="hr.payslip">
             <field name="name">Lönespecifikation för December - Asse Aronsson</field>

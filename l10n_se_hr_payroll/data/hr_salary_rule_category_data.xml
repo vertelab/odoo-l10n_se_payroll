@@ -40,28 +40,33 @@
             <field name="code">NETTIL</field>
             <field name="name">Nettotillägg</field>
             <field name="note">Reseräkning</field>
+            <field name="company_id" eval="False"/>
         </record>
         <record id="hr_salary_rule_category_NETAVG" model="hr.salary.rule.category">
             <field name="code">NETAVG</field>
             <field name="name">Nettoavdrag</field>
             <field name="note">Källskatt, Fackavgift</field>
+            <field name="company_id" eval="False"/>
         </record>
         <record id="hr_salary_rule_category_SUMMA" model="hr.salary.rule.category">
             <field name="code">SUMMA</field>
             <field name="name">Summa</field>
             <field name="note">Bruttolön minus netto-avdrag plus netto-tillägg</field>
+            <field name="company_id" eval="False"/>
         </record>
 
         <record id="hr_salary_rule_category_FORMAN" model="hr.salary.rule.category">
             <field name="code">FORMAN</field>
             <field name="name">Förmån</field>
             <field name="note">Utgivna förmåner</field>
+            <field name="company_id" eval="False"/>
         </record> 
 
         <record id="hr_salary_rule_category_DUMMY" model="hr.salary.rule.category">
             <field name="code">DUMMY</field>
             <field name="name">Slask</field>
             <field name="note">Används när sumering inte är relevant</field>
+            <field name="company_id" eval="False"/>
         </record>
 
         <!-- <record id="hr_salary_rule_category-SYSTEM" model="hr.salary.rule.category">

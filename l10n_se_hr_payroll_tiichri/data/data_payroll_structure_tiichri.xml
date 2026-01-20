@@ -9,9 +9,8 @@
             <field name="name">Bas för löneavtal heltid (Ska ej användas i avtal)</field>
             <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons" />
             <field name="rule_ids" eval="[(6,0,[
-                ref('l10n_se_hr_payroll.hr_salary_rule_gl'),
                 ref('l10n_se_hr_payroll.hr_salary_rule_brutto'),
-                ref('l10n_se_hr_payroll.hr_salary_rule_netto'),
+                ref('l10n_se_hr_payroll.hr_salary_rule_summa'),
                 ref('l10n_se_hr_payroll.hr_salary_rule_wage_exchange'),
 
                 ref('l10n_se_hr_payroll.hr_salary_rule_sick_leave'),
@@ -33,7 +32,6 @@
                 ref('l10n_se_hr_payroll.hr_salary_rule_lunch'),
                 ref('l10n_se_hr_payroll.hr_salary_rule_reimbursment_parent'),
                 ref('l10n_se_hr_payroll.hr_salary_rule_reimbursment'),
-
 
                 ref('l10n_se_hr_holidays.hr_salary_rule_legal_leave'),
                 ref('l10n_se_hr_holidays.hr_salary_rule_saved_leave'),
@@ -59,7 +57,6 @@
             <field name="parent_id" ref="hr_payroll_structure_gl_tiichri" />
             <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons" />
             <field name="rule_ids" eval="[(6,0,[
-                ref('l10n_se_hr_payroll.hr_salary_rule_sick_pay_15_90_tj'),
                 ref('l10n_se_hr_holidays.hr_salary_rule_legal_leave_addition8'),
                 ref('l10n_se_hr_holidays.hr_salary_rule_legal_leave_pay_tj'),
                 ref('l10n_se_hr_payroll.hr_salary_rule_mertid'),
@@ -84,7 +81,10 @@
             <field name="parent_id" ref="hr_payroll_structure_tj_base" />
             <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons" />
             <field name="rule_ids" eval="[(6,0,[
-                        ref('l10n_se_hr_payroll.hr_salary_rule_sick_deduction_1_14'),
+                ref('l10n_se_hr_payroll.hr_salary_rule_sick_pay_15_90_tj'),
+                ref('l10n_se_hr_payroll.hr_salary_rule_gl'),
+                ref('l10n_se_hr_payroll.hr_salary_rule_dl'),
+                ref('l10n_se_hr_payroll.hr_salary_rule_sick_deduction_1_14'),
             ])]" />
             <field name="const_ids" eval="[
                 (0, 0, {'name': 'Månadsarbetstid i timmar heltid', 'code': 'MAT', 'constant': 175.0}),
@@ -103,6 +103,7 @@
             <field name="parent_id" ref="hr_payroll_structure_tj_base" />
             <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons" />
             <field name="rule_ids" eval="[(6,0,[
+                ref('l10n_se_hr_payroll.hr_salary_rule_gl_tim'),
                         
             ])]" />
             <field name="const_ids" eval="[
@@ -120,7 +121,7 @@
         <!-- Konstanterna är satta utifrån heltid, och kommer 
              att justeras i reglerna när någon har en annan 
              sysselsättninggrad.                          -->
-        <record id="hr_payroll_structure_arb_basee" model="hr.payroll.structure">
+        <record id="hr_payroll_structure_arb_base" model="hr.payroll.structure">
             <field name="code">arb_bas</field>
             <field name="name">Arbetare bas</field>
             <field name="parent_id" ref="hr_payroll_structure_gl_tiichri" />
@@ -145,9 +146,11 @@
         <record id="hr_payroll_structure_arb_man" model="hr.payroll.structure">
             <field name="code">arb_man</field>
             <field name="name">Arbetare månadsavlönad</field>
-            <field name="parent_id" ref="hr_payroll_structure_arb_basee" />
+            <field name="parent_id" ref="hr_payroll_structure_arb_base" />
             <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons" />
             <field name="rule_ids" eval="[(6,0,[
+                    ref('l10n_se_hr_payroll.hr_salary_rule_gl'),
+                    ref('l10n_se_hr_payroll.hr_salary_rule_dl'),
                     ref('l10n_se_hr_payroll.hr_salary_rule_sick_deduction_1_14'),
 
             ])]" />
@@ -166,9 +169,10 @@
         <record id="hr_payroll_structure_arb_tim" model="hr.payroll.structure">
             <field name="code">arb_tim</field>
             <field name="name">Arbetare timavlönad</field>
-            <field name="parent_id" ref="hr_payroll_structure_arb_basee" />
+            <field name="parent_id" ref="hr_payroll_structure_arb_base" />
             <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons" />
             <field name="rule_ids" eval="[(6,0,[
+                    ref('l10n_se_hr_payroll.hr_salary_rule_gl_tim'),
                         
             ])]" />
             <field name="const_ids" eval="[

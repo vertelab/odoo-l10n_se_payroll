@@ -314,7 +314,13 @@ class hr_contract(models.Model):
             start_dt, end_dt, compute_leaves=False
         )
 
-        absence_codes = ['vab', 'sjk', 'tjl_tim', 'tjl_kort', 'tjl_lang', 'sem_bet', 'sem_obet', 'sjk_1_14', 'sjk_15_90']
+        absence_codes = [
+            'vab', 'sjk', 'tj_ledighet',
+            'tjl_tim', 'tjl_kort', 'tjl',
+            'tjl_lang', 'sem_bet', 
+            'sem_obet', 'sjk_1_14', 
+            'sjk_lon_1590', 'sjk_15_90_arb'
+        ]
         absence_hours = sum(
             abs(line.number_of_hours) 
             for line in payslip.worked_days_line_ids 
