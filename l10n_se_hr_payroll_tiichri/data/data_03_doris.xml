@@ -598,6 +598,36 @@
 
         <!-- Manuell input -->
         <!-- Ingen överitd denna månad -->
+        
+        <!--  Övertid 2, månadsavlönad, 2 x 234.04  -->
+        <!-- <function model="hr.payslip.input" name="write">
+            <value model="hr.payslip.input" search="[('payslip_id', '=', ref('hr_payslip_doris_06')), ('code', '=', 'XXXXX_mertid')]"/>
+            <value eval="{'amount_qty': 2, 'amount': 234.04}"/>
+        </function> -->
+        <!--  Mertid månadsavlönad, 8 x 157.14  -->
+        <!-- <function model="hr.payslip.input" name="write">
+            <value model="hr.payslip.input" search="[('payslip_id', '=', ref('hr_payslip_doris_06')), ('code', '=', 'mertid')]"/>
+            <value eval="{'amount_qty': 8, 'amount': 157.14}"/>
+        </function> -->
+        
+        <!--  Semesterlön betald,  8 dgr x 1012  -->
+        <!-- <function model="hr.payslip.input" name="write">
+            <value model="hr.payslip.input" search="[('payslip_id', '=', ref('hr_payslip_doris_06')), ('code', '=', 'semester_betald')]"/>
+            <value eval="{'amount_qty': 8, 'amount': 1012}"/>
+        </function> -->
+        
+        <!--  Semestertillägg betalda semesterdagar,  8 dgr x 176  -->
+        <!-- <function model="hr.payslip.input" name="write">
+            <value model="hr.payslip.input" search="[('payslip_id', '=', ref('hr_payslip_doris_06')), ('code', '=', 'semester_bet_dagar')]"/>
+            <value eval="{'amount_qty': 8, 'amount': 176}"/>
+        </function> -->
+
+        <!--  Semesteravdrag betald,  8 dgr x -1012  -->
+        <!-- <function model="hr.payslip.input" name="write">
+            <value model="hr.payslip.input" search="[('payslip_id', '=', ref('hr_payslip_doris_06')), ('code', '=', 'semester_avdr')]"/>
+            <value eval="{'amount_qty': 8, 'amount': -1012}"/>
+        </function> -->
+
         <function model="hr.payslip" name="onchange_employee">
             <value eval="[ref('hr_payslip_doris_06')]"/>
         </function>
@@ -671,6 +701,42 @@
 
         <!-- Manuell input -->
         <!-- Ingen överitd denna månad -->
+        
+        <!--  Karens Månadsavlönad,  6,40 hrs x -101.54  -->
+        <!-- <function model="hr.payslip.input" name="write">
+            <value model="hr.payslip.input" search="[('payslip_id', '=', ref('hr_payslip_doris_07')), ('code', '=', 'karens')]"/>
+            <value eval="{'amount_qty': 6.40, 'amount': -101.54}"/>
+        </function> -->
+        <!--  Sjukavdrag per dag... ,  64 hrs x -126.92  -->
+        <!-- <function model="hr.payslip.input" name="write">
+            <value model="hr.payslip.input" search="[('payslip_id', '=', ref('hr_payslip_doris_07')), ('code', '=', 'sjukavdrag')]"/>
+            <value eval="{'amount_qty': 64, 'amount': -126.92}"/>
+        </function> -->
+        <!--  Sjuklön dag 1-14 ,  64 hrs x 101.54  -->
+        <!-- <function model="hr.payslip.input" name="write">
+            <value model="hr.payslip.input" search="[('payslip_id', '=', ref('hr_payslip_doris_07')), ('code', '=', 'sjuklön_betald')]"/>
+            <value eval="{'amount_qty': 64, 'amount': 101.54}"/>
+        </function> -->
+        
+        
+        <!--  Semesterlön betald,  4 dgr x 1012  -->
+        <!-- <function model="hr.payslip.input" name="write">
+            <value model="hr.payslip.input" search="[('payslip_id', '=', ref('hr_payslip_doris_07')), ('code', '=', 'semester_betald')]"/>
+            <value eval="{'amount_qty': 4, 'amount': 1012}"/>
+        </function> -->
+        
+        <!--  Semestertillägg betalda semesterdagar,  4 dgr x 176  -->
+        <!-- <function model="hr.payslip.input" name="write">
+            <value model="hr.payslip.input" search="[('payslip_id', '=', ref('hr_payslip_doris_07')), ('code', '=', 'semester_bet_dagar')]"/>
+            <value eval="{'amount_qty': 4, 'amount': 176}"/>
+        </function> -->
+
+        <!--  Semesteravdrag betald,  4 dgr x -1012  -->
+        <!-- <function model="hr.payslip.input" name="write">
+            <value model="hr.payslip.input" search="[('payslip_id', '=', ref('hr_payslip_doris_07')), ('code', '=', 'semester_avdr')]"/>
+            <value eval="{'amount_qty': 4, 'amount': -1012}"/>
+        </function> -->
+        
         <function model="hr.payslip" name="onchange_employee">
             <value eval="[ref('hr_payslip_doris_07')]"/>
         </function>
@@ -733,6 +799,48 @@
 
         <!-- Manuell input -->
         <!-- Ingen överitd denna månad -->
+
+        <!--  Karens Månadsavlönad,  6,40 hrs x -101.54  -->
+        <!-- <function model="hr.payslip.input" name="write">
+            <value model="hr.payslip.input" search="[('payslip_id', '=', ref('hr_payslip_doris_08')), ('code', '=', 'karens')]"/>
+            <value eval="{'amount_qty': 6.40, 'amount': -101.54}"/>
+        </function> -->
+        <!--  Sjukavdrag per dag... ,  64 hrs x -126.92  -->
+        <!-- <function model="hr.payslip.input" name="write">
+            <value model="hr.payslip.input" search="[('payslip_id', '=', ref('hr_payslip_doris_08')), ('code', '=', 'sjukavdrag')]"/>
+            <value eval="{'amount_qty': 64, 'amount': -126.92}"/>
+        </function> -->
+        <!--  Sjuklön dag 1-14 ,  64 hrs x 101.54  -->
+        <!-- <function model="hr.payslip.input" name="write">
+            <value model="hr.payslip.input" search="[('payslip_id', '=', ref('hr_payslip_doris_08')), ('code', '=', 'sjuklön_betald')]"/>
+            <value eval="{'amount_qty': 64, 'amount': 101.54}"/>
+        </function> -->
+
+        <!--  Sjukavdrag 90% dag 15-90 ,  7 dgr x -520.77  -->
+        <!-- <function model="hr.payslip.input" name="write">
+            <value model="hr.payslip.input" search="[('payslip_id', '=', ref('hr_payslip_doris_08')), ('code', '=', 'sjukavdrag')]"/>
+            <value eval="{'amount_qty': 7, 'amount': -520.77}"/>
+        </function> -->
+
+                
+        <!--  Semesterlön betald,  6 dgr x 1012  -->
+        <!-- <function model="hr.payslip.input" name="write">
+            <value model="hr.payslip.input" search="[('payslip_id', '=', ref('hr_payslip_doris_08')), ('code', '=', 'semester_betald')]"/>
+            <value eval="{'amount_qty': 5, 'amount': 1012}"/>
+        </function> -->
+        
+        <!--  Semestertillägg betalda semesterdagar,  6 dgr x 176  -->
+        <!-- <function model="hr.payslip.input" name="write">
+            <value model="hr.payslip.input" search="[('payslip_id', '=', ref('hr_payslip_doris_08')), ('code', '=', 'semester_bet_dagar')]"/>
+            <value eval="{'amount_qty': 6, 'amount': 176}"/>
+        </function> -->
+
+        <!--  Semesteravdrag betald,  6 dgr x -1012  -->
+        <!-- <function model="hr.payslip.input" name="write">
+            <value model="hr.payslip.input" search="[('payslip_id', '=', ref('hr_payslip_doris_08')), ('code', '=', 'semester_avdr')]"/>
+            <value eval="{'amount_qty': 6, 'amount': -1012}"/>
+        </function> -->
+        
         <function model="hr.payslip" name="onchange_employee">
             <value eval="[ref('hr_payslip_doris_08')]"/>
         </function>
