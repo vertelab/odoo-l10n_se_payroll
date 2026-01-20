@@ -138,6 +138,12 @@
             <value eval="[ref('l10n_se_hr_payroll_tiichri.hr_payslip_gustav_01')]"/>
         </function>
 
+        <!-- Lunch -->
+        <function model="hr.payslip.input" name="write">
+            <value model="hr.payslip.input" search="[('payslip_id', '=', ref('hr_payslip_gustav_01')), ('code', '=', 'lunch')]"/>
+            <value eval="{'amount_qty': 1.0}"/>
+        </function>
+
         <function model="hr.payslip.input" name="write">
             <value model="hr.payslip.input" search="[('payslip_id', '=', ref('hr_payslip_gustav_01')), ('code', '=', 'otidtim')]"/>
             <value eval="{'amount_qty': 2.0}"/>
@@ -205,6 +211,12 @@
             <value eval="[ref('l10n_se_hr_payroll_tiichri.hr_payslip_gustav_02')]"/>
         </function>
 
+        <!-- Lunch -->
+        <function model="hr.payslip.input" name="write">
+            <value model="hr.payslip.input" search="[('payslip_id', '=', ref('hr_payslip_gustav_02')), ('code', '=', 'lunch')]"/>
+            <value eval="{'amount_qty': 1.0}"/>
+        </function>
+
         <function model="hr.payslip.input" name="write">
             <value model="hr.payslip.input" search="[('payslip_id', '=', ref('hr_payslip_gustav_02')), ('code', '=', 'otidtim')]"/>
             <value eval="{'amount_qty': 3.0}"/>
@@ -260,6 +272,24 @@
             <value eval="[ref('l10n_se_hr_payroll_tiichri.hr_payslip_gustav_03')]"/>
         </function>
 
+        <!-- Lunch -->
+        <function model="hr.payslip.input" name="write">
+            <value model="hr.payslip.input" search="[('payslip_id', '=', ref('hr_payslip_gustav_03')), ('code', '=', 'lunch')]"/>
+            <value eval="{'amount_qty': 1.0}"/>
+        </function>
+
+        <!-- Milersättning, skattefri, 6000 x 1.85 -->
+        <function model="hr.payslip.input" name="write">
+            <value model="hr.payslip.input" search="[('payslip_id', '=', ref('hr_payslip_gustav_03')), ('code', '=', 'milers_fri')]"/>
+            <value eval="{'amount_qty': 600 ,'amount': 1.85}"/>
+        </function>
+        <!-- Milersättning, skattepliktig, 600 x 1.15 -->
+        <function model="hr.payslip.input" name="write">
+            <value model="hr.payslip.input" search="[('payslip_id', '=', ref('hr_payslip_gustav_03')), ('code', '=', 'milers_skatt')]"/>
+            <value eval="{'amount_qty': 600 ,'amount': 1.15}"/>
+        </function>
+
+
         <function model="hr.payslip" name="compute_sheet">
             <value eval="[ref('l10n_se_hr_payroll_tiichri.hr_payslip_gustav_03')]"/>
         </function>
@@ -308,6 +338,29 @@
         <function model="hr.payslip" name="onchange_employee">
             <value eval="[ref('l10n_se_hr_payroll_tiichri.hr_payslip_gustav_04')]"/>
         </function>
+
+        <!-- Lunch -->
+        <function model="hr.payslip.input" name="write">
+            <value model="hr.payslip.input" search="[('payslip_id', '=', ref('hr_payslip_gustav_04')), ('code', '=', 'lunch')]"/>
+            <value eval="{'amount_qty': 1.0}"/>
+        </function>
+
+        <!-- Kostavdrag, frukost, utland 1.5 x -85.20 -->
+        <function model="hr.payslip.input" name="write">
+            <value model="hr.payslip.input" search="[('payslip_id', '=', ref('hr_payslip_gustav_04')), ('code', '=', 'kost_utland_frukost')]"/>
+            <value eval="{'amount_qty': 1.5, 'amount': -85.20}"/>
+        </function>
+        <!-- Kostavdrag, lunch, utland 2.5 x -198.80 -->
+        <function model="hr.payslip.input" name="write">
+            <value model="hr.payslip.input" search="[('payslip_id', '=', ref('hr_payslip_gustav_04')), ('code', '=', 'kost_utland_lunch')]"/>
+            <value eval="{'amount_qty': 2.5, 'amount': -198.80}"/>
+        </function>
+        <!-- Kostavdrag, middag, utland 2 x -253.05 -->
+        <function model="hr.payslip.input" name="write">
+            <value model="hr.payslip.input" search="[('payslip_id', '=', ref('hr_payslip_gustav_04')), ('code', '=', 'kost_utland_middag')]"/>
+            <value eval="{'amount_qty': 2.5, 'amount': -198.80}"/>
+        </function>
+
 
         <function model="hr.payslip.input" name="write">
             <value model="hr.payslip.input" search="[('payslip_id', '=', ref('hr_payslip_gustav_04')), ('code', '=', 'otidtim')]"/>
