@@ -818,7 +818,7 @@
 
         <!--  Sjukavdrag 90% dag 15-90 ,  7 dgr x -520.77  -->
         <!-- <function model="hr.payslip.input" name="write">
-            <value model="hr.payslip.input" search="[('payslip_id', '=', ref('hr_payslip_doris_08')), ('code', '=', 'sjukavdrag')]"/>
+            <value model="hr.payslip.input" search="[('payslip_id', '=', ref('hr_payslip_doris_08')), ('code', '=', 'sjukavdrag_90')]"/>
             <value eval="{'amount_qty': 7, 'amount': -520.77}"/>
         </function> -->
 
@@ -913,6 +913,30 @@
         <function model="hr.payslip" name="onchange_employee">
             <value eval="[ref('hr_payslip_doris_09')]"/>
         </function>
+        
+        <!--  Karens Månadsavlönad,  4 hrs x -138.46  -->
+        <!-- <function model="hr.payslip.input" name="write">
+            <value model="hr.payslip.input" search="[('payslip_id', '=', ref('hr_payslip_doris_08')), ('code', '=', 'karens')]"/>
+            <value eval="{'amount_qty': 4, 'amount': -138.46}"/>
+        </function> -->
+        <!--  Sjukavdrag per dag... ,  4 hrs x -173.08  -->
+        <!-- <function model="hr.payslip.input" name="write">
+            <value model="hr.payslip.input" search="[('payslip_id', '=', ref('hr_payslip_doris_08')), ('code', '=', 'sjukavdrag')]"/>
+            <value eval="{'amount_qty': 4, 'amount': -173.08}"/>
+        </function> -->
+        <!--  Sjuklön dag 1-14 ,  4 hrs x 138.46  -->
+        <!-- <function model="hr.payslip.input" name="write">
+            <value model="hr.payslip.input" search="[('payslip_id', '=', ref('hr_payslip_doris_08')), ('code', '=', 'sjuklön_betald')]"/>
+            <value eval="{'amount_qty': 4, 'amount': 134.46}"/>
+        </function> -->
+
+        <!--  Sjukavdrag 100% dag 15-90 ,  40 hrs x -173.08  -->
+        <!-- <function model="hr.payslip.input" name="write">
+            <value model="hr.payslip.input" search="[('payslip_id', '=', ref('hr_payslip_doris_08')), ('code', '=', 'sjukavdrag_100')]"/>
+            <value eval="{'amount_qty': 40, 'amount': -173.55}"/>
+        </function> -->
+        
+        
 
         <!-- Milersättning, mil_fri, 500 x 1.85 -->
         <!-- <function model="hr.payslip.input" name="write">
