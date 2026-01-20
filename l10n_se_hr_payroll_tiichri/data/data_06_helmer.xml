@@ -129,6 +129,12 @@
             <value eval="[ref('l10n_se_hr_payroll_tiichri.hr_payslip_helmer_01')]"/>
         </function>
 
+        <!-- Lunch -->
+        <function model="hr.payslip.input" name="write">
+            <value model="hr.payslip.input" search="[('payslip_id', '=', ref('hr_payslip_helmer_01')), ('code', '=', 'lunch')]"/>
+            <value eval="{'amount_qty': 1.0}"/>
+        </function>
+
         <function model="hr.payslip.input" name="write">
             <value model="hr.payslip.input" search="[('payslip_id', '=', ref('hr_payslip_helmer_01')), ('code', '=', 'otidtim')]"/>
             <value eval="{'amount_qty': 2.0}"/>
@@ -210,6 +216,22 @@
         <!-- Manuell input -->
         <function model="hr.payslip" name="onchange_employee">
             <value eval="[ref('l10n_se_hr_payroll_tiichri.hr_payslip_helmer_02')]"/>
+        </function>
+
+        <!-- Lunch -->
+        <function model="hr.payslip.input" name="write">
+            <value model="hr.payslip.input" search="[('payslip_id', '=', ref('hr_payslip_helmer_02')), ('code', '=', 'lunch')]"/>
+            <value eval="{'amount_qty': 1.0}"/>
+        </function>
+        <!-- Milersättning, skattefri, 500 x 1.85 -->
+        <function model="hr.payslip.input" name="write">
+            <value model="hr.payslip.input" search="[('payslip_id', '=', ref('hr_payslip_helmer_02')), ('code', '=', 'milers_fri')]"/>
+            <value eval="{'amount_qty': 500 ,'amount': 1.85}"/>
+        </function>
+        <!-- Milersättning, skattepliktig, 500 x 1.15 -->
+        <function model="hr.payslip.input" name="write">
+            <value model="hr.payslip.input" search="[('payslip_id', '=', ref('hr_payslip_helmer_02')), ('code', '=', 'milers_skatt')]"/>
+            <value eval="{'amount_qty': 500 ,'amount': 1.15}"/>
         </function>
 
         <function model="hr.payslip.input" name="write">
@@ -304,6 +326,22 @@
             <value eval="[ref('l10n_se_hr_payroll_tiichri.hr_payslip_helmer_03')]"/>
         </function>
 
+        <!-- Lunch -->
+        <function model="hr.payslip.input" name="write">
+            <value model="hr.payslip.input" search="[('payslip_id', '=', ref('hr_payslip_helmer_03')), ('code', '=', 'lunch')]"/>
+            <value eval="{'amount_qty': 1.0}"/>
+        </function>
+        <!-- Milersättning, skattefri, 300 x 1.85 -->
+        <function model="hr.payslip.input" name="write">
+            <value model="hr.payslip.input" search="[('payslip_id', '=', ref('hr_payslip_helmer_03')), ('code', '=', 'milers_fri')]"/>
+            <value eval="{'amount_qty': 300 ,'amount': 1.85}"/>
+        </function>
+        <!-- Milersättning, skattepliktig, 300 x 1.15 -->
+        <function model="hr.payslip.input" name="write">
+            <value model="hr.payslip.input" search="[('payslip_id', '=', ref('hr_payslip_helmer_03')), ('code', '=', 'milers_skatt')]"/>
+            <value eval="{'amount_qty': 300 ,'amount': 1.15}"/>
+        </function>
+                
         <function model="hr.payslip.input" name="write">
             <value model="hr.payslip.input" search="[('payslip_id', '=', ref('hr_payslip_helmer_03')), ('code', '=', 'otidtim')]"/>
             <value eval="{'amount_qty': 3.0}"/>
@@ -369,6 +407,12 @@
             <value eval="[ref('l10n_se_hr_payroll_tiichri.hr_payslip_helmer_04')]"/>
         </function>
 
+        <!-- Lunch -->
+        <function model="hr.payslip.input" name="write">
+            <value model="hr.payslip.input" search="[('payslip_id', '=', ref('hr_payslip_helmer_04')), ('code', '=', 'lunch')]"/>
+            <value eval="{'amount_qty': 1.0}"/>
+        </function>
+        
         <function model="hr.payslip.input" name="write">
             <value model="hr.payslip.input" search="[('payslip_id', '=', ref('hr_payslip_helmer_04')), ('code', '=', 'otidtim')]"/>
             <value eval="{'amount_qty': 2.0}"/>
@@ -467,6 +511,30 @@
         <function model="hr.payslip" name="onchange_employee">
             <value eval="[ref('l10n_se_hr_payroll_tiichri.hr_payslip_helmer_05')]"/>
         </function>
+
+        <!-- Lunch -->
+        <function model="hr.payslip.input" name="write">
+            <value model="hr.payslip.input" search="[('payslip_id', '=', ref('hr_payslip_helmer_05')), ('code', '=', 'lunch')]"/>
+            <value eval="{'amount_qty': 1.0}"/>
+        </function>
+
+        <!-- Kostavdrag, frukost, utland 2 x -108.45 -->
+        <function model="hr.payslip.input" name="write">
+            <value model="hr.payslip.input" search="[('payslip_id', '=', ref('hr_payslip_helmer_05')), ('code', '=', 'kost_utland_frukost')]"/>
+            <value eval="{'amount_qty': 2, 'amount': -108.45}"/>
+        </function>
+        <!-- Kostavdrag, lunch, utland 2 x -253.05 -->
+        <function model="hr.payslip.input" name="write">
+            <value model="hr.payslip.input" search="[('payslip_id', '=', ref('hr_payslip_helmer_05')), ('code', '=', 'kost_utland_lunch')]"/>
+            <value eval="{'amount_qty': 2, 'amount': -253.05}"/>
+        </function>
+        <!-- Kostavdrag, middag, utland 2 x -253.05 -->
+        <function model="hr.payslip.input" name="write">
+            <value model="hr.payslip.input" search="[('payslip_id', '=', ref('hr_payslip_helmer_05')), ('code', '=', 'kost_utland_middag')]"/>
+            <value eval="{'amount_qty': 2, 'amount': -253.05}"/>
+        </function>
+
+
 
         <function model="hr.payslip.input" name="write">
             <value model="hr.payslip.input" search="[('payslip_id', '=', ref('hr_payslip_helmer_05')), ('code', '=', 'otidtim')]"/>
@@ -573,6 +641,17 @@
             <value eval="[ref('l10n_se_hr_payroll_tiichri.hr_payslip_helmer_06')]"/>
         </function>
 
+        <!-- Milersättning, skattefri, 500 x 1.85 -->
+        <function model="hr.payslip.input" name="write">
+            <value model="hr.payslip.input" search="[('payslip_id', '=', ref('hr_payslip_helmer_06')), ('code', '=', 'milers_fri')]"/>
+            <value eval="{'amount_qty': 500 ,'amount': 1.85}"/>
+        </function>
+        <!-- Milersättning, skattepliktig, 500 x 1.15 -->
+        <function model="hr.payslip.input" name="write">
+            <value model="hr.payslip.input" search="[('payslip_id', '=', ref('hr_payslip_helmer_06')), ('code', '=', 'milers_skatt')]"/>
+            <value eval="{'amount_qty': 500 ,'amount': 1.15}"/>
+        </function>
+
         <function model="hr.payslip.input" name="write">
             <value model="hr.payslip.input" search="[('payslip_id', '=', ref('hr_payslip_helmer_06')), ('code', '=', 'otidtim')]"/>
             <value eval="{'amount_qty': 6.0}"/>
@@ -655,6 +734,17 @@
         <!-- Manuell input -->
         <function model="hr.payslip" name="onchange_employee">
             <value eval="[ref('l10n_se_hr_payroll_tiichri.hr_payslip_helmer_07')]"/>
+        </function>
+
+        <!-- Milersättning, skattefri, 350 x 1.85 -->
+        <function model="hr.payslip.input" name="write">
+            <value model="hr.payslip.input" search="[('payslip_id', '=', ref('hr_payslip_helmer_07')), ('code', '=', 'milers_fri')]"/>
+            <value eval="{'amount_qty': 350 ,'amount': 1.85}"/>
+        </function>
+        <!-- Milersättning, skattepliktig, 350 x 1.15 -->
+        <function model="hr.payslip.input" name="write">
+            <value model="hr.payslip.input" search="[('payslip_id', '=', ref('hr_payslip_helmer_07')), ('code', '=', 'milers_skatt')]"/>
+            <value eval="{'amount_qty': 350 ,'amount': 1.15}"/>
         </function>
 
         <function model="hr.payslip.input" name="write">
@@ -1059,6 +1149,7 @@
         <function model="hr.payslip" name="onchange_employee">
             <value eval="[ref('l10n_se_hr_payroll_tiichri.hr_payslip_helmer_11')]"/>
         </function>
+        
         <!-- Lunch -->
         <function model="hr.payslip.input" name="write">
             <value model="hr.payslip.input" search="[('payslip_id', '=', ref('hr_payslip_helmer_11')), ('code', '=', 'lunch')]"/>
