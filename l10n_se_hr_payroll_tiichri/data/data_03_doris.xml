@@ -403,7 +403,6 @@
         </record>
 
         <!-- Manuell input -->
-        <!-- Ingen överitd denna månad -->
         <function model="hr.payslip" name="onchange_employee">
             <value eval="[ref('hr_payslip_doris_04')]"/>
         </function>
@@ -411,20 +410,10 @@
         <!--  Lunchkuponger  -->
         <function model="hr.payslip.input" name="write">
             <value model="hr.payslip.input" search="[('payslip_id', '=', ref('hr_payslip_doris_04')), ('code', '=', 'lunch')]"/>
-            <value eval="{'amount_qty': 1.0, 'amount': 900}"/>
+            <value eval="{'amount_qty': 1.0}"/>
         </function>
 
-
-        <!--  Övertid 1, 2 x 234.94  -->
-        <!-- <function model="hr.payslip.input" name="write">
-            <value model="hr.payslip.input" search="[('payslip_id', '=', ref('hr_payslip_doris_04')), ('code', '=', 'OB1')]"/>
-            <value eval="{'amount_qty': 2, 'amount': 234.04}"/>
-        </function> -->
-        <!--  Övertid 2, 1 x 305.56  -->
-        <!-- <function model="hr.payslip.input" name="write">
-            <value model="hr.payslip.input" search="[('payslip_id', '=', ref('hr_payslip_doris_04')), ('code', '=', 'OB2')]"/>
-            <value eval="{'amount_qty': 1, 'amount': 305.56}"/>
-        </function> -->
+        <!-- Ingen övertid denna månad! -->
 
         <!--  Traktamente, natt  -->
         <!-- <function model="hr.payslip.input" name="write">
