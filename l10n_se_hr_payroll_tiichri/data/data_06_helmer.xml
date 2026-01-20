@@ -617,8 +617,6 @@
         </function>
 
         <!-- Saknas: -->
-        <!-- Uttag betalda semesterdagar, timavlönad -->
-        <!-- Semesterdaglön betald, timavlönad -->
         <!-- Milersättning, skattefri enl. schablon -->
         <!-- Milersättning skattepliktig -->
 
@@ -711,8 +709,6 @@
         </function>
 
         <!-- Saknas: -->
-        <!-- Uttag betalda semesterdagar, timavlönad -->
-        <!-- Semesterdaglön betald, timavlönad -->
         <!-- Bonus -->
         <!-- Milersättning, skattefri enl. schablon -->
         <!-- Milersättning skattepliktig -->
@@ -815,8 +811,6 @@
 
 
         <!-- Saknas: -->
-        <!-- Uttag betalda semesterdagar, timavlönad -->
-        <!-- Semesterdaglön betald, timavlönad -->
 
         <!-- Skatt -->
         <!-- Arbetsgivaravgift -->
@@ -930,10 +924,6 @@
         </function>
 
         <!-- Saknas: -->
-        <!-- Uttag betalda semesterdagar, timavlönad -->
-        <!-- Semesterdaglön betald, timavlönad -->
-        <!-- Lunchkuponger förmånsvärde -->
-        <!-- Avdrag lunchkuponger -->
 
         <!-- Skatt -->
         <!-- Arbetsgivaravgift -->
@@ -1019,8 +1009,6 @@
 
 
         <!-- Saknas: -->
-        <!-- Uttag betalda semesterdagar, timavlönad -->
-        <!-- Semesterdaglön betald, timavlönad -->
         <!-- Utmätning av lön -->
 
         <!-- Skatt -->
@@ -1125,10 +1113,6 @@
         </function>
 
         <!-- Saknas: -->
-        <!-- Uttag betalda semesterdagar, timavlönad -->
-        <!-- Semesterdaglön betald, timavlönad -->
-        <!-- Lunchkuponger förmånsvärde-->
-        <!-- Avdrag lunchkuponger-->
         <!-- Utmätning av lön -->
 
         <!-- Skatt -->
@@ -1211,10 +1195,6 @@
             <value eval="[ref('hr_leave_helmer_1202'), ref('hr_leave_helmer_1203')]"/>
         </function>
         <!-- Saknas: -->
-        <!-- Uttag betalda semesterdagar, timavlönad -->
-        <!-- Semesterdaglön betald, timavlönad -->
-        <!-- Lunchkuponger förmånsvärde-->
-        <!-- Avdrag lunchkuponger-->
         <!-- Utmätning av lön -->
 
         <!-- Skatt -->

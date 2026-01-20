@@ -128,11 +128,8 @@
         </record>
 
         <!-- Saknas: -->
-        <!-- Daglön (?) -->
         <!-- Restidsersättning vardag -->
         <!-- Restidsersättning helg -->
-        <!-- Lunchkuponger förmånsvärde -->
-        <!-- Avdrag lunchkuponger -->
 
         <!-- Skatt -->
         <!-- Arbetsgivaravgift -->
@@ -153,10 +150,10 @@
             <value eval="[ref('l10n_se_hr_payroll_tiichri.hr_payslip_camilla_01')]"/>
         </function>
 
-        <!-- Lunchkuponger, 900 x 1-->
+        <!-- Lunchkuponger -->
         <function model="hr.payslip.input" name="write">
             <value model="hr.payslip.input" search="[('payslip_id', '=', ref('hr_payslip_camilla_01')), ('code', '=', 'lunch')]"/>
-            <value eval="{'amount_qty': 1, 'amount': 900}"/>
+            <value eval="{'amount_qty': 1}"/>
         </function>
 
         <function model="hr.payslip.input" name="write">
@@ -203,12 +200,9 @@
         </record>
 
         <!-- Saknas: -->
-        <!-- Bilförmån -->
         <!-- Förmån hushållsnära tjänster, arbetskostnad -->
         <!-- Skattereduktion hushållsnära tjänster -->
         <!-- Övrig nettoersättning (kvitto gymkort) -->
-        <!-- Milersättning för bensin vid tjänstekörning -->
-        <!-- Milersättning tjänstebil skattepliktig -->
 
         <!-- Skatt -->
         <!-- Arbetsgivaravgift -->
@@ -230,16 +224,11 @@
             <value eval="[ref('l10n_se_hr_payroll_tiichri.hr_payslip_camilla_02')]"/>
         </function>
 
-        <!-- Milersättning bensin, 300 x 0.95 -->
-        <!-- <function model="hr.payslip.input" name="write">
-            <value model="hr.payslip.input" search="[('payslip_id', '=', ref('hr_payslip_camilla_02')), ('code', '=', 'milers_bensin')]"/>
-            <value eval="{'amount_qty': 300, 'amount': 0.95}"/>
-        </function> -->
-        <!-- Milersättning skattepliktig, 300 x 0.55 -->
-        <!-- <function model="hr.payslip.input" name="write">
-            <value model="hr.payslip.input" search="[('payslip_id', '=', ref('hr_payslip_camilla_02')), ('code', '=', 'milers_skatt')]"/>
-            <value eval="{'amount_qty': 300, 'amount': 0.55}"/>
-        </function> -->
+        <!-- Milersättning -->
+        <function model="hr.payslip.input" name="write">
+            <value model="hr.payslip.input" search="[('payslip_id', '=', ref('hr_payslip_camilla_02')), ('code', '=', 'bensin_mil_antal')]"/>
+            <value eval="{'amount_qty': 300.0}"/>
+        </function>
 
         <function model="hr.payslip" name="compute_sheet">
             <value eval="[ref('l10n_se_hr_payroll_tiichri.hr_payslip_camilla_02')]"/>
@@ -260,12 +249,9 @@
         </record>
 
         <!-- Saknas: -->
-        <!-- Bilförmån -->
         <!-- Förmån hushållsnära tjänster, arbetskostnad -->
         <!-- Skattereduktion hushållsnära tjänster -->
         <!-- Övrig nettoersättning (kiropraktor) -->
-        <!-- Milersättning för bensin vid tjänstekörning -->
-        <!-- Milersättning tjänstebil skattepliktig -->
 
         <!-- Skatt -->
         <!-- Arbetsgivaravgift -->
@@ -282,20 +268,15 @@
         </record>
 
         <!-- Manuell input -->
-        <!-- Milersättning, bensin, 800 x 0.95 -->
-        <!-- <function model="hr.payslip.input" name="write">
-            <value model="hr.payslip.input" search="[('payslip_id', '=', ref('hr_payslip_camilla_03')), ('code', '=', 'milers_bensin')]"/>
-            <value eval="{'amount_qty': 800, 'amount': 0.95}"/>
-        </function> -->
-        <!-- Milersättning skattepliktig, upphöjt, 800 x 0.55 -->
-        <!-- <function model="hr.payslip.input" name="write">
-            <value model="hr.payslip.input" search="[('payslip_id', '=', ref('hr_payslip_camilla_03')), ('code', '=', 'milers_skatt')]"/>
-            <value eval="{'amount_qty': 800, 'amount': 0.55}"/>
-        </function> -->
-
 
         <function model="hr.payslip" name="onchange_employee">
             <value eval="[ref('l10n_se_hr_payroll_tiichri.hr_payslip_camilla_03')]"/>
+        </function>
+
+        <!-- Milersättning -->
+        <function model="hr.payslip.input" name="write">
+            <value model="hr.payslip.input" search="[('payslip_id', '=', ref('hr_payslip_camilla_03')), ('code', '=', 'bensin_mil_antal')]"/>
+            <value eval="{'amount_qty': 800.0}"/>
         </function>
 
         <function model="hr.payslip" name="compute_sheet">
@@ -317,7 +298,6 @@
         </record>
 
         <!-- Saknas: -->
-        <!-- Bilförmån -->
         <!-- Förmån hushållsnära tjänster, arbetskostnad -->
         <!-- Skattereduktion hushållsnära tjänster -->
         <!-- Representation, ej avdragsgill -->
@@ -328,8 +308,6 @@
         <!-- Kostavdrag frukost 15% utland -->
         <!-- Kostavdrag lunch 35% utland -->
         <!-- Kostavdrag middag 35% utland -->
-        <!-- Milersättning för bensin vid tjänstekörning -->
-        <!-- Milersättning tjänstebil skattepliktig -->
 
         <!-- Skatt -->
         <!-- Arbetsgivaravgift -->
@@ -350,16 +328,14 @@
             <value eval="[ref('l10n_se_hr_payroll_tiichri.hr_payslip_camilla_04')]"/>
         </function>
 
-        <!-- Milersättning bensin, 2600 x 0.95 -->
-        <!-- <function model="hr.payslip.input" name="write">
-            <value model="hr.payslip.input" search="[('payslip_id', '=', ref('hr_payslip_camilla_04')), ('code', '=', 'milers_bensin')]"/>
-            <value eval="{'amount_qty': 2600, 'amount': 0.95}"/>
-        </function> -->
-        <!-- Milersättning skattepliktig, 2600 x 0.55 -->
-        <!-- <function model="hr.payslip.input" name="write">
-            <value model="hr.payslip.input" search="[('payslip_id', '=', ref('hr_payslip_camilla_04')), ('code', '=', 'milers_skatt')]"/>
-            <value eval="{'amount_qty': 2600, 'amount': 0.55}"/>
-        </function> -->
+
+        <!-- Milersättning -->
+        <function model="hr.payslip.input" name="write">
+            <value model="hr.payslip.input" search="[('payslip_id', '=', ref('hr_payslip_camilla_04')), ('code', '=', 'bensin_mil_antal')]"/>
+            <value eval="{'amount_qty': 2600.0}"/>
+        </function>
+
+
 
         <!-- Kostavdrag frukost 15%, utland, 1.5 x 85.20 -->
         <!-- <function model="hr.payslip.input" name="write">
@@ -412,7 +388,6 @@
         </function>
 
         <!-- Saknas: -->
-        <!-- Bilförmån -->
         <!-- Förmån hushållsnära tjänster, arbetskostnad -->
         <!-- Skattereduktion hushållsnära tjänster -->
         <!-- Utlägg resekostnader -->
@@ -422,8 +397,6 @@
         <!-- Kostförmån middag -->
         <!-- Kostavdrag frukost -->
         <!-- Kostavdrag lunch eller middag -->
-        <!-- Milersättning för bensin vid tjänstekörning -->
-        <!-- Milersättning tjänstebil skattepliktig -->
         <!-- Bostadsförmån ej småhus (lån av fjällstuga) -->
 
         <!-- Skatt -->
@@ -444,17 +417,13 @@
         <function model="hr.payslip" name="onchange_employee">
             <value eval="[ref('l10n_se_hr_payroll_tiichri.hr_payslip_camilla_05')]"/>
         </function>
-        <!-- Manuell input -->
-        <!-- Milersättning bensin, 120 x 0.95 -->
-        <!-- <function model="hr.payslip.input" name="write">
-            <value model="hr.payslip.input" search="[('payslip_id', '=', ref('hr_payslip_camilla_05')), ('code', '=', 'milers_bensin')]"/>
-            <value eval="{'amount_qty': 120, 'amount': 0.95}"/>
-        </function> -->
-        <!-- Milersättning, skattepliktigt, 120 x 0.55 -->
-        <!-- <function model="hr.payslip.input" name="write">
-            <value model="hr.payslip.input" search="[('payslip_id', '=', ref('hr_payslip_camilla_05')), ('code', '=', 'milers_skatt')]"/>
-            <value eval="{'amount_qty': 120, 'amount': 0.55}"/>
-        </function> -->
+
+        <!-- Milersättning -->
+        <function model="hr.payslip.input" name="write">
+            <value model="hr.payslip.input" search="[('payslip_id', '=', ref('hr_payslip_camilla_05')), ('code', '=', 'bensin_mil_antal')]"/>
+            <value eval="{'amount_qty': 120.0}"/>
+        </function>
+
         <function model="hr.payslip" name="compute_sheet">
             <value eval="[ref('l10n_se_hr_payroll_tiichri.hr_payslip_camilla_05')]"/>
         </function>
@@ -490,16 +459,9 @@
         </function>
 
         <!-- Saknas: -->
-        <!-- Bilförmån -->
         <!-- Förmån hushållsnära tjänster, arbetskostnad -->
         <!-- Skattereduktion hushållsnära tjänster -->
-        <!-- Uttag betalda semesterdagar, månadsavlönad -->
-        <!-- Semesterlön betald -->
-        <!-- Semestertillägg betalda semesterdagar -->
-        <!-- Semesteravdrag betald -->
         <!-- Uttag förskottssemester, månadsavlönad -->
-        <!-- Milersättning för bensin vid tjänstekörning -->
-        <!-- Milersättning tjänstebil skattepliktig -->
 
         <!-- Skatt -->
         <!-- Arbetsgivaravgift -->
@@ -517,27 +479,24 @@
 
 
         <!-- Manuell input -->
-        
-        <!-- Milersättning bensin, 800 x 0.95 -->
-        <!-- <function model="hr.payslip.input" name="write">
-            <value model="hr.payslip.input" search="[('payslip_id', '=', ref('hr_payslip_camilla_06')), ('code', '=', 'milers_bensin')]"/>
-            <value eval="{'amount_qty': 800, 'amount': 0.95}"/>
-        </function> -->
-        <!-- Milersättning, skattepliktigt, 800 x 0.55 -->
-        <!-- <function model="hr.payslip.input" name="write">
-            <value model="hr.payslip.input" search="[('payslip_id', '=', ref('hr_payslip_camilla_06')), ('code', '=', 'milers_skatt')]"/>
-            <value eval="{'amount_qty': 800, 'amount': 0.55}"/>
-        </function> -->
 
         <function model="hr.payslip" name="onchange_employee">
             <value eval="[ref('l10n_se_hr_payroll_tiichri.hr_payslip_camilla_06')]"/>
         </function>
 
+        <!-- Övertid 1 -->
         <function model="hr.payslip.input" name="write">
             <value model="hr.payslip.input" search="[('payslip_id', '=', ref('hr_payslip_camilla_06')), ('code', '=', 'otidtim')]"/>
             <value eval="{'amount_qty': 2.0}"/>
         </function>
 
+        <!-- Milersättning -->
+        <function model="hr.payslip.input" name="write">
+            <value model="hr.payslip.input" search="[('payslip_id', '=', ref('hr_payslip_camilla_06')), ('code', '=', 'bensin_mil_antal')]"/>
+            <value eval="{'amount_qty': 800.0}"/>
+        </function>
+
+        <!-- Övertid 2 -->
         <function model="hr.payslip.input" name="write">
             <value model="hr.payslip.input" search="[('payslip_id', '=', ref('hr_payslip_camilla_06')), ('code', '=', 'kvaltim')]"/>
             <value eval="{'amount_qty': 2.0}"/>
@@ -573,13 +532,10 @@
         </record>
 
         <!-- Saknas: -->
-        <!-- Bilförmån -->
         <!-- Förmån hushållsnära tjänster, arbetskostnad -->
         <!-- Skattereduktion hushållsnära tjänster -->
         <!-- Uttag förskottssemester, månadsavlönad -->
         <!-- Bonus-->
-        <!-- Milersättning för bensin vid tjänstekörning -->
-        <!-- Milersättning tjänstebil skattepliktig -->
 
         <!-- Skatt -->
         <!-- Arbetsgivaravgift -->
@@ -597,20 +553,14 @@
 
         <!-- Manuell input -->
 
-        <!-- Milersättning bensin, 700 x 0.95 -->
-        <!-- <function model="hr.payslip.input" name="write">
-            <value model="hr.payslip.input" search="[('payslip_id', '=', ref('hr_payslip_camilla_05')), ('code', '=', 'milers_bensin')]"/>
-            <value eval="{'amount_qty': 700, 'amount': 0.95}"/>
-        </function> -->
-        <!-- Milersättning, skattepliktigt, 700 x 0.55 -->
-        <!-- <function model="hr.payslip.input" name="write">
-            <value model="hr.payslip.input" search="[('payslip_id', '=', ref('hr_payslip_camilla_05')), ('code', '=', 'milers_skatt')]"/>
-            <value eval="{'amount_qty': 700, 'amount': 0.55}"/>
-        </function> -->
-
-
         <function model="hr.payslip" name="onchange_employee">
             <value eval="[ref('l10n_se_hr_payroll_tiichri.hr_payslip_camilla_07')]"/>
+        </function>
+
+        <!-- Milersättning -->
+        <function model="hr.payslip.input" name="write">
+            <value model="hr.payslip.input" search="[('payslip_id', '=', ref('hr_payslip_camilla_07')), ('code', '=', 'bensin_mil_antal')]"/>
+            <value eval="{'amount_qty': 700.0}"/>
         </function>
 
         <function model="hr.payslip" name="compute_sheet">
@@ -633,7 +583,6 @@
         </record>
 
         <!-- Saknas: -->
-        <!-- Bilförmån -->
         <!-- Förmån hushållsnära tjänster, arbetskostnad -->
         <!-- Skattereduktion hushållsnära tjänster -->
 
@@ -675,12 +624,9 @@
         </record>
 
         <!-- Saknas: -->
-        <!-- Bilförmån -->
         <!-- Förmån hushållsnära tjänster, arbetskostnad -->
         <!-- Skattereduktion hushållsnära tjänster -->
         <!-- Uttag förskottssemester, månadsavlönad -->
-        <!-- Milersättning för bensin vid tjänstekörning -->
-        <!-- Milersättning tjänstebil skattepliktig -->
 
         <!-- Skatt -->
         <!-- Arbetsgivaravgift -->
@@ -699,19 +645,14 @@
 
         <!-- Manuell input -->
 
-        <!-- Milersättning bensin, 700 x 0.95 -->
-        <!-- <function model="hr.payslip.input" name="write">
-            <value model="hr.payslip.input" search="[('payslip_id', '=', ref('hr_payslip_camilla_05')), ('code', '=', 'milers_bensin')]"/>
-            <value eval="{'amount_qty 700, 'amount': 0.95}"/>
-        </function> -->
-        <!-- Milersättning, skattepliktigt, 700 x 0.55 -->
-        <!-- <function model="hr.payslip.input" name="write">
-            <value model="hr.payslip.input" search="[('payslip_id', '=', ref('hr_payslip_camilla_05')), ('code', '=', 'milers_skatt')]"/>
-            <value eval="{'amount_qty': 700, 'amount': 0.55}"/>
-        </function> -->
-
         <function model="hr.payslip" name="onchange_employee">
             <value eval="[ref('l10n_se_hr_payroll_tiichri.hr_payslip_camilla_09')]"/>
+        </function>
+
+        <!-- Milersättning -->
+        <function model="hr.payslip.input" name="write">
+            <value model="hr.payslip.input" search="[('payslip_id', '=', ref('hr_payslip_camilla_09')), ('code', '=', 'bensin_mil_antal')]"/>
+            <value eval="{'amount_qty': 700.0}"/>
         </function>
 
         <function model="hr.payslip" name="compute_sheet">
@@ -779,11 +720,8 @@
 
 
         <!-- Saknas: -->
-        <!-- Bilförmån -->
         <!-- Förmån hushållsnära tjänster, arbetskostnad -->
         <!-- Skattereduktion hushållsnära tjänster -->
-        <!-- Milersättning för bensin vid tjänstekörning -->
-        <!-- Milersättning tjänstebil skattepliktig -->
 
         <!-- Skatt -->
         <!-- Arbetsgivaravgift -->
@@ -802,19 +740,14 @@
 
         <!-- Manuell input -->
 
-        <!-- Milersättning bensin, 500 x 0.95 -->
-        <!-- <function model="hr.payslip.input" name="write">
-            <value model="hr.payslip.input" search="[('payslip_id', '=', ref('hr_payslip_camilla_05')), ('code', '=', 'milers_bensin')]"/>
-            <value eval="{'amount_qty 500, 'amount': 0.95}"/>
-        </function> -->
-        <!-- Milersättning, skattepliktigt, 500 x 0.55 -->
-        <!-- <function model="hr.payslip.input" name="write">
-            <value model="hr.payslip.input" search="[('payslip_id', '=', ref('hr_payslip_camilla_05')), ('code', '=', 'milers_skatt')]"/>
-            <value eval="{'amount_qty': 500, 'amount': 0.55}"/>
-        </function> -->
-
         <function model="hr.payslip" name="onchange_employee">
             <value eval="[ref('l10n_se_hr_payroll_tiichri.hr_payslip_camilla_10')]"/>
+        </function>
+
+        <!-- Milersättning -->
+        <function model="hr.payslip.input" name="write">
+            <value model="hr.payslip.input" search="[('payslip_id', '=', ref('hr_payslip_camilla_10')), ('code', '=', 'bensin_mil_antal')]"/>
+            <value eval="{'amount_qty': 500.0}"/>
         </function>
 
         <function model="hr.payslip" name="compute_sheet">
@@ -836,7 +769,6 @@
         </record>
 
         <!-- Saknas: -->
-        <!-- Bilförmån -->
         <!-- Förmån hushållsnära tjänster, arbetskostnad -->
         <!-- Skattereduktion hushållsnära tjänster -->
         <!-- Övrig nettoersättning (Husläkare) -->
@@ -880,7 +812,6 @@
         </record>
 
         <!-- Saknas: -->
-        <!-- Bilförmån -->
         <!-- Förmån hushållsnära tjänster, arbetskostnad -->
         <!-- Skattereduktion hushållsnära tjänster -->
         <!-- Övrig nettoersättning (Husläkare) -->

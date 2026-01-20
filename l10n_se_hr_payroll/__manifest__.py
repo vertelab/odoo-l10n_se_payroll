@@ -36,6 +36,7 @@
         'payroll',
         'account_period_vrtl', 
         'hr_timesheet_sheet',
+        #'l10n_se_hr_payroll_benefits'
     ],
     'description': """
 Swedish Payroll Rules.

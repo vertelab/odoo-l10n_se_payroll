@@ -1,10 +1,10 @@
-<!-- <?xml version="1.0"?>
+<?xml version="1.0"?>
 <odoo>
     <data noupdate="0">
 
         <record model="hr.leave.type" id="holiday_status_cl-4">
             <field name="name" eval="'Legal Leaves '+str(DateTime.today().year - 5)" />
-            <field name="work_entry_type_id" ref="l10n_se_hr_holidays.holiday_status_payed_code" />
+            <field name="work_entry_type_id" ref="l10n_se_hr_holidays.leave_type_vacation" />
             <field name="color">2</field>
             <field name="legal_leave" eval="True" />
             <field name="limit" eval="False" />
@@ -14,7 +14,7 @@
 
         <record model="hr.leave.type" id="holiday_status_cl-3">
             <field name="name" eval="'Legal Leaves '+str(DateTime.today().year - 4)" />
-            <field name="work_entry_type_id" ref="l10n_se_hr_holidays.holiday_status_payed_code" />
+            <field name="work_entry_type_id" ref="l10n_se_hr_holidays.leave_type_vacation" />
             <field name="color">2</field>
             <field name="legal_leave" eval="True" />
             <field name="limit" eval="False" />
@@ -24,7 +24,7 @@
 
         <record model="hr.leave.type" id="holiday_status_cl-2">
             <field name="name" eval="'Legal Leaves '+str(DateTime.today().year - 3)" />
-            <field name="work_entry_type_id" ref="l10n_se_hr_holidays.holiday_status_payed_code" />
+            <field name="work_entry_type_id" ref="l10n_se_hr_holidays.leave_type_vacation" />
             <field name="color">2</field>
             <field name="legal_leave" eval="True" />
             <field name="limit" eval="False" />
@@ -33,7 +33,7 @@
         </record>
         <record model="hr.leave.type" id="holiday_status_cl-1">
             <field name="name" eval="'Legal Leaves '+str(DateTime.today().year - 2)" />
-            <field name="work_entry_type_id" ref="l10n_se_hr_holidays.holiday_status_payed_code" />
+            <field name="work_entry_type_id" ref="l10n_se_hr_holidays.leave_type_vacation" />
             <field name="color">2</field>
             <field name="legal_leave" eval="True" />
             <field name="limit" eval="False" />
@@ -42,7 +42,7 @@
         </record>
         <record model="hr.leave.type" id="holiday_status_cl0">
             <field name="name" eval="'Legal Leaves '+str(DateTime.today().year - 1)" />
-            <field name="work_entry_type_id" ref="l10n_se_hr_holidays.holiday_status_payed_code" />
+            <field name="work_entry_type_id" ref="l10n_se_hr_holidays.leave_type_vacation" />
             <field name="color">2</field>
             <field name="legal_leave" eval="True" />
             <field name="limit" eval="False" />
@@ -52,7 +52,7 @@
 
         <record model="hr.leave.type" id="holiday_status_cl1">
             <field name="name" eval="'Legal Leaves '+str(DateTime.today().year)" />
-            <field name="work_entry_type_id" ref="l10n_se_hr_holidays.holiday_status_payed_code" />
+            <field name="work_entry_type_id" ref="l10n_se_hr_holidays.leave_type_vacation" />
             <field name="color">2</field>
             <field name="legal_leave" eval="True" />
             <field name="limit" eval="False" />
@@ -61,7 +61,7 @@
         </record>
         <record model="hr.leave.type" id="holiday_status_cl2">
             <field name="name" eval="'Legal Leaves '+str(DateTime.today().year + 1)" />
-            <field name="work_entry_type_id" ref="l10n_se_hr_holidays.holiday_status_payed_code" />
+            <field name="work_entry_type_id" ref="l10n_se_hr_holidays.leave_type_vacation" />
             <field name="color">2</field>
             <field name="legal_leave" eval="True" />
             <field name="limit" eval="False" />
@@ -70,19 +70,12 @@
         </record>
         <record model="hr.leave.type" id="holiday_status_cl3">
             <field name="name" eval="'Legal Leaves '+str(DateTime.today().year + 2)" />
-            <field name="work_entry_type_id" ref="l10n_se_hr_holidays.holiday_status_payed_code" />
+            <field name="work_entry_type_id" ref="l10n_se_hr_holidays.leave_type_vacation" />
             <field name="color">2</field>
             <field name="legal_leave" eval="True" />
             <field name="limit" eval="False" />
             <field name="date_earning_start" eval="time.strftime(str(DateTime.today().year + 1) + '-04-01')" />
             <field name="date_earning_end" eval="time.strftime(str(DateTime.today().year + 2) + '-03-31')" />
-        </record>
-
-        <record model="hr.leave.type" id="holiday_status_cl4">
-            <field name="name">Legal Leaves unpaid</field>
-            <field name="work_entry_type_id" ref="l10n_se_hr_holidays.holiday_status_unpayed_code" />
-            <field name="legal_leave" eval="True" />
-            <field name="color">2</field>
         </record>
 
         <record model="hr.work.entry.type" id="holiday_status_furlough_code">
@@ -112,4 +105,4 @@
         </record>
         
     </data>
-</odoo> -->
+</odoo>

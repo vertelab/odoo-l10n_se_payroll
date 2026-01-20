@@ -69,7 +69,7 @@ Swedish Holidays Rules
         'views/hr_holidays_view.xml',
         'views/hr_leave_views.xml',
         'views/resource_calendar_view.xml',
-        #'data/hr_holidays_data.xml',
+        'data/hr_holidays_data.xml',
         #'data/hr_salary_rule_category_data.xml',
         #'report/hr_payroll_payslip_report.xml',
         #'data/hr_salary_rule_data_sick.xml',
