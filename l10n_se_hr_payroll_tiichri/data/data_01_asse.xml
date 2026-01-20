@@ -380,7 +380,7 @@
             <value eval="{'amount_qty': 3.0}"/>
         </function>
 
-        <!-- Övriga nettoavdrag -->
+        <!-- Övriga nettoavdrag gymkort -->
         <function model="hr.payslip.input" name="write">
             <value model="hr.payslip.input" search="[('payslip_id', '=', ref('hr_payslip_asse_02')), ('code', '=', 'utlagg')]"/>
             <value eval="{'name': 'Övrig nettoersättning (gymkort)', 'amount': 1000.0}"/>
@@ -620,17 +620,19 @@
 
         <!-- Manuell input -->
 
-        <function model="hr.payslip.input" name="write">
-            <value model="hr.payslip.input" search="[('payslip_id', '=', ref('hr_payslip_asse_05')), ('code', '=', 'otidtim')]"/>
-            <value eval="{'amount_qty': 2.0}"/>
-        </function>
-
         <!-- Förmån fritt drivmedel -->
         <function model="hr.payslip.input" name="write">
             <value model="hr.payslip.input" search="[('payslip_id', '=', ref('hr_payslip_asse_05')), ('code', '=', 'drivmedel')]"/>
             <value eval="{'amount': 930.0}"/>
         </function>
 
+        <!-- Övertid 1 -->
+        <function model="hr.payslip.input" name="write">
+            <value model="hr.payslip.input" search="[('payslip_id', '=', ref('hr_payslip_asse_05')), ('code', '=', 'otidtim')]"/>
+            <value eval="{'amount_qty': 2.0}"/>
+        </function>
+
+        <!-- Övertid 2 -->
         <function model="hr.payslip.input" name="write">
             <value model="hr.payslip.input" search="[('payslip_id', '=', ref('hr_payslip_asse_05')), ('code', '=', 'kvaltim')]"/>
             <value eval="{'amount_qty': 1.0}"/>
@@ -678,11 +680,19 @@
             <field name="holiday_status_id" ref="l10n_se_hr_payroll.leave_type_loa" />
         </record>
 
+        <!-- Semester -->
+        <record id="hr_leave_asse_603" model="hr.leave">
+            <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_asse_employee" />
+            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons"/>
+            <field name="date_from">2022-06-10</field>
+            <field name="date_to">2022-06-16</field>
+            <field name="request_date_from">2022-06-10</field>
+            <field name="request_date_to">2022-06-16</field>
+            <field name="number_of_hours">40</field>
+            <field name="holiday_status_id" ref="l10n_se_hr_payroll.leave_type_vacation" />
+        </record>
+
         <!-- Saknas: -->
-        <!-- Uttag semesterdagar, månadsavlönad -->
-        <!-- Semesterlön betald -->
-        <!-- Semestertillägg betalda semesterdagar -->
-        <!-- Semesteravdrag betald -->
         <!-- Bostadsförmån ej småhus (lån av fjällstugan) -->
 
         <!-- Skatt -->
@@ -760,13 +770,19 @@
             <field name="holiday_status_id" ref="l10n_se_hr_payroll.leave_type_vab" />
         </record>
 
+        <!-- Semester -->
+        <record id="hr_leave_asse_704" model="hr.leave">
+            <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_asse_employee" />
+            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons"/>
+            <field name="date_from">2022-07-11</field>
+            <field name="date_to">2022-07-15</field>
+            <field name="request_date_from">2022-07-11</field>
+            <field name="request_date_to">2022-07-15</field>
+            <field name="number_of_hours">40</field>
+            <field name="holiday_status_id" ref="l10n_se_hr_payroll.leave_type_vacation" />
+        </record>
 
         <!-- Saknas: -->
-        <!-- Uttag betalda semesterdagar, månadsavlönad -->
-        <!-- Semesterlön betald -->
-        <!-- Semestertillägg betalda semesterdagar -->
-        <!-- Semesteravdrag betald -->
-        <!-- Bonus -->
 
         <!-- Skatt -->
         <!-- Arbetsgivaravgift -->
@@ -794,9 +810,15 @@
 
         <!-- Manuell input -->
 
+        <!-- Bonus -->
+        <function model="hr.payslip.input" name="write">
+            <value model="hr.payslip.input" search="[('payslip_id', '=', ref('hr_payslip_asse_07')), ('code', '=', 'bonus')]"/>
+            <value eval="{'amount_qty': 1.0, 'amount': 10000.0}"/>
+        </function>
+
         <!-- Förmån fritt drivmedel -->
         <function model="hr.payslip.input" name="write">
-            <value model="hr.payslip.input" search="[('payslip_id', '=', ref('hr_payslip_asse_02')), ('code', '=', 'drivmedel')]"/>
+            <value model="hr.payslip.input" search="[('payslip_id', '=', ref('hr_payslip_asse_07')), ('code', '=', 'drivmedel')]"/>
             <value eval="{'amount': 642.0}"/>
         </function>
 
@@ -828,12 +850,30 @@
             <field name="holiday_status_id" ref="l10n_se_hr_payroll.leave_type_sick" />
         </record>
 
+        <!-- Semester -->
+        <record id="hr_leave_asse_802" model="hr.leave">
+            <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_asse_employee" />
+            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons"/>
+            <field name="date_from">2022-08-04</field>
+            <field name="date_to">2022-08-04</field>
+            <field name="request_date_from">2022-08-04</field>
+            <field name="request_date_to">2022-08-04</field>
+            <field name="number_of_hours">8</field>
+            <field name="holiday_status_id" ref="l10n_se_hr_payroll.leave_type_vacation" />
+        </record>
+
+        <record id="hr_leave_asse_803" model="hr.leave">
+            <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_asse_employee" />
+            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons"/>
+            <field name="date_from">2022-08-08</field>
+            <field name="date_to">2022-08-08</field>
+            <field name="request_date_from">2022-08-08</field>
+            <field name="request_date_to">2022-08-08</field>
+            <field name="number_of_hours">32</field>
+            <field name="holiday_status_id" ref="l10n_se_hr_payroll.leave_type_vacation" />
+        </record>
+
         <!-- Saknas: -->
-        <!-- Uttag semesterdagar, månadsavlönad -->
-        <!-- Semesterlön betald -->
-        <!-- Semestertillägg betalda semesterdagar -->
-        <!-- Semesteravdrag betald -->
-        <!-- Bonus -->
 
         <!-- Skatt -->
         <!-- Arbetsgivaravgift -->
@@ -889,11 +929,19 @@
             <field name="holiday_status_id" ref="l10n_se_hr_payroll.leave_type_sick" />
         </record>
 
+        <!-- Semester -->
+        <record id="hr_leave_asse_902" model="hr.leave">
+            <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_asse_employee" />
+            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons"/>
+            <field name="date_from">2022-09-19</field>
+            <field name="date_to">2022-09-23</field>
+            <field name="request_date_from">2022-09-19</field>
+            <field name="request_date_to">2022-09-23</field>
+            <field name="number_of_hours">40</field>
+            <field name="holiday_status_id" ref="l10n_se_hr_payroll.leave_type_vacation" />
+        </record>
+
         <!-- Saknas: -->
-        <!-- Uttag semesterdagar, månadsavlönad -->
-        <!-- Semesterlön betald -->
-        <!-- Semestertillägg betalda semesterdagar -->
-        <!-- Semesteravdrag betald -->
 
         <!-- Skatt -->
         <!-- Arbetsgivaravgift -->
@@ -944,12 +992,20 @@
             <field name="holiday_status_id" ref="l10n_se_hr_payroll.leave_type_loa" />
         </record>
 
+        <!-- Semester -->
+        <record id="hr_leave_asse_1002" model="hr.leave">
+            <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_asse_employee" />
+            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons"/>
+            <field name="date_from">2022-10-17</field>
+            <field name="date_to">2022-10-18</field>
+            <field name="request_date_from">2022-06-17</field>
+            <field name="request_date_to">2022-06-18</field>
+            <field name="number_of_hours">16</field>
+            <field name="holiday_status_id" ref="l10n_se_hr_payroll.leave_type_vacation" />
+        </record>
+
         <!-- Saknas: -->
         <!-- Föräldraledighet kalenderdagsavdrag -->
-        <!-- Uttag betalda semesterdagar, månadsavlönad -->
-        <!-- Semesterlön betald -->
-        <!-- Semestertillägg betalda semesterdagar -->
-        <!-- Semesteravdrag betald -->
         <!-- Lunchkuponger förmånsvärde -->
         <!-- Avdrag lunchkuponger -->
 
@@ -1051,11 +1107,8 @@
             <field name="holiday_status_id" ref="l10n_se_hr_payroll.leave_type_vab" />
         </record>
 
+
         <!-- Saknas: -->
-        <!-- Uttag semesterdagar, månadsavlönad -->
-        <!-- Semesterlön betald -->
-        <!-- Semestertillägg betalda semesterdagar -->
-        <!-- Semesteravdrag betald -->
 
         <!-- Skatt -->
         <!-- Arbetsgivaravgift -->
