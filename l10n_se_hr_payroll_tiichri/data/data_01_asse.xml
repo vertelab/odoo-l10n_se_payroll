@@ -92,12 +92,12 @@
 
 
         <!-- ## HR.CONTRACT.BENEFIT -->
-        <!-- <record id="hr_benefit_asse" model="hr.contract.benefit">
-            <field name="contract_id" ref="contract_asse" />
-            <field name="name" ref="hr_benefit_forman_carbru" />
-            <field name="desc">Volvo tjänstebil</field>
+        <record id="hr_benefit_asse" model="hr.contract.benefit">
+            <field name="contract_id" ref="contract_asse_2" />
+            <field name="name" ref="l10n_se_hr_payroll_benefits.hr_benefit_carbru" />
+            <field name="desc">Tjänstebil, Volvo</field>
             <field name="value">4391</field>
-        </record> -->
+        </record>
 
 
         <!--==========================INSTRUKTIONER FÖR TESTDATA======================
@@ -689,7 +689,7 @@
             <field name="request_date_from">2022-06-10</field>
             <field name="request_date_to">2022-06-16</field>
             <field name="number_of_hours">40</field>
-            <field name="holiday_status_id" ref="l10n_se_hr_payroll.leave_type_vacation" />
+            <field name="holiday_status_id" ref="l10n_se_hr_holidays.leave_type_vacation" />
         </record>
 
         <!-- Saknas: -->
@@ -779,7 +779,7 @@
             <field name="request_date_from">2022-07-11</field>
             <field name="request_date_to">2022-07-15</field>
             <field name="number_of_hours">40</field>
-            <field name="holiday_status_id" ref="l10n_se_hr_payroll.leave_type_vacation" />
+            <field name="holiday_status_id" ref="l10n_se_hr_holidays.leave_type_vacation" />
         </record>
 
         <!-- Saknas: -->
@@ -859,7 +859,7 @@
             <field name="request_date_from">2022-08-04</field>
             <field name="request_date_to">2022-08-04</field>
             <field name="number_of_hours">8</field>
-            <field name="holiday_status_id" ref="l10n_se_hr_payroll.leave_type_vacation" />
+            <field name="holiday_status_id" ref="l10n_se_hr_holidays.leave_type_vacation" />
         </record>
 
         <record id="hr_leave_asse_803" model="hr.leave">
@@ -870,7 +870,7 @@
             <field name="request_date_from">2022-08-08</field>
             <field name="request_date_to">2022-08-08</field>
             <field name="number_of_hours">32</field>
-            <field name="holiday_status_id" ref="l10n_se_hr_payroll.leave_type_vacation" />
+            <field name="holiday_status_id" ref="l10n_se_hr_holidays.leave_type_vacation" />
         </record>
 
         <!-- Saknas: -->
@@ -938,7 +938,7 @@
             <field name="request_date_from">2022-09-19</field>
             <field name="request_date_to">2022-09-23</field>
             <field name="number_of_hours">40</field>
-            <field name="holiday_status_id" ref="l10n_se_hr_payroll.leave_type_vacation" />
+            <field name="holiday_status_id" ref="l10n_se_hr_holidays.leave_type_vacation" />
         </record>
 
         <!-- Saknas: -->
@@ -1001,7 +1001,7 @@
             <field name="request_date_from">2022-06-17</field>
             <field name="request_date_to">2022-06-18</field>
             <field name="number_of_hours">16</field>
-            <field name="holiday_status_id" ref="l10n_se_hr_payroll.leave_type_vacation" />
+            <field name="holiday_status_id" ref="l10n_se_hr_holidays.leave_type_vacation" />
         </record>
 
         <!-- Saknas: -->

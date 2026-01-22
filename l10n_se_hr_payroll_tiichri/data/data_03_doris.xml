@@ -55,12 +55,12 @@
         </record>
 
         <!-- ## HR.CONTRACT.BENEFIT -->
-        <!-- <record id="hr_benefit_doris" model="hr.contract.benefit">
+        <record id="hr_benefit_doris" model="hr.contract.benefit">
             <field name="contract_id" ref="contract_doris" />
-            <field name="name" ref="hr_benefit_forman_bost" />
+            <field name="name" ref="l10n_se_hr_payroll_benefits.hr_benefit_home" />
             <field name="desc">Tjänstebostad 60 kvm i Stockholms innerstad</field>
             <field name="value">6960</field>
-        </record> -->
+        </record>
 
 
         <!--==========================INSTRUKTIONER FÖR TESTDATA======================
@@ -197,6 +197,11 @@
             <value eval="{'amount_qty': 8.0}"/>
         </function>
 
+        <function model="hr.payslip.input" name="write">
+            <value model="hr.payslip.input" search="[('payslip_id', '=', ref('hr_payslip_doris_01')), ('code', '=', 'utlagg')]"/>
+            <value eval="{'name': 'Övrig nettoersättning (Kiropraktor)', 'amount': 1200.0}"/>
+        </function>
+
         <function model="hr.payslip" name="compute_sheet">
             <value eval="[ref('hr_payslip_doris_01')]"/>
         </function>
@@ -270,6 +275,18 @@
         <function model="hr.payslip.input" name="write">
             <value model="hr.payslip.input" search="[('payslip_id', '=', ref('hr_payslip_doris_02')), ('code', '=', 'mertidtim')]"/>
             <value eval="{'amount_qty': 8.0}"/>
+        </function>
+
+        <!-- Övriga nettoavdrag -->
+        <function model="hr.payslip.input" name="write">
+            <value model="hr.payslip.input" search="[('payslip_id', '=', ref('hr_payslip_doris_02')), ('code', '=', 'net_avd')]"/>
+            <value eval="{'name': 'Övriga nettoavdrag (Gymkort)', 'amount': 2100.0}"/>
+        </function>
+
+        <!-- Övriga förmåner tabellskatt -->
+        <function model="hr.payslip.input" name="write">
+            <value model="hr.payslip.input" search="[('payslip_id', '=', ref('hr_payslip_doris_02')), ('code', '=', 'ovrig_fmn')]"/>
+            <value eval="{'name': 'Möbelförmån', 'amount': 1417.0}"/>
         </function>
 
         <function model="hr.payslip" name="compute_sheet">
@@ -418,13 +435,32 @@
         </function>
         <!--  Traktamente, helt  -->
         <function model="hr.payslip.input" name="write">
-            <value model="hr.payslip.input" search="[('payslip_id', '=', ref('hr_payslip_doris_04')), ('code', '=', 'trakt_hel_dagar')]"/>
+            <value model="hr.payslip.input" search="[('payslip_id', '=', ref('hr_payslip_doris_04')), ('code', '=', 'trakt_hel')]"/>
             <value eval="{'amount_qty': 2.0}"/>
         </function>
         <!--  Traktamente, halvt  -->
         <function model="hr.payslip.input" name="write">
-            <value model="hr.payslip.input" search="[('payslip_id', '=', ref('hr_payslip_doris_04')), ('code', '=', 'trakt_halv_dagar')]"/>
+            <value model="hr.payslip.input" search="[('payslip_id', '=', ref('hr_payslip_doris_04')), ('code', '=', 'trakt_halv')]"/>
             <value eval="{'amount_qty': 1.0}"/>
+        </function>
+
+        <!-- Kostförmån -->
+        <function model="hr.payslip.input" name="write">
+            <value model="hr.payslip.input" search="[('payslip_id', '=', ref('hr_payslip_doris_04')), ('code', '=', 'fmn_lunch')]"/>
+            <value eval="{'name': "Kostförmån (lunch)", 'amount_qty': 1.0}"/>
+        </function>
+
+        <!-- Kostavdrag -->
+        
+        <!--  Frukost -->
+        <function model="hr.payslip.input" name="write">
+            <value model="hr.payslip.input" search="[('payslip_id', '=', ref('hr_payslip_doris_04')), ('code', '=', 'red_frukost')]"/>
+            <value eval="{'amount_qty': 1}"/>
+        </function>
+        <!--  Lunch eller middag -->
+        <function model="hr.payslip.input" name="write">
+            <value model="hr.payslip.input" search="[('payslip_id', '=', ref('hr_payslip_doris_04')), ('code', '=', 'red_lunch')]"/>
+            <value eval="{'amount_qty': 3.5}"/>
         </function>
 
         <function model="hr.payslip" name="compute_sheet">
@@ -479,12 +515,12 @@
 
         <!--  Traktamente, helt  -->
         <function model="hr.payslip.input" name="write">
-            <value model="hr.payslip.input" search="[('payslip_id', '=', ref('hr_payslip_doris_05')), ('code', '=', 'trakt_hel_dagar')]"/>
+            <value model="hr.payslip.input" search="[('payslip_id', '=', ref('hr_payslip_doris_05')), ('code', '=', 'trakt_hel')]"/>
             <value eval="{'amount_qty': 3.0}"/>
         </function>
         <!--  Traktamente, halvt  -->
         <function model="hr.payslip.input" name="write">
-            <value model="hr.payslip.input" search="[('payslip_id', '=', ref('hr_payslip_doris_05')), ('code', '=', 'trakt_halv_dagar')]"/>
+            <value model="hr.payslip.input" search="[('payslip_id', '=', ref('hr_payslip_doris_05')), ('code', '=', 'trakt_halv')]"/>
             <value eval="{'amount_qty': 1.0}"/>
         </function>
 
@@ -507,12 +543,12 @@
 
         <!--  Kostavdrag frukost -->
         <function model="hr.payslip.input" name="write">
-            <value model="hr.payslip.input" search="[('payslip_id', '=', ref('hr_payslip_doris_05')), ('code', '=', 'avdrag_frukost')]"/>
+            <value model="hr.payslip.input" search="[('payslip_id', '=', ref('hr_payslip_doris_05')), ('code', '=', 'red_frukost')]"/>
             <value eval="{'amount_qty': 3}"/>
         </function>
         <!--  Kostavdrag lunch eller middag -->
         <function model="hr.payslip.input" name="write">
-            <value model="hr.payslip.input" search="[('payslip_id', '=', ref('hr_payslip_doris_05')), ('code', '=', 'avdrag_lunch_middag')]"/>
+            <value model="hr.payslip.input" search="[('payslip_id', '=', ref('hr_payslip_doris_05')), ('code', '=', 'red_lunch')]"/>
             <value eval="{'amount_qty': 5}"/>
         </function>
 
@@ -765,7 +801,7 @@
         <function model="hr.payslip" name="onchange_employee">
             <value eval="[ref('hr_payslip_doris_09')]"/>
         </function>
-        
+
 
         <!--  Milersättning -->
         <function model="hr.payslip.input" name="write">

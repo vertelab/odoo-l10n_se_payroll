@@ -55,12 +55,12 @@
         </record>
 
         <!-- ## HR.CONTRACT.BENEFIT -->
-        <!-- <record id="hr_benefit_camilla" model="hr.contract.benefit">
+        <record id="hr_benefit_camilla" model="hr.contract.benefit">
             <field name="contract_id" ref="contract_camilla" />
-            <field name="name" ref="hr_benefit_forman_carbru" />
+            <field name="name" ref="l10n_se_hr_payroll_benefits.hr_benefit_carbru" />
             <field name="desc">Tjänstebil, Volvo</field>
             <field name="value">3908</field>
-        </record> -->
+        </record>
 
 
         <!--==========================INSTRUKTIONER FÖR TESTDATA======================

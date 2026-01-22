@@ -34,9 +34,10 @@ Swedish Payslip additions for Benefits
     'contributor': '',
     'maintainer': 'Vertel AB',
     'repository': 'https://github.com/vertelab/odoo-l10n-se-payroll',
-    'depends': ['l10n_se_hr_payroll', 'hr_payroll_benefits'],
+    'depends': ['l10n_se_hr_payroll'], #'hr_payroll_benefits'
     'data': [
         'data/hr_salary_rule_data.xml',
+        'security/ir.model.access.csv',
     ],
     'auto_install': True,
     'installable': True,

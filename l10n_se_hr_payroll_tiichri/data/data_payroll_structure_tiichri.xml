@@ -9,8 +9,6 @@
             <field name="name">Bas för löneavtal heltid (Ska ej användas i avtal)</field>
             <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons" />
             <field name="rule_ids" eval="[(6,0,[
-                ref('l10n_se_hr_payroll.hr_salary_rule_brutto'),
-                ref('l10n_se_hr_payroll.hr_salary_rule_summa'),
                 ref('l10n_se_hr_payroll.hr_salary_rule_wage_exchange'),
 
                 ref('l10n_se_hr_payroll.hr_salary_rule_sick_leave'),
@@ -26,12 +24,6 @@
 
                 ref('l10n_se_hr_payroll.hr_salary_rule_kval_otid'),
                 ref('l10n_se_hr_payroll.hr_salary_rule_enkel_otid'),
-                ref('l10n_se_hr_payroll.hr_salary_rule_bonus'),
-                ref('l10n_se_hr_payroll.hr_salary_rule_lunch_parent'),
-                ref('l10n_se_hr_payroll.hr_salary_rule_lunch_fmn'),
-                ref('l10n_se_hr_payroll.hr_salary_rule_lunch'),
-                ref('l10n_se_hr_payroll.hr_salary_rule_reimbursment_parent'),
-                ref('l10n_se_hr_payroll.hr_salary_rule_reimbursment'),
 
                 ref('l10n_se_hr_holidays.hr_salary_rule_legal_leave'),
                 ref('l10n_se_hr_holidays.hr_salary_rule_saved_leave'),
@@ -41,6 +33,61 @@
                 ref('l10n_se_hr_holidays.hr_salary_rule_advance_leave'),
                 ref('l10n_se_hr_holidays.hr_salary_rule_advance_leave_display'),
 
+                ref('l10n_se_hr_payroll.hr_salary_rule_restid_parent'),
+                ref('l10n_se_hr_payroll.hr_salary_rule_restid_vardag'),
+                ref('l10n_se_hr_payroll.hr_salary_rule_restid_helg'),
+
+                ref('l10n_se_hr_payroll.hr_salary_rule_mil_parent'),
+                ref('l10n_se_hr_payroll.hr_salary_rule_mil_fri'),
+                ref('l10n_se_hr_payroll.hr_salary_rule_mil_skatt'),
+                ref('l10n_se_hr_payroll.hr_salary_rule_mil_bensin_fri'),
+                ref('l10n_se_hr_payroll.hr_salary_rule_mil_bensin_skatt'),
+
+                ref('l10n_se_hr_payroll.hr_salary_rule_ovrig_netto_ers'),
+                ref('l10n_se_hr_payroll.hr_salary_rule_ovrig_netto_avd'),
+                
+                ref('l10n_se_hr_payroll.hr_salary_rule_bonus'),
+
+                ref('l10n_se_hr_payroll.hr_salary_rule_brutto'),
+                ref('l10n_se_hr_payroll.hr_salary_rule_summa'),
+
+                ref('l10n_se_hr_payroll_benefits.hr_benefit_rule_carbru'),
+                ref('l10n_se_hr_payroll_benefits.hr_benefit_rule_home'),
+                ref('l10n_se_hr_payroll_benefits.hr_benefit_rule_drivmedel'),
+
+                ref('l10n_se_hr_payroll_benefits.hr_salary_rule_trakt_parent'),
+
+                ref('l10n_se_hr_payroll_benefits.hr_salary_rule_trakt_hel'),
+                ref('l10n_se_hr_payroll_benefits.hr_salary_rule_trakt_halv'),
+                ref('l10n_se_hr_payroll_benefits.hr_salary_rule_trakt_natt'),
+
+                ref('l10n_se_hr_payroll_benefits.hr_salary_rule_trakt_finland'),
+                ref('l10n_se_hr_payroll_benefits.hr_salary_rule_trakt_frankrike'),
+                ref('l10n_se_hr_payroll_benefits.hr_salary_rule_trakt_norge'),
+                ref('l10n_se_hr_payroll_benefits.hr_salary_rule_trakt_spanien'),
+                ref('l10n_se_hr_payroll_benefits.hr_salary_rule_trakt_tyskland'),
+                ref('l10n_se_hr_payroll_benefits.hr_salary_rule_trakt_usa'),
+
+                ref('l10n_se_hr_payroll_benefits.hr_salary_rule_trakt_inrikes_skatt'),
+
+                ref('l10n_se_hr_payroll_benefits.hr_benefit_rule_kost_frukost'),
+                ref('l10n_se_hr_payroll_benefits.hr_benefit_rule_kost_lunch'),
+                ref('l10n_se_hr_payroll_benefits.hr_benefit_rule_kost_fri'),
+
+                ref('l10n_se_hr_payroll_benefits.hr_salary_rule_trakt_red_frukost'),
+                ref('l10n_se_hr_payroll_benefits.hr_salary_rule_trakt_red_lunch'),
+                ref('l10n_se_hr_payroll_benefits.hr_salary_rule_trakt_red_fri'),
+
+                ref('l10n_se_hr_payroll_benefits.hr_salary_rule_red_utl_frukost'),
+                ref('l10n_se_hr_payroll_benefits.hr_salary_rule_trakt_red_utl_lunch'),
+                ref('l10n_se_hr_payroll_benefits.hr_salary_rule_trakt_red_utl_fri'),
+
+                ref('l10n_se_hr_payroll_benefits.hr_salary_rule_lunch_parent'),
+                ref('l10n_se_hr_payroll_benefits.hr_salary_rule_lunch_kupong'),
+                ref('l10n_se_hr_payroll_benefits.hr_salary_rule_lunch_kupong_fmn'),
+
+                ref('l10n_se_hr_payroll_benefits.hr_salary_rule_ovrig_fmn_skatt'),
+                ref('l10n_se_hr_payroll_benefits.hr_salary_rule_forman_parent'),
             ])]" />
 
         </record>
@@ -68,7 +115,44 @@
                 (0, 0, {'name': 'Månadsarbetstid i dagar heltid', 'code': 'MAD', 'constant': 21.0}),
                 (0, 0, {'name': 'Divisor enkel övertid', 'code': 'EO', 'constant': 94.0}),
                 (0, 0, {'name': 'Divisor kvalificerad övertid', 'code': 'KO', 'constant': 72.0}),
-                (0, 0, {'name': 'Prisbasbelopp', 'code': 'PBB', 'constant': 483000.0})
+                (0, 0, {'name': 'Prisbasbelopp', 'code': 'PBB', 'constant': 483000.0}),
+
+                (0, 0, {'name': 'Milersättning (Tjänstebil, bensin)', 'code': 'F_MIL_BENSIN', 'constant': 0.95}),
+                (0, 0, {'name': 'Skattepliktig milersättning (Tjänstebil, bensin)', 'code': 'S_MIL_BENSIN', 'constant': 0.55}),
+                
+                (0, 0, {'name': 'Milersättning (Egen bil)', 'code': 'F_MIL_EGEN', 'constant': 1.85}),
+                (0, 0, {'name': 'Skattepliktig milersättning (Egen bil)', 'code': 'S_MIL_EGEN', 'constant': 1.15}),
+                
+                (0, 0, {'name': 'Restidsersättning Vardag', 'code': 'RES_VARD', 'constant': 190.0}),
+                (0, 0, {'name': 'Restidsersättning Helg', 'code': 'RES_HELG', 'constant': 240.0}),
+
+                (0, 0, {'name': 'Drivmedel Upphöjt värde', 'code': 'DRIV_UH', 'constant': 1.2}),
+                
+                (0, 0, {'name': 'Traktamente USA', 'code': 'TRAKT_US', 'constant': 821.0}),
+                (0, 0, {'name': 'Traktamente Tyskland', 'code': 'TRAKT_DE', 'constant': 611.0}),
+                (0, 0, {'name': 'Traktamente Spanien', 'code': 'TRAKT_SPA', 'constant': 568.0}),
+                (0, 0, {'name': 'Traktamente Norge', 'code': 'TRAKT_NO', 'constant': 953.0}),
+                (0, 0, {'name': 'Traktamente Frankrike', 'code': 'TRAKT_FRA', 'constant': 761.0}),
+                (0, 0, {'name': 'Traktamente Finland', 'code': 'TRAKT_FIN', 'constant': 700.0}),
+
+                (0, 0, {'name': 'Traktamente Heldag', 'code': 'TRAKT_HEL', 'constant': 240.0}),
+                (0, 0, {'name': 'Traktamente Halvdag', 'code': 'TRAKT_HALV', 'constant': 120.0}),
+                (0, 0, {'name': 'Traktamente Natt', 'code': 'TRAKT_NATT', 'constant': 120.0}),
+                
+                (0, 0, {'name': 'Kostförmån Frukost', 'code': 'KOST_FRUKOST', 'constant': 50.0}),
+                (0, 0, {'name': 'Kostförmån Lunch/Middag', 'code': 'KOST_LUNCH', 'constant': 100.0}),
+                (0, 0, {'name': 'Kostförmån Helt fri', 'code': 'KOST_FRI', 'constant': 250.0}),
+
+                (0, 0, {'name': 'Avdrag Frukost (utland)', 'code': 'U_RED_FRUKOST', 'constant': 0.15}),
+                (0, 0, {'name': 'Avdrag Lunch/Middag (utland)', 'code': 'U_RED_LUNCH', 'constant': 0.35}),
+                (0, 0, {'name': 'Avdrag Helt Fri (utland)', 'code': 'U_RED_FRI', 'constant': 0.85}),
+                
+                (0, 0, {'name': 'Avdrag Frukost', 'code': 'RED_FRUKOST', 'constant': 48.0}),
+                (0, 0, {'name': 'Avdrag Lunch/Middag', 'code': 'RED_LUNCH', 'constant': 84.0}),
+                (0, 0, {'name': 'Avdrag Helt fri', 'code': 'RED_FRI', 'constant': 216.0}),
+                
+                (0, 0, {'name': 'Lunchkuponger (Pris)', 'code': 'PRIS', 'constant': 900.0}),
+                (0, 0, {'name': 'Lunchkuponger (Förmnsvärde)', 'code': 'VARDE', 'constant': 600.0}),
             ]" />
         </record>
 
@@ -91,7 +175,45 @@
                 (0, 0, {'name': 'Månadsarbetstid i dagar heltid', 'code': 'MAD', 'constant': 21.0}),
                 (0, 0, {'name': 'Divisor enkel övertid', 'code': 'EO', 'constant': 94.0}),
                 (0, 0, {'name': 'Divisor kvalificerad övertid', 'code': 'KO', 'constant': 72.0}),
-                (0, 0, {'name': 'Prisbasbelopp', 'code': 'PBB', 'constant': 483000.0})]" />
+                (0, 0, {'name': 'Prisbasbelopp', 'code': 'PBB', 'constant': 483000.0}),
+
+                (0, 0, {'name': 'Milersättning (Tjänstebil, bensin)', 'code': 'F_MIL_BENSIN', 'constant': 0.95}),
+                (0, 0, {'name': 'Skattepliktig milersättning (Tjänstebil, bensin)', 'code': 'S_MIL_BENSIN', 'constant': 0.55}),
+                
+                (0, 0, {'name': 'Milersättning (Egen bil)', 'code': 'F_MIL_EGEN', 'constant': 1.85}),
+                (0, 0, {'name': 'Skattepliktig milersättning (Egen bil)', 'code': 'S_MIL_EGEN', 'constant': 1.15}),
+                
+                (0, 0, {'name': 'Restidsersättning Vardag', 'code': 'RES_VARD', 'constant': 190.0}),
+                (0, 0, {'name': 'Restidsersättning Helg', 'code': 'RES_HELG', 'constant': 240.0}),
+
+                (0, 0, {'name': 'Drivmedel Upphöjt värde', 'code': 'DRIV_UH', 'constant': 1.2}),
+                
+                (0, 0, {'name': 'Traktamente USA', 'code': 'TRAKT_US', 'constant': 821.0}),
+                (0, 0, {'name': 'Traktamente Tyskland', 'code': 'TRAKT_DE', 'constant': 611.0}),
+                (0, 0, {'name': 'Traktamente Spanien', 'code': 'TRAKT_SPA', 'constant': 568.0}),
+                (0, 0, {'name': 'Traktamente Norge', 'code': 'TRAKT_NO', 'constant': 953.0}),
+                (0, 0, {'name': 'Traktamente Frankrike', 'code': 'TRAKT_FRA', 'constant': 761.0}),
+                (0, 0, {'name': 'Traktamente Finland', 'code': 'TRAKT_FIN', 'constant': 700.0}),
+
+                (0, 0, {'name': 'Traktamente Heldag', 'code': 'TRAKT_HEL', 'constant': 240.0}),
+                (0, 0, {'name': 'Traktamente Halvdag', 'code': 'TRAKT_HALV', 'constant': 120.0}),
+                (0, 0, {'name': 'Traktamente Natt', 'code': 'TRAKT_NATT', 'constant': 120.0}),
+                
+                (0, 0, {'name': 'Kostförmån Frukost', 'code': 'KOST_FRUKOST', 'constant': 50.0}),
+                (0, 0, {'name': 'Kostförmån Lunch/Middag', 'code': 'KOST_LUNCH', 'constant': 100.0}),
+                (0, 0, {'name': 'Kostförmån Helt fri', 'code': 'KOST_FRI', 'constant': 250.0}),
+
+                (0, 0, {'name': 'Avdrag Frukost (utland)', 'code': 'U_RED_FRUKOST', 'constant': 0.15}),
+                (0, 0, {'name': 'Avdrag Lunch/Middag (utland)', 'code': 'U_RED_LUNCH', 'constant': 0.35}),
+                (0, 0, {'name': 'Avdrag Helt Fri (utland)', 'code': 'U_RED_FRI', 'constant': 0.85}),
+                
+                (0, 0, {'name': 'Avdrag Frukost', 'code': 'RED_FRUKOST', 'constant': 48.0}),
+                (0, 0, {'name': 'Avdrag Lunch/Middag', 'code': 'RED_LUNCH', 'constant': 84.0}),
+                (0, 0, {'name': 'Avdrag Helt fri', 'code': 'RED_FRI', 'constant': 216.0}),
+                
+                (0, 0, {'name': 'Lunchkuponger (Pris)', 'code': 'PRIS', 'constant': 900.0}),
+                (0, 0, {'name': 'Lunchkuponger (Förmnsvärde)', 'code': 'VARDE', 'constant': 600.0}),
+            ]" />
         </record>
 
         <!-- ============================================ -->
@@ -111,7 +233,44 @@
                 (0, 0, {'name': 'Månadsarbetstid i dagar heltid', 'code': 'MAD', 'constant': 21.0}),
                 (0, 0, {'name': 'Divisor enkel övertid', 'code': 'EO', 'constant': 94.0}),
                 (0, 0, {'name': 'Divisor kvalificerad övertid', 'code': 'KO', 'constant': 72.0}),
-                (0, 0, {'name': 'Prisbasbelopp', 'code': 'PBB', 'constant': 483000.0})
+                (0, 0, {'name': 'Prisbasbelopp', 'code': 'PBB', 'constant': 483000.0}),
+
+                (0, 0, {'name': 'Milersättning (Tjänstebil, bensin)', 'code': 'F_MIL_BENSIN', 'constant': 0.95}),
+                (0, 0, {'name': 'Skattepliktig milersättning (Tjänstebil, bensin)', 'code': 'S_MIL_BENSIN', 'constant': 0.55}),
+                
+                (0, 0, {'name': 'Milersättning (Egen bil)', 'code': 'F_MIL_EGEN', 'constant': 1.85}),
+                (0, 0, {'name': 'Skattepliktig milersättning (Egen bil)', 'code': 'S_MIL_EGEN', 'constant': 1.15}),
+                
+                (0, 0, {'name': 'Restidsersättning Vardag', 'code': 'RES_VARD', 'constant': 190.0}),
+                (0, 0, {'name': 'Restidsersättning Helg', 'code': 'RES_HELG', 'constant': 240.0}),
+
+                (0, 0, {'name': 'Drivmedel Upphöjt värde', 'code': 'DRIV_UH', 'constant': 1.2}),
+                
+                (0, 0, {'name': 'Traktamente USA', 'code': 'TRAKT_US', 'constant': 821.0}),
+                (0, 0, {'name': 'Traktamente Tyskland', 'code': 'TRAKT_DE', 'constant': 611.0}),
+                (0, 0, {'name': 'Traktamente Spanien', 'code': 'TRAKT_SPA', 'constant': 568.0}),
+                (0, 0, {'name': 'Traktamente Norge', 'code': 'TRAKT_NO', 'constant': 953.0}),
+                (0, 0, {'name': 'Traktamente Frankrike', 'code': 'TRAKT_FRA', 'constant': 761.0}),
+                (0, 0, {'name': 'Traktamente Finland', 'code': 'TRAKT_FIN', 'constant': 700.0}),
+
+                (0, 0, {'name': 'Traktamente Heldag', 'code': 'TRAKT_HEL', 'constant': 240.0}),
+                (0, 0, {'name': 'Traktamente Halvdag', 'code': 'TRAKT_HALV', 'constant': 120.0}),
+                (0, 0, {'name': 'Traktamente Natt', 'code': 'TRAKT_NATT', 'constant': 120.0}),
+                
+                (0, 0, {'name': 'Kostförmån Frukost', 'code': 'KOST_FRUKOST', 'constant': 50.0}),
+                (0, 0, {'name': 'Kostförmån Lunch/Middag', 'code': 'KOST_LUNCH', 'constant': 100.0}),
+                (0, 0, {'name': 'Kostförmån Helt fri', 'code': 'KOST_FRI', 'constant': 250.0}),
+
+                (0, 0, {'name': 'Avdrag Frukost (utland)', 'code': 'U_RED_FRUKOST', 'constant': 0.15}),
+                (0, 0, {'name': 'Avdrag Lunch/Middag (utland)', 'code': 'U_RED_LUNCH', 'constant': 0.35}),
+                (0, 0, {'name': 'Avdrag Helt Fri (utland)', 'code': 'U_RED_FRI', 'constant': 0.85}),
+                
+                (0, 0, {'name': 'Avdrag Frukost', 'code': 'RED_FRUKOST', 'constant': 48.0}),
+                (0, 0, {'name': 'Avdrag Lunch/Middag', 'code': 'RED_LUNCH', 'constant': 84.0}),
+                (0, 0, {'name': 'Avdrag Helt fri', 'code': 'RED_FRI', 'constant': 216.0}),
+                
+                (0, 0, {'name': 'Lunchkuponger (Pris)', 'code': 'PRIS', 'constant': 900.0}),
+                (0, 0, {'name': 'Lunchkuponger (Förmnsvärde)', 'code': 'VARDE', 'constant': 600.0}),
             ]" />
         </record>
 
@@ -136,7 +295,44 @@
                 (0, 0, {'name': 'Månadsarbetstid i dagar heltid', 'code': 'MAD', 'constant': 21.0}),
                 (0, 0, {'name': 'Faktor enkel övertid', 'code': 'EO', 'constant': 1.5}),
                 (0, 0, {'name': 'Faktor kvalificerad övertid', 'code': 'KO', 'constant': 2.0}),
-                (0, 0, {'name': 'Prisbasbelopp', 'code': 'PBB', 'constant': 483000.0})
+                (0, 0, {'name': 'Prisbasbelopp', 'code': 'PBB', 'constant': 483000.0}),
+
+                (0, 0, {'name': 'Milersättning (Tjänstebil, bensin)', 'code': 'F_MIL_BENSIN', 'constant': 0.95}),
+                (0, 0, {'name': 'Skattepliktig milersättning (Tjänstebil, bensin)', 'code': 'S_MIL_BENSIN', 'constant': 0.55}),
+                
+                (0, 0, {'name': 'Milersättning (Egen bil)', 'code': 'F_MIL_EGEN', 'constant': 1.85}),
+                (0, 0, {'name': 'Skattepliktig milersättning (Egen bil)', 'code': 'S_MIL_EGEN', 'constant': 1.15}),
+                
+                (0, 0, {'name': 'Restidsersättning Vardag', 'code': 'RES_VARD', 'constant': 190.0}),
+                (0, 0, {'name': 'Restidsersättning Helg', 'code': 'RES_HELG', 'constant': 240.0}),
+
+                (0, 0, {'name': 'Drivmedel Upphöjt värde', 'code': 'DRIV_UH', 'constant': 1.2}),
+                
+                (0, 0, {'name': 'Traktamente USA', 'code': 'TRAKT_US', 'constant': 821.0}),
+                (0, 0, {'name': 'Traktamente Tyskland', 'code': 'TRAKT_DE', 'constant': 611.0}),
+                (0, 0, {'name': 'Traktamente Spanien', 'code': 'TRAKT_SPA', 'constant': 568.0}),
+                (0, 0, {'name': 'Traktamente Norge', 'code': 'TRAKT_NO', 'constant': 953.0}),
+                (0, 0, {'name': 'Traktamente Frankrike', 'code': 'TRAKT_FRA', 'constant': 761.0}),
+                (0, 0, {'name': 'Traktamente Finland', 'code': 'TRAKT_FIN', 'constant': 700.0}),
+
+                (0, 0, {'name': 'Traktamente Heldag', 'code': 'TRAKT_HEL', 'constant': 240.0}),
+                (0, 0, {'name': 'Traktamente Halvdag', 'code': 'TRAKT_HALV', 'constant': 120.0}),
+                (0, 0, {'name': 'Traktamente Natt', 'code': 'TRAKT_NATT', 'constant': 120.0}),
+                
+                (0, 0, {'name': 'Kostförmån Frukost', 'code': 'KOST_FRUKOST', 'constant': 50.0}),
+                (0, 0, {'name': 'Kostförmån Lunch/Middag', 'code': 'KOST_LUNCH', 'constant': 100.0}),
+                (0, 0, {'name': 'Kostförmån Helt fri', 'code': 'KOST_FRI', 'constant': 250.0}),
+
+                (0, 0, {'name': 'Avdrag Frukost (utland)', 'code': 'U_RED_FRUKOST', 'constant': 0.15}),
+                (0, 0, {'name': 'Avdrag Lunch/Middag (utland)', 'code': 'U_RED_LUNCH', 'constant': 0.35}),
+                (0, 0, {'name': 'Avdrag Helt Fri (utland)', 'code': 'U_RED_FRI', 'constant': 0.85}),
+                
+                (0, 0, {'name': 'Avdrag Frukost', 'code': 'RED_FRUKOST', 'constant': 48.0}),
+                (0, 0, {'name': 'Avdrag Lunch/Middag', 'code': 'RED_LUNCH', 'constant': 84.0}),
+                (0, 0, {'name': 'Avdrag Helt fri', 'code': 'RED_FRI', 'constant': 216.0}),
+                
+                (0, 0, {'name': 'Lunchkuponger (Pris)', 'code': 'PRIS', 'constant': 900.0}),
+                (0, 0, {'name': 'Lunchkuponger (Förmnsvärde)', 'code': 'VARDE', 'constant': 600.0}),
             ]" />
         </record>
 
@@ -159,7 +355,44 @@
                 (0, 0, {'name': 'Månadsarbetstid i dagar heltid', 'code': 'MAD', 'constant': 21.0}),
                 (0, 0, {'name': 'Faktor enkel övertid', 'code': 'EO', 'constant': 1.5}),
                 (0, 0, {'name': 'Faktor kvalificerad övertid', 'code': 'KO', 'constant': 2.0}),
-                (0, 0, {'name': 'Prisbasbelopp', 'code': 'PBB', 'constant': 483000.0})
+                (0, 0, {'name': 'Prisbasbelopp', 'code': 'PBB', 'constant': 483000.0}),
+
+                (0, 0, {'name': 'Milersättning (Tjänstebil, bensin)', 'code': 'F_MIL_BENSIN', 'constant': 0.95}),
+                (0, 0, {'name': 'Skattepliktig milersättning (Tjänstebil, bensin)', 'code': 'S_MIL_BENSIN', 'constant': 0.55}),
+                
+                (0, 0, {'name': 'Milersättning (Egen bil)', 'code': 'F_MIL_EGEN', 'constant': 1.85}),
+                (0, 0, {'name': 'Skattepliktig milersättning (Egen bil)', 'code': 'S_MIL_EGEN', 'constant': 1.15}),
+                
+                (0, 0, {'name': 'Restidsersättning Vardag', 'code': 'RES_VARD', 'constant': 190.0}),
+                (0, 0, {'name': 'Restidsersättning Helg', 'code': 'RES_HELG', 'constant': 240.0}),
+
+                (0, 0, {'name': 'Drivmedel Upphöjt värde', 'code': 'DRIV_UH', 'constant': 1.2}),
+                
+                (0, 0, {'name': 'Traktamente USA', 'code': 'TRAKT_US', 'constant': 821.0}),
+                (0, 0, {'name': 'Traktamente Tyskland', 'code': 'TRAKT_DE', 'constant': 611.0}),
+                (0, 0, {'name': 'Traktamente Spanien', 'code': 'TRAKT_SPA', 'constant': 568.0}),
+                (0, 0, {'name': 'Traktamente Norge', 'code': 'TRAKT_NO', 'constant': 953.0}),
+                (0, 0, {'name': 'Traktamente Frankrike', 'code': 'TRAKT_FRA', 'constant': 761.0}),
+                (0, 0, {'name': 'Traktamente Finland', 'code': 'TRAKT_FIN', 'constant': 700.0}),
+
+                (0, 0, {'name': 'Traktamente Heldag', 'code': 'TRAKT_HEL', 'constant': 240.0}),
+                (0, 0, {'name': 'Traktamente Halvdag', 'code': 'TRAKT_HALV', 'constant': 120.0}),
+                (0, 0, {'name': 'Traktamente Natt', 'code': 'TRAKT_NATT', 'constant': 120.0}),
+                
+                (0, 0, {'name': 'Kostförmån Frukost', 'code': 'KOST_FRUKOST', 'constant': 50.0}),
+                (0, 0, {'name': 'Kostförmån Lunch/Middag', 'code': 'KOST_LUNCH', 'constant': 100.0}),
+                (0, 0, {'name': 'Kostförmån Helt fri', 'code': 'KOST_FRI', 'constant': 250.0}),
+
+                (0, 0, {'name': 'Avdrag Frukost (utland)', 'code': 'U_RED_FRUKOST', 'constant': 0.15}),
+                (0, 0, {'name': 'Avdrag Lunch/Middag (utland)', 'code': 'U_RED_LUNCH', 'constant': 0.35}),
+                (0, 0, {'name': 'Avdrag Helt Fri (utland)', 'code': 'U_RED_FRI', 'constant': 0.85}),
+                
+                (0, 0, {'name': 'Avdrag Frukost', 'code': 'RED_FRUKOST', 'constant': 48.0}),
+                (0, 0, {'name': 'Avdrag Lunch/Middag', 'code': 'RED_LUNCH', 'constant': 84.0}),
+                (0, 0, {'name': 'Avdrag Helt fri', 'code': 'RED_FRI', 'constant': 216.0}),
+                
+                (0, 0, {'name': 'Lunchkuponger (Pris)', 'code': 'PRIS', 'constant': 900.0}),
+                (0, 0, {'name': 'Lunchkuponger (Förmnsvärde)', 'code': 'VARDE', 'constant': 600.0}),
             ]" />
         </record>
 
@@ -180,7 +413,44 @@
                 (0, 0, {'name': 'Månadsarbetstid i dagar heltid', 'code': 'MAD', 'constant': 21.0}),
                 (0, 0, {'name': 'Faktor enkel övertid', 'code': 'EO', 'constant': 1.5}),
                 (0, 0, {'name': 'Faktor kvalificerad övertid', 'code': 'KO', 'constant': 2.0}),
-                (0, 0, {'name': 'Prisbasbelopp', 'code': 'PBB', 'constant': 483000.0})
+                (0, 0, {'name': 'Prisbasbelopp', 'code': 'PBB', 'constant': 483000.0}),
+
+                (0, 0, {'name': 'Milersättning (Tjänstebil, bensin)', 'code': 'F_MIL_BENSIN', 'constant': 0.95}),
+                (0, 0, {'name': 'Skattepliktig milersättning (Tjänstebil, bensin)', 'code': 'S_MIL_BENSIN', 'constant': 0.55}),
+                
+                (0, 0, {'name': 'Milersättning (Egen bil)', 'code': 'F_MIL_EGEN', 'constant': 1.85}),
+                (0, 0, {'name': 'Skattepliktig milersättning (Egen bil)', 'code': 'S_MIL_EGEN', 'constant': 1.15}),
+                
+                (0, 0, {'name': 'Restidsersättning Vardag', 'code': 'RES_VARD', 'constant': 190.0}),
+                (0, 0, {'name': 'Restidsersättning Helg', 'code': 'RES_HELG', 'constant': 240.0}),
+
+                (0, 0, {'name': 'Drivmedel Upphöjt värde', 'code': 'DRIV_UH', 'constant': 1.2}),
+                
+                (0, 0, {'name': 'Traktamente USA', 'code': 'TRAKT_US', 'constant': 821.0}),
+                (0, 0, {'name': 'Traktamente Tyskland', 'code': 'TRAKT_DE', 'constant': 611.0}),
+                (0, 0, {'name': 'Traktamente Spanien', 'code': 'TRAKT_SPA', 'constant': 568.0}),
+                (0, 0, {'name': 'Traktamente Norge', 'code': 'TRAKT_NO', 'constant': 953.0}),
+                (0, 0, {'name': 'Traktamente Frankrike', 'code': 'TRAKT_FRA', 'constant': 761.0}),
+                (0, 0, {'name': 'Traktamente Finland', 'code': 'TRAKT_FIN', 'constant': 700.0}),
+
+                (0, 0, {'name': 'Traktamente Heldag', 'code': 'TRAKT_HEL', 'constant': 240.0}),
+                (0, 0, {'name': 'Traktamente Halvdag', 'code': 'TRAKT_HALV', 'constant': 120.0}),
+                (0, 0, {'name': 'Traktamente Natt', 'code': 'TRAKT_NATT', 'constant': 120.0}),
+                
+                (0, 0, {'name': 'Kostförmån Frukost', 'code': 'KOST_FRUKOST', 'constant': 50.0}),
+                (0, 0, {'name': 'Kostförmån Lunch/Middag', 'code': 'KOST_LUNCH', 'constant': 100.0}),
+                (0, 0, {'name': 'Kostförmån Helt fri', 'code': 'KOST_FRI', 'constant': 250.0}),
+
+                (0, 0, {'name': 'Avdrag Frukost (utland)', 'code': 'U_RED_FRUKOST', 'constant': 0.15}),
+                (0, 0, {'name': 'Avdrag Lunch/Middag (utland)', 'code': 'U_RED_LUNCH', 'constant': 0.35}),
+                (0, 0, {'name': 'Avdrag Helt Fri (utland)', 'code': 'U_RED_FRI', 'constant': 0.85}),
+                
+                (0, 0, {'name': 'Avdrag Frukost', 'code': 'RED_FRUKOST', 'constant': 48.0}),
+                (0, 0, {'name': 'Avdrag Lunch/Middag', 'code': 'RED_LUNCH', 'constant': 84.0}),
+                (0, 0, {'name': 'Avdrag Helt fri', 'code': 'RED_FRI', 'constant': 216.0}),
+                
+                (0, 0, {'name': 'Lunchkuponger (Pris)', 'code': 'PRIS', 'constant': 900.0}),
+                (0, 0, {'name': 'Lunchkuponger (Förmnsvärde)', 'code': 'VARDE', 'constant': 600.0}),
             ]" />
         </record>
 
