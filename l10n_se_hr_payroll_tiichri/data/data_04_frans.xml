@@ -59,6 +59,9 @@
             <field name="struct_id" ref="l10n_se_hr_payroll_tiichri.hr_payroll_structure_tj_man" />
             <field name="table_number">30</field>
             <field name="column_number" eval="'column1'"/>
+            <field name="has_tax_equalization" eval="False"/>
+            <field name="has_one_off_tax" eval="True"/>
+            <field name="one_off_tax">0.3</field>
         </record>
 
 
@@ -77,6 +80,9 @@
             <field name="struct_id" ref="l10n_se_hr_payroll_tiichri.hr_payroll_structure_tj_man" />
             <field name="table_number">30</field>
             <field name="column_number" eval="'column1'" />
+            <field name="has_tax_equalization" eval="False"/>
+            <field name="has_one_off_tax" eval="True"/>
+            <field name="one_off_tax">0.3</field>
         </record>
 
 
@@ -181,7 +187,7 @@
         <function model="hr.payslip" name="onchange_employee">
             <value eval="[ref('l10n_se_hr_payroll_tiichri.hr_payslip_frans_01')]"/>
         </function>
-        
+
         <function model="hr.payslip.input" name="write">
             <value model="hr.payslip.input" search="[('payslip_id', '=', ref('hr_payslip_frans_01')), ('code', '=', 'bonus')]"/>
             <value eval="{'amount_qty': 1.0, 'amount': 10000.0}"/>

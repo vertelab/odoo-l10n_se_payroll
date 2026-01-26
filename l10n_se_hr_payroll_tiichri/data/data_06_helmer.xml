@@ -50,6 +50,9 @@
             <field name="struct_id" ref="l10n_se_hr_payroll_tiichri.hr_payroll_structure_arb_tim" />
             <field name="table_number">30</field>
             <field name="column_number" eval="'column1'" />
+            <field name="has_tax_equalization" eval="False"/>
+            <field name="has_one_off_tax" eval="True"/>
+            <field name="one_off_tax">0.3</field>
         </record>
 
         <!-- ================================ January ================================ -->
@@ -341,7 +344,7 @@
             <value model="hr.payslip.input" search="[('payslip_id', '=', ref('hr_payslip_helmer_03')), ('code', '=', 'milers_skatt')]"/>
             <value eval="{'amount_qty': 300 ,'amount': 1.15}"/>
         </function>
-                
+
         <function model="hr.payslip.input" name="write">
             <value model="hr.payslip.input" search="[('payslip_id', '=', ref('hr_payslip_helmer_03')), ('code', '=', 'otidtim')]"/>
             <value eval="{'amount_qty': 3.0}"/>
@@ -412,7 +415,7 @@
             <value model="hr.payslip.input" search="[('payslip_id', '=', ref('hr_payslip_helmer_04')), ('code', '=', 'lunch')]"/>
             <value eval="{'amount_qty': 1.0}"/>
         </function>
-        
+
         <function model="hr.payslip.input" name="write">
             <value model="hr.payslip.input" search="[('payslip_id', '=', ref('hr_payslip_helmer_04')), ('code', '=', 'otidtim')]"/>
             <value eval="{'amount_qty': 2.0}"/>
@@ -949,7 +952,7 @@
             <value model="hr.payslip.input" search="[('payslip_id', '=', ref('hr_payslip_helmer_09')), ('code', '=', 'lunch')]"/>
             <value eval="{'amount_qty': 1.0}"/>
         </function>
-        
+
         <function model="hr.payslip.input" name="write">
             <value model="hr.payslip.input" search="[('payslip_id', '=', ref('hr_payslip_helmer_09')), ('code', '=', 'otidtim')]"/>
             <value eval="{'amount_qty': 1.0}"/>
@@ -1133,7 +1136,7 @@
         <function model="hr.payslip" name="onchange_employee">
             <value eval="[ref('l10n_se_hr_payroll_tiichri.hr_payslip_helmer_11')]"/>
         </function>
-        
+
         <!-- Lunch -->
         <function model="hr.payslip.input" name="write">
             <value model="hr.payslip.input" search="[('payslip_id', '=', ref('hr_payslip_helmer_11')), ('code', '=', 'lunch')]"/>

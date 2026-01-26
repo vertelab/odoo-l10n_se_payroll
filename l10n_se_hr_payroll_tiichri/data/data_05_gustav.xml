@@ -49,6 +49,11 @@
             <field name="struct_id" ref="l10n_se_hr_payroll_tiichri.hr_payroll_structure_arb_man" />
             <field name="table_number">30</field>
             <field name="column_number" eval="'column1'"/>
+            <field name="has_one_off_tax" eval="False"/>
+            <field name="has_tax_equalization" eval="True"/>
+            <field name="tax_equalization">0.25</field>
+            <field name="tax_equalization_start">2011-04-01</field>
+            <field name="tax_equalization_end">2022-12-31</field>
         </record>
 
 

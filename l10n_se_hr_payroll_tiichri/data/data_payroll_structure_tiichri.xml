@@ -8,7 +8,23 @@
             <field name="code">bas</field>
             <field name="name">Bas för löneavtal heltid (Ska ej användas i avtal)</field>
             <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons" />
+        </record>
+
+        <!-- ============================================ -->
+        <!-- TJÄNSTEMAN BAS (parent)                      -->
+        <!-- ============================================ -->
+        <!-- Konstanterna är satta utifrån heltid, och kommer 
+             att justeras av en löneregel när någon har annan 
+             sysselsättninggrad.                          -->
+        <record id="hr_payroll_structure_tj_base" model="hr.payroll.structure">
+            <field name="code">tj_bas</field>
+            <field name="name">Tjänsteman Bas</field>
+            <field name="parent_id" ref="hr_payroll_structure_gl_tiichri" />
+            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons" />
             <field name="rule_ids" eval="[(6,0,[
+                ref('l10n_se_hr_holidays.hr_salary_rule_legal_leave_addition8'),
+                ref('l10n_se_hr_holidays.hr_salary_rule_legal_leave_pay_tj'),
+                ref('l10n_se_hr_payroll.hr_salary_rule_mertid'),
                 ref('l10n_se_hr_payroll.hr_salary_rule_wage_exchange'),
 
                 ref('l10n_se_hr_payroll.hr_salary_rule_sick_leave'),
@@ -88,25 +104,10 @@
 
                 ref('l10n_se_hr_payroll_benefits.hr_salary_rule_ovrig_fmn_skatt'),
                 ref('l10n_se_hr_payroll_benefits.hr_salary_rule_forman_parent'),
-            ])]" />
 
-        </record>
-
-        <!-- ============================================ -->
-        <!-- TJÄNSTEMAN BAS (parent)                      -->
-        <!-- ============================================ -->
-        <!-- Konstanterna är satta utifrån heltid, och kommer 
-             att justeras av en löneregel när någon har annan 
-             sysselsättninggrad.                          -->
-        <record id="hr_payroll_structure_tj_base" model="hr.payroll.structure">
-            <field name="code">tj_bas</field>
-            <field name="name">Tjänsteman Bas</field>
-            <field name="parent_id" ref="hr_payroll_structure_gl_tiichri" />
-            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons" />
-            <field name="rule_ids" eval="[(6,0,[
-                ref('l10n_se_hr_holidays.hr_salary_rule_legal_leave_addition8'),
-                ref('l10n_se_hr_holidays.hr_salary_rule_legal_leave_pay_tj'),
-                ref('l10n_se_hr_payroll.hr_salary_rule_mertid'),
+                ref('l10n_se_payroll_taxtable.hr_salary_rule_prel_tax_table'),
+                ref('l10n_se_payroll_taxtable.hr_salary_rule_one_off_tax'),
+                ref('l10n_se_payroll_taxtable.hr_salary_rule_total_tax_display'),
 
 
             ])]" />
@@ -169,6 +170,89 @@
                 ref('l10n_se_hr_payroll.hr_salary_rule_gl'),
                 ref('l10n_se_hr_payroll.hr_salary_rule_dl'),
                 ref('l10n_se_hr_payroll.hr_salary_rule_sick_deduction_1_14'),
+                ref('l10n_se_hr_payroll.hr_salary_rule_wage_exchange'),
+
+                ref('l10n_se_hr_payroll.hr_salary_rule_sick_leave'),
+                ref('l10n_se_hr_payroll.hr_salary_rule_qualifying_deduction'),
+                ref('l10n_se_hr_payroll.hr_salary_rule_sick_wage'),
+
+                ref('l10n_se_hr_payroll.hr_salary_rule_vab'),
+
+                ref('l10n_se_hr_payroll.hr_salary_rule_leave_of_absence'),
+                ref('l10n_se_hr_payroll.hr_salary_rule_leave_of_absence_hourly'),
+                ref('l10n_se_hr_payroll.hr_salary_rule_leave_of_absence_less_than_5'),
+                ref('l10n_se_hr_payroll.hr_salary_rule_leave_of_absence_more_than_5'),
+
+                ref('l10n_se_hr_payroll.hr_salary_rule_kval_otid'),
+                ref('l10n_se_hr_payroll.hr_salary_rule_enkel_otid'),
+
+                ref('l10n_se_hr_holidays.hr_salary_rule_legal_leave'),
+                ref('l10n_se_hr_holidays.hr_salary_rule_saved_leave'),
+
+                ref('l10n_se_hr_holidays.hr_salary_rule_legal_leave_deduction_monthly'),
+                ref('l10n_se_hr_holidays.hr_salary_rule_legal_leave_unpaid'),
+                ref('l10n_se_hr_holidays.hr_salary_rule_advance_leave'),
+                ref('l10n_se_hr_holidays.hr_salary_rule_advance_leave_display'),
+
+                ref('l10n_se_hr_payroll.hr_salary_rule_restid_parent'),
+                ref('l10n_se_hr_payroll.hr_salary_rule_restid_vardag'),
+                ref('l10n_se_hr_payroll.hr_salary_rule_restid_helg'),
+
+                ref('l10n_se_hr_payroll.hr_salary_rule_mil_parent'),
+                ref('l10n_se_hr_payroll.hr_salary_rule_mil_fri'),
+                ref('l10n_se_hr_payroll.hr_salary_rule_mil_skatt'),
+                ref('l10n_se_hr_payroll.hr_salary_rule_mil_bensin_fri'),
+                ref('l10n_se_hr_payroll.hr_salary_rule_mil_bensin_skatt'),
+
+                ref('l10n_se_hr_payroll.hr_salary_rule_ovrig_netto_ers'),
+                ref('l10n_se_hr_payroll.hr_salary_rule_ovrig_netto_avd'),
+                
+                ref('l10n_se_hr_payroll.hr_salary_rule_bonus'),
+
+                ref('l10n_se_hr_payroll.hr_salary_rule_brutto'),
+                ref('l10n_se_hr_payroll.hr_salary_rule_summa'),
+
+                ref('l10n_se_hr_payroll_benefits.hr_benefit_rule_carbru'),
+                ref('l10n_se_hr_payroll_benefits.hr_benefit_rule_home'),
+                ref('l10n_se_hr_payroll_benefits.hr_benefit_rule_drivmedel'),
+
+                ref('l10n_se_hr_payroll_benefits.hr_salary_rule_trakt_parent'),
+
+                ref('l10n_se_hr_payroll_benefits.hr_salary_rule_trakt_hel'),
+                ref('l10n_se_hr_payroll_benefits.hr_salary_rule_trakt_halv'),
+                ref('l10n_se_hr_payroll_benefits.hr_salary_rule_trakt_natt'),
+
+                ref('l10n_se_hr_payroll_benefits.hr_salary_rule_trakt_finland'),
+                ref('l10n_se_hr_payroll_benefits.hr_salary_rule_trakt_frankrike'),
+                ref('l10n_se_hr_payroll_benefits.hr_salary_rule_trakt_norge'),
+                ref('l10n_se_hr_payroll_benefits.hr_salary_rule_trakt_spanien'),
+                ref('l10n_se_hr_payroll_benefits.hr_salary_rule_trakt_tyskland'),
+                ref('l10n_se_hr_payroll_benefits.hr_salary_rule_trakt_usa'),
+
+                ref('l10n_se_hr_payroll_benefits.hr_salary_rule_trakt_inrikes_skatt'),
+
+                ref('l10n_se_hr_payroll_benefits.hr_benefit_rule_kost_frukost'),
+                ref('l10n_se_hr_payroll_benefits.hr_benefit_rule_kost_lunch'),
+                ref('l10n_se_hr_payroll_benefits.hr_benefit_rule_kost_fri'),
+
+                ref('l10n_se_hr_payroll_benefits.hr_salary_rule_trakt_red_frukost'),
+                ref('l10n_se_hr_payroll_benefits.hr_salary_rule_trakt_red_lunch'),
+                ref('l10n_se_hr_payroll_benefits.hr_salary_rule_trakt_red_fri'),
+
+                ref('l10n_se_hr_payroll_benefits.hr_salary_rule_red_utl_frukost'),
+                ref('l10n_se_hr_payroll_benefits.hr_salary_rule_trakt_red_utl_lunch'),
+                ref('l10n_se_hr_payroll_benefits.hr_salary_rule_trakt_red_utl_fri'),
+
+                ref('l10n_se_hr_payroll_benefits.hr_salary_rule_lunch_parent'),
+                ref('l10n_se_hr_payroll_benefits.hr_salary_rule_lunch_kupong'),
+                ref('l10n_se_hr_payroll_benefits.hr_salary_rule_lunch_kupong_fmn'),
+
+                ref('l10n_se_hr_payroll_benefits.hr_salary_rule_ovrig_fmn_skatt'),
+                ref('l10n_se_hr_payroll_benefits.hr_salary_rule_forman_parent'),
+
+                ref('l10n_se_payroll_taxtable.hr_salary_rule_prel_tax_table'),
+                ref('l10n_se_payroll_taxtable.hr_salary_rule_one_off_tax'),
+                ref('l10n_se_payroll_taxtable.hr_salary_rule_total_tax_display'),
             ])]" />
             <field name="const_ids" eval="[
                 (0, 0, {'name': 'Månadsarbetstid i timmar heltid', 'code': 'MAT', 'constant': 175.0}),
@@ -226,6 +310,89 @@
             <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons" />
             <field name="rule_ids" eval="[(6,0,[
                 ref('l10n_se_hr_payroll.hr_salary_rule_gl_tim'),
+                ref('l10n_se_hr_payroll.hr_salary_rule_wage_exchange'),
+
+                ref('l10n_se_hr_payroll.hr_salary_rule_sick_leave'),
+                ref('l10n_se_hr_payroll.hr_salary_rule_qualifying_deduction'),
+                ref('l10n_se_hr_payroll.hr_salary_rule_sick_wage'),
+
+                ref('l10n_se_hr_payroll.hr_salary_rule_vab'),
+
+                ref('l10n_se_hr_payroll.hr_salary_rule_leave_of_absence'),
+                ref('l10n_se_hr_payroll.hr_salary_rule_leave_of_absence_hourly'),
+                ref('l10n_se_hr_payroll.hr_salary_rule_leave_of_absence_less_than_5'),
+                ref('l10n_se_hr_payroll.hr_salary_rule_leave_of_absence_more_than_5'),
+
+                ref('l10n_se_hr_payroll.hr_salary_rule_kval_otid'),
+                ref('l10n_se_hr_payroll.hr_salary_rule_enkel_otid'),
+
+                ref('l10n_se_hr_holidays.hr_salary_rule_legal_leave'),
+                ref('l10n_se_hr_holidays.hr_salary_rule_saved_leave'),
+
+                ref('l10n_se_hr_holidays.hr_salary_rule_legal_leave_deduction_monthly'),
+                ref('l10n_se_hr_holidays.hr_salary_rule_legal_leave_unpaid'),
+                ref('l10n_se_hr_holidays.hr_salary_rule_advance_leave'),
+                ref('l10n_se_hr_holidays.hr_salary_rule_advance_leave_display'),
+
+                ref('l10n_se_hr_payroll.hr_salary_rule_restid_parent'),
+                ref('l10n_se_hr_payroll.hr_salary_rule_restid_vardag'),
+                ref('l10n_se_hr_payroll.hr_salary_rule_restid_helg'),
+
+                ref('l10n_se_hr_payroll.hr_salary_rule_mil_parent'),
+                ref('l10n_se_hr_payroll.hr_salary_rule_mil_fri'),
+                ref('l10n_se_hr_payroll.hr_salary_rule_mil_skatt'),
+                ref('l10n_se_hr_payroll.hr_salary_rule_mil_bensin_fri'),
+                ref('l10n_se_hr_payroll.hr_salary_rule_mil_bensin_skatt'),
+
+                ref('l10n_se_hr_payroll.hr_salary_rule_ovrig_netto_ers'),
+                ref('l10n_se_hr_payroll.hr_salary_rule_ovrig_netto_avd'),
+                
+                ref('l10n_se_hr_payroll.hr_salary_rule_bonus'),
+
+                ref('l10n_se_hr_payroll.hr_salary_rule_brutto'),
+                ref('l10n_se_hr_payroll.hr_salary_rule_summa'),
+
+                ref('l10n_se_hr_payroll_benefits.hr_benefit_rule_carbru'),
+                ref('l10n_se_hr_payroll_benefits.hr_benefit_rule_home'),
+                ref('l10n_se_hr_payroll_benefits.hr_benefit_rule_drivmedel'),
+
+                ref('l10n_se_hr_payroll_benefits.hr_salary_rule_trakt_parent'),
+
+                ref('l10n_se_hr_payroll_benefits.hr_salary_rule_trakt_hel'),
+                ref('l10n_se_hr_payroll_benefits.hr_salary_rule_trakt_halv'),
+                ref('l10n_se_hr_payroll_benefits.hr_salary_rule_trakt_natt'),
+
+                ref('l10n_se_hr_payroll_benefits.hr_salary_rule_trakt_finland'),
+                ref('l10n_se_hr_payroll_benefits.hr_salary_rule_trakt_frankrike'),
+                ref('l10n_se_hr_payroll_benefits.hr_salary_rule_trakt_norge'),
+                ref('l10n_se_hr_payroll_benefits.hr_salary_rule_trakt_spanien'),
+                ref('l10n_se_hr_payroll_benefits.hr_salary_rule_trakt_tyskland'),
+                ref('l10n_se_hr_payroll_benefits.hr_salary_rule_trakt_usa'),
+
+                ref('l10n_se_hr_payroll_benefits.hr_salary_rule_trakt_inrikes_skatt'),
+
+                ref('l10n_se_hr_payroll_benefits.hr_benefit_rule_kost_frukost'),
+                ref('l10n_se_hr_payroll_benefits.hr_benefit_rule_kost_lunch'),
+                ref('l10n_se_hr_payroll_benefits.hr_benefit_rule_kost_fri'),
+
+                ref('l10n_se_hr_payroll_benefits.hr_salary_rule_trakt_red_frukost'),
+                ref('l10n_se_hr_payroll_benefits.hr_salary_rule_trakt_red_lunch'),
+                ref('l10n_se_hr_payroll_benefits.hr_salary_rule_trakt_red_fri'),
+
+                ref('l10n_se_hr_payroll_benefits.hr_salary_rule_red_utl_frukost'),
+                ref('l10n_se_hr_payroll_benefits.hr_salary_rule_trakt_red_utl_lunch'),
+                ref('l10n_se_hr_payroll_benefits.hr_salary_rule_trakt_red_utl_fri'),
+
+                ref('l10n_se_hr_payroll_benefits.hr_salary_rule_lunch_parent'),
+                ref('l10n_se_hr_payroll_benefits.hr_salary_rule_lunch_kupong'),
+                ref('l10n_se_hr_payroll_benefits.hr_salary_rule_lunch_kupong_fmn'),
+
+                ref('l10n_se_hr_payroll_benefits.hr_salary_rule_ovrig_fmn_skatt'),
+                ref('l10n_se_hr_payroll_benefits.hr_salary_rule_forman_parent'),
+
+                ref('l10n_se_payroll_taxtable.hr_salary_rule_prel_tax_table'),
+                ref('l10n_se_payroll_taxtable.hr_salary_rule_one_off_tax'),
+                ref('l10n_se_payroll_taxtable.hr_salary_rule_total_tax_display'),
                         
             ])]" />
             <field name="const_ids" eval="[
@@ -288,6 +455,89 @@
             <field name="rule_ids" eval="[(6,0,[
                 ref('l10n_se_hr_payroll.hr_salary_rule_sick_deduction_15_90'),
                 ref('l10n_se_hr_holidays.hr_salary_rule_legal_leave_pay_arb'),
+                ref('l10n_se_hr_payroll.hr_salary_rule_wage_exchange'),
+
+                ref('l10n_se_hr_payroll.hr_salary_rule_sick_leave'),
+                ref('l10n_se_hr_payroll.hr_salary_rule_qualifying_deduction'),
+                ref('l10n_se_hr_payroll.hr_salary_rule_sick_wage'),
+
+                ref('l10n_se_hr_payroll.hr_salary_rule_vab'),
+
+                ref('l10n_se_hr_payroll.hr_salary_rule_leave_of_absence'),
+                ref('l10n_se_hr_payroll.hr_salary_rule_leave_of_absence_hourly'),
+                ref('l10n_se_hr_payroll.hr_salary_rule_leave_of_absence_less_than_5'),
+                ref('l10n_se_hr_payroll.hr_salary_rule_leave_of_absence_more_than_5'),
+
+                ref('l10n_se_hr_payroll.hr_salary_rule_kval_otid'),
+                ref('l10n_se_hr_payroll.hr_salary_rule_enkel_otid'),
+
+                ref('l10n_se_hr_holidays.hr_salary_rule_legal_leave'),
+                ref('l10n_se_hr_holidays.hr_salary_rule_saved_leave'),
+
+                ref('l10n_se_hr_holidays.hr_salary_rule_legal_leave_deduction_monthly'),
+                ref('l10n_se_hr_holidays.hr_salary_rule_legal_leave_unpaid'),
+                ref('l10n_se_hr_holidays.hr_salary_rule_advance_leave'),
+                ref('l10n_se_hr_holidays.hr_salary_rule_advance_leave_display'),
+
+                ref('l10n_se_hr_payroll.hr_salary_rule_restid_parent'),
+                ref('l10n_se_hr_payroll.hr_salary_rule_restid_vardag'),
+                ref('l10n_se_hr_payroll.hr_salary_rule_restid_helg'),
+
+                ref('l10n_se_hr_payroll.hr_salary_rule_mil_parent'),
+                ref('l10n_se_hr_payroll.hr_salary_rule_mil_fri'),
+                ref('l10n_se_hr_payroll.hr_salary_rule_mil_skatt'),
+                ref('l10n_se_hr_payroll.hr_salary_rule_mil_bensin_fri'),
+                ref('l10n_se_hr_payroll.hr_salary_rule_mil_bensin_skatt'),
+
+                ref('l10n_se_hr_payroll.hr_salary_rule_ovrig_netto_ers'),
+                ref('l10n_se_hr_payroll.hr_salary_rule_ovrig_netto_avd'),
+                
+                ref('l10n_se_hr_payroll.hr_salary_rule_bonus'),
+
+                ref('l10n_se_hr_payroll.hr_salary_rule_brutto'),
+                ref('l10n_se_hr_payroll.hr_salary_rule_summa'),
+
+                ref('l10n_se_hr_payroll_benefits.hr_benefit_rule_carbru'),
+                ref('l10n_se_hr_payroll_benefits.hr_benefit_rule_home'),
+                ref('l10n_se_hr_payroll_benefits.hr_benefit_rule_drivmedel'),
+
+                ref('l10n_se_hr_payroll_benefits.hr_salary_rule_trakt_parent'),
+
+                ref('l10n_se_hr_payroll_benefits.hr_salary_rule_trakt_hel'),
+                ref('l10n_se_hr_payroll_benefits.hr_salary_rule_trakt_halv'),
+                ref('l10n_se_hr_payroll_benefits.hr_salary_rule_trakt_natt'),
+
+                ref('l10n_se_hr_payroll_benefits.hr_salary_rule_trakt_finland'),
+                ref('l10n_se_hr_payroll_benefits.hr_salary_rule_trakt_frankrike'),
+                ref('l10n_se_hr_payroll_benefits.hr_salary_rule_trakt_norge'),
+                ref('l10n_se_hr_payroll_benefits.hr_salary_rule_trakt_spanien'),
+                ref('l10n_se_hr_payroll_benefits.hr_salary_rule_trakt_tyskland'),
+                ref('l10n_se_hr_payroll_benefits.hr_salary_rule_trakt_usa'),
+
+                ref('l10n_se_hr_payroll_benefits.hr_salary_rule_trakt_inrikes_skatt'),
+
+                ref('l10n_se_hr_payroll_benefits.hr_benefit_rule_kost_frukost'),
+                ref('l10n_se_hr_payroll_benefits.hr_benefit_rule_kost_lunch'),
+                ref('l10n_se_hr_payroll_benefits.hr_benefit_rule_kost_fri'),
+
+                ref('l10n_se_hr_payroll_benefits.hr_salary_rule_trakt_red_frukost'),
+                ref('l10n_se_hr_payroll_benefits.hr_salary_rule_trakt_red_lunch'),
+                ref('l10n_se_hr_payroll_benefits.hr_salary_rule_trakt_red_fri'),
+
+                ref('l10n_se_hr_payroll_benefits.hr_salary_rule_red_utl_frukost'),
+                ref('l10n_se_hr_payroll_benefits.hr_salary_rule_trakt_red_utl_lunch'),
+                ref('l10n_se_hr_payroll_benefits.hr_salary_rule_trakt_red_utl_fri'),
+
+                ref('l10n_se_hr_payroll_benefits.hr_salary_rule_lunch_parent'),
+                ref('l10n_se_hr_payroll_benefits.hr_salary_rule_lunch_kupong'),
+                ref('l10n_se_hr_payroll_benefits.hr_salary_rule_lunch_kupong_fmn'),
+
+                ref('l10n_se_hr_payroll_benefits.hr_salary_rule_ovrig_fmn_skatt'),
+                ref('l10n_se_hr_payroll_benefits.hr_salary_rule_forman_parent'),
+
+                ref('l10n_se_payroll_taxtable.hr_salary_rule_prel_tax_table'),
+                ref('l10n_se_payroll_taxtable.hr_salary_rule_one_off_tax'),
+                ref('l10n_se_payroll_taxtable.hr_salary_rule_total_tax_display'),
 
             ])]" />
             <field name="const_ids" eval="[
@@ -348,6 +598,89 @@
                     ref('l10n_se_hr_payroll.hr_salary_rule_gl'),
                     ref('l10n_se_hr_payroll.hr_salary_rule_dl'),
                     ref('l10n_se_hr_payroll.hr_salary_rule_sick_deduction_1_14'),
+                    ref('l10n_se_hr_payroll.hr_salary_rule_wage_exchange'),
+
+                    ref('l10n_se_hr_payroll.hr_salary_rule_sick_leave'),
+                    ref('l10n_se_hr_payroll.hr_salary_rule_qualifying_deduction'),
+                    ref('l10n_se_hr_payroll.hr_salary_rule_sick_wage'),
+
+                    ref('l10n_se_hr_payroll.hr_salary_rule_vab'),
+
+                    ref('l10n_se_hr_payroll.hr_salary_rule_leave_of_absence'),
+                    ref('l10n_se_hr_payroll.hr_salary_rule_leave_of_absence_hourly'),
+                    ref('l10n_se_hr_payroll.hr_salary_rule_leave_of_absence_less_than_5'),
+                    ref('l10n_se_hr_payroll.hr_salary_rule_leave_of_absence_more_than_5'),
+
+                    ref('l10n_se_hr_payroll.hr_salary_rule_kval_otid'),
+                    ref('l10n_se_hr_payroll.hr_salary_rule_enkel_otid'),
+
+                    ref('l10n_se_hr_holidays.hr_salary_rule_legal_leave'),
+                    ref('l10n_se_hr_holidays.hr_salary_rule_saved_leave'),
+
+                    ref('l10n_se_hr_holidays.hr_salary_rule_legal_leave_deduction_monthly'),
+                    ref('l10n_se_hr_holidays.hr_salary_rule_legal_leave_unpaid'),
+                    ref('l10n_se_hr_holidays.hr_salary_rule_advance_leave'),
+                    ref('l10n_se_hr_holidays.hr_salary_rule_advance_leave_display'),
+
+                    ref('l10n_se_hr_payroll.hr_salary_rule_restid_parent'),
+                    ref('l10n_se_hr_payroll.hr_salary_rule_restid_vardag'),
+                    ref('l10n_se_hr_payroll.hr_salary_rule_restid_helg'),
+
+                    ref('l10n_se_hr_payroll.hr_salary_rule_mil_parent'),
+                    ref('l10n_se_hr_payroll.hr_salary_rule_mil_fri'),
+                    ref('l10n_se_hr_payroll.hr_salary_rule_mil_skatt'),
+                    ref('l10n_se_hr_payroll.hr_salary_rule_mil_bensin_fri'),
+                    ref('l10n_se_hr_payroll.hr_salary_rule_mil_bensin_skatt'),
+
+                    ref('l10n_se_hr_payroll.hr_salary_rule_ovrig_netto_ers'),
+                    ref('l10n_se_hr_payroll.hr_salary_rule_ovrig_netto_avd'),
+                    
+                    ref('l10n_se_hr_payroll.hr_salary_rule_bonus'),
+
+                    ref('l10n_se_hr_payroll.hr_salary_rule_brutto'),
+                    ref('l10n_se_hr_payroll.hr_salary_rule_summa'),
+
+                    ref('l10n_se_hr_payroll_benefits.hr_benefit_rule_carbru'),
+                    ref('l10n_se_hr_payroll_benefits.hr_benefit_rule_home'),
+                    ref('l10n_se_hr_payroll_benefits.hr_benefit_rule_drivmedel'),
+
+                    ref('l10n_se_hr_payroll_benefits.hr_salary_rule_trakt_parent'),
+
+                    ref('l10n_se_hr_payroll_benefits.hr_salary_rule_trakt_hel'),
+                    ref('l10n_se_hr_payroll_benefits.hr_salary_rule_trakt_halv'),
+                    ref('l10n_se_hr_payroll_benefits.hr_salary_rule_trakt_natt'),
+
+                    ref('l10n_se_hr_payroll_benefits.hr_salary_rule_trakt_finland'),
+                    ref('l10n_se_hr_payroll_benefits.hr_salary_rule_trakt_frankrike'),
+                    ref('l10n_se_hr_payroll_benefits.hr_salary_rule_trakt_norge'),
+                    ref('l10n_se_hr_payroll_benefits.hr_salary_rule_trakt_spanien'),
+                    ref('l10n_se_hr_payroll_benefits.hr_salary_rule_trakt_tyskland'),
+                    ref('l10n_se_hr_payroll_benefits.hr_salary_rule_trakt_usa'),
+
+                    ref('l10n_se_hr_payroll_benefits.hr_salary_rule_trakt_inrikes_skatt'),
+
+                    ref('l10n_se_hr_payroll_benefits.hr_benefit_rule_kost_frukost'),
+                    ref('l10n_se_hr_payroll_benefits.hr_benefit_rule_kost_lunch'),
+                    ref('l10n_se_hr_payroll_benefits.hr_benefit_rule_kost_fri'),
+
+                    ref('l10n_se_hr_payroll_benefits.hr_salary_rule_trakt_red_frukost'),
+                    ref('l10n_se_hr_payroll_benefits.hr_salary_rule_trakt_red_lunch'),
+                    ref('l10n_se_hr_payroll_benefits.hr_salary_rule_trakt_red_fri'),
+
+                    ref('l10n_se_hr_payroll_benefits.hr_salary_rule_red_utl_frukost'),
+                    ref('l10n_se_hr_payroll_benefits.hr_salary_rule_trakt_red_utl_lunch'),
+                    ref('l10n_se_hr_payroll_benefits.hr_salary_rule_trakt_red_utl_fri'),
+
+                    ref('l10n_se_hr_payroll_benefits.hr_salary_rule_lunch_parent'),
+                    ref('l10n_se_hr_payroll_benefits.hr_salary_rule_lunch_kupong'),
+                    ref('l10n_se_hr_payroll_benefits.hr_salary_rule_lunch_kupong_fmn'),
+
+                    ref('l10n_se_hr_payroll_benefits.hr_salary_rule_ovrig_fmn_skatt'),
+                    ref('l10n_se_hr_payroll_benefits.hr_salary_rule_forman_parent'),
+
+                    ref('l10n_se_payroll_taxtable.hr_salary_rule_prel_tax_table'),
+                    ref('l10n_se_payroll_taxtable.hr_salary_rule_one_off_tax'),
+                    ref('l10n_se_payroll_taxtable.hr_salary_rule_total_tax_display'),
 
             ])]" />
             <field name="const_ids" eval="[
@@ -406,7 +739,89 @@
             <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons" />
             <field name="rule_ids" eval="[(6,0,[
                     ref('l10n_se_hr_payroll.hr_salary_rule_gl_tim'),
-                        
+                    ref('l10n_se_hr_payroll.hr_salary_rule_wage_exchange'),
+
+                    ref('l10n_se_hr_payroll.hr_salary_rule_sick_leave'),
+                    ref('l10n_se_hr_payroll.hr_salary_rule_qualifying_deduction'),
+                    ref('l10n_se_hr_payroll.hr_salary_rule_sick_wage'),
+
+                    ref('l10n_se_hr_payroll.hr_salary_rule_vab'),
+
+                    ref('l10n_se_hr_payroll.hr_salary_rule_leave_of_absence'),
+                    ref('l10n_se_hr_payroll.hr_salary_rule_leave_of_absence_hourly'),
+                    ref('l10n_se_hr_payroll.hr_salary_rule_leave_of_absence_less_than_5'),
+                    ref('l10n_se_hr_payroll.hr_salary_rule_leave_of_absence_more_than_5'),
+
+                    ref('l10n_se_hr_payroll.hr_salary_rule_kval_otid'),
+                    ref('l10n_se_hr_payroll.hr_salary_rule_enkel_otid'),
+
+                    ref('l10n_se_hr_holidays.hr_salary_rule_legal_leave'),
+                    ref('l10n_se_hr_holidays.hr_salary_rule_saved_leave'),
+
+                    ref('l10n_se_hr_holidays.hr_salary_rule_legal_leave_deduction_monthly'),
+                    ref('l10n_se_hr_holidays.hr_salary_rule_legal_leave_unpaid'),
+                    ref('l10n_se_hr_holidays.hr_salary_rule_advance_leave'),
+                    ref('l10n_se_hr_holidays.hr_salary_rule_advance_leave_display'),
+
+                    ref('l10n_se_hr_payroll.hr_salary_rule_restid_parent'),
+                    ref('l10n_se_hr_payroll.hr_salary_rule_restid_vardag'),
+                    ref('l10n_se_hr_payroll.hr_salary_rule_restid_helg'),
+
+                    ref('l10n_se_hr_payroll.hr_salary_rule_mil_parent'),
+                    ref('l10n_se_hr_payroll.hr_salary_rule_mil_fri'),
+                    ref('l10n_se_hr_payroll.hr_salary_rule_mil_skatt'),
+                    ref('l10n_se_hr_payroll.hr_salary_rule_mil_bensin_fri'),
+                    ref('l10n_se_hr_payroll.hr_salary_rule_mil_bensin_skatt'),
+
+                    ref('l10n_se_hr_payroll.hr_salary_rule_ovrig_netto_ers'),
+                    ref('l10n_se_hr_payroll.hr_salary_rule_ovrig_netto_avd'),
+                    
+                    ref('l10n_se_hr_payroll.hr_salary_rule_bonus'),
+
+                    ref('l10n_se_hr_payroll.hr_salary_rule_brutto'),
+                    ref('l10n_se_hr_payroll.hr_salary_rule_summa'),
+
+                    ref('l10n_se_hr_payroll_benefits.hr_benefit_rule_carbru'),
+                    ref('l10n_se_hr_payroll_benefits.hr_benefit_rule_home'),
+                    ref('l10n_se_hr_payroll_benefits.hr_benefit_rule_drivmedel'),
+
+                    ref('l10n_se_hr_payroll_benefits.hr_salary_rule_trakt_parent'),
+
+                    ref('l10n_se_hr_payroll_benefits.hr_salary_rule_trakt_hel'),
+                    ref('l10n_se_hr_payroll_benefits.hr_salary_rule_trakt_halv'),
+                    ref('l10n_se_hr_payroll_benefits.hr_salary_rule_trakt_natt'),
+
+                    ref('l10n_se_hr_payroll_benefits.hr_salary_rule_trakt_finland'),
+                    ref('l10n_se_hr_payroll_benefits.hr_salary_rule_trakt_frankrike'),
+                    ref('l10n_se_hr_payroll_benefits.hr_salary_rule_trakt_norge'),
+                    ref('l10n_se_hr_payroll_benefits.hr_salary_rule_trakt_spanien'),
+                    ref('l10n_se_hr_payroll_benefits.hr_salary_rule_trakt_tyskland'),
+                    ref('l10n_se_hr_payroll_benefits.hr_salary_rule_trakt_usa'),
+
+                    ref('l10n_se_hr_payroll_benefits.hr_salary_rule_trakt_inrikes_skatt'),
+
+                    ref('l10n_se_hr_payroll_benefits.hr_benefit_rule_kost_frukost'),
+                    ref('l10n_se_hr_payroll_benefits.hr_benefit_rule_kost_lunch'),
+                    ref('l10n_se_hr_payroll_benefits.hr_benefit_rule_kost_fri'),
+
+                    ref('l10n_se_hr_payroll_benefits.hr_salary_rule_trakt_red_frukost'),
+                    ref('l10n_se_hr_payroll_benefits.hr_salary_rule_trakt_red_lunch'),
+                    ref('l10n_se_hr_payroll_benefits.hr_salary_rule_trakt_red_fri'),
+
+                    ref('l10n_se_hr_payroll_benefits.hr_salary_rule_red_utl_frukost'),
+                    ref('l10n_se_hr_payroll_benefits.hr_salary_rule_trakt_red_utl_lunch'),
+                    ref('l10n_se_hr_payroll_benefits.hr_salary_rule_trakt_red_utl_fri'),
+
+                    ref('l10n_se_hr_payroll_benefits.hr_salary_rule_lunch_parent'),
+                    ref('l10n_se_hr_payroll_benefits.hr_salary_rule_lunch_kupong'),
+                    ref('l10n_se_hr_payroll_benefits.hr_salary_rule_lunch_kupong_fmn'),
+
+                    ref('l10n_se_hr_payroll_benefits.hr_salary_rule_ovrig_fmn_skatt'),
+                    ref('l10n_se_hr_payroll_benefits.hr_salary_rule_forman_parent'),
+
+                    ref('l10n_se_payroll_taxtable.hr_salary_rule_prel_tax_table'),
+                    ref('l10n_se_payroll_taxtable.hr_salary_rule_one_off_tax'),
+                    ref('l10n_se_payroll_taxtable.hr_salary_rule_total_tax_display'),
             ])]" />
             <field name="const_ids" eval="[
                 (0, 0, {'name': 'Månadsarbetstid i timmar heltid', 'code': 'MAT', 'constant': 173.0}),

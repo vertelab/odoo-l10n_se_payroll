@@ -60,6 +60,13 @@
             <field name="name">Förmån</field>
             <field name="note">Utgivna förmåner</field>
             <field name="company_id" eval="False"/>
+        </record>
+
+        <record id="hr_salary_rule_category_ENGANG" model="hr.salary.rule.category">
+            <field name="code">ENGANG</field>
+            <field name="name">Engångsbelopp</field>
+            <field name="note">Bonus, Retroaktiv lön, Semesterersättning vid slutlön, etc.</field>
+            <field name="company_id" eval="False"/>
         </record> 
 
         <record id="hr_salary_rule_category_DUMMY" model="hr.salary.rule.category">
@@ -68,6 +75,20 @@
             <field name="note">Används när sumering inte är relevant</field>
             <field name="company_id" eval="False"/>
         </record>
+
+        <record id="hr_salary_rule_category_SKV" model="hr.salary.rule.category">
+            <field name="code">SKV</field>
+            <field name="name">Skatter</field>
+            <field name="note">Används för att summera all skatt</field>
+            <field name="company_id" eval="False"/>
+        </record>
+
+<!--         
+        <record id="hr_salary_rule_category_SKVPRE" model="hr.salary.rule.category">
+            <field name="code">SKVPRE</field>
+            <field name="name">Skatter (pre)</field>
+            <field name="note">Används för skatt att dra av förutom preleminär skatt</field>
+        </record> -->
 
         <!-- <record id="hr_salary_rule_category-SYSTEM" model="hr.salary.rule.category">
             <field name="code">SYSTEM</field>
@@ -79,16 +100,7 @@
             <field name="name">Tillämpning</field>
             <field name="note">Används när en 'category' ska bearbetas</field>
         </record>
-        <record id="hr_salary_rule_category-SKV" model="hr.salary.rule.category">
-            <field name="code">SKV</field>
-            <field name="name">Skatter</field>
-            <field name="note">Används för att summera all skatt</field>
-        </record>
-        <record id="hr_salary_rule_category-SKVPRE" model="hr.salary.rule.category">
-            <field name="code">SKVPRE</field>
-            <field name="name">Skatter (pre)</field>
-            <field name="note">Används för skatt att dra av förutom preleminär skatt</field>
-        </record>
+
         -->
     </data>
 </odoo>

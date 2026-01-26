@@ -52,6 +52,9 @@
             <field name="struct_id" ref="l10n_se_hr_payroll_tiichri.hr_payroll_structure_tj_man" />
             <field name="table_number">30</field>
             <field name="column_number" eval="'column1'" />
+            <field name="has_tax_equalization" eval="False"/>
+            <field name="has_one_off_tax" eval="True"/>
+            <field name="one_off_tax">0.3</field>
         </record>
 
         <!-- ## HR.CONTRACT.BENEFIT -->
@@ -447,11 +450,11 @@
         <!-- Kostförmån -->
         <function model="hr.payslip.input" name="write">
             <value model="hr.payslip.input" search="[('payslip_id', '=', ref('hr_payslip_doris_04')), ('code', '=', 'fmn_lunch')]"/>
-            <value eval="{'name': "Kostförmån (lunch)", 'amount_qty': 1.0}"/>
+            <value eval="{'amount_qty': 1.0}"/>
         </function>
 
         <!-- Kostavdrag -->
-        
+
         <!--  Frukost -->
         <function model="hr.payslip.input" name="write">
             <value model="hr.payslip.input" search="[('payslip_id', '=', ref('hr_payslip_doris_04')), ('code', '=', 'red_frukost')]"/>

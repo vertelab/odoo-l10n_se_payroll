@@ -50,6 +50,9 @@
             <field name="resource_calendar_id" ref="l10n_se_hr_payroll_tiichri.resource_calendar_part_time_80_tiichri" />
             <field name="table_number">30</field>
             <field name="column_number" eval="'column1'"/>
+            <field name="has_tax_equalization" eval="False"/>
+            <field name="has_one_off_tax" eval="True"/>
+            <field name="one_off_tax">0.3</field>
         </record>
 
 

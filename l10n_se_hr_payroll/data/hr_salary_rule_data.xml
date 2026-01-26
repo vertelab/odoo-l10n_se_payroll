@@ -829,7 +829,7 @@ result_qty = inputs.net_avd.amount_qty
 
         <!-- Bonus -->
         <record id="hr_salary_rule_bonus" model="hr.salary.rule">
-            <field name="category_id" ref="l10n_se_hr_payroll.hr_salary_rule_category_BRUTIL" />
+            <field name="category_id" ref="l10n_se_hr_payroll.hr_salary_rule_category_ENGANG" />
             <field name="company_id" eval="False"/>
             <field name="code">bonus</field>
             <field name="name">Bonus</field>
@@ -865,7 +865,7 @@ result = inputs.bonus.amount
             <field name="condition_select">none</field>
             <field name="amount_select">code</field>
             <field name="amount_python_compute">
-result = categories.BAS + categories.BRUAVG + categories.BRUTIL
+result = categories.BAS + categories.BRUAVG + categories.BRUTIL + categories.ENGANG
             </field>
         </record>
 
@@ -880,7 +880,7 @@ result = categories.BAS + categories.BRUAVG + categories.BRUTIL
             <field name="condition_select">none</field>
             <field name="amount_select">code</field>
             <field name="amount_python_compute">
-result = categories.BRUTTO + categories.NETAVG + categories.NETTIL
+result = categories.BRUTTO + categories.SKV + categories.NETAVG + categories.NETTIL
             </field>
         </record>
 
