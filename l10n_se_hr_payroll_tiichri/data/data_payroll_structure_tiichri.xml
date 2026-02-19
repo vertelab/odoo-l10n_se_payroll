@@ -24,8 +24,13 @@
             <field name="rule_ids" eval="[(6,0,[
                 ref('l10n_se_hr_holidays.hr_salary_rule_legal_leave_addition8'),
                 ref('l10n_se_hr_holidays.hr_salary_rule_legal_leave_pay_tj'),
+                ref('l10n_se_hr_payroll.hr_salary_rule_parental_deduction_tj'),
+                ref('l10n_se_hr_payroll.hr_salary_rule_parental_pay_tj'),
+                ref('l10n_se_hr_payroll.hr_salary_rule_parental_leave'),
+
                 ref('l10n_se_hr_payroll.hr_salary_rule_mertid'),
                 ref('l10n_se_hr_payroll.hr_salary_rule_wage_exchange'),
+                ref('l10n_se_hr_payroll.hr_salary_rule_attachment_deduction'),
 
                 ref('l10n_se_hr_payroll.hr_salary_rule_sick_leave'),
                 ref('l10n_se_hr_payroll.hr_salary_rule_qualifying_deduction'),
@@ -62,6 +67,8 @@
                 ref('l10n_se_hr_payroll.hr_salary_rule_ovrig_netto_ers'),
                 ref('l10n_se_hr_payroll.hr_salary_rule_ovrig_netto_avd'),
                 
+                ref('l10n_se_hr_payroll.hr_salary_rule_representation_ers'),
+
                 ref('l10n_se_hr_payroll.hr_salary_rule_bonus'),
 
                 ref('l10n_se_hr_payroll.hr_salary_rule_brutto'),
@@ -69,6 +76,8 @@
 
                 ref('l10n_se_hr_payroll_benefits.hr_benefit_rule_carbru'),
                 ref('l10n_se_hr_payroll_benefits.hr_benefit_rule_home'),
+                ref('l10n_se_hr_payroll_benefits.hr_benefit_rule_home_not_small'),
+
                 ref('l10n_se_hr_payroll_benefits.hr_benefit_rule_drivmedel'),
 
                 ref('l10n_se_hr_payroll_benefits.hr_salary_rule_trakt_parent'),
@@ -77,12 +86,7 @@
                 ref('l10n_se_hr_payroll_benefits.hr_salary_rule_trakt_halv'),
                 ref('l10n_se_hr_payroll_benefits.hr_salary_rule_trakt_natt'),
 
-                ref('l10n_se_hr_payroll_benefits.hr_salary_rule_trakt_finland'),
-                ref('l10n_se_hr_payroll_benefits.hr_salary_rule_trakt_frankrike'),
-                ref('l10n_se_hr_payroll_benefits.hr_salary_rule_trakt_norge'),
-                ref('l10n_se_hr_payroll_benefits.hr_salary_rule_trakt_spanien'),
-                ref('l10n_se_hr_payroll_benefits.hr_salary_rule_trakt_tyskland'),
-                ref('l10n_se_hr_payroll_benefits.hr_salary_rule_trakt_usa'),
+                ref('l10n_se_hr_payroll_benefits.hr_salary_rule_trakt_utland'),
 
                 ref('l10n_se_hr_payroll_benefits.hr_salary_rule_trakt_inrikes_skatt'),
 
@@ -97,6 +101,10 @@
                 ref('l10n_se_hr_payroll_benefits.hr_salary_rule_red_utl_frukost'),
                 ref('l10n_se_hr_payroll_benefits.hr_salary_rule_trakt_red_utl_lunch'),
                 ref('l10n_se_hr_payroll_benefits.hr_salary_rule_trakt_red_utl_fri'),
+
+                ref('l10n_se_hr_payroll_benefits.hr_salary_rule_rut_red'),
+                ref('l10n_se_hr_payroll_benefits.hr_salary_rule_rut_fmn'),
+                ref('l10n_se_hr_payroll_benefits.hr_salary_rule_rut_parent'),
 
                 ref('l10n_se_hr_payroll_benefits.hr_salary_rule_lunch_parent'),
                 ref('l10n_se_hr_payroll_benefits.hr_salary_rule_lunch_kupong'),
@@ -116,7 +124,7 @@
                 (0, 0, {'name': 'Månadsarbetstid i dagar heltid', 'code': 'MAD', 'constant': 21.0}),
                 (0, 0, {'name': 'Divisor enkel övertid', 'code': 'EO', 'constant': 94.0}),
                 (0, 0, {'name': 'Divisor kvalificerad övertid', 'code': 'KO', 'constant': 72.0}),
-                (0, 0, {'name': 'Prisbasbelopp', 'code': 'PBB', 'constant': 483000.0}),
+                (0, 0, {'name': 'Prisbasbelopp', 'code': 'PBB', 'constant': 48300.0}),
 
                 (0, 0, {'name': 'Milersättning (Tjänstebil, bensin)', 'code': 'F_MIL_BENSIN', 'constant': 0.95}),
                 (0, 0, {'name': 'Skattepliktig milersättning (Tjänstebil, bensin)', 'code': 'S_MIL_BENSIN', 'constant': 0.55}),
@@ -124,18 +132,11 @@
                 (0, 0, {'name': 'Milersättning (Egen bil)', 'code': 'F_MIL_EGEN', 'constant': 1.85}),
                 (0, 0, {'name': 'Skattepliktig milersättning (Egen bil)', 'code': 'S_MIL_EGEN', 'constant': 1.15}),
                 
-                (0, 0, {'name': 'Restidsersättning Vardag', 'code': 'RES_VARD', 'constant': 190.0}),
-                (0, 0, {'name': 'Restidsersättning Helg', 'code': 'RES_HELG', 'constant': 240.0}),
+                (0, 0, {'name': 'Restidsersättning Vardag', 'code': 'RES_VARD', 'constant': 240.0}),
+                (0, 0, {'name': 'Restidsersättning Helg', 'code': 'RES_HELG', 'constant': 190.0}),
 
                 (0, 0, {'name': 'Drivmedel Upphöjt värde', 'code': 'DRIV_UH', 'constant': 1.2}),
                 
-                (0, 0, {'name': 'Traktamente USA', 'code': 'TRAKT_US', 'constant': 821.0}),
-                (0, 0, {'name': 'Traktamente Tyskland', 'code': 'TRAKT_DE', 'constant': 611.0}),
-                (0, 0, {'name': 'Traktamente Spanien', 'code': 'TRAKT_SPA', 'constant': 568.0}),
-                (0, 0, {'name': 'Traktamente Norge', 'code': 'TRAKT_NO', 'constant': 953.0}),
-                (0, 0, {'name': 'Traktamente Frankrike', 'code': 'TRAKT_FRA', 'constant': 761.0}),
-                (0, 0, {'name': 'Traktamente Finland', 'code': 'TRAKT_FIN', 'constant': 700.0}),
-
                 (0, 0, {'name': 'Traktamente Heldag', 'code': 'TRAKT_HEL', 'constant': 240.0}),
                 (0, 0, {'name': 'Traktamente Halvdag', 'code': 'TRAKT_HALV', 'constant': 120.0}),
                 (0, 0, {'name': 'Traktamente Natt', 'code': 'TRAKT_NATT', 'constant': 120.0}),
@@ -166,15 +167,19 @@
             <field name="parent_id" ref="hr_payroll_structure_tj_base" />
             <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons" />
             <field name="rule_ids" eval="[(6,0,[
-                ref('l10n_se_hr_payroll.hr_salary_rule_sick_pay_15_90_tj'),
+                ref('l10n_se_hr_payroll.hr_salary_rule_sick_deduction_15_90_tj'),
                 ref('l10n_se_hr_payroll.hr_salary_rule_gl'),
                 ref('l10n_se_hr_payroll.hr_salary_rule_dl'),
                 ref('l10n_se_hr_payroll.hr_salary_rule_sick_deduction_1_14'),
                 ref('l10n_se_hr_payroll.hr_salary_rule_wage_exchange'),
+                ref('l10n_se_hr_payroll.hr_salary_rule_attachment_deduction'),
 
                 ref('l10n_se_hr_payroll.hr_salary_rule_sick_leave'),
                 ref('l10n_se_hr_payroll.hr_salary_rule_qualifying_deduction'),
                 ref('l10n_se_hr_payroll.hr_salary_rule_sick_wage'),
+                ref('l10n_se_hr_payroll.hr_salary_rule_parental_deduction_tj'),
+                ref('l10n_se_hr_payroll.hr_salary_rule_parental_pay_tj'),
+                ref('l10n_se_hr_payroll.hr_salary_rule_parental_leave'),
 
                 ref('l10n_se_hr_payroll.hr_salary_rule_vab'),
 
@@ -206,6 +211,8 @@
 
                 ref('l10n_se_hr_payroll.hr_salary_rule_ovrig_netto_ers'),
                 ref('l10n_se_hr_payroll.hr_salary_rule_ovrig_netto_avd'),
+
+                ref('l10n_se_hr_payroll.hr_salary_rule_representation_ers'),
                 
                 ref('l10n_se_hr_payroll.hr_salary_rule_bonus'),
 
@@ -214,6 +221,8 @@
 
                 ref('l10n_se_hr_payroll_benefits.hr_benefit_rule_carbru'),
                 ref('l10n_se_hr_payroll_benefits.hr_benefit_rule_home'),
+                ref('l10n_se_hr_payroll_benefits.hr_benefit_rule_home_not_small'),
+
                 ref('l10n_se_hr_payroll_benefits.hr_benefit_rule_drivmedel'),
 
                 ref('l10n_se_hr_payroll_benefits.hr_salary_rule_trakt_parent'),
@@ -222,12 +231,7 @@
                 ref('l10n_se_hr_payroll_benefits.hr_salary_rule_trakt_halv'),
                 ref('l10n_se_hr_payroll_benefits.hr_salary_rule_trakt_natt'),
 
-                ref('l10n_se_hr_payroll_benefits.hr_salary_rule_trakt_finland'),
-                ref('l10n_se_hr_payroll_benefits.hr_salary_rule_trakt_frankrike'),
-                ref('l10n_se_hr_payroll_benefits.hr_salary_rule_trakt_norge'),
-                ref('l10n_se_hr_payroll_benefits.hr_salary_rule_trakt_spanien'),
-                ref('l10n_se_hr_payroll_benefits.hr_salary_rule_trakt_tyskland'),
-                ref('l10n_se_hr_payroll_benefits.hr_salary_rule_trakt_usa'),
+                ref('l10n_se_hr_payroll_benefits.hr_salary_rule_trakt_utland'),
 
                 ref('l10n_se_hr_payroll_benefits.hr_salary_rule_trakt_inrikes_skatt'),
 
@@ -243,6 +247,10 @@
                 ref('l10n_se_hr_payroll_benefits.hr_salary_rule_trakt_red_utl_lunch'),
                 ref('l10n_se_hr_payroll_benefits.hr_salary_rule_trakt_red_utl_fri'),
 
+                ref('l10n_se_hr_payroll_benefits.hr_salary_rule_rut_red'),
+                ref('l10n_se_hr_payroll_benefits.hr_salary_rule_rut_fmn'),
+                ref('l10n_se_hr_payroll_benefits.hr_salary_rule_rut_parent'),
+                
                 ref('l10n_se_hr_payroll_benefits.hr_salary_rule_lunch_parent'),
                 ref('l10n_se_hr_payroll_benefits.hr_salary_rule_lunch_kupong'),
                 ref('l10n_se_hr_payroll_benefits.hr_salary_rule_lunch_kupong_fmn'),
@@ -259,7 +267,7 @@
                 (0, 0, {'name': 'Månadsarbetstid i dagar heltid', 'code': 'MAD', 'constant': 21.0}),
                 (0, 0, {'name': 'Divisor enkel övertid', 'code': 'EO', 'constant': 94.0}),
                 (0, 0, {'name': 'Divisor kvalificerad övertid', 'code': 'KO', 'constant': 72.0}),
-                (0, 0, {'name': 'Prisbasbelopp', 'code': 'PBB', 'constant': 483000.0}),
+                (0, 0, {'name': 'Prisbasbelopp', 'code': 'PBB', 'constant': 48300.0}),
 
                 (0, 0, {'name': 'Milersättning (Tjänstebil, bensin)', 'code': 'F_MIL_BENSIN', 'constant': 0.95}),
                 (0, 0, {'name': 'Skattepliktig milersättning (Tjänstebil, bensin)', 'code': 'S_MIL_BENSIN', 'constant': 0.55}),
@@ -267,18 +275,11 @@
                 (0, 0, {'name': 'Milersättning (Egen bil)', 'code': 'F_MIL_EGEN', 'constant': 1.85}),
                 (0, 0, {'name': 'Skattepliktig milersättning (Egen bil)', 'code': 'S_MIL_EGEN', 'constant': 1.15}),
                 
-                (0, 0, {'name': 'Restidsersättning Vardag', 'code': 'RES_VARD', 'constant': 190.0}),
-                (0, 0, {'name': 'Restidsersättning Helg', 'code': 'RES_HELG', 'constant': 240.0}),
+                (0, 0, {'name': 'Restidsersättning Vardag', 'code': 'RES_VARD', 'constant': 240.0}),
+                (0, 0, {'name': 'Restidsersättning Helg', 'code': 'RES_HELG', 'constant': 190.0}),
 
                 (0, 0, {'name': 'Drivmedel Upphöjt värde', 'code': 'DRIV_UH', 'constant': 1.2}),
                 
-                (0, 0, {'name': 'Traktamente USA', 'code': 'TRAKT_US', 'constant': 821.0}),
-                (0, 0, {'name': 'Traktamente Tyskland', 'code': 'TRAKT_DE', 'constant': 611.0}),
-                (0, 0, {'name': 'Traktamente Spanien', 'code': 'TRAKT_SPA', 'constant': 568.0}),
-                (0, 0, {'name': 'Traktamente Norge', 'code': 'TRAKT_NO', 'constant': 953.0}),
-                (0, 0, {'name': 'Traktamente Frankrike', 'code': 'TRAKT_FRA', 'constant': 761.0}),
-                (0, 0, {'name': 'Traktamente Finland', 'code': 'TRAKT_FIN', 'constant': 700.0}),
-
                 (0, 0, {'name': 'Traktamente Heldag', 'code': 'TRAKT_HEL', 'constant': 240.0}),
                 (0, 0, {'name': 'Traktamente Halvdag', 'code': 'TRAKT_HALV', 'constant': 120.0}),
                 (0, 0, {'name': 'Traktamente Natt', 'code': 'TRAKT_NATT', 'constant': 120.0}),
@@ -311,10 +312,14 @@
             <field name="rule_ids" eval="[(6,0,[
                 ref('l10n_se_hr_payroll.hr_salary_rule_gl_tim'),
                 ref('l10n_se_hr_payroll.hr_salary_rule_wage_exchange'),
+                ref('l10n_se_hr_payroll.hr_salary_rule_attachment_deduction'),
 
                 ref('l10n_se_hr_payroll.hr_salary_rule_sick_leave'),
                 ref('l10n_se_hr_payroll.hr_salary_rule_qualifying_deduction'),
                 ref('l10n_se_hr_payroll.hr_salary_rule_sick_wage'),
+                ref('l10n_se_hr_payroll.hr_salary_rule_parental_deduction_tj'),
+                ref('l10n_se_hr_payroll.hr_salary_rule_parental_pay_tj'),
+                ref('l10n_se_hr_payroll.hr_salary_rule_parental_leave'),
 
                 ref('l10n_se_hr_payroll.hr_salary_rule_vab'),
 
@@ -346,6 +351,8 @@
 
                 ref('l10n_se_hr_payroll.hr_salary_rule_ovrig_netto_ers'),
                 ref('l10n_se_hr_payroll.hr_salary_rule_ovrig_netto_avd'),
+
+                ref('l10n_se_hr_payroll.hr_salary_rule_representation_ers'),
                 
                 ref('l10n_se_hr_payroll.hr_salary_rule_bonus'),
 
@@ -354,6 +361,8 @@
 
                 ref('l10n_se_hr_payroll_benefits.hr_benefit_rule_carbru'),
                 ref('l10n_se_hr_payroll_benefits.hr_benefit_rule_home'),
+                ref('l10n_se_hr_payroll_benefits.hr_benefit_rule_home_not_small'),
+
                 ref('l10n_se_hr_payroll_benefits.hr_benefit_rule_drivmedel'),
 
                 ref('l10n_se_hr_payroll_benefits.hr_salary_rule_trakt_parent'),
@@ -362,12 +371,7 @@
                 ref('l10n_se_hr_payroll_benefits.hr_salary_rule_trakt_halv'),
                 ref('l10n_se_hr_payroll_benefits.hr_salary_rule_trakt_natt'),
 
-                ref('l10n_se_hr_payroll_benefits.hr_salary_rule_trakt_finland'),
-                ref('l10n_se_hr_payroll_benefits.hr_salary_rule_trakt_frankrike'),
-                ref('l10n_se_hr_payroll_benefits.hr_salary_rule_trakt_norge'),
-                ref('l10n_se_hr_payroll_benefits.hr_salary_rule_trakt_spanien'),
-                ref('l10n_se_hr_payroll_benefits.hr_salary_rule_trakt_tyskland'),
-                ref('l10n_se_hr_payroll_benefits.hr_salary_rule_trakt_usa'),
+                ref('l10n_se_hr_payroll_benefits.hr_salary_rule_trakt_utland'),
 
                 ref('l10n_se_hr_payroll_benefits.hr_salary_rule_trakt_inrikes_skatt'),
 
@@ -382,6 +386,10 @@
                 ref('l10n_se_hr_payroll_benefits.hr_salary_rule_red_utl_frukost'),
                 ref('l10n_se_hr_payroll_benefits.hr_salary_rule_trakt_red_utl_lunch'),
                 ref('l10n_se_hr_payroll_benefits.hr_salary_rule_trakt_red_utl_fri'),
+
+                ref('l10n_se_hr_payroll_benefits.hr_salary_rule_rut_red'),
+                ref('l10n_se_hr_payroll_benefits.hr_salary_rule_rut_fmn'),
+                ref('l10n_se_hr_payroll_benefits.hr_salary_rule_rut_parent'),
 
                 ref('l10n_se_hr_payroll_benefits.hr_salary_rule_lunch_parent'),
                 ref('l10n_se_hr_payroll_benefits.hr_salary_rule_lunch_kupong'),
@@ -400,7 +408,7 @@
                 (0, 0, {'name': 'Månadsarbetstid i dagar heltid', 'code': 'MAD', 'constant': 21.0}),
                 (0, 0, {'name': 'Divisor enkel övertid', 'code': 'EO', 'constant': 94.0}),
                 (0, 0, {'name': 'Divisor kvalificerad övertid', 'code': 'KO', 'constant': 72.0}),
-                (0, 0, {'name': 'Prisbasbelopp', 'code': 'PBB', 'constant': 483000.0}),
+                (0, 0, {'name': 'Prisbasbelopp', 'code': 'PBB', 'constant': 48300.0}),
 
                 (0, 0, {'name': 'Milersättning (Tjänstebil, bensin)', 'code': 'F_MIL_BENSIN', 'constant': 0.95}),
                 (0, 0, {'name': 'Skattepliktig milersättning (Tjänstebil, bensin)', 'code': 'S_MIL_BENSIN', 'constant': 0.55}),
@@ -408,17 +416,10 @@
                 (0, 0, {'name': 'Milersättning (Egen bil)', 'code': 'F_MIL_EGEN', 'constant': 1.85}),
                 (0, 0, {'name': 'Skattepliktig milersättning (Egen bil)', 'code': 'S_MIL_EGEN', 'constant': 1.15}),
                 
-                (0, 0, {'name': 'Restidsersättning Vardag', 'code': 'RES_VARD', 'constant': 190.0}),
-                (0, 0, {'name': 'Restidsersättning Helg', 'code': 'RES_HELG', 'constant': 240.0}),
+                (0, 0, {'name': 'Restidsersättning Vardag', 'code': 'RES_VARD', 'constant': 240.0}),
+                (0, 0, {'name': 'Restidsersättning Helg', 'code': 'RES_HELG', 'constant': 190.0}),
 
                 (0, 0, {'name': 'Drivmedel Upphöjt värde', 'code': 'DRIV_UH', 'constant': 1.2}),
-                
-                (0, 0, {'name': 'Traktamente USA', 'code': 'TRAKT_US', 'constant': 821.0}),
-                (0, 0, {'name': 'Traktamente Tyskland', 'code': 'TRAKT_DE', 'constant': 611.0}),
-                (0, 0, {'name': 'Traktamente Spanien', 'code': 'TRAKT_SPA', 'constant': 568.0}),
-                (0, 0, {'name': 'Traktamente Norge', 'code': 'TRAKT_NO', 'constant': 953.0}),
-                (0, 0, {'name': 'Traktamente Frankrike', 'code': 'TRAKT_FRA', 'constant': 761.0}),
-                (0, 0, {'name': 'Traktamente Finland', 'code': 'TRAKT_FIN', 'constant': 700.0}),
 
                 (0, 0, {'name': 'Traktamente Heldag', 'code': 'TRAKT_HEL', 'constant': 240.0}),
                 (0, 0, {'name': 'Traktamente Halvdag', 'code': 'TRAKT_HALV', 'constant': 120.0}),
@@ -456,6 +457,9 @@
                 ref('l10n_se_hr_payroll.hr_salary_rule_sick_deduction_15_90'),
                 ref('l10n_se_hr_holidays.hr_salary_rule_legal_leave_pay_arb'),
                 ref('l10n_se_hr_payroll.hr_salary_rule_wage_exchange'),
+                ref('l10n_se_hr_payroll.hr_salary_rule_attachment_deduction'),
+                ref('l10n_se_hr_payroll.hr_salary_rule_parental_deduction_arb'),
+                ref('l10n_se_hr_payroll.hr_salary_rule_parental_leave'),
 
                 ref('l10n_se_hr_payroll.hr_salary_rule_sick_leave'),
                 ref('l10n_se_hr_payroll.hr_salary_rule_qualifying_deduction'),
@@ -491,6 +495,8 @@
 
                 ref('l10n_se_hr_payroll.hr_salary_rule_ovrig_netto_ers'),
                 ref('l10n_se_hr_payroll.hr_salary_rule_ovrig_netto_avd'),
+
+                ref('l10n_se_hr_payroll.hr_salary_rule_representation_ers'),
                 
                 ref('l10n_se_hr_payroll.hr_salary_rule_bonus'),
 
@@ -499,6 +505,7 @@
 
                 ref('l10n_se_hr_payroll_benefits.hr_benefit_rule_carbru'),
                 ref('l10n_se_hr_payroll_benefits.hr_benefit_rule_home'),
+                ref('l10n_se_hr_payroll_benefits.hr_benefit_rule_home_not_small'),
                 ref('l10n_se_hr_payroll_benefits.hr_benefit_rule_drivmedel'),
 
                 ref('l10n_se_hr_payroll_benefits.hr_salary_rule_trakt_parent'),
@@ -507,12 +514,7 @@
                 ref('l10n_se_hr_payroll_benefits.hr_salary_rule_trakt_halv'),
                 ref('l10n_se_hr_payroll_benefits.hr_salary_rule_trakt_natt'),
 
-                ref('l10n_se_hr_payroll_benefits.hr_salary_rule_trakt_finland'),
-                ref('l10n_se_hr_payroll_benefits.hr_salary_rule_trakt_frankrike'),
-                ref('l10n_se_hr_payroll_benefits.hr_salary_rule_trakt_norge'),
-                ref('l10n_se_hr_payroll_benefits.hr_salary_rule_trakt_spanien'),
-                ref('l10n_se_hr_payroll_benefits.hr_salary_rule_trakt_tyskland'),
-                ref('l10n_se_hr_payroll_benefits.hr_salary_rule_trakt_usa'),
+                ref('l10n_se_hr_payroll_benefits.hr_salary_rule_trakt_utland'),
 
                 ref('l10n_se_hr_payroll_benefits.hr_salary_rule_trakt_inrikes_skatt'),
 
@@ -527,6 +529,10 @@
                 ref('l10n_se_hr_payroll_benefits.hr_salary_rule_red_utl_frukost'),
                 ref('l10n_se_hr_payroll_benefits.hr_salary_rule_trakt_red_utl_lunch'),
                 ref('l10n_se_hr_payroll_benefits.hr_salary_rule_trakt_red_utl_fri'),
+
+                ref('l10n_se_hr_payroll_benefits.hr_salary_rule_rut_red'),
+                ref('l10n_se_hr_payroll_benefits.hr_salary_rule_rut_fmn'),
+                ref('l10n_se_hr_payroll_benefits.hr_salary_rule_rut_parent'),
 
                 ref('l10n_se_hr_payroll_benefits.hr_salary_rule_lunch_parent'),
                 ref('l10n_se_hr_payroll_benefits.hr_salary_rule_lunch_kupong'),
@@ -545,7 +551,7 @@
                 (0, 0, {'name': 'Månadsarbetstid i dagar heltid', 'code': 'MAD', 'constant': 21.0}),
                 (0, 0, {'name': 'Faktor enkel övertid', 'code': 'EO', 'constant': 1.5}),
                 (0, 0, {'name': 'Faktor kvalificerad övertid', 'code': 'KO', 'constant': 2.0}),
-                (0, 0, {'name': 'Prisbasbelopp', 'code': 'PBB', 'constant': 483000.0}),
+                (0, 0, {'name': 'Prisbasbelopp', 'code': 'PBB', 'constant': 48300.0}),
 
                 (0, 0, {'name': 'Milersättning (Tjänstebil, bensin)', 'code': 'F_MIL_BENSIN', 'constant': 0.95}),
                 (0, 0, {'name': 'Skattepliktig milersättning (Tjänstebil, bensin)', 'code': 'S_MIL_BENSIN', 'constant': 0.55}),
@@ -553,17 +559,10 @@
                 (0, 0, {'name': 'Milersättning (Egen bil)', 'code': 'F_MIL_EGEN', 'constant': 1.85}),
                 (0, 0, {'name': 'Skattepliktig milersättning (Egen bil)', 'code': 'S_MIL_EGEN', 'constant': 1.15}),
                 
-                (0, 0, {'name': 'Restidsersättning Vardag', 'code': 'RES_VARD', 'constant': 190.0}),
-                (0, 0, {'name': 'Restidsersättning Helg', 'code': 'RES_HELG', 'constant': 240.0}),
+                (0, 0, {'name': 'Restidsersättning Vardag', 'code': 'RES_VARD', 'constant': 240.0}),
+                (0, 0, {'name': 'Restidsersättning Helg', 'code': 'RES_HELG', 'constant': 190.0}),
 
                 (0, 0, {'name': 'Drivmedel Upphöjt värde', 'code': 'DRIV_UH', 'constant': 1.2}),
-                
-                (0, 0, {'name': 'Traktamente USA', 'code': 'TRAKT_US', 'constant': 821.0}),
-                (0, 0, {'name': 'Traktamente Tyskland', 'code': 'TRAKT_DE', 'constant': 611.0}),
-                (0, 0, {'name': 'Traktamente Spanien', 'code': 'TRAKT_SPA', 'constant': 568.0}),
-                (0, 0, {'name': 'Traktamente Norge', 'code': 'TRAKT_NO', 'constant': 953.0}),
-                (0, 0, {'name': 'Traktamente Frankrike', 'code': 'TRAKT_FRA', 'constant': 761.0}),
-                (0, 0, {'name': 'Traktamente Finland', 'code': 'TRAKT_FIN', 'constant': 700.0}),
 
                 (0, 0, {'name': 'Traktamente Heldag', 'code': 'TRAKT_HEL', 'constant': 240.0}),
                 (0, 0, {'name': 'Traktamente Halvdag', 'code': 'TRAKT_HALV', 'constant': 120.0}),
@@ -599,6 +598,9 @@
                     ref('l10n_se_hr_payroll.hr_salary_rule_dl'),
                     ref('l10n_se_hr_payroll.hr_salary_rule_sick_deduction_1_14'),
                     ref('l10n_se_hr_payroll.hr_salary_rule_wage_exchange'),
+                    ref('l10n_se_hr_payroll.hr_salary_rule_attachment_deduction'),
+                    ref('l10n_se_hr_payroll.hr_salary_rule_parental_deduction_arb'),
+                    ref('l10n_se_hr_payroll.hr_salary_rule_parental_leave'),
 
                     ref('l10n_se_hr_payroll.hr_salary_rule_sick_leave'),
                     ref('l10n_se_hr_payroll.hr_salary_rule_qualifying_deduction'),
@@ -634,7 +636,9 @@
 
                     ref('l10n_se_hr_payroll.hr_salary_rule_ovrig_netto_ers'),
                     ref('l10n_se_hr_payroll.hr_salary_rule_ovrig_netto_avd'),
-                    
+
+                    ref('l10n_se_hr_payroll.hr_salary_rule_representation_ers'),
+
                     ref('l10n_se_hr_payroll.hr_salary_rule_bonus'),
 
                     ref('l10n_se_hr_payroll.hr_salary_rule_brutto'),
@@ -642,6 +646,7 @@
 
                     ref('l10n_se_hr_payroll_benefits.hr_benefit_rule_carbru'),
                     ref('l10n_se_hr_payroll_benefits.hr_benefit_rule_home'),
+                    ref('l10n_se_hr_payroll_benefits.hr_benefit_rule_home_not_small'),
                     ref('l10n_se_hr_payroll_benefits.hr_benefit_rule_drivmedel'),
 
                     ref('l10n_se_hr_payroll_benefits.hr_salary_rule_trakt_parent'),
@@ -650,12 +655,7 @@
                     ref('l10n_se_hr_payroll_benefits.hr_salary_rule_trakt_halv'),
                     ref('l10n_se_hr_payroll_benefits.hr_salary_rule_trakt_natt'),
 
-                    ref('l10n_se_hr_payroll_benefits.hr_salary_rule_trakt_finland'),
-                    ref('l10n_se_hr_payroll_benefits.hr_salary_rule_trakt_frankrike'),
-                    ref('l10n_se_hr_payroll_benefits.hr_salary_rule_trakt_norge'),
-                    ref('l10n_se_hr_payroll_benefits.hr_salary_rule_trakt_spanien'),
-                    ref('l10n_se_hr_payroll_benefits.hr_salary_rule_trakt_tyskland'),
-                    ref('l10n_se_hr_payroll_benefits.hr_salary_rule_trakt_usa'),
+                    ref('l10n_se_hr_payroll_benefits.hr_salary_rule_trakt_utland'),
 
                     ref('l10n_se_hr_payroll_benefits.hr_salary_rule_trakt_inrikes_skatt'),
 
@@ -670,6 +670,10 @@
                     ref('l10n_se_hr_payroll_benefits.hr_salary_rule_red_utl_frukost'),
                     ref('l10n_se_hr_payroll_benefits.hr_salary_rule_trakt_red_utl_lunch'),
                     ref('l10n_se_hr_payroll_benefits.hr_salary_rule_trakt_red_utl_fri'),
+
+                    ref('l10n_se_hr_payroll_benefits.hr_salary_rule_rut_red'),
+                    ref('l10n_se_hr_payroll_benefits.hr_salary_rule_rut_fmn'),
+                    ref('l10n_se_hr_payroll_benefits.hr_salary_rule_rut_parent'),
 
                     ref('l10n_se_hr_payroll_benefits.hr_salary_rule_lunch_parent'),
                     ref('l10n_se_hr_payroll_benefits.hr_salary_rule_lunch_kupong'),
@@ -688,7 +692,7 @@
                 (0, 0, {'name': 'Månadsarbetstid i dagar heltid', 'code': 'MAD', 'constant': 21.0}),
                 (0, 0, {'name': 'Faktor enkel övertid', 'code': 'EO', 'constant': 1.5}),
                 (0, 0, {'name': 'Faktor kvalificerad övertid', 'code': 'KO', 'constant': 2.0}),
-                (0, 0, {'name': 'Prisbasbelopp', 'code': 'PBB', 'constant': 483000.0}),
+                (0, 0, {'name': 'Prisbasbelopp', 'code': 'PBB', 'constant': 48300.0}),
 
                 (0, 0, {'name': 'Milersättning (Tjänstebil, bensin)', 'code': 'F_MIL_BENSIN', 'constant': 0.95}),
                 (0, 0, {'name': 'Skattepliktig milersättning (Tjänstebil, bensin)', 'code': 'S_MIL_BENSIN', 'constant': 0.55}),
@@ -696,18 +700,11 @@
                 (0, 0, {'name': 'Milersättning (Egen bil)', 'code': 'F_MIL_EGEN', 'constant': 1.85}),
                 (0, 0, {'name': 'Skattepliktig milersättning (Egen bil)', 'code': 'S_MIL_EGEN', 'constant': 1.15}),
                 
-                (0, 0, {'name': 'Restidsersättning Vardag', 'code': 'RES_VARD', 'constant': 190.0}),
-                (0, 0, {'name': 'Restidsersättning Helg', 'code': 'RES_HELG', 'constant': 240.0}),
+                (0, 0, {'name': 'Restidsersättning Vardag', 'code': 'RES_VARD', 'constant': 240.0}),
+                (0, 0, {'name': 'Restidsersättning Helg', 'code': 'RES_HELG', 'constant': 190.0}),
 
                 (0, 0, {'name': 'Drivmedel Upphöjt värde', 'code': 'DRIV_UH', 'constant': 1.2}),
                 
-                (0, 0, {'name': 'Traktamente USA', 'code': 'TRAKT_US', 'constant': 821.0}),
-                (0, 0, {'name': 'Traktamente Tyskland', 'code': 'TRAKT_DE', 'constant': 611.0}),
-                (0, 0, {'name': 'Traktamente Spanien', 'code': 'TRAKT_SPA', 'constant': 568.0}),
-                (0, 0, {'name': 'Traktamente Norge', 'code': 'TRAKT_NO', 'constant': 953.0}),
-                (0, 0, {'name': 'Traktamente Frankrike', 'code': 'TRAKT_FRA', 'constant': 761.0}),
-                (0, 0, {'name': 'Traktamente Finland', 'code': 'TRAKT_FIN', 'constant': 700.0}),
-
                 (0, 0, {'name': 'Traktamente Heldag', 'code': 'TRAKT_HEL', 'constant': 240.0}),
                 (0, 0, {'name': 'Traktamente Halvdag', 'code': 'TRAKT_HALV', 'constant': 120.0}),
                 (0, 0, {'name': 'Traktamente Natt', 'code': 'TRAKT_NATT', 'constant': 120.0}),
@@ -740,7 +737,10 @@
             <field name="rule_ids" eval="[(6,0,[
                     ref('l10n_se_hr_payroll.hr_salary_rule_gl_tim'),
                     ref('l10n_se_hr_payroll.hr_salary_rule_wage_exchange'),
+                    ref('l10n_se_hr_payroll.hr_salary_rule_attachment_deduction'),
 
+                    ref('l10n_se_hr_payroll.hr_salary_rule_parental_deduction_arb'),
+                    ref('l10n_se_hr_payroll.hr_salary_rule_parental_leave'),
                     ref('l10n_se_hr_payroll.hr_salary_rule_sick_leave'),
                     ref('l10n_se_hr_payroll.hr_salary_rule_qualifying_deduction'),
                     ref('l10n_se_hr_payroll.hr_salary_rule_sick_wage'),
@@ -775,6 +775,8 @@
 
                     ref('l10n_se_hr_payroll.hr_salary_rule_ovrig_netto_ers'),
                     ref('l10n_se_hr_payroll.hr_salary_rule_ovrig_netto_avd'),
+
+                    ref('l10n_se_hr_payroll.hr_salary_rule_representation_ers'),
                     
                     ref('l10n_se_hr_payroll.hr_salary_rule_bonus'),
 
@@ -783,6 +785,7 @@
 
                     ref('l10n_se_hr_payroll_benefits.hr_benefit_rule_carbru'),
                     ref('l10n_se_hr_payroll_benefits.hr_benefit_rule_home'),
+                    ref('l10n_se_hr_payroll_benefits.hr_benefit_rule_home_not_small'),
                     ref('l10n_se_hr_payroll_benefits.hr_benefit_rule_drivmedel'),
 
                     ref('l10n_se_hr_payroll_benefits.hr_salary_rule_trakt_parent'),
@@ -791,12 +794,7 @@
                     ref('l10n_se_hr_payroll_benefits.hr_salary_rule_trakt_halv'),
                     ref('l10n_se_hr_payroll_benefits.hr_salary_rule_trakt_natt'),
 
-                    ref('l10n_se_hr_payroll_benefits.hr_salary_rule_trakt_finland'),
-                    ref('l10n_se_hr_payroll_benefits.hr_salary_rule_trakt_frankrike'),
-                    ref('l10n_se_hr_payroll_benefits.hr_salary_rule_trakt_norge'),
-                    ref('l10n_se_hr_payroll_benefits.hr_salary_rule_trakt_spanien'),
-                    ref('l10n_se_hr_payroll_benefits.hr_salary_rule_trakt_tyskland'),
-                    ref('l10n_se_hr_payroll_benefits.hr_salary_rule_trakt_usa'),
+                    ref('l10n_se_hr_payroll_benefits.hr_salary_rule_trakt_utland'),
 
                     ref('l10n_se_hr_payroll_benefits.hr_salary_rule_trakt_inrikes_skatt'),
 
@@ -811,6 +809,10 @@
                     ref('l10n_se_hr_payroll_benefits.hr_salary_rule_red_utl_frukost'),
                     ref('l10n_se_hr_payroll_benefits.hr_salary_rule_trakt_red_utl_lunch'),
                     ref('l10n_se_hr_payroll_benefits.hr_salary_rule_trakt_red_utl_fri'),
+
+                    ref('l10n_se_hr_payroll_benefits.hr_salary_rule_rut_red'),
+                    ref('l10n_se_hr_payroll_benefits.hr_salary_rule_rut_fmn'),
+                    ref('l10n_se_hr_payroll_benefits.hr_salary_rule_rut_parent'),
 
                     ref('l10n_se_hr_payroll_benefits.hr_salary_rule_lunch_parent'),
                     ref('l10n_se_hr_payroll_benefits.hr_salary_rule_lunch_kupong'),
@@ -828,7 +830,7 @@
                 (0, 0, {'name': 'Månadsarbetstid i dagar heltid', 'code': 'MAD', 'constant': 21.0}),
                 (0, 0, {'name': 'Faktor enkel övertid', 'code': 'EO', 'constant': 1.5}),
                 (0, 0, {'name': 'Faktor kvalificerad övertid', 'code': 'KO', 'constant': 2.0}),
-                (0, 0, {'name': 'Prisbasbelopp', 'code': 'PBB', 'constant': 483000.0}),
+                (0, 0, {'name': 'Prisbasbelopp', 'code': 'PBB', 'constant': 48300.0}),
 
                 (0, 0, {'name': 'Milersättning (Tjänstebil, bensin)', 'code': 'F_MIL_BENSIN', 'constant': 0.95}),
                 (0, 0, {'name': 'Skattepliktig milersättning (Tjänstebil, bensin)', 'code': 'S_MIL_BENSIN', 'constant': 0.55}),
@@ -836,18 +838,11 @@
                 (0, 0, {'name': 'Milersättning (Egen bil)', 'code': 'F_MIL_EGEN', 'constant': 1.85}),
                 (0, 0, {'name': 'Skattepliktig milersättning (Egen bil)', 'code': 'S_MIL_EGEN', 'constant': 1.15}),
                 
-                (0, 0, {'name': 'Restidsersättning Vardag', 'code': 'RES_VARD', 'constant': 190.0}),
-                (0, 0, {'name': 'Restidsersättning Helg', 'code': 'RES_HELG', 'constant': 240.0}),
+                (0, 0, {'name': 'Restidsersättning Vardag', 'code': 'RES_VARD', 'constant': 240.0}),
+                (0, 0, {'name': 'Restidsersättning Helg', 'code': 'RES_HELG', 'constant': 190.0}),
 
                 (0, 0, {'name': 'Drivmedel Upphöjt värde', 'code': 'DRIV_UH', 'constant': 1.2}),
                 
-                (0, 0, {'name': 'Traktamente USA', 'code': 'TRAKT_US', 'constant': 821.0}),
-                (0, 0, {'name': 'Traktamente Tyskland', 'code': 'TRAKT_DE', 'constant': 611.0}),
-                (0, 0, {'name': 'Traktamente Spanien', 'code': 'TRAKT_SPA', 'constant': 568.0}),
-                (0, 0, {'name': 'Traktamente Norge', 'code': 'TRAKT_NO', 'constant': 953.0}),
-                (0, 0, {'name': 'Traktamente Frankrike', 'code': 'TRAKT_FRA', 'constant': 761.0}),
-                (0, 0, {'name': 'Traktamente Finland', 'code': 'TRAKT_FIN', 'constant': 700.0}),
-
                 (0, 0, {'name': 'Traktamente Heldag', 'code': 'TRAKT_HEL', 'constant': 240.0}),
                 (0, 0, {'name': 'Traktamente Halvdag', 'code': 'TRAKT_HALV', 'constant': 120.0}),
                 (0, 0, {'name': 'Traktamente Natt', 'code': 'TRAKT_NATT', 'constant': 120.0}),

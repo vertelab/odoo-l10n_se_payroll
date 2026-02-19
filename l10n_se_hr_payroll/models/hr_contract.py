@@ -28,11 +28,36 @@ _logger = logging.getLogger(__name__)
 class hr_contract(models.Model):
     _inherit = "hr.contract"
 
-    wage_exchange_amount = fields.Float(string="Löneväxlingssumma", defaul=0.0)
+    wage_exchange_amount = fields.Float(string="Löneväxlingssumma", default=0.0)
     wage_exchange_start = fields.Date(string="Startdatum löneväxling")
     wage_exchange_end = fields.Date(string="Slutdatum löneväxling", help="Lämna tom om växlingen är pågående")
 
     day_of_pay = fields.Integer(string="Lönedag", default=25)
+
+    #löneutmätning på engelska = attachment of earnings
+    has_attachment_of_earnings = fields.Boolean(string="Löneutmätning", default=False)
+    attachment_of_earnings_start = fields.Date(string="Startdatum löneutmätning")
+
+    attachment_amount = fields.Float(string="Utmätningsbelopp", help="Det fasta belopp Kronofogden beslutat ska dras per månad.")
+    protected_amount = fields.Float(string="Förbehållsbelopp", help="Det individuella belopp den anställde måste få behålla (bestäms av Kronofogden).")
+
+    def get_attachment_deduction(self, payslip, net_salary_before_deduction):
+        self.ensure_one()
+
+        if not self.has_attachment_of_earnings:
+            return 0.0
+        
+        if self.attachment_of_earnings_start and self.attachment_of_earnings_start > payslip.date_to:
+            return 0.0
+
+        available_for_attachment = net_salary_before_deduction - self.protected_amount
+
+        if available_for_attachment <= 0:
+            return 0.0
+            
+        actual_deduction = min(self.attachment_amount, available_for_attachment)
+        
+        return actual_deduction
 
     def get_current_wage_exchange(self, payslip):
         self.ensure_one()
@@ -79,10 +104,23 @@ class hr_contract(models.Model):
         qualifying_periods = self.get_qualifying_sick_leave_periods(payslip_id) 
         combined_qualifying_periods = self.combine_sick_leave_periods(qualifying_periods)
 
+        twelve_months_ago = payslip_id.date_from - relativedelta(months = 12)
+
+        historical_deductions_count = 0
         new_deductions_this_month = 0
-        for period in combined_qualifying_periods:
-            if payslip_id.date_from <= period['date_from'] <= payslip_id.date_to:
-                new_deductions_this_month += 1
+
+        sorted_periods = sorted(combined_qualifying_periods, key=lambda p: p['date_from'])
+
+        for period in sorted_periods:
+            if period['date_from'] >= twelve_months_ago:
+                if payslip_id.date_from <= period['date_from'] <= payslip_id.date_to:
+                    if historical_deductions_count < 10:
+                        new_deductions_this_month += 1
+                        historical_deductions_count += 1
+                    else:
+                        _logger.info(f"Högriskskydd triggat för {self.employee_id.name}. Inget karensavdrag dras.")
+                elif period['date_from'] < payslip_id.date_from:
+                    historical_deductions_count += 1
 
         return new_deductions_this_month
 
@@ -214,8 +252,12 @@ class hr_contract(models.Model):
         res = {
             'hours_1_14': 0.0,
             'days_15_90': 0.0,
-            'days_91_plus': 0.0
+            'part_15_90': 1.0,
+            'days_91_plus': 0.0,
         }
+
+        part_sum = 0.0
+        part_day_count = 0
 
         for period in combined_periods:
             loop_date = period['date_from']
@@ -226,20 +268,38 @@ class hr_contract(models.Model):
                     actual_leaves_this_day = [l['obj'] for l in leaves_mapped if l['date_from'] <= loop_date <= l['date_to']]
                     
                     if actual_leaves_this_day:
+                        explicit_parts = [l.sick_leave_part for l in actual_leaves_this_day
+                                            if hasattr(l, 'sick_leave_part') and l.sick_leave_part]
+                        
+                        day_start = datetime.combine(loop_date, time.min)
+                        day_end = datetime.combine(loop_date, time.max)
+                        work_hours_today = self.resource_calendar_id.get_work_hours_count(
+                            day_start, day_end, compute_leaves=False)
+
+                        if explicit_parts:
+                            part = max(int(d) for d in explicit_parts) / 100.0
+                        else:
+                            if work_hours_today > 0:
+                                leave_hours = sum(l.number_of_hours for l in actual_leaves_this_day)
+                                part = min(leave_hours / work_hours_today, 1.0)
+                            else:
+                                part = 1.0
+
                         if day_index <= 14:
-                            for leave in actual_leaves_this_day:
-                                if leave.request_unit_hours:
-                                    res['hours_1_14'] += leave.number_of_hours
-                                else:
-                                    day_start = fields.Datetime.to_datetime(loop_date)
-                                    day_end = day_start + relativedelta(days=1, seconds=-1)
-                                    res['hours_1_14'] += self.resource_calendar_id.get_work_hours_count(day_start, day_end, compute_leaves=False)
+                            if work_hours_today > 0:
+                                res['hours_1_14'] += (work_hours_today * part)
                         elif 15 <= day_index <= 90:
                             res['days_15_90'] += 1.0
+                            part_sum += part
+                            part_day_count += 1
                         else:
                             res['days_91_plus'] += 1.0
             
                 loop_date += relativedelta(days=1)
+
+        if part_day_count > 0:
+            res['part_15_90'] = part_sum / part_day_count
+
         return res
 
     def get_leave_of_absence_periods(self, payslip):
@@ -316,6 +376,9 @@ class hr_contract(models.Model):
 
         absence_codes = [
             'vab', 'sjk', 'tj_ledighet',
+            'f_ledighet', 'f_led',
+            'f_led_arb', 'f_led_tj',
+            'f_lon_tj',
             'tjl_tim', 'tjl_kort', 'tjl',
             'tjl_lang', 'sem_bet', 
             'sem_obet', 'sjk_1_14', 
@@ -369,5 +432,127 @@ class hr_contract(models.Model):
             total_days_employed += duration
         
         if total_days_employed > 0:
-            return total_average_rate / total_days_employed
+            raw_rate = total_average_rate / total_days_employed
+            return round(raw_rate, 2)
         return 1.0
+
+    def get_parental_leave_data(self, payslip):
+        domain = [
+            ('date_from', '<=', payslip.date_to),
+            ('date_to', '>=', payslip.date_from),
+            ('employee_id', '=', self.employee_id.id),
+            ('holiday_status_id.work_entry_type_id.code', '=', 'f_led'),
+            ('state', '=', 'validate'),
+        ]
+        leaves = self.env['hr.leave'].search(domain)
+
+        res = {
+            'hourly_hours': 0.0,
+            'short_work_days': 0.0,
+            'long_calendar_days': 0.0
+        }
+
+        for l in leaves:
+            start = max(l.date_from.date(), payslip.date_from)
+            end = min(l.date_to.date(), payslip.date_to)
+            
+            if l.number_of_days < 1.0:
+                res['hourly_hours'] += l.number_of_hours
+            
+            elif 1.0 <= l.number_of_days <= 5.0:
+                res['short_work_days'] += l.number_of_days
+            
+            else:
+                delta = (end - start).days + 1
+                res['long_calendar_days'] += delta
+
+        return res
+
+    def calculate_employment_years(self, reference_date):
+        self.ensure_one()
+        start_date = self.first_contract_date or self.date_start
+
+        if not start_date:
+            return 0
+        
+        d1 = start_date
+        d2 = reference_date
+        
+        years = relativedelta(d2, d1).years
+        return years
+
+    def get_calendar_days_for_f_led(self, payslip):
+        domain = [
+            ('date_from', '<=', payslip.date_to),
+            ('date_to', '>=', payslip.date_from),
+            ('employee_id', '=', self.employee_id.id),
+            ('holiday_status_id.work_entry_type_id.code', '=', 'f_led'),
+            ('state', '=', 'validate'),
+        ]
+        leaves = self.env['hr.leave'].search(domain)
+        total_cal_days = 0
+        for l in leaves:
+            start = max(l.date_from.date(), payslip.date_from)
+            end = min(l.date_to.date(), payslip.date_to)
+            total_cal_days += (end - start).days + 1
+        return total_cal_days
+
+
+    def get_parental_pay_amount(self, payslip):
+        self.ensure_one()
+
+        input_line = payslip.input_line_ids.filtered(lambda l: l.code == 'fl_slut_tj')
+        input_amount = input_line.amount if input_line else 0.0
+
+        effective_wage = self.get_effective_wage(payslip)
+
+        PBB = payslip.struct_id.get_constant('PBB') or 48300 
+        limit = 40250
+
+        if effective_wage <= limit:
+            avdrag_dag = 0.90 * (effective_wage * 12) / 365
+        else:
+            avdrag_dag = (0.90 * (10 * PBB) / 365) + (0.10 * (effective_wage * 12 - 10 * PBB) / 365)
+
+        years = self.calculate_employment_years(payslip.date_to)
+        total_f_lon = 0
+        
+        if 1 <= years < 2:
+            total_f_lon = (2 * effective_wage) - (60 * avdrag_dag)
+        elif 2 <= years < 3:
+            total_f_lon = (3 * effective_wage) - (90 * avdrag_dag)
+        elif 3 <= years < 4:
+            total_f_lon = (4 * effective_wage) - (120 * avdrag_dag)
+        elif years >= 4:
+            total_f_lon = (5 * effective_wage) - (150 * avdrag_dag)
+
+        if input_amount > 0:
+            return max(0, total_f_lon * 0.5)
+
+        current_leaves = self.env['hr.leave'].search([
+            ('employee_id', '=', self.employee_id.id),
+            ('date_from', '<=', payslip.date_to),
+            ('date_to', '>=', payslip.date_from),
+            ('holiday_status_id.work_entry_type_id.code', '=', 'f_led'),
+            ('state', '=', 'validate')
+        ])
+
+        if current_leaves:
+            earliest_leave = sorted(current_leaves, key=lambda x: x.date_from)[0]
+            start_date = earliest_leave.date_from.date()
+
+            if payslip.date_from <= start_date <= payslip.date_to:
+
+                day_before = start_date - relativedelta(days=1)
+                
+                previous_leave_exists = self.env['hr.leave'].search_count([
+                    ('employee_id', '=', self.employee_id.id),
+                    ('date_to', '=', day_before),
+                    ('holiday_status_id.work_entry_type_id.code', '=', 'f_led'),
+                    ('state', '=', 'validate')
+                ])
+
+                if previous_leave_exists == 0:
+                    return max(0, total_f_lon * 0.5)
+
+        return 0.0

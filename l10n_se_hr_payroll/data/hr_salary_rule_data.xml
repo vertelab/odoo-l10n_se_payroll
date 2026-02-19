@@ -90,6 +90,28 @@ result = contract.get_current_wage_exchange(payslip) * -1
             </field>
         </record>
 
+        <!-- Löneutmätning -->
+        <record id="hr_salary_rule_attachment_deduction" model="hr.salary.rule">
+            <field name="category_id" ref="l10n_se_hr_payroll.hr_salary_rule_category_NETAVG" />
+            <field name="company_id" eval="False"/>
+            <field name="code">lon_utm</field>
+            <field name="name">Löneutmätning (Kronofogden)</field>
+            <field name="sequence">1800</field>
+            <field name="appears_on_payslip" eval="True"/>
+            <field name="condition_select">python</field>
+            <field name="condition_python">
+result = contract.has_attachment_of_earnings and (not contract.attachment_of_earnings_start or contract.attachment_of_earnings_start &lt;= payslip.date_to)
+            </field>
+            <field name="amount_select">code</field>
+            <field name="amount_python_compute">
+current_net = categories.BRUTTO + categories.SKV
+
+deduction = contract.get_attachment_deduction(payslip, current_net)
+
+result = deduction * -1
+            </field>
+        </record>
+
         <!-- ======================================================================================== -->
         <!-- Övertidsregler                                                                           -->
         <!-- ======================================================================================== -->
@@ -120,15 +142,15 @@ result = contract.get_current_wage_exchange(payslip) * -1
 struct_code = contract.struct_id.code
 effective_wage = contract.get_full_time_wage(payslip)
 EO = payslip.struct_id.get_constant('EO') # Faktor 1.5 för arbetare, divisor 94 för tjänstemän
-MAT = payslip.struct_id.get_constant('MAT') # 173 för arbeterae, 175 för tjänstemän 
+MAT = payslip.struct_id.get_constant('MAT') # 173 för arbeterae, 175 för tjänstemän
 
 result_qty = inputs.otidtim.amount_qty if inputs.otidtim else 0.0
 
 if struct_code == 'tj_tim':
     # Timanställd tjänsteman: Timlön * 175 / 94
-    result = (effective_wage * MAT) / EO 
+    result = (effective_wage * MAT) / EO
 elif struct_code == 'arb_tim':
-    # Timanställd arbetare: Timlön * 1.5 
+    # Timanställd arbetare: Timlön * 1.5
     result = effective_wage * EO
 elif struct_code == 'tj_man':
     # Månadsavlönad tjänsteman: Månadslön / 94
@@ -163,15 +185,15 @@ else:
 struct_code = contract.struct_id.code
 effective_wage = contract.get_full_time_wage(payslip)
 KO = payslip.struct_id.get_constant('KO') # Faktor 2 för arbetare, divisor 72 för tjänstemän
-MAT = payslip.struct_id.get_constant('MAT') # 173 för arbeterae, 175 för tjänstemän 
+MAT = payslip.struct_id.get_constant('MAT') # 173 för arbeterae, 175 för tjänstemän
 
 result_qty = inputs.kvaltim.amount_qty if inputs.kvaltim else 0.0
 
 if struct_code == 'tj_tim':
     # Timanställd tjänsteman: Timlön * 175 / 72
-    result = (effective_wage * MAT) / KO 
+    result = (effective_wage * MAT) / KO
 elif struct_code == 'arb_tim':
-    # Timanställd arbetare: Timlön * 2.0 
+    # Timanställd arbetare: Timlön * 2.0
     result = effective_wage * KO
 elif struct_code == 'tj_man':
     # Månadsavlönad tjänsteman: Månadslön / 72
@@ -264,9 +286,9 @@ result_qty = 1
 v_kar = result_rules.sjk_kar.total if result_rules.sjk_kar else 0.0
 v_114 = result_rules.sjk_114.total if result_rules.sjk_114 else 0.0
 v_1590_arb = result_rules.sjk_15_90_arb.total if result_rules.sjk_15_90_arb else 0.0
+v_1590_tj = result_rules.sjk_15_90_tj.total if result_rules.sjk_15_90_tj else 0.0
 v_lon = result_rules.sjk_lon.total if result_rules.sjk_lon else 0.0
-v_lon_1590 = result_rules.sjk_lon_1590.total if result_rules.sjk_lon_1590 else 0.0
-result = v_kar + v_114 + v_1590_arb + v_lon + v_lon_1590
+result = v_kar + v_114 + v_1590_arb + v_1590_tj + v_lon
             </field>
         </record>
 
@@ -286,12 +308,12 @@ result = v_kar + v_114 + v_1590_arb + v_lon + v_lon_1590
 # (ML*12)/52 * 0.2 * 0.8
 # (Timlön * VA) * 0.2 * 0.8 för timanställd
 effective_wage = contract.get_effective_wage(payslip)
-if contract.struct_id.code in ['tj_tim', 'arb_tim']: 
+if contract.struct_id.code in ['tj_tim', 'arb_tim']:
     va = (contract.resource_calendar_id.full_time_required_hours * contract.resource_calendar_id.work_time_rate) / 100.0
     result = (effective_wage * va) * (0.2 * 0.8) *-1
 else:
     result = (effective_wage * 12) / 52 * 0.2 * 0.8 * -1
-    
+
 result_qty = contract.qualifying_count(payslip)
             </field>
         </record>
@@ -307,7 +329,7 @@ result_qty = contract.qualifying_count(payslip)
             <field name="appears_on_payslip" eval="True"/>
             <field name="condition_select">python</field>
             <field name="condition_python">
-result = contract.get_sick_pay_data(payslip)['hours_1_14'] &gt; 0
+result = contract.struct_id.code in ['tj_man', 'arb_man'] and contract.get_sick_pay_data(payslip)['hours_1_14'] &gt; 0
             </field>
             <field name="amount_select">code</field>
             <field name="amount_python_compute">
@@ -318,14 +340,11 @@ va = (contract.resource_calendar_id.full_time_required_hours * contract.resource
 sick_data = contract.get_sick_pay_data(payslip)
 result_qty = sick_data['hours_1_14']
 
-if contract.struct_id.code in ['tj_tim', 'arb_tim']: 
-    result = 0.0
-else:
-    result = (effective_wage * 12) / (52 * va) * -1
+result = (effective_wage * 12) / (52 * va) * -1
             </field>
         </record>
 
-        <!-- Avdrag dag 15 - 90 -->
+        <!-- Avdrag dag 15 - 90 arbetare -->
         <record id="hr_salary_rule_sick_deduction_15_90" model="hr.salary.rule">
             <field name="category_id" ref="l10n_se_hr_payroll.hr_salary_rule_category_BRUAVG" />
             <field name="company_id" eval="False"/>
@@ -336,18 +355,48 @@ else:
             <field name="appears_on_payslip" eval="True"/>
             <field name="condition_select">python</field>
             <field name="condition_python">
-result = contract.get_sick_pay_data(payslip)['days_15_90'] &gt; 0
+result = 'arb_man' in contract.struct_id.code and contract.get_sick_pay_data(payslip)['days_15_90'] &gt; 0
             </field>
             <field name="amount_select">code</field>
             <field name="amount_python_compute">
 effective_wage = contract.get_effective_wage(payslip)
 sick_data = contract.get_sick_pay_data(payslip)
 result_qty = sick_data['days_15_90']
+part = sick_data.get('part_15_90', 1.0)
 
-if contract.struct_id.code in ['tj_tim', 'arb_tim']:
-    result = 0.0
+result = ((effective_wage * 12) / 365) * -1 * part
+            </field>
+        </record>
+
+        <record id="hr_salary_rule_sick_deduction_15_90_tj" model="hr.salary.rule">
+            <field name="category_id" ref="l10n_se_hr_payroll.hr_salary_rule_category_BRUAVG" />
+            <field name="company_id" eval="False"/>
+            <field name="parent_rule_id" ref="l10n_se_hr_payroll.hr_salary_rule_sick_leave" />
+            <field name="code">sjk_15_90_tj</field>
+            <field name="name">Sjukfrånvaro dag 15-90 Tjänstemän (avdrag + sjuklön)</field>
+            <field name="sequence">23</field>
+            <field name="appears_on_payslip" eval="True"/>
+            <field name="condition_select">python</field>
+            <field name="condition_python">
+result = 'tj' in contract.struct_id.code and contract.get_sick_pay_data(payslip)['days_15_90'] &gt; 0
+            </field>
+            <field name="amount_select">code</field>
+            <field name="amount_python_compute">
+effective_wage = contract.get_effective_wage(payslip)
+full_time_wage = contract.get_full_time_wage(payslip)
+PBB = payslip.struct_id.get_constant('PBB') or 48300
+sick_data = contract.get_sick_pay_data(payslip)
+result_qty = sick_data['days_15_90']
+part = sick_data.get('part_15_90', 1.0)
+
+deduction = ((effective_wage * 12) / 365) * -1 * part
+
+if full_time_wage &lt; 40250:
+    pay = (effective_wage * 12 * 0.10) / 365 * part
 else:
-    result = ((effective_wage * 12) / 365) * -1
+    pay = ((0.10 * 10 * PBB / 365) + (0.9 * (full_time_wage * 12 - 10 * PBB) / 365)) * part
+
+result = deduction + pay
             </field>
         </record>
 
@@ -358,60 +407,28 @@ else:
             <field name="parent_rule_id" ref="hr_salary_rule_sick_leave" />
             <field name="code">sjk_lon</field>
             <field name="name">Sjuklön</field>
-            <field name="sequence">23</field>
+            <field name="sequence">24</field>
             <field name="appears_on_payslip" eval="True"/>
             <field name="condition_select">python</field>
             <field name="condition_python">
-result = contract.get_sick_pay_data(payslip)['hours_1_14'] &gt; 0       
+result = contract.get_sick_pay_data(payslip)['hours_1_14'] &gt; 0
             </field>
             <field name="amount_select">code</field>
             <field name="amount_python_compute">
 # (ML*12*0.8)/(52*VA)
 effective_wage = contract.get_effective_wage(payslip)
 va = (contract.resource_calendar_id.full_time_required_hours * contract.resource_calendar_id.work_time_rate) / 100.0
+sick_data = contract.get_sick_pay_data(payslip)
+
 result_qty = sick_data['hours_1_14']
 
-if contract.struct_id.code in ['tj_tim', 'arb_tim']: 
+if contract.struct_id.code in ['tj_tim', 'arb_tim']:
     result = effective_wage * 0.8
 else:
     result = (effective_wage * 12 * 0.8) / (52 * va)
 
             </field>
         </record>
-
-        <!-- Sjuklön dag 15 - 90 tjÄNSTEMÄN -->
-        <record id="hr_salary_rule_sick_pay_15_90_tj" model="hr.salary.rule">
-            <field name="category_id" ref="l10n_se_hr_payroll.hr_salary_rule_category_BRUTIL" />
-            <field name="company_id" eval="False"/>
-            <field name="parent_rule_id" ref="hr_salary_rule_sick_leave" />
-            <field name="code">sjk_lon_1590</field>
-            <field name="name">Sjuklön 15-90 Tjänstemän</field>
-            <field name="sequence">24</field>
-            <field name="appears_on_payslip" eval="True"/>
-            <field name="condition_select">python</field>
-            <field name="condition_python">
-result = contract.get_sick_pay_data(payslip)['days_15_90'] &gt; 0
-            </field>
-            <field name="amount_select">code</field>
-            <field name="amount_python_compute">
-# Tjänsteman: 
-if 'tj' not in contract.struct_id.code:
-    result = 0.0
-else:
-    effective_wage = contract.get_full_time_wage(payslip)
-    PBB = payslip.struct_id.get_constant('PBB') or 483000
-    sick_data = contract.get_sick_pay_data(payslip)
-
-    if effective_wage &lt; 40250:
-        result = (effective_wage * 12 * 0.10) / 365
-    else:
-        result = (0.10 * PBB / 365) + (0.9 * (effective_wage * 12 - PBB) / 365)
-
-    result_qty = sick_data['days_15_90']
-            
-            </field>
-        </record>
-
 
         <!-- ===========================VAB-regler=========================== -->
 
@@ -450,11 +467,125 @@ va = (contract.resource_calendar_id.full_time_required_hours * contract.resource
 
 result_qty = worked_days.dict.get('vab').number_of_hours if worked_days.dict.get('vab') else 0.0
 
-if contract.struct_id.code in ['tj_tim', 'arb_tim']: 
+if contract.struct_id.code in ['tj_tim', 'arb_tim']:
     result = 0.0
 else:
     result = (effective_wage * 12) / (52 * va)
             </field>
+        </record>
+
+        <!-- ===========================Föräldraledighetsregler=========================== -->
+
+        <record model="hr.work.entry.type" id="work_entry_type_f_led">
+            <field name="name">Föräldraledighet</field>
+            <field name="code">f_led</field>
+            <field name="external_code">l10n_se_hr_payroll.f_led</field>
+            <field name="color">3</field>
+            <field name="is_leave" eval="True"/>
+            <field name="country_id" ref="base.se"/>
+        </record>
+
+        <record model="hr.leave.type" id="leave_type_f_led">
+            <field name="name">Föräldraledighet</field>
+            <field name="company_id" eval="False"/>
+            <field name="work_entry_type_id" ref="work_entry_type_f_led" />
+            <field name="color">3</field>
+            <field name="leave_validation_type">hr</field>
+            <field name="requires_allocation">no</field>
+            <field name="request_unit">hour</field>
+        </record>
+
+        <!-- Parent -->
+        <record id="hr_salary_rule_parental_leave" model="hr.salary.rule">
+            <field name="category_id" ref="l10n_se_hr_payroll.hr_salary_rule_category_PARENT" />
+            <field name="company_id" eval="False"/>
+            <field name="code">f_ledighet</field>
+            <field name="name">Föräldraledighet</field>
+            <field name="sequence">38</field>
+            <field name="appears_on_payslip" eval="True"/>
+            <field name="condition_select">python</field>
+            <field name="condition_python">
+result = worked_days.dict.get('f_led')
+            </field>
+            <field name="amount_select">code</field>
+            <field name="amount_python_compute">
+# Räknar ihop total för avdrag och tillägg vid Föräldraledighet. Tas inte med i bruttouträkningen.
+result_qty = 1
+v_f_led_arb = result_rules.f_led_arb.total if result_rules.f_led_arb else 0.0
+v_f_led_tj = result_rules.f_led_tj.total if result_rules.f_led_tj else 0.0
+v_f_lon_tj = result_rules.f_lon_tj.total if result_rules.f_lon_tj else 0.0
+
+result = v_f_led_arb + v_f_led_tj + v_f_lon_tj
+            </field>
+        </record>
+
+        <record id="hr_salary_rule_parental_deduction_arb" model="hr.salary.rule">
+            <field name="category_id" ref="l10n_se_hr_payroll.hr_salary_rule_category_BRUAVG" />
+            <field name="company_id" eval="False"/>
+            <field name="code">f_led_arb</field>
+            <field name="name">Föräldraledighetsavdrag (Arbetare)</field>
+            <field name="sequence">35</field>
+            <field name="condition_select">python</field>
+            <field name="condition_python">result = 'arb_man' in contract.struct_id.code and worked_days.dict.get('f_led')</field>
+            <field name="amount_select">code</field>
+            <field name="amount_python_compute">
+effective_wage = contract.get_effective_wage(payslip)
+f_led_data = contract.get_parental_leave_data(payslip)
+
+val_hourly = (effective_wage * f_led_data['hourly_hours']) / 173
+val_short = (effective_wage * f_led_data['short_work_days']) / 21
+val_long = (effective_wage * 12 * f_led_data['long_calendar_days']) / 365
+
+result = (val_hourly + val_short + val_long) * -1
+            </field>
+        </record>
+
+        <record id="hr_salary_rule_parental_deduction_tj" model="hr.salary.rule">
+            <field name="category_id" ref="l10n_se_hr_payroll.hr_salary_rule_category_BRUAVG" />
+            <field name="company_id" eval="False"/>
+            <field name="code">f_led_tj</field>
+            <field name="name">Föräldralöneavdrag (Tjänsteman)</field>
+            <field name="sequence">36</field>
+            <field name="condition_select">python</field>
+            <field name="condition_python">result = 'tj' in contract.struct_id.code and worked_days.dict.get('f_led')</field>
+            <field name="amount_select">code</field>
+            <field name="amount_python_compute">
+effective_wage = contract.get_effective_wage(payslip)
+f_led_days = contract.get_calendar_days_for_f_led(payslip)
+
+days_in_month = (payslip.date_to - payslip.date_from).days + 1
+
+daily_deduction = (effective_wage * 12) / 365
+
+if f_led_days &gt;= days_in_month:
+    daily_deduction = effective_wage / f_led_days
+
+result = daily_deduction * -1
+result_qty = f_led_days
+            </field>
+        </record>
+
+        <record id="hr_salary_rule_parental_pay_tj" model="hr.salary.rule">
+            <field name="category_id" ref="l10n_se_hr_payroll.hr_salary_rule_category_ENGANG" />
+            <field name="company_id" eval="False"/>
+            <field name="code">f_lon_tj</field>
+            <field name="name">Föräldralön Tjänsteman</field>
+            <field name="sequence">37</field>
+            <field name="condition_select">python</field>
+            <field name="condition_python">
+input_val = inputs.fl_slut_tj.amount if (inputs and inputs.fl_slut_tj) else 0.0
+result = 'tj' in contract.struct_id.code and (worked_days.dict.get('f_led') or input_val &gt; 0)
+            </field>
+            <field name="amount_select">code</field>
+            <field name="amount_python_compute">
+result = contract.get_parental_pay_amount(payslip) or 0.0
+            </field>
+        </record>
+
+        <record id="hr_rule_input_fl_slutbetalning" model="hr.rule.input">
+            <field name="code">fl_slut_tj</field>
+            <field name="name">Föräldralön slutbetalning (efter 3 mån i tjänst)</field>
+            <field name="input_id" ref="hr_salary_rule_parental_pay_tj" />
         </record>
 
         <!-- ===========================Tjänstledighetsregler=========================== -->
@@ -576,7 +707,7 @@ else:
             <field name="sequence">42</field>
             <field name="appears_on_payslip" eval="True" />
             <field name="condition_select">python</field>
-            <field name="condition_python">            
+            <field name="condition_python">
 res = contract.split_leave_of_absence_periods(payslip)
 result = res['long_leave_calendar_days'] &gt; 0
             </field>
@@ -674,8 +805,6 @@ result_qty = inputs.res_helg_tim.amount_qty
             <field name="name">Restid Helg (timmar)</field>
             <field name="input_id" ref="hr_salary_rule_restid_helg" />
         </record>
-
-        <!-- Utlägg resekostnader -->
 
 
         <!-- Förälder för milersättning -->
@@ -805,6 +934,8 @@ result_qty = inputs.utlagg.amount_qty
             <field name="input_id" ref="hr_salary_rule_ovrig_netto_ers" />
         </record>
 
+
+
         <record id="hr_salary_rule_ovrig_netto_avd" model="hr.salary.rule">
             <field name="category_id" ref="l10n_se_hr_payroll.hr_salary_rule_category_NETAVG" />
             <field name="company_id" eval="False"/>
@@ -827,13 +958,36 @@ result_qty = inputs.net_avd.amount_qty
             <field name="input_id" ref="hr_salary_rule_ovrig_netto_avd" />
         </record>
 
+        <!-- Ersättning representationsutlägg -->
+        <record id="hr_salary_rule_representation_ers" model="hr.salary.rule">
+            <field name="category_id" ref="l10n_se_hr_payroll.hr_salary_rule_category_NETTIL" />
+            <field name="company_id" eval="False"/>
+            <field name="code">rep_net</field>
+            <field name="name">Representation, ej avdragsgill (Utlägg)</field>
+            <field name="sequence">87</field>
+            <field name="appears_on_payslip" eval="True"/>
+            <field name="condition_select">python</field>
+            <field name="condition_python">result = inputs.rep_utlagg and inputs.rep_utlagg.amount &gt; 0</field>
+            <field name="amount_select">code</field>
+            <field name="amount_python_compute">
+result = inputs.rep_utlagg.amount
+result_qty = 1
+            </field>
+        </record>
+
+        <record id="hr_rule_input_rep_ers" model="hr.rule.input">
+            <field name="code">rep_utlagg</field>
+            <field name="name">Ersättning vid representation</field>
+            <field name="input_id" ref="hr_salary_rule_representation_ers" />
+        </record>
+
         <!-- Bonus -->
         <record id="hr_salary_rule_bonus" model="hr.salary.rule">
             <field name="category_id" ref="l10n_se_hr_payroll.hr_salary_rule_category_ENGANG" />
             <field name="company_id" eval="False"/>
             <field name="code">bonus</field>
             <field name="name">Bonus</field>
-            <field name="sequence">90</field>
+            <field name="sequence">95</field>
             <field name="appears_on_payslip" eval="True"/>
             <field name="condition_select">python</field>
             <field name="condition_python">result = inputs.bonus and inputs.bonus.amount_qty &gt; 0</field>

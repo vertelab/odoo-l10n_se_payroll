@@ -117,12 +117,22 @@ result = worked_days.dict.get('sem_bet') and 'tj' in contract.struct_id.code
             </field>
             <field name="amount_select">code</field>
             <field name="amount_python_compute">
+full_time_wage = contract.get_full_time_wage(payslip)
 historical_rate = contract.get_historical_employment_rate(payslip)
-effective_wage = contract.get_effective_wage(payslip)
-result_qty = worked_days.dict.get('sem_bet').number_of_days * -1
+current_rate = contract.resource_calendar_id.work_time_rate / 100.0
 
-# Räknar ut 0,8% av den historiska sysselsättningsgraden för att hantera varierad sysselsättninggrad
-result = effective_wage * historical_rate * 0.008
+is_varied_rate = abs(historical_rate - current_rate) &gt; 0.01
+
+if is_varied_rate:
+    amount_per_day = full_time_wage * 0.008 * historical_rate
+else:
+
+    amount_per_day = full_time_wage * 0.008
+
+amount_per_day = amount_per_day * -1
+result = round(amount_per_day, 2)
+
+result_qty = worked_days.dict.get('sem_bet').number_of_days
             
             </field>
         </record>
@@ -140,16 +150,18 @@ result = effective_wage * historical_rate * 0.008
 historical_rate = contract.get_historical_employment_rate(payslip)
 current_rate = contract.resource_calendar_id.work_time_rate / 100.0
 
-# Körs endast om SSG har ändrats mer än 0,5%
-result = worked_days.dict.get('sem_bet') and 'tj' in contract.struct_id.code and abs(historical_rate - current_rate) &gt; 0.005
+# Körs endast om SSG har ändrats mer än 1%
+result = worked_days.dict.get('sem_bet') and 'tj' in contract.struct_id.code and abs(historical_rate - current_rate) &gt; 0.01
             </field>
             <field name="amount_select">code</field>
             <field name="amount_python_compute">
 historical_rate = contract.get_historical_employment_rate(payslip)
 effective_wage = contract.get_effective_wage(payslip)
-result_qty = worked_days.dict.get('sem_bet').number_of_days
 
-result = effective_wage * historical_rate * 0.046 * -1
+amount_per_day = effective_wage * 0.046 * historical_rate * -1
+
+result = round(amount_per_day, 2)
+result_qty = worked_days.dict.get('sem_bet').number_of_days
             </field>
         </record>
 
@@ -170,16 +182,18 @@ current_rate = contract.resource_calendar_id.work_time_rate / 100.0
 
 is_arb_man = contract.struct_id.code == 'arb_man'
 
-is_tj_var = 'tj' in contract.struct_id.code and abs(historical_rate - current_rate) &gt; 0.005
+is_tj_var = 'tj' in contract.struct_id.code and abs(historical_rate - current_rate) &gt; 0.01
 
 result = worked_days.dict.get('sem_bet') and (is_arb_man or is_tj_var)
             </field>
             <field name="amount_select">code</field>
             <field name="amount_python_compute">
 effective_wage = contract.get_effective_wage(payslip)
-result_qty = worked_days.dict.get('sem_bet').number_of_days
 
-result = effective_wage * 0.046
+amount_per_day = effective_wage * 0.046
+
+result = round(amount_per_day, 2)
+result_qty = worked_days.dict.get('sem_bet').number_of_days
             </field>
         </record>
 

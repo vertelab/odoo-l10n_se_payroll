@@ -10,10 +10,7 @@
             <field name="name">Totalt avdragen skatt</field>
             <field name="sequence">1950</field>
             <field name="appears_on_payslip" eval="True"/>
-            <field name="condition_select">python</field>
-            <field name="condition_python">
-result = (categories.SKV and categories.SKV &gt; 0)
-            </field>
+            <field name="condition_select">none</field>
             <field name="amount_select">code</field>
             <field name="amount_python_compute">
 result = categories.SKV
@@ -38,10 +35,14 @@ gross = categories.BRUTTO or 0.0
 benefits = categories.FORMAN or 0.0
 one_off = categories.ENGANG or 0.0
 
-taxable_income = (gross - one_off) + benefits
+if contract.has_tax_equalization:
+    taxable_income = gross + benefits
+else:
+    taxable_income = (gross - one_off) + benefits
 
-if taxable_base &gt; 0:
-    tax_amount = contract.l10_sum_columns_taxtable_line(payslip, taxable_base)
+
+if taxable_income &gt; 0:
+    tax_amount = contract.l10_sum_columns_taxtable_line(payslip, taxable_income)
     result = (tax_amount or 0.0) * -1
 else:
     result = 0.0
@@ -58,7 +59,7 @@ else:
             <field name="appears_on_payslip" eval="True"/>
             <field name="condition_select">python</field>
             <field name="condition_python">
-result = (categories.ENGANG and categories.ENGANG &gt; 0)
+result = (categories.ENGANG and categories.ENGANG &gt; 0) and not contract.has_tax_equalization
             </field>
             <field name="amount_select">code</field>
             <field name="amount_python_compute">

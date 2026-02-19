@@ -61,6 +61,15 @@ class Holidays(models.Model):
 
     is_deffered_period = fields.Boolean(string="Deffered Day", compute=_compute_karens)
 
+    sick_leave_part = fields.Selection([
+        ('100', '100% (heltid)'),
+        ('75', '75%'),
+        ('50', '50%'),
+        ('25', '25%'),
+    ], string='Sjukskrivningsgrad', default=False,
+       help='Grad av sjukskrivning enligt Försäkringskassan. '
+            'Styr hur stor andel av arbetsdagen som är sjukskriven.')
+
     def _get_number_of_days(self, date_from, date_to, employee_id):
         context_data = {'hr_leave_request': True, 'include_weekends': False}
 

@@ -9,9 +9,20 @@ class hr_contract(models.Model):
 
     benefit_ids = fields.One2many(comodel_name="hr.contract.benefit", inverse_name='contract_id')
 
-    def benefit_value(self, code):
+    def benefit_value(self, code, date_from=None, date_to=None):
         self.ensure_one() 
-        return sum(self.benefit_ids.filtered(lambda b: b.name.name == code).mapped('value'))
+
+        benefits = self.benefit_ids.filtered(lambda b: 
+            b.name.name == code or 
+            (b.name.code_id and b.name.code_id.code == code)
+        )
+        if date_from and date_to:
+            benefits = benefits.filtered(lambda b: (
+                (not b.date_start or b.date_start <= date_to) and
+                (not b.date_end or b.date_end >= date_from)
+            ))
+            
+        return sum(benefits.mapped('value'))
 
 class hr_contract_benefit(models.Model):
     _name = 'hr.contract.benefit'
@@ -20,6 +31,8 @@ class hr_contract_benefit(models.Model):
     name = fields.Many2one(comodel_name='hr.benefit', string="Code")
     desc = fields.Char(string="Description")
     value = fields.Float(string="Value")
+    date_start = fields.Date(string="Start Date")
+    date_end = fields.Date(string="End Date")
 
     @api.onchange('name')
     def onchange_name(self):

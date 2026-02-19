@@ -10,6 +10,9 @@
                 </field>
                 <field name="name" position="after">
                     <field name="is_deffered_period" readonly="1"/>
+                    <field name="sick_leave_part"
+                           invisible="not holiday_status_id.sick_leave"
+                           readonly="state not in ['draft', 'confirm']"/>
                 </field>
             </field>
         </record>

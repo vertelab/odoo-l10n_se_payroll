@@ -131,8 +131,6 @@
         </record>
 
         <!-- Saknas: -->
-        <!-- Restidsersättning vardag -->
-        <!-- Restidsersättning helg -->
 
         <!-- Skatt -->
         <!-- Arbetsgivaravgift -->
@@ -153,12 +151,7 @@
             <value eval="[ref('l10n_se_hr_payroll_tiichri.hr_payslip_camilla_01')]"/>
         </function>
 
-        <!-- Lunchkuponger -->
-        <function model="hr.payslip.input" name="write">
-            <value model="hr.payslip.input" search="[('payslip_id', '=', ref('hr_payslip_camilla_01')), ('code', '=', 'lunch')]"/>
-            <value eval="{'amount_qty': 1}"/>
-        </function>
-
+        <!-- Övertid -->
         <function model="hr.payslip.input" name="write">
             <value model="hr.payslip.input" search="[('payslip_id', '=', ref('hr_payslip_camilla_01')), ('code', '=', 'otidtim')]"/>
             <value eval="{'amount_qty': 2.0}"/>
@@ -167,6 +160,24 @@
         <function model="hr.payslip.input" name="write">
             <value model="hr.payslip.input" search="[('payslip_id', '=', ref('hr_payslip_camilla_01')), ('code', '=', 'kvaltim')]"/>
             <value eval="{'amount_qty': 2.0}"/>
+        </function>
+
+        <!-- Restidersättning vardag-->
+        <function model="hr.payslip.input" name="write">
+            <value model="hr.payslip.input" search="[('payslip_id', '=', ref('hr_payslip_camilla_01')), ('code', '=', 'res_vardag_tim')]"/>
+            <value eval="{'amount_qty': 2}"/>
+        </function>
+
+        <!-- Restidsersättning helg -->
+        <function model="hr.payslip.input" name="write">
+            <value model="hr.payslip.input" search="[('payslip_id', '=', ref('hr_payslip_camilla_01')), ('code', '=', 'res_helg_tim')]"/>
+            <value eval="{'amount_qty': 2}"/>
+        </function>
+
+        <!-- Lunchkuponger -->
+        <function model="hr.payslip.input" name="write">
+            <value model="hr.payslip.input" search="[('payslip_id', '=', ref('hr_payslip_camilla_01')), ('code', '=', 'lunch')]"/>
+            <value eval="{'amount_qty': 1}"/>
         </function>
 
         <function model="hr.payslip" name="compute_sheet">
@@ -203,13 +214,9 @@
         </record>
 
         <!-- Saknas: -->
-        <!-- Förmån hushållsnära tjänster, arbetskostnad -->
-        <!-- Skattereduktion hushållsnära tjänster -->
-        <!-- Övrig nettoersättning (kvitto gymkort) -->
 
         <!-- Skatt -->
         <!-- Arbetsgivaravgift -->
-
 
         <!-- Generera lönespec (payslip) -->
         <record id="hr_payslip_camilla_02" model="hr.payslip">
@@ -225,6 +232,22 @@
         <!-- Manuell input -->
         <function model="hr.payslip" name="onchange_employee">
             <value eval="[ref('l10n_se_hr_payroll_tiichri.hr_payslip_camilla_02')]"/>
+        </function>
+
+        <!-- RUT -->
+        <record id="payslip_input_rut_02" model="hr.payslip.input">
+            <field name="payslip_id" ref="hr_payslip_camilla_02"/>
+            <field name="code">rut</field>
+            <field name="name">Hushållsnära tjänster (Arbetskostnad)</field>
+            <field name="amount">1800.0</field>
+            <field name="amount_qty">1.0</field>
+            <field name="contract_id" ref="contract_camilla"/>
+        </record>
+
+        <!-- Övrig nettoersättning gymkort -->
+        <function model="hr.payslip.input" name="write">
+            <value model="hr.payslip.input" search="[('payslip_id', '=', ref('hr_payslip_camilla_02')), ('code', '=', 'utlagg')]"/>
+            <value eval="{'name': 'Övrig nettoersättning (gymkort)', 'amount_qty': 1, 'amount': 3500.0}"/>
         </function>
 
         <!-- Milersättning -->
@@ -252,9 +275,6 @@
         </record>
 
         <!-- Saknas: -->
-        <!-- Förmån hushållsnära tjänster, arbetskostnad -->
-        <!-- Skattereduktion hushållsnära tjänster -->
-        <!-- Övrig nettoersättning (kiropraktor) -->
 
         <!-- Skatt -->
         <!-- Arbetsgivaravgift -->
@@ -274,6 +294,22 @@
 
         <function model="hr.payslip" name="onchange_employee">
             <value eval="[ref('l10n_se_hr_payroll_tiichri.hr_payslip_camilla_03')]"/>
+        </function>
+
+        <!-- RUT -->
+        <record id="payslip_input_rut_03" model="hr.payslip.input">
+            <field name="payslip_id" ref="hr_payslip_camilla_03"/>
+            <field name="code">rut</field>
+            <field name="name">Hushållsnära tjänster (Arbetskostnad)</field>
+            <field name="amount">1800.0</field>
+            <field name="amount_qty">1.0</field>
+            <field name="contract_id" ref="contract_camilla"/>
+        </record>
+
+        <!-- Övrig nettoersättning kiropraktor -->
+        <function model="hr.payslip.input" name="write">
+            <value model="hr.payslip.input" search="[('payslip_id', '=', ref('hr_payslip_camilla_03')), ('code', '=', 'utlagg')]"/>
+            <value eval="{'name': 'Övrig nettoersättning (kiropraktor)', 'amount_qty': 1, 'amount': 1200.0}"/>
         </function>
 
         <!-- Milersättning -->
@@ -301,16 +337,6 @@
         </record>
 
         <!-- Saknas: -->
-        <!-- Förmån hushållsnära tjänster, arbetskostnad -->
-        <!-- Skattereduktion hushållsnära tjänster -->
-        <!-- Representation, ej avdragsgill -->
-        <!-- Utlägg resekostnader -->
-        <!-- Restidsersättning helg -->
-        <!-- Utlandstraktamente ej skattepliktigt -->
-        <!-- Kostförmån lunch -->
-        <!-- Kostavdrag frukost 15% utland -->
-        <!-- Kostavdrag lunch 35% utland -->
-        <!-- Kostavdrag middag 35% utland -->
 
         <!-- Skatt -->
         <!-- Arbetsgivaravgift -->
@@ -331,32 +357,72 @@
             <value eval="[ref('l10n_se_hr_payroll_tiichri.hr_payslip_camilla_04')]"/>
         </function>
 
-
-        <!-- Milersättning -->
+        <!-- Övriga förmåner tabellskatt -->
         <function model="hr.payslip.input" name="write">
-            <value model="hr.payslip.input" search="[('payslip_id', '=', ref('hr_payslip_camilla_04')), ('code', '=', 'bensin_mil_antal')]"/>
-            <value eval="{'amount_qty': 2600.0}"/>
+            <value model="hr.payslip.input" search="[('payslip_id', '=', ref('hr_payslip_camilla_04')), ('code', '=', 'ovrig_fmn')]"/>
+            <value eval="{'name': 'Lån av fjällstugan', 'amount_qty': 1, 'amount': 3500.0}"/>
         </function>
 
+        <!-- RUT -->
+        <record id="payslip_input_rut_04" model="hr.payslip.input">
+            <field name="payslip_id" ref="hr_payslip_camilla_04"/>
+            <field name="code">rut</field>
+            <field name="name">Hushållsnära tjänster (Arbetskostnad)</field>
+            <field name="amount">1800.0</field>
+            <field name="amount_qty">1.0</field>
+            <field name="contract_id" ref="contract_camilla"/>
+        </record>
 
+        <!-- Representation -->
+        <function model="hr.payslip.input" name="write">
+            <value model="hr.payslip.input" search="[('payslip_id', '=', ref('hr_payslip_camilla_04')), ('code', '=', 'rep_utlagg')]"/>
+            <value eval="{'amount_qty': 1, 'amount': 1400.0}"/>
+        </function>
 
-        <!-- Kostavdrag frukost 15%, utland, 1.5 x 85.20 -->
-        <!-- <function model="hr.payslip.input" name="write">
-            <value model="hr.payslip.input" search="[('payslip_id', '=', ref('hr_payslip_camilla_04')), ('code', '=', 'frukost_utland')]"/>
-            <value eval="{'amount_qty': 1.5, 'amount': 85.2}"/>
-        </function> -->
-        <!-- Kostavdrag lunch 35%, utland, 2.5 x 198.80 -->
-        <!-- <function model="hr.payslip.input" name="write">
-            <value model="hr.payslip.input" search="[('payslip_id', '=', ref('hr_payslip_camilla_04')), ('code', '=', 'lunch_utland')]"/>
-            <value eval="{'amount_qty': 2.5, 'amount': 198.8}"/>
-        </function> -->
-        <!-- Kostavdrag middag 35%, utland, 2 x 198.80 -->
-        <!-- <function model="hr.payslip.input" name="write">
-            <value model="hr.payslip.input" search="[('payslip_id', '=', ref('hr_payslip_camilla_04')), ('code', '=', 'middag_utland')]"/>
-            <value eval="{'amount_qty': 2, 'amount': 198.8}"/>
-        </function> -->
+        <!-- Utlägg resekostnader -->
+        <function model="hr.payslip.input" name="write">
+            <value model="hr.payslip.input" search="[('payslip_id', '=', ref('hr_payslip_camilla_04')), ('code', '=', 'utlagg')]"/>
+            <value eval="{'name': 'Utlägg resekostnader', 'amount_qty': 1, 'amount': 720.0}"/>
+        </function>
 
+        <!-- Restidersättning vardag-->
+        <function model="hr.payslip.input" name="write">
+            <value model="hr.payslip.input" search="[('payslip_id', '=', ref('hr_payslip_camilla_04')), ('code', '=', 'res_vardag_tim')]"/>
+            <value eval="{'amount_qty': 3}"/>
+        </function>
 
+        <!-- Restidsersättning helg -->
+        <function model="hr.payslip.input" name="write">
+            <value model="hr.payslip.input" search="[('payslip_id', '=', ref('hr_payslip_camilla_04')), ('code', '=', 'res_helg_tim')]"/>
+            <value eval="{'amount_qty': 3}"/>
+        </function>
+
+        <!-- Utlandstraktamente, ej skattepliktigt, Spanien -->
+        <function model="hr.payslip.input" name="write">
+            <value model="hr.payslip.input" search="[('payslip_id', '=', ref('hr_payslip_camilla_04')), ('code', '=', 'trakt_utl')]"/>
+            <value eval="{'amount_qty': 2.5, 'amount': 568.0}"/>
+        </function>
+
+        <!-- Kostförmån lunch + middag-->
+        <function model="hr.payslip.input" name="write">
+            <value model="hr.payslip.input" search="[('payslip_id', '=', ref('hr_payslip_camilla_04')), ('code', '=', 'fmn_lunch')]"/>
+            <value eval="{'amount_qty': 1.0}"/>
+        </function>
+
+        <!-- Kostavdrag utland -->
+        <!-- Frukost -->
+        <function model="hr.payslip.input" name="write">
+            <value model="hr.payslip.input" search="[('payslip_id', '=', ref('hr_payslip_camilla_04')), ('code', '=', 'red_utl_frukost')]"/>
+            <value eval="{'amount_qty': 1.5}"/>
+        </function>
+
+        <!--  Lunch eller middag -->
+        <function model="hr.payslip.input" name="write">
+            <value model="hr.payslip.input" search="[('payslip_id', '=', ref('hr_payslip_camilla_04')), ('code', '=', 'red_utl_lunch')]"/>
+            <value eval="{'amount_qty': 4.5}"/>
+        </function>
+
+        <!-- Övertid -->
         <function model="hr.payslip.input" name="write">
             <value model="hr.payslip.input" search="[('payslip_id', '=', ref('hr_payslip_camilla_04')), ('code', '=', 'otidtim')]"/>
             <value eval="{'amount_qty': 2.0}"/>
@@ -365,6 +431,12 @@
         <function model="hr.payslip.input" name="write">
             <value model="hr.payslip.input" search="[('payslip_id', '=', ref('hr_payslip_camilla_04')), ('code', '=', 'kvaltim')]"/>
             <value eval="{'amount_qty': 3.0}"/>
+        </function>
+
+        <!-- Milersättning -->
+        <function model="hr.payslip.input" name="write">
+            <value model="hr.payslip.input" search="[('payslip_id', '=', ref('hr_payslip_camilla_04')), ('code', '=', 'bensin_mil_antal')]"/>
+            <value eval="{'amount_qty': 2600.0}"/>
         </function>
 
         <function model="hr.payslip" name="compute_sheet">
@@ -391,16 +463,6 @@
         </function>
 
         <!-- Saknas: -->
-        <!-- Förmån hushållsnära tjänster, arbetskostnad -->
-        <!-- Skattereduktion hushållsnära tjänster -->
-        <!-- Utlägg resekostnader -->
-        <!-- Traktamente helt -->
-        <!-- Traktamente halvt -->
-        <!-- Traktamente skattepliktigt -->
-        <!-- Kostförmån middag -->
-        <!-- Kostavdrag frukost -->
-        <!-- Kostavdrag lunch eller middag -->
-        <!-- Bostadsförmån ej småhus (lån av fjällstuga) -->
 
         <!-- Skatt -->
         <!-- Arbetsgivaravgift -->
@@ -421,10 +483,69 @@
             <value eval="[ref('l10n_se_hr_payroll_tiichri.hr_payslip_camilla_05')]"/>
         </function>
 
+        <!-- RUT -->
+        <record id="payslip_input_rut_05" model="hr.payslip.input">
+            <field name="payslip_id" ref="hr_payslip_camilla_05"/>
+            <field name="code">rut</field>
+            <field name="name">Hushållsnära tjänster (Arbetskostnad)</field>
+            <field name="amount">1800.0</field>
+            <field name="amount_qty">1.0</field>
+            <field name="contract_id" ref="contract_camilla"/>
+        </record>
+
+        <!-- Utlägg resekostnader -->
+        <function model="hr.payslip.input" name="write">
+            <value model="hr.payslip.input" search="[('payslip_id', '=', ref('hr_payslip_camilla_05')), ('code', '=', 'utlagg')]"/>
+            <value eval="{'name': 'Utlägg resekostnader', 'amount_qty': 1, 'amount': 330.0}"/>
+        </function>
+
+        <!--  Traktamente, helt  -->
+        <function model="hr.payslip.input" name="write">
+            <value model="hr.payslip.input" search="[('payslip_id', '=', ref('hr_payslip_camilla_05')), ('code', '=', 'trakt_hel')]"/>
+            <value eval="{'amount_qty': 2.0}"/>
+        </function>
+
+        <!--  Traktamente, halvt  -->
+        <function model="hr.payslip.input" name="write">
+            <value model="hr.payslip.input" search="[('payslip_id', '=', ref('hr_payslip_camilla_05')), ('code', '=', 'trakt_halv')]"/>
+            <value eval="{'amount_qty': 1.0}"/>
+        </function>
+
+        <!-- Traktamente, skattepliktigt -->
+        <function model="hr.payslip.input" name="write">
+            <value model="hr.payslip.input" search="[('payslip_id', '=', ref('hr_payslip_camilla_05')), ('code', '=', 'trakt_skatt')]"/>
+            <value eval="{'amount_qty': 2.5, 'amount': 80.0}"/>
+        </function>
+
+        <!-- Kostförmån -->
+        <function model="hr.payslip.input" name="write">
+            <value model="hr.payslip.input" search="[('payslip_id', '=', ref('hr_payslip_camilla_05')), ('code', '=', 'fmn_lunch')]"/>
+            <value eval="{'amount_qty': 1.0}"/>
+        </function>
+
+        <!-- Kostavdrag -->
+        <!-- Frukost -->
+        <function model="hr.payslip.input" name="write">
+            <value model="hr.payslip.input" search="[('payslip_id', '=', ref('hr_payslip_camilla_05')), ('code', '=', 'red_frukost')]"/>
+            <value eval="{'amount_qty': 2}"/>
+        </function>
+
+        <!--  Lunch eller middag -->
+        <function model="hr.payslip.input" name="write">
+            <value model="hr.payslip.input" search="[('payslip_id', '=', ref('hr_payslip_camilla_05')), ('code', '=', 'red_lunch')]"/>
+            <value eval="{'amount_qty': 3.5}"/>
+        </function>
+
         <!-- Milersättning -->
         <function model="hr.payslip.input" name="write">
             <value model="hr.payslip.input" search="[('payslip_id', '=', ref('hr_payslip_camilla_05')), ('code', '=', 'bensin_mil_antal')]"/>
             <value eval="{'amount_qty': 120.0}"/>
+        </function>
+
+        <!-- Övriga förmåner tabellskatt -->
+        <function model="hr.payslip.input" name="write">
+            <value model="hr.payslip.input" search="[('payslip_id', '=', ref('hr_payslip_camilla_05')), ('code', '=', 'ovrig_fmn')]"/>
+            <value eval="{'name': 'Lån av fjällstugan', 'amount_qty': 1, 'amount': 3500.0}"/>
         </function>
 
         <function model="hr.payslip" name="compute_sheet">
@@ -438,10 +559,24 @@
             <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_camilla_employee" />
             <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons"/>
             <field name="date_from">2022-06-07</field>
-            <field name="date_to">2022-06-08</field>
+            <field name="date_to">2022-06-07</field>
             <field name="request_date_from">2022-06-07</field>
+            <field name="request_date_to">2022-06-07</field>
+            <field name="request_unit_hours" eval="True"/>
+            <field name="request_hour_from">13</field>
+            <field name="request_hour_to">17</field>
+            <field name="number_of_hours">4</field>
+            <field name="holiday_status_id" ref="l10n_se_hr_payroll.leave_type_sick" />
+        </record>
+
+        <record id="hr_leave_camilla_601_2" model="hr.leave">
+            <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_camilla_employee" />
+            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons"/>
+            <field name="date_from">2022-06-08</field>
+            <field name="date_to">2022-06-08</field>
+            <field name="request_date_from">2022-06-08</field>
             <field name="request_date_to">2022-06-08</field>
-            <field name="number_of_hours">16</field>
+            <field name="number_of_hours">8</field>
             <field name="holiday_status_id" ref="l10n_se_hr_payroll.leave_type_sick" />
         </record>
 
@@ -462,9 +597,6 @@
         </function>
 
         <!-- Saknas: -->
-        <!-- Förmån hushållsnära tjänster, arbetskostnad -->
-        <!-- Skattereduktion hushållsnära tjänster -->
-        <!-- Uttag förskottssemester, månadsavlönad -->
 
         <!-- Skatt -->
         <!-- Arbetsgivaravgift -->
@@ -480,12 +612,21 @@
             <field name="struct_id" ref="l10n_se_hr_payroll_tiichri.hr_payroll_structure_tj_man" />
         </record>
 
-
         <!-- Manuell input -->
 
         <function model="hr.payslip" name="onchange_employee">
             <value eval="[ref('l10n_se_hr_payroll_tiichri.hr_payslip_camilla_06')]"/>
         </function>
+
+        <!-- RUT -->
+        <record id="payslip_input_rut_06" model="hr.payslip.input">
+            <field name="payslip_id" ref="hr_payslip_camilla_06"/>
+            <field name="code">rut</field>
+            <field name="name">Hushållsnära tjänster (Arbetskostnad)</field>
+            <field name="amount">1800.0</field>
+            <field name="amount_qty">1.0</field>
+            <field name="contract_id" ref="contract_camilla"/>
+        </record>
 
         <!-- Övertid 1 -->
         <function model="hr.payslip.input" name="write">
@@ -493,16 +634,16 @@
             <value eval="{'amount_qty': 2.0}"/>
         </function>
 
-        <!-- Milersättning -->
-        <function model="hr.payslip.input" name="write">
-            <value model="hr.payslip.input" search="[('payslip_id', '=', ref('hr_payslip_camilla_06')), ('code', '=', 'bensin_mil_antal')]"/>
-            <value eval="{'amount_qty': 800.0}"/>
-        </function>
-
         <!-- Övertid 2 -->
         <function model="hr.payslip.input" name="write">
             <value model="hr.payslip.input" search="[('payslip_id', '=', ref('hr_payslip_camilla_06')), ('code', '=', 'kvaltim')]"/>
             <value eval="{'amount_qty': 2.0}"/>
+        </function>
+
+        <!-- Milersättning -->
+        <function model="hr.payslip.input" name="write">
+            <value model="hr.payslip.input" search="[('payslip_id', '=', ref('hr_payslip_camilla_06')), ('code', '=', 'bensin_mil_antal')]"/>
+            <value eval="{'amount_qty': 800.0}"/>
         </function>
 
         <function model="hr.payslip" name="compute_sheet">
@@ -527,18 +668,49 @@
             <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_camilla_employee" />
             <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons"/>
             <field name="date_from">2022-07-18</field>
-            <field name="date_to">2022-07-19</field>
+            <field name="date_to">2022-07-18</field>
             <field name="request_date_from">2022-07-18</field>
-            <field name="request_date_to">2022-07-19</field>
+            <field name="request_date_to">2022-07-18</field>
             <field name="number_of_hours">16</field>
+            <field name="request_unit_hours" eval="True"/>
+            <field name="request_hour_from">13</field>
+            <field name="request_hour_to">17</field>
+            <field name="number_of_hours">4</field>
             <field name="holiday_status_id" ref="l10n_se_hr_payroll.leave_type_sick" />
         </record>
 
+        <record id="hr_leave_camilla_702_2" model="hr.leave">
+            <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_camilla_employee" />
+            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons"/>
+            <field name="date_from">2022-07-19</field>
+            <field name="date_to">2022-07-19</field>
+            <field name="request_date_from">2022-07-19</field>
+            <field name="request_date_to">2022-07-19</field>
+            <field name="number_of_hours">16</field>
+            <field name="request_unit_hours" eval="True"/>
+            <field name="request_hour_from">8</field>
+            <field name="request_hour_to">12</field>
+            <field name="number_of_hours">4</field>
+            <field name="holiday_status_id" ref="l10n_se_hr_payroll.leave_type_sick" />
+        </record>
+
+        <!-- Förskottssemester -->
+        <record id="hr_leave_camilla_703" model="hr.leave">
+            <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_camilla_employee" />
+            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons"/>
+            <field name="date_from">2022-07-04</field>
+            <field name="date_to">2022-07-08</field>
+            <field name="request_date_from">2022-07-04</field>
+            <field name="request_date_to">2022-07-08</field>
+            <field name="number_of_hours">40</field>
+            <field name="holiday_status_id" ref="l10n_se_hr_holidays.leave_type_vacation_advance" />
+        </record>
+
+        <function model="hr.leave" name="action_validate">
+            <value eval="[ref('hr_leave_camilla_703')]"/>
+        </function>
+
         <!-- Saknas: -->
-        <!-- Förmån hushållsnära tjänster, arbetskostnad -->
-        <!-- Skattereduktion hushållsnära tjänster -->
-        <!-- Uttag förskottssemester, månadsavlönad -->
-        <!-- Bonus-->
 
         <!-- Skatt -->
         <!-- Arbetsgivaravgift -->
@@ -560,6 +732,22 @@
             <value eval="[ref('l10n_se_hr_payroll_tiichri.hr_payslip_camilla_07')]"/>
         </function>
 
+        <!-- RUT -->
+        <record id="payslip_input_rut_07" model="hr.payslip.input">
+            <field name="payslip_id" ref="hr_payslip_camilla_07"/>
+            <field name="code">rut</field>
+            <field name="name">Hushållsnära tjänster (Arbetskostnad)</field>
+            <field name="amount">1800.0</field>
+            <field name="amount_qty">1.0</field>
+            <field name="contract_id" ref="contract_camilla"/>
+        </record>
+
+        <!-- Bonus -->
+        <function model="hr.payslip.input" name="write">
+            <value model="hr.payslip.input" search="[('payslip_id', '=', ref('hr_payslip_camilla_07')), ('code', '=', 'bonus')]"/>
+            <value eval="{'amount_qty': 1.0, 'amount': 3000.0}"/>
+        </function>
+
         <!-- Milersättning -->
         <function model="hr.payslip.input" name="write">
             <value model="hr.payslip.input" search="[('payslip_id', '=', ref('hr_payslip_camilla_07')), ('code', '=', 'bensin_mil_antal')]"/>
@@ -570,7 +758,6 @@
             <value eval="[ref('l10n_se_hr_payroll_tiichri.hr_payslip_camilla_07')]"/>
         </function>
 
-
         <!-- ================================ August ================================ -->
 
         <!-- Sjukfrånvaro -->
@@ -578,16 +765,28 @@
             <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_camilla_employee" />
             <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons"/>
             <field name="date_from">2022-08-01</field>
-            <field name="date_to">2022-08-25</field>
+            <field name="date_to">2022-08-01</field>
             <field name="request_date_from">2022-08-01</field>
+            <field name="request_date_to">2022-08-01</field>
+            <field name="request_unit_hours" eval="True"/>
+            <field name="request_hour_from">12</field>
+            <field name="request_hour_to">17</field>
+            <field name="number_of_hours">4</field>
+            <field name="holiday_status_id" ref="l10n_se_hr_payroll.leave_type_sick" />
+        </record>
+
+        <record id="hr_leave_camilla_801_2" model="hr.leave">
+            <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_camilla_employee" />
+            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons"/>
+            <field name="date_from">2022-08-02</field>
+            <field name="date_to">2022-08-25</field>
+            <field name="request_date_from">2022-08-02</field>
             <field name="request_date_to">2022-08-25</field>
-            <field name="number_of_hours">152</field>
+            <field name="number_of_hours">144</field>
             <field name="holiday_status_id" ref="l10n_se_hr_payroll.leave_type_sick" />
         </record>
 
         <!-- Saknas: -->
-        <!-- Förmån hushållsnära tjänster, arbetskostnad -->
-        <!-- Skattereduktion hushållsnära tjänster -->
 
         <!-- Skatt -->
         <!-- Arbetsgivaravgift -->
@@ -608,6 +807,17 @@
             <value eval="[ref('l10n_se_hr_payroll_tiichri.hr_payslip_camilla_08')]"/>
         </function>
 
+        <!-- RUT -->
+        <record id="payslip_input_rut_08" model="hr.payslip.input">
+            <field name="payslip_id" ref="hr_payslip_camilla_08"/>
+            <field name="code">rut</field>
+            <field name="name">Hushållsnära tjänster (Arbetskostnad)</field>
+            <field name="amount">1800.0</field>
+            <field name="amount_qty">1.0</field>
+            <field name="contract_id" ref="contract_camilla"/>
+        </record>
+
+
         <function model="hr.payslip" name="compute_sheet">
             <value eval="[ref('l10n_se_hr_payroll_tiichri.hr_payslip_camilla_08')]"/>
         </function>
@@ -619,21 +829,59 @@
             <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_camilla_employee" />
             <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons"/>
             <field name="date_from">2022-09-01</field>
-            <field name="date_to">2022-09-19</field>
+            <field name="date_to">2022-09-01</field>
             <field name="request_date_from">2022-09-01</field>
-            <field name="request_date_to">2022-09-19</field>
-            <field name="number_of_hours">104</field>
+            <field name="request_date_to">2022-09-01</field>
+            <field name="request_unit_hours" eval="True"/>
+            <field name="request_hour_from">12</field>
+            <field name="request_hour_to">17</field>
+            <field name="number_of_hours">4</field>
             <field name="holiday_status_id" ref="l10n_se_hr_payroll.leave_type_sick" />
         </record>
 
+        <record id="hr_leave_camilla_901_2" model="hr.leave">
+            <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_camilla_employee" />
+            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons"/>
+            <field name="date_from">2022-09-02</field>
+            <field name="date_to">2022-09-08</field>
+            <field name="request_date_from">2022-09-02</field>
+            <field name="request_date_to">2022-09-08</field>
+            <field name="number_of_hours">40</field>
+            <field name="holiday_status_id" ref="l10n_se_hr_payroll.leave_type_sick" />
+            <field name="sick_leave_part">100</field>
+        </record>
+
+        <record id="hr_leave_camilla_901_3" model="hr.leave">
+            <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_camilla_employee" />
+            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons"/>
+            <field name="date_from">2022-09-09</field>
+            <field name="date_to">2022-09-19</field>
+            <field name="request_date_from">2022-09-09</field>
+            <field name="request_date_to">2022-09-19</field>
+            <field name="holiday_status_id" ref="l10n_se_hr_payroll.leave_type_sick" />
+            <field name="sick_leave_part">50</field>
+        </record>
+
+        <!-- Förskottssemester -->
+        <record id="hr_leave_camilla_902" model="hr.leave">
+            <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_camilla_employee" />
+            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons"/>
+            <field name="date_from">2022-09-26</field>
+            <field name="date_to">2022-09-27</field>
+            <field name="request_date_from">2022-09-26</field>
+            <field name="request_date_to">2022-09-27</field>
+            <field name="number_of_hours">16</field>
+            <field name="holiday_status_id" ref="l10n_se_hr_holidays.leave_type_vacation_advance" />
+        </record>
+
+        <function model="hr.leave" name="action_validate">
+            <value eval="[ref('hr_leave_camilla_902')]"/>
+        </function>
+
         <!-- Saknas: -->
-        <!-- Förmån hushållsnära tjänster, arbetskostnad -->
-        <!-- Skattereduktion hushållsnära tjänster -->
-        <!-- Uttag förskottssemester, månadsavlönad -->
 
         <!-- Skatt -->
         <!-- Arbetsgivaravgift -->
-
 
         <!-- Generera lönespec (payslip) -->
         <record id="hr_payslip_camilla_09" model="hr.payslip">
@@ -652,6 +900,17 @@
             <value eval="[ref('l10n_se_hr_payroll_tiichri.hr_payslip_camilla_09')]"/>
         </function>
 
+        <!-- RUT -->
+        <record id="payslip_input_rut_09" model="hr.payslip.input">
+            <field name="payslip_id" ref="hr_payslip_camilla_09"/>
+            <field name="code">rut</field>
+            <field name="name">Hushållsnära tjänster (Arbetskostnad)</field>
+            <field name="amount">1800.0</field>
+            <field name="amount_qty">1.0</field>
+            <field name="contract_id" ref="contract_camilla"/>
+        </record>
+
+
         <!-- Milersättning -->
         <function model="hr.payslip.input" name="write">
             <value model="hr.payslip.input" search="[('payslip_id', '=', ref('hr_payslip_camilla_09')), ('code', '=', 'bensin_mil_antal')]"/>
@@ -663,7 +922,6 @@
         </function>
 
         <!-- ================================ October ================================ -->
-
 
         <!-- Tjänstledighet -->
         <record id="hr_leave_camilla_1001" model="hr.leave">
@@ -723,9 +981,6 @@
 
 
         <!-- Saknas: -->
-        <!-- Förmån hushållsnära tjänster, arbetskostnad -->
-        <!-- Skattereduktion hushållsnära tjänster -->
-
         <!-- Skatt -->
         <!-- Arbetsgivaravgift -->
 
@@ -747,6 +1002,17 @@
             <value eval="[ref('l10n_se_hr_payroll_tiichri.hr_payslip_camilla_10')]"/>
         </function>
 
+        <!-- RUT -->
+        <record id="payslip_input_rut_10" model="hr.payslip.input">
+            <field name="payslip_id" ref="hr_payslip_camilla_10"/>
+            <field name="code">rut</field>
+            <field name="name">Hushållsnära tjänster (Arbetskostnad)</field>
+            <field name="amount">1800.0</field>
+            <field name="amount_qty">1.0</field>
+            <field name="contract_id" ref="contract_camilla"/>
+        </record>
+
+
         <!-- Milersättning -->
         <function model="hr.payslip.input" name="write">
             <value model="hr.payslip.input" search="[('payslip_id', '=', ref('hr_payslip_camilla_10')), ('code', '=', 'bensin_mil_antal')]"/>
@@ -767,16 +1033,11 @@
             <field name="date_to">2022-12-02</field>
             <field name="request_date_from">2022-11-01</field>
             <field name="request_date_to">2022-12-02</field>
-            <field name="number_of_hours">192</field>
+            <field name="sick_leave_part">100</field>
             <field name="holiday_status_id" ref="l10n_se_hr_payroll.leave_type_sick" />
         </record>
 
         <!-- Saknas: -->
-        <!-- Förmån hushållsnära tjänster, arbetskostnad -->
-        <!-- Skattereduktion hushållsnära tjänster -->
-        <!-- Övrig nettoersättning (Husläkare) -->
-        <!-- Övriga förmåner, tabellskatt (Husläkare) -->
-
         <!-- Skatt -->
         <!-- Arbetsgivaravgift -->
 
@@ -796,12 +1057,37 @@
             <value eval="[ref('l10n_se_hr_payroll_tiichri.hr_payslip_camilla_11')]"/>
         </function>
 
+        <!-- RUT -->
+        <record id="payslip_input_rut_11" model="hr.payslip.input">
+            <field name="payslip_id" ref="hr_payslip_camilla_11"/>
+            <field name="code">rut</field>
+            <field name="name">Hushållsnära tjänster (Arbetskostnad)</field>
+            <field name="amount">1800.0</field>
+            <field name="amount_qty">1.0</field>
+            <field name="contract_id" ref="contract_camilla"/>
+        </record>
+
+
+        <!-- Övrig nettoersättning husläkare -->
+        <function model="hr.payslip.input" name="write">
+            <value model="hr.payslip.input" search="[('payslip_id', '=', ref('hr_payslip_camilla_11')), ('code', '=', 'utlagg')]"/>
+            <value eval="{'name': 'Övrig nettoersättning (Husläkare)', 'amount_qty': 1, 'amount': 200.0}"/>
+        </function>
+
+        <!-- Övriga förmåner tabellskatt -->
+        <function model="hr.payslip.input" name="write">
+            <value model="hr.payslip.input" search="[('payslip_id', '=', ref('hr_payslip_camilla_11')), ('code', '=', 'ovrig_fmn')]"/>
+            <value eval="{'name': 'Tabellskatt (Husläkare)', 'amount_qty': 1, 'amount': 200.0}"/>
+        </function>
+
+
         <function model="hr.payslip" name="compute_sheet">
             <value eval="[ref('l10n_se_hr_payroll_tiichri.hr_payslip_camilla_11')]"/>
         </function>
 
         <!-- ================================ December ================================ -->
 
+        <!-- Denna record lite off pga inga röda dagar än, men blir korrekt i uträkning -->
         <!-- Sjukfrånvaro -->
         <record id="hr_leave_camilla_1201" model="hr.leave">
             <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_camilla_employee" />
@@ -815,10 +1101,6 @@
         </record>
 
         <!-- Saknas: -->
-        <!-- Förmån hushållsnära tjänster, arbetskostnad -->
-        <!-- Skattereduktion hushållsnära tjänster -->
-        <!-- Övrig nettoersättning (Husläkare) -->
-        <!-- Övriga förmåner, tabellskatt (Husläkare) -->
 
         <!-- Skatt -->
         <!-- Arbetsgivaravgift -->
@@ -839,6 +1121,16 @@
         <function model="hr.payslip" name="onchange_employee">
             <value eval="[ref('l10n_se_hr_payroll_tiichri.hr_payslip_camilla_12')]"/>
         </function>
+
+        <!-- RUT -->
+        <record id="payslip_input_rut_12" model="hr.payslip.input">
+            <field name="payslip_id" ref="hr_payslip_camilla_12"/>
+            <field name="code">rut</field>
+            <field name="name">Hushållsnära tjänster (Arbetskostnad)</field>
+            <field name="amount">1800.0</field>
+            <field name="amount_qty">1.0</field>
+            <field name="contract_id" ref="contract_camilla"/>
+        </record>
 
         <function model="hr.payslip" name="compute_sheet">
             <value eval="[ref('l10n_se_hr_payroll_tiichri.hr_payslip_camilla_12')]"/>
