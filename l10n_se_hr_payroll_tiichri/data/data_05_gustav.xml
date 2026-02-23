@@ -54,6 +54,7 @@
             <field name="tax_equalization">0.25</field>
             <field name="tax_equalization_start">2011-04-01</field>
             <field name="tax_equalization_end">2022-12-31</field>
+            <field name="annual_vacation_days">25.0</field>
         </record>
 
 

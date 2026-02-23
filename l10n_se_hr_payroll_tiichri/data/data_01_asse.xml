@@ -71,6 +71,7 @@
             <field name="has_tax_equalization" eval="False"/>
             <field name="has_one_off_tax" eval="True"/>
             <field name="one_off_tax">0.57</field>
+            <field name="annual_vacation_days">30.0</field>
         </record>
 
         <record id="contract_asse_2" model="hr.contract">
@@ -94,6 +95,7 @@
             <field name="has_tax_equalization" eval="False"/>
             <field name="has_one_off_tax" eval="True"/>
             <field name="one_off_tax">0.57</field>
+            <field name="annual_vacation_days">30.0</field>
         </record>
 
 
@@ -247,12 +249,6 @@
             <field name="holiday_status_id" ref="l10n_se_hr_payroll.leave_type_vab" />
         </record>
 
-        <!-- Saknas: -->
-
-        <!-- Skatt -->
-        <!-- Arbetsgivaravgift -->
-
-        <!-- Validera tjänstledighet/semester/föräld.led.-->
         <!-- Validera tjänstledighet/semester/föräld.led. -->
         <function model="hr.leave" name="action_validate">
             <value eval="[ref('hr_leave_asse_104'), ref('hr_leave_asse_105')]"/>
@@ -358,12 +354,7 @@
             <field name="number_of_hours">8</field>
             <field name="holiday_status_id" ref="l10n_se_hr_payroll.leave_type_vab" />
         </record>
-        <!-- Saknas: -->
 
-        <!-- Skatt -->
-        <!-- Arbetsgivaravgift -->
-
-        <!-- Validera tjänstledighet/semester/föräld.led. -->
         <!-- Validera tjänstledighet/semester/föräld.led. -->
         <function model="hr.leave" name="action_validate">
             <value eval="[ref('hr_leave_asse_201'), ref('hr_leave_asse_202')]"/>
@@ -405,8 +396,8 @@
 
         <!-- Övriga nettoers gymkort -->
         <function model="hr.payslip.input" name="write">
-            <value model="hr.payslip.input" search="[('payslip_id', '=', ref('hr_payslip_asse_02')), ('code', '=', 'utlagg')]"/>
-            <value eval="{'name': 'Övrig nettoersättning (gymkort)', 'amount_qty': 1, 'amount': 1000.0}"/>
+            <value model="hr.payslip.input" search="[('payslip_id', '=', ref('hr_payslip_asse_02')), ('code', '=', 'net_avd')]"/>
+            <value eval="{'name': 'Övrig nettoavdrag (gymkort)', 'amount_qty': 1, 'amount': 1000.0}"/>
         </function>
 
         <function model="hr.payslip" name="compute_sheet">
@@ -803,8 +794,8 @@
             <field name="request_hour_to">11</field>
             <field name="number_of_hours">3</field>
             <field name="holiday_status_id" ref="l10n_se_hr_payroll.leave_type_loa" />
-        </record>        
-        
+        </record>
+
         <record id="hr_leave_asse_603" model="hr.leave">
             <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_asse_employee" />
             <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons"/>

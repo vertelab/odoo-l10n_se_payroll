@@ -103,6 +103,7 @@ class hr_contract(models.Model):
     # SKV', default="http://www.skatteverket.se/privat/skatter/biltrafik/bilformansberakning", readonly=True,
     # help="Beräknat förmånsvärde för bil från skatteverket")
     vacation_days = fields.Float(string='Semesterdagar', digits='Payroll', help="Sparad semester i dagar", )
+    annual_vacation_days = fields.Float(string='Årlig semesterrätt', default=25.0, help="Antal avtalade semesterdagar per år.")
 
     # ~ office_fund = fields.Float(string='Office fund', digits_compute=dp.get_precision('Payroll'), help="Fund for
     # personal office supplies",)

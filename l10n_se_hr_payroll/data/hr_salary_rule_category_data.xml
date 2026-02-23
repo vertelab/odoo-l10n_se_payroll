@@ -67,7 +67,7 @@
             <field name="name">Engångsbelopp</field>
             <field name="note">Bonus, Retroaktiv lön, Semesterersättning vid slutlön, etc.</field>
             <field name="company_id" eval="False"/>
-        </record> 
+        </record>
 
         <record id="hr_salary_rule_category_DUMMY" model="hr.salary.rule.category">
             <field name="code">DUMMY</field>
@@ -83,19 +83,20 @@
             <field name="company_id" eval="False"/>
         </record>
 
-<!--         
+        <record id="hr_salary_rule_category_SYSTEM" model="hr.salary.rule.category">
+            <field name="code">SYSTEM</field>
+            <field name="name">System</field>
+            <field name="note">Används till regler som är verktyg</field>
+        </record>
+
+<!--
         <record id="hr_salary_rule_category_SKVPRE" model="hr.salary.rule.category">
             <field name="code">SKVPRE</field>
             <field name="name">Skatter (pre)</field>
             <field name="note">Används för skatt att dra av förutom preleminär skatt</field>
         </record> -->
 
-        <!-- <record id="hr_salary_rule_category-SYSTEM" model="hr.salary.rule.category">
-            <field name="code">SYSTEM</field>
-            <field name="name">System</field>
-            <field name="note">Används till regler som är verktyg</field>
-        </record>
-        <record id="hr_salary_rule_category-HANDLER" model="hr.salary.rule.category">
+        <!-- <record id="hr_salary_rule_category-HANDLER" model="hr.salary.rule.category">
             <field name="code">HANDLER</field>
             <field name="name">Tillämpning</field>
             <field name="note">Används när en 'category' ska bearbetas</field>

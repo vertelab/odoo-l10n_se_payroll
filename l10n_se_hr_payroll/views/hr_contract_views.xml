@@ -4,15 +4,23 @@
         <field name="model">hr.contract</field>
         <field name="inherit_id" ref="hr_contract.hr_contract_view_form" />
         <field name="arch" type="xml">
-            <xpath expr="//field[@name='wage']" position="after">
-                <field name="schedule_pay" invisible="1" />
-                <field name="day_of_pay" invisible="schedule_pay != 'monthly'" />
+            <xpath expr="//group[@name='salary']" position="inside">
+                <field name="schedule_pay" invisible="1"/>
+                <field name="day_of_pay" invisible="schedule_pay != 'monthly'"/>
 
-                <separator string="Löneväxling" colspan="2" />
-                <field name="wage_exchange_amount" />
-                <field name="wage_exchange_start" />
-                <field name="wage_exchange_end" placeholder="Tillsvidare..." />
-                <separator colspan="2" />
+                <separator string="Lönejusteringar" colspan="2"/>
+                <field name="wage_exchange_amount"/>
+                <field name="wage_exchange_start"/>
+                <field name="wage_exchange_end" placeholder="Tillsvidare..."/>
+
+                <field name="has_attachment_of_earnings"/>
+                <field name="attachment_of_earnings_start" placeholder="Start Date" class="oe_inline" invisible="not has_attachment_of_earnings" required="has_attachment_of_earnings"/>
+                <field name="attachment_amount" placeholder="Attachment Amount" invisible="not has_attachment_of_earnings" required="has_attachment_of_earnings"/>
+                <field name="protected_amount" placeholder="Protected Amount" invisible="not has_attachment_of_earnings" required="has_attachment_of_earnings"/>    
+                
+                <separator string="Semester" colspan="2"/>
+                <field name="vacation_days"/>
+                <field name="annual_vacation_days"/>
             </xpath>
         </field>
     </record>

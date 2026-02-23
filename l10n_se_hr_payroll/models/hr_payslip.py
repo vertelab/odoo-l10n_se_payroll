@@ -53,23 +53,39 @@ class hr_payslip(models.Model):
             rec.holiday_status_ids += rec.env['hr.leave.type'].search([('id', 'in', [
                 rec.env.ref('l10n_se_hr_holidays.leave_type_vacation').id,
                 rec.env.ref('l10n_se_hr_holidays.leave_type_vacation_unpaid').id,
+                rec.env.ref('l10n_se_hr_holidays.leave_type_vacation_saved').id,
+                rec.env.ref('l10n_se_hr_holidays.leave_type_vacation_advance').id,
                 rec.env.ref('l10n_se_hr_payroll.leave_type_sick').id,
                 rec.env.ref('l10n_se_hr_payroll.leave_type_vab').id,
-                rec.env.ref('l10n_se_hr_payroll.leave_type_loa').id])])
+                rec.env.ref('l10n_se_hr_payroll.leave_type_loa').id,
+                rec.env.ref('l10n_se_hr_payroll.leave_type_f_led').id
+            ])])
 
     holiday_status_ids = fields.Many2many(comodel_name="hr.leave.type", compute="_holiday_status_ids")
 
     @api.model
     def get_leaves_earnings_days(self, employee, date_from, date_to):
         employed_days = worked_days = absent_days = 0
-        for slip in self.env['hr.payslip'].search(
-                [('employee_id', '=', employee.id), ('date_from', '>=', date_from), ('date_to', '<=', date_to)]):
-            employed_days += (fields.Date.from_string(slip.date_to) - fields.Date.from_string(slip.date_from)).days
-            worked_days += slip.worked_days_line_ids.filtered(
-                lambda l: l.code == 'WORK100').number_of_days if slip.worked_days_line_ids.filtered(
-                lambda l: l.code == 'WORK100') else 0.0
-            absent_days += sum(
-                a.number_of_days for a in slip.worked_days_line_ids.filtered(lambda l: l.code != 'WORK100'))
+
+        vacation_basis_codes = ['sjk', 'vab', 'f_led']
+
+        for slip in self.env['hr.payslip'].search([
+                ('employee_id', '=', employee.id), 
+                ('date_from', '>=', date_from), 
+                ('date_to', '<=', date_to),
+                ('state', 'in', ['done', 'paid'])
+            ]):
+
+            date_start = fields.Date.from_string(slip.date_from)
+            date_end = fields.Date.from_string(slip.date_to)
+            employed_days += (date_end - date_start).days +1
+
+            for line in slip.worked_days_line_ids:
+                if line.code == 'WORK100':
+                    worked_days += line.number_of_days
+                elif line.code not in vacation_basis_codes and line.number_of_days > 0:
+                    absent_days += line.number_of_days
+
         return {'employed_days': employed_days, 'absent_days': absent_days, 'worked_days': worked_days}
 
     @api.model

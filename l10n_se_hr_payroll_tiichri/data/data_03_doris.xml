@@ -55,6 +55,7 @@
             <field name="has_tax_equalization" eval="False"/>
             <field name="has_one_off_tax" eval="True"/>
             <field name="one_off_tax">0.3</field>
+            <field name="annual_vacation_days">25.0</field>
         </record>
 
         <!-- ## HR.CONTRACT.BENEFIT -->

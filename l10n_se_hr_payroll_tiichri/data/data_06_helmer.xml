@@ -57,6 +57,7 @@
             <field name="attachment_of_earnings_start">2022-10-01</field>
             <field name="attachment_amount">5500.0</field>
             <field name="protected_amount">10800.0</field>
+            <field name="annual_vacation_days">25.0</field>
         </record>
 
         <!-- ================================ January ================================ -->
@@ -234,7 +235,7 @@
 
         <!-- Milersättning -->
         <function model="hr.payslip.input" name="write">
-            <value model="hr.payslip.input" search="[('payslip_id', '=', ref('hr_payslip_helmer_02')), ('code', '=', 'mil_fri')]"/>
+            <value model="hr.payslip.input" search="[('payslip_id', '=', ref('hr_payslip_helmer_02')), ('code', '=', 'mil_antal')]"/>
             <value eval="{'amount_qty': 500,}"/>
         </function>
 
@@ -335,7 +336,7 @@
 
         <!-- Milersättning -->
         <function model="hr.payslip.input" name="write">
-            <value model="hr.payslip.input" search="[('payslip_id', '=', ref('hr_payslip_helmer_03')), ('code', '=', 'mil_fri')]"/>
+            <value model="hr.payslip.input" search="[('payslip_id', '=', ref('hr_payslip_helmer_03')), ('code', '=', 'mil_antal')]"/>
             <value eval="{'amount_qty': 300}"/>
         </function>
 

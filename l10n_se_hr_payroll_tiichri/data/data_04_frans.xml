@@ -62,6 +62,7 @@
             <field name="has_tax_equalization" eval="False"/>
             <field name="has_one_off_tax" eval="True"/>
             <field name="one_off_tax">0.3</field>
+            <field name="annual_vacation_days">25.0</field>
         </record>
 
 
@@ -84,6 +85,7 @@
             <field name="has_tax_equalization" eval="False"/>
             <field name="has_one_off_tax" eval="True"/>
             <field name="one_off_tax">0.3</field>
+            <field name="annual_vacation_days">25.0</field>
         </record>
 
 
@@ -952,8 +954,6 @@
         <!-- Ingen frånvaro denna månad -->
 
         <!-- Saknas: -->
-
-        <!-- Skatt -->
         <!-- Arbetsgivaravgift -->
 
 
@@ -989,13 +989,7 @@
 
         <!-- ================================ November ================================ -->
 
-        <!-- Ingen frånvaro denna månad -->
-
         <!-- Saknas: -->
-        <!-- Föräldraledighet hel månad -->
-        <!-- Föräldrapenningstillägg 120 dgr -->
-
-        <!-- Skatt -->
         <!-- Arbetsgivaravgift -->
 
         <!-- Generera lönespec (payslip) -->
@@ -1007,12 +1001,38 @@
             <field name="date_from">2022-11-01</field>
             <field name="date_to">2022-11-30</field>
             <field name="struct_id" ref="l10n_se_hr_payroll_tiichri.hr_payroll_structure_tj_man" />
+            <field name="contract_id" ref="contract_frans_2" />
         </record>
 
         <!-- Manuell input-->
         <!-- Ingen övertid denna måbad -->
         <function model="hr.payslip" name="onchange_employee">
             <value eval="[ref('l10n_se_hr_payroll_tiichri.hr_payslip_frans_11')]"/>
+        </function>
+
+        <function model="hr.payslip" name="write">
+            <value eval="[ref('hr_payslip_frans_11')]"/>
+            <value eval="{'contract_id': ref('contract_frans_2')}"/>
+        </function>
+
+        <function model="hr.payslip.input" name="write">
+            <value model="hr.payslip.input" search="[('payslip_id', '=', ref('hr_payslip_frans_11')), ('code', '=', 'sem_slut_kvar')]"/>
+            <value eval="{'amount_qty': 9.0}"/>
+        </function>
+
+        <function model="hr.payslip.input" name="write">
+            <value model="hr.payslip.input" search="[('payslip_id', '=', ref('hr_payslip_frans_11')), ('code', '=', 'sem_slut_spar')]"/>
+            <value eval="{'amount_qty': 5.0}"/>
+        </function>
+
+        <function model="hr.payslip.input" name="write">
+            <value model="hr.payslip.input" search="[('payslip_id', '=', ref('hr_payslip_frans_11')), ('code', '=', 'sem_slut_intj')]"/>
+            <value eval="{'amount_qty': 12.5}"/>
+        </function>
+
+        <function model="hr.payslip.input" name="write">
+            <value model="hr.payslip.input" search="[('payslip_id', '=', ref('hr_payslip_frans_11')), ('code', '=', 'sem_slut_ssg')]"/>
+            <value eval="{'amount_qty': 80.0}"/>
         </function>
 
         <function model="hr.payslip" name="compute_sheet">

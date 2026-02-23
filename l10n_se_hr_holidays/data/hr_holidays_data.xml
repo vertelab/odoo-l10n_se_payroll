@@ -31,6 +31,7 @@
             <field name="date_earning_start" eval="time.strftime(str(DateTime.today().year - 4) + '-04-01')" />
             <field name="date_earning_end" eval="time.strftime(str(DateTime.today().year -3) + '-03-31')" />
         </record>
+
         <record model="hr.leave.type" id="holiday_status_cl-1">
             <field name="name" eval="'Legal Leaves '+str(DateTime.today().year - 2)" />
             <field name="work_entry_type_id" ref="l10n_se_hr_holidays.work_entry_type_vacation" />
@@ -40,6 +41,7 @@
             <field name="date_earning_start" eval="time.strftime(str(DateTime.today().year - 3) + '-04-01')" />
             <field name="date_earning_end" eval="time.strftime(str(DateTime.today().year -2) + '-03-31')" />
         </record>
+
         <record model="hr.leave.type" id="holiday_status_cl0">
             <field name="name" eval="'Legal Leaves '+str(DateTime.today().year - 1)" />
             <field name="work_entry_type_id" ref="l10n_se_hr_holidays.work_entry_type_vacation" />
@@ -59,6 +61,7 @@
             <field name="date_earning_start" eval="time.strftime(str(DateTime.today().year - 1) + '-04-01')" />
             <field name="date_earning_end" eval="time.strftime(str(DateTime.today().year) + '-03-31')" />
         </record>
+
         <record model="hr.leave.type" id="holiday_status_cl2">
             <field name="name" eval="'Legal Leaves '+str(DateTime.today().year + 1)" />
             <field name="work_entry_type_id" ref="l10n_se_hr_holidays.work_entry_type_vacation" />
@@ -68,6 +71,7 @@
             <field name="date_earning_start" eval="time.strftime(str(DateTime.today().year) + '-04-01')" />
             <field name="date_earning_end" eval="time.strftime(str(DateTime.today().year + 1) + '-03-31')" />
         </record>
+
         <record model="hr.leave.type" id="holiday_status_cl3">
             <field name="name" eval="'Legal Leaves '+str(DateTime.today().year + 2)" />
             <field name="work_entry_type_id" ref="l10n_se_hr_holidays.work_entry_type_vacation" />
@@ -78,31 +82,66 @@
             <field name="date_earning_end" eval="time.strftime(str(DateTime.today().year + 2) + '-03-31')" />
         </record>
 
-        <record model="hr.work.entry.type" id="holiday_status_furlough_code">
-             <field name="name" eval="'Furlough Code'"/>
-             <field name="code">furlough</field>
-             <field name="external_code" eval="'l10n_se_hr_holidays.furlough'"/>
-             <field name="color">2</field>
-             <field name="is_leave" eval="True"/>
-             <field name="country_id" ref="base.se"/>
-        </record>
-
-        <record model="hr.leave.type" id="holiday_status_furlough">
-            <field name="name">Furlough</field>
-            <field name="work_entry_type_id" ref="l10n_se_hr_holidays.holiday_status_furlough_code" />
-            <field name="color">2</field>
-            <field name="limit" eval="True"/>
-        </record>
-
-        <record model="ir.actions.server" id="earn_leaves_dayes">
-            <field name="name">Earn Leaves Days</field>
+        <record model="ir.actions.server" id="earn_leaves_days">
+            <field name="name">Beräkna Intjänad Semester för nuvarande intjänandeår</field>
             <field name="model_id" ref="hr_holidays.model_hr_leave_type"/>
+            <field name="binding_model_id" ref="hr_holidays.model_hr_leave_type"/>
             <field name="state">code</field>
             <field name="code">
-                for rec in records:
-                    rec.earn_leaves_days()
+for record in records: 
+    record.earn_leaves_days()
             </field>
         </record>
-        
+
+        <record model="ir.actions.server" id="earn_leaves_days_2022_2023">
+            <field name="name">Beräkna Intjänad Semester 2022-2023</field>
+            <field name="model_id" ref="hr_holidays.model_hr_leave_type"/>
+            <field name="binding_model_id" ref="hr_holidays.model_hr_leave_type"/>
+            <field name="state">code</field>
+            <field name="code">
+start = datetime.date(2022, 4, 1)
+end = datetime.date(2023, 3, 31)
+
+for record in records: record.earn_leaves_days(forced_start=start, forced_end=end)
+            </field>
+        </record>
+
+        <record model="ir.actions.server" id="earn_leaves_days_2021_2022">
+            <field name="name">Beräkna Intjänad Semester 2021-2022</field>
+            <field name="model_id" ref="hr_holidays.model_hr_leave_type"/>
+            <field name="binding_model_id" ref="hr_holidays.model_hr_leave_type"/>
+            <field name="state">code</field>
+            <field name="code">
+start = datetime.date(2021, 4, 1)
+end = datetime.date(2022, 3, 31)
+
+for record in records: record.earn_leaves_days(forced_start=start, forced_end=end)
+            </field>
+        </record>
+
+        <record id="ir_cron_update_leave_types_yearly" model="ir.cron">
+            <field name="name">HR: Uppdatera semesterår</field>
+            <field name="model_id" ref="hr_holidays.model_hr_leave_type"/>
+            <field name="state">code</field>
+            <field name="code">model.init_records()</field>
+            <field name="user_id" ref="base.user_root"/>
+            <field name="interval_number">12</field>
+            <field name="interval_type">months</field>
+            <field name="active" eval="True"/>
+            <field name="nextcall" eval="(DateTime.today() + relativedelta(years=1, month=1, day=1, hour=2, minute=0)).strftime('%Y-%m-%d %H:%M:%S')"/>
+        </record>
+
+        <record model="ir.actions.server" id="action_transfer_saved_leaves_button">
+            <field name="name">Överför till Sparad Semester (Årskörning)</field>
+            <field name="model_id" ref="hr_holidays.model_hr_leave_type"/>
+            <field name="binding_model_id" ref="hr_holidays.model_hr_leave_type"/>
+            <field name="binding_view_types">list,form</field>
+            <field name="state">code</field>
+            <field name="code">
+for record in records:
+    record.action_transfer_to_saved_leaves()
+            </field>
+        </record>
+
     </data>
 </odoo>

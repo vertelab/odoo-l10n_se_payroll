@@ -71,7 +71,6 @@ result = (tax_amount or 0.0) * -1
             </field>
         </record>
 
-
         <!-- <record id="hr_salary_rule_side_income_tax" model="hr.salary.rule">
             <field name="category_id" ref="l10n_se_hr_payroll.hr_salary_rule_category_NETAVG" />
             <field name="company_id" eval="False"/>

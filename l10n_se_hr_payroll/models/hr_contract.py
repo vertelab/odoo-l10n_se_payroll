@@ -392,6 +392,19 @@ class hr_contract(models.Model):
 
         return max(0.0, total_scheduled - absence_hours)
 
+    def get_holiday_basis_pay_hours(self, payslip):
+        self.ensure_one()
+
+        basis_hour_codes = ['sjk', 'vab', 'f_led']
+
+        basis_hours = sum(
+            abs(line.number_of_hours)
+            for line in payslip.worked_days_line_ids
+            if line.code and line.code.lower() in basis_hour_codes
+        )
+
+        return basis_hours
+
     def get_historical_employment_rate(self, payslip):
         self.ensure_one()
 
@@ -556,3 +569,28 @@ class hr_contract(models.Model):
                     return max(0, total_f_lon * 0.5)
 
         return 0.0
+
+    def get_expired_saved_vacation_days(self, payslip):
+        self.ensure_one()
+
+        date_from_history = payslip.date_from - relativedelta(months=1)
+        date_to_history = payslip.date_from - relativedelta(days=1)
+
+        saved_leave_type = self.env.ref('l10n_se_hr_holidays.leave_type_vacation_saved', raise_if_not_found=False)
+        if not saved_leave_type:
+            return 0.0
+
+        allocations = self.env['hr.leave.allocation'].search([
+            ('employee_id', '=', self.employee_id.id),
+            ('holiday_status_id', '=', saved_leave_type.id),
+            ('state', '=', 'validate'),
+            ('date_to', '>=', date_from_history),
+            ('date_to', '<=', date_to_history),
+        ])
+
+        expired_days = 0.0
+        for alloc in allocations:
+            remaining = alloc.number_of_days - alloc.leaves_taken
+            if remaining > 0:
+                expired_days += remaining
+        return expired_days
