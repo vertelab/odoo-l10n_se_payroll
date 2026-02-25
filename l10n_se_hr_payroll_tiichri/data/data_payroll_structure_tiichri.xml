@@ -30,6 +30,7 @@
                     ref('l10n_se_hr_payroll.hr_salary_rule_parental_pay_tj'),
                     ref('l10n_se_hr_payroll.hr_salary_rule_parental_leave'),
 
+                    ref('l10n_se_hr_payroll.hr_salary_rule_oresavrundning'),
                     ref('l10n_se_hr_payroll.hr_salary_rule_mertid'),
                     ref('l10n_se_hr_payroll.hr_salary_rule_wage_exchange'),
                     ref('l10n_se_hr_payroll.hr_salary_rule_attachment_deduction'),
@@ -185,6 +186,7 @@
                     ref('l10n_se_hr_payroll.hr_salary_rule_wage_exchange'),
                     ref('l10n_se_hr_payroll.hr_salary_rule_attachment_deduction'),
 
+                    ref('l10n_se_hr_payroll.hr_salary_rule_oresavrundning'),
                     ref('l10n_se_hr_payroll.hr_salary_rule_sick_leave'),
                     ref('l10n_se_hr_payroll.hr_salary_rule_qualifying_deduction'),
                     ref('l10n_se_hr_payroll.hr_salary_rule_sick_wage'),
@@ -337,6 +339,7 @@
                     ref('l10n_se_hr_payroll.hr_salary_rule_wage_exchange'),
                     ref('l10n_se_hr_payroll.hr_salary_rule_attachment_deduction'),
 
+                    ref('l10n_se_hr_payroll.hr_salary_rule_oresavrundning'),
                     ref('l10n_se_hr_payroll.hr_salary_rule_sick_leave'),
                     ref('l10n_se_hr_payroll.hr_salary_rule_qualifying_deduction'),
                     ref('l10n_se_hr_payroll.hr_salary_rule_sick_wage'),
@@ -502,6 +505,7 @@
 
                     ref('l10n_se_hr_payroll.hr_salary_rule_vab'),
 
+                    ref('l10n_se_hr_payroll.hr_salary_rule_oresavrundning'),
                     ref('l10n_se_hr_payroll.hr_salary_rule_leave_of_absence'),
                     ref('l10n_se_hr_payroll.hr_salary_rule_leave_of_absence_hourly'),
                     ref('l10n_se_hr_payroll.hr_salary_rule_leave_of_absence_less_than_5'),
@@ -648,6 +652,7 @@
                     ref('l10n_se_hr_payroll.hr_salary_rule_parental_deduction_arb'),
                     ref('l10n_se_hr_payroll.hr_salary_rule_parental_leave'),
 
+                    ref('l10n_se_hr_payroll.hr_salary_rule_oresavrundning'),
                     ref('l10n_se_hr_payroll.hr_salary_rule_sick_leave'),
                     ref('l10n_se_hr_payroll.hr_salary_rule_qualifying_deduction'),
                     ref('l10n_se_hr_payroll.hr_salary_rule_sick_wage'),
@@ -796,6 +801,7 @@
                     ref('l10n_se_hr_payroll.hr_salary_rule_wage_exchange'),
                     ref('l10n_se_hr_payroll.hr_salary_rule_attachment_deduction'),
 
+                    ref('l10n_se_hr_payroll.hr_salary_rule_oresavrundning'),
                     ref('l10n_se_hr_payroll.hr_salary_rule_parental_deduction_arb'),
                     ref('l10n_se_hr_payroll.hr_salary_rule_parental_leave'),
                     ref('l10n_se_hr_payroll.hr_salary_rule_sick_leave'),
@@ -932,7 +938,7 @@
         </record>
 
         <!-- ============================================ -->
-        <!-- Arbetere - Timavlönad                        -->
+        <!-- Arbetere - Timavlönad Visstidsanställd       -->
         <!-- ============================================ -->
         <record id="hr_payroll_structure_arb_tim_vt" model="hr.payroll.structure">
             <field name="code">arb_tim_vt</field>
@@ -950,6 +956,7 @@
 
                     ref('l10n_se_hr_payroll.hr_salary_rule_vab'),
 
+                    ref('l10n_se_hr_payroll.hr_salary_rule_oresavrundning'),
                     ref('l10n_se_hr_payroll.hr_salary_rule_leave_of_absence'),
                     ref('l10n_se_hr_payroll.hr_salary_rule_leave_of_absence_hourly'),
                     ref('l10n_se_hr_payroll.hr_salary_rule_leave_of_absence_less_than_5'),

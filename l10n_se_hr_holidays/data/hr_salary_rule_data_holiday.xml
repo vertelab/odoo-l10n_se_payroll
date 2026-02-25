@@ -145,14 +145,11 @@ current_rate = contract.resource_calendar_id.work_time_rate / 100.0
 is_varied_rate = abs(historical_rate - current_rate) &gt; 0.01
 
 if is_varied_rate:
-    amount_per_day = full_time_wage * 0.008 * historical_rate
+    amount_per_day = round(full_time_wage * 0.008 * historical_rate, 2)
 else:
+    amount_per_day = round(full_time_wage * 0.008, 2)
 
-    amount_per_day = full_time_wage * 0.008
-
-amount_per_day = amount_per_day * -1
-result = round(amount_per_day, 2)
-
+result = amount_per_day * -1
 result_qty = worked_days.dict.get('sem_bet').number_of_days
             
             </field>
@@ -179,9 +176,7 @@ result = worked_days.dict.get('sem_bet') and 'tj' in contract.struct_id.code and
 historical_rate = contract.get_historical_employment_rate(payslip)
 effective_wage = contract.get_effective_wage(payslip)
 
-amount_per_day = effective_wage * 0.046 * historical_rate * -1
-
-result = round(amount_per_day, 2)
+result = round(effective_wage * 0.046 * historical_rate, 2) * -1
 result_qty = worked_days.dict.get('sem_bet').number_of_days
             </field>
         </record>
@@ -211,9 +206,7 @@ result = worked_days.dict.get('sem_bet') and (is_arb_man or is_tj_var)
             <field name="amount_python_compute">
 effective_wage = contract.get_effective_wage(payslip)
 
-amount_per_day = effective_wage * 0.046
-
-result = round(amount_per_day, 2)
+result = round(effective_wage * 0.046, 2)
 result_qty = worked_days.dict.get('sem_bet').number_of_days
             </field>
         </record>
@@ -256,7 +249,7 @@ result = worked_days.dict.get('sem_obet')
 effective_wage = contract.get_effective_wage(payslip)
 
 result_qty = worked_days.dict.get('sem_obet').number_of_days
-result = effective_wage * 0.046
+result = round(effective_wage * 0.046, 2)
             </field>
         </record>
 
@@ -279,7 +272,7 @@ effective_wage = contract.get_effective_wage(payslip)
 MAD = payslip.struct_id.get_constant('MAD')
 
 result_qty = worked_days.dict.get('sem_spar_dagar').number_of_days
-result = effective_wage / MAD
+result = round(effective_wage / MAD, 2)
             </field>
         </record>
 
@@ -301,7 +294,7 @@ result = (inputs and inputs.sem_forsk and inputs.sem_forsk.amount_qty &gt; 0)
 effective_wage = contract.get_effective_wage(payslip)
 
 result_qty = inputs.dict.get('sem_forsk').amount_qty if inputs.dict.get('sem_forsk') else 0.0
-result = effective_wage * 0.046
+result = round(effective_wage * 0.046, 2)
             </field>
         </record>
 
@@ -355,7 +348,7 @@ timmar = contract.get_holiday_basis_pay_hours(payslip)
 
 ers_underlag = timmar * contract.wage
 
-result = (arbetat_underlag + ers_underlag) * 0.12
+result = round((arbetat_underlag + ers_underlag) * 0.12, 2)
             </field>
         </record>
 
@@ -369,7 +362,12 @@ result = (arbetat_underlag + ers_underlag) * 0.12
             <field name="appears_on_payslip" eval="True"/>
             <field name="condition_select">python</field>
             <field name="condition_python">
-result = inputs.sem_slut_kvar or inputs.sem_slut_spar or inputs.sem_slut_intj or inputs.sem_dagar_slut
+kvar = inputs.sem_slut_kvar.amount_qty if inputs.sem_slut_kvar else 0.0
+spar = inputs.sem_slut_spar.amount_qty if inputs.sem_slut_spar else 0.0
+intj = inputs.sem_slut_intj.amount_qty if inputs.sem_slut_intj else 0.0
+dagar = inputs.sem_dagar_slut.amount_qty if inputs.sem_dagar_slut else 0.0
+
+result = (kvar + spar + intj + dagar) &gt; 0
             </field>
             <field name="amount_select">code</field>
             <field name="amount_python_compute">
@@ -389,15 +387,14 @@ else:
     hist_ssg = contract.get_historical_employment_rate(payslip)
 
 if 'tj' in contract.struct_id.code:
-    val_kvarvarande = kvarvarande * (full_time_wage * 0.054 * hist_ssg)
-    val_sparade = sparade * (full_time_wage * 0.054 * hist_ssg)
+    val_kvarvarande = kvarvarande * round(full_time_wage * 0.054 * hist_ssg, 2)
+    val_sparade = sparade * round(full_time_wage * 0.054 * hist_ssg, 2)
+    val_intjanade = intjanade * round(full_time_wage * 0.054 * 1.0, 2)
     
-    val_intjanade = intjanade * (full_time_wage * 0.054 * 1.0)
-    
-    result = val_kvarvarande + val_sparade + val_intjanade
+    result = round(val_kvarvarande + val_sparade + val_intjanade, 2)
 elif 'arb' in contract.struct_id.code:
     SEML = payslip.struct_id.get_constant('SEML') or 1210.0
-    result = (kvarvarande + sparade + intjanade) * SEML
+    result = round((kvarvarande + sparade + intjanade) * SEML, 2)
 else:
     result = 0.0
             </field>
@@ -446,10 +443,10 @@ full_time_wage = contract.get_full_time_wage(payslip)
 hist_ssg = contract.get_historical_employment_rate(payslip)
 
 if 'tj' in contract.struct_id.code:
-    result = expired_days * (full_time_wage * 0.054 * hist_ssg)
+    result = round(full_time_wage * 0.054 * hist_ssg, 2)
 elif 'arb' in contract.struct_id.code:
     SEML = payslip.struct_id.get_constant('SEML') or 1210.0
-    result = expired_days * SEML
+    result = round(SEML, 2)
 else:
     result = 0.0
 

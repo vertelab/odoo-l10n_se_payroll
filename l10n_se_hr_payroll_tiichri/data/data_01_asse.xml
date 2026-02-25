@@ -172,6 +172,7 @@
             <field name="request_hour_from">8</field>
             <field name="request_hour_to">12</field>
             <field name="number_of_hours">4</field>
+            <field name="sick_leave_part">50</field>
             <field name="holiday_status_id" ref="l10n_se_hr_payroll.leave_type_sick" />
         </record>
 
@@ -429,6 +430,7 @@
             <field name="request_hour_from">8</field>
             <field name="request_hour_to">12</field>
             <field name="number_of_hours">4</field>
+            <field name="sick_leave_part">50</field>
             <field name="holiday_status_id" ref="l10n_se_hr_payroll.leave_type_sick" />
         </record>
 
@@ -646,6 +648,7 @@
             <field name="request_hour_from">8</field>
             <field name="request_hour_to">12</field>
             <field name="number_of_hours">4</field>
+            <field name="sick_leave_part">50</field>
             <field name="holiday_status_id" ref="l10n_se_hr_payroll.leave_type_sick" />
         </record>
 
@@ -692,20 +695,20 @@
         <!-- Utlandstraktamente, ej skattepliktigt, Thailand -->
         <function model="hr.payslip.input" name="write">
             <value model="hr.payslip.input" search="[('payslip_id', '=', ref('hr_payslip_asse_05')), ('code', '=', 'trakt_utl')]"/>
-            <value eval="{'amount_qty': 2.0, 'amount': 480.0}"/>
+            <value eval="{'amount_qty': 1.0, 'amount': 2847.0}"/>
         </function>
 
         <!-- Kostavdrag utland -->
-        <!--  Frukost -->
+        <!-- Frukost -->
         <function model="hr.payslip.input" name="write">
             <value model="hr.payslip.input" search="[('payslip_id', '=', ref('hr_payslip_asse_05')), ('code', '=', 'red_utl_frukost')]"/>
-            <value eval="{'amount_qty': 2}"/>
+            <value eval="{'amount_qty': 1, 'amount': 427 }"/>
         </function>
 
         <!--  Lunch eller middag -->
         <function model="hr.payslip.input" name="write">
-            <value model="hr.payslip.input" search="[('payslip_id', '=', ref('hr_payslip_asse_04')), ('code', '=', 'red_utl_lunch')]"/>
-            <value eval="{'amount_qty': 2}"/>
+            <value model="hr.payslip.input" search="[('payslip_id', '=', ref('hr_payslip_asse_05')), ('code', '=', 'red_utl_lunch')]"/>
+            <value eval="{'amount_qty': 1, 'amount': 996.45}"/>
         </function>
 
         <!-- Utlägg resekostnader -->
@@ -714,29 +717,10 @@
             <value eval="{'name': 'Utlägg resekostnader', 'amount_qty': 1, 'amount': 410.0}"/>
         </function>
 
-        <!-- Utlandstraktamente, ej skattepliktigt, Singapore -->
-        <function model="hr.payslip.input" name="write">
-            <value model="hr.payslip.input" search="[('payslip_id', '=', ref('hr_payslip_asse_05')), ('code', '=', 'trakt_utl')]"/>
-            <value eval="{'amount_qty': 3.0, 'amount': 629.0}"/>
-        </function>
-
         <!-- Kostförmån lunch + middag-->
         <function model="hr.payslip.input" name="write">
             <value model="hr.payslip.input" search="[('payslip_id', '=', ref('hr_payslip_asse_05')), ('code', '=', 'fmn_lunch')]"/>
             <value eval="{'amount_qty': 4.0}"/>
-        </function>
-
-        <!-- Kostavdrag utland -->
-        <!--  Frukost -->
-        <function model="hr.payslip.input" name="write">
-            <value model="hr.payslip.input" search="[('payslip_id', '=', ref('hr_payslip_asse_05')), ('code', '=', 'red_utl_frukost')]"/>
-            <value eval="{'amount_qty': 3}"/>
-        </function>
-
-        <!--  Lunch eller middag -->
-        <function model="hr.payslip.input" name="write">
-            <value model="hr.payslip.input" search="[('payslip_id', '=', ref('hr_payslip_asse_05')), ('code', '=', 'red_utl_lunch')]"/>
-            <value eval="{'amount_qty': 3}"/>
         </function>
 
         <!-- Övertid 1 -->
@@ -800,9 +784,9 @@
             <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_asse_employee" />
             <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons"/>
             <field name="date_from">2022-06-22</field>
-            <field name="date_to">2022-06-28</field>
+            <field name="date_to">2022-06-29</field>
             <field name="request_date_from">2022-06-22</field>
-            <field name="request_date_to">2022-06-28</field>
+            <field name="request_date_to">2022-06-29</field>
             <field name="number_of_hours">40</field>
             <field name="holiday_status_id" ref="l10n_se_hr_payroll.leave_type_loa" />
         </record>
@@ -1200,6 +1184,11 @@
             <value model="hr.payslip.input" search="[('payslip_id', '=', ref('hr_payslip_asse_10')), ('code', '=', 'kvaltim')]"/>
             <value eval="{'amount_qty': 2.0}"/>
         </function>
+        
+        <function model="hr.payslip.input" name="write">
+            <value model="hr.payslip.input" search="[('payslip_id', '=', ref('hr_payslip_asse_10')), ('code', '=', 'lunch')]"/>
+            <value eval="{'amount_qty': 1.0}"/>
+        </function>
 
         <function model="hr.payslip" name="compute_sheet">
             <value eval="[ref('hr_payslip_asse_10')]"/>
@@ -1223,83 +1212,10 @@
             <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_asse_employee" />
             <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons"/>
             <field name="date_from">2022-11-17</field>
-            <field name="date_to">2022-11-17</field>
-            <field name="request_date_from">2022-11-17</field>
-            <field name="request_date_to">2022-11-17</field>
-            <field name="request_unit_hours" eval="True"/>
-            <field name="request_hour_from">8</field>
-            <field name="request_hour_to">12</field>
-            <field name="number_of_hours">4</field>
-            <field name="holiday_status_id" ref="l10n_se_hr_payroll.leave_type_sick" />
-        </record>
-
-        <record id="hr_leave_asse_1101_03" model="hr.leave">
-            <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_asse_employee" />
-            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons"/>
-            <field name="date_from">2022-11-18</field>
-            <field name="date_to">2022-11-18</field>
-            <field name="request_date_from">2022-11-18</field>
-            <field name="request_date_to">2022-11-18</field>
-            <field name="request_unit_hours" eval="True"/>
-            <field name="request_hour_from">8</field>
-            <field name="request_hour_to">12</field>
-            <field name="number_of_hours">4</field>
-            <field name="holiday_status_id" ref="l10n_se_hr_payroll.leave_type_sick" />
-        </record>
-
-        <record id="hr_leave_asse_1101_04" model="hr.leave">
-            <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_asse_employee" />
-            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons"/>
-            <field name="date_from">2022-11-21</field>
-            <field name="date_to">2022-11-21</field>
-            <field name="request_date_from">2022-11-21</field>
-            <field name="request_date_to">2022-11-21</field>
-            <field name="request_unit_hours" eval="True"/>
-            <field name="request_hour_from">8</field>
-            <field name="request_hour_to">12</field>
-            <field name="number_of_hours">4</field>
-            <field name="holiday_status_id" ref="l10n_se_hr_payroll.leave_type_sick" />
-        </record>
-
-        <record id="hr_leave_asse_1101_05" model="hr.leave">
-            <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_asse_employee" />
-            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons"/>
-            <field name="date_from">2022-11-22</field>
-            <field name="date_to">2022-11-22</field>
-            <field name="request_date_from">2022-11-22</field>
-            <field name="request_date_to">2022-11-22</field>
-            <field name="request_unit_hours" eval="True"/>
-            <field name="request_hour_from">8</field>
-            <field name="request_hour_to">12</field>
-            <field name="number_of_hours">4</field>
-            <field name="holiday_status_id" ref="l10n_se_hr_payroll.leave_type_sick" />
-        </record>
-
-        <record id="hr_leave_asse_1101_06" model="hr.leave">
-            <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_asse_employee" />
-            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons"/>
-            <field name="date_from">2022-11-23</field>
-            <field name="date_to">2022-11-23</field>
-            <field name="request_date_from">2022-11-23</field>
-            <field name="request_date_to">2022-11-23</field>
-            <field name="request_unit_hours" eval="True"/>
-            <field name="request_hour_from">8</field>
-            <field name="request_hour_to">12</field>
-            <field name="number_of_hours">4</field>
-            <field name="holiday_status_id" ref="l10n_se_hr_payroll.leave_type_sick" />
-        </record>
-
-        <record id="hr_leave_asse_1101_07" model="hr.leave">
-            <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_asse_employee" />
-            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons"/>
-            <field name="date_from">2022-11-24</field>
             <field name="date_to">2022-11-24</field>
-            <field name="request_date_from">2022-11-24</field>
+            <field name="request_date_from">2022-11-17</field>
             <field name="request_date_to">2022-11-24</field>
-            <field name="request_unit_hours" eval="True"/>
-            <field name="request_hour_from">8</field>
-            <field name="request_hour_to">12</field>
-            <field name="number_of_hours">4</field>
+            <field name="sick_leave_part">50</field>
             <field name="holiday_status_id" ref="l10n_se_hr_payroll.leave_type_sick" />
         </record>
 
@@ -1375,9 +1291,9 @@
             <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_asse_employee" />
             <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons"/>
             <field name="date_from">2022-12-01</field>
-            <field name="date_to">2022-12-31</field>
+            <field name="date_to">2023-04-30</field>
             <field name="request_date_from">2022-12-01</field>
-            <field name="request_date_to">2022-12-31</field>
+            <field name="request_date_to">2023-04-30</field>
             <field name="number_of_hours">856</field>
             <field name="holiday_status_id" ref="l10n_se_hr_payroll.leave_type_f_led" />
         </record>

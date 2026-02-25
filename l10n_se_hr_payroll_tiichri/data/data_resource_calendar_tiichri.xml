@@ -5,6 +5,8 @@
             <field name="name">Standard 40 timmar - Aronssons Montage AB</field>
             <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons" />
             <field name="hours_per_day">8</field>
+            <field name="work_time_rate">100.0</field>
+            <field name="full_time_required_hours">40</field>
             <field name="attendance_ids" eval="[(5, 0, 0),
                     (0, 0, {'name': 'Monday Morning', 'dayofweek': '0', 'hour_from': 8, 'hour_to': 12, 'day_period': 'morning'}),
                     (0, 0, {'name': 'Monday Lunch', 'dayofweek': '0', 'hour_from': 12, 'hour_to': 13, 'day_period': 'lunch'}),
@@ -27,13 +29,14 @@
                     (0, 0, {'name': 'Friday Afternoon', 'dayofweek': '4', 'hour_from': 13, 'hour_to': 17, 'day_period': 'afternoon'})
             ]" />
 
-            <field name="full_time_required_hours">40</field>
         </record>
 
         <record id="resource_calendar_part_time_80_tiichri" model="resource.calendar">
             <field name="name">Deltid 32 timmar (80%) - Aronssons Montage AB</field>
             <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons" />
             <field name="hours_per_day">8</field>
+            <field name="work_time_rate">80.0</field>
+            <field name="full_time_required_hours">40</field>
             <field name="attendance_ids" eval="[(5, 0, 0),
                     (0, 0, {'name': 'Monday Morning', 'dayofweek': '0', 'hour_from': 8, 'hour_to': 12, 'day_period': 'morning'}),
                     (0, 0, {'name': 'Monday Lunch', 'dayofweek': '0', 'hour_from': 12, 'hour_to': 13, 'day_period': 'lunch'}),
@@ -51,13 +54,14 @@
                     (0, 0, {'name': 'Thursday Lunch', 'dayofweek': '3', 'hour_from': 12, 'hour_to': 13, 'day_period': 'lunch'}),
                     (0, 0, {'name': 'Thursday Afternoon', 'dayofweek': '3', 'hour_from': 13, 'hour_to': 17, 'day_period': 'afternoon'}),
             ]" />
-            <field name="full_time_required_hours">40</field>
         </record>
 
         <record id="resource_calendar_part_time_75_tiichri" model="resource.calendar">
             <field name="name">Deltid 30 timmar (75%) - Aronssons Montage AB</field>
             <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons" />
             <field name="hours_per_day">6</field>
+            <field name="work_time_rate">75.0</field>
+            <field name="full_time_required_hours">40</field>
             <field name="attendance_ids" eval="[(5, 0, 0),
                     (0, 0, {'name': 'Monday Morning', 'dayofweek': '0', 'hour_from': 8, 'hour_to': 12, 'day_period': 'morning'}),
                     (0, 0, {'name': 'Monday Lunch', 'dayofweek': '0', 'hour_from': 12, 'hour_to': 13, 'day_period': 'lunch'}),
@@ -79,7 +83,6 @@
                     (0, 0, {'name': 'Friday Lunch', 'dayofweek': '4', 'hour_from': 12, 'hour_to': 13, 'day_period': 'lunch'}),
                     (0, 0, {'name': 'Friday Afternoon', 'dayofweek': '4', 'hour_from': 13, 'hour_to': 15, 'day_period': 'afternoon'})
             ]" />
-            <field name="full_time_required_hours">40</field>
         </record>
 
         <!-- Konstiga kalendrar för att få till rätt historisk sysselsättningsgrad medan fortfarande kunna följa facit: -->
@@ -87,6 +90,8 @@
             <field name="name">Deltid 26.67 timmar (66.67%) - Aronssons Montage AB</field>
             <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons" />
             <field name="hours_per_day">5.33</field>
+            <field name="work_time_rate">66.67</field>
+            <field name="full_time_required_hours">40</field>
             <field name="attendance_ids" eval="[(5, 0, 0),
                     (0, 0, {'name': 'Monday Morning', 'dayofweek': '0', 'hour_from': 8, 'hour_to': 12, 'day_period': 'morning'}),
                     (0, 0, {'name': 'Monday Lunch', 'dayofweek': '0', 'hour_from': 12, 'hour_to': 13, 'day_period': 'lunch'}),
@@ -108,13 +113,14 @@
                     (0, 0, {'name': 'Friday Lunch', 'dayofweek': '4', 'hour_from': 12, 'hour_to': 13, 'day_period': 'lunch'}),
                     (0, 0, {'name': 'Friday Afternoon', 'dayofweek': '4', 'hour_from': 13, 'hour_to': 14.333, 'day_period': 'afternoon'})
             ]" />
-            <field name="full_time_required_hours">40</field>
         </record>
 
         <record id="resource_calendar_part_time_73_tiichri" model="resource.calendar">
             <field name="name">Deltid 29.33 timmar (73.33%) - Aronssons Montage AB</field>
             <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons" />
             <field name="hours_per_day">5.867</field>
+            <field name="work_time_rate">73.33</field>
+            <field name="full_time_required_hours">40</field>
             <field name="attendance_ids" eval="[(5, 0, 0),
             (0, 0, {'name': 'Monday Morning', 'dayofweek': '0', 'hour_from': 8, 'hour_to': 12, 'day_period': 'morning'}),
             (0, 0, {'name': 'Monday Lunch', 'dayofweek': '0', 'hour_from': 12, 'hour_to': 13, 'day_period': 'lunch'}),
@@ -136,9 +142,11 @@
             (0, 0, {'name': 'Friday Lunch', 'dayofweek': '4', 'hour_from': 12, 'hour_to': 13, 'day_period': 'lunch'}),
             (0, 0, {'name': 'Friday Afternoon', 'dayofweek': '4', 'hour_from': 13, 'hour_to': 14.867, 'day_period': 'afternoon'})
     ]" />
-            <field name="full_time_required_hours">40</field>
         </record>
 
+        <function model="resource.calendar" name="_auto_init_swedish_holidays">
+            <value eval="[]"/>
+        </function>
 
     </data>
 </odoo>

@@ -43,7 +43,7 @@ else:
 
 if taxable_income &gt; 0:
     tax_amount = contract.l10_sum_columns_taxtable_line(payslip, taxable_income)
-    result = (tax_amount or 0.0) * -1
+    result = round(tax_amount or 0.0) * -1
 else:
     result = 0.0
             </field>
@@ -67,7 +67,7 @@ one_off_amount = categories.ENGANG or 0.0
 
 tax_amount = contract.l10_sum_columns_one_off_tax(one_off_amount)
 
-result = (tax_amount or 0.0) * -1
+result = result = round(tax_amount or 0.0) * -1
             </field>
         </record>
 

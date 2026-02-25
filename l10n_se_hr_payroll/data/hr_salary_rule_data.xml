@@ -118,17 +118,44 @@ result = deduction * -1
             </field>
         </record>
 
+        <record id="hr_salary_rule_oresavrundning" model="hr.salary.rule">
+            <field name="category_id" ref="l10n_se_hr_payroll.hr_salary_rule_category_NETTIL" />
+            <field name="company_id" eval="False"/>
+            <field name="code">ores_avr</field>
+            <field name="name">Öresavrundning</field>
+            <field name="sequence">1955</field>
+            <field name="appears_on_payslip" eval="True"/>
+            <field name="condition_select">python</field>
+            <field name="condition_python">
+current_net = categories.BRUTTO + categories.SKV + categories.NETAVG + categories.NETTIL
+result = current_net != int(current_net)
+            </field>
+            <field name="amount_select">code</field>
+            <field name="amount_python_compute">
+current_net = categories.BRUTTO + categories.SKV + categories.NETAVG + categories.NETTIL
+
+heltal = int(current_net)
+
+if current_net &gt; heltal:
+    rounded_net = heltal + 1.0
+else:
+    rounded_net = float(heltal)
+
+result = rounded_net - current_net
+            </field>
+        </record>
 
         <!-- ======================================================================================== -->
         <!-- Arbetsgivaravgifter                                                                      -->
         <!-- ======================================================================================== -->
 
-<record id="hr_salary_rule_sa" model="hr.salary.rule">
+        <record id="hr_salary_rule_sa" model="hr.salary.rule">
             <field name="category_id" ref="l10n_se_hr_payroll.hr_salary_rule_category_PARENT" />
+            <field name="company_id" eval="False"/>
             <field name="code">sa</field>
             <field name="name">Arbetsgivaravgift</field>
-            <field name="sequence">1050</field>
-            <field name="appears_on_payslip" eval="False"/>
+            <field name="sequence">3000</field>
+            <field name="appears_on_payslip" eval="True"/>
             <field name="condition_select">none</field>
             <field name="amount_select">code</field>
             <field name="amount_python_compute">
@@ -144,6 +171,7 @@ result = v_ageu + v_agen + v_agep + v_agepx
 
         <record id="hr_salary_rule_AGEU" model="hr.salary.rule">
             <field name="parent_rule_id" ref="hr_salary_rule_sa" />
+            <field name="company_id" eval="False"/>
             <field name="category_id" ref="l10n_se_hr_payroll.hr_salary_rule_category_SYSTEM" />
             <field name="code">AGEU</field>
             <field name="name">Arbetsgivaravgift Ungdom (under 26 år)</field>
@@ -163,6 +191,7 @@ result = underlag * pct
 
         <record id="hr_salary_rule_AGEN" model="hr.salary.rule">
             <field name="parent_rule_id" ref="hr_salary_rule_sa" />
+            <field name="company_id" eval="False"/>
             <field name="category_id" ref="l10n_se_hr_payroll.hr_salary_rule_category_SYSTEM" />
             <field name="code">AGEN</field>
             <field name="name">Arbetsgivaravgift Normal (26 - 65 år)</field>
@@ -182,6 +211,7 @@ result = underlag * pct
 
         <record id="hr_salary_rule_AGEP" model="hr.salary.rule">
             <field name="parent_rule_id" ref="hr_salary_rule_sa" />
+            <field name="company_id" eval="False"/>
             <field name="category_id" ref="l10n_se_hr_payroll.hr_salary_rule_category_SYSTEM" />
             <field name="code">AGEP</field>
             <field name="name">Arbetsgivaravgift Pensionär (66 - 76 år)</field>
@@ -201,6 +231,7 @@ result = underlag * pct
 
         <record id="hr_salary_rule_AGEPX" model="hr.salary.rule">
             <field name="parent_rule_id" ref="hr_salary_rule_sa" />
+            <field name="company_id" eval="False"/>
             <field name="category_id" ref="l10n_se_hr_payroll.hr_salary_rule_category_SYSTEM" />
             <field name="code">AGEPX</field>
             <field name="name">Arbetsgivaravgift Äldre (77 +)</field>
@@ -335,7 +366,7 @@ va = (contract.resource_calendar_id.full_time_required_hours * contract.resource
 effective_wage = contract.get_effective_wage(payslip)
 
 if va &gt; 0:
-    result = effective_wage / (3.5 * va)
+    result = round(effective_wage / (3.5 * va), 2)
 else:
     result = 0.0
 
@@ -413,14 +444,18 @@ result = v_kar + v_114 + v_1590_arb + v_1590_tj + v_lon
             <field name="amount_python_compute">
 # (ML*12)/52 * 0.2 * 0.8
 # (Timlön * VA) * 0.2 * 0.8 för timanställd
-effective_wage = contract.get_effective_wage(payslip)
-if contract.struct_id.code in ['tj_tim', 'arb_tim', 'arb_tim_vt']:
-    va = (contract.resource_calendar_id.full_time_required_hours * contract.resource_calendar_id.work_time_rate) / 100.0
-    result = (effective_wage * va) * (0.2 * 0.8) *-1
-else:
-    result = (effective_wage * 12) / 52 * 0.2 * 0.8 * -1
 
-result_qty = contract.qualifying_count(payslip)
+effective_wage = contract.get_effective_wage(payslip)
+
+if contract.struct_id.code in ['tj_tim', 'arb_tim', 'arb_tim_vt']:
+    result = round(effective_wage * 0.8 * -1, 2)
+    result_qty = (contract.resource_calendar_id.full_time_required_hours * contract.resource_calendar_id.work_time_rate / 100.0) * 0.2 * contract.qualifying_count(payslip)
+else:
+    va = (contract.resource_calendar_id.full_time_required_hours * contract.resource_calendar_id.work_time_rate) / 100.0
+
+    result = round(((effective_wage * 12) / (52 * va)) * 0.8 * -1, 2)
+    
+    result_qty = (va * 0.2) * contract.qualifying_count(payslip)
             </field>
         </record>
 
@@ -446,7 +481,7 @@ va = (contract.resource_calendar_id.full_time_required_hours * contract.resource
 sick_data = contract.get_sick_pay_data(payslip)
 result_qty = sick_data['hours_1_14']
 
-result = (effective_wage * 12) / (52 * va) * -1
+result = round((effective_wage * 12) / (52 * va), 2) * -1
             </field>
         </record>
 
@@ -461,7 +496,7 @@ result = (effective_wage * 12) / (52 * va) * -1
             <field name="appears_on_payslip" eval="True"/>
             <field name="condition_select">python</field>
             <field name="condition_python">
-result = 'arb_man' in contract.struct_id.code and contract.get_sick_pay_data(payslip)['days_15_90'] &gt; 0
+result = 'arb' in contract.struct_id.code and contract.get_sick_pay_data(payslip)['days_15_90'] &gt; 0
             </field>
             <field name="amount_select">code</field>
             <field name="amount_python_compute">
@@ -470,7 +505,10 @@ sick_data = contract.get_sick_pay_data(payslip)
 result_qty = sick_data['days_15_90']
 part = sick_data.get('part_15_90', 1.0)
 
-result = ((effective_wage * 12) / 365) * -1 * part
+if contract.struct_id.code == 'arb_man':
+    result = ((effective_wage * 12) / 365) * -1 * part
+else:
+    result = 0.0
             </field>
         </record>
 
@@ -529,10 +567,9 @@ sick_data = contract.get_sick_pay_data(payslip)
 result_qty = sick_data['hours_1_14']
 
 if contract.struct_id.code in ['tj_tim', 'arb_tim', 'arb_tim_vt']:
-    result = effective_wage * 0.8
+    result = round(effective_wage * 0.8, 2)
 else:
-    result = (effective_wage * 12 * 0.8) / (52 * va)
-
+    result = round((effective_wage * 12 * 0.8) / (52 * va), 2)
             </field>
         </record>
 
@@ -768,7 +805,7 @@ full_time_wage = contract.get_full_time_wage(payslip)
 if 'tim' in contract.struct_id.code:
     result = 0.0
 else:
-    result = (full_time_wage / MAT)
+    result = round(full_time_wage / MAT, 2)
     result_qty = res['hourly_leave_hours'] * -1
             </field>
         </record>

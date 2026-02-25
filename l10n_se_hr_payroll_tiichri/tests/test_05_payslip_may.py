@@ -20,231 +20,75 @@ _logger = logging.getLogger(__name__)
 
 @tagged('l10n_se_payroll_tiichri', 'may')
 class TestPayslipMay(TransactionCase):
+    ## Test 1
+    def test_asse_net(self):   
 
-    @classmethod
-    def _create_leave(cls, employee_id, code, date_from, date_to, number_of_days): 
-        cls.leave_type = cls.env["hr.leave.type"].search([('code', '=', code)])
+        payslip = self.env.ref('l10n_se_hr_payroll_tiichri.hr_payslip_asse_05')
 
-        leave_form = Form(cls.env['hr.leave'])
-        leave_form.employee_id = employee_id
-        leave_form.name = "test1"
-        leave_form.date_from = date_from
-        leave_form.request_date_from = date_from
-        leave_form.date_to = date_to
-        leave_form.request_date_to = date_to
-        leave_form.name = number_of_days
-        leave_form.number_of_days = number_of_days
-        leave_form.holiday_type = 'employee'
-        leave_form.holiday_status_id = cls.leave_type
+        net_line = payslip.line_ids.filtered(lambda l: l.code == 'nl')
 
-        leave_form = leave_form.save()
-    
-        if leave_form.state == 'confirm':
-            leave_form.action_validate()
-            
-        return leave_form
-
-    @classmethod
-    def _create_payslip(cls, employee_id, contract_id, input_recs): 
-
-        _logger.info(f"TEST PAYSLIP: Employee: {employee_id.name} | Period: {cls.period.name} | Inputs: {input_recs}")
-        payslip_form = Form(cls.env['hr.payslip'])
-        payslip_form.employee_id = employee_id
-        payslip_form.date_from = cls.date_start
-        payslip_form.period_id = cls.period
-        payslip_form.contract_id = contract_id
-        payslip_form = payslip_form.save()
-
-        payslip_form.action_payslip_draft()
-
-        payslip_form.onchange_dates()  
-        payslip_form.compute_sheet()
-    
-        for input_rec in input_recs:
-            line = cls.env["hr.payslip.input"].search([('code','=',input_rec['code']),('payslip_id','=',payslip_form.id)])
-            line.amount = input_rec['amount']
-            line.amount_qty = input_rec['amount']              
-        return payslip_form
-    
-    @classmethod
-    def setUpClass(cls):
-        super().setUpClass()
-        cls.date_start = fields.Date.from_string('2022-05-01')
-        cls.date_stop = fields.Date.from_string('2022-05-31')
-        cls.company = cls.env['res.company'].search([('name', '=', 'Aronssons Montage AB')])
-        cls.struct = cls.env['hr.payroll.structure'].search([('code', '=', 'bas2018-tj')])
-
-        cls.fiscal_year = cls.env['account.fiscalyear'].create({
-            'name': 'Unittest fiscal year',
-            'code': 'UFY',
-            'company_id': cls.company.id,
-            'date_start': cls.date_start,
-            'date_stop': cls.date_stop,
-        })
-
-        cls.period_type = cls.env['date.range.type'].create({
-            'name': 'Unittest Month Type',
-            'company_id': cls.company.id,
-            'allow_overlap': True
-        })
-
-        cls.period = cls.env['account.period'].create({
-            'name': 'Unittest period',
-            'company_id': cls.company.id,
-            'fiscalyear_id': cls.fiscal_year.id,
-            'date_start': cls.date_start,
-            'date_end': cls.date_stop,
-            'type_id': cls.period_type.id,
-        })
-
-        
-        # Asse Aronsson
-        cls.employee_asse = cls.env.ref('l10n_se_hr_payroll_tiichri.hr_asse_employee')  # asse_employee
-        cls.asse_501 = cls.env.ref('l10n_se_hr_payroll_tiichri.hr_leave_asse_501')  # leave_asse_501
-        cls.asse_502 = cls.env.ref('l10n_se_hr_payroll_tiichri.hr_leave_asse_502')  # leave_asse_502
-        cls.asse_503 = cls.env.ref('l10n_se_hr_payroll_tiichri.hr_leave_asse_503')  # leave_asse_503
-            
-        # Frans Filipsson -- Låt stå! :-) Inte sjuk i maj
-        cls.employee_frans = cls.env.ref('l10n_se_hr_payroll_tiichri.hr_frans_employee')  # frans_employee
-        # ~ cls.frans_kar = cls._create_leave(cls.employee_frans.id, "sjk_kar" ,"2022-05-09","2022-05-09",1)
-        # ~ cls.frans_kar = cls._create_leave(cls.employee_frans.id, "sjk_214" ,"2022-05-10","2022-05-13",4)
-        # ~ cls.frans_kar = cls._create_leave(cls.employee_frans.id, "sjk_214" ,"2022-05-16","2022-05-18",3)
-
-        # Doris Dahlin -- Låt stå! :-) Inte sjuk i maj
-        cls.employee_doris = cls.env.ref('l10n_se_hr_payroll_tiichri.hr_doris_employee')  # doris_employee
-        # ~ cls.doris_kar = cls._create_leave(cls.employee_doris.id, "sjk_kar" ,"2022-04-06","2022-04-06",1)
-        # ~ cls.doris_kar = cls._create_leave(cls.employee_doris.id, "sjk_214" ,"2022-04-07","2022-04-07",1)
-        # ~ cls.doris_kar = cls._create_leave(cls.employee_doris.id, "sjk_214" ,"2022-04-11","2022-04-13",3)
-
-        # Camilla Cobolt -- Låt stå! :-) Inte sjuk i maj
-        cls.employee_camilla = cls.env.ref('l10n_se_hr_payroll_tiichri.hr_camilla_employee')  # camilla_employee
-        # ~ cls.camilla_kar = cls._create_leave(cls.employee_camilla.id, "sjk_kar" ,"2022-04-19","2022-04-19",1)
-        # ~ cls.camilla_kar = cls._create_leave(cls.employee_camilla.id, "sjk_214" ,"2022-04-20","2022-04-21",2)
-
-        # Gustav Groth -- Låt stå! :-) Inte sjuk i maj
-        cls.employee_gustav = cls.env.ref('l10n_se_hr_payroll_tiichri.hr_gustav_employee')  # gustav_employee
-        # ~ cls.gustav_kar = cls._create_leave(cls.employee_gustav.id, "sjk_kar" ,"2022-04-13","2022-04-13",1)
-        # ~ cls.gustav_kar = cls._create_leave(cls.employee_gustav.id, "sjk_214" ,"2022-04-14","2022-04-14",1)
-        # ~ cls.gustav_kar = cls._create_leave(cls.employee_gustav.id, "sjk_214" ,"2022-04-19","2022-04-22",4)
-        # ~ cls.gustav_kar = cls._create_leave(cls.employee_gustav.id, "sjk_214" ,"2022-04-25","2022-04-28",4)
-       
-        # Helmer Henriksson
-        cls.employee_helmer = cls.env.ref('l10n_se_hr_payroll_tiichri.hr_helmer_employee')  # helmer_employee
-        cls.helmer_501 = cls.env.ref('l10n_se_hr_payroll_tiichri.hr_leave_helmer_501')  # leave_helmer_501
-        cls.helmer_502 = cls.env.ref('l10n_se_hr_payroll_tiichri.hr_leave_helmer_502')  # leave_helmer_502
-        cls.helmer_503 = cls.env.ref('l10n_se_hr_payroll_tiichri.hr_leave_helmer_503')  # leave_helmer_503
-        cls.helmer_504 = cls.env.ref('l10n_se_hr_payroll_tiichri.hr_leave_helmer_504')  # leave_helmer_504
-
-        # Karin Kullberg
-        # Anställning per timme, påbörjad 2022-06-01
-        
-       
-
-    ## Test xx
-    def test_asse(self):   
-        payslip_form = self._create_payslip(self.employee_asse, self.employee_asse.contract_id, [
-                {'code': 'mertidtim','amount': 8.0},
-                {'code': 'kvaltim','amount': 3.0},
-            ])
-
-        found_net = False
-        for detail in payslip_form.dynamic_filtered_payslip_lines:
-            if detail.code == 'net':
-                # FACIT: Ska vara 33247.0
-                self.assertAlmostEqual(detail.total, 33247.0, msg=f"Wrong net pay for Asse! Got: {detail.total}, expected 33247.0")
-                _logger.info(f"SUCCESS: Asse net pay correct: {detail.total}")
-                found_net = True
-        
-        self.assertTrue(found_net, "Could not find field 'net' for Asse.")
+        self.assertTrue(net_line, "Kunde inte hitta fältet 'nl' (Nettolön) för Asse.")
+        self.assertAlmostEqual(net_line.total, 33247.0, msg=f"Fel nettolön för Asse! Fick: {net_line.total}, förväntat: 33247.0.")
+        _logger.info(f"SUCCESS: Asse net pay correct: {net_line.total}")
 
 
-    ## Test xx
-    def test_frans(self):
-        payslip_form = self._create_payslip(self.employee_frans, self.employee_frans.contract_id, [
-                {'code': 'mertidtim','amount': 8.0},
-                {'code': 'kvaltim','amount': 7.0},
-            ])
+              
+    ## Test 4
+    def test_frans_net(self):
+
+        payslip = self.env.ref('l10n_se_hr_payroll_tiichri.hr_payslip_frans_05')
+
+        net_line = payslip.line_ids.filtered(lambda l: l.code == 'nl')
+
+        self.assertTrue(net_line, "Kunde inte hitta fältet 'nl' (Nettolön) för Frans.")
+        self.assertAlmostEqual(net_line.total, 28440.0, msg=f"Fel nettolön för Frans! Fick: {net_line.total}, förväntat: 28440.0.")
+        _logger.info(f"SUCCESS: Frans net pay correct: {net_line.total}")
 
 
-        found_net = False
-        for detail in payslip_form.dynamic_filtered_payslip_lines:
-            if detail.code == 'net':
-                found_net = True
-                # FACIT: Ska vara 28440.0
-                self.assertAlmostEqual(detail.total, 28440.0, msg=f"Wrong net pay for Frans! Got: {detail.total}, expected 28440.0")
-                _logger.info(f"SUCCESS: Frans net pay correct: {detail.total}")
-                found_net = True
-        
-        self.assertTrue(found_net, "Could not find field 'net' for Frans.")
-        
-    ## Test xx
-    def test_doris(self):
-        payslip_form = self._create_payslip(self.employee_doris, self.employee_doris.contract_id, [
-                {'code': 'mertidtim','amount': 8.0},
-                {'code': 'kvaltim','amount': 3.0},
-            ])
+    ## Test 3
+    def test_doris_net(self):
 
-        found_net = False
-        for detail in payslip_form.dynamic_filtered_payslip_lines:
-            if detail.code == 'net':
-                found_net = True
-                # FACIT: Ska vara 16734.0
-                self.assertAlmostEqual(detail.total, 16734.0, msg=f"Wrong net pay for Doris! Got: {detail.total}, expected 16734.0")
-                _logger.info(f"SUCCESS: Doris net pay correct: {detail.total}")
-                found_net = True
-        
-        self.assertTrue(found_net, "Could not find field 'net' for Doris.")
+        payslip = self.env.ref('l10n_se_hr_payroll_tiichri.hr_payslip_doris_05')
 
-    ## Test xx
-    def test_camilla(self):
-        payslip_form = self._create_payslip(self.employee_camilla, self.employee_camilla.contract_id, [
-                {'code': 'mertidtim','amount': 8.0},
-                {'code': 'kvaltim','amount': 5.0},
-            ])
+        net_line = payslip.line_ids.filtered(lambda l: l.code == 'nl')
 
-        found_net = False
-        for detail in payslip_form.dynamic_filtered_payslip_lines:
-            if detail.code == 'net':
-                found_net = True
-                # FACIT: Ska vara 17750.0
-                self.assertAlmostEqual(detail.total, 17750.0, msg=f"Wrong net pay for Camilla! Got: {detail.total}, expected 17750.0")
-                _logger.info(f"SUCCESS: Camilla net pay correct: {detail.total}")
-                found_net = True
-        
-        self.assertTrue(found_net, "Could not find field 'net' for Camilla.")
+        self.assertTrue(net_line, "Kunde inte hitta fältet 'nl' (Nettolön) för Doris.")
+        self.assertAlmostEqual(net_line.total, 16734.0, msg=f"Fel nettolön för Doris! Fick: {net_line.total}, förväntat: 16734.0.")
+        _logger.info(f"SUCCESS: Doris net pay correct: {net_line.total}")
 
-    ## Test xx
-    def test_gustav(self):
-        payslip_form = self._create_payslip(self.employee_gustav, self.employee_gustav.contract_id, [
-                {'code': 'mertidtim','amount': 8.0},
-                {'code': 'kvaltim','amount': 8.0},
-            ])
 
-        found_net = False
-        for detail in payslip_form.dynamic_filtered_payslip_lines:
-            if detail.code == 'net':
-                found_net = True
-                # FACIT: Ska vara 19537.0
-                self.assertAlmostEqual(detail.total, 19537.0, msg=f"Wrong net pay for Gustav! Got: {detail.total}, expected 19537.0")
-                _logger.info(f"SUCCESS: Gustav net pay correct: {detail.total}")
-                found_net = True
+    ## Test 2
+    def test_camilla_net(self):
 
-        self.assertTrue(found_net, "Could not find field 'net' for Gustav.")
+        payslip = self.env.ref('l10n_se_hr_payroll_tiichri.hr_payslip_camilla_05')
 
-    ## Test xx
-    def test_helmer(self):
-        payslip_form = self._create_payslip(self.employee_helmer, self.employee_helmer.contract_id, [
-                # ~ {'code': 'mertidtim','amount': 8.0},
-                {'code': 'kvaltim','amount': 8.0},
-            ])
+        net_line = payslip.line_ids.filtered(lambda l: l.code == 'nl')
 
-        found_net = False
-        for detail in payslip_form.dynamic_filtered_payslip_lines:
-            if detail.code == 'net':
-                found_net = True
-                # FACIT: Ska vara 18118.0
-                self.assertAlmostEqual(detail.total, 18118.0, msg=f"Wrong net pay for Helmer! Got: {detail.total}, expected 18118.0")
-                _logger.info(f"SUCCESS: Helmer net pay correct: {detail.total}")
-                found_net = True
+        self.assertTrue(net_line, "Kunde inte hitta fältet 'nl' (Nettolön) för Camilla.")
+        self.assertAlmostEqual(net_line.total, 17750.0, msg=f"Fel nettolön för Camilla! Fick: {net_line.total}, förväntat: 17750.0.")
+        _logger.info(f"SUCCESS: Camilla net pay correct: {net_line.total}")
 
-        self.assertTrue(found_net, "Could not find field 'net' for Helmer.")
+
+
+    ## Test 5
+    def test_gustav_net(self):
+
+        payslip = self.env.ref('l10n_se_hr_payroll_tiichri.hr_payslip_gustav_05')
+
+        net_line = payslip.line_ids.filtered(lambda l: l.code == 'nl')
+
+        self.assertTrue(net_line, "Kunde inte hitta fältet 'nl' (Nettolön) för Gustav.")
+        self.assertAlmostEqual(net_line.total, 19537.0, msg=f"Fel nettolön för Gustav! Fick: {net_line.total}, förväntat: 19537.0.")
+        _logger.info(f"SUCCESS: Gustav net pay correct: {net_line.total}")
+
+
+    ## Test 6
+    def test_helmer_net(self):
+
+        payslip = self.env.ref('l10n_se_hr_payroll_tiichri.hr_payslip_helmer_05')
+
+        net_line = payslip.line_ids.filtered(lambda l: l.code == 'nl')
+
+        self.assertTrue(net_line, "Kunde inte hitta fältet 'nl' (Nettolön) för Helmer.")
+        self.assertAlmostEqual(net_line.total, 18118.0, msg=f"Fel nettolön för Helmer! Fick: {net_line.total}, förväntat: 18118.0.")
+        _logger.info(f"SUCCESS: Helmer net pay correct: {net_line.total}")

@@ -23,6 +23,7 @@
             <field name="vat">SE123456789701</field>
             <field name="country_id" ref="base.se"/>
             <field name="company_registry">556060-0000</field>
+            <field name="currency_id" ref="base.SEK"/>
             <field name="email">info@aronssons.se</field>
             <field name="website">http://www.aronssons.se</field>
             <field name="partner_id" ref="company_aronssons_partner" />
@@ -63,7 +64,6 @@
         <record id="job_id_assembly" model="hr.job">
             <field name="name">Montör</field>
         </record>
-
 
         <record id="date_range_type_company_aronssons" model="date.range.type">
             <field name="name">Fiscal Year 2022</field>

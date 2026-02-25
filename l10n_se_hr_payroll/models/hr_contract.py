@@ -1,6 +1,7 @@
 import logging
 from dateutil.relativedelta import relativedelta
 from datetime import datetime, time, date
+from pytz import timezone
 
 from odoo import models, fields, api, _
 
@@ -137,10 +138,7 @@ class hr_contract(models.Model):
         ]
 
         leaves = self.env['hr.leave'].search(domain)
-        
-        #leaves_mapped = list(map(lambda l: dict(date_from = l.date_from.date(), date_to = l.date_to.date()) ,leaves))
 
-        #return leaves_mapped
         return [{'date_from': l.date_from.date(), 'date_to': l.date_to.date()} for l in leaves]
         
     def get_monthly_sick_leave_periods(self, payslip_id):
@@ -167,17 +165,6 @@ class hr_contract(models.Model):
         leaves = self.env['hr.leave'].search(domain)
 
         fix_weekend_leaves = []
-
-        # for leave in leaves:
-        #     if leave.date_to.weekday() == 4:
-        #         fix_weekend_leaves.append(
-        #             {"date_from": leave.date_from.date(), "date_to": leave.date_to.date() + relativedelta(days = 2)}
-        #         )
-        #     else:
-        #         fix_weekend_leaves.append(
-        #             {"date_from": leave.date_from.date(), "date_to": leave.date_to.date()}
-        #         )
-        # _logger.error(f"{fix_weekend_leaves=}")
 
         for leave in leaves:
             fix_weekend_leaves.append(
@@ -236,6 +223,7 @@ class hr_contract(models.Model):
 
     def get_sick_pay_data(self, payslip):
         # Kolla sex mån bakåt för att lämna utrymme för 5-dagarsregeln
+        import pytz
         date_from_history = payslip.date_from - relativedelta(months=6)
         domain = [
             ('date_from', '<=', payslip.date_to),
@@ -273,8 +261,28 @@ class hr_contract(models.Model):
                         
                         day_start = datetime.combine(loop_date, time.min)
                         day_end = datetime.combine(loop_date, time.max)
+
                         work_hours_today = self.resource_calendar_id.get_work_hours_count(
-                            day_start, day_end, compute_leaves=False)
+                            day_start, day_end, compute_leaves=True)
+
+                        user_tz = pytz.timezone(self.env.user.tz or 'Europe/Stockholm')
+
+                        day_start_local = user_tz.localize(day_start)
+                        day_end_local = user_tz.localize(day_end)
+
+                        day_start_utc = day_start_local.astimezone(pytz.utc).replace(tzinfo=None)
+                        day_end_utc = day_end_local.astimezone(pytz.utc).replace(tzinfo=None)
+
+                        is_global_leave = self.env['resource.calendar.leaves'].search_count([
+                            ('resource_id', '=', False),
+                            ('date_from', '<=', day_end_utc),
+                            ('date_to', '>=', day_start_utc),
+                            '|', ('calendar_id', '=', False), ('calendar_id', '=', self.resource_calendar_id.id),
+                            ('company_id', 'in', [False, self.company_id.id])
+                        ])
+                        
+                        if is_global_leave > 0:
+                            work_hours_today = 0.0
 
                         if explicit_parts:
                             part = max(int(d) for d in explicit_parts) / 100.0
@@ -366,13 +374,36 @@ class hr_contract(models.Model):
     
     def get_actual_work_hours(self, payslip):
         self.ensure_one()
-        
-        start_dt = datetime.combine(payslip.date_from, time.min)
-        end_dt = datetime.combine(payslip.date_to, time.max)
+        import pytz
+
+        user_tz = pytz.timezone(self.env.user.tz or 'Europe/Stockholm')
+
+        start_dt = user_tz.localize(datetime.combine(payslip.date_from, time.min)).astimezone(pytz.UTC)
+        end_dt = user_tz.localize(datetime.combine(payslip.date_to, time.max)).astimezone(pytz.UTC)
 
         total_scheduled = self.resource_calendar_id.get_work_hours_count(
             start_dt, end_dt, compute_leaves=False
         )
+
+        public_holiday_hours = 0.0
+
+        global_leaves = self.env['resource.calendar.leaves'].search([
+            ('resource_id', '=', False),
+            ('date_from', '<=', end_dt),
+            ('date_to', '>=', start_dt),
+            '|', ('calendar_id', '=', False), ('calendar_id', '=', self.resource_calendar_id.id),
+            ('company_id', 'in', [False, self.company_id.id])
+        ])
+
+        for leave in global_leaves:
+            leave_start_utc = pytz.utc.localize(leave.date_from)
+            leave_end_utc = pytz.utc.localize(leave.date_to)
+            
+            l_start = max(start_dt, leave_start_utc)
+            l_end = min(end_dt, leave_end_utc)
+            
+            if l_start < l_end:
+                public_holiday_hours += self.resource_calendar_id.get_work_hours_count(l_start, l_end, compute_leaves=False)
 
         absence_codes = [
             'vab', 'sjk', 'tj_ledighet',
@@ -390,7 +421,7 @@ class hr_contract(models.Model):
             if line.code and line.code.lower() in absence_codes
         )
 
-        return max(0.0, total_scheduled - absence_hours)
+        return max(0.0, total_scheduled - absence_hours - public_holiday_hours)
 
     def get_holiday_basis_pay_hours(self, payslip):
         self.ensure_one()
@@ -551,23 +582,25 @@ class hr_contract(models.Model):
         ])
 
         if current_leaves:
-            earliest_leave = sorted(current_leaves, key=lambda x: x.date_from)[0]
-            start_date = earliest_leave.date_from.date()
-
-            if payslip.date_from <= start_date <= payslip.date_to:
-
-                day_before = start_date - relativedelta(days=1)
+            for leave in current_leaves:
+                start_date = leave.date_from.date()
                 
-                previous_leave_exists = self.env['hr.leave'].search_count([
-                    ('employee_id', '=', self.employee_id.id),
-                    ('date_to', '=', day_before),
-                    ('holiday_status_id.work_entry_type_id.code', '=', 'f_led'),
-                    ('state', '=', 'validate')
-                ])
+                if payslip.date_from <= start_date <= payslip.date_to:
+                    
+                    duration = (leave.date_to.date() - leave.date_from.date()).days + 1
+                    
+                    if duration >= 30:
+                        day_before = start_date - relativedelta(days=1)
+                        previous_leave_exists = self.env['hr.leave'].search_count([
+                            ('employee_id', '=', self.employee_id.id),
+                            ('date_to', '=', day_before),
+                            ('holiday_status_id.work_entry_type_id.code', '=', 'f_led'),
+                            ('state', '=', 'validate')
+                        ])
 
-                if previous_leave_exists == 0:
-                    return max(0, total_f_lon * 0.5)
-
+                        if previous_leave_exists == 0:
+                            return max(0, total_f_lon * 0.5)
+        
         return 0.0
 
     def get_expired_saved_vacation_days(self, payslip):

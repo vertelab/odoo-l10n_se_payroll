@@ -15,21 +15,20 @@ _logger = logging.getLogger(__name__)
 # $ sudo su odoo
 # $ odoo --test-tags /l10n_se_payroll_tiichri -c /etc/odoo/odoo.conf
 # $ odoo -c /etc/odoo/odoo.conf -d DATABASNAMN -i l10n_se_hr_payroll_tiichri --test-enable
-# $ odoo -c /etc/odoo/odoo.conf -d odoo-tiichri -i l10n_se_hr_payroll_tiichri --test-enable
+# $ odoo -c /etc/odoo/odoo.conf -d odoo-tiichri -i --test-enable
 #
 
-@tagged('l10n_se_payroll_tiichri', 'february')
-class TestPayslipFebruary(TransactionCase):
-
+@tagged('l10n_se_payroll_tiichri', 'october')
+class TestPayslipOctober(TransactionCase):
     ## Test 1
     def test_asse_net(self):   
 
-        payslip = self.env.ref('l10n_se_hr_payroll_tiichri.hr_payslip_asse_02')
+        payslip = self.env.ref('l10n_se_hr_payroll_tiichri.hr_payslip_asse_10')
 
         net_line = payslip.line_ids.filtered(lambda l: l.code == 'nl')
 
         self.assertTrue(net_line, "Kunde inte hitta fältet 'nl' (Nettolön) för Asse.")
-        self.assertAlmostEqual(net_line.total, 27680.0, msg=f"Fel nettolön för Asse! Fick: {net_line.total}, förväntat: 27680.0.")
+        self.assertAlmostEqual(net_line.total, 21983.0, msg=f"Fel nettolön för Asse! Fick: {net_line.total}, förväntat: 21983.0.")
         _logger.info(f"SUCCESS: Asse net pay correct: {net_line.total}")
 
 
@@ -37,36 +36,36 @@ class TestPayslipFebruary(TransactionCase):
     ## Test 4
     def test_frans_net(self):
 
-        payslip = self.env.ref('l10n_se_hr_payroll_tiichri.hr_payslip_frans_02')
+        payslip = self.env.ref('l10n_se_hr_payroll_tiichri.hr_payslip_frans_10')
 
         net_line = payslip.line_ids.filtered(lambda l: l.code == 'nl')
 
         self.assertTrue(net_line, "Kunde inte hitta fältet 'nl' (Nettolön) för Frans.")
-        self.assertAlmostEqual(net_line.total, 25468.0, msg=f"Fel nettolön för Frans! Fick: {net_line.total}, förväntat: 25468.0.")
+        self.assertAlmostEqual(net_line.total, 7209.0, msg=f"Fel nettolön för Frans! Fick: {net_line.total}, förväntat: 7209.0.")
         _logger.info(f"SUCCESS: Frans net pay correct: {net_line.total}")
 
 
     ## Test 3
     def test_doris_net(self):
 
-        payslip = self.env.ref('l10n_se_hr_payroll_tiichri.hr_payslip_doris_02')
+        payslip = self.env.ref('l10n_se_hr_payroll_tiichri.hr_payslip_doris_10')
 
         net_line = payslip.line_ids.filtered(lambda l: l.code == 'nl')
 
         self.assertTrue(net_line, "Kunde inte hitta fältet 'nl' (Nettolön) för Doris.")
-        self.assertAlmostEqual(net_line.total, 9067.0, msg=f"Fel nettolön för Doris! Fick: {net_line.total}, förväntat: 9067.0.")
+        self.assertAlmostEqual(net_line.total, 5160.0, msg=f"Fel nettolön för Doris! Fick: {net_line.total}, förväntat: 5160.0.")
         _logger.info(f"SUCCESS: Doris net pay correct: {net_line.total}")
 
 
     ## Test 2
     def test_camilla_net(self):
 
-        payslip = self.env.ref('l10n_se_hr_payroll_tiichri.hr_payslip_camilla_02')
+        payslip = self.env.ref('l10n_se_hr_payroll_tiichri.hr_payslip_camilla_10')
 
         net_line = payslip.line_ids.filtered(lambda l: l.code == 'nl')
 
         self.assertTrue(net_line, "Kunde inte hitta fältet 'nl' (Nettolön) för Camilla.")
-        self.assertAlmostEqual(net_line.total, 24895.0, msg=f"Fel nettolön för Camilla! Fick: {net_line.total}, förväntat: 24895.0.")
+        self.assertAlmostEqual(net_line.total, 13354.0, msg=f"Fel nettolön för Camilla! Fick: {net_line.total}, förväntat: 13354.0.")
         _logger.info(f"SUCCESS: Camilla net pay correct: {net_line.total}")
 
 
@@ -74,28 +73,22 @@ class TestPayslipFebruary(TransactionCase):
     ## Test 5
     def test_gustav_net(self):
 
-        payslip = self.env.ref('l10n_se_hr_payroll_tiichri.hr_payslip_gustav_02')
+        payslip = self.env.ref('l10n_se_hr_payroll_tiichri.hr_payslip_gustav_10')
 
         net_line = payslip.line_ids.filtered(lambda l: l.code == 'nl')
 
         self.assertTrue(net_line, "Kunde inte hitta fältet 'nl' (Nettolön) för Gustav.")
-        self.assertAlmostEqual(net_line.total, 21963.0, msg=f"Fel nettolön för Gustav! Fick: {net_line.total}, förväntat: 21963.0.")
+        self.assertAlmostEqual(net_line.total, 10929.0, msg=f"Fel nettolön för Gustav! Fick: {net_line.total}, förväntat: 10929.0.")
         _logger.info(f"SUCCESS: Gustav net pay correct: {net_line.total}")
 
 
     ## Test 6
     def test_helmer_net(self):
 
-        payslip = self.env.ref('l10n_se_hr_payroll_tiichri.hr_payslip_helmer_02')
+        payslip = self.env.ref('l10n_se_hr_payroll_tiichri.hr_payslip_helmer_10')
 
         net_line = payslip.line_ids.filtered(lambda l: l.code == 'nl')
 
         self.assertTrue(net_line, "Kunde inte hitta fältet 'nl' (Nettolön) för Helmer.")
-        self.assertAlmostEqual(net_line.total, 16290.0, msg=f"Fel nettolön för Helmer! Fick: {net_line.total}, förväntat: 16290.0.")
+        self.assertAlmostEqual(net_line.total, 10800.0, msg=f"Fel nettolön för Helmer! Fick: {net_line.total}, förväntat: 10800.0.")
         _logger.info(f"SUCCESS: Helmer net pay correct: {net_line.total}")
-
-
-
-
-
-

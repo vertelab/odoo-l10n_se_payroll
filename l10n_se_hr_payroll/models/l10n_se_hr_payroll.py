@@ -37,8 +37,8 @@ class HrPayslipLine(models.Model):
     @api.depends("quantity", "amount", "rate")
     def _compute_total(self):
         for line in self:
-            line.total = round(float(line.quantity) * line.amount * line.rate / 100)
-
+            rounded_a_price = round(line.amount, 2)
+            line.total = round(float(line.quantity) * rounded_a_price * (line.rate / 100.0), 2)
 
 class HrPayslipWorkedDays(models.Model):
     _inherit = "hr.payslip.worked_days"
@@ -372,6 +372,21 @@ class hr_payslip(models.Model):
             day_from, day_to, calendar=contract.resource_calendar_id
         )
         for day, hours, leave in day_leave_intervals:
+            import pytz
+            day_start_utc = tz.localize(datetime.combine(day, datetime.min.time())).astimezone(pytz.UTC).replace(tzinfo=None)
+            day_end_utc = tz.localize(datetime.combine(day, datetime.max.time())).astimezone(pytz.UTC).replace(tzinfo=None)
+            
+            is_global_leave = self.env['resource.calendar.leaves'].search_count([
+                ('resource_id', '=', False),
+                ('date_from', '<=', day_end_utc),
+                ('date_to', '>=', day_start_utc),
+                '|', ('calendar_id', '=', False), ('calendar_id', '=', calendar.id),
+                ('company_id', 'in', [False, contract.company_id.id])
+            ])
+            
+            if is_global_leave > 0:
+                continue
+
             holiday = leave[:1].holiday_id
             # Fix: Explicitly check if work_entry_type_id is set
             work_entry_type = holiday.holiday_status_id.work_entry_type_id

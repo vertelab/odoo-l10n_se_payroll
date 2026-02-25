@@ -87,6 +87,7 @@
             <field name="code">SYSTEM</field>
             <field name="name">System</field>
             <field name="note">Används till regler som är verktyg</field>
+            <field name="company_id" eval="False"/>
         </record>
 
 <!--

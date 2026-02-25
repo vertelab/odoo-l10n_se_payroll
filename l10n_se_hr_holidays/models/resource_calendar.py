@@ -4,7 +4,6 @@
 from odoo import api, models, fields, _
 from odoo.addons.resource.models.utils import Intervals
 
-from pytz import timezone
 import datetime
 from dateutil import rrule
 import pandas as pd
@@ -19,6 +18,10 @@ from itertools import chain
 from pytz import timezone, utc
 from odoo.addons.resource.models.utils import float_to_time
 from odoo.osv import expression
+
+import logging
+
+_logger = logging.getLogger(__name__)
 
 
 # Default hour per day value. The one should
@@ -83,6 +86,50 @@ class ResourceCalendar(models.Model):
                 (0, 0, {'name': _(f'{absent_days[-1]} Afternoon'), 'dayofweek': absent_days[0], 'hour_from': 13,
                         'hour_to': 17, 'day_period': 'afternoon', 'absent_calendar_id': self.id}),
             ]
+
+    def action_sync_public_holidays(self):
+        import pytz
+        
+        nager_calendars = self.env['calendar.public.holiday'].search([])
+        years_to_sync = nager_calendars.mapped('year')
+
+        if not years_to_sync:
+            _logger.warning("Inga Nager-helgdagar hittades att synka.")
+            return
+
+        holidays = self.env['calendar.public.holiday.line'].search([
+            ('public_holiday_id.year', 'in', years_to_sync)
+        ])
+
+        leaves_obj = self.env['resource.calendar.leaves']
+        user_tz = timezone(self.env.user.tz or 'Europe/Stockholm')
+
+        for calendar in self:
+            _logger.info("Synkar helgdagar för kalender: %s", calendar.name)
+            
+            for holiday in holidays:
+                dt_start_local = user_tz.localize(datetime.combine(holiday.date, time.min))
+                dt_end_local = user_tz.localize(datetime.combine(holiday.date, time.max))
+
+                date_from_utc = dt_start_local.astimezone(utc).replace(tzinfo=None)
+                date_to_utc = dt_end_local.astimezone(utc).replace(tzinfo=None)
+
+                existing_leave = leaves_obj.search([
+                    ('date_from', '<=', date_to_utc),
+                    ('date_to', '>=', date_from_utc),
+                    ('calendar_id', '=', calendar.id)
+                ], limit=1)
+
+                if not existing_leave:
+                    leaves_obj.create({
+                        'name': holiday.name,
+                        'date_from': date_from_utc,
+                        'date_to': date_to_utc,
+                        'resource_id': False, 
+                        'calendar_id': calendar.id,
+                        'company_id': calendar.company_id.id if calendar.company_id else False
+                    })
+
 
     def _attendance_intervals_batch(self, start_dt, end_dt, resources=None, domain=None, tz=None, lunch=False):
         """ Return the attendance intervals in the given datetime range.

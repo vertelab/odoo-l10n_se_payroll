@@ -143,5 +143,16 @@ for record in records:
             </field>
         </record>
 
+        <record model="ir.actions.server" id="action_sync_nager_holidays">
+            <field name="name">Synka Nager Helgdagar till Global Leaves</field>
+            <field name="model_id" ref="resource.model_resource_calendar"/>
+            <field name="binding_model_id" ref="resource.model_resource_calendar"/>
+            <field name="binding_view_types">list,form</field>
+            <field name="state">code</field>
+            <field name="code">
+model.action_sync_public_holidays()
+            </field>
+        </record>
+
     </data>
 </odoo>

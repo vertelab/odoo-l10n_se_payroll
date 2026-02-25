@@ -35,6 +35,7 @@
         'l10n_se_hr_payroll',  
         #'hr_holidays',
         'hr_work_entry_holidays',
+        'calendar_public_holiday_nager',
         # 'l10n_se_payroll_taxtable',
         # 'hr_weekly_working_hours',
         # 'payroll',
