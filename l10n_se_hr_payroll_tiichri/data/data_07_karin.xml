@@ -1,24 +1,34 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
     <data noupdate="1">
-        <!-- <record id="hr_karin_partner" model="res.partner">
+        <record id="hr_karin_partner" model="res.partner">
             <field name="company_type">person</field>
-            <field name="name">Karin Kullberg Kontakt</field>
+            <field name="name">Karin Kullberg</field>
             <field name="street">Lövövägen 6</field>
             <field name="zip">171 00</field>
             <field name="city">Sollentuna</field>
             <field name="mobile">073-980078</field>
             <field name="function">Montör</field>
             <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons"/>
-        </record> -->
+        </record>
 
-        <!-- <record id="bank_karin" model="res.partner.bank">
+        <record id="bank_karin" model="res.partner.bank">
             <field name="acc_number">4133-98765</field>
             <field name="partner_id" ref="hr_karin_partner" />
-        </record> -->
+        </record>
+
+        <record id="hr_karin_user" model="res.users">
+            <field name="name">Karin Kullberg</field>
+            <field name="partner_id" ref="hr_karin_partner" />
+            <field name="login">Karin</field>
+            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons"/>
+            <field name="company_ids" eval="[
+                (4, ref('l10n_se_hr_payroll_tiichri.company_aronssons')),
+            ]" />
+        </record>
 
         <record id="hr_karin_employee" model="hr.employee">
-            <field name="name">Karin Kullberg Anställd</field>
+            <field name="name">Karin Kullberg</field>
             <field name="birthday">1989-12-08</field>
             <field name="work_location_id" ref="main_work_location" />
             <field name="work_phone">073-400000</field>
@@ -26,14 +36,11 @@
             <field name="identification_id">891208-2396</field>
             <field name="registration_number">302</field>
             <field name="job_title">Montör</field>
-            <field name="private_street">Lövövägen 6</field>
-            <field name="private_zip">171 00</field>
-            <field name="private_city">Sollentuna</field>
-            <field name="country_id" ref="base.se"/>
-            <field name="private_phone">073-980078</field>
             <field name="tz" eval="'Europe/Stockholm'" />
             <field name="address_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons_partner" />
             <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons" />
+            <field name="work_contact_id" ref="hr_karin_partner" />
+            <field name="user_id" ref="hr_karin_user" />
         </record>
 
         <record id="contract_karin" model="hr.contract">

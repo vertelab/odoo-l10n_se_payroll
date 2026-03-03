@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
     <data noupdate="1">
+
         <!-- ## FRANS FILIPSSON -->
-        <!--
         <record id="hr_frans_partner" model="res.partner">
             <field name="company_type">person</field>
-            <field name="name">Frans Filipsson Kontakt</field>
+            <field name="name">Frans Filipsson</field>
             <field name="street">Högbyvägen 34</field>
             <field name="zip">127 00</field>
             <field name="city">Älvsjö</field>
@@ -15,13 +15,23 @@
 
         </record>
 
-         <record id="bank_frans" model="res.partner.bank">
+        <record id="bank_frans" model="res.partner.bank">
             <field name="acc_number">4333-44444444</field>
             <field name="partner_id" ref="hr_frans_partner" />
-        </record> -->
+        </record>
+
+        <record id="hr_frans_user" model="res.users">
+            <field name="name">Frans Filipsson</field>
+            <field name="partner_id" ref="hr_frans_partner" />
+            <field name="login">Frans</field>
+            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons"/>
+            <field name="company_ids" eval="[
+                (4, ref('l10n_se_hr_payroll_tiichri.company_aronssons')),
+            ]" />
+        </record>
 
         <record id="hr_frans_employee" model="hr.employee">
-            <field name="name">Frans Filipsson Anställd</field>
+            <field name="name">Frans Filipsson</field>
             <field name="birthday">1946-05-07</field>
             <field name="work_location_id" ref="main_work_location" />
             <field name="work_phone">073-400000</field>
@@ -29,14 +39,11 @@
             <field name="identification_id">460507-6738</field>
             <field name="registration_number">102</field>
             <field name="job_title">Inköpare</field>
-            <field name="private_street">Högbyvägen 34</field>
-            <field name="private_zip">127 00</field>
-            <field name="private_city">Älvsjö</field>
-            <field name="country_id" ref="base.se"/>
-            <field name="private_phone">073-6000000</field>
             <field name="tz" eval="'Europe/Stockholm'" />
             <field name="address_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons_partner" />
             <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons" />
+            <field name="work_contact_id" ref="hr_frans_partner" />
+            <field name="user_id" ref="hr_frans_user" />
         </record>
 
         <!-- För att få till historisk lägre sysselesättningsgrad.
@@ -89,41 +96,6 @@
             <field name="one_off_tax">0.3</field>
             <field name="annual_vacation_days">25.0</field>
         </record>
-
-
-        <!--==========================INSTRUKTIONER FÖR TESTDATA======================
-
-               PAYSLIP SKAPAS I ORDNINGEN:
-
-               1. Frånvaro-records
-               2. Eventuell validering av tjänstledighet
-               3. Payslip-record
-               4. Hämta data till payslip med onchange-funktion
-               5. Eventuell write-funktion på inputfält för övertid
-               6. Beräkna lönespec med compute_sheet-funktion
-
-               ATT SKAPA LEDIGHETSRECORDS:
-
-               • Enstaka eller flera hela dagar: en enda record
-                 Exempel: hr_leave_frans_801
-                 HELTID 100% (Övriga): 1 hel dag = 8 timmar.
-                 DELTID 80% (Doris + Karin): Jobbar mån-tor. 1 hel dag = 8 timmar.
-
-               • Halva dagar: en enda record MEN måste innehålla tider
-                 Exempel: hr_leave_frans_901
-
-               • Flera dagar som börjar/slutar med halvdag: TVÅ records
-                 Exempel: hr_leave_frans_101 + hr_leave_frans_101_02
-
-                 VIKTIGT: Tjänstledighet (leave_type_loa) måste valideras
-                 INNAN den aktuella månadens payslip genereras!
-                 VIKTIGT: Just nu hanteras INTE röda dagar automatiskt, utan måste
-                 exkluderas genom att skapa flera records när frånvaro sammanfaller med
-                 en röd dag.
-
-        ==============================================================================-->
-
-
 
         <!-- ================================ January ================================ -->
 
@@ -359,7 +331,7 @@
             <field name="name">Hushållsnära tjänster (Arbetskostnad)</field>
             <field name="amount">2200.0</field>
             <field name="amount_qty">1.0</field>
-            <field name="contract_id" ref="contract_camilla"/>
+            <field name="contract_id" ref="contract_frans_2"/>
         </record>
 
         <!--  Milersättning -->

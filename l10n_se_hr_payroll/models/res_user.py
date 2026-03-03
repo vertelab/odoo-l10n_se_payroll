@@ -223,7 +223,7 @@ class UserPayslip(models.TransientModel):
     @api.model
     def get_slip_line(self, code):
         self = self.sudo()
-        lines = self.payslip_id.details_by_salary_rule_category.filtered(
+        lines = self.payslip_id.line_ids.filtered(
             lambda l: l.code == code).mapped(
             lambda v: {
                 'name': v.name,
@@ -231,13 +231,13 @@ class UserPayslip(models.TransientModel):
                 'rate': v.rate,
                 'amount': v.amount,
                 'total': v.total,
-                'amount_percentage': v.amount_percentage,
               }
         )
         if len(lines) > 0:
             return lines
         else:
-            return [{'amount': 0, 'amount_percentage': 0.0, 'total': 0}]
+            return [{'amount': 0, 'total': 0}]
+
 
     @api.model
     def get_slip_line_total(self, code):
@@ -245,9 +245,9 @@ class UserPayslip(models.TransientModel):
         return self.payslip_id.get_slip_line_total(code)
 
     @api.model
-    def get_slip_line_acc(self, code):
+    def get_slip_line_acc(self, codes):
         self = self.sudo()
-        return self.payslip_id.get_slip_line_acc(['bl', 'gl', 'pre', 'prej', 'san'])
+        return self.payslip_id.get_slip_line_acc(codes)
 
     def payslip_report(self):
         self.ensure_one()

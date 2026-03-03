@@ -3,10 +3,10 @@
     <data noupdate="1">
 
         <!-- ## DORIS DALIN -->
-        <!--
+        
         <record id="hr_doris_partner" model="res.partner">
             <field name="company_type">person</field>
-            <field name="name">Doris Dahlin Kontakt</field>
+            <field name="name">Doris Dahlin</field>
             <field name="street">Slingerstigen 33</field>
             <field name="zip">186 45</field>
             <field name="city">Ingarö</field>
@@ -18,10 +18,20 @@
         <record id="bank_doris" model="res.partner.bank">
             <field name="acc_number">4333-55555555</field>
             <field name="partner_id" ref="hr_doris_partner" />
-        </record> -->
+        </record>
+
+        <record id="hr_doris_user" model="res.users">
+            <field name="name">Doris Dahlin</field>
+            <field name="partner_id" ref="hr_doris_partner" />
+            <field name="login">Doris</field>
+            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons"/>
+            <field name="company_ids" eval="[
+                (4, ref('l10n_se_hr_payroll_tiichri.company_aronssons')),
+            ]" />
+        </record>
 
         <record id="hr_doris_employee" model="hr.employee">
-            <field name="name">Doris Dahlin Anställd</field>
+            <field name="name">Doris Dahlin</field>
             <field name="birthday">1992-02-17</field>
             <field name="work_location_id" ref="main_work_location" />
             <field name="work_phone">073-400000</field>
@@ -29,14 +39,11 @@
             <field name="identification_id">920217-2384</field>
             <field name="registration_number">103</field>
             <field name="job_title">Lönekonsult</field>
-            <field name="private_street">Slingerstigen 33</field>
-            <field name="private_zip">186 45</field>
-            <field name="private_city">Ingarö</field>
-            <field name="country_id" ref="base.se"/>
-            <field name="private_phone">073-700000</field>
             <field name="tz" eval="'Europe/Stockholm'" />
             <field name="address_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons_partner" />
             <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons" />
+            <field name="work_contact_id" ref="hr_doris_partner" />
+            <field name="user_id" ref="hr_doris_user" />
         </record>
 
         <record id="contract_doris" model="hr.contract">

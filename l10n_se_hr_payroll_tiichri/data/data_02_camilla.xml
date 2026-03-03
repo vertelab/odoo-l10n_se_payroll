@@ -3,10 +3,9 @@
     <data noupdate="1">
 
         <!-- CAMILLA COBOLT -->
-        <!-- 
         <record id="hr_camilla_partner" model="res.partner">
             <field name="company_type">person</field>
-            <field name="name">Camilla Cobolt Kontakt</field>
+            <field name="name">Camilla Cobolt</field>
             <field name="street">Sveavägen 7</field>
             <field name="zip">112 00</field>
             <field name="city">Stockholm</field>
@@ -18,10 +17,20 @@
         <record id="bank_camilla" model="res.partner.bank">
             <field name="acc_number">4132-123123</field>
             <field name="partner_id" ref="hr_camilla_partner" />
-        </record> -->
+        </record>
+
+        <record id="hr_camilla_user" model="res.users">
+            <field name="name">Camilla Cobolt</field>
+            <field name="partner_id" ref="hr_camilla_partner" />
+            <field name="login">Camilla</field>
+            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons"/>
+            <field name="company_ids" eval="[
+                (4, ref('l10n_se_hr_payroll_tiichri.company_aronssons')),
+            ]" />
+        </record>
 
         <record id="hr_camilla_employee" model="hr.employee">
-            <field name="name">Camilla Cobolt Anställd</field>
+            <field name="name">Camilla Cobolt</field>
             <field name="birthday">1971-10-02</field>
             <field name="work_location_id" ref="main_work_location" />
             <field name="work_phone">073-400000</field>
@@ -29,14 +38,11 @@
             <field name="identification_id">711002-1834</field>
             <field name="registration_number">104</field>
             <field name="job_title">Logistikansvarig</field>
-            <field name="private_street">Sveavägen 7</field>
-            <field name="private_zip">112 00</field>
-            <field name="private_city">Stockholm</field>
-            <field name="country_id" ref="base.se"/>
-            <field name="private_phone">073-980001</field>
             <field name="tz" eval="'Europe/Stockholm'" />
             <field name="address_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons_partner" />
             <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons" />
+            <field name="work_contact_id" ref="hr_camilla_partner" />
+            <field name="user_id" ref="hr_camilla_user" />
         </record>
 
         <record id="contract_camilla" model="hr.contract">

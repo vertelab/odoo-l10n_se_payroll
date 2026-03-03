@@ -1,25 +1,34 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
     <data noupdate="1">
-        <!-- <record id="hr_helmer_partner" model="res.partner">
+        <record id="hr_helmer_partner" model="res.partner">
             <field name="company_type">person</field>
-            <field name="name">Helmer Henriksson Kontakt</field>
+            <field name="name">Helmer Henriksson</field>
             <field name="street">Högvägen 34</field>
             <field name="zip">197 00</field>
             <field name="city">Bro</field>
             <field name="mobile">073-800000</field>
             <field name="function">Montör</field>
             <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons"/>
-        </record> -->
+        </record> 
 
-        <!-- <record id="bank_helmer" model="res.partner.bank">
+        <record id="bank_helmer" model="res.partner.bank">
             <field name="acc_number">4333-888888</field>
             <field name="partner_id" ref="hr_helmer_partner" />
-        </record> -->
+        </record>
 
+        <record id="hr_helmer_user" model="res.users">
+            <field name="name">Helmer Henriksson</field>
+            <field name="partner_id" ref="hr_helmer_partner" />
+            <field name="login">Helmer</field>
+            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons"/>
+            <field name="company_ids" eval="[
+                (4, ref('l10n_se_hr_payroll_tiichri.company_aronssons')),
+            ]" />
+        </record>
 
         <record id="hr_helmer_employee" model="hr.employee">
-            <field name="name">Helmer Henriksson Anställd</field>
+            <field name="name">Helmer Henriksson</field>
             <field name="birthday">1968-05-22</field>
             <field name="work_location_id" ref="main_work_location" />
             <field name="work_phone">073-400000</field>
@@ -27,14 +36,11 @@
             <field name="identification_id">680522-9272</field>
             <field name="registration_number">301</field>
             <field name="job_title">Montör</field>
-            <field name="private_street">Högvägen 34</field>
-            <field name="private_zip">197 00</field>
-            <field name="private_city">Bro</field>
-            <field name="country_id" ref="base.se"/>
-            <field name="private_phone">073-800000</field>
             <field name="tz" eval="'Europe/Stockholm'" />
             <field name="address_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons_partner" />
             <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons" />
+            <field name="work_contact_id" ref="hr_helmer_partner" />
+            <field name="user_id" ref="hr_helmer_user" />
         </record>
 
         <record id="contract_helmer" model="hr.contract">

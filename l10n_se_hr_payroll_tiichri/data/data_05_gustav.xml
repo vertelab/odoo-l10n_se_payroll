@@ -1,25 +1,34 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
     <data noupdate="1">
-        <!-- <record id="hr_gustav_partner" model="res.partner">
+        <record id="hr_gustav_partner" model="res.partner">
             <field name="company_type">person</field>
-            <field name="name">Gustav Groth Kontakt</field>
+            <field name="name">Gustav Groth</field>
             <field name="street">Gruvvägen 7</field>
             <field name="zip">171 00</field>
             <field name="city">Solna</field>
             <field name="mobile">073-700000</field>
             <field name="function">Montör</field>
             <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons"/>
-
-        </record> -->
-        <!-- 
+        </record>
+        
         <record id="bank_gustav" model="res.partner.bank">
             <field name="acc_number">4333-7777777</field>
             <field name="partner_id" ref="hr_gustav_partner" />
-        </record> -->
+        </record>
+
+        <record id="hr_gustav_user" model="res.users">
+            <field name="name">Gustav Groth</field>
+            <field name="partner_id" ref="hr_gustav_partner" />
+            <field name="login">Gustav</field>
+            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons"/>
+            <field name="company_ids" eval="[
+                (4, ref('l10n_se_hr_payroll_tiichri.company_aronssons')),
+            ]" />
+        </record>
 
         <record id="hr_gustav_employee" model="hr.employee">
-            <field name="name">Gustav Groth Anställd</field>
+            <field name="name">Gustav Groth</field>
             <field name="birthday">1979-01-24</field>
             <field name="work_location_id" ref="main_work_location" />
             <field name="work_phone">073-400000</field>
@@ -27,13 +36,11 @@
             <field name="identification_id">790124-0207</field>
             <field name="registration_number">201</field>
             <field name="job_title">Montör</field>
-            <field name="private_street">Gruvvägen 7</field>
-            <field name="private_zip">171 00</field>
-            <field name="private_city">Solna</field>
-            <field name="private_phone">073-700000</field>
             <field name="tz" eval="'Europe/Stockholm'" />
             <field name="address_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons_partner" />
             <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons" />
+            <field name="work_contact_id" ref="hr_gustav_partner" />
+            <field name="user_id" ref="hr_gustav_user" />
         </record>
 
         <record id="contract_gustav" model="hr.contract">
@@ -58,41 +65,6 @@
             <field name="tax_equalization_end">2022-12-31</field>
             <field name="annual_vacation_days">25.0</field>
         </record>
-
-
-        <!--==========================INSTRUKTIONER FÖR TESTDATA======================
-
-               PAYSLIP SKAPAS I ORDNINGEN:
-
-               1. Frånvaro-records
-               2. Eventuell validering av tjänstledighet
-               3. Payslip-record
-               4. Hämta data till payslip med onchange-funktion
-               5. Eventuell write-funktion på inputfält för övertid
-               6. Beräkna lönespec med compute_sheet-funktion
-
-               ATT SKAPA LEDIGHETSRECORDS:
-
-               • Enstaka eller flera hela dagar: en enda record
-                 Exempel: hr_leave_frans_801
-                 HELTID 100% (Övriga): 1 hel dag = 8 timmar.
-                 DELTID 80% (gustav + Karin): Jobbar mån-tor. 1 hel dag = 8 timmar.
-
-               • Halva dagar: en enda record MEN måste innehålla tider
-                 Exempel: hr_leave_frans_901
-
-               • Flera dagar som börjar/slutar med halvdag: TVÅ records
-                 Exempel: hr_leave_frans_101 + hr_leave_frans_101_02
-
-                 VIKTIGT: Tjänstledighet (leave_type_loa) måste valideras
-                 INNAN den aktuella månadens payslip genereras!
-                 VIKTIGT: Just nu hanteras INTE röda dagar automatiskt, utan måste
-                 exkluderas genom att skapa flera records när frånvaro sammanfaller med
-                 en röd dag.
-
-        ==============================================================================-->
-
-
 
         <!-- ================================ January ================================ -->
 
