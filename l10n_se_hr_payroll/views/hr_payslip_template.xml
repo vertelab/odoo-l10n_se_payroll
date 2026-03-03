@@ -4,253 +4,344 @@
         <t t-call="web.report_layout">
             <t t-foreach="docs" t-as="o">
                 <t t-call="l10n_se_hr_payroll.external_layout">
+                    <style>
+                    .page {
+                        position: relative;
+                        font-family: Arial, sans-serif; 
+                        font-size: 12px; 
+                        color: #000;                             
+                        width: 100%;
+                        box-sizing: border-box;
+                    }
+
+                    .header-table { width: 100%; margin-bottom: 15px; margin-top: 15px; font-weight: bold; }
+                    .header-table td { padding: 2px 0; }
+                    
+                    .page-layout-table {
+                        width: 100%;
+                        height: 200mm;
+                        border-collapse: collapse;
+                    }
+
+                    .page-layout-table &gt; tbody &gt; tr &gt; td {
+                        padding: 0;
+                        vertical-align: bottom;
+                    }
+
+                    .page-layout-table &gt; tbody &gt; tr &gt; td.content-cell {
+                        vertical-align: top;
+                        height: 100%;
+                    }
+
+                    .main-table {
+                        width: 100%; 
+                        border-collapse: collapse; 
+                        margin-bottom: 10px;
+                    }
+
+                    .main-table th { 
+                        background-color: #e9ecef; 
+                        padding: 6px 5px; font-weight: bold; 
+                        text-align: left; 
+                        border-bottom: 1px solid #ccc; 
+                    }
+
+                    .main-table td { padding: 4px 5px; }
+
+                    .summary-container { 
+                        width: 100%; 
+                        padding-top: 10px;
+                        background-color: white; 
+                        page-break-inside: avoid;
+                    }
+
+                    .summary-table { width: 100%; font-size: 11px; table-layout: fixed; }
+                    .summary-table td { vertical-align: top; padding-right: 15px; padding-top: 8px; }
+                    .summary-table td.col-border { 
+                        border-right: 1px solid #ccc; 
+                        border-left: 1px solid #ccc; 
+                        padding-left: 10px;
+                    }
+                    
+                    .inner-table { width: 100%; }
+                    .inner-table td { padding: 1px 0; }
+                    .inner-table td.right { text-align: right; }
+
+                    .payout-bar { 
+                        width: 100%; 
+                        background-color: #dcdcdc; 
+                        font-weight: bold; 
+                        font-size: 14px; 
+                        margin-top: 5px; 
+                    }
+                    
+                    .payout-bar td { padding: 6px 10px; }
+                    </style>
+
                     <div class="page">
-                        <h1>Lönespecifikation hr_payslip_template</h1>
-                        <table class="table table-bordered table-responsive">
+                        <table style="width: 100%; margin-bottom: 5px;">
                             <tr>
-                                <td rowspan="2" width="20%">
-                                    Löntagare
-                                    <br />
-                                </td>
-                                <td colspan="3" width="60%">
-                                    <sup>Namn</sup>
-                                    <br />
-                                    <span t-field="o.employee_id.name" />
-                                </td>
-                                <td width="20%" style="border: 1px solid #000000; padding: 0.1cm">
-                                    <sup>Personnummer</sup>
-                                    <br />
-                                    <span t-field="o.employee_id.identification_id" />
-                                </td>
-                            </tr>
-                            <tr>
-                                <td colspan="3" width="60%">
-                                    <sup>Adress</sup>
-                                    <br />
-                                    <span t-field="o.employee_id.private_street" />
-                                    <span t-field="o.employee_id.private_zip" />
-                                    <span t-field="o.employee_id.private_city" />
-
-
-                                </td>
-                                <td width="20%" style="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000; padding-top: 0cm; padding-bottom: 0.1cm; padding-left: 0.1cm; padding-right: 0.1cm">
-                                    <sup>Kontonummer</sup>
-                                    <br />
-                                    <span t-field="o.employee_id.bank_account_id.acc_number" />
-                                </td>
-                            </tr>
-                            <tr>
-                                <td rowspan="2" width="20%">
-                                    <sup>Arbetsgivare</sup>
-                                    <br />
-                                </td>
-                                <td colspan="3" width="60%">
-                                    <sup>Företag</sup>
-                                    <br />
-                                    <span t-field="o.employee_id.company_id.name" />
-                                </td>
-                                <td width="20%" style="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000; padding-top: 0cm; padding-bottom: 0.1cm; padding-left: 0.1cm; padding-right: 0.1cm">
-                                    <sup>Organisationsnummer</sup>
-                                    <br />
-                                    <span t-field="o.employee_id.company_id.company_registry" />
-                                </td>
-                            </tr>
-                            <tr>
-                                <td colspan="3" width="60%">
-                                    <sup>Adress</sup>
-                                    <br />
-                                    <span t-field="o.employee_id.company_id.street" />
-                                    ,
-                                    <span t-field="o.employee_id.company_id.zip" />
-                                    <span t-field="o.employee_id.company_id.city" />
-                                </td>
-                                <td width="20%" style="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000; padding-top: 0cm; padding-bottom: 0.1cm; padding-left: 0.1cm; padding-right: 0.1cm">
-                                    <sup>Telefon</sup>
-                                    <br />
-                                    <span t-field="o.employee_id.company_id.partner_id.phone" />
-                                </td>
-                            </tr>
-                            <tr>
-                                <td width="20%">
-                                    <sup>Period</sup>
-                                    <br />
-                                </td>
-                                <td colspan="2" width="40%">
-                                    <sup>Löneperiod</sup>
-                                    <br />
-                                    <span t-field="o.name" />
-                                    <span t-field="o.number" />
-                                </td>
-                                <td colspan="2" width="40%" style="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000; padding-top: 0cm; padding-bottom: 0.1cm; padding-left: 0.1cm; padding-right: 0.1cm">
-                                    <sup>Utbetalningsdag</sup>
-                                    <br />
-                                    ????
-                                </td>
-                            </tr>
-                            <tr>
-                                <td width="20%">
-                                    <sup>Specifikation</sup>
-                                    <br />
-                                </td>
-                                <td colspan="2" width="40%">
-                                    <small>Skattepliktiga ersättningar och avdrag</small>
-                                    <br />
-                                    <table>
+                                <td style="width: 60%; vertical-align: top; min-height: 50px;">
+                                    <table class="header-table">
                                         <tr>
-                                            <td width="5%">
-                                                <b>Antal</b>
-                                            </td>
-                                            <td width="10%">
-                                                <b>Kod</b>
-                                            </td>
-                                            <td width="40%">
-                                                <b>Beskrivning</b>
-                                            </td>
-                                            <td width="5%">
-                                                <b>%</b>
-                                            </td>
-                                            <td width="20%">
-                                                <b>a pris</b>
-                                            </td>
-                                            <td width="20%">
-                                                <b>Summa</b>
+                                            <td style="width: 160px;">Anställningsnummer:</td>
+                                            <td>
+                                                <span t-esc="o.employee_id.registration_number"/>
                                             </td>
                                         </tr>
-                                        <tr t-foreach="o.line_ids" t-as="line">
+                                        <tr>
+                                            <td>Löneperiod:</td>
                                             <td>
-                                                <span t-field="line.quantity" />
+                                                <span t-esc="o.date_from"/>
+ -                                                <span t-esc="o.date_to"/>
                                             </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Avvikelser t o m:</td>
                                             <td>
-                                                <span t-field="line.code" />
-                                            </td>
-                                            <td>
-                                                <span t-field="line.name" />
-                                            </td>
-                                            <td>
-                                                <span t-field="line.rate" />
-                                            </td>
-                                            <td>
-                                                <span t-field="line.amount" />
-                                            </td>
-                                            <td>
-                                                <span t-field="line.total" />
+                                                <span t-esc="o.date_to"/>
                                             </td>
                                         </tr>
                                     </table>
                                 </td>
-                                <td colspan="2" width="40%">
-                                    <sup>Skattefria ersättningar och avdrag</sup>
-                                    <br />
-                                    <p>
-                                        <br />
-                                    </p>
-                                    <p>
-                                        <br />
-                                    </p>
+                                <td style="width: 40%; vertical-align: top; text-align: right;">
+                                    <div style="font-weight: bold; font-size: 16px; margin-top: 2px;">
+                                        <span t-field="o.employee_id.name"/>
+                                    </div>
+                                    <div style="font-weight: bold; color: #666; margin-top: 5px;">
+                                        Kontantutbetalning
+                                    </div>
                                 </td>
                             </tr>
-                            <tr>
-                                <td width="20%">
-                                    <sup>Avgifter</sup>
-                                    <br />
-                                </td>
-                                <td width="20%">
-                                    <p>
-                                        <br />
-                                    </p>
-                                </td>
-                                <td width="20%">
-                                    <p>
-                                        <br />
-                                    </p>
-                                </td>
-                                <td width="20%">
-                                    <sup>Arbetsgivaravgift</sup>
-                                    <br />
-                                </td>
-                                <td width="20%">
-                                    <p>
-                                        <br />
-                                    </p>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td width="20%">
-                                    <sup>Saldon</sup>
-                                    <br />
-                                </td>
-                                <td width="20%">
-                                    <sup>Kvarvarande semester</sup>
-                                    <br />
-                                    <span t-field="o.contract_id.vacation_days" />
-                                </td>
-                                <td width="20%">
-                                    <p>
-                                        <br />
-                                    </p>
-                                </td>
-                                <td width="20%">
-                                    <p>
-                                        <br />
-                                    </p>
-                                </td>
-                                <td width="20%">
-                                    <p>
-                                        <br />
-                                    </p>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td width="20%">
-                                    <sup>Meddelande</sup>
-                                    <br />
-                                </td>
-                                <td colspan="4" width="80%">
-                                    <p>
-                                        <br />
-                                    </p>
-                                    <p>
-                                        <br />
-                                    </p>
-                                    <p>
-                                        <br />
-                                    </p>
-                                    <p>
-                                        <br />
-                                    </p>
-                                    <p>
-                                        <br />
-                                    </p>
-                                    <p>
-                                        <br />
-                                    </p>
-                                    <p>
-                                        <br />
-                                    </p>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td width="20%">
-                                    <sup>Utbetalning</sup>
-                                    <br />
-                                </td>
-                                <td width="20%">
-                                    <sup>Skattepliktig lön</sup>
-                                    <br />
-                                </td>
-                                <td width="20%">
-                                    <sup>Preleminärskatt</sup>
-                                    <br />
-                                </td>
-                                <td width="20%">
-                                    <sup>Skattefri lön</sup>
-                                    <br />
-                                </td>
-                                <td width="20%">
-                                    <sup>Nettolön att erhålla</sup>
-                                    <br />
-                                </td>
-                            </tr>
+                        </table>
+
+                        <table class="page-layout-table">
+                            <tbody>
+                                <tr>
+                                    <td class="content-cell">
+                                        <table class="main-table">
+                                            <thead>
+                                                <tr>
+                                                    <th style="width: 35%;">Benämning</th>
+                                                    <th style="width: 15%;">Datum</th>
+                                                    <th style="width: 15%; text-align: right;">Kvantitet</th>
+                                                    <th style="width: 10%; text-align: right;">A-pris</th>
+                                                    <th style="width: 15%; text-align: right;">Belopp</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <t t-foreach="o.line_ids" t-as="line">
+                                                    <t t-set="is_display_rule" t-value="line.code in ['sem_forsk_info', 'sem_obet']"/>
+                                                    <t t-set="is_visible_parent" t-value="line.category_id.code == 'PARENT' and line.total != 0 and line.code not in ['sa', 'fmn_total', 'total_skatt']"/>
+                                                    <t t-if="(line.total != 0 or is_display_rule) and line.code != 'ores_avr' and (line.category_id.code not in ['SYSTEM', 'PARENT', 'DUMMY', 'BRUTTO', 'SKV', 'SUMMA'] or line.code == 'rut_red' or is_display_rule or is_visible_parent)">
+                                                        <t t-set="is_forman" t-value="line.category_id.code == 'FORMAN'"/>
+                                                        <t t-set="is_info_only" t-value="line.total == 0 and is_display_rule"/>
+                                                        <tr>
+                                                            <td>
+                                                                <t t-esc="line.name"/>
+                                                            </td>
+                                                            <td></td>
+                                                            <td style="text-align: right;">
+                                                                <t t-if="line.quantity and line.quantity != 1.0">
+                                                                    <span t-esc="('{:,.2f}'.format(line.quantity).replace(',', 'X').replace('.', ',').replace('X', ' '))"/>
+                                                                </t>
+                                                            </td>
+
+                                                            <td style="text-align: right;">
+                                                                <t t-if="not is_info_only and line.amount and line.amount != 0">
+                                                                    <t t-if="is_forman">
+                                                                        (<t t-esc="('{:,.2f}'.format(abs(line.amount)).replace(',', 'X').replace('.', ',').replace('X', ' '))"/>)
+                                                                    </t>
+                                                                    <t t-else="">
+                                                                        <t t-esc="('{:,.2f}'.format(line.amount).replace(',', 'X').replace('.', ',').replace('X', ' '))"/>
+                                                                    </t>
+                                                                </t>
+                                                            </td>
+
+                                                            <td style="text-align: right;">
+                                                                <t t-if="not is_info_only">
+                                                                    <t t-if="is_forman">
+                                                                        (<t t-esc="('{:,.2f}'.format(abs(line.total)).replace(',', 'X').replace('.', ',').replace('X', ' '))"/>)
+                                                                    </t>
+
+                                                                    <t t-else="">
+                                                                        <t t-esc="('{:,.2f}'.format(line.total).replace(',', 'X').replace('.', ',').replace('X', ' '))"/>
+                                                                    </t>
+                                                                </t>
+                                                            </td>
+                                                        </tr>
+                                                    </t>
+                                                </t>
+                                            </tbody>
+                                        </table>
+                                    </td>
+                                </tr>
+                                <t t-set="acc" t-value="o.get_slip_line_acc(['bl','gl','sa','nl','total_skatt'])"/>
+                                <div class="summary-container">
+                                    <table class="summary-table">
+                                        <tr>
+                                            <td style="width: 25%;" class="col-border">
+                                                <strong>Kvarvarande semesterdagar</strong>
+                                                <br/>
+                                                <table class="inner-table">
+                                                    <tr>
+                                                        <td>Betalda</td>
+                                                        <td class="right">
+                                                            <t t-esc="int(sum((a.number_of_days or 0) - (a.leaves_taken or 0) for a in o.employee_id.allocation_ids if a.holiday_status_id.work_entry_type_id.code == 'sem_bet'))"/>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Obetalda</td>
+                                                        <td class="right">
+                                                            <t t-esc="int(sum((a.number_of_days or 0) - (a.leaves_taken or 0) for a in o.employee_id.allocation_ids if a.holiday_status_id.work_entry_type_id.code == 'sem_obet'))"/>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Sparade</td>
+                                                        <td class="right">
+                                                            <t t-esc="int(sum((a.number_of_days or 0) - (a.leaves_taken or 0) for a in o.employee_id.allocation_ids if a.holiday_status_id.work_entry_type_id.code == 'sem_spar_dagar'))"/>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Förskottssemester</td>
+                                                        <td class="right">
+                                                            <t t-esc="int(o.contract_id.advance_vacation_days or 0)"/>
+                                                        </td>
+                                                    </tr>
+                                                </table>
+                                                <div style="margin-top: 15px;">
+                                                    <strong>Tidssaldo</strong>
+                                                    <br/>
+                                                    <table class="inner-table">
+                                                        <tr>
+                                                            <td>Komptid</td>
+                                                            <td class="right">-</td>
+                                                        </tr>
+                                                    </table>
+                                                </div>
+                                            </td>
+
+                                            <td style="width: 25%;" class="col-border">
+                                                <strong>Totalt i år</strong>
+                                                <br/>
+                                                <table class="inner-table">
+                                                    <tr>
+                                                        <td>Bruttolön</td>
+                                                        <td class="right">
+                                                            <t t-esc="('{:,.2f}'.format(acc.get('bl', 0) or 0).replace(',', 'X').replace('.', ',').replace('X', ' '))"/>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Förmån</td>
+                                                        <td class="right">
+                                                            <t t-esc="('{:,.2f}'.format(acc.get('fmn_total', 0) or 0).replace(',', 'X').replace('.', ',').replace('X', ' '))"/>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Skatt</td>
+                                                        <td class="right">
+                                                            <t t-esc="('{:,.2f}'.format(abs(acc.get('total_skatt', 0) or 0)).replace(',', 'X').replace('.', ',').replace('X', ' '))"/>
+                                                        </td>
+                                                    </tr>
+                                                </table>
+                                            </td>
+
+                                            <td style="width: 25%;" class="col-border">
+                                                <strong>Skatt beräknad på</strong>
+                                                <br/>
+                                                <table class="inner-table">
+                                                    <tr>
+                                                        <td>Bruttolön</td>
+                                                        <td class="right">
+                                                            <t t-esc="('{:,.2f}'.format(o.get_slip_line('bl')[0]['total'] if len(o.get_slip_line('bl')) &gt; 0 else 0).replace(',', 'X').replace('.', ',').replace('X', ' '))"/>
+                                                        </td>
+                                                    </tr>
+
+                                                    <t t-set="month_forman" t-value="sum([l.total for l in o.line_ids if l.category_id.code == 'FORMAN'])" />
+                                                    <tr>
+                                                        <td>Förmån</td>
+                                                        <td class="right">
+                                                            <t t-esc="('{:,.2f}'.format(month_forman).replace(',', 'X').replace('.', ',').replace('X', ' '))"/>
+                                                        </td>
+                                                    </tr>
+
+                                                    <tr>
+                                                        <td>Tabell</td>
+                                                        <td class="right">
+                                                            <t t-esc="o.contract_id.table_number"/>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Engångsskatt %</td>
+                                                        <td class="right">
+                                                            <t t-esc="('{:,.2f}'.format(o.contract_id.one_off_tax).replace('.', ','))"/>
+                                                        </td>
+                                                    </tr>
+                                                </table>
+                                                <div style="margin-top: 15px;">
+                                                    <strong>Preliminär arbetsgivaravgift</strong>
+                                                    <br/>
+                                                    <table class="inner-table">
+                                                        <tr>
+                                                            <td class="right">
+                                                                <t t-esc="('{:,.2f}'.format(o.get_slip_line('sa')[0]['total'] if len(o.get_slip_line('sa')) &gt; 0 else 0).replace(',', 'X').replace('.', ',').replace('X', ' '))"/>
+                                                            </td>
+                                                        </tr>
+                                                    </table>
+                                                </div>
+                                            </td>
+
+                                            <td style="width: 25%;" class="col-border">
+                                                <strong>Utbetalning</strong>
+                                                <br/>
+                                                <table class="inner-table">
+                                                    <tr>
+                                                        <td>Bruttolön</td>
+                                                        <td class="right">
+                                                            <t t-esc="('{:,.2f}'.format(o.get_slip_line('bl')[0]['total'] if len(o.get_slip_line('bl')) &gt; 0 else 0).replace(',', 'X').replace('.', ',').replace('X', ' '))"/>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Skatt</td>
+                                                        <td class="right">
+                                                            <t t-esc="('{:,.2f}'.format(abs(o.get_slip_line('total_skatt')[0]['total']) if len(o.get_slip_line('total_skatt')) &gt; 0 else 0).replace(',', 'X').replace('.', ',').replace('X', ' '))"/>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Övriga avdrag</td>
+                                                        <td class="right">
+                                                            <t t-esc="('{:,.2f}'.format(sum([l.total for l in o.line_ids if l.category_id.code == 'NETAVG'])).replace(',', 'X').replace('.', ',').replace('X', ' '))"/>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Ersättning</td>
+                                                        <td class="right">
+                                                            <t t-esc="('{:,.2f}'.format(sum([l.total for l in o.line_ids if l.category_id.code == 'NETTIL' and l.code != 'ores_avr'])).replace(',', 'X').replace('.', ',').replace('X', ' '))"/>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Öresutjämning</td>
+                                                        <td class="right">
+                                                            <t t-esc="('{:,.2f}'.format(o.get_slip_line('ores_avr')[0]['total'] if len(o.get_slip_line('ores_avr')) &gt; 0 else 0).replace(',', 'X').replace('.', ',').replace('X', ' '))"/>
+                                                        </td>
+                                                    </tr>
+                                                </table>
+                                            </td>
+                                        </tr>
+                                    </table>
+
+                                    <table class="payout-bar">
+                                        <tr>
+                                            <td>Utbetalas <span t-esc="o.contract_id.day_of_pay"/>
+                                            </td>
+                                            <td style="text-align: right;">
+                                                <t t-esc="('{:,.2f}'.format(o.get_slip_line('nl')[0]['total'] if len(o.get_slip_line('nl')) &gt; 0 else 0).replace(',', 'X').replace('.', ',').replace('X', ' '))"/>
+                                            </td>
+                                        </tr>
+                                    </table>
+
+                                </div>
+                            </tbody>
                         </table>
                     </div>
                 </t>
@@ -268,6 +359,7 @@
         <field name="attachment">('payslip_'+(object.number.replace('/','') or ''))+'.pdf'</field>
         <field name="attachment_use">True</field>
         <field name="binding_view_types">list</field>
+        <field name="paperformat_id" ref="l10n_se_hr_payroll.payslip_pdf_format"/>
     </record>
-    <!--    <report id="l10n_se_hr_payroll.payslip_2" model="hr.payslip" string="Payslip" report_type="qweb-pdf" name="l10n_se_hr_payroll.payslip_2_report" file="l10n_se_hr_payroll.payslip_2_report" attachment_use="True" attachment="('payslip_'+(object.number.replace('/','') or ''))+'.pdf'" />-->
+
 </odoo>

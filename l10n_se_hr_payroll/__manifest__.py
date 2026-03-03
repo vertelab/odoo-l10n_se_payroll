@@ -77,14 +77,14 @@ Swedish Payroll Rules.
         'views/hr_payslip_views.xml',
         'security/ir.model.access.csv',
         'report/pivot_salary_views.xml',
-
+        'security/hr_payslip_security.xml',
         'views/res_company.xml',
 
     ],
-    'demo': [
+    #'demo': [
         # ~ 'demo/hr_payroll_demo.xml',
-        'demo/hr_payroll_demo.xml',
-    ],
+    #    'demo/hr_payroll_demo.xml',
+    #],
     'installable': True
 }
 

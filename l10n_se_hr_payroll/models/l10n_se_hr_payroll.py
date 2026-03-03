@@ -102,8 +102,9 @@ class hr_contract(models.Model):
     # förmånsvärde för bil från skatteverket",) ~ car_deduction_url = fields.Char(string='Förmånsvärdesberäkning
     # SKV', default="http://www.skatteverket.se/privat/skatter/biltrafik/bilformansberakning", readonly=True,
     # help="Beräknat förmånsvärde för bil från skatteverket")
-    vacation_days = fields.Float(string='Semesterdagar', digits='Payroll', help="Sparad semester i dagar", )
+    vacation_days = fields.Float(string='Semesterdagar', digits='Payroll', help="Sparad semester i dagar.")
     annual_vacation_days = fields.Float(string='Årlig semesterrätt', default=25.0, help="Antal avtalade semesterdagar per år.")
+    advance_vacation_days = fields.Float(string='Förskottssemesterdagar', default=0, help="Antal förskottssemesterdagar, nyanställd.")
 
     # ~ office_fund = fields.Float(string='Office fund', digits_compute=dp.get_precision('Payroll'), help="Fund for
     # personal office supplies",)
@@ -171,6 +172,12 @@ class hr_contract(models.Model):
 class hr_employee(models.Model):
     _inherit = 'hr.employee'
 
+    registration_number = fields.Char(
+        string='Employee identification number', 
+        copy=False, 
+        help='Unique employee identification number.'
+    )
+
     @api.depends("birthday")
     def _age(self):
         for employee in self:
@@ -180,6 +187,31 @@ class hr_employee(models.Model):
 
     age = fields.Integer(string="_compute_age", compute=_age, help="Age to calculate social security deduction")
 
+    payslip_count = fields.Integer(
+        string='Payslips',
+        compute='_compute_payslip_count',
+    )
+
+    def _compute_payslip_count(self):
+        payslip_data = self.env['hr.payslip'].sudo().read_group(
+            [('employee_id', 'in', self.ids)],
+            ['employee_id'],
+            ['employee_id'],
+        )
+        mapped_data = {item['employee_id'][0]: item['employee_id_count'] for item in payslip_data}
+        for employee in self:
+            employee.payslip_count = mapped_data.get(employee.id, 0)
+
+    def action_open_payslips(self):
+        self.ensure_one()
+        return {
+            'name': 'Payslips',
+            'type': 'ir.actions.act_window',
+            'res_model': 'hr.payslip',
+            'view_mode': 'list,form',
+            'domain': [('employee_id', '=', self.id)],
+            'context': {'default_employee_id': self.id},
+        }
 
 class hr_payslip(models.Model):
     _inherit = 'hr.payslip'

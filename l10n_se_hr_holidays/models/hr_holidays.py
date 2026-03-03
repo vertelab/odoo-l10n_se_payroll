@@ -23,6 +23,7 @@ import odoo.exceptions
 from odoo import models, fields, api, _
 import datetime
 from datetime import timedelta, date, datetime
+from dateutil.relativedelta import relativedelta
 from odoo.exceptions import AccessError, UserError, ValidationError
 
 import logging
@@ -356,5 +357,69 @@ class hr_employee(models.Model):
     def get_leaves_days(self, date_from, date_to):
         return self.contract_id.vacation_days
 
+    allocation_ids = fields.One2many(
+            'hr.leave.allocation', 
+            'employee_id', 
+            string='Leave Allocations'
+    )
+
+    vacation_paid_remaining = fields.Float(
+        string="Kvarvarande betalda semesterdagar",
+        compute='_compute_vacation_balances',
+        store=True,
+        readonly=True
+    )
+    vacation_unpaid_remaining = fields.Float(
+        string="Kvarvarande obetalda semesterdagar",
+        compute='_compute_vacation_balances',
+        store=True,
+        readonly=True
+    )
+    vacation_saved_remaining = fields.Float(
+        string="Kvarvarande sparade semesterdagar",
+        compute='_compute_vacation_balances',
+        store=True,
+        readonly=True
+    )
+    vacation_advance_remaining = fields.Float(
+        string="Kvarvarande förskottssemesterdagar",
+        compute='_compute_vacation_balances',
+        store=True,
+        readonly=True
+    )
+
+    @api.depends(
+        'allocation_ids',
+        'allocation_ids.number_of_days',
+        'allocation_ids.leaves_taken',
+        'allocation_ids.holiday_status_id'
+    )
+    def _compute_vacation_balances(self):
+        saved_type = self.env.ref('l10n_se_hr_holidays.leave_type_vacation_saved', raise_if_not_found=False)
+        paid_type = self.env.ref('l10n_se_hr_holidays.leave_type_vacation', raise_if_not_found=False)
+        unpaid_type = self.env.ref('l10n_se_hr_holidays.leave_type_vacation_unpaid', raise_if_not_found=False)
+        advance_type = self.env.ref('l10n_se_hr_holidays.leave_type_vacation_advance', raise_if_not_found=False)
+
+        for emp in self:
+            emp.vacation_paid_remaining = sum(
+                a.number_of_days - a.leaves_taken
+                for a in emp.allocation_ids
+                if a.holiday_status_id == paid_type
+            )
+            emp.vacation_unpaid_remaining = sum(
+                a.number_of_days - a.leaves_taken
+                for a in emp.allocation_ids
+                if a.holiday_status_id == unpaid_type
+            )
+            emp.vacation_saved_remaining = sum(
+                a.number_of_days - a.leaves_taken
+                for a in emp.allocation_ids
+                if a.holiday_status_id == saved_type
+            )
+            emp.vacation_advance_remaining = sum(
+                a.number_of_days - a.leaves_taken
+                for a in emp.allocation_ids
+                if a.holiday_status_id == advance_type
+            )
 
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:

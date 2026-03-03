@@ -11,16 +11,13 @@
                         type="object"
                         class="oe_stat_button"
                         icon="fa-money"
-                        invisible="payslip_nbr > 0"
                         help="Payslips">
                     <div class="o_field_widget o_stat_info">
                         <span class="o_stat_value">
-                            <field name="payslip_nbr" widget="statinfo"/>
+                            <field name="payslip_nbr" widget="statinfo" string="Payslips"/>
                         </span>
-
                     </div>
                 </button>
-            
             </div>
 
         </field>
@@ -32,7 +29,7 @@
         <field name="model">user.payslip</field>
         <field name="arch" type="xml">
             <list
-                decoration-info="state in ('confirm','hr_check','accont_check')"
+                decoration-info="state in ('confirm','hr_check','account_check')"
                 decoration-muted="state == 'cancel'"
                 string="Payslips"
                 multi_edit="1"
@@ -41,20 +38,17 @@
                 <field name="number" readonly="1" decoration-bf="1" />
                 <field name="employee_id" optional="hidden"/>
                 <field name="name" />
-                <field
-                    name="state"
+                <field name="state" widget="badge"
+                    decoration-info="state == 'draft'"
+                    decoration-warning="state == 'verify'"
                     decoration-success="state == 'done'"
-                    decoration-info="state == 'draft' or state == 'verify'"
-                    decoration-danger="state == 'cancel'"
-                    widget="badge"
                     optional="show"
                 />
                 <field name="payslip_run_id" optional="show" />
                 <field name="period_id" optional="show" />
                 <field name="paid" optional="show" />
                 <field name="credit_note" optional="show" />
-                <button name="payslip_report" string="Payslip" type="object" class="o_replenish_buttons" icon="fa-refresh" />
-
+                <button name="payslip_report" type="object" string="Download" icon="fa-download" />
             </list>
         </field>
     </record>

@@ -159,92 +159,21 @@ result = rounded_net - current_net
             <field name="condition_select">none</field>
             <field name="amount_select">code</field>
             <field name="amount_python_compute">
-# Summerar de olika åldersreglerna
-v_ageu = result_rules.AGEU.total if result_rules.AGEU else 0.0
-v_agen = result_rules.AGEN.total if result_rules.AGEN else 0.0
-v_agep = result_rules.AGEP.total if result_rules.AGEP else 0.0
-v_agepx = result_rules.AGEPX.total if result_rules.AGEPX else 0.0
-
-result = v_ageu + v_agen + v_agep + v_agepx
-            </field>
-        </record>
-
-        <record id="hr_salary_rule_AGEU" model="hr.salary.rule">
-            <field name="parent_rule_id" ref="hr_salary_rule_sa" />
-            <field name="company_id" eval="False"/>
-            <field name="category_id" ref="l10n_se_hr_payroll.hr_salary_rule_category_SYSTEM" />
-            <field name="code">AGEU</field>
-            <field name="name">Arbetsgivaravgift Ungdom (under 26 år)</field>
-            <field name="sequence">1051</field>
-            <field name="appears_on_payslip" eval="False" />
-            <field name="condition_select">python</field>
-            <field name="condition_python">
-result = employee.age and 0 &lt;= employee.age &lt; 26
-            </field>
-            <field name="amount_select">code</field>
-            <field name="amount_python_compute">
 underlag = categories.BRUTTO + categories.FORMAN
-pct = payslip.struct_id.get_constant('AGEU_PCT') or 0.1976
-result = underlag * pct
-            </field>
-        </record>
+pct = 0.0
 
-        <record id="hr_salary_rule_AGEN" model="hr.salary.rule">
-            <field name="parent_rule_id" ref="hr_salary_rule_sa" />
-            <field name="company_id" eval="False"/>
-            <field name="category_id" ref="l10n_se_hr_payroll.hr_salary_rule_category_SYSTEM" />
-            <field name="code">AGEN</field>
-            <field name="name">Arbetsgivaravgift Normal (26 - 65 år)</field>
-            <field name="sequence">1052</field>
-            <field name="appears_on_payslip" eval="False" />
-            <field name="condition_select">python</field>
-            <field name="condition_python">
-result = employee.age and 26 &lt;= employee.age &lt;= 65
-            </field>
-            <field name="amount_select">code</field>
-            <field name="amount_python_compute">
-underlag = categories.BRUTTO + categories.FORMAN
-pct = payslip.struct_id.get_constant('AGEN_PCT') or 0.3142
-result = underlag * pct
-            </field>
-        </record>
+if employee.birthday:
+    age_this_year = payslip.date_to.year - employee.birthday.year
+    
+    if age_this_year &lt; 26:
+        pct = payslip.struct_id.get_constant('AGEU_PCT') or 0.1976
+    elif 26 &lt;= age_this_year &lt;= 65:
+        pct = payslip.struct_id.get_constant('AGEN_PCT') or 0.3142
+    elif 65 &lt; age_this_year &lt;= 77:
+        pct = payslip.struct_id.get_constant('AGEP_PCT') or 0.1021
+    else:
+        pct = payslip.struct_id.get_constant('AGEPX_PCT') or 0.0
 
-        <record id="hr_salary_rule_AGEP" model="hr.salary.rule">
-            <field name="parent_rule_id" ref="hr_salary_rule_sa" />
-            <field name="company_id" eval="False"/>
-            <field name="category_id" ref="l10n_se_hr_payroll.hr_salary_rule_category_SYSTEM" />
-            <field name="code">AGEP</field>
-            <field name="name">Arbetsgivaravgift Pensionär (66 - 76 år)</field>
-            <field name="sequence">1053</field>
-            <field name="appears_on_payslip" eval="False" />
-            <field name="condition_select">python</field>
-            <field name="condition_python">
-result = employee.age and 65 &lt; employee.age &lt;= 77
-            </field>
-            <field name="amount_select">code</field>
-            <field name="amount_python_compute">
-underlag = categories.BRUTTO + categories.FORMAN
-pct = payslip.struct_id.get_constant('AGEP_PCT') or 0.1021
-result = underlag * pct
-            </field>
-        </record>
-
-        <record id="hr_salary_rule_AGEPX" model="hr.salary.rule">
-            <field name="parent_rule_id" ref="hr_salary_rule_sa" />
-            <field name="company_id" eval="False"/>
-            <field name="category_id" ref="l10n_se_hr_payroll.hr_salary_rule_category_SYSTEM" />
-            <field name="code">AGEPX</field>
-            <field name="name">Arbetsgivaravgift Äldre (77 +)</field>
-            <field name="sequence">1054</field>
-            <field name="appears_on_payslip" eval="False" />
-            <field name="condition_select">python</field>
-            <field name="condition_python">
-result = employee.age and employee.age &gt; 77
-            </field>
-            <field name="amount_select">code</field>
-            <field name="amount_python_compute">
-underlag = categories.BRUTTO + categories.FORMAN
-pct = payslip.struct_id.get_constant('AGEPX_PCT') or 0.0
 result = underlag * pct
             </field>
         </record>

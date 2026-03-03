@@ -120,10 +120,9 @@
                     ref('l10n_se_payroll_taxtable.hr_salary_rule_one_off_tax'),
                     ref('l10n_se_payroll_taxtable.hr_salary_rule_total_tax_display'),
 
-                    ref('l10n_se_hr_payroll.hr_salary_rule_AGEU'),
-                    ref('l10n_se_hr_payroll.hr_salary_rule_AGEN'),
-                    ref('l10n_se_hr_payroll.hr_salary_rule_AGEP'),
-                    ref('l10n_se_hr_payroll.hr_salary_rule_AGEPX')
+                    ref('l10n_se_hr_payroll.hr_salary_rule_sa'), 
+                    
+
             ])]" />
             <field name="const_ids" eval="[
                 (0, 0, {'name': 'Månadsarbetstid i timmar heltid', 'code': 'MAT', 'constant': 175.0}),
@@ -275,10 +274,9 @@
                     ref('l10n_se_payroll_taxtable.hr_salary_rule_one_off_tax'),
                     ref('l10n_se_payroll_taxtable.hr_salary_rule_total_tax_display'),
 
-                    ref('l10n_se_hr_payroll.hr_salary_rule_AGEU'),
-                    ref('l10n_se_hr_payroll.hr_salary_rule_AGEN'),
-                    ref('l10n_se_hr_payroll.hr_salary_rule_AGEP'),
-                    ref('l10n_se_hr_payroll.hr_salary_rule_AGEPX')
+                    ref('l10n_se_hr_payroll.hr_salary_rule_sa'), 
+                    
+
 
             ])]" />
             <field name="const_ids" eval="[
@@ -428,10 +426,9 @@
                     ref('l10n_se_payroll_taxtable.hr_salary_rule_one_off_tax'),
                     ref('l10n_se_payroll_taxtable.hr_salary_rule_total_tax_display'),
 
-                    ref('l10n_se_hr_payroll.hr_salary_rule_AGEU'),
-                    ref('l10n_se_hr_payroll.hr_salary_rule_AGEN'),
-                    ref('l10n_se_hr_payroll.hr_salary_rule_AGEP'),
-                    ref('l10n_se_hr_payroll.hr_salary_rule_AGEPX')
+                    ref('l10n_se_hr_payroll.hr_salary_rule_sa'), 
+                    
+
                         
             ])]" />
             <field name="const_ids" eval="[
@@ -584,10 +581,9 @@
                     ref('l10n_se_payroll_taxtable.hr_salary_rule_one_off_tax'),
                     ref('l10n_se_payroll_taxtable.hr_salary_rule_total_tax_display'),
 
-                    ref('l10n_se_hr_payroll.hr_salary_rule_AGEU'),
-                    ref('l10n_se_hr_payroll.hr_salary_rule_AGEN'),
-                    ref('l10n_se_hr_payroll.hr_salary_rule_AGEP'),
-                    ref('l10n_se_hr_payroll.hr_salary_rule_AGEPX')
+                    ref('l10n_se_hr_payroll.hr_salary_rule_sa'), 
+                    
+
 
             ])]" />
             <field name="const_ids" eval="[
@@ -737,10 +733,9 @@
                     ref('l10n_se_payroll_taxtable.hr_salary_rule_one_off_tax'),
                     ref('l10n_se_payroll_taxtable.hr_salary_rule_total_tax_display'),
 
-                    ref('l10n_se_hr_payroll.hr_salary_rule_AGEU'),
-                    ref('l10n_se_hr_payroll.hr_salary_rule_AGEN'),
-                    ref('l10n_se_hr_payroll.hr_salary_rule_AGEP'),
-                    ref('l10n_se_hr_payroll.hr_salary_rule_AGEPX')
+                    ref('l10n_se_hr_payroll.hr_salary_rule_sa'), 
+                    
+
 
             ])]" />
             <field name="const_ids" eval="[
@@ -888,10 +883,9 @@
                     ref('l10n_se_payroll_taxtable.hr_salary_rule_one_off_tax'),
                     ref('l10n_se_payroll_taxtable.hr_salary_rule_total_tax_display'),
 
-                    ref('l10n_se_hr_payroll.hr_salary_rule_AGEU'),
-                    ref('l10n_se_hr_payroll.hr_salary_rule_AGEN'),
-                    ref('l10n_se_hr_payroll.hr_salary_rule_AGEP'),
-                    ref('l10n_se_hr_payroll.hr_salary_rule_AGEPX')
+                    ref('l10n_se_hr_payroll.hr_salary_rule_sa'), 
+                    
+
             ])]" />
             <field name="const_ids" eval="[
                 (0, 0, {'name': 'Månadsarbetstid i timmar heltid', 'code': 'MAT', 'constant': 173.0}),
@@ -1030,10 +1024,8 @@
                     ref('l10n_se_payroll_taxtable.hr_salary_rule_total_tax_display'),
 
                     ref('l10n_se_hr_payroll.hr_salary_rule_sa'),
-                    ref('l10n_se_hr_payroll.hr_salary_rule_AGEU'),
-                    ref('l10n_se_hr_payroll.hr_salary_rule_AGEN'),
-                    ref('l10n_se_hr_payroll.hr_salary_rule_AGEP'),
-                    ref('l10n_se_hr_payroll.hr_salary_rule_AGEPX')
+                    
+
             ])]" />
             <field name="const_ids" eval="[
                 (0, 0, {'name': 'Månadsarbetstid i timmar heltid', 'code': 'MAT', 'constant': 173.0}),

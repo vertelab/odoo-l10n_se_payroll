@@ -22,10 +22,12 @@
 
         <record id="hr_camilla_employee" model="hr.employee">
             <field name="name">Camilla Cobolt Anställd</field>
+            <field name="birthday">1971-10-02</field>
             <field name="work_location_id" ref="main_work_location" />
             <field name="work_phone">073-400000</field>
             <field name="work_email">camilla.cobolt@aronssons.se</field>
             <field name="identification_id">711002-1834</field>
+            <field name="registration_number">104</field>
             <field name="job_title">Logistikansvarig</field>
             <field name="private_street">Sveavägen 7</field>
             <field name="private_zip">112 00</field>
@@ -55,6 +57,7 @@
             <field name="has_tax_equalization" eval="False"/>
             <field name="has_one_off_tax" eval="True"/>
             <field name="one_off_tax">0.34</field>
+            <field name="advance_vacation_days">10.0</field>
             <field name="annual_vacation_days">25.0</field>
         </record>
 

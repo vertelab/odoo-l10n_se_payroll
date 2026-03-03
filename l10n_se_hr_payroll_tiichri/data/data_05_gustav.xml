@@ -20,10 +20,12 @@
 
         <record id="hr_gustav_employee" model="hr.employee">
             <field name="name">Gustav Groth Anställd</field>
+            <field name="birthday">1979-01-24</field>
             <field name="work_location_id" ref="main_work_location" />
             <field name="work_phone">073-400000</field>
             <field name="work_email">gustav.groth@aronssons.se</field>
             <field name="identification_id">790124-0207</field>
+            <field name="registration_number">201</field>
             <field name="job_title">Montör</field>
             <field name="private_street">Gruvvägen 7</field>
             <field name="private_zip">171 00</field>

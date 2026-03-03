@@ -21,6 +21,7 @@
                 <separator string="Semester" colspan="2"/>
                 <field name="vacation_days"/>
                 <field name="annual_vacation_days"/>
+                <field name="advance_vacation_days"/>
             </xpath>
         </field>
     </record>

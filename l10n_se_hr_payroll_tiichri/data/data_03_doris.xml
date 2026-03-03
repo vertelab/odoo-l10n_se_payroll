@@ -22,10 +22,12 @@
 
         <record id="hr_doris_employee" model="hr.employee">
             <field name="name">Doris Dahlin Anställd</field>
+            <field name="birthday">1992-02-17</field>
             <field name="work_location_id" ref="main_work_location" />
             <field name="work_phone">073-400000</field>
             <field name="work_email">doris.dahlin@aronssons.se</field>
             <field name="identification_id">920217-2384</field>
+            <field name="registration_number">103</field>
             <field name="job_title">Lönekonsult</field>
             <field name="private_street">Slingerstigen 33</field>
             <field name="private_zip">186 45</field>

@@ -90,10 +90,26 @@ class hr_payslip(models.Model):
 
     @api.model
     def get_legal_leaves_status(self):
-        result = self.with_context({'employee_id': self.employee_id.id}).holiday_status_ids.filtered(
-            lambda h: h.remaining_leaves > 0 and h.id not in [
-                self.env.ref('hr_holidays.holiday_status_comp').id]).sorted(key=lambda h: h.sequence)
-        return result
+        if not self.employee_id:
+            return self.env['hr.leave.type'].browse()
+
+        allocations = self.env['hr.leave.allocation'].search([
+            ('employee_id', '=', self.employee_id.id),
+            ('state', '=', 'validate'),
+            ('number_of_days', '>', 0),
+        ])
+
+        positive_types = {}
+        for alloc in allocations:
+            leave_type = alloc.holiday_status_id
+            
+            remaining = alloc.number_of_days - alloc.leaves_taken
+            if remaining > 0:
+                if leave_type.id not in positive_types:
+                    positive_types[leave_type.id] = leave_type
+
+        result = self.env['hr.leave.type'].browse(positive_types.keys())
+        return result.sorted(key=lambda h: h.sequence)
 
     def leave_number_of_days(self, holiday_status_ref):
         return sum(self.worked_days_line_ids.filtered(lambda w: w.code == self.env.ref(holiday_status_ref).name).mapped(
@@ -108,9 +124,16 @@ class hr_payslip(models.Model):
              ('date_to', '<=', self.date_to), ('state', '=', 'validate')]).filtered(
             lambda h: h.holiday_status_id.legal_leave).mapped('number_of_days')))
 
-    def get_sick_days(self):
+    def get_advance_leave_days(self):
+        days = 0.0
+        for line in self.worked_days_line_ids:
+            if line.code == 'sem_forsk_dagar':
+                days += line.number_of_days
+        return days
 
-        pass
+    # def get_sick_days(self):
+
+    #     pass
 
         # ~ days = 0.0
         # ~ for line in self.worked_days_line_ids:

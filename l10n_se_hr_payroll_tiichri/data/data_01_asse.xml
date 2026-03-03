@@ -31,10 +31,12 @@
 
         <record id="hr_asse_employee" model="hr.employee">
             <field name="name">Asse Aronsson Anställd</field>
+            <field name="birthday">1965-10-31</field>
             <field name="work_location_id" ref="main_work_location" />
             <field name="work_phone">073-400000</field>
             <field name="work_email">asse.aronsson@aronssons.se</field>
             <field name="identification_id">651031-3114</field>
+            <field name="registration_number">101</field>
             <field name="job_title">VD och försäljningschef</field>
             <field name="private_street">Tjädervägen 23</field>
             <field name="private_zip">175 00</field>
@@ -45,6 +47,7 @@
             <field name="address_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons_partner" />
             <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons" />
         </record>
+
 
         <!-- För att få till historisk lägre sysselesättningsgrad.
              Facit säger att han hade sysselsättninggrad 75% under
@@ -1184,7 +1187,7 @@
             <value model="hr.payslip.input" search="[('payslip_id', '=', ref('hr_payslip_asse_10')), ('code', '=', 'kvaltim')]"/>
             <value eval="{'amount_qty': 2.0}"/>
         </function>
-        
+
         <function model="hr.payslip.input" name="write">
             <value model="hr.payslip.input" search="[('payslip_id', '=', ref('hr_payslip_asse_10')), ('code', '=', 'lunch')]"/>
             <value eval="{'amount_qty': 1.0}"/>

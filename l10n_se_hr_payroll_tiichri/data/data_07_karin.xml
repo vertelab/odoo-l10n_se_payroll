@@ -19,10 +19,12 @@
 
         <record id="hr_karin_employee" model="hr.employee">
             <field name="name">Karin Kullberg Anställd</field>
+            <field name="birthday">1989-12-08</field>
             <field name="work_location_id" ref="main_work_location" />
             <field name="work_phone">073-400000</field>
             <field name="work_email">karin.kullberg@aronssons.se</field>
             <field name="identification_id">891208-2396</field>
+            <field name="registration_number">302</field>
             <field name="job_title">Montör</field>
             <field name="private_street">Lövövägen 6</field>
             <field name="private_zip">171 00</field>

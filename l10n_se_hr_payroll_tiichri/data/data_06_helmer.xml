@@ -20,10 +20,12 @@
 
         <record id="hr_helmer_employee" model="hr.employee">
             <field name="name">Helmer Henriksson Anställd</field>
+            <field name="birthday">1968-05-22</field>
             <field name="work_location_id" ref="main_work_location" />
             <field name="work_phone">073-400000</field>
             <field name="work_email">helmer.henriksson@aronssons.se</field>
             <field name="identification_id">680522-9272</field>
+            <field name="registration_number">301</field>
             <field name="job_title">Montör</field>
             <field name="private_street">Högvägen 34</field>
             <field name="private_zip">197 00</field>

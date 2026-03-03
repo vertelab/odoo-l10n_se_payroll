@@ -251,8 +251,26 @@ class UserPayslip(models.TransientModel):
 
     def payslip_report(self):
         self.ensure_one()
-        return self.env.ref('l10n_se_hr_payroll.payslip').report_action(self, data={})
-
+        payslip = self.sudo().payslip_id
+        if not payslip:
+            raise UserError(_("No payslip found."))
+        report = self.env.ref('l10n_se_hr_payroll.payslip_2')
+        report_sudo = report.sudo()
+        pdf_content, content_type = report_sudo._render_qweb_pdf(report_sudo.report_name, payslip.ids)
+        
+        filename = 'payslip_%s.pdf' % (payslip.number or '').replace('/', '_')
+        attachment = self.env['ir.attachment'].sudo().create({
+            'name': filename,
+            'type': 'binary',
+            'raw': pdf_content,
+            'mimetype': 'application/pdf',
+        })
+        
+        return {
+            'type': 'ir.actions.act_url',
+            'url': '/web/content/%s?download=true' % attachment.id,
+            'target': 'new',
+        }
 
 class ResUsers(models.Model):
     _inherit = "res.users"
@@ -288,7 +306,7 @@ class ResUsers(models.Model):
                         {'name': holiday_id.holiday_status_id.name})
                     holiday_day_id = self.env['user.leave'].create(
                         {'holiday_status_id': holiday_status_id.id, 'date_from': holiday_id.date_from,
-                         'date_to': holiday_id.date_to, 'number_of_days_temp': holiday_id.number_of_days_display})
+                         'date_to': holiday_id.date_to, 'number_of_days_temp': holiday_id.number_of_days})
                     holiday_ids_ids.append(holiday_day_id.id)
                 user_payslip.write({"holiday_ids": [(6, 0, holiday_ids_ids)]})
 
@@ -329,14 +347,14 @@ class ResUsers(models.Model):
         treeview_ref = self.env.ref("l10n_se_hr_payroll.user_payslip_view_tree", False)
         return {
             "name": _("Payslips"),
-            "view_mode": "tree, form",
+            "view_mode": "list",
             "view_id": False,
             "res_model": "user.payslip",
             "type": "ir.actions.act_window",
             "target": "current",
             "domain": [("employee_id", "=", self.employee_id.id)],
             "views": [
-                (treeview_ref and treeview_ref.id or False, "tree"),
+                (treeview_ref and treeview_ref.id or False, "list"),
             ],
             "context": {},
         }
