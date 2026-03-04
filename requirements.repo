@@ -1,5 +1,7 @@
 git@github.com:vertelab/odoo-account.git /usr/share/odoo-account
+git@github.com:vertelab/odoo-calendar.git /usr/share/odoo-calendar
 git@github.com:OCA/payroll.git /usr/share/odooext-OCA-payroll
 git@github.com:OCA/timesheet.git /usr/share/odooext-OCA-timesheet
 git@github.com:OCA/web.git /usr/share/odooext-OCA-web
+git@github.com:OCA/calendar.git /usr/share/odooext-OCA-calendar
 git@github.com:OCA/mis-builder.git /usr/share/odooext-OCA-mis-builder
