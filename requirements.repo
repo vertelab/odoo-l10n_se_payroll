@@ -6,3 +6,4 @@ git@github.com:OCA/timesheet.git /usr/share/odooext-OCA-timesheet
 git@github.com:OCA/web.git /usr/share/odooext-OCA-web
 git@github.com:OCA/calendar.git /usr/share/odooext-OCA-calendar
 git@github.com:OCA/mis-builder.git /usr/share/odooext-OCA-mis-builder
+git@github.com:OCA/odoo-test-helper.git /usr/share/odooext-OCA-odoo-test-helper
