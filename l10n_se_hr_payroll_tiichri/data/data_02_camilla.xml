@@ -80,6 +80,7 @@
             <field name="employee_id" ref="hr_camilla_employee"/>
             <field name="holiday_status_id" ref="l10n_se_hr_holidays.leave_type_vacation"/>
             <field name="number_of_days">25</field>
+            <field name="date_from">2022-01-01</field>
             <field name="allocation_type">regular</field>
         </record>
         
@@ -88,6 +89,7 @@
             <field name="employee_id" ref="hr_camilla_employee"/>
             <field name="holiday_status_id" ref="l10n_se_hr_holidays.leave_type_vacation_advance"/>
             <field name="number_of_days">10</field>
+            <field name="date_from">2022-01-01</field>
             <field name="allocation_type">regular</field>
         </record>
 
