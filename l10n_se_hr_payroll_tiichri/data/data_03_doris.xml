@@ -3,7 +3,7 @@
     <data noupdate="1">
 
         <!-- ## DORIS DALIN -->
-        
+
         <record id="hr_doris_partner" model="res.partner">
             <field name="company_type">person</field>
             <field name="name">Doris Dahlin</field>
@@ -14,7 +14,7 @@
             <field name="function">Lönekonsult</field>
             <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons"/>
         </record>
- 
+
         <record id="bank_doris" model="res.partner.bank">
             <field name="acc_number">4333-55555555</field>
             <field name="partner_id" ref="hr_doris_partner" />
@@ -80,6 +80,18 @@
         <record id="l10n_se_hr_payroll_benefits.hr_benefit_home" model="hr.benefit">
             <field name="code_id" ref="l10n_se_hr_payroll_benefits.hr_benefit_rule_home"/>
         </record>
+
+        <record id="allocation_doris_vacation" model="hr.leave.allocation">
+            <field name="name">Initial Vacation Allocation</field>
+            <field name="employee_id" ref="hr_doris_employee"/>
+            <field name="holiday_status_id" ref="l10n_se_hr_holidays.leave_type_vacation"/>
+            <field name="number_of_days">25</field>
+            <field name="allocation_type">regular</field>
+        </record>
+
+        <function model="hr.leave.allocation" name="action_validate">
+            <value eval="[ref('allocation_doris_vacation')]"/>
+        </function>
 
         <!-- ================================ January ================================ -->
 

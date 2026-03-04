@@ -97,6 +97,18 @@
             <field name="annual_vacation_days">25.0</field>
         </record>
 
+        <record id="allocation_frans_vacation" model="hr.leave.allocation">
+            <field name="name">Initial Vacation Allocation</field>
+            <field name="employee_id" ref="hr_frans_employee"/>
+            <field name="holiday_status_id" ref="l10n_se_hr_holidays.leave_type_vacation"/>
+            <field name="number_of_days">25</field>
+            <field name="allocation_type">regular</field>
+        </record>
+
+        <function model="hr.leave.allocation" name="action_validate">
+            <value eval="[ref('allocation_frans_vacation')]"/>
+        </function>
+
         <!-- ================================ January ================================ -->
 
         <!-- Sjukfrånvaro -->

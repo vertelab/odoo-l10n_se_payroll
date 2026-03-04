@@ -122,6 +122,19 @@
             <field name="code_id" ref="l10n_se_hr_payroll_benefits.hr_benefit_rule_carbru"/>
         </record>
 
+        <!-- Semestertilldelning -->
+        <record id="allocation_asse_vacation" model="hr.leave.allocation">
+            <field name="name">Initial Vacation Allocation</field>
+            <field name="employee_id" ref="hr_asse_employee"/>
+            <field name="holiday_status_id" ref="l10n_se_hr_holidays.leave_type_vacation"/>
+            <field name="number_of_days">30</field>
+            <field name="allocation_type">regular</field>
+        </record>
+
+        <function model="hr.leave.allocation" name="action_validate">
+            <value eval="[ref('allocation_asse_vacation')]"/>
+        </function>
+
         <!-- ================================ January ================================ -->
 
         <!-- Sjukfrånvaro: -->
