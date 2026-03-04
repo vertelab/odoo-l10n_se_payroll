@@ -150,7 +150,8 @@
                                                             <td style="text-align: right;">
                                                                 <t t-if="not is_info_only and line.amount and line.amount != 0">
                                                                     <t t-if="is_forman">
-                                                                        (<t t-esc="('{:,.2f}'.format(abs(line.amount)).replace(',', 'X').replace('.', ',').replace('X', ' '))"/>)
+                                                                        (                                                                        <t t-esc="('{:,.2f}'.format(abs(line.amount)).replace(',', 'X').replace('.', ',').replace('X', ' '))"/>
+)
                                                                     </t>
                                                                     <t t-else="">
                                                                         <t t-esc="('{:,.2f}'.format(line.amount).replace(',', 'X').replace('.', ',').replace('X', ' '))"/>
@@ -161,7 +162,8 @@
                                                             <td style="text-align: right;">
                                                                 <t t-if="not is_info_only">
                                                                     <t t-if="is_forman">
-                                                                        (<t t-esc="('{:,.2f}'.format(abs(line.total)).replace(',', 'X').replace('.', ',').replace('X', ' '))"/>)
+                                                                        (                                                                        <t t-esc="('{:,.2f}'.format(abs(line.total)).replace(',', 'X').replace('.', ',').replace('X', ' '))"/>
+)
                                                                     </t>
 
                                                                     <t t-else="">
@@ -356,10 +358,25 @@
         <field name="report_type">qweb-pdf</field>
         <field name="report_name">l10n_se_hr_payroll.payslip_2_report</field>
         <field name="report_file">l10n_se_hr_payroll.payslip_2_report</field>
-        <field name="attachment">('payslip_'+(object.number.replace('/','') or ''))+'.pdf'</field>
+        <field name="print_report_name">
+        'Payslip_%s_%s' % (object.employee_id.registration_number or '000', object.date_from.strftime('%Y-%m'))
+        </field>
+        <field name="attachment">
+        'Payslip_%s_%s.pdf' % (object.employee_id.registration_number or '000', object.date_from.strftime('%Y-%m'))
+        </field>
         <field name="attachment_use">True</field>
         <field name="binding_view_types">list</field>
         <field name="paperformat_id" ref="l10n_se_hr_payroll.payslip_pdf_format"/>
+    </record>
+
+    <record id="payroll.action_report_payslip" model="ir.actions.report">
+        <field name="print_report_name">
+        'Payslip_%s_%s' % (object.employee_id.registration_number or '000', object.date_from.strftime('%Y-%m'))
+        </field>
+        <field name="attachment">
+        'Payslip_%s_%s.pdf' % (object.employee_id.registration_number or '000', object.date_from.strftime('%Y-%m'))
+        </field>
+        <field name="attachment_use">True</field>
     </record>
 
 </odoo>

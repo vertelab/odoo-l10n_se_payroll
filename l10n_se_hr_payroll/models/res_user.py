@@ -18,7 +18,7 @@ class UserPayslipLine(models.TransientModel):
     code = fields.Char(string="Code")
     name = fields.Char(string="Name")
     quantity = fields.Char(string="Quantity")
-    category_id = fields.Many2one("user.salary.rule.category")
+    category_id = fields.Many2one("user.salary.rule.category", string="Salary Category")
     category = fields.Char(string="Category")
     amount = fields.Float(string='Amount')
     sequence = fields.Integer(string='Sequence')
@@ -57,7 +57,7 @@ class UserContract(models.TransientModel):
     name = fields.Char(string="Name")
 
     employee_fund_balance = fields.Monetary(string='Balance', currency_field='currency_id')
-    employee_fund_name = fields.Char(string='Name')
+    employee_fund_name = fields.Char(string='Fund Name')
     currency_id = fields.Many2one(
         comodel_name="res.currency",
         string="Currency of the Payment Transaction"
@@ -167,9 +167,8 @@ class UserPayslip(models.TransientModel):
         "user.payslip.line", inverse_name='user_payslip_id'
     )
 
-    name = fields.Char(
-        string="Payslip Name", readonly=True, states={"draft": [("readonly", False)]}
-    )
+    name = fields.Char(string="Payslip Name")
+    
     number = fields.Char(
         string="Reference",
         readonly=True,
@@ -186,7 +185,7 @@ class UserPayslip(models.TransientModel):
 
     contract_id = fields.Many2one(
         comodel_name="user.contract",
-        string="Employee",
+        string="Contract",
     )
     state = fields.Selection(
         [
@@ -258,7 +257,10 @@ class UserPayslip(models.TransientModel):
         report_sudo = report.sudo()
         pdf_content, content_type = report_sudo._render_qweb_pdf(report_sudo.report_name, payslip.ids)
         
-        filename = 'payslip_%s.pdf' % (payslip.number or '').replace('/', '_')
+        filename = 'Payslip_%s_%s.pdf' % (
+            payslip.employee_id.registration_number or '000',
+            payslip.date_from.strftime('%Y-%m') if payslip.date_from else '0000-00',
+        )
         attachment = self.env['ir.attachment'].sudo().create({
             'name': filename,
             'type': 'binary',
