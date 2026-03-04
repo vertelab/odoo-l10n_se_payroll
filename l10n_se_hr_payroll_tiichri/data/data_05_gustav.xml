@@ -51,7 +51,7 @@
             <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons"/>
             <field name="schedule_pay" eval="'monthly'" />
             <field name="state" eval="'open'" />
-            <field name="job_id" ref="job_id_gustavmbly" />
+            <field name="job_id" ref="job_id_assembly" />
             <field name="date_start">2011-04-01</field>
             <field name="first_contract_date">2011-04-01</field>
             <field name="resource_calendar_id" ref="l10n_se_hr_payroll_tiichri.resource_calendar_standard_tiichri" />
