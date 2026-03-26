@@ -64,7 +64,7 @@ Swedish Payroll Rules.
         'report/hr_payroll_payslip_report.xml',
         #
         'data/hr_salary_rule_category_data.xml',
-        'data/hr_salary_rule_data.xml',
+        # 'data/hr_salary_rule_data.xml',
         # last
         'views/general_journal_view.xml',
         'views/hr_employee_views.xml',
@@ -74,7 +74,7 @@ Swedish Payroll Rules.
         'views/user_payslip_views.xml',
         'views/hr_contract_views.xml',
         #'views/hr_leave_views.xml',
-        'views/hr_payslip_views.xml',
+        # 'views/hr_payslip_views.xml',
         'security/ir.model.access.csv',
         'report/pivot_salary_views.xml',
         'security/hr_payslip_security.xml',

@@ -28,12 +28,46 @@
         <field name="model">hr.payslip.run</field>
         <field name="inherit_id" ref="payroll.hr_payslip_run_view_form"/>
         <field name="arch" type="xml">
+            <button name="%(payroll.action_hr_payslip_by_employees)d" position="replace">
+                <button
+                    name="action_open_employees_for_payslip"
+                    type="object"
+                    string="Generate Payslips"
+                    invisible="state != 'draft'"
+                    class="oe_highlight"
+                />
+            </button>
+
+
             <field name="date_start" position="before">
                 <field name="period_id"/>
             </field>
             <field name="date_start" position="attributes">
                 <attribute name="class">oe_read_only</attribute>
             </field>
+
+            <xpath expr="//sheet" position="inside">
+                <div name="button_box" class="oe_button_box">
+                    <button
+                        name="action_view_payslips"
+                        type="object"
+                        class="oe_stat_button"
+                        icon="fa-list"
+                        invisible="slip_ids_count == 0"
+                    >
+                        <field name="slip_ids_count" string="Payslips" widget="statinfo"/>
+                    </button>
+                </div>
+            </xpath>
+
+            <separator position="attributes">
+                <attribute name="invisible">1</attribute>
+            </separator>
+            <field name="slip_ids" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </field>
+            
+            
 <!--            <field name="date_end" position="attributes">-->
 <!--                <attribute name="class">oe_read_only</attribute>-->
 <!--            </field>-->
