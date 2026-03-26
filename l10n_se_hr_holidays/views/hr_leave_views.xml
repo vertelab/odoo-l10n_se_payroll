@@ -9,10 +9,10 @@
                     <field name="request_date_to" class="oe_inline" invisible="request_unit_half" readonly="state not in ['draft', 'confirm']" required="not date_from or not date_to"/>
                 </field>
                 <field name="name" position="after">
-                    <field name="is_deffered_period" readonly="1"/>
+                    <!-- <field name="is_deffered_period" readonly="1"/> -->
                     <field name="sick_leave_part"
-                           invisible="not holiday_status_id.sick_leave"
-                           readonly="state not in ['draft', 'confirm']"/>
+                        invisible="not holiday_status_id or not holiday_status_id.sick_leave"
+                        readonly="state not in ['draft', 'confirm']"/>
                 </field>
             </field>
         </record>

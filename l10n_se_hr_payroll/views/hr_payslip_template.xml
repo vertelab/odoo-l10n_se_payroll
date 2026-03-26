@@ -133,10 +133,11 @@
                                                 <t t-foreach="o.line_ids" t-as="line">
                                                     <t t-set="is_display_rule" t-value="line.code in ['sem_forsk_info', 'sem_obet']"/>
                                                     <t t-set="is_visible_parent" t-value="line.category_id.code == 'PARENT' and line.total != 0 and line.code not in ['sa', 'fmn_total', 'total_skatt']"/>
-                                                    <t t-if="(line.total != 0 or is_display_rule) and line.code != 'ores_avr' and (line.category_id.code not in ['SYSTEM', 'PARENT', 'DUMMY', 'BRUTTO', 'SKV', 'SUMMA'] or line.code == 'rut_red' or is_display_rule or is_visible_parent)">
+                                                    <t t-if="(line.total != 0 or is_display_rule or line.quantity) and line.code != 'ores_avr' and (line.category_id.code not in ['SYSTEM', 'PARENT', 'DUMMY', 'BRUTTO', 'SKV', 'SUMMA'] or line.code == 'rut_red' or is_display_rule or is_visible_parent)">
                                                         <t t-set="is_forman" t-value="line.category_id.code == 'FORMAN'"/>
                                                         <t t-set="is_info_only" t-value="line.total == 0 and is_display_rule"/>
-                                                        <tr>
+                                                        <t t-set="is_parent_line" t-value="line.category_id.code == 'PARENT'"/>
+                                                        <tr t-attf-style="font-weight: #{'bold' if is_parent_line else 'normal'};">
                                                             <td>
                                                                 <t t-esc="line.name"/>
                                                             </td>
@@ -150,7 +151,8 @@
                                                             <td style="text-align: right;">
                                                                 <t t-if="not is_info_only and line.amount and line.amount != 0">
                                                                     <t t-if="is_forman">
-                                                                        (<t t-esc="('{:,.2f}'.format(abs(line.amount)).replace(',', 'X').replace('.', ',').replace('X', ' '))"/>)
+                                                                        (                                                                        <t t-esc="('{:,.2f}'.format(abs(line.amount)).replace(',', 'X').replace('.', ',').replace('X', ' '))"/>
+)
                                                                     </t>
                                                                     <t t-else="">
                                                                         <t t-esc="('{:,.2f}'.format(line.amount).replace(',', 'X').replace('.', ',').replace('X', ' '))"/>
@@ -161,7 +163,8 @@
                                                             <td style="text-align: right;">
                                                                 <t t-if="not is_info_only">
                                                                     <t t-if="is_forman">
-                                                                        (<t t-esc="('{:,.2f}'.format(abs(line.total)).replace(',', 'X').replace('.', ',').replace('X', ' '))"/>)
+                                                                        (                                                                        <t t-esc="('{:,.2f}'.format(abs(line.total)).replace(',', 'X').replace('.', ',').replace('X', ' '))"/>
+)
                                                                     </t>
 
                                                                     <t t-else="">
@@ -356,10 +359,25 @@
         <field name="report_type">qweb-pdf</field>
         <field name="report_name">l10n_se_hr_payroll.payslip_2_report</field>
         <field name="report_file">l10n_se_hr_payroll.payslip_2_report</field>
-        <field name="attachment">('payslip_'+(object.number.replace('/','') or ''))+'.pdf'</field>
+        <field name="print_report_name">
+        'Payslip_%s_%s' % (object.employee_id.registration_number or '000', object.date_from.strftime('%Y-%m'))
+        </field>
+        <field name="attachment">
+        'Payslip_%s_%s.pdf' % (object.employee_id.registration_number or '000', object.date_from.strftime('%Y-%m'))
+        </field>
         <field name="attachment_use">True</field>
         <field name="binding_view_types">list</field>
         <field name="paperformat_id" ref="l10n_se_hr_payroll.payslip_pdf_format"/>
+    </record>
+
+    <record id="payroll.action_report_payslip" model="ir.actions.report">
+        <field name="print_report_name">
+        'Payslip_%s_%s' % (object.employee_id.registration_number or '000', object.date_from.strftime('%Y-%m'))
+        </field>
+        <field name="attachment">
+        'Payslip_%s_%s.pdf' % (object.employee_id.registration_number or '000', object.date_from.strftime('%Y-%m'))
+        </field>
+        <field name="attachment_use">True</field>
     </record>
 
 </odoo>

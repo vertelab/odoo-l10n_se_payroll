@@ -90,19 +90,5 @@
             <field name="company_id" eval="False"/>
         </record>
 
-<!--
-        <record id="hr_salary_rule_category_SKVPRE" model="hr.salary.rule.category">
-            <field name="code">SKVPRE</field>
-            <field name="name">Skatter (pre)</field>
-            <field name="note">Används för skatt att dra av förutom preleminär skatt</field>
-        </record> -->
-
-        <!-- <record id="hr_salary_rule_category-HANDLER" model="hr.salary.rule.category">
-            <field name="code">HANDLER</field>
-            <field name="name">Tillämpning</field>
-            <field name="note">Används när en 'category' ska bearbetas</field>
-        </record>
-
-        -->
     </data>
 </odoo>

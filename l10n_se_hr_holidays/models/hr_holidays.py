@@ -45,23 +45,6 @@ DummyAttendance = namedtuple('DummyAttendance', 'hour_from, hour_to, dayofweek, 
 class Holidays(models.Model):
     _inherit = "hr.leave"
 
-    def _compute_karens(self):
-        for leave_request in self:
-            if leave_request.holiday_status_id.sick_leave:
-                leave = self.env['hr.leave'].search([
-                    ('employee_id', '=', leave_request.employee_id.id),
-                    ('date_to', '<', leave_request.date_from)],
-                    order='date_to desc', limit=1)
-
-                if not leave or (leave_request.date_from - leave[0].date_to).days > 5:
-                    leave_request.is_deffered_period = True
-                else:
-                    leave_request.is_deffered_period = False
-            else:
-                leave_request.is_deffered_period = False
-
-    is_deffered_period = fields.Boolean(string="Deffered Day", compute=_compute_karens)
-
     sick_leave_part = fields.Selection([
         ('100', '100% (heltid)'),
         ('75', '75%'),
@@ -367,7 +350,8 @@ class hr_employee(models.Model):
         string="Kvarvarande betalda semesterdagar",
         compute='_compute_vacation_balances',
         store=True,
-        readonly=True
+        readonly=True,
+        groups="hr.group_hr_user"
     )
     vacation_unpaid_remaining = fields.Float(
         string="Kvarvarande obetalda semesterdagar",

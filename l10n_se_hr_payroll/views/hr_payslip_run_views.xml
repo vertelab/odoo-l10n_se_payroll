@@ -38,10 +38,14 @@
                 />
             </button>
 
+            <xpath expr="//field[@name='name']" position="attributes">
+                <attribute name="readonly">state != 'draft'</attribute>
+            </xpath>
 
             <field name="date_start" position="before">
-                <field name="period_id"/>
+                <field name="period_id" readonly="state != 'draft'"/>
             </field>
+
             <field name="date_start" position="attributes">
                 <attribute name="class">oe_read_only</attribute>
             </field>

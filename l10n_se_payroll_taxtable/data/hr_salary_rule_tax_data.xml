@@ -3,6 +3,7 @@
 <odoo>
     <data noupdate="0">
 
+        <!-- Skattesummering -->
         <record id="hr_salary_rule_total_tax_display" model="hr.salary.rule">
             <field name="category_id" ref="l10n_se_hr_payroll.hr_salary_rule_category_PARENT"/>
             <field name="company_id" eval="False"/>
@@ -17,6 +18,7 @@ result = categories.SKV
             </field>
         </record>
 
+        <!-- Preliminärskatt -->
         <record id="hr_salary_rule_prel_tax_table" model="hr.salary.rule">
             <field name="category_id" ref="l10n_se_hr_payroll.hr_salary_rule_category_SKV" />
             <field name="parent_rule_id" ref="hr_salary_rule_total_tax_display" />
@@ -40,7 +42,6 @@ if contract.has_tax_equalization:
 else:
     taxable_income = (gross - one_off) + benefits
 
-
 if taxable_income &gt; 0:
     tax_amount = contract.l10_sum_columns_taxtable_line(payslip, taxable_income)
     result = round(tax_amount or 0.0) * -1
@@ -49,6 +50,7 @@ else:
             </field>
         </record>
 
+        <!-- Engångsskatt vid t.ex. bonus. -->
         <record id="hr_salary_rule_one_off_tax" model="hr.salary.rule">
             <field name="category_id" ref="l10n_se_hr_payroll.hr_salary_rule_category_SKV" />
             <field name="parent_rule_id" ref="hr_salary_rule_total_tax_display" />

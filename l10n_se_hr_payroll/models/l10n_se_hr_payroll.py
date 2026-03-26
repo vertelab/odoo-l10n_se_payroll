@@ -175,7 +175,8 @@ class hr_employee(models.Model):
     registration_number = fields.Char(
         string='Employee identification number', 
         copy=False, 
-        help='Unique employee identification number.'
+        help='Unique employee identification number.',
+        groups="hr.group_hr_user"
     )
 
     @api.depends("birthday")
@@ -188,7 +189,7 @@ class hr_employee(models.Model):
     age = fields.Integer(string="_compute_age", compute=_age, help="Age to calculate social security deduction")
 
     payslip_count = fields.Integer(
-        string='Payslips',
+        string='Payslip Count',
         compute='_compute_payslip_count',
     )
 
