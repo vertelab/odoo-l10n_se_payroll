@@ -11,7 +11,8 @@ class HrPayslipRun(models.Model):
     )
     period_id = fields.Many2one(
         comodel_name='account.period',
-        string="Period",
+        string="Salary period",
+        help="Selected payroll month. Deviations are fetched from previous period.",
         readonly=False,
         required=True,
         default=lambda self: self.env['account.period'].date2period(fields.Date.today()),

@@ -5,8 +5,6 @@
         <field name="inherit_id" ref="hr_contract.hr_contract_view_form" />
         <field name="arch" type="xml">
             <xpath expr="//group[@name='salary']" position="inside">
-                <field name="schedule_pay" invisible="1"/>
-                <field name="day_of_pay" invisible="schedule_pay != 'monthly'"/>
 
                 <separator string="Lönejusteringar" colspan="2"/>
                 <field name="wage_exchange_amount"/>

@@ -19,7 +19,7 @@
                     
                     .page-layout-table {
                         width: 100%;
-                        height: 200mm;
+                        height: 188mm;
                         border-collapse: collapse;
                     }
 
@@ -50,7 +50,7 @@
 
                     .summary-container { 
                         width: 100%; 
-                        padding-top: 10px;
+                        padding-top: 6px;
                         background-color: white; 
                         page-break-inside: avoid;
                     }
@@ -92,14 +92,19 @@
                                         <tr>
                                             <td>Löneperiod:</td>
                                             <td>
-                                                <span t-esc="o.date_from"/>
- -                                                <span t-esc="o.date_to"/>
+                                                <span t-esc="o.period_id.date_start.strftime('%b %Y') if o.period_id and o.period_id.date_start else '-'"/>
                                             </td>
                                         </tr>
                                         <tr>
-                                            <td>Avvikelser t o m:</td>
+                                            <td>Avvikelseperiod:</td>
                                             <td>
-                                                <span t-esc="o.date_to"/>
+                                                <span t-esc="o.deviation_period_label or '-'"/>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Utbetalningsdatum:</td>
+                                            <td>
+                                                <span t-esc="o.payday_date or '-'"/>
                                             </td>
                                         </tr>
                                     </table>
@@ -335,8 +340,7 @@
 
                                     <table class="payout-bar">
                                         <tr>
-                                            <td>Utbetalas <span t-esc="o.contract_id.day_of_pay"/>
-                                            </td>
+                                            <td>Utbetalas <span t-esc="o.payday_date or '-'"/></td>
                                             <td style="text-align: right;">
                                                 <t t-esc="('{:,.2f}'.format(o.get_slip_line('nl')[0]['total'] if len(o.get_slip_line('nl')) &gt; 0 else 0).replace(',', 'X').replace('.', ',').replace('X', ' '))"/>
                                             </td>

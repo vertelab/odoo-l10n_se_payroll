@@ -15,6 +15,13 @@
                         <button name="sync_hr_payroll_salary_rule" class="btn btn-primary" type="object" string="Sync Salary Rule"/>
                     </header>
                 </xpath>
+                <xpath expr="//sheet" position="inside">
+                    <group string="Lön - Inställningar">
+                        <field name="payroll_payday_day"/>
+                        <field name="payroll_payday_policy"/>
+                        <field name="payroll_cutoff_day"/>
+                    </group>
+                </xpath>
             </field>
         </record>
     </data>

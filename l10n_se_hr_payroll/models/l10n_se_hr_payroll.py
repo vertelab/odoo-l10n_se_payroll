@@ -22,9 +22,10 @@ from dateutil.relativedelta import relativedelta
 from odoo.exceptions import RedirectWarning, UserError, ValidationError
 from odoo import models, fields, api, _
 from odoo.tools.safe_eval import safe_eval as eval
-from datetime import timedelta, date, datetime
+from datetime import timedelta, date, datetime, time
 import random
 import dateutil.relativedelta
+import calendar
 
 import logging
 
@@ -225,7 +226,9 @@ class hr_payslip(models.Model):
                 record.has_activities = False
     has_activities = fields.Boolean(compute=compute_has_activities)
 
-    period_id = fields.Many2one(comodel_name='account.period', string="Period",
+    period_id = fields.Many2one(comodel_name='account.period', 
+                                string="Salary period",
+                                help="Selected payroll month. Deviations are fetched from previous period.",
                                 default=lambda self: self.env['account.period'].date2period(fields.Date.today()),
                                 required=True,
                                 tracking=1,
@@ -237,6 +240,130 @@ class hr_payslip(models.Model):
                                                       compute='_compute_details_by_salary_rule_category',
                                                       string='Details by Salary Rule Category',
                                                       help="Details from the salary rule category")
+
+    deviation_period_label = fields.Char(
+        string="Deviation period",
+        compute="_compute_deviation_period_label",
+        help="The period from which deviations are fetched",
+        readonly=True,
+    )    
+
+    payday_date = fields.Date(
+        string="Payment day",
+        compute="_compute_payday_date",
+        store=True,
+        readonly=True,
+    )
+
+    payday_policy_used = fields.Selection(
+        [
+            ("next_business_day", "Next business day"),
+            ("nearest_business_day", "Nearest business day"),
+            ("previous_or_same_business_day", "Nearest business day on or before target date"),
+        ],
+        string="Payday rule",
+        compute="_compute_payday_date",
+        store=True,
+        readonly=True,
+    )
+
+    @api.depends("period_id")
+    def _compute_deviation_period_label(self):
+        Period = self.env["account.period"]
+        for slip in self:
+            slip.deviation_period_label = "-"
+            if not slip.period_id:
+                continue
+
+            prev_period = Period.search(
+                [
+                    ("date_start", "<", slip.period_id.date_start),
+                    ("company_id", "=", slip.period_id.company_id.id),
+                    ("special", "=", False),
+                ],
+                order="date_start desc",
+                limit=1,
+            )
+
+            if prev_period:
+                if prev_period.date_start:
+                    slip.deviation_period_label = prev_period.date_start.strftime("%b %Y")
+                else:
+                    slip.deviation_period_label = prev_period.display_name or prev_period.name
+
+    def _is_bank_day(self, day, company):
+        if day.weekday() >= 5:
+            return False
+
+        day_start = datetime.combine(day, time.min)
+        day_end = datetime.combine(day, time.max)
+
+        holiday_count = self.env["resource.calendar.leaves"].search_count([
+            ("resource_id", "=", False),
+            ("date_from", "<=", day_end),
+            ("date_to", ">=", day_start),
+            ("company_id", "in", [False, company.id]),
+        ])
+        return holiday_count == 0
+
+    def _next_bank_day(self, day, company):
+        d = day
+        for _i in range(31):
+            if self._is_bank_day(d, company):
+                return d
+            d += timedelta(days=1)
+        return day
+
+    def _prev_bank_day(self, day, company):
+        d = day
+        for _i in range(31):
+            if self._is_bank_day(d, company):
+                return d
+            d -= timedelta(days=1)
+        return day
+
+    def _resolve_payday(self, base_day, company, policy):
+        if policy == "next_business_day":
+            return self._next_bank_day(base_day, company)
+
+        if policy == "nearest_business_day":
+            prev_d = self._prev_bank_day(base_day, company)
+            next_d = self._next_bank_day(base_day, company)
+            if (base_day - prev_d) <= (next_d - base_day):
+                return prev_d
+            return next_d
+
+        return self._prev_bank_day(base_day, company)
+
+    @api.depends(
+        "period_id",
+        "period_id.date_start",
+        "company_id",
+        "company_id.payroll_payday_day",
+        "company_id.payroll_payday_policy",
+    )
+    def _compute_payday_date(self):
+        for slip in self:
+            slip.payday_date = False
+            slip.payday_policy_used = False
+
+            if not slip.period_id or not slip.period_id.date_start or not slip.company_id:
+                continue
+
+            company = slip.company_id
+            policy = company.payroll_payday_policy or "previous_or_same_business_day"
+            target_day = company.payroll_payday_day or 25
+
+            year = slip.period_id.date_start.year
+            month = slip.period_id.date_start.month
+            last_day = calendar.monthrange(year, month)[1]
+            target_day = min(max(target_day, 1), last_day)
+
+            base_date = slip.period_id.date_start.replace(day=target_day)
+            resolved = self._resolve_payday(base_date, company, policy)
+
+            slip.payday_date = resolved
+            slip.payday_policy_used = policy
 
 
     def move_activites_to_payslip(self):
@@ -490,6 +617,38 @@ class hr_payslip(models.Model):
 
 class HrPayrollStructure(models.Model):
     _inherit = "res.company"
+
+    payroll_payday_day = fields.Integer(
+        string="Payday",
+        default=25,
+        help="Day of the month that salary is paid (1-31).",
+    )
+
+    payroll_payday_policy = fields.Selection(
+        [
+            ("next_business_day", "Next business day"),
+            ("nearest_business_day", "Nearest business day"),
+            ("previous_or_same_business_day", "Nearest business day on or before target date"),
+        ],
+        string="Rule for bank holidays",
+        default="previous_or_same_business_day",
+        required=True,
+        help="How the payday is moved if it falls on a bank holiday.",
+    )
+
+    payroll_cutoff_day = fields.Integer(
+        string="Deviation cut off date",
+        help="Optional cut off date for deviations (1-31).",
+    )
+
+    @api.constrains("payroll_payday_day", "payroll_cutoff_day")
+    def _check_payroll_day_ranges(self):
+        for rec in self:
+            if rec.payroll_payday_day and not (1 <= rec.payroll_payday_day <= 31):
+                raise ValidationError(_("Payday must be between 1 and 31."))
+            if rec.payroll_cutoff_day and not (1 <= rec.payroll_cutoff_day <= 31):
+                raise ValidationError(_("Deviation cut off must be between 1 och 31."))
+
 
     def sync_hr_payroll_structure(self):
         """FIX ME: when a copy of hr.payroll.structure is made on company B, the rule is not attached
