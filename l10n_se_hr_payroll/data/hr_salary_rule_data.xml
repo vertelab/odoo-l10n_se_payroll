@@ -118,6 +118,7 @@ result = deduction * -1
             </field>
         </record>
 
+        <!-- Öresavrundning -->
         <record id="hr_salary_rule_oresavrundning" model="hr.salary.rule">
             <field name="category_id" ref="l10n_se_hr_payroll.hr_salary_rule_category_NETTIL" />
             <field name="company_id" eval="False"/>
@@ -148,7 +149,6 @@ result = rounded_net - current_net
         <!-- ======================================================================================== -->
         <!-- Arbetsgivaravgifter                                                                      -->
         <!-- ======================================================================================== -->
-
         <record id="hr_salary_rule_sa" model="hr.salary.rule">
             <field name="category_id" ref="l10n_se_hr_payroll.hr_salary_rule_category_PARENT" />
             <field name="company_id" eval="False"/>
@@ -340,7 +340,7 @@ result_qty = inputs.mertidtim.amount_qty if inputs.mertidtim else 0.0
             <field name="category_id" ref="l10n_se_hr_payroll.hr_salary_rule_category_PARENT" />
             <field name="company_id" eval="False"/>
             <field name="code">sjk_frnv</field>
-            <field name="name">Sjukfrånvaro</field>
+            <field name="name">Sjukfrånvaro (totalt)</field>
             <field name="sequence">25</field>
             <field name="appears_on_payslip" eval="True"/>
             <field name="condition_select">python</field>
@@ -420,7 +420,7 @@ result = round((effective_wage * 12) / (52 * va), 2) * -1
             <field name="company_id" eval="False"/>
             <field name="parent_rule_id" ref="hr_salary_rule_sick_leave" />
             <field name="code">sjk_15_90_arb</field>
-            <field name="name">Sjukavdrag 15-90 arbetare</field>
+            <field name="name">Sjukavdrag dag 15-90</field>
             <field name="sequence">22</field>
             <field name="appears_on_payslip" eval="True"/>
             <field name="condition_select">python</field>
@@ -441,12 +441,13 @@ else:
             </field>
         </record>
 
+        <!-- Sjukavdrag dag 15-90 arbetare -->
         <record id="hr_salary_rule_sick_deduction_15_90_tj" model="hr.salary.rule">
             <field name="category_id" ref="l10n_se_hr_payroll.hr_salary_rule_category_BRUAVG" />
             <field name="company_id" eval="False"/>
             <field name="parent_rule_id" ref="l10n_se_hr_payroll.hr_salary_rule_sick_leave" />
             <field name="code">sjk_15_90_tj</field>
-            <field name="name">Sjukfrånvaro dag 15-90 Tjänstemän (avdrag + sjuklön)</field>
+            <field name="name">Sjukfrånvaro dag 15-90 (Avdrag + sjuklön)</field>
             <field name="sequence">23</field>
             <field name="appears_on_payslip" eval="True"/>
             <field name="condition_select">python</field>
@@ -523,7 +524,7 @@ else:
             <field name="request_unit">hour</field>
         </record>
 
-
+        <!-- VAB-avdrag -->
         <record id="hr_salary_rule_vab" model="hr.salary.rule">
             <field name="category_id" ref="l10n_se_hr_payroll.hr_salary_rule_category_BRUAVG" />
             <field name="company_id" eval="False"/>
@@ -568,13 +569,12 @@ else:
             <field name="request_unit">hour</field>
         </record>
 
-
         <!-- Parent -->
         <record id="hr_salary_rule_parental_leave" model="hr.salary.rule">
             <field name="category_id" ref="l10n_se_hr_payroll.hr_salary_rule_category_PARENT" />
             <field name="company_id" eval="False"/>
             <field name="code">f_ledighet</field>
-            <field name="name">Föräldraledighet</field>
+            <field name="name">Föräldraledighet (Totalt)</field>
             <field name="sequence">38</field>
             <field name="appears_on_payslip" eval="True"/>
             <field name="condition_select">python</field>
@@ -593,11 +593,12 @@ result = v_f_led_arb + v_f_led_tj + v_f_lon_tj
             </field>
         </record>
 
+        <!-- Föräldraavdrag arbetare -->
         <record id="hr_salary_rule_parental_deduction_arb" model="hr.salary.rule">
             <field name="category_id" ref="l10n_se_hr_payroll.hr_salary_rule_category_BRUAVG" />
             <field name="company_id" eval="False"/>
             <field name="code">f_led_arb</field>
-            <field name="name">Föräldraledighetsavdrag (Arbetare)</field>
+            <field name="name">Föräldraledighetsavdrag</field>
             <field name="sequence">35</field>
             <field name="condition_select">python</field>
             <field name="condition_python">result = 'arb_man' in contract.struct_id.code and worked_days.dict.get('f_led')</field>
@@ -614,11 +615,12 @@ result = (val_hourly + val_short + val_long) * -1
             </field>
         </record>
 
+        <!-- Föräldraavdrag tjänsteman -->
         <record id="hr_salary_rule_parental_deduction_tj" model="hr.salary.rule">
             <field name="category_id" ref="l10n_se_hr_payroll.hr_salary_rule_category_BRUAVG" />
             <field name="company_id" eval="False"/>
             <field name="code">f_led_tj</field>
-            <field name="name">Föräldralöneavdrag (Tjänsteman)</field>
+            <field name="name">Föräldralöneavdrag</field>
             <field name="sequence">36</field>
             <field name="condition_select">python</field>
             <field name="condition_python">result = 'tj' in contract.struct_id.code and worked_days.dict.get('f_led')</field>
@@ -639,11 +641,12 @@ result_qty = f_led_days
             </field>
         </record>
 
+        <!-- Föräldralön tjänsteman -->
         <record id="hr_salary_rule_parental_pay_tj" model="hr.salary.rule">
             <field name="category_id" ref="l10n_se_hr_payroll.hr_salary_rule_category_ENGANG" />
             <field name="company_id" eval="False"/>
             <field name="code">f_lon_tj</field>
-            <field name="name">Föräldralön Tjänsteman</field>
+            <field name="name">Föräldralön</field>
             <field name="sequence">37</field>
             <field name="condition_select">python</field>
             <field name="condition_python">
@@ -690,7 +693,7 @@ result = contract.get_parental_pay_amount(payslip) or 0.0
             <field name="category_id" ref="l10n_se_hr_payroll.hr_salary_rule_category_PARENT" />
             <field name="company_id" eval="False"/>
             <field name="code">tj_ledighet</field>
-            <field name="name">Tjänstledighet</field>
+            <field name="name">Tjänstledighet (Totalt)</field>
             <field name="sequence">45</field>
             <field name="appears_on_payslip" eval="True"/>
             <field name="condition_select">python</field>
@@ -924,6 +927,7 @@ result_qty = inputs.mil_antal.amount_qty
             </field>
         </record>
 
+        <!-- Milersättning egen bil skattepliktig del -->
         <record id="hr_salary_rule_mil_skatt" model="hr.salary.rule">
             <field name="category_id" ref="l10n_se_hr_payroll.hr_salary_rule_category_BRUTIL" />
             <field name="parent_rule_id" ref="hr_salary_rule_mil_parent" />
@@ -963,6 +967,7 @@ result_qty = inputs.bensin_mil_antal.amount_qty
             </field>
         </record>
 
+        <!-- Milersättning bensin, skattepliktig del -->
         <record id="hr_salary_rule_mil_bensin_skatt" model="hr.salary.rule">
             <field name="category_id" ref="l10n_se_hr_payroll.hr_salary_rule_category_BRUTIL" />
             <field name="parent_rule_id" ref="hr_salary_rule_mil_parent" />
@@ -1008,8 +1013,7 @@ result_qty = inputs.utlagg.amount_qty
             <field name="input_id" ref="hr_salary_rule_ovrig_netto_ers" />
         </record>
 
-
-
+        <!-- Nettoavdrag vid tex gymkort -->
         <record id="hr_salary_rule_ovrig_netto_avd" model="hr.salary.rule">
             <field name="category_id" ref="l10n_se_hr_payroll.hr_salary_rule_category_NETAVG" />
             <field name="company_id" eval="False"/>

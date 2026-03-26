@@ -205,10 +205,6 @@ class hr_contract(models.Model):
             current_start = leave["date_from"]
             current_end = leave["date_to"]
 
-            #cut_off_date = fields.Date(year=leave.date_from.year, month=leave.date_from.month, day=1) + relativedelta(months = 1) - relativedelta(days = 1)
-            #if current_end > cut_off_date:
-            #    current_end = cut_off_date 
-
             if not combined_periods:
                 combined_periods.append(
                     {"date_from": current_start, "date_to": current_end, "non_sick_days": 0}

@@ -133,10 +133,11 @@
                                                 <t t-foreach="o.line_ids" t-as="line">
                                                     <t t-set="is_display_rule" t-value="line.code in ['sem_forsk_info', 'sem_obet']"/>
                                                     <t t-set="is_visible_parent" t-value="line.category_id.code == 'PARENT' and line.total != 0 and line.code not in ['sa', 'fmn_total', 'total_skatt']"/>
-                                                    <t t-if="(line.total != 0 or is_display_rule) and line.code != 'ores_avr' and (line.category_id.code not in ['SYSTEM', 'PARENT', 'DUMMY', 'BRUTTO', 'SKV', 'SUMMA'] or line.code == 'rut_red' or is_display_rule or is_visible_parent)">
+                                                    <t t-if="(line.total != 0 or is_display_rule or line.quantity) and line.code != 'ores_avr' and (line.category_id.code not in ['SYSTEM', 'PARENT', 'DUMMY', 'BRUTTO', 'SKV', 'SUMMA'] or line.code == 'rut_red' or is_display_rule or is_visible_parent)">
                                                         <t t-set="is_forman" t-value="line.category_id.code == 'FORMAN'"/>
                                                         <t t-set="is_info_only" t-value="line.total == 0 and is_display_rule"/>
-                                                        <tr>
+                                                        <t t-set="is_parent_line" t-value="line.category_id.code == 'PARENT'"/>
+                                                        <tr t-attf-style="font-weight: #{'bold' if is_parent_line else 'normal'};">
                                                             <td>
                                                                 <t t-esc="line.name"/>
                                                             </td>

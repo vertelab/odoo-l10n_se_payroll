@@ -2,7 +2,6 @@
 <odoo>
     <data noupdate="0">
 
-
         <!-- ============================================ -->
         <!-- Arbetstyper & Frånvarotyper                  -->
         <!-- ============================================ -->
@@ -92,7 +91,7 @@
         </record>
 
         <!-- ============================================ -->
-        <!-- SEMESTERREGLER                              -->
+        <!-- ORDINARIE SEMESTER                           -->
         <!-- ============================================ -->
 
         <!-- Uttag betalda semesterdagar (parent) -->
@@ -100,7 +99,7 @@
             <field name="company_id" eval="False"/>
             <field name="category_id" ref="l10n_se_hr_payroll.hr_salary_rule_category_PARENT" />
             <field name="code">sem_bet</field>
-            <field name="name">Uttag betalda semesterdagar</field>
+            <field name="name">Uttag betalda semesterdagar (Totalt)</field>
             <field name="sequence">700</field>
             <field name="appears_on_payslip" eval="True"/>
             <field name="condition_select">python</field>
@@ -155,6 +154,7 @@ result_qty = worked_days.dict.get('sem_bet').number_of_days
             </field>
         </record>
 
+        <!-- Semseterlön tjänstemän med varierad SSG -->
         <record id="hr_salary_rule_legal_leave_pay_tj" model="hr.salary.rule">
             <field name="company_id" eval="False"/>
             <field name="category_id" ref="l10n_se_hr_payroll.hr_salary_rule_category_BRUTIL"/>
@@ -218,7 +218,7 @@ result_qty = worked_days.dict.get('sem_bet').number_of_days
             <field name="parent_rule_id" ref="hr_salary_rule_legal_leave" />
             <field name="code">sem_lon_arb</field>
             <field name="salary_art">220</field>
-            <field name="name">Semesterlön arbetare</field>
+            <field name="name">Semesterdaglön</field>
             <field name="sequence">655</field>
             <field name="appears_on_payslip" eval="True"/>
             <field name="condition_select">python</field>
@@ -233,11 +233,12 @@ result = SEML * -1
             </field>
         </record>
 
+        <!-- Uttag obetald semester -->
         <record id="hr_salary_rule_legal_leave_unpaid" model="hr.salary.rule">
             <field name="company_id" eval="False"/>
             <field name="category_id" ref="l10n_se_hr_payroll.hr_salary_rule_category_PARENT" />
             <field name="code">sem_obet</field>
-            <field name="name">Uttag obetald semester</field>
+            <field name="name">Uttag obetald semester (Totalt)</field>
             <field name="sequence">665</field>
             <field name="appears_on_payslip" eval="True"/>
             <field name="condition_select">python</field>
@@ -253,13 +254,14 @@ result = round(effective_wage * 0.046, 2)
             </field>
         </record>
 
+        <!-- Uttag av sparade semesterdagar -->
         <record id="hr_salary_rule_saved_leave" model="hr.salary.rule">
             <field name="company_id" eval="False"/>
             <field name="category_id" ref="l10n_se_hr_payroll.hr_salary_rule_category_BRUTIL"/>
             <field name="parent_rule_id" ref="hr_salary_rule_legal_leave" />
             <field name="code">sem_spar</field>
             <field name="salary_art">220</field>
-            <field name="name">Sparad semester</field>
+            <field name="name">Uttag av sparade semesterdagar</field>
             <field name="sequence">670</field>
             <field name="appears_on_payslip" eval="True"/>
             <field name="condition_select">python</field>
@@ -276,6 +278,9 @@ result = round(effective_wage / MAD, 2)
             </field>
         </record>
 
+        <!-- ============================================ -->
+        <!-- FÖRSKOTTSSEMESTER                            -->
+        <!-- ============================================ -->
 
         <record id="hr_salary_rule_advance_leave" model="hr.salary.rule">
             <field name="company_id" eval="False"/>
@@ -309,7 +314,7 @@ result = round(effective_wage * 0.046, 2)
             <field name="category_id" ref="l10n_se_hr_payroll.hr_salary_rule_category_DUMMY"/>
             <field name="company_id" eval="False"/>
             <field name="code">sem_forsk_info</field>
-            <field name="name">Uttag förskottssemester (info)</field>
+            <field name="name">Uttag förskottssemesterdagar</field>
             <field name="sequence">674</field>
             <field name="appears_on_payslip" eval="True"/>
             <field name="condition_select">python</field>
@@ -322,6 +327,10 @@ result_qty = worked_days.dict.get('sem_forsk_dagar').number_of_days
 result = 0.0
             </field>
         </record>
+
+        <!-- ============================================ -->
+        <!-- SEMESTERERSÄTTNING                           -->
+        <!-- ============================================ -->
 
         <!-- Semesterersättning vid visstidsanställning -->
         <record id="hr_salary_rule_holiday_compensation" model="hr.salary.rule">
@@ -352,7 +361,7 @@ result = round((arbetat_underlag + ers_underlag) * 0.12, 2)
             </field>
         </record>
 
-
+        <!-- Semesterersättning vid slutlön -->
         <record id="hr_salary_rule_final_holiday_compensation" model="hr.salary.rule">
             <field name="category_id" ref="l10n_se_hr_payroll.hr_salary_rule_category_ENGANG"/>
             <field name="company_id" eval="False"/>
@@ -423,6 +432,10 @@ else:
             <field name="name">Slutlön: Historisk SSG (t.ex. 80 för 80%)</field>
             <field name="input_id" ref="hr_salary_rule_final_holiday_compensation"/>
         </record>
+
+        <!-- ============================================ -->
+        <!-- Utbetalning förfallna semesterdagar          -->
+        <!-- ============================================ -->
 
         <record id="hr_salary_rule_expired_saved_leaves" model="hr.salary.rule">
             <field name="category_id" ref="l10n_se_hr_payroll.hr_salary_rule_category_BRUTIL"/>
