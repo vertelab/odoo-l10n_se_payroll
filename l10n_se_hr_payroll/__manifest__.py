@@ -36,6 +36,8 @@
         'payroll',
         'account_period_vrtl', 
         'hr_timesheet_sheet',
+        'hr_work_entry',
+        'hr_work_entry_contract'
         #'l10n_se_hr_payroll_benefits'
     ],
     'description': """
