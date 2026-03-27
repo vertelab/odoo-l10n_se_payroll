@@ -1,30 +1,31 @@
-from  odoo import models, api, _
+from odoo import models, api, _
+from odoo.exceptions import UserError
+
 
 class HrEmployee(models.Model):
     _inherit = "hr.employee"
 
-    def action_generate_payslip(self):
+    def _generate_payslips(self, confirm=False):
         run_id = self.env.context.get("active_payslip_run_id")
+
         if not run_id:
             raise UserError(_("No Payslip Batch found in context. Please open this from a Payslip Batch."))
-
         if not self:
             raise UserError(_("Please select at least one employee."))
 
         [run_data] = self.env["hr.payslip.run"].browse(run_id).read(
             ["date_start", "date_end", "credit_note", "struct_id"]
         )
-
         from_date = run_data.get("date_start")
         to_date = run_data.get("date_end")
-        struct_id = run_data.get("struct_id")  
+        struct_id = run_data.get("struct_id")
 
         payslips = self.env["hr.payslip"]
         for employee in self:
             slip_data = self.env["hr.payslip"].get_payslip_vals(
                 from_date, to_date, employee.id,
                 contract_id=False,
-                struct_id=struct_id, 
+                struct_id=struct_id,
             )
             res = {
                 "employee_id": employee.id,
@@ -32,12 +33,8 @@ class HrEmployee(models.Model):
                 "struct_id": slip_data["value"].get("struct_id"),
                 "contract_id": slip_data["value"].get("contract_id"),
                 "payslip_run_id": run_id,
-                "input_line_ids": [
-                    (0, 0, x) for x in slip_data["value"].get("input_line_ids")
-                ],
-                "worked_days_line_ids": [
-                    (0, 0, x) for x in slip_data["value"].get("worked_days_line_ids")
-                ],
+                "input_line_ids": [(0, 0, x) for x in slip_data["value"].get("input_line_ids")],
+                "worked_days_line_ids": [(0, 0, x) for x in slip_data["value"].get("worked_days_line_ids")],
                 "date_from": from_date,
                 "date_to": to_date,
                 "credit_note": run_data.get("credit_note"),
@@ -48,6 +45,10 @@ class HrEmployee(models.Model):
         payslips._compute_name()
         payslips.compute_sheet()
 
+        if confirm:
+            for payslip in payslips:
+                payslip.action_payslip_done()
+
         return {
             "type": "ir.actions.act_window",
             "name": _("Generated Payslips"),
@@ -56,3 +57,9 @@ class HrEmployee(models.Model):
             "domain": [("payslip_run_id", "=", run_id)],
             "context": {"default_payslip_run_id": run_id},
         }
+
+    def action_generate_payslip(self):
+        return self._generate_payslips(confirm=False)
+
+    def action_generate_confirmed_payslip(self):
+        return self._generate_payslips(confirm=True)

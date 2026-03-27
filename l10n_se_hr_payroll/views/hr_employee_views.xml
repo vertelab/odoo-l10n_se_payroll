@@ -66,6 +66,12 @@
                             string="Generate Payslips"
                             class="oe_highlight"
                         />
+                        <button
+                            name="action_generate_confirmed_payslip"
+                            type="object"
+                            string="Generate Confirmed Payslips"
+                            class="oe_highlight"
+                        />
                     </header>
                     
                     <field name="name" readonly="1"/>

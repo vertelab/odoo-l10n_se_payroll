@@ -73,7 +73,7 @@ class HrPayslipRun(models.Model):
             "view_mode": "list",
             "view_id": view.id,
             "target": "current",
-            "domain": [("active", "=", True)],
+            "domain": [("active", "=", True), ('contract_id.state', '=', 'open')],
             "context": {
                 "active_payslip_run_id": self.id,
                 "create": False,
