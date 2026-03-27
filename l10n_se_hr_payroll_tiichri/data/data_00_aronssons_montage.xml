@@ -190,23 +190,111 @@
             <field name="date_end">2022-12-31</field>
         </record>
 
-        <!-- ## HR.BENEFIT -->
-        <!-- <record id="hr_benefit_forman_carbru" model="hr.benefit">
-            <field name="name">hr_forman_carbru</field>
-            <field name="desc">Bilförmån, brutto **</field>
+        <!-- Projekt för ledighet och närvaro för timesheet-generering -->
+
+        <record id="project_regular_work" model="project.project">
+            <field name="name">Internt Arbete (Vanlig tid)</field>
+            <field name="allow_timesheets" eval="True"/>
+            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons"/>
         </record>
-        <record id="hr_benefit_forman_carnet" model="hr.benefit">
-            <field name="name">hr_forman_carnet</field>
-            <field name="desc">Bilförmån, netto **</field>
+
+        <record id="task_regular_work" model="project.task">
+            <field name="name">Dagligt arbete</field>
+            <field name="project_id" ref="project_regular_work"/>
+            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons"/>
         </record>
-        <record id="hr_benefit_forman_driv" model="hr.benefit">
-            <field name="name">hr_forman_driv</field>
-            <field name="desc">Drivmedel **</field>
+
+        <record id="project_time_off_internal" model="project.project">
+            <field name="name">Internal / Time Off</field>
+            <field name="allow_timesheets" eval="True"/>
+            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons"/>
         </record>
-        <record id="hr_benefit_forman_bost" model="hr.benefit">
-            <field name="name">hr_forman_bost</field>
-            <field name="desc">hr_Bostad **</field>
-        </record> -->
+
+        <record id="task_time_off_vacation" model="project.task">
+            <field name="name">Semester (Vacation)</field>
+            <field name="project_id" ref="project_time_off_internal"/>
+            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons"/>
+        </record>
+
+        <record id="task_time_off_sick" model="project.task">
+            <field name="name">Sjukfrånvaro (Sick Leave)</field>
+            <field name="project_id" ref="project_time_off_internal"/>
+            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons"/>
+        </record>
+
+        <record id="task_time_off_vab" model="project.task">
+            <field name="name">Vård av barn (VAB)</field>
+            <field name="project_id" ref="project_time_off_internal"/>
+            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons"/>
+        </record>
+
+        <record id="task_time_off_f_led" model="project.task">
+            <field name="name">Föräldraledighet</field>
+            <field name="project_id" ref="project_time_off_internal"/>
+            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons"/>
+        </record>
+
+        <record id="task_time_off_loa" model="project.task">
+            <field name="name">Tjänstledighet</field>
+            <field name="project_id" ref="project_time_off_internal"/>
+            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons"/>
+        </record>
+
+        <record id="l10n_se_hr_payroll.leave_type_sick" model="hr.leave.type">
+            <field name="timesheet_generate" eval="True"/>
+            <field name="timesheet_project_id" ref="project_time_off_internal"/>
+            <field name="timesheet_task_id" ref="task_time_off_sick"/>
+            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons"/>
+        </record>
+
+        <record id="l10n_se_hr_payroll.leave_type_vab" model="hr.leave.type">
+            <field name="timesheet_generate" eval="True"/>
+            <field name="timesheet_project_id" ref="project_time_off_internal"/>
+            <field name="timesheet_task_id" ref="task_time_off_vab"/>
+            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons"/>
+        </record>
+
+        <record id="l10n_se_hr_payroll.leave_type_f_led" model="hr.leave.type">
+            <field name="timesheet_generate" eval="True"/>
+            <field name="timesheet_project_id" ref="project_time_off_internal"/>
+            <field name="timesheet_task_id" ref="task_time_off_f_led"/>
+            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons"/>
+        </record>
+
+        <record id="l10n_se_hr_payroll.leave_type_loa" model="hr.leave.type">
+            <field name="timesheet_generate" eval="True"/>
+            <field name="timesheet_project_id" ref="project_time_off_internal"/>
+            <field name="timesheet_task_id" ref="task_time_off_loa"/>
+            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons"/>
+        </record>
+
+        <record id="l10n_se_hr_holidays.leave_type_vacation" model="hr.leave.type">
+            <field name="timesheet_generate" eval="True"/>
+            <field name="timesheet_project_id" ref="project_time_off_internal"/>
+            <field name="timesheet_task_id" ref="task_time_off_vacation"/>
+            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons"/>
+        </record>
+
+        <record id="l10n_se_hr_holidays.leave_type_vacation_saved" model="hr.leave.type">
+            <field name="timesheet_generate" eval="True"/>
+            <field name="timesheet_project_id" ref="project_time_off_internal"/>
+            <field name="timesheet_task_id" ref="task_time_off_vacation"/>
+            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons"/>
+        </record>
+
+        <record id="l10n_se_hr_holidays.leave_type_vacation_unpaid" model="hr.leave.type">
+            <field name="timesheet_generate" eval="True"/>
+            <field name="timesheet_project_id" ref="project_time_off_internal"/>
+            <field name="timesheet_task_id" ref="task_time_off_vacation"/>
+            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons"/>
+        </record>
+
+        <record id="l10n_se_hr_holidays.leave_type_vacation_advance" model="hr.leave.type">
+            <field name="timesheet_generate" eval="True"/>
+            <field name="timesheet_project_id" ref="project_time_off_internal"/>
+            <field name="timesheet_task_id" ref="task_time_off_vacation"/>
+            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons"/>
+        </record>
 
     </data>
 </odoo>

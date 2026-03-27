@@ -121,6 +121,7 @@
                     ref('l10n_se_payroll_taxtable.hr_salary_rule_total_tax_display'),
 
                     ref('l10n_se_hr_payroll.hr_salary_rule_sa'), 
+                    ref('l10n_se_hr_payroll.hr_salary_rule_optional_brutil'), 
                     
 
             ])]" />
@@ -275,7 +276,8 @@
                     ref('l10n_se_payroll_taxtable.hr_salary_rule_total_tax_display'),
 
                     ref('l10n_se_hr_payroll.hr_salary_rule_sa'), 
-                    
+                    ref('l10n_se_hr_payroll.hr_salary_rule_optional_brutil'), 
+
 
 
             ])]" />
@@ -427,7 +429,8 @@
                     ref('l10n_se_payroll_taxtable.hr_salary_rule_total_tax_display'),
 
                     ref('l10n_se_hr_payroll.hr_salary_rule_sa'), 
-                    
+                    ref('l10n_se_hr_payroll.hr_salary_rule_optional_brutil'), 
+
 
                         
             ])]" />
@@ -582,7 +585,8 @@
                     ref('l10n_se_payroll_taxtable.hr_salary_rule_total_tax_display'),
 
                     ref('l10n_se_hr_payroll.hr_salary_rule_sa'), 
-                    
+                    ref('l10n_se_hr_payroll.hr_salary_rule_optional_brutil'), 
+
 
 
             ])]" />
@@ -734,7 +738,8 @@
                     ref('l10n_se_payroll_taxtable.hr_salary_rule_total_tax_display'),
 
                     ref('l10n_se_hr_payroll.hr_salary_rule_sa'), 
-                    
+                    ref('l10n_se_hr_payroll.hr_salary_rule_optional_brutil'), 
+
 
 
             ])]" />
@@ -884,7 +889,8 @@
                     ref('l10n_se_payroll_taxtable.hr_salary_rule_total_tax_display'),
 
                     ref('l10n_se_hr_payroll.hr_salary_rule_sa'), 
-                    
+                    ref('l10n_se_hr_payroll.hr_salary_rule_optional_brutil'), 
+
 
             ])]" />
             <field name="const_ids" eval="[
@@ -1024,7 +1030,8 @@
                     ref('l10n_se_payroll_taxtable.hr_salary_rule_total_tax_display'),
 
                     ref('l10n_se_hr_payroll.hr_salary_rule_sa'),
-                    
+                    ref('l10n_se_hr_payroll.hr_salary_rule_optional_brutil'), 
+
 
             ])]" />
             <field name="const_ids" eval="[

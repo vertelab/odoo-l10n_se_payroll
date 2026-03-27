@@ -10,7 +10,7 @@
             <field name="mobile">073-800000</field>
             <field name="function">Montör</field>
             <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons"/>
-        </record> 
+        </record>
 
         <record id="bank_helmer" model="res.partner.bank">
             <field name="acc_number">4333-888888</field>
@@ -167,7 +167,7 @@
             <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons"/>
             <field name="date_start">2022-11-01</field>
             <field name="date_end">2022-11-30</field>
-        </record>        
+        </record>
 
         <record id="timesheet_12_helmer" model="hr_timesheet.sheet">
             <field name="name">Tidrapport Decmber - Helmer</field>
@@ -178,6 +178,15 @@
         </record>
 
         <!-- ================================ January ================================ -->
+
+        <record id="ts_helmer_01" model="account.analytic.line">
+            <field name="name">Arbetad tid Januari</field>
+            <field name="employee_id" ref="hr_helmer_employee"/>
+            <field name="project_id" ref="project_regular_work"/>
+            <field name="task_id" ref="task_regular_work"/>
+            <field name="date">2022-01-31</field>
+            <field name="unit_amount">108.0</field>
+        </record>
 
         <!-- Sjukfrånvaro -->
         <record id="hr_leave_helmer_101" model="hr.leave">
@@ -244,7 +253,7 @@
         <function model="hr.payslip" name="onchange_employee">
             <value eval="[ref('l10n_se_hr_payroll_tiichri.hr_payslip_helmer_01')]"/>
         </function>
-        
+
         <!-- Manuell data-inmatning -->
 
         <!-- Lunch -->
@@ -277,6 +286,15 @@
         </function>
 
         <!-- ================================ February ================================ -->
+
+        <record id="ts_helmer_02" model="account.analytic.line">
+            <field name="name">Arbetad tid Februari</field>
+            <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_helmer_employee"/>
+            <field name="project_id" ref="project_regular_work"/>
+            <field name="task_id" ref="task_regular_work"/>
+            <field name="date">2022-02-28</field>
+            <field name="unit_amount">88.0</field>
+        </record>
 
         <!-- Sjukfrånvaro -->
         <record id="hr_leave_helmer_201" model="hr.leave">
@@ -373,6 +391,15 @@
         </function>
 
         <!-- ================================ March ================================ -->
+
+        <record id="ts_helmer_03" model="account.analytic.line">
+            <field name="name">Arbetad tid Mars</field>
+            <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_helmer_employee"/>
+            <field name="project_id" ref="project_regular_work"/>
+            <field name="task_id" ref="task_regular_work"/>
+            <field name="date">2022-03-31</field>
+            <field name="unit_amount">120.0</field>
+        </record>
 
         <!-- Sjukfrånvaro -->
         <record id="hr_leave_helmer_301" model="hr.leave">
@@ -475,6 +502,15 @@
 
         <!-- ================================ April ================================ -->
 
+        <record id="ts_helmer_04" model="account.analytic.line">
+            <field name="name">Arbetad tid April</field>
+            <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_helmer_employee"/>
+            <field name="project_id" ref="project_regular_work"/>
+            <field name="task_id" ref="task_regular_work"/>
+            <field name="date">2022-04-30</field>
+            <field name="unit_amount">56.0</field>
+        </record>
+
         <!-- Sjukfrånvaro -->
         <record id="hr_leave_helmer_401" model="hr.leave">
             <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_helmer_employee" />
@@ -545,6 +581,15 @@
         </function>
 
         <!-- ================================ May ================================ -->
+
+        <record id="ts_helmer_05" model="account.analytic.line">
+            <field name="name">Arbetad tid Maj</field>
+            <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_helmer_employee"/>
+            <field name="project_id" ref="project_regular_work"/>
+            <field name="task_id" ref="task_regular_work"/>
+            <field name="date">2022-05-31</field>
+            <field name="unit_amount">132.0</field>
+        </record>
 
         <!-- Sjukfrånvaro -->
         <record id="hr_leave_helmer_501" model="hr.leave">
@@ -687,6 +732,15 @@
 
         <!-- ================================ June ================================ -->
 
+        <record id="ts_helmer_06" model="account.analytic.line">
+            <field name="name">Arbetad tid Juni</field>
+            <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_helmer_employee"/>
+            <field name="project_id" ref="project_regular_work"/>
+            <field name="task_id" ref="task_regular_work"/>
+            <field name="date">2022-06-30</field>
+            <field name="unit_amount">84.0</field>
+        </record>
+
         <!-- Sjukfrånvaro -->
         <record id="hr_leave_helmer_601" model="hr.leave">
             <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_helmer_employee" />
@@ -795,6 +849,15 @@
 
         <!-- ================================ July ================================ -->
 
+        <record id="ts_helmer_07" model="account.analytic.line">
+            <field name="name">Arbetad tid Juli</field>
+            <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_helmer_employee"/>
+            <field name="project_id" ref="project_regular_work"/>
+            <field name="task_id" ref="task_regular_work"/>
+            <field name="date">2022-07-31</field>
+            <field name="unit_amount">116.0</field>
+        </record>
+
         <!-- Sjukfrånvaro -->
         <record id="hr_leave_helmer_701" model="hr.leave">
             <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_helmer_employee" />
@@ -888,6 +951,15 @@
 
         <!-- ================================ August ================================ -->
 
+        <record id="ts_helmer_08" model="account.analytic.line">
+            <field name="name">Arbetad tid Augsti</field>
+            <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_helmer_employee"/>
+            <field name="project_id" ref="project_regular_work"/>
+            <field name="task_id" ref="task_regular_work"/>
+            <field name="date">2022-08-31</field>
+            <field name="unit_amount">16.0</field>
+        </record>
+
         <!-- Sjukfrånvaro -->
         <record id="hr_leave_helmer_801" model="hr.leave">
             <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_helmer_employee" />
@@ -966,7 +1038,14 @@
 
         <!-- ================================ September ================================ -->
 
-        <!-- Sjukfrånvaro-record i aug spiller över i september så skrivs ej här -->
+        <record id="ts_helmer_09" model="account.analytic.line">
+            <field name="name">Arbetad tid September</field>
+            <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_helmer_employee"/>
+            <field name="project_id" ref="project_regular_work"/>
+            <field name="task_id" ref="task_regular_work"/>
+            <field name="date">2022-09-30</field>
+            <field name="unit_amount">92.0</field>
+        </record>
 
         <!-- VAB -->
         <record id="hr_leave_helmer_901" model="hr.leave">
@@ -1077,6 +1156,15 @@
 
         <!-- ================================ October ================================ -->
 
+        <record id="ts_helmer_10" model="account.analytic.line">
+            <field name="name">Arbetad tid Oktober</field>
+            <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_helmer_employee"/>
+            <field name="project_id" ref="project_regular_work"/>
+            <field name="task_id" ref="task_regular_work"/>
+            <field name="date">2022-10-31</field>
+            <field name="unit_amount">112.0</field>
+        </record>
+
         <!-- VAB -->
         <record id="hr_leave_helmer_1001" model="hr.leave">
             <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_helmer_employee" />
@@ -1154,6 +1242,15 @@
         </function>
 
         <!-- ================================ November ================================ -->
+
+        <record id="ts_helmer_11" model="account.analytic.line">
+            <field name="name">Arbetad tid November</field>
+            <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_helmer_employee"/>
+            <field name="project_id" ref="project_regular_work"/>
+            <field name="task_id" ref="task_regular_work"/>
+            <field name="date">2022-11-30</field>
+            <field name="unit_amount">76.0</field>
+        </record>
 
         <!-- Sjukfrånvaro -->
         <record id="hr_leave_helmer_1101" model="hr.leave">
@@ -1277,6 +1374,15 @@
         </function>
 
         <!-- ================================ December ================================ -->
+
+        <record id="ts_helmer_12" model="account.analytic.line">
+            <field name="name">Arbetad tid December</field>
+            <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_helmer_employee"/>
+            <field name="project_id" ref="project_regular_work"/>
+            <field name="task_id" ref="task_regular_work"/>
+            <field name="date">2022-12-31</field>
+            <field name="unit_amount">104.0</field>
+        </record>
 
         <!-- Sjukfrånvaro -->
         <record id="hr_leave_helmer_1201" model="hr.leave">

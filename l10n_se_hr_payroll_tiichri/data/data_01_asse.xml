@@ -135,8 +135,8 @@
         <function model="hr.leave.allocation" name="action_validate">
             <value eval="[ref('allocation_asse_vacation')]"/>
         </function>
-
-                <record id="timesheet_01_asse" model="hr_timesheet.sheet">
+<!-- 
+        <record id="timesheet_01_asse" model="hr_timesheet.sheet">
             <field name="name">Tidrapport Januari - Asse</field>
             <field name="employee_id" ref="hr_asse_employee"/>
             <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons"/>
@@ -222,7 +222,7 @@
             <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons"/>
             <field name="date_start">2022-11-01</field>
             <field name="date_end">2022-11-30</field>
-        </record>        
+        </record>
 
         <record id="timesheet_12_asse" model="hr_timesheet.sheet">
             <field name="name">Tidrapport Decmber - Asse</field>
@@ -230,7 +230,7 @@
             <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons"/>
             <field name="date_start">2022-12-01</field>
             <field name="date_end">2022-12-31</field>
-        </record>
+        </record> -->
 
 
         <!-- ================================ January ================================ -->

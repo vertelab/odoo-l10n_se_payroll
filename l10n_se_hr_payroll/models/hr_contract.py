@@ -370,6 +370,18 @@ class hr_contract(models.Model):
     
     def get_actual_work_hours(self, payslip):
         self.ensure_one()
+        
+        is_hourly = self.struct_id and self.struct_id.code and 'tim' in self.struct_id.code
+
+        if is_hourly:
+            timesheets = self.env['account.analytic.line'].search([
+                ('employee_id', '=', self.employee_id.id),
+                ('date', '>=', payslip.date_from),
+                ('date', '<=', payslip.date_to),
+                ('holiday_id', '=', False),
+            ])
+            return sum(timesheets.mapped('unit_amount'))
+
         import pytz
 
         user_tz = pytz.timezone(self.env.user.tz or 'Europe/Stockholm')

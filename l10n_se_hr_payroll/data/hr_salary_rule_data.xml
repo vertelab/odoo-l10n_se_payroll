@@ -80,6 +80,30 @@ else:
             </field>
         </record>
 
+        <!-- Fri input av bruttotillägg -->
+        <record id="hr_salary_rule_optional_brutil" model="hr.salary.rule">
+            <field name="category_id" ref="l10n_se_hr_payroll.hr_salary_rule_category_BRUTIL" />
+            <field name="company_id" eval="False"/>
+            <field name="code">brutil_optional</field>
+            <field name="name">Övrigt bruttotillägg (Fri lönesumma)</field>
+            <field name="sequence">5</field>
+            <field name="condition_select">python</field>
+            <field name="condition_python">
+result = inputs and inputs.input_brutil_optional and inputs.input_brutil_optional.amount_qty &gt; 0
+            </field>
+            <field name="amount_select">code</field>
+            <field name="amount_python_compute">
+result = inputs.input_brutil_optional.amount
+result_qty = inputs.input_brutil_optional.amount_qty
+            </field>
+        </record>
+
+        <record id="hr_rule_input_optional_brutil" model="hr.rule.input">
+            <field name="code">input_brutil_optional</field>
+            <field name="name">Övrigt bruttottilläg (Fri lönesumma)</field>
+            <field name="input_id" ref="hr_salary_rule_optional_brutil" />
+        </record>
+
         <!-- Löneväxling -->
         <record id="hr_salary_rule_wage_exchange" model="hr.salary.rule">
             <field name="category_id" ref="l10n_se_hr_payroll.hr_salary_rule_category_BRUAVG" />
