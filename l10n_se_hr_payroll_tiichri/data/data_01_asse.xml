@@ -136,6 +136,103 @@
             <value eval="[ref('allocation_asse_vacation')]"/>
         </function>
 
+                <record id="timesheet_01_asse" model="hr_timesheet.sheet">
+            <field name="name">Tidrapport Januari - Asse</field>
+            <field name="employee_id" ref="hr_asse_employee"/>
+            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons"/>
+            <field name="date_start">2022-01-01</field>
+            <field name="date_end">2022-01-31</field>
+        </record>
+
+        <record id="timesheet_02_asse" model="hr_timesheet.sheet">
+            <field name="name">Tidrapport Februari - Asse</field>
+            <field name="employee_id" ref="hr_asse_employee"/>
+            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons"/>
+            <field name="date_start">2022-02-01</field>
+            <field name="date_end">2022-02-28</field>
+        </record>
+
+        <record id="timesheet_03_asse" model="hr_timesheet.sheet">
+            <field name="name">Tidrapport Mars - Asse</field>
+            <field name="employee_id" ref="hr_asse_employee"/>
+            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons"/>
+            <field name="date_start">2022-03-01</field>
+            <field name="date_end">2022-03-31</field>
+        </record>
+
+        <record id="timesheet_04_asse" model="hr_timesheet.sheet">
+            <field name="name">Tidrapport April - Asse</field>
+            <field name="employee_id" ref="hr_asse_employee"/>
+            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons"/>
+            <field name="date_start">2022-04-01</field>
+            <field name="date_end">2022-04-30</field>
+        </record>
+
+        <record id="timesheet_05_asse" model="hr_timesheet.sheet">
+            <field name="name">Tidrapport Maj - Asse</field>
+            <field name="employee_id" ref="hr_asse_employee"/>
+            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons"/>
+            <field name="date_start">2022-05-01</field>
+            <field name="date_end">2022-05-31</field>
+        </record>
+
+        <record id="timesheet_06_asse" model="hr_timesheet.sheet">
+            <field name="name">Tidrapport Juni - Asse</field>
+            <field name="employee_id" ref="hr_asse_employee"/>
+            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons"/>
+            <field name="date_start">2022-06-01</field>
+            <field name="date_end">2022-06-30</field>
+        </record>
+
+        <record id="timesheet_07_asse" model="hr_timesheet.sheet">
+            <field name="name">Tidrapport Juli - Asse</field>
+            <field name="employee_id" ref="hr_asse_employee"/>
+            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons"/>
+            <field name="date_start">2022-07-01</field>
+            <field name="date_end">2022-07-31</field>
+        </record>
+
+        <record id="timesheet_08_asse" model="hr_timesheet.sheet">
+            <field name="name">Tidrapport Augusti - Asse</field>
+            <field name="employee_id" ref="hr_asse_employee"/>
+            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons"/>
+            <field name="date_start">2022-08-01</field>
+            <field name="date_end">2022-08-31</field>
+        </record>
+
+        <record id="timesheet_09_asse" model="hr_timesheet.sheet">
+            <field name="name">Tidrapport September - Asse</field>
+            <field name="employee_id" ref="hr_asse_employee"/>
+            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons"/>
+            <field name="date_start">2022-09-01</field>
+            <field name="date_end">2022-09-30</field>
+        </record>
+
+        <record id="timesheet_10_asse" model="hr_timesheet.sheet">
+            <field name="name">Tidrapport Oktober - Asse</field>
+            <field name="employee_id" ref="hr_asse_employee"/>
+            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons"/>
+            <field name="date_start">2022-10-01</field>
+            <field name="date_end">2022-10-31</field>
+        </record>
+
+        <record id="timesheet_11_asse" model="hr_timesheet.sheet">
+            <field name="name">Tidrapport November - Asse</field>
+            <field name="employee_id" ref="hr_asse_employee"/>
+            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons"/>
+            <field name="date_start">2022-11-01</field>
+            <field name="date_end">2022-11-30</field>
+        </record>        
+
+        <record id="timesheet_12_asse" model="hr_timesheet.sheet">
+            <field name="name">Tidrapport Decmber - Asse</field>
+            <field name="employee_id" ref="hr_asse_employee"/>
+            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons"/>
+            <field name="date_start">2022-12-01</field>
+            <field name="date_end">2022-12-31</field>
+        </record>
+
+
         <!-- ================================ January ================================ -->
 
         <!-- Sjukfrånvaro: -->

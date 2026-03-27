@@ -81,6 +81,102 @@
             <value eval="[ref('allocation_helmer_vacation')]"/>
         </function>
 
+        <record id="timesheet_01_helmer" model="hr_timesheet.sheet">
+            <field name="name">Tidrapport Januari - Helmer</field>
+            <field name="employee_id" ref="hr_helmer_employee"/>
+            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons"/>
+            <field name="date_start">2022-01-01</field>
+            <field name="date_end">2022-01-31</field>
+        </record>
+
+        <record id="timesheet_02_helmer" model="hr_timesheet.sheet">
+            <field name="name">Tidrapport Februari - Helmer</field>
+            <field name="employee_id" ref="hr_helmer_employee"/>
+            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons"/>
+            <field name="date_start">2022-02-01</field>
+            <field name="date_end">2022-02-28</field>
+        </record>
+
+        <record id="timesheet_03_helmer" model="hr_timesheet.sheet">
+            <field name="name">Tidrapport Mars - Helmer</field>
+            <field name="employee_id" ref="hr_helmer_employee"/>
+            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons"/>
+            <field name="date_start">2022-03-01</field>
+            <field name="date_end">2022-03-31</field>
+        </record>
+
+        <record id="timesheet_04_helmer" model="hr_timesheet.sheet">
+            <field name="name">Tidrapport April - Helmer</field>
+            <field name="employee_id" ref="hr_helmer_employee"/>
+            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons"/>
+            <field name="date_start">2022-04-01</field>
+            <field name="date_end">2022-04-30</field>
+        </record>
+
+        <record id="timesheet_05_helmer" model="hr_timesheet.sheet">
+            <field name="name">Tidrapport Maj - Helmer</field>
+            <field name="employee_id" ref="hr_helmer_employee"/>
+            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons"/>
+            <field name="date_start">2022-05-01</field>
+            <field name="date_end">2022-05-31</field>
+        </record>
+
+        <record id="timesheet_06_helmer" model="hr_timesheet.sheet">
+            <field name="name">Tidrapport Juni - Helmer</field>
+            <field name="employee_id" ref="hr_helmer_employee"/>
+            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons"/>
+            <field name="date_start">2022-06-01</field>
+            <field name="date_end">2022-06-30</field>
+        </record>
+
+        <record id="timesheet_07_helmer" model="hr_timesheet.sheet">
+            <field name="name">Tidrapport Juli - Helmer</field>
+            <field name="employee_id" ref="hr_helmer_employee"/>
+            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons"/>
+            <field name="date_start">2022-07-01</field>
+            <field name="date_end">2022-07-31</field>
+        </record>
+
+        <record id="timesheet_08_helmer" model="hr_timesheet.sheet">
+            <field name="name">Tidrapport Augusti - Helmer</field>
+            <field name="employee_id" ref="hr_helmer_employee"/>
+            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons"/>
+            <field name="date_start">2022-08-01</field>
+            <field name="date_end">2022-08-31</field>
+        </record>
+
+        <record id="timesheet_09_helmer" model="hr_timesheet.sheet">
+            <field name="name">Tidrapport September - Helmer</field>
+            <field name="employee_id" ref="hr_helmer_employee"/>
+            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons"/>
+            <field name="date_start">2022-09-01</field>
+            <field name="date_end">2022-09-30</field>
+        </record>
+
+        <record id="timesheet_10_helmer" model="hr_timesheet.sheet">
+            <field name="name">Tidrapport Oktober - Helmer</field>
+            <field name="employee_id" ref="hr_helmer_employee"/>
+            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons"/>
+            <field name="date_start">2022-10-01</field>
+            <field name="date_end">2022-10-31</field>
+        </record>
+
+        <record id="timesheet_11_helmer" model="hr_timesheet.sheet">
+            <field name="name">Tidrapport November - Helmer</field>
+            <field name="employee_id" ref="hr_helmer_employee"/>
+            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons"/>
+            <field name="date_start">2022-11-01</field>
+            <field name="date_end">2022-11-30</field>
+        </record>        
+
+        <record id="timesheet_12_helmer" model="hr_timesheet.sheet">
+            <field name="name">Tidrapport Decmber - Helmer</field>
+            <field name="employee_id" ref="hr_helmer_employee"/>
+            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons"/>
+            <field name="date_start">2022-12-01</field>
+            <field name="date_end">2022-12-31</field>
+        </record>
+
         <!-- ================================ January ================================ -->
 
         <!-- Sjukfrånvaro -->
