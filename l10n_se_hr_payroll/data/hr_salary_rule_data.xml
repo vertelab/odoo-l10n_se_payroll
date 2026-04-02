@@ -84,7 +84,7 @@ else:
         <record id="hr_salary_rule_optional_brutil" model="hr.salary.rule">
             <field name="category_id" ref="l10n_se_hr_payroll.hr_salary_rule_category_BRUTIL" />
             <field name="company_id" eval="False"/>
-            <field name="code">brutil_optional</field>
+            <field name="code"> </field>
             <field name="name">Övrigt bruttotillägg (Fri lönesumma)</field>
             <field name="sequence">5</field>
             <field name="condition_select">python</field>
@@ -175,7 +175,7 @@ result = rounded_net - current_net
         <!-- ======================================================================================== -->
         <record id="hr_salary_rule_sa" model="hr.salary.rule">
             <field name="category_id" ref="l10n_se_hr_payroll.hr_salary_rule_category_PARENT" />
-            <field name="company_id" eval="False"/>
+            <field name="company_id" ref="base.main_company"/>
             <field name="code">sa</field>
             <field name="name">Arbetsgivaravgift</field>
             <field name="sequence">3000</field>
@@ -184,21 +184,39 @@ result = rounded_net - current_net
             <field name="amount_select">code</field>
             <field name="amount_python_compute">
 underlag = categories.BRUTTO + categories.FORMAN
-pct = 0.0
+result = 0.0
 
 if employee.birthday:
     age_this_year = payslip.date_to.year - employee.birthday.year
     
-    if age_this_year &lt; 26:
-        pct = payslip.struct_id.get_constant('AGEU_PCT') or 0.1976
-    elif 26 &lt;= age_this_year &lt;= 65:
-        pct = payslip.struct_id.get_constant('AGEN_PCT') or 0.3142
-    elif 65 &lt; age_this_year &lt;= 77:
-        pct = payslip.struct_id.get_constant('AGEP_PCT') or 0.1021
+    # Hämta procentsatser och tak
+    pct_normal = payslip.struct_id.get_constant('AGEN_PCT') or 0.3142
+    pct_pension = payslip.struct_id.get_constant('AGEP_PCT') or 0.1021
+    pct_older = payslip.struct_id.get_constant('AGEPX_PCT') or 0.0
+    pct_youth = payslip.struct_id.get_constant('AGEU_PCT') or 0.2081
+    cap_youth = payslip.struct_id.get_constant('AGEU_CAP') or 25000.0
+    
+    # Hämta de dynamiska åldersgränserna
+    limit_pension = payslip.struct_id.get_constant('AGE_LIMIT_PENSION') or 68.0
+    limit_youth_min = payslip.struct_id.get_constant('AGE_LIMIT_YOUTH_MIN') or 19.0
+    limit_youth_max = payslip.struct_id.get_constant('AGE_LIMIT_YOUTH_MAX') or 23.0
+    
+    # Födda 1937 eller tidigare har fri avgift, detta är en lagstadgad
+    # gräns och kommer inte ändras över tid på samma sätt som de andra
+    # åldersrelaterade gränserna.
+    if employee.birthday.year &lt;= 1937:
+        result = underlag * pct_older
+        
+    elif age_this_year &gt;= limit_pension:
+        result = underlag * pct_pension
+        
+    elif limit_youth_min &lt;= age_this_year &lt;= limit_youth_max:
+        if underlag &lt;= cap_youth:
+            result = underlag * pct_youth
+        else:
+            result = (cap_youth * pct_youth) + ((underlag - cap_youth) * pct_normal)            
     else:
-        pct = payslip.struct_id.get_constant('AGEPX_PCT') or 0.0
-
-result = underlag * pct
+        result = underlag * pct_normal
             </field>
         </record>
 
@@ -482,14 +500,16 @@ result = 'tj' in contract.struct_id.code and contract.get_sick_pay_data(payslip)
             <field name="amount_python_compute">
 effective_wage = contract.get_effective_wage(payslip)
 full_time_wage = contract.get_full_time_wage(payslip)
-PBB = payslip.struct_id.get_constant('PBB') or 48300
+PBB = payslip.struct_id.get_constant('PBB') 
 sick_data = contract.get_sick_pay_data(payslip)
 result_qty = sick_data['days_15_90']
 part = sick_data.get('part_15_90', 1.0)
 
 deduction = ((effective_wage * 12) / 365) * -1 * part
 
-if full_time_wage &lt; 40250:
+tak_manad = (10 * PBB) / 12
+
+if full_time_wage &lt;= tak_manad:
     pay = (effective_wage * 12 * 0.10) / 365 * part
 else:
     pay = ((0.10 * 10 * PBB / 365) + (0.9 * (full_time_wage * 12 - 10 * PBB) / 365)) * part
@@ -940,13 +960,13 @@ result = v_mil_fri + v_mil_skatt + v_bensin_fri + v_bensin_skatt
             <field name="parent_rule_id" ref="hr_salary_rule_mil_parent" />
             <field name="company_id" eval="False"/>
             <field name="code">mil_fri</field>
-            <field name="name">Milersättning egen bil, skattefri (18.50kr)</field>
+            <field name="name">Milersättning egen bil, skattefri</field>
             <field name="sequence">55</field>
             <field name="condition_select">python</field>
             <field name="condition_python">result = inputs.mil_antal and inputs.mil_antal.amount_qty &gt; 0</field>
             <field name="amount_select">code</field>
             <field name="amount_python_compute">
-result = payslip.struct_id.get_constant('F_MIL_EGEN') or 1.85
+result = payslip.struct_id.get_constant('F_MIL_EGEN') or 2.5
 result_qty = inputs.mil_antal.amount_qty
             </field>
         </record>
@@ -957,7 +977,7 @@ result_qty = inputs.mil_antal.amount_qty
             <field name="parent_rule_id" ref="hr_salary_rule_mil_parent" />
             <field name="company_id" eval="False"/>
             <field name="code">mil_skatt</field>
-            <field name="name">Milersättning egen bil, skattepliktig del (11.50kr)</field>
+            <field name="name">Milersättning egen bil, skattepliktig del</field>
             <field name="sequence">56</field>
             <field name="condition_select">python</field>
             <field name="condition_python">result = inputs.mil_antal and inputs.mil_antal.amount_qty &gt; 0</field>
@@ -980,13 +1000,13 @@ result_qty = inputs.mil_antal.amount_qty
             <field name="parent_rule_id" ref="hr_salary_rule_mil_parent" />
             <field name="company_id" eval="False"/>
             <field name="code">bensin_mil_fri</field>
-            <field name="name">Milersättning tjänstebil, bensin, skattefri (9.50kr)</field>
+            <field name="name">Milersättning tjänstebil, bensin, skattefri</field>
             <field name="sequence">57</field>
             <field name="condition_select">python</field>
             <field name="condition_python">result = inputs.bensin_mil_antal and inputs.bensin_mil_antal.amount_qty &gt; 0</field>
             <field name="amount_select">code</field>
             <field name="amount_python_compute">
-result = payslip.struct_id.get_constant('F_MIL_BENSIN') or 0.95
+result = payslip.struct_id.get_constant('F_MIL_BENSIN') or 1.2
 result_qty = inputs.bensin_mil_antal.amount_qty
             </field>
         </record>

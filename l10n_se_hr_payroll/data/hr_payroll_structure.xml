@@ -10,7 +10,7 @@
         <record id="hr_payroll_structure_base" model="hr.payroll.structure">
             <field name="code">bas</field>
             <field name="name">Basexempel för löneavtal heltid (Ska ej användas i avtal)</field>
-            <field name="company_id" eval="False"/> <!-- Byt ut mot rätt företag -->
+            <field name="company_id" ref="base.main_company"/>
         <field name="rule_ids" eval="[(6,0,[
                 ref('l10n_se_hr_payroll.hr_salary_rule_gl'),
                 ref('l10n_se_hr_payroll.hr_salary_rule_gl_tim'),
@@ -108,14 +108,14 @@
                 ref('l10n_se_hr_payroll.hr_salary_rule_sa'),
             ])]" />
             <field name="const_ids" eval="[
-                (0, 0, {'name': 'Prisbasbelopp', 'code': 'PBB', 'constant': 48300.0}),
+                (0, 0, {'name': 'Prisbasbelopp', 'code': 'PBB', 'constant': 59200.0}),
 
                 (0, 0, {'name': 'Månadsarbetstid i dagar heltid', 'code': 'MAD', 'constant': 21.0}),
 
-                (0, 0, {'name': 'Milersättning (Tjänstebil, bensin)', 'code': 'F_MIL_BENSIN', 'constant': 0.95}),
+                (0, 0, {'name': 'Milersättning (Tjänstebil, bensin)', 'code': 'F_MIL_BENSIN', 'constant': 1.2}),
                 (0, 0, {'name': 'Skattepliktig milersättning (Tjänstebil, bensin)', 'code': 'S_MIL_BENSIN', 'constant': 0.55}),
 
-                (0, 0, {'name': 'Milersättning (Egen bil)', 'code': 'F_MIL_EGEN', 'constant': 1.85}),
+                (0, 0, {'name': 'Milersättning (Egen bil)', 'code': 'F_MIL_EGEN', 'constant': 2.5}),
                 (0, 0, {'name': 'Skattepliktig milersättning (Egen bil)', 'code': 'S_MIL_EGEN', 'constant': 1.15}),
 
                 (0, 0, {'name': 'Restidsersättning Vardag', 'code': 'RES_VARD', 'constant': 240.0}),
@@ -140,10 +140,15 @@
                 (0, 0, {'name': 'Lunchkuponger (Pris)', 'code': 'PRIS', 'constant': 900.0}),
                 (0, 0, {'name': 'Lunchkuponger (Förmnsvärde)', 'code': 'VARDE', 'constant': 600.0}),
 
-                (0, 0, {'name': 'AG-avgift Ungdom (under 26)', 'code': 'AGEU_PCT', 'constant': 0.1976}),
-                (0, 0, {'name': 'AG-avgift Normal (26-64)', 'code': 'AGEN_PCT', 'constant': 0.3142}),
-                (0, 0, {'name': 'AG-avgift Pensionär (65-76)', 'code': 'AGEP_PCT', 'constant': 0.1021}),
-                (0, 0, {'name': 'AG-avgift Äldre (77+)', 'code': 'AGEPX_PCT', 'constant': 0.0}),
+                (0, 0, {'name': 'AG-avgift Ungdom 19-23', 'code': 'AGEU_PCT', 'constant': 0.2081}),
+                (0, 0, {'name': 'Beloppstak Ungdom (maxlön)', 'code': 'AGEU_CAP', 'constant': 25000.0}),
+                (0, 0, {'name': 'AG-avgift Normal', 'code': 'AGEN_PCT', 'constant': 0.3142}),
+                (0, 0, {'name': 'AG-avgift Pensionär', 'code': 'AGEP_PCT', 'constant': 0.1021}),
+                (0, 0, {'name': 'AG-avgift Äldre', 'code': 'AGEPX_PCT', 'constant': 0.0}),
+
+                (0, 0, {'name': 'Åldersgräns Pensionär (vid årets ingång)', 'code': 'AGE_LIMIT_PENSION', 'constant': 68.0}),
+                (0, 0, {'name': 'Åldersgräns Ungdom MIN', 'code': 'AGE_LIMIT_YOUTH_MIN', 'constant': 19.0}),
+                (0, 0, {'name': 'Åldersgräns Ungdom MAX', 'code': 'AGE_LIMIT_YOUTH_MAX', 'constant': 23.0}),
             ]" />
         </record>
 
@@ -154,7 +159,7 @@
             <field name="code">tj_bas</field>
             <field name="name">Tjänsteman (Exempel)</field>
             <field name="parent_id" ref="hr_payroll_structure_base" />
-            <field name="company_id" eval="False"/> <!-- Byt ut mot rätt företag -->
+            <field name="company_id" ref="base.main_company"/> <!-- Byt ut mot rätt företag -->
             <field name="rule_ids" eval="[(6,0,[
                 ref('l10n_se_hr_payroll.hr_salary_rule_sick_deduction_15_90_tj'),
                 ref('l10n_se_hr_payroll.hr_salary_rule_parental_deduction_tj'),
@@ -182,7 +187,7 @@
             <field name="code">arb_bas</field>
             <field name="name">Arbetare (Exempel)</field>
             <field name="parent_id" ref="hr_payroll_structure_base" />
-            <field name="company_id" eval="False"/> <!-- Byt ut mot rätt företag -->
+            <field name="company_id" ref="base.main_company"/> <!-- Byt ut mot rätt företag -->
             <field name="rule_ids" eval="[(6,0,[
                 ref('l10n_se_hr_payroll.hr_salary_rule_parental_deduction_arb'),
 

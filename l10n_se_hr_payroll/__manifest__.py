@@ -37,7 +37,8 @@
         'account_period_vrtl', 
         'hr_timesheet_sheet',
         'hr_work_entry',
-        'hr_work_entry_contract'
+        'hr_work_entry_contract',
+        'base_recompute_field',
         #'l10n_se_hr_payroll_benefits'
     ],
     'description': """
@@ -67,6 +68,9 @@ Swedish Payroll Rules.
         #
         'data/hr_salary_rule_category_data.xml',
         'data/hr_salary_rule_data.xml',
+        # Avkommentera nedanstående EFTER installation av holidays, 
+        # sen uppgradera, för att få exempel-lönestrukturer och konstanter.
+        #'data/hr_payroll_structure.xml', 
         # last
         'views/general_journal_view.xml',
         'views/hr_employee_views.xml',
