@@ -23,6 +23,6 @@
     <!-- Action Menu Item Related To Above Action Window -->
     <menuitem action="action_salary_menu"
               id="action_menu_salary"
-              parent="payroll.payroll_menu_root" name="Salary overview" groups="payroll.group_payroll_manager"/>
+              parent="hr.hr_menu_hr_reports" name="Salary overview" groups="payroll.group_payroll_manager"/>
 
 </odoo>
