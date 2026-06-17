@@ -1,6 +1,7 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
 # 	* payroll
+# 	* l10n_se_payroll_taxtable
 #
 msgid ""
 msgstr ""
@@ -2360,3 +2361,180 @@ msgstr "resultat kommer att påverkas av en variabel"
 #: model_terms:ir.ui.view,arch_db:payroll.hr_payslip_line_view_form
 msgid "total_net"
 msgstr ""
+
+#. module: l10n_se_payroll_taxtable
+#: model:ir.actions.act_window,name:l10n_se_payroll_taxtable.action_payroll_taxtable
+msgid "Payroll Taxtable"
+msgstr "Löneskattetabell"
+
+#. module: l10n_se_payroll_taxtable
+#: model:ir.actions.act_window,name:l10n_se_payroll_taxtable.action_payroll_taxtable_wizard_action
+msgid "Payroll Taxtable Wizard Action"
+msgstr "Guiden Löneskattetabell"
+
+#. module: l10n_se_payroll_taxtable
+#: model:ir.ui.menu,name:l10n_se_payroll_taxtable.menu_payroll_taxtable
+msgid "Taxtable"
+msgstr "Skattetabell"
+
+#. module: l10n_se_payroll_taxtable
+#: model:ir.ui.menu,name:l10n_se_payroll_taxtable.hr_menu_payroll_taxtable_wizard
+msgid "Sync TaxTable"
+msgstr "Synkronisera skattetabell"
+
+#. module: l10n_se_payroll_taxtable
+#: model_terms:ir.ui.view,arch_db:l10n_se_payroll_taxtable.view_payroll_taxtable_wizard_form
+msgid "Add URL"
+msgstr "Lägg till URL"
+
+#. module: l10n_se_payroll_taxtable
+#: model_terms:ir.ui.view,arch_db:l10n_se_payroll_taxtable.payroll_taxtable_form_view
+#: model_terms:ir.ui.view,arch_db:l10n_se_payroll_taxtable.payroll_taxtable_tree_view
+msgid "Create a new Payroll Taxable"
+msgstr "Skapa en ny löneskattetabell"
+
+#. module: l10n_se_payroll_taxtable
+#: model:ir.model.fields,field_description:l10n_se_payroll_taxtable.field_payroll_taxtable_wizard__taxable_url
+msgid "Taxable URL"
+msgstr "Skatte-URL"
+
+#. module: l10n_se_payroll_taxtable
+#: model:ir.model,name:l10n_se_payroll_taxtable.model_payroll_taxtable_wizard
+msgid "Payroll Taxable Wizard"
+msgstr "Guide för löneskattetabell"
+
+#. module: l10n_se_payroll_taxtable
+#: model:ir.model,name:l10n_se_payroll_taxtable.model_payroll_taxtable
+msgid " Payroll Taxtable"
+msgstr "Löneskattetabell"
+
+#. module: l10n_se_payroll_taxtable
+#: model:ir.model,name:l10n_se_payroll_taxtable.model_payroll_taxtable_line
+msgid " "
+msgstr "Rad för löneskattetabell"
+
+#. module: l10n_se_payroll_taxtable
+#: model:ir.model.fields,field_description:l10n_se_payroll_taxtable.field_payroll_taxtable__name
+#: model:ir.model.fields,field_description:l10n_se_payroll_taxtable.field_payroll_taxtable_line__name
+msgid "Name"
+msgstr "Namn"
+
+#. module: l10n_se_payroll_taxtable
+#: model:ir.model.fields,field_description:l10n_se_payroll_taxtable.field_payroll_taxtable__taxable_lines
+msgid "Taxable Lines"
+msgstr "Skattegränser"
+
+#. module: l10n_se_payroll_taxtable
+#: model:ir.model.fields,field_description:l10n_se_payroll_taxtable.field_payroll_taxtable_line__year
+msgid "Year"
+msgstr "År"
+
+#. module: l10n_se_payroll_taxtable
+#: model:ir.model.fields,field_description:l10n_se_payroll_taxtable.field_payroll_taxtable_line__number_of_days
+msgid "Number of Days"
+msgstr "Antal dagar"
+
+#. module: l10n_se_payroll_taxtable
+#: model:ir.model.fields,field_description:l10n_se_payroll_taxtable.field_payroll_taxtable_line__table_number
+msgid "Table Number"
+msgstr "Tabellnummer"
+
+#. module: l10n_se_payroll_taxtable
+#: model:ir.model.fields,field_description:l10n_se_payroll_taxtable.field_payroll_taxtable_line__income_from
+msgid "Income From"
+msgstr "Inkomst från"
+
+#. module: l10n_se_payroll_taxtable
+#: model:ir.model.fields,field_description:l10n_se_payroll_taxtable.field_payroll_taxtable_line__income_to
+msgid "Income To"
+msgstr "Inkomst till"
+
+#. module: l10n_se_payroll_taxtable
+#: model:ir.model.fields,field_description:l10n_se_payroll_taxtable.field_payroll_taxtable_line__column1
+msgid "Column 1"
+msgstr "Kolumn 1"
+
+#. module: l10n_se_payroll_taxtable
+#: model:ir.model.fields,field_description:l10n_se_payroll_taxtable.field_payroll_taxtable_line__column2
+msgid "Column 2"
+msgstr "Kolumn 2"
+
+#. module: l10n_se_payroll_taxtable
+#: model:ir.model.fields,field_description:l10n_se_payroll_taxtable.field_payroll_taxtable_line__column3
+msgid "Column 3"
+msgstr "Kolumn 3"
+
+#. module: l10n_se_payroll_taxtable
+#: model:ir.model.fields,field_description:l10n_se_payroll_taxtable.field_payroll_taxtable_line__column4
+msgid "Column 4"
+msgstr "Kolumn 4"
+
+#. module: l10n_se_payroll_taxtable
+#: model:ir.model.fields,field_description:l10n_se_payroll_taxtable.field_payroll_taxtable_line__column5
+msgid "Column 5"
+msgstr "Kolumn 5"
+
+#. module: l10n_se_payroll_taxtable
+#: model:ir.model.fields,field_description:l10n_se_payroll_taxtable.field_payroll_taxtable_line__column6
+msgid "Column 6"
+msgstr "Kolumn 6"
+
+#. module: l10n_se_payroll_taxtable
+#: model:ir.model.fields,field_description:l10n_se_payroll_taxtable.field_payroll_taxtable_line__column7
+msgid "Column 7"
+msgstr "Kolumn 7"
+
+#. module: l10n_se_payroll_taxtable
+#: model:ir.model.fields,field_description:l10n_se_payroll_taxtable.field_payroll_taxtable_line__payroll_taxable_id
+msgid "Payroll Taxable"
+msgstr "Löneskattetabell"
+
+#. module: l10n_se_payroll_taxtable
+#: model:ir.model.fields,field_description:l10n_se_payroll_taxtable.field_hr_contract__table_number
+msgid "Table Number"
+msgstr "Tabellnummer"
+
+#. module: l10n_se_payroll_taxtable
+#: model:ir.model.fields,field_description:l10n_se_payroll_taxtable.field_hr_contract__is_church_deductible
+msgid "Church Deductible"
+msgstr "Svenska kyrkan-avdrag"
+
+#. module: l10n_se_payroll_taxtable
+#: model:ir.model.fields,field_description:l10n_se_payroll_taxtable.field_hr_contract__column_number
+msgid "Column Number"
+msgstr "Kolumnnummer"
+
+#. module: l10n_se_payroll_taxtable
+#: model:ir.model.fields,field_description:l10n_se_payroll_taxtable.field_hr_contract__has_tax_equalization
+msgid "Has Tax Equalization"
+msgstr "Har skatteutjämning"
+
+#. module: l10n_se_payroll_taxtable
+#: model:ir.model.fields,field_description:l10n_se_payroll_taxtable.field_hr_contract__tax_equalization
+msgid "Tax Equalization"
+msgstr "Skatteutjämning"
+
+#. module: l10n_se_payroll_taxtable
+#: model:ir.model.fields,field_description:l10n_se_payroll_taxtable.field_hr_contract__tax_equalization_start
+msgid "Tax Equalization Start"
+msgstr "Skatteutjämning start"
+
+#. module: l10n_se_payroll_taxtable
+#: model:ir.model.fields,field_description:l10n_se_payroll_taxtable.field_hr_contract__tax_equalization_end
+msgid "Tax Equalization End"
+msgstr "Skatteutjämning slut"
+
+#. module: l10n_se_payroll_taxtable
+#: model:ir.model.fields,field_description:l10n_se_payroll_taxtable.field_hr_contract__has_one_off_tax
+msgid "One Off Tax"
+msgstr "Engångsskatt"
+
+#. module: l10n_se_payroll_taxtable
+#: model:ir.model.fields,field_description:l10n_se_payroll_taxtable.field_hr_contract__one_off_tax
+msgid "One Off Tax Amount"
+msgstr "Engångsskattebelopp"
+
+#. module: l10n_se_payroll_taxtable
+#: model:ir.ui.view,arch_db:l10n_se_payroll_taxtable.hr_contract_form_view_inherit
+msgid "Get Taxtable"
+msgstr "Hämta skattetabell"

@@ -50,7 +50,7 @@
             </field>
         </record>
 
-        <menuitem id="menu_payroll_taxtable" name="Taxtable" parent="hr.menu_hr_root" action="action_payroll_taxtable" sequence="50" />
+        <menuitem id="menu_payroll_taxtable" name="Taxtable" parent="hr.menu_human_resources_configuration" action="action_payroll_taxtable" sequence="50" />
         <record model="ir.ui.view" id="view_payroll_taxtable_wizard_form">
             <field name="name">payroll.taxtable.wizard</field>
             <field name="model">payroll.taxtable.wizard</field>
