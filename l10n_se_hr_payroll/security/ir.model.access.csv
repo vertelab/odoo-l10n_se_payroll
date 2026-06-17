@@ -11,3 +11,6 @@ user_holiday_status,user.holiday.status,model_user_holiday_status,base.group_use
 report_salary_task,report_salary_task,model_report_salary_task,base.group_user,1,1,1,1
 access_user_workdays,access_user_workdays,model_user_workdays,base.group_user,1,1,1,1
 access_hr_payroll_structure_const,access_hr_payroll_structure_const,model_hr_payroll_structure_const,base.group_user,1,1,1,1
+access_hr_nyk_user,hr.nyk.user,model_hr_nyk,base.group_user,1,0,0,0
+access_hr_nyk_manager,hr.nyk.manager,model_hr_nyk,hr.group_hr_manager,1,1,1,1
+access_vacation_debt_report_wizard,vacation.debt.report.wizard,model_vacation_debt_report_wizard,base.group_user,1,1,1,1

@@ -63,6 +63,7 @@ Swedish Payroll Rules.
     'auto_install': False,
     'data': [
         'data/hr_payroll_data.xml',
+        'data/hr_nyk_data.xml',
         'views/hr_payroll_view.xml',
         'report/hr_payroll_payslip_report.xml',
         #
@@ -74,17 +75,23 @@ Swedish Payroll Rules.
         # last
         'views/general_journal_view.xml',
         'views/hr_employee_views.xml',
+        'views/hr_nyk_views.xml',
         'views/hr_payslip_template.xml',
         'views/hr_payslip_run_views.xml',
         # 'views/res_config_settings_views.xml',
         'views/user_payslip_views.xml',
         'views/hr_contract_views.xml',
         #'views/hr_leave_views.xml',
-        # 'views/hr_payslip_views.xml',
+        'views/hr_payslip_views.xml',
         'security/ir.model.access.csv',
         'report/pivot_salary_views.xml',
+        'report/sn_lonestatistik_report.xml',
+        'wizard/sn_lonestatistik_wizard_views.xml',
         'security/hr_payslip_security.xml',
+        'views/hr_pivot_views.xml',
         'views/res_company.xml',
+        'views/vacation_debt_report_wizard_views.xml',
+        'report/hr_vacation_debt_report.xml',
 
     ],
     #'demo': [

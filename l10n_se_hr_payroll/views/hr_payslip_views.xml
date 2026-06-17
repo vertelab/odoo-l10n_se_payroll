@@ -1,12 +1,42 @@
 <odoo>
 
+    <record id="hr_payslip_view_tree_inherit" model="ir.ui.view">
+        <field name="name">hr.payslip.list.amounts</field>
+        <field name="model">hr.payslip</field>
+        <field name="inherit_id" ref="payroll.hr_payslip_view_tree"/>
+        <field name="arch" type="xml">
+            <field name="state" position="after">
+                <field name="gl_amount" optional="hide"/>
+                <field name="bl_amount" optional="show"/>
+                <field name="total_skatt_amount" optional="show"/>
+                <field name="nl_amount" optional="show"/>
+                <field name="sa_amount" optional="hide"/>
+            </field>
+        </field>
+    </record>
+
+    <record id="hr_payslip_view_form_inherit" model="ir.ui.view">
+        <field name="name">hr.payslip.form.amounts</field>
+        <field name="model">hr.payslip</field>
+        <field name="inherit_id" ref="payroll.hr_payslip_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//group[@name='right']" position="after">
+                <group string="Lönesammanställning" col="5">
+                    <field name="gl_amount" widget="monetary"/>
+                    <field name="bl_amount" widget="monetary"/>
+                    <field name="total_skatt_amount" widget="monetary"/>
+                    <field name="nl_amount" widget="monetary"/>
+                    <field name="sa_amount" widget="monetary"/>
+                </group>
+            </xpath>
+        </field>
+    </record>
+
     <record id="work_entry_search" model="ir.ui.view">
         <field name="name">work.entry.search</field>
         <field name="model">hr.work.entry.type</field>
         <field name="arch" type="xml">
             <search string="Sök Uppgifter">
-
-
 
             </search>
         </field>

@@ -29,6 +29,9 @@
                 <xpath expr="//field[@name='department_id']" position="before">
                     <field name="registration_number"/>
                 </xpath>
+                <xpath expr="//field[@name='job_id']" position="after">
+                    <field name="nyk_id"/>
+                </xpath>
             </field>
         </record>
 
@@ -42,17 +45,15 @@
             </field>
         </record>
 
-        <record id="mail_activity_view_form_popup_inherit" model="ir.ui.view">
+        <!-- record id="mail_activity_view_form_popup_inherit" model="ir.ui.view">
             <field name="name">mail_activity_view_form_popup_inherit</field>
             <field name="model">mail.activity</field>
             <field name="inherit_id" ref="mail.mail_activity_view_form_popup" />
             <field name="arch" type="xml">
                 <field name="activity_type_id" position="after">
-                    <field name="is_payslip" invisible="1"/>
-                    <field name="employee_id" invisible="not is_payslip"/>
                 </field>
             </field>
-        </record>
+        </record -->
 
         <record id="hr_employee_payslip_select_view_list" model="ir.ui.view">
             <field name="name">hr.employee.payslip.select.list</field>

@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <!-- hr.payslip pivot -->
+    <record id="hr_payslip_view_pivot" model="ir.ui.view">
+        <field name="name">hr.payslip.pivot</field>
+        <field name="model">hr.payslip</field>
+        <field name="arch" type="xml">
+            <pivot string="Payslips" disable_linking="true">
+                <field name="employee_id" type="row"/>
+                <field name="date_from" interval="month" type="col"/>
+                <field name="bl_amount" type="measure"/>
+                <field name="total_skatt_amount" type="measure"/>
+                <field name="nl_amount" type="measure"/>
+                <field name="sa_amount" type="measure"/>
+            </pivot>
+        </field>
+    </record>
+
+    <!-- hr.payslip.run pivot -->
+    <record id="hr_payslip_run_view_pivot" model="ir.ui.view">
+        <field name="name">hr.payslip.run.pivot</field>
+        <field name="model">hr.payslip.run</field>
+        <field name="arch" type="xml">
+            <pivot string="Payslip Batches">
+                <field name="date_start" interval="month" type="row"/>
+                <field name="gl_amount" type="measure"/>
+                <field name="bl_amount" type="measure"/>
+                <field name="total_skatt_amount" type="measure"/>
+                <field name="nl_amount" type="measure"/>
+                <field name="sa_amount" type="measure"/>
+            </pivot>
+        </field>
+    </record>
+
+    <!-- hr.contract pivot -->
+    <record id="hr_contract_view_pivot" model="ir.ui.view">
+        <field name="name">hr.contract.pivot</field>
+        <field name="model">hr.contract</field>
+        <field name="arch" type="xml">
+            <pivot string="Contracts">
+                <field name="employee_id" type="row"/>
+                <field name="struct_id" type="col"/>
+                <field name="wage" type="measure"/>
+            </pivot>
+        </field>
+    </record>
+
+    <record id="payroll.hr_payslip_action" model="ir.actions.act_window">
+        <field name="view_mode">list,kanban,form,pivot</field>
+    </record>
+    <record id="l10n_se_hr_payroll.hr_payslip_action_employee" model="ir.actions.act_window">
+        <field name="view_mode">list,form,pivot</field>
+    </record>
+    <record id="payroll.hr_payslip_run_action" model="ir.actions.act_window">
+        <field name="view_mode">list,kanban,form,pivot</field>
+    </record>
+    <record id="hr_contract.action_hr_contract" model="ir.actions.act_window">
+        <field name="view_mode">list,kanban,form,activity,pivot</field>
+    </record>
+</odoo>

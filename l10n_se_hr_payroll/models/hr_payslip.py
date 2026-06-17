@@ -38,6 +38,43 @@ _logger = logging.getLogger(__name__)
 class hr_payslip(models.Model):
     _inherit = 'hr.payslip'
 
+    currency_id = fields.Many2one("res.currency", related="company_id.currency_id")
+    gl_amount = fields.Monetary(string="Grundlön")
+    bl_amount = fields.Monetary(string="Bruttolön")
+    nl_amount = fields.Monetary(string="Nettolön")
+    total_skatt_amount = fields.Monetary(string="Skatt")
+    sa_amount = fields.Monetary(string="Arbetsgivaravgift")
+
+    def _compute_amounts(self):
+        salary_rule_codes = {"gl": "gl_amount", "bl": "bl_amount", "nl": "nl_amount",
+                             "total_skatt": "total_skatt_amount", "sa": "sa_amount"}
+        for slip in self:
+            amounts = {key: 0.0 for key in salary_rule_codes.values()}
+            for line in slip.line_ids:
+                code = line.salary_rule_id.code
+                if code in salary_rule_codes:
+                    amounts[salary_rule_codes[code]] += abs(line.total)
+            for fname, val in amounts.items():
+                setattr(slip, fname, val)
+
+    def compute_sheet(self):
+        res = super().compute_sheet()
+        self._compute_amounts()
+        return res
+
+    def action_payslip_done(self):
+        res = super().action_payslip_done()
+        self._compute_amounts()
+        if self.payslip_run_id:
+            self.payslip_run_id._compute_amounts()
+        return res
+
+    def action_payslip_cancel(self):
+        res = super().action_payslip_cancel()
+        if self.payslip_run_id:
+            self.payslip_run_id._compute_amounts()
+        return res
+
     def _holiday_ids(self):
         for rec in self:
             rec.holiday_ids = rec.env['hr.leave'].search(

@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="paperformat_vacation_debt_report" model="report.paperformat">
+            <field name="name">Vacation Debt Report</field>
+            <field name="default" eval="True"/>
+            <field name="format">A4</field>
+            <field name="page_height">0</field>
+            <field name="page_width">0</field>
+            <field name="orientation">Landscape</field>
+            <field name="margin_top">20</field>
+            <field name="margin_bottom">20</field>
+            <field name="margin_left">15</field>
+            <field name="margin_right">15</field>
+            <field name="dpi">90</field>
+        </record>
+
+        <record id="action_report_vacation_debt" model="ir.actions.report">
+            <field name="name">Semesterskuldlista</field>
+            <field name="model">vacation.debt.report.wizard</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="report_name">l10n_se_hr_payroll.report_vacation_debt_template</field>
+            <field name="report_file">l10n_se_hr_payroll.report_vacation_debt_template</field>
+            <field name="print_report_name">'Semesterskuldlista_%s' % (fields.Date.today().strftime('%%Y-%%m-%%d'))</field>
+            <field name="paperformat_id" ref="paperformat_vacation_debt_report"/>
+        </record>
+
+        <template id="report_vacation_debt_template">
+            <t t-call="web.html_container">
+                <t t-foreach="docs" t-as="doc">
+                    <t t-call="l10n_se_hr_payroll.external_layout">
+                        <div class="page">
+                            <h2 style="text-align: center;">Semesterskuldlista</h2>
+                            <h4 style="text-align: center;">
+                                <t t-esc="data['company']"/>
+                                <t t-if="data.get('date_to')">
+                                    — per <t t-esc="data['date_to']"/>
+                                </t>
+                            </h4>
+                            <br/>
+                            <table class="table table-sm table-bordered" style="font-size: 10px;">
+                                <thead>
+                                    <tr>
+                                        <th>Anställd</th>
+                                        <th class="text-right">Sparade dagar</th>
+                                        <th class="text-right">Kvarvarande dagar</th>
+                                        <th class="text-right">Bruttolön/dag</th>
+                                        <th class="text-right">Semesterskuld (Brutto)</th>
+                                        <th class="text-right">Arbetsgivaravgift (31,42%)</th>
+                                        <th class="text-right">Total skuld att boka</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <t t-foreach="data['lines']" t-as="line">
+                                        <tr>
+                                            <td><t t-esc="line['name']"/></td>
+                                            <td class="text-right"><t t-esc="line['saved_days']"/></td>
+                                            <td class="text-right"><t t-esc="line['remaining_days']"/></td>
+                                            <td class="text-right">
+                                                <t t-if="line['daily_wage']">
+                                                    <t t-esc="line['daily_wage']"/> kr
+                                                </t>
+                                                <t t-if="not line['daily_wage']"></t>
+                                            </td>
+                                            <td class="text-right"><t t-esc="line['gross_debt']"/> kr</td>
+                                            <td class="text-right"><t t-esc="line['employer_fee']"/> kr</td>
+                                            <td class="text-right"><t t-esc="line['total_debt']"/> kr</td>
+                                        </tr>
+                                    </t>
+                                </tbody>
+                            </table>
+                        </div>
+                    </t>
+                </t>
+            </t>
+        </template>
+    </data>
+</odoo>

@@ -5,6 +5,7 @@ _logger = logging.getLogger(__name__)
 
 class HrPayslipRun(models.Model):
     _inherit = "hr.payslip.run"
+    _mail_post_access = "read"
 
     name = fields.Char(
         required=True, readonly=True, states={"draft": [("readonly", False)]}
@@ -28,9 +29,35 @@ class HrPayslipRun(models.Model):
         compute="_compute_slip_ids_count",
     )
 
+    gl_amount = fields.Monetary(string="Grundlön")
+    bl_amount = fields.Monetary(string="Bruttolön")
+    nl_amount = fields.Monetary(string="Nettolön")
+    total_skatt_amount = fields.Monetary(string="Skatt")
+    sa_amount = fields.Monetary(string="Arbetsgivaravgift")
+    currency_id = fields.Many2one("res.currency", related="company_id.currency_id")
+
     def _compute_slip_ids_count(self):
         for run in self:
             run.slip_ids_count = len(run.slip_ids)
+
+    def _compute_amounts(self):
+        salary_rule_codes = {"gl": "gl_amount", "bl": "bl_amount", "nl": "nl_amount",
+                             "total_skatt": "total_skatt_amount", "sa": "sa_amount"}
+        for run in self:
+            amounts = {key: 0.0 for key in salary_rule_codes.values()}
+            for slip in run.slip_ids.filtered(lambda s: s.state in ('done', 'paid')):
+                for line in slip.line_ids:
+                    code = line.salary_rule_id.code
+                    if code in salary_rule_codes:
+                        amounts[salary_rule_codes[code]] += abs(line.total)
+            for fname, val in amounts.items():
+                setattr(run, fname, val)
+
+    def write(self, vals):
+        res = super().write(vals)
+        if 'slip_ids' in vals or 'state' in vals:
+            self._compute_amounts()
+        return res
 
     @api.onchange('period_id')
     def onchange_name(self):

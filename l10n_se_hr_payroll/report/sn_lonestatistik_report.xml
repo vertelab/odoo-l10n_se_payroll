@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+    <record id="action_report_sn_lonestatistik" model="ir.actions.report">
+            <field name="name">SN Lönestatistik</field>
+            <field name="model">sn.lonestatistik.wizard</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="report_name">l10n_se_hr_payroll.report_sn_lonestatistik</field>
+            <field name="print_report_name">'SN_Lonestatistik_%s' % (object.year)</field>
+            <field name="binding_model_id" ref="model_sn_lonestatistik_wizard"/>
+            <field name="binding_type">report</field>
+        </record>
+
+    <template id="report_sn_lonestatistik">
+        <t t-call="web.html_container">
+            <t t-call="web.external_layout">
+                <div class="page">
+                    <h2>Lönestatistik - Svenskt Näringsliv</h2>
+                    <p><strong>Period:</strong> September <t t-esc="doc.year"/></p>
+                    <p><strong>Företag:</strong> <t t-esc="doc.company_id.name"/></p>
+                    <table class="table table-sm">
+                        <thead>
+                            <tr>
+                                <th>Personnummer</th>
+                                <th>Kön</th>
+                                <th>Födelseår</th>
+                                <th>Anst.form</th>
+                                <th>NYK-kod</th>
+                                <th class="text-right">Grundlön</th>
+                                <th class="text-right">Rörliga</th>
+                                <th class="text-right">Förmåner</th>
+                                <th class="text-right">Avdrag</th>
+                                <th class="text-right">Nettolön</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <t t-set="total_gl" t-value="0.0"/>
+                            <t t-set="total_bl" t-value="0.0"/>
+                            <t t-set="total_nl" t-value="0.0"/>
+                            <t t-set="total_rorlig" t-value="0.0"/>
+                            <t t-set="total_forman" t-value="0.0"/>
+                            <t t-set="total_avdrag" t-value="0.0"/>
+                            <t t-foreach="doc._generate_csv().split('\n')[1:]" t-as="line" t-if="line">
+                                <t t-set="cols" t-value="line.split(';')"/>
+                                <t t-if="len(cols) &gt;= 10">
+                                    <t t-set="total_gl" t-value="total_gl + float(cols[5] or 0)"/>
+                                    <t t-set="total_rorlig" t-value="total_rorlig + float(cols[6] or 0)"/>
+                                    <t t-set="total_forman" t-value="total_forman + float(cols[7] or 0)"/>
+                                    <t t-set="total_avdrag" t-value="total_avdrag + float(cols[8] or 0)"/>
+                                    <t t-set="total_nl" t-value="total_nl + float(cols[9] or 0)"/>
+                                    <tr>
+                                        <td><t t-esc="cols[0]"/></td>
+                                        <td><t t-esc="cols[1]"/></td>
+                                        <td><t t-esc="cols[2]"/></td>
+                                        <td><t t-esc="cols[3]"/></td>
+                                        <td><t t-esc="cols[4]"/></td>
+                                        <td class="text-right"><t t-esc="cols[5]"/></td>
+                                        <td class="text-right"><t t-esc="cols[6]"/></td>
+                                        <td class="text-right"><t t-esc="cols[7]"/></td>
+                                        <td class="text-right"><t t-esc="cols[8]"/></td>
+                                        <td class="text-right"><t t-esc="cols[9]"/></td>
+                                    </tr>
+                                </t>
+                            </t>
+                        </tbody>
+                        <tfoot>
+                            <tr class="font-weight-bold">
+                                <td colspan="5">Totalt</td>
+                                <td class="text-right"><t t-esc="total_gl"/></td>
+                                <td class="text-right"><t t-esc="total_rorlig"/></td>
+                                <td class="text-right"><t t-esc="total_forman"/></td>
+                                <td class="text-right"><t t-esc="total_avdrag"/></td>
+                                <td class="text-right"><t t-esc="total_nl"/></td>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
+            </t>
+        </t>
+    </template>
+    </data>
+</odoo>

@@ -180,6 +180,12 @@ class hr_employee(models.Model):
         groups="hr.group_hr_user"
     )
 
+    nyk_id = fields.Many2one(
+        'hr.nyk',
+        string='NYK Code',
+        help='Swedish Occupational Classification Code (NYK)'
+    )
+
     @api.depends("birthday")
     def _age(self):
         for employee in self:
