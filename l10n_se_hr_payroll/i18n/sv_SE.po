@@ -1,0 +1,137 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* l10n_se_hr_payroll
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 18.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-06-17 16:20+0000\n"
+"PO-Revision-Date: 2026-06-17 16:20+0100\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: sv\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#. module: l10n_se_hr_payroll
+#: model_terms:ir.ui.view,arch_db:l10n_se_hr_payroll.hr_payslip_run_view_form
+msgid "Salary overview"
+msgstr "Löneöversikt"
+
+#. module: l10n_se_hr_payroll
+#: model_terms:ir.ui.view,arch_db:l10n_se_hr_payroll.hr_payslip_view_form_inherit
+msgid "Salary overview"
+msgstr "Löneöversikt"
+
+#. module: l10n_se_hr_payroll
+#: model:ir.actions.act_window,name:l10n_se_hr_payroll.payroll.hr_payslip_run_action
+msgid "Payslips Batches"
+msgstr "Lönekörning"
+
+#. module: l10n_se_hr_payroll
+#: model:ir.actions.act_window,name:l10n_se_hr_payroll.action_sn_lonestatistik
+msgid "SN Salary Statistics"
+msgstr "SN Lönestatistik"
+
+#. module: l10n_se_hr_payroll
+#: model:ir.ui.menu,name:l10n_se_hr_payroll.menu_sn_lonestatistik
+msgid "SN Salary Statistics"
+msgstr "SN Lönestatistik"
+
+#. module: l10n_se_hr_payroll
+#: model_terms:ir.ui.view,arch_db:l10n_se_hr_payroll.sn_lonestatistik_wizard_form
+msgid "Salary Statistics"
+msgstr "Lönestatistik"
+
+#. module: l10n_se_hr_payroll
+#: model_terms:ir.ui.view,arch_db:l10n_se_hr_payroll.sn_lonestatistik_wizard_form
+msgid "Export CSV"
+msgstr "Exportera CSV"
+
+#. module: l10n_se_hr_payroll
+#: model_terms:ir.ui.view,arch_db:l10n_se_hr_payroll.sn_lonestatistik_wizard_form
+msgid "Print Report"
+msgstr "Skriv ut rapport"
+
+#. module: l10n_se_hr_payroll
+#: model_terms:ir.ui.view,arch_db:l10n_se_hr_payroll.sn_lonestatistik_wizard_form_download
+msgid "Download Ready"
+msgstr "Nedladdning klar"
+
+#. module: l10n_se_hr_payroll
+#: model_terms:ir.ui.view,arch_db:l10n_se_hr_payroll.sn_lonestatistik_wizard_form_download
+msgid "Export Again"
+msgstr "Exportera på nytt"
+
+#. module: l10n_se_hr_payroll
+#: model_terms:ir.ui.view,arch_db:l10n_se_hr_payroll.sn_lonestatistik_wizard_form_download
+msgid "Print Report"
+msgstr "Skriv ut rapport"
+
+#. module: l10n_se_hr_payroll
+#: model:ir.model.fields,field_description:l10n_se_hr_payroll.field_hr_payslip__gl_amount
+msgid "Grundlön"
+msgstr "Grundlön"
+
+#. module: l10n_se_hr_payroll
+#: model:ir.model.fields,field_description:l10n_se_hr_payroll.field_hr_payslip__bl_amount
+msgid "Bruttolön"
+msgstr "Bruttolön"
+
+#. module: l10n_se_hr_payroll
+#: model:ir.model.fields,field_description:l10n_se_hr_payroll.field_hr_payslip__nl_amount
+msgid "Nettolön"
+msgstr "Nettolön"
+
+#. module: l10n_se_hr_payroll
+#: model:ir.model.fields,field_description:l10n_se_hr_payroll.field_hr_payslip__total_skatt_amount
+msgid "Skatt"
+msgstr "Skatt"
+
+#. module: l10n_se_hr_payroll
+#: model:ir.model.fields,field_description:l10n_se_hr_payroll.field_hr_payslip__sa_amount
+msgid "Arbetsgivaravgift"
+msgstr "Arbetsgivaravgift"
+
+#. module: l10n_se_hr_payroll
+#: model:ir.model.fields,field_description:l10n_se_hr_payroll.field_hr_payslip_run__gl_amount
+msgid "Grundlön"
+msgstr "Grundlön"
+
+#. module: l10n_se_hr_payroll
+#: model:ir.model.fields,field_description:l10n_se_hr_payroll.field_hr_payslip_run__bl_amount
+msgid "Bruttolön"
+msgstr "Bruttolön"
+
+#. module: l10n_se_hr_payroll
+#: model:ir.model.fields,field_description:l10n_se_hr_payroll.field_hr_payslip_run__nl_amount
+msgid "Nettolön"
+msgstr "Nettolön"
+
+#. module: l10n_se_hr_payroll
+#: model:ir.model.fields,field_description:l10n_se_hr_payroll.field_hr_payslip_run__total_skatt_amount
+msgid "Skatt"
+msgstr "Skatt"
+
+#. module: l10n_se_hr_payroll
+#: model:ir.model.fields,field_description:l10n_se_hr_payroll.field_hr_payslip_run__sa_amount
+msgid "Arbetsgivaravgift"
+msgstr "Arbetsgivaravgift"
+
+#. module: l10n_se_hr_payroll
+#: model:ir.model.fields,field_description:l10n_se_hr_payroll.field_hr_payslip__gender
+msgid "Gender"
+msgstr "Kön"
+
+#. module: l10n_se_hr_payroll
+#: model:ir.model.fields,field_description:l10n_se_hr_payroll.field_hr_payslip__nyk_id
+msgid "NYK"
+msgstr "NYK-kod"
+
+#. module: l10n_se_hr_payroll
+#: model:ir.model.fields,field_description:l10n_se_hr_payroll.field_hr_payslip__job_id
+msgid "Job"
+msgstr "Tjänst"
