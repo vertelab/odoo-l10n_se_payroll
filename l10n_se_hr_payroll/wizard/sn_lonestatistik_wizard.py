@@ -9,10 +9,10 @@ class SnLonestatistikWizard(models.TransientModel):
     _name = 'sn.lonestatistik.wizard'
     _description = 'Svenskt Näringsliv Lönestatistik'
 
-    year = fields.Selection(selection=lambda self: self._get_year_selection(), string="År", required=True, default=lambda self: str(date.today().year))
-    company_id = fields.Many2one('res.company', string="Företag", required=True, default=lambda self: self.env.company)
-    csv_file = fields.Binary(string="CSV-fil", readonly=True)
-    csv_filename = fields.Char(string="Filnamn", default="lonestatistik.csv")
+    year = fields.Selection(selection=lambda self: self._get_year_selection(), string="Year", required=True, default=lambda self: str(date.today().year))
+    company_id = fields.Many2one('res.company', string="Company", required=True, default=lambda self: self.env.company)
+    csv_file = fields.Binary(string="CSV File", readonly=True)
+    csv_filename = fields.Char(string="Filename", default="salary_statistics.csv")
 
     def _get_year_selection(self):
         year = date.today().year

@@ -4,15 +4,15 @@
         <field name="name">sn.lonestatistik.wizard.form</field>
         <field name="model">sn.lonestatistik.wizard</field>
         <field name="arch" type="xml">
-            <form string="Svenskt Näringsliv Lönestatistik">
+            <form string="Salary Statistics">
                 <group>
                     <field name="year"/>
                     <field name="company_id" groups="base.group_multi_company"/>
                 </group>
                 <footer>
-                    <button name="action_export_csv" string="Exportera CSV" type="object" class="btn-primary"/>
-                    <button name="action_print_report" string="Skriv ut rapport" type="object" class="btn-secondary"/>
-                    <button string="Avbryt" class="btn-secondary" special="cancel"/>
+                    <button name="action_export_csv" string="Export CSV" type="object" class="btn-primary"/>
+                    <button name="action_print_report" string="Print Report" type="object" class="btn-secondary"/>
+                    <button string="Cancel" class="btn-secondary" special="cancel"/>
                 </footer>
             </form>
         </field>
@@ -22,28 +22,28 @@
         <field name="name">sn.lonestatistik.wizard.form.download</field>
         <field name="model">sn.lonestatistik.wizard</field>
         <field name="arch" type="xml">
-            <form string="Lönestatistik - Nedladdning klar">
+            <form string="Download Ready">
                 <group>
                     <field name="year"/>
                     <field name="company_id" groups="base.group_multi_company"/>
                 </group>
                 <footer>
-                    <button name="action_export_csv" string="Exportera på nytt" type="object" class="btn-secondary"/>
-                    <button name="action_print_report" string="Skriv ut rapport" type="object" class="btn-secondary"/>
-                    <button string="Stäng" class="btn-primary" special="cancel"/>
+                    <button name="action_export_csv" string="Export Again" type="object" class="btn-secondary"/>
+                    <button name="action_print_report" string="Print Report" type="object" class="btn-secondary"/>
+                    <button string="Close" class="btn-primary" special="cancel"/>
                 </footer>
             </form>
         </field>
     </record>
 
     <record id="action_sn_lonestatistik" model="ir.actions.act_window">
-        <field name="name">SN Lönestatistik</field>
+        <field name="name">SN Salary Statistics</field>
         <field name="res_model">sn.lonestatistik.wizard</field>
         <field name="view_mode">form</field>
         <field name="target">new</field>
     </record>
 
-    <menuitem id="menu_sn_lonestatistik" name="SN Lönestatistik"
+    <menuitem id="menu_sn_lonestatistik" name="SN Salary Statistics"
               parent="hr.hr_menu_hr_reports"
               action="action_sn_lonestatistik"
               sequence="50"/>

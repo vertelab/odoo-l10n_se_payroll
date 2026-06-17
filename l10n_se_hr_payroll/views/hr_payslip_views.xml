@@ -21,12 +21,16 @@
         <field name="inherit_id" ref="payroll.hr_payslip_view_form"/>
         <field name="arch" type="xml">
             <xpath expr="//group[@name='right']" position="after">
-                <group string="Lönesammanställning" col="5">
-                    <field name="gl_amount" widget="monetary"/>
-                    <field name="bl_amount" widget="monetary"/>
-                    <field name="total_skatt_amount" widget="monetary"/>
-                    <field name="nl_amount" widget="monetary"/>
-                    <field name="sa_amount" widget="monetary"/>
+                <group string="Salary overview">
+                    <group>
+                        <field name="gl_amount" widget="monetary"/>
+                        <field name="bl_amount" widget="monetary"/>
+                        <field name="total_skatt_amount" widget="monetary"/>
+                    </group>
+                    <group>
+                        <field name="nl_amount" widget="monetary"/>
+                        <field name="sa_amount" widget="monetary"/>
+                    </group>
                 </group>
             </xpath>
         </field>

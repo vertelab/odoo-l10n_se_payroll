@@ -6,8 +6,12 @@
         <field name="model">hr.payslip</field>
         <field name="arch" type="xml">
             <pivot string="Payslips" disable_linking="true">
-                <field name="employee_id" type="row"/>
+                <field name="gender" type="row"/>
+                <field name="nyk_id" type="row"/>
+                <field name="job_id" type="row"/>
+                <field name="payslip_run_id" type="row"/>
                 <field name="date_from" interval="month" type="col"/>
+                <field name="employee_id" type="measure"/>
                 <field name="bl_amount" type="measure"/>
                 <field name="total_skatt_amount" type="measure"/>
                 <field name="nl_amount" type="measure"/>
@@ -52,6 +56,7 @@
         <field name="view_mode">list,form,pivot</field>
     </record>
     <record id="payroll.hr_payslip_run_action" model="ir.actions.act_window">
+        <field name="name">Payslips Batches</field>
         <field name="view_mode">list,kanban,form,pivot</field>
     </record>
     <record id="hr_contract.action_hr_contract" model="ir.actions.act_window">

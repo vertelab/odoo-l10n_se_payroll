@@ -79,22 +79,22 @@
                 </div>
             </xpath>
 
-            <xpath expr="//group[@name='other']" position="after">
-                <group string="Lönesammanställning" col="5">
-                    <field name="gl_amount" widget="monetary"/>
-                    <field name="bl_amount" widget="monetary"/>
-                    <field name="total_skatt_amount" widget="monetary"/>
-                    <field name="nl_amount" widget="monetary"/>
-                    <field name="sa_amount" widget="monetary"/>
-                </group>
+            <xpath expr="//sheet" position="after">
+                <chatter/>
             </xpath>
 
-            <xpath expr="//sheet" position="after">
-                <div class="oe_chatter">
-                    <field name="message_follower_ids" widget="mail_followers"/>
-                    <field name="activity_ids" widget="mail_activity"/>
-                    <field name="message_ids" widget="mail_thread"/>
-                </div>
+            <xpath expr="//group[@name='other']" position="after">
+                <group string="Salary overview">
+                    <group>
+                        <field name="gl_amount" widget="monetary"/>
+                        <field name="bl_amount" widget="monetary"/>
+                        <field name="total_skatt_amount" widget="monetary"/>
+                    </group>
+                    <group>
+                        <field name="nl_amount" widget="monetary"/>
+                        <field name="sa_amount" widget="monetary"/>
+                    </group>
+                </group>
             </xpath>
 
             <separator position="attributes">
