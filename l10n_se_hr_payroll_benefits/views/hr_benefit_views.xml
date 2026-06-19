@@ -231,6 +231,8 @@
                                    placeholder="Filter by department..."/>
                             <field name="job_id"
                                    placeholder="Filter by job..."/>
+                            <field name="filter_benefit_id"
+                                   placeholder="Filter by contract benefit..."/>
                             <field name="employee_ids" widget="many2many_tags"
                                    placeholder="Employees (auto-filled from filter)"/>
                         </group>

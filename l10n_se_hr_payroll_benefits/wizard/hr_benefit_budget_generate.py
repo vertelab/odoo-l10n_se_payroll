@@ -41,6 +41,10 @@ class HrBenefitBudgetGenerate(models.TransientModel):
     job_id = fields.Many2one(
         'hr.job', string='Job Position')
 
+    filter_benefit_id = fields.Many2one(
+        'hr.benefit', string='Filter by Benefit',
+        help='Only include employees with this benefit on their active contract')
+
     employee_ids = fields.Many2many(
         'hr.employee', string='Employees',
         domain="[('company_id', '=', company_id)]")
@@ -63,6 +67,11 @@ class HrBenefitBudgetGenerate(models.TransientModel):
             self.code = f"{self.type_id.code}_{self.year}"
             self.max_amount = self.type_id.max_amount
             self.salary_rule_id = self.type_id.salary_rule_id
+            # Auto-set benefit filter for car budget
+            if self.type_id.code == 'car_care':
+                car_benefit = self.env['hr.benefit'].search([('name', '=', 'forman_carbru')], limit=1)
+                if car_benefit:
+                    self.filter_benefit_id = car_benefit
 
     @api.depends('type_id', 'year')
     def _compute_name(self):
@@ -82,7 +91,7 @@ class HrBenefitBudgetGenerate(models.TransientModel):
             if wiz.type_id and not wiz.max_amount:
                 wiz.max_amount = wiz.type_id.max_amount
 
-    @api.onchange('department_id', 'job_id')
+    @api.onchange('department_id', 'job_id', 'filter_benefit_id')
     def _onchange_filter(self):
         domain = [('company_id', '=', self.company_id.id)]
         if self.department_id:
@@ -90,6 +99,10 @@ class HrBenefitBudgetGenerate(models.TransientModel):
         if self.job_id:
             domain.append(('job_id', '=', self.job_id.id))
         employees = self.env['hr.employee'].search(domain)
+        if self.filter_benefit_id:
+            employees = employees.filtered(
+                lambda e: e.contract_id.benefit_ids.filtered(
+                    lambda b: b.name == self.filter_benefit_id))
         self.employee_ids = [(6, 0, employees.ids)]
 
     @api.depends('employee_ids', 'max_amount')
