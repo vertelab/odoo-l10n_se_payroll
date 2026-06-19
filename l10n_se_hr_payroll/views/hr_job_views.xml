@@ -6,8 +6,48 @@
             <field name="model">hr.job</field>
             <field name="inherit_id" ref="hr.view_hr_job_form"/>
             <field name="arch" type="xml">
+                <!-- Add nyk_id after department -->
                 <xpath expr="//field[@name='department_id']" position="after">
                     <field name="nyk_id"/>
+                </xpath>
+                <!-- Add statistics notebook after the main group(s) -->
+                <xpath expr="//sheet/group[last()]" position="after">
+                    <notebook>
+                        <page string="Lönestatistik">
+                            <group string="Anställda">
+                                <field name="employee_count"/>
+                                <button name="action_view_employees"
+                                        string="Visa anställda" type="object"
+                                        class="btn-secondary"/>
+                            </group>
+                            <group string="Lön (månadslön)">
+                                <field name="avg_wage" widget="monetary"
+                                       options="{'currency_field': 'company_currency_id'}"/>
+                                <field name="min_wage" widget="monetary"
+                                       options="{'currency_field': 'company_currency_id'}"/>
+                                <field name="max_wage" widget="monetary"
+                                       options="{'currency_field': 'company_currency_id'}"/>
+                                <field name="wage_trend"/>
+                            </group>
+                            <group string="Könsfördelning">
+                                <field name="male_count"/>
+                                <field name="female_count"/>
+                                <field name="other_gender_count"/>
+                            </group>
+                            <group string="Erfarenhet">
+                                <field name="avg_age"/>
+                                <field name="avg_seniority_days"/>
+                            </group>
+                        </page>
+                    </notebook>
+                </xpath>
+                <!-- Add chatter after sheet -->
+                <xpath expr="//sheet" position="after">
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids"/>
+                        <field name="activity_ids"/>
+                        <field name="message_ids"/>
+                    </div>
                 </xpath>
             </field>
         </record>
