@@ -113,18 +113,21 @@ class HrPayrollCorrection(models.Model):
     def _apply_to_payslip(self, payslip):
         """Apply corrections as payslip inputs and mark them as done."""
         for correction in self:
+            code = correction.salary_rule_id.code
             input_vals = {
                 'payslip_id': payslip.id,
-                'input_type_id': correction.salary_rule_id.id,
+                'name': correction.salary_rule_id.name,
+                'code': code,
                 'amount': correction.amount,
+                'contract_id': correction.contract_id.id,
             }
             # Find or create payslip input
             existing = payslip.input_line_ids.filtered(
-                lambda i: i.input_type_id == correction.salary_rule_id)
+                lambda i: i.code == code)
             if existing:
                 existing.amount += correction.amount
             else:
-                payslip.input_line_ids = [(0, 0, input_vals)]
+                self.env['hr.payslip.input'].create(input_vals)
 
             correction.write({
                 'state': 'done',
