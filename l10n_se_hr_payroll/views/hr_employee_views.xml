@@ -35,6 +35,13 @@
                 <xpath expr="//field[@name='job_id']" position="after">
                     <field name="nyk_id" invisible="1"/>
                 </xpath>
+                <xpath expr="//page[@name='hr_settings']" position="after">
+                    <page string="Contract History" name="contract_history">
+                        <group>
+                            <field name="contract_history" nolabel="1" colspan="2"/>
+                        </group>
+                    </page>
+                </xpath>
             </field>
         </record>
 

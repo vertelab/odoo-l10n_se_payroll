@@ -188,6 +188,26 @@ class hr_employee(models.Model):
                 ('employee_id', '=', emp.id),
             ])
 
+    contract_history = fields.Text(
+        string='Contract History',
+        compute='_compute_contract_history',
+    )
+
+    @api.depends('contract_ids', 'contract_ids.date_start', 'contract_ids.date_end', 'contract_ids.wage')
+    def _compute_contract_history(self):
+        for emp in self:
+            contracts = emp.contract_ids.sorted('date_start')
+            if not contracts:
+                emp.contract_history = ''
+                continue
+            lines = []
+            for c in contracts:
+                start = c.date_start or '?'
+                end = c.date_end or 'ongoing'
+                state = dict(c._fields['state'].selection).get(c.state, c.state)
+                lines.append(f"{start} → {end}  |  {c.wage:>10,.0f} kr  |  {state}")
+            emp.contract_history = '\n'.join(lines)
+
     def action_view_corrections(self):
         self.ensure_one()
         return {

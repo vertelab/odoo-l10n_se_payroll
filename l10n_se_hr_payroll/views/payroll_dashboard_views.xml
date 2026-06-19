@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <!-- Payslip pivot view for dashboard -->
+        <record id="view_hr_payslip_dashboard_pivot" model="ir.ui.view">
+            <field name="name">hr.payslip.dashboard.pivot</field>
+            <field name="model">hr.payslip</field>
+            <field name="arch" type="xml">
+                <pivot string="Payroll Dashboard" disable_linking="1">
+                    <field name="employee_id" type="row"/>
+                    <field name="department_id" type="col"/>
+                    <field name="date_from" type="col" interval="month"/>
+                    <field name="gl_amount" type="measure" widget="monetary"/>
+                    <field name="bl_amount" type="measure" widget="monetary"/>
+                    <field name="nl_amount" type="measure" widget="monetary"/>
+                    <field name="total_skatt_amount" type="measure" widget="monetary"/>
+                    <field name="sa_amount" type="measure" widget="monetary"/>
+                </pivot>
+            </field>
+        </record>
+
+        <!-- Dashboard action -->
+        <record id="action_payroll_dashboard" model="ir.actions.act_window">
+            <field name="name">Payroll Dashboard</field>
+            <field name="res_model">hr.payslip</field>
+            <field name="view_mode">pivot,graph</field>
+            <field name="view_id" ref="view_hr_payslip_dashboard_pivot"/>
+        </record>
+
+        <menuitem id="menu_payroll_dashboard"
+                  name="Dashboard"
+                  parent="payroll.payroll_menu_root"
+                  action="action_payroll_dashboard"
+                  sequence="5"/>
+
+    </data>
+</odoo>
