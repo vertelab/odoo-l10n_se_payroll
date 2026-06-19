@@ -15,11 +15,11 @@
                         <group string="Typ av ändring">
                             <field name="change_type" widget="radio"/>
                             <field name="percentage"
-                                   attrs="{'required': [('change_type', '=', 'percentage')],
-                                           'invisible': [('change_type', '!=', 'percentage')]}"/>
+                                   invisible="change_type != 'percentage'"
+                                   required="change_type == 'percentage'"/>
                             <field name="new_wage"
-                                   attrs="{'required': [('change_type', '=', 'absolute')],
-                                           'invisible': [('change_type', '!=', 'absolute')]}"/>
+                                   invisible="change_type != 'absolute'"
+                                   required="change_type == 'absolute'"/>
                         </group>
                         <group string="Anställda">
                             <field name="employee_ids" widget="many2many_tags"
@@ -27,8 +27,7 @@
                         </group>
                         <group string="Förhandsvisning">
                             <field name="preview_text" nolabel="1"
-                                   colspan="2"
-                                   attrs="{'invisible': [('preview_text', '=', False)]}"/>
+                                   colspan="2"/>
                         </group>
                     </sheet>
                     <footer>
