@@ -348,18 +348,27 @@ class hr_payslip(models.Model):
 
     def move_activites_to_payslip(self):
         for record in self:
-            activites = self.env['mail.activity'].search([
+            if not record.employee_id:
+                continue
+            activity_obj = self.env['mail.activity']
+            domain = [
                 ('date_deadline','>=',record.period_id.date_start),
-                ('date_deadline','<=',record.period_id.date_stop), 
-                ('employee_id','=',record.employee_id.id)])
-            # raise UserError(record.__dict__)
+                ('date_deadline','<=',record.period_id.date_stop),
+            ]
+            # employee_id may not exist on mail.activity in all Odoo versions
+            if 'employee_id' in activity_obj._fields:
+                domain.append(('employee_id','=',record.employee_id.id))
+            else:
+                domain.extend([
+                    ('res_model','=','hr.employee'),
+                    ('res_id','=',record.employee_id.id),
+                ])
+            activites = activity_obj.search(domain)
             for activity in activites:
-                #record.has_activities = True
                 model = self.env['ir.model'].search([('model','=','hr.payslip')])
                 activity.res_model = model.model
                 activity.res_model_id = model.id
                 activity.res_id = record.id
-            #raise UserError(f'{activites=}')
     
     @api.model_create_multi
     def create(self, vals_list):
