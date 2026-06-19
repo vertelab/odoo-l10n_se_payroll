@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="view_collective_agreement_list" model="ir.ui.view">
+            <field name="name">hr.collective.agreement.list</field>
+            <field name="model">hr.collective.agreement</field>
+            <field name="arch" type="xml">
+                <list string="Collective Agreements">
+                    <field name="name"/>
+                    <field name="code"/>
+                    <field name="pension_type"/>
+                    <field name="active"/>
+                </list>
+            </field>
+        </record>
+
+        <record id="view_collective_agreement_form" model="ir.ui.view">
+            <field name="name">hr.collective.agreement.form</field>
+            <field name="model">hr.collective.agreement</field>
+            <field name="arch" type="xml">
+                <form string="Collective Agreement">
+                    <sheet>
+                        <div class="oe_title"><h1><field name="name"/></h1></div>
+                        <group>
+                            <field name="code"/>
+                            <field name="active"/>
+                        </group>
+                        <notebook>
+                            <page string="OB &amp; Overtime">
+                                <group string="OB (Uncomfortable Hours)">
+                                    <field name="ob_evening_rate"/>
+                                    <field name="ob_weekend_rate"/>
+                                    <field name="ob_night_rate"/>
+                                    <field name="ob_holiday_rate"/>
+                                </group>
+                                <group string="Overtime">
+                                    <field name="overtime_simple_rate"/>
+                                    <field name="overtime_qualified_rate"/>
+                                </group>
+                            </page>
+                            <page string="Vacation &amp; Pension">
+                                <group string="Semestertillägg">
+                                    <field name="vacation_supplement_pct"/>
+                                    <field name="vacation_supplement_min"/>
+                                </group>
+                                <group string="Pension">
+                                    <field name="pension_type"/>
+                                    <field name="pension_premium_pct"/>
+                                </group>
+                                <group string="Insurance">
+                                    <field name="insurance_tgl"/>
+                                    <field name="insurance_tfa"/>
+                                </group>
+                            </page>
+                            <page string="Notes">
+                                <field name="note" nolabel="1"/>
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_collective_agreement" model="ir.actions.act_window">
+            <field name="name">Collective Agreements</field>
+            <field name="res_model">hr.collective.agreement</field>
+            <field name="view_mode">list,form</field>
+        </record>
+
+        <menuitem id="menu_collective_agreement"
+                  name="Collective Agreements"
+                  parent="payroll.payroll_menu_configuration"
+                  action="action_collective_agreement"
+                  sequence="20"/>
+
+    </data>
+</odoo>

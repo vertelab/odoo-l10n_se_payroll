@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="view_hr_contract_form_collective" model="ir.ui.view">
+            <field name="name">hr.contract.form.collective</field>
+            <field name="model">hr.contract</field>
+            <field name="inherit_id" ref="l10n_se_hr_payroll.view_hr_contract_form_payroll"/>
+            <field name="arch" type="xml">
+                <xpath expr="//page[@name='accounting']" position="after">
+                    <page string="Collective Agreement" name="collective">
+                        <group>
+                            <field name="collective_agreement_id"/>
+                        </group>
+                        <group string="OB Hours This Month"
+                               invisible="not collective_agreement_id">
+                            <field name="ob_evening_hours"/>
+                            <field name="ob_weekend_hours"/>
+                            <field name="ob_night_hours"/>
+                        </group>
+                        <group string="Overtime This Month"
+                               invisible="not collective_agreement_id">
+                            <field name="overtime_simple_hours"/>
+                            <field name="overtime_qualified_hours"/>
+                        </group>
+                    </page>
+                </xpath>
+            </field>
+        </record>
+
+    </data>
+</odoo>

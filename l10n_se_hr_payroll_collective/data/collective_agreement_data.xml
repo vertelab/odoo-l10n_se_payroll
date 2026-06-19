@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+
+        <!-- Teknikavtalet (ITP) -->
+        <record id="agreement_teknik" model="hr.collective.agreement">
+            <field name="name">Teknikavtalet</field>
+            <field name="code">teknik</field>
+            <field name="ob_evening_rate">20</field>
+            <field name="ob_weekend_rate">50</field>
+            <field name="ob_night_rate">70</field>
+            <field name="ob_holiday_rate">100</field>
+            <field name="overtime_simple_rate">50</field>
+            <field name="overtime_qualified_rate">100</field>
+            <field name="vacation_supplement_pct">0.8</field>
+            <field name="pension_type">itp1</field>
+            <field name="pension_premium_pct">4.5</field>
+            <field name="note">Teknikarbetsgivarna / Unionen / Sveriges Ingenjörer</field>
+        </record>
+
+        <!-- Industriavtalet (SAF-LO) -->
+        <record id="agreement_industri" model="hr.collective.agreement">
+            <field name="name">Industriavtalet</field>
+            <field name="code">industri</field>
+            <field name="ob_evening_rate">25</field>
+            <field name="ob_weekend_rate">70</field>
+            <field name="ob_night_rate">80</field>
+            <field name="ob_holiday_rate">100</field>
+            <field name="overtime_simple_rate">50</field>
+            <field name="overtime_qualified_rate">100</field>
+            <field name="vacation_supplement_pct">0.8</field>
+            <field name="pension_type">saflo</field>
+            <field name="pension_premium_pct">4.5</field>
+            <field name="note">Teknikföretagen / IF Metall / Unionen / Sveriges Ingenjörer</field>
+        </record>
+
+        <!-- Kommunal -->
+        <record id="agreement_kommunal" model="hr.collective.agreement">
+            <field name="name">Kommunal (AB)</field>
+            <field name="code">kommunal</field>
+            <field name="ob_evening_rate">20</field>
+            <field name="ob_weekend_rate">50</field>
+            <field name="ob_night_rate">70</field>
+            <field name="ob_holiday_rate">100</field>
+            <field name="overtime_simple_rate">50</field>
+            <field name="overtime_qualified_rate">100</field>
+            <field name="vacation_supplement_pct">0.605</field>
+            <field name="pension_type">akap</field>
+            <field name="pension_premium_pct">6.0</field>
+            <field name="note">SKR / Kommunal — Allmänna bestämmelser</field>
+        </record>
+
+    </data>
+</odoo>
