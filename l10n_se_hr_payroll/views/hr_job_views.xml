@@ -10,36 +10,34 @@
                 <xpath expr="//field[@name='department_id']" position="after">
                     <field name="nyk_id"/>
                 </xpath>
-                <!-- Add statistics notebook after the main group(s) -->
-                <xpath expr="//sheet/group[last()]" position="after">
-                    <notebook>
-                        <page string="Lönestatistik">
-                            <group string="Anställda">
-                                <field name="employee_count"/>
-                                <button name="action_view_employees"
-                                        string="Visa anställda" type="object"
-                                        class="btn-secondary"/>
-                            </group>
-                            <group string="Lön (månadslön)">
-                                <field name="avg_wage" widget="monetary"
-                                       options="{'currency_field': 'company_currency_id'}"/>
-                                <field name="min_wage" widget="monetary"
-                                       options="{'currency_field': 'company_currency_id'}"/>
-                                <field name="max_wage" widget="monetary"
-                                       options="{'currency_field': 'company_currency_id'}"/>
-                                <field name="wage_trend"/>
-                            </group>
-                            <group string="Könsfördelning">
-                                <field name="male_count"/>
-                                <field name="female_count"/>
-                                <field name="other_gender_count"/>
-                            </group>
-                            <group string="Erfarenhet">
-                                <field name="avg_age"/>
-                                <field name="avg_seniority_days"/>
-                            </group>
-                        </page>
-                    </notebook>
+                <!-- Add statistics page to existing notebook -->
+                <xpath expr="//page[@name='recruitment_page']" position="after">
+                    <page string="Lönestatistik" name="salary_stats_page">
+                        <group string="Anställda">
+                            <field name="employee_count"/>
+                            <button name="action_view_employees"
+                                    string="Visa anställda" type="object"
+                                    class="btn-secondary"/>
+                        </group>
+                        <group string="Lön">
+                            <field name="avg_wage" widget="monetary"
+                                   options="{'currency_field': 'company_currency_id'}"/>
+                            <field name="min_wage" widget="monetary"
+                                   options="{'currency_field': 'company_currency_id'}"/>
+                            <field name="max_wage" widget="monetary"
+                                   options="{'currency_field': 'company_currency_id'}"/>
+                            <field name="wage_trend"/>
+                        </group>
+                        <group string="Könsfördelning">
+                            <field name="male_count"/>
+                            <field name="female_count"/>
+                            <field name="other_gender_count"/>
+                        </group>
+                        <group string="Erfarenhet">
+                            <field name="avg_age"/>
+                            <field name="avg_seniority_days"/>
+                        </group>
+                    </page>
                 </xpath>
                 <!-- Add chatter after sheet -->
                 <xpath expr="//sheet" position="after">
