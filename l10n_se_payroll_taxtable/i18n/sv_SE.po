@@ -1005,7 +1005,7 @@ msgstr "Arbetsuppgifter det"
 #: model:ir.actions.act_window,name:payroll.hr_payslip_action
 #: model:ir.ui.menu,name:payroll.hr_payslip_menu
 msgid "Employee Payslips"
-msgstr "Anställdas lönespecifikation"
+msgstr "Lönespecifikationer"
 
 #. module: payroll
 #: model:ir.model.fields,help:payroll.field_hr_contract__resource_calendar_id
