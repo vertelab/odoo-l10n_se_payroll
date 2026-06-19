@@ -5,6 +5,7 @@
         <!-- Fiscal Year 2026 -->
         <record id="company_aronssons_year_2026" model="account.fiscalyear">
             <field name="name">Fiscal Year 2026</field>
+            <field name="code">2026</field>
             <field name="date_start">2026-01-01</field>
             <field name="date_stop">2026-12-31</field>
             <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons"/>
