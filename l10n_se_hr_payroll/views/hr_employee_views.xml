@@ -17,6 +17,9 @@
                     <button name="%(l10n_se_hr_payroll.hr_payslip_action_employee)d" class="oe_stat_button" icon="fa-money" type="action">
                         <field name="payslip_count" widget="statinfo" string="Payslips" />
                     </button>
+                    <button name="action_view_corrections" class="oe_stat_button" icon="fa-wrench" type="object">
+                        <field name="correction_count" widget="statinfo" string="Corrections"/>
+                    </button>
                 </div>
                 <field name="birthday" position="replace">
                     <label for='birthday' />

@@ -177,6 +177,28 @@ class hr_employee(models.Model):
         compute='_compute_payslip_count',
     )
 
+    correction_count = fields.Integer(
+        string='Corrections',
+        compute='_compute_correction_count',
+    )
+
+    def _compute_correction_count(self):
+        for emp in self:
+            emp.correction_count = self.env['hr.payroll.correction'].search_count([
+                ('employee_id', '=', emp.id),
+            ])
+
+    def action_view_corrections(self):
+        self.ensure_one()
+        return {
+            'name': _('Payroll Corrections'),
+            'type': 'ir.actions.act_window',
+            'res_model': 'hr.payroll.correction',
+            'view_mode': 'list,form',
+            'domain': [('employee_id', '=', self.id)],
+            'context': {'default_employee_id': self.id},
+        }
+
     def _compute_payslip_count(self):
         payslip_data = self.env['hr.payslip'].sudo().read_group(
             [('employee_id', 'in', self.ids)],
