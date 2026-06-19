@@ -42,11 +42,11 @@ class hr_payslip(models.Model):
     gender = fields.Selection(related="employee_id.gender", string="Kön", store=True)
     nyk_id = fields.Many2one(related="employee_id.nyk_id", string="NYK-kod", store=True)
     job_id = fields.Many2one(related="contract_id.job_id", string="Tjänst", store=True)
-    gl_amount = fields.Monetary(string="Grundlön")
-    bl_amount = fields.Monetary(string="Bruttolön")
-    nl_amount = fields.Monetary(string="Nettolön")
-    total_skatt_amount = fields.Monetary(string="Skatt")
-    sa_amount = fields.Monetary(string="Arbetsgivaravgift")
+    gl_amount = fields.Monetary(string="Grundlön", currency_field='currency_id')
+    bl_amount = fields.Monetary(string="Bruttolön", currency_field='currency_id')
+    nl_amount = fields.Monetary(string="Nettolön", currency_field='currency_id')
+    total_skatt_amount = fields.Monetary(string="Skatt", currency_field='currency_id')
+    sa_amount = fields.Monetary(string="Arbetsgivaravgift", currency_field='currency_id')
 
     def _compute_amounts(self):
         salary_rule_codes = {"gl": "gl_amount", "bl": "bl_amount", "nl": "nl_amount",

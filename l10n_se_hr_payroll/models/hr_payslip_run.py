@@ -29,11 +29,11 @@ class HrPayslipRun(models.Model):
         compute="_compute_slip_ids_count",
     )
 
-    gl_amount = fields.Monetary(string="Grundlön")
-    bl_amount = fields.Monetary(string="Bruttolön")
-    nl_amount = fields.Monetary(string="Nettolön")
-    total_skatt_amount = fields.Monetary(string="Skatt")
-    sa_amount = fields.Monetary(string="Arbetsgivaravgift")
+    gl_amount = fields.Monetary(string="Grundlön", currency_field='currency_id')
+    bl_amount = fields.Monetary(string="Bruttolön", currency_field='currency_id')
+    nl_amount = fields.Monetary(string="Nettolön", currency_field='currency_id')
+    total_skatt_amount = fields.Monetary(string="Skatt", currency_field='currency_id')
+    sa_amount = fields.Monetary(string="Arbetsgivaravgift", currency_field='currency_id')
     currency_id = fields.Many2one("res.currency", related="company_id.currency_id")
 
     def _compute_slip_ids_count(self):
