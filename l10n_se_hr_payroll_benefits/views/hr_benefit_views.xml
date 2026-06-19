@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <!-- hr.benefit tree view -->
+        <record id="view_hr_benefit_tree" model="ir.ui.view">
+            <field name="name">hr.benefit.tree</field>
+            <field name="model">hr.benefit</field>
+            <field name="arch" type="xml">
+                <tree string="Förmånstyper" editable="bottom">
+                    <field name="name"/>
+                    <field name="desc"/>
+                    <field name="category" widget="badge"/>
+                    <field name="code_id"/>
+                    <field name="active"/>
+                </tree>
+            </field>
+        </record>
+
+        <!-- hr.benefit form view -->
+        <record id="view_hr_benefit_form" model="ir.ui.view">
+            <field name="name">hr.benefit.form</field>
+            <field name="model">hr.benefit</field>
+            <field name="arch" type="xml">
+                <form string="Förmånstyp">
+                    <sheet>
+                        <div class="oe_title">
+                            <h1><field name="desc"/></h1>
+                        </div>
+                        <group>
+                            <field name="name"/>
+                            <field name="category"/>
+                            <field name="active"/>
+                        </group>
+                        <group string="Koppling till löneregel">
+                            <field name="code_id"
+                                   domain="[('category_id.code', '=', 'FORMAN')]"/>
+                        </group>
+                        <group string="Notering">
+                            <field name="note" nolabel="1"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!-- hr.benefit search view -->
+        <record id="view_hr_benefit_search" model="ir.ui.view">
+            <field name="name">hr.benefit.search</field>
+            <field name="model">hr.benefit</field>
+            <field name="arch" type="xml">
+                <search>
+                    <field name="name"/>
+                    <field name="desc"/>
+                    <filter name="active" string="Aktiva"
+                            domain="[('active', '=', True)]"/>
+                    <filter name="category_vehicle" string="Bil"
+                            domain="[('category', '=', 'vehicle')]"/>
+                    <filter name="category_housing" string="Bostad"
+                            domain="[('category', '=', 'housing')]"/>
+                    <filter name="category_meal" string="Måltider"
+                            domain="[('category', '=', 'meal')]"/>
+                    <group expand="0" string="Kategori">
+                        <filter name="cat_vehicle" string="Bil / Motorfordon"
+                                domain="[('category', '=', 'vehicle')]"/>
+                        <filter name="cat_housing" string="Bostad"
+                                domain="[('category', '=', 'housing')]"/>
+                        <filter name="cat_meal" string="Måltider"
+                                domain="[('category', '=', 'meal')]"/>
+                        <filter name="cat_travel" string="Resor"
+                                domain="[('category', '=', 'travel')]"/>
+                        <filter name="cat_other" string="Övrigt"
+                                domain="[('category', '=', 'other')]"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+
+        <!-- hr.benefit action -->
+        <record id="action_hr_benefit" model="ir.actions.act_window">
+            <field name="name">Förmånstyper</field>
+            <field name="res_model">hr.benefit</field>
+            <field name="view_mode">tree,form</field>
+            <field name="search_view_id" ref="view_hr_benefit_search"/>
+        </record>
+
+        <!-- Contract form: add benefits tab -->
+        <record id="view_hr_contract_form_benefits" model="ir.ui.view">
+            <field name="name">hr.contract.form.benefits</field>
+            <field name="model">hr.contract</field>
+            <field name="inherit_id" ref="hr_contract.hr_contract_view_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//notebook" position="inside">
+                    <page string="Förmåner" name="benefits">
+                        <group invisible="not benefit_summary">
+                            <field name="benefit_summary" nolabel="1"
+                                   colspan="2"/>
+                        </group>
+                        <field name="benefit_ids">
+                            <tree editable="bottom">
+                                <field name="name"/>
+                                <field name="desc"/>
+                                <field name="value" widget="monetary"
+                                       options="{'currency_field': 'currency_id'}"/>
+                                <field name="date_start"/>
+                                <field name="date_end"/>
+                                <field name="note"/>
+                            </tree>
+                        </field>
+                    </page>
+                </xpath>
+            </field>
+        </record>
+
+        <!-- Menus -->
+        <menuitem id="menu_hr_benefit"
+                  name="Förmånstyper"
+                  parent="payroll.payroll_menu_configuration"
+                  action="action_hr_benefit"
+                  sequence="25"/>
+
+    </data>
+</odoo>
