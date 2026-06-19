@@ -15,7 +15,7 @@ class HrPayrollSalaryChange(models.TransientModel):
     _description = 'Löneändring'
 
     company_id = fields.Many2one(
-        'res.company', string='Företag', required=True,
+        'res.company', string='Företag',
         default=lambda self: self.env.company)
 
     department_id = fields.Many2one(
