@@ -86,6 +86,7 @@ Swedish Payroll Rules.
         'views/hr_pivot_views.xml',
         'views/res_company.xml',
         'views/vacation_debt_report_wizard_views.xml',
+        'views/hr_payroll_salary_change_views.xml',
         'report/hr_vacation_debt_report.xml',
 
     ],

@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="view_hr_payroll_salary_change_form" model="ir.ui.view">
+            <field name="name">hr.payroll.salary.change.form</field>
+            <field name="model">hr.payroll.salary.change</field>
+            <field name="arch" type="xml">
+                <form string="Löneändring">
+                    <sheet>
+                        <div class="oe_title"><h1>Löneändring</h1></div>
+                        <group>
+                            <field name="company_id" options="{'no_create': True}"/>
+                            <field name="effective_date"/>
+                        </group>
+                        <group string="Typ av ändring">
+                            <field name="change_type" widget="radio"/>
+                            <field name="percentage"
+                                   attrs="{'required': [('change_type', '=', 'percentage')],
+                                           'invisible': [('change_type', '!=', 'percentage')]}"/>
+                            <field name="new_wage"
+                                   attrs="{'required': [('change_type', '=', 'absolute')],
+                                           'invisible': [('change_type', '!=', 'absolute')]}"/>
+                        </group>
+                        <group string="Anställda">
+                            <field name="employee_ids" widget="many2many_tags"
+                                   placeholder="Välj anställda..."/>
+                        </group>
+                        <group string="Förhandsvisning">
+                            <field name="preview_text" nolabel="1"
+                                   colspan="2"
+                                   attrs="{'invisible': [('preview_text', '=', False)]}"/>
+                        </group>
+                    </sheet>
+                    <footer>
+                        <button name="apply_salary_changes"
+                                string="Verkställ"
+                                type="object" class="btn-primary"
+                                confirm="Nya kontraktsversioner skapas för valda anställda. Fortsätt?"/>
+                        <button string="Avbryt" class="btn-secondary" special="cancel"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_hr_payroll_salary_change" model="ir.actions.act_window">
+            <field name="name">Löneändring</field>
+            <field name="res_model">hr.payroll.salary.change</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+        </record>
+
+        <menuitem id="menu_hr_payroll_salary_change"
+                  name="Löneändring"
+                  parent="payroll.payroll_menu_configuration"
+                  action="action_hr_payroll_salary_change"
+                  sequence="30"/>
+    </data>
+</odoo>
