@@ -24,6 +24,7 @@ Extends l10n_se_hr_payroll_tiichri with 2026 data:
         'data/data_payroll_run_2026.xml',
         'data/data_payslips_2026.xml',
         'data/data_contracts_2023_2026.xml',
+        'data/data_corrections_2026.xml',
     ],
     'auto_install': False,
     'installable': True,
