@@ -40,6 +40,7 @@ Swedish Payslip additions for Benefits
         'data/hr_benefit_budget_type_data.xml',
         'security/ir.model.access.csv',
         'views/hr_benefit_views.xml',
+        'views/benefit_budget_report_views.xml',
     ],
     'auto_install': True,
     'installable': True,

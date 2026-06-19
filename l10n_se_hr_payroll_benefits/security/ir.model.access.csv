@@ -7,3 +7,4 @@ access_hr_benefit_budget,hr.benefit.budget,model_hr_benefit_budget,base.group_us
 access_hr_benefit_budget_line,hr.benefit.budget.line,model_hr_benefit_budget_line,base.group_user,1,1,1,1
 access_hr_benefit_budget_type,hr.benefit.budget.type,model_hr_benefit_budget_type,base.group_user,1,0,0,0
 access_hr_benefit_budget_generate,hr.benefit.budget.generate,model_hr_benefit_budget_generate,base.group_user,1,1,1,1
+access_benefit_budget_report_wizard,benefit.budget.report.wizard,model_benefit_budget_report_wizard,base.group_user,1,1,1,1
