@@ -73,6 +73,7 @@ Swedish Payroll Rules.
         # last
         'views/general_journal_view.xml',
         'views/hr_employee_views.xml',
+        'views/hr_job_views.xml',
         'views/hr_payslip_template.xml',
         'views/hr_payslip_run_views.xml',
         # 'views/res_config_settings_views.xml',

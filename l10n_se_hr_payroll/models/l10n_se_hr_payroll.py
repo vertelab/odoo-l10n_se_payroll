@@ -156,9 +156,11 @@ class hr_employee(models.Model):
 
     nyk_id = fields.Many2one(
         'hr.nyk',
+        related='job_id.nyk_id',
         string='NYK Code',
+        store=True,
         help='Swedish Occupational Classification Code (NYK).'
-             ' Requires l10n_se_payroll_sn_report module.'
+             ' Inherited from job position.'
     )
 
     @api.depends("birthday")

@@ -30,7 +30,7 @@
                     <field name="registration_number"/>
                 </xpath>
                 <xpath expr="//field[@name='job_id']" position="after">
-                    <field name="nyk_id"/>
+                    <field name="nyk_id" invisible="1"/>
                 </xpath>
             </field>
         </record>
