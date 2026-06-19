@@ -10,6 +10,10 @@
                 <xpath expr="//field[@name='department_id']" position="after">
                     <field name="nyk_id"/>
                 </xpath>
+                <!-- Add chatter -->
+                <xpath expr="//sheet" position="after">
+                    <chatter/>
+                </xpath>
                 <!-- Add statistics page to existing notebook -->
                 <xpath expr="//page[@name='recruitment_page']" position="after">
                     <page string="Lönestatistik" name="salary_stats_page">
