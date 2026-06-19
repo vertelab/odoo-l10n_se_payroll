@@ -2,6 +2,37 @@
 <odoo>
     <data noupdate="1">
 
+        <!-- Close tiichri contracts (set end date to 2022-12-31) -->
+        <record id="l10n_se_hr_payroll_tiichri.contract_asse_2" model="hr.contract">
+            <field name="date_end">2022-12-31</field>
+            <field name="state">close</field>
+        </record>
+        <record id="l10n_se_hr_payroll_tiichri.contract_camilla_2" model="hr.contract">
+            <field name="date_end">2022-12-31</field>
+            <field name="state">close</field>
+        </record>
+        <record id="l10n_se_hr_payroll_tiichri.contract_doris_2" model="hr.contract">
+            <field name="date_end">2022-12-31</field>
+            <field name="state">close</field>
+        </record>
+        <record id="l10n_se_hr_payroll_tiichri.contract_frans_2" model="hr.contract">
+            <field name="date_end">2022-12-31</field>
+            <field name="state">close</field>
+        </record>
+        <record id="l10n_se_hr_payroll_tiichri.contract_gustav_2" model="hr.contract">
+            <field name="date_end">2022-12-31</field>
+            <field name="state">close</field>
+        </record>
+        <record id="l10n_se_hr_payroll_tiichri.contract_helmer_2" model="hr.contract">
+            <field name="date_end">2022-12-31</field>
+            <field name="state">close</field>
+        </record>
+        <record id="l10n_se_hr_payroll_tiichri.contract_karin" model="hr.contract">
+            <field name="date_end">2022-12-31</field>
+            <field name="state">close</field>
+        </record>
+
+
         <!-- Asse Aronsson — 2023 -->
         <record id="contract_asse_2023" model="hr.contract">
             <field name="name">Asse Aronsson Avtal 2023</field>
