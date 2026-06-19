@@ -209,7 +209,60 @@
             </field>
         </record>
 
+        <!-- Budget generate wizard -->
+        <record id="view_hr_benefit_budget_generate_form" model="ir.ui.view">
+            <field name="name">hr.benefit.budget.generate.form</field>
+            <field name="model">hr.benefit.budget.generate</field>
+            <field name="arch" type="xml">
+                <form string="Generate Benefit Budget">
+                    <sheet>
+                        <div class="oe_title"><h1>Generate Benefit Budget</h1></div>
+                        <group>
+                            <field name="type_id"/>
+                            <field name="year"/>
+                            <field name="name"/>
+                            <field name="code"/>
+                            <field name="max_amount" widget="monetary"
+                                   options="{'currency_field': 'currency_id'}"/>
+                            <field name="salary_rule_id"/>
+                        </group>
+                        <group string="Select Employees">
+                            <field name="department_id"
+                                   placeholder="Filter by department..."/>
+                            <field name="job_id"
+                                   placeholder="Filter by job..."/>
+                            <field name="employee_ids" widget="many2many_tags"
+                                   placeholder="Employees (auto-filled from filter)"/>
+                        </group>
+                        <group string="Preview">
+                            <field name="preview_text" nolabel="1" colspan="2"/>
+                        </group>
+                    </sheet>
+                    <footer>
+                        <button name="action_generate"
+                                string="Generate"
+                                type="object" class="btn-primary"
+                                confirm="Create budget lines for selected employees?"/>
+                        <button string="Cancel" class="btn-secondary" special="cancel"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_hr_benefit_budget_generate" model="ir.actions.act_window">
+            <field name="name">Generate Benefit Budget</field>
+            <field name="res_model">hr.benefit.budget.generate</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+        </record>
+
         <!-- Menus -->
+        <menuitem id="menu_hr_benefit_budget_generate"
+                  name="Generate Budget"
+                  parent="menu_hr_benefit_budget"
+                  action="action_hr_benefit_budget_generate"
+                  sequence="10"/>
+
         <menuitem id="menu_hr_benefit_budget"
                   name="Benefit Budgets"
                   parent="payroll.payroll_menu_configuration"
