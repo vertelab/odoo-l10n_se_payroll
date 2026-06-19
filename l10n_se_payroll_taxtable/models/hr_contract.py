@@ -139,10 +139,10 @@ class HRContract(models.Model):
         try:
             response = urllib.request.urlopen(request_url)
         except HTTPError as e:
-            raise Warning(
+            raise UserError(
                 f"felkod: {e.code}, self.table_number: {self.table_number}, reg_ex_income_to: {reg_ex_income_to}, year: {year}, reg_ex_income_from: {reg_ex_income_from}")
         except URLError as e:
-            raise Warning(
+            raise UserError(
                 f"felkod: {e.reason}, self.table_number: {self.table_number}, reg_ex_income_to: {reg_ex_income_to}, year: {year}, reg_ex_income_from: {reg_ex_income_from}")
         else:
             response = response.read()
@@ -239,10 +239,10 @@ class HRContract(models.Model):
         try:
             response = urllib.request.urlopen(request_url)
         except HTTPError as e:
-            raise Warning(
+            raise UserError(
                 f"felkod: {e.code}, self.table_number: {self.table_number}, reg_ex_income_to: {reg_ex_income_to}, year: {year}, reg_ex_income_from: {reg_ex_income_from}")
         except URLError as e:
-            raise Warning(
+            raise UserError(
                 f"felkod: {e.reason}, self.table_number: {self.table_number}, reg_ex_income_to: {reg_ex_income_to}, year: {year}, reg_ex_income_from: {reg_ex_income_from}")
         else:
             response = response.read()

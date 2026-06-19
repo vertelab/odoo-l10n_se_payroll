@@ -32,46 +32,6 @@ msgid "Payslips Batches"
 msgstr "Lönekörning"
 
 #. module: l10n_se_hr_payroll
-#: model:ir.actions.act_window,name:l10n_se_hr_payroll.action_sn_lonestatistik
-msgid "SN Salary Statistics"
-msgstr "SN Lönestatistik"
-
-#. module: l10n_se_hr_payroll
-#: model:ir.ui.menu,name:l10n_se_hr_payroll.menu_sn_lonestatistik
-msgid "SN Salary Statistics"
-msgstr "SN Lönestatistik"
-
-#. module: l10n_se_hr_payroll
-#: model_terms:ir.ui.view,arch_db:l10n_se_hr_payroll.sn_lonestatistik_wizard_form
-msgid "Salary Statistics"
-msgstr "Lönestatistik"
-
-#. module: l10n_se_hr_payroll
-#: model_terms:ir.ui.view,arch_db:l10n_se_hr_payroll.sn_lonestatistik_wizard_form
-msgid "Export CSV"
-msgstr "Exportera CSV"
-
-#. module: l10n_se_hr_payroll
-#: model_terms:ir.ui.view,arch_db:l10n_se_hr_payroll.sn_lonestatistik_wizard_form
-msgid "Print Report"
-msgstr "Skriv ut rapport"
-
-#. module: l10n_se_hr_payroll
-#: model_terms:ir.ui.view,arch_db:l10n_se_hr_payroll.sn_lonestatistik_wizard_form_download
-msgid "Download Ready"
-msgstr "Nedladdning klar"
-
-#. module: l10n_se_hr_payroll
-#: model_terms:ir.ui.view,arch_db:l10n_se_hr_payroll.sn_lonestatistik_wizard_form_download
-msgid "Export Again"
-msgstr "Exportera på nytt"
-
-#. module: l10n_se_hr_payroll
-#: model_terms:ir.ui.view,arch_db:l10n_se_hr_payroll.sn_lonestatistik_wizard_form_download
-msgid "Print Report"
-msgstr "Skriv ut rapport"
-
-#. module: l10n_se_hr_payroll
 #: model:ir.model.fields,field_description:l10n_se_hr_payroll.field_hr_payslip__gl_amount
 msgid "Grundlön"
 msgstr "Grundlön"

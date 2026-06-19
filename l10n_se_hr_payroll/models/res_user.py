@@ -13,7 +13,6 @@ _logger = logging.getLogger(__name__)
 class UserPayslipLine(models.TransientModel):
     _name = "user.payslip.line"
     _description = "User Payslip Line"
-    # ~ salary_rule_id = fields.Many2one("user.salary.rule", string="Rule", required=True)
     salary_rule = fields.Char(string='Salary Rule', size=10, trim=True, )
     code = fields.Char(string="Code")
     name = fields.Char(string="Name")
@@ -129,10 +128,6 @@ class UserHolidayStatus(models.TransientModel):
 class UserPayslip(models.TransientModel):
     _name = "user.payslip"
     _description = "User Payslip"
-
-    # def get_legal_leaves_consumed(self, year = False):
-    #     self = self.sudo()
-    #     return self.payslip_id.get_legal_leaves_consumed(year)
 
     def get_legal_leaves_consumed(self):
         self = self.sudo()

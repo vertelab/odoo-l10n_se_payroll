@@ -72,7 +72,7 @@
             <field name="name">Lönespecifikation för Juni - Karin Kullberg</field>
             <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons" />
             <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_karin_employee" />
-            <field name="period_id" ref="period_06_2022" />
+            <field name="period_id" ref="l10n_se_hr_payroll_tiichri.period_06_2022" />
             <field name="date_from">2022-06-01</field>
             <field name="date_to">2022-06-30</field>
             <field name="struct_id" ref="l10n_se_hr_payroll_tiichri.hr_payroll_structure_arb_tim_vt" />
@@ -107,7 +107,7 @@
             <field name="name">Lönespecifikation för Juli - Karin Kullberg</field>
             <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons" />
             <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_karin_employee" />
-            <field name="period_id" ref="period_07_2022" />
+            <field name="period_id" ref="l10n_se_hr_payroll_tiichri.period_07_2022" />
             <field name="date_from">2022-07-01</field>
             <field name="date_to">2022-07-31</field>
             <field name="struct_id" ref="l10n_se_hr_payroll_tiichri.hr_payroll_structure_arb_tim_vt" />
@@ -141,7 +141,7 @@
             <field name="name">Lönespecifikation för Augusti - Karin Kullberg</field>
             <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons" />
             <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_karin_employee" />
-            <field name="period_id" ref="period_08_2022" />
+            <field name="period_id" ref="l10n_se_hr_payroll_tiichri.period_08_2022" />
             <field name="date_from">2022-08-01</field>
             <field name="date_to">2022-08-31</field>
             <field name="struct_id" ref="l10n_se_hr_payroll_tiichri.hr_payroll_structure_arb_tim_vt" />

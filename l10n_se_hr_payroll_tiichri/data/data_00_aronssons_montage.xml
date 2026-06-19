@@ -85,109 +85,97 @@
         <record id="period_01_2022" model="account.period">
             <field name="name">01/2022</field>
             <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons" />
-            <field name="type_id" ref="date_range_type_company_aronssons" />
             <field name="date_start" eval="'2022-01-01'"/>
-            <field name="date_end" eval="'2022-01-31'"/>
+            <field name="date_stop" eval="'2022-01-31'"/>
             <field name="fiscalyear_id" ref="company_aronssons_year_2022" />
         </record>
 
         <record id="period_02_2022" model="account.period">
             <field name="name">02/2022</field>
             <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons" />
-            <field name="type_id" ref="date_range_type_company_aronssons" />
             <field name="date_start">2022-02-01</field>
-            <field name="date_end">2022-02-28</field>
+            <field name="date_stop">2022-02-28</field>
             <field name="fiscalyear_id" ref="company_aronssons_year_2022" />
         </record>
 
         <record id="period_03_2022" model="account.period">
             <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons" />
             <field name="fiscalyear_id" ref="company_aronssons_year_2022" />
-            <field name="type_id" ref="date_range_type_company_aronssons" />
             <field name="name">03/2022</field>
             <field name="date_start">2022-03-01</field>
-            <field name="date_end">2022-03-31</field>
+            <field name="date_stop">2022-03-31</field>
         </record>
 
         <record id="period_04_2022" model="account.period">
             <field name="name">04/2022</field>
             <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons" />
             <field name="fiscalyear_id" ref="company_aronssons_year_2022" />
-            <field name="type_id" ref="date_range_type_company_aronssons" />
             <field name="date_start">2022-04-01</field>
-            <field name="date_end">2022-04-30</field>
+            <field name="date_stop">2022-04-30</field>
         </record>
 
         <record id="period_05_2022" model="account.period">
             <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons" />
             <field name="fiscalyear_id" ref="company_aronssons_year_2022" />
-            <field name="type_id" ref="date_range_type_company_aronssons" />
             <field name="name">05/2022</field>
             <field name="date_start">2022-05-01</field>
-            <field name="date_end">2022-05-31</field>
+            <field name="date_stop">2022-05-31</field>
         </record>
 
         <record id="period_06_2022" model="account.period">
             <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons" />
             <field name="fiscalyear_id" ref="company_aronssons_year_2022" />
-            <field name="type_id" ref="date_range_type_company_aronssons" />
             <field name="name">06/2022</field>
             <field name="date_start">2022-06-01</field>
-            <field name="date_end">2022-06-30</field>
+            <field name="date_stop">2022-06-30</field>
         </record>
 
         <record id="period_07_2022" model="account.period">
             <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons" />
             <field name="fiscalyear_id" ref="company_aronssons_year_2022" />
-            <field name="type_id" ref="date_range_type_company_aronssons" />
             <field name="name">07/2022</field>
             <field name="date_start">2022-07-01</field>
-            <field name="date_end">2022-07-31</field>
+            <field name="date_stop">2022-07-31</field>
         </record>
 
         <record id="period_08_2022" model="account.period">
             <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons" />
             <field name="fiscalyear_id" ref="company_aronssons_year_2022" />
-            <field name="type_id" ref="date_range_type_company_aronssons" />
             <field name="name">08/2022</field>
             <field name="date_start">2022-08-01</field>
-            <field name="date_end">2022-08-31</field>
+            <field name="date_stop">2022-08-31</field>
         </record>
 
         <record id="period_09_2022" model="account.period">
             <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons" />
             <field name="fiscalyear_id" ref="company_aronssons_year_2022" />
-            <field name="type_id" ref="date_range_type_company_aronssons" />
             <field name="name">09/2022</field>
             <field name="date_start">2022-09-01</field>
-            <field name="date_end">2022-09-30</field>
+            <field name="date_stop">2022-09-30</field>
         </record>
 
         <record id="period_10_2022" model="account.period">
             <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons" />
             <field name="fiscalyear_id" ref="company_aronssons_year_2022" />
-            <field name="type_id" ref="date_range_type_company_aronssons" />
             <field name="name">10/2022</field>
             <field name="date_start">2022-10-01</field>
-            <field name="date_end">2022-10-31</field>
+            <field name="date_stop">2022-10-31</field>
         </record>
 
         <record id="period_11_2022" model="account.period">
             <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons" />
             <field name="fiscalyear_id" ref="company_aronssons_year_2022" />
-            <field name="type_id" ref="date_range_type_company_aronssons" />
             <field name="name">11/2022</field>
             <field name="date_start">2022-11-01</field>
-            <field name="date_end">2022-11-30</field>
+            <field name="date_stop">2022-11-30</field>
         </record>
 
         <record id="period_12_2022" model="account.period">
             <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons" />
             <field name="fiscalyear_id" ref="company_aronssons_year_2022" />
-            <field name="type_id" ref="date_range_type_company_aronssons" />
             <field name="name">12/2022</field>
             <field name="date_start">2022-12-01</field>
-            <field name="date_end">2022-12-31</field>
+            <field name="date_stop">2022-12-31</field>
         </record>
 
         <!-- Projekt för ledighet och närvaro för timesheet-generering -->

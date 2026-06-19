@@ -1,0 +1,62 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* l10n_se_payroll_sn_report
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 18.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-06-18 08:00+0000\n"
+"PO-Revision-Date: 2026-06-18 08:00+0100\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: sv\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#. module: l10n_se_payroll_sn_report
+#: model:ir.actions.act_window,name:l10n_se_payroll_sn_report.action_sn_lonestatistik
+msgid "SN Salary Statistics"
+msgstr "SN Lönestatistik"
+
+#. module: l10n_se_payroll_sn_report
+#: model:ir.ui.menu,name:l10n_se_payroll_sn_report.menu_sn_lonestatistik
+msgid "SN Salary Statistics"
+msgstr "SN Lönestatistik"
+
+#. module: l10n_se_payroll_sn_report
+#: model_terms:ir.ui.view,arch_db:l10n_se_payroll_sn_report.sn_lonestatistik_wizard_form
+msgid "Salary Statistics"
+msgstr "Lönestatistik"
+
+#. module: l10n_se_payroll_sn_report
+#: model_terms:ir.ui.view,arch_db:l10n_se_payroll_sn_report.sn_lonestatistik_wizard_form
+msgid "Export CSV"
+msgstr "Exportera CSV"
+
+#. module: l10n_se_payroll_sn_report
+#: model_terms:ir.ui.view,arch_db:l10n_se_payroll_sn_report.sn_lonestatistik_wizard_form
+msgid "Print Report"
+msgstr "Skriv ut rapport"
+
+#. module: l10n_se_payroll_sn_report
+#: model_terms:ir.ui.view,arch_db:l10n_se_payroll_sn_report.sn_lonestatistik_wizard_form_download
+msgid "Download Ready"
+msgstr "Nedladdning klar"
+
+#. module: l10n_se_payroll_sn_report
+#: model_terms:ir.ui.view,arch_db:l10n_se_payroll_sn_report.sn_lonestatistik_wizard_form_download
+msgid "Export Again"
+msgstr "Exportera på nytt"
+
+#. module: l10n_se_payroll_sn_report
+#: model_terms:ir.ui.view,arch_db:l10n_se_payroll_sn_report.sn_lonestatistik_wizard_form_download
+msgid "Print Report"
+msgstr "Skriv ut rapport"
+
+#. module: l10n_se_payroll_sn_report
+#: model:ir.model.fields,field_description:l10n_se_payroll_sn_report.field_hr_payslip__nyk_id
+msgid "NYK"
+msgstr "NYK-kod"

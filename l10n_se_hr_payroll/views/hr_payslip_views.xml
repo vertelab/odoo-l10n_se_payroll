@@ -21,7 +21,7 @@
         <field name="inherit_id" ref="payroll.hr_payslip_view_form"/>
         <field name="arch" type="xml">
             <xpath expr="//group[@name='right']" position="after">
-                <group string="Salary overview">
+                <group string="Löneöversikt">
                     <group>
                         <field name="gl_amount" widget="monetary"/>
                         <field name="bl_amount" widget="monetary"/>

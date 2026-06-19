@@ -45,11 +45,11 @@ Accounting Data for Swedish Payroll Rules.
     'maintainer': 'Vertel AB',
     'repository': 'https://github.com/vertelab/odoo-l10n_se_payroll',
     'depends': ['l10n_se_hr_payroll', 'payroll_account', 'l10n_se', 'payroll', 'l10n_se_extended'],
-    'auto_install': True,
+    'auto_install': False,
     'demo': [],
     'data':[
         #~ 'data/l10n_se_wizard.yml', # Leif
-        'data/l10n_se_hr_salary_rule_data.xml',
+        # 'data/l10n_se_hr_salary_rule_data.xml',
         'views/l10n_se_hr_payroll_account_view.xml',
         #'views/res_config_settings_views.xml',
 

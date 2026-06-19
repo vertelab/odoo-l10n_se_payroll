@@ -35,7 +35,7 @@ class SnLonestatistikWizard(models.TransientModel):
         }
 
     def action_print_report(self):
-        return self.env.ref('l10n_se_hr_payroll.action_report_sn_lonestatistik').report_action(self)
+        return self.env.ref('l10n_se_payroll_sn_report.action_report_sn_lonestatistik').report_action(self)
 
     def _generate_csv(self):
         output = io.StringIO()
@@ -101,7 +101,7 @@ class SnLonestatistikWizard(models.TransientModel):
                 gender,
                 birth_year,
                 employment_form,
-                '',  # arbetstid timmar
+                '',
                 nyk_code,
                 round(gl, 2),
                 round(rorliga, 2),

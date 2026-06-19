@@ -170,14 +170,3 @@ class hr_payslip(models.Model):
             if line.code == 'sem_forsk_dagar':
                 days += line.number_of_days
         return days
-
-    # def get_sick_days(self):
-
-    #     pass
-
-        # ~ days = 0.0
-        # ~ for line in self.worked_days_line_ids:
-        # ~ if self.env['hr.leave.type'].search(
-        # ~ [('name', '=', line.code), ('holiday_basis', '=', True)]) or line.code == 'WORK100':
-        # ~ days += line.number_of_days
-        # ~ return days

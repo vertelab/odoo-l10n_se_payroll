@@ -2,12 +2,6 @@
 <odoo>
     <data noupdate="1">
 
-        <!-- <record id="hr_benefit_carnet" model="hr.benefit">
-            <field name="name">forman_carnet</field>
-            <field name="desc">Bilförmån netto</field>
-            <field name="note" />
-        </record> -->
-
         <!-- ============================================ -->
         <!-- Långsiktiga förmåner                         -->
         <!-- ============================================ -->

@@ -73,24 +73,5 @@ result = result = round(tax_amount or 0.0) * -1
             </field>
         </record>
 
-        <!-- <record id="hr_salary_rule_side_income_tax" model="hr.salary.rule">
-            <field name="category_id" ref="l10n_se_hr_payroll.hr_salary_rule_category_NETAVG" />
-            <field name="company_id" eval="False"/>
-            <field name="code">skatt_sido</field>
-            <field name="name">Sidoinkomstskatt (30%)</field>
-            <field name="sequence">210</field>
-            <field name="appears_on_payslip" eval="True"/>
-            <field name="condition_select">python</field>
-            <field name="condition_python">
-
-result = contract.type_id.name == 'Sidoinkomst'
-            </field>
-            <field name="amount_select">code</field>
-            <field name="amount_python_compute">
-
-result = categories.BRUTTO * 0.30 * -1
-            </field>
-        </record> -->
-
     </data>
 </odoo>

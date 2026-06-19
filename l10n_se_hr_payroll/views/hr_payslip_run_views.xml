@@ -84,7 +84,7 @@
             </xpath>
 
             <xpath expr="//group[@name='other']" position="after">
-                <group string="Salary overview">
+                <group string="Löneöversikt">
                     <group>
                         <field name="gl_amount" widget="monetary"/>
                         <field name="bl_amount" widget="monetary"/>

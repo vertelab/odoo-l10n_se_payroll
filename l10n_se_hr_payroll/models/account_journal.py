@@ -27,8 +27,6 @@ from odoo import http
 from odoo.http import request
 from odoo import tools
 
-import random
-
 import logging
 
 _logger = logging.getLogger(__name__)

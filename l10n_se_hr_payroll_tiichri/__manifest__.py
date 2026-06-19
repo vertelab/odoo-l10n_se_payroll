@@ -39,6 +39,7 @@ We create test data to seven employees, to use while developing our own code. To
     'depends': [
         'l10n_se_hr_payroll_benefits',
         'l10n_se_hr_holidays',  
+        'l10n_se_hr_payroll_account',
         #'l10n_se_hr_payroll',
         #'hr_contract',
         #'payroll',
@@ -49,6 +50,7 @@ We create test data to seven employees, to use while developing our own code. To
         'data/data_00_aronssons_montage.xml',
         'data/data_resource_calendar_tiichri.xml',
         'data/data_payroll_structure_tiichri.xml',
+        'data/data_payroll_run_tiichri.xml',
         #'data/data_payroll_tiichri.xml',
         'data/data_01_asse.xml',
         'data/data_02_camilla.xml',

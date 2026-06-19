@@ -18,7 +18,7 @@ _logger = logging.getLogger(__name__)
 # $ odoo -c /etc/odoo/odoo.conf -d odoo-tiichri -i l10n_se_hr_payroll_tiichri --test-enable
 #
 
-@tagged('l10n_se_payroll_tiichri', 'june')
+@tagged('at_install', 'l10n_se_payroll_tiichri', 'june')
 class TestPayslipJune(TransactionCase):
     ## Test 1
     def test_asse_net(self):   

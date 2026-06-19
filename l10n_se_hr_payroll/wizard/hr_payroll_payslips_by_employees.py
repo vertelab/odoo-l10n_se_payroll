@@ -16,14 +16,12 @@ class MailActivity(models.Model):
             else:
                 record.is_payslip = False
 
-    is_payslip = fields.Boolean(compute=compute_is_payslip)
+    is_payslip = fields.Boolean(compute=compute_is_payslip, store=True)
     employee_id = fields.Many2one(comodel_name="hr.employee")
 
 class MailActivityType(models.Model):
     _inherit = "mail.activity.type"
     is_payslip = fields.Boolean()
-    #employee_id = fields.Many2one(comodel_name="hr.employee")
-    #fields.Many2many(comodel_name='hr.leave', compute='_holiday_ids')
 
 class HrPayslipEmployees(models.TransientModel):
     _inherit = "hr.payslip.employees"

@@ -2,7 +2,7 @@
 ##############################################################################
 #
 #    Odoo, Open Source Enterprise Management Solution, third party addon
-#    Copyright (C) 2014- Vertel AB (<http://vertel.se>).
+#    Copyright (C) 2024- Vertel AB (<http://vertel.se>).
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as
@@ -18,13 +18,6 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
-from . import l10n_se_hr_payroll
-from . import account_journal
-from . import hr_payslip_run
-from . import res_user
-from . import res_config_settings
-from . import hr_contract
-from . import hr_payroll_structure
-from . import hr_payslip
-from . import resource_calendar
-from . import hr_employee
+from . import models
+from . import wizard
+from . import report

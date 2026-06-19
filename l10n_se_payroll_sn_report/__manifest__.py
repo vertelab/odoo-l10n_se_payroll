@@ -20,37 +20,26 @@
 ##############################################################################
 
 {
-    'name': 'l10n_se_payroll: Holiday Pay with Accounting',
-    'version': '0.1',
-    # Version ledger: XX.0 = Odoo version. 1 = Major. Non regressionable code. 2 = Minor. New features that are regressionable. 3 = Bug fixes
-    'summary': 'Accounting Data for Swedish Holiday Pay Rules.',
+    'name': 'l10n_se_payroll_sn_report: (SN Lönestatistik & NYK-koder)',
+    'version': '18.0.1.0.0',
+    'summary': 'SN Lönestatistik rapport och NYK-koder för Svenskt Näringsliv',
     'category': 'Payroll Localization',
-    #'sequence': '1'
     'author': 'Vertel AB',
-    'website': 'https://vertel.se/apps/odoo-l10n_se_payroll/l10n_se_hr_holidays_account',
-    'images': ['static/description/banner.png'], # 560x280 px.
+    'website': 'https://vertel.se/apps/odoo-l10n_se_payroll/l10n_se_payroll_sn_report',
     'license': 'AGPL-3',
-    'contributor': '',
     'maintainer': 'Vertel AB',
     'repository': 'https://github.com/vertelab/odoo-l10n_se_payroll',
-    'depends': ['l10n_se_hr_holidays', 'l10n_se_hr_payroll_account'],
-    'description': """
-Accounting Data for Swedish Holiday Pay Rules.
-==============================================
-
-  This module depends on OCA:
-  git@github.com:OCA/payroll.git
-  git@github.com:OCA/timesheet.git
-  git@github.com:OCA/web.git
-  
-    """,
-
-    'auto_install': False,
-    'demo': [],
-    'data':[
-        # 'data/l10n_se_hr_salary_rule_data.xml',
+    'depends': [
+        'l10n_se_hr_payroll',
     ],
-    'installable': True
+    'auto_install': False,
+    'data': [
+        'security/ir.model.access.csv',
+        'data/hr_nyk_data.xml',
+        'views/hr_nyk_views.xml',
+        'wizard/sn_lonestatistik_wizard_views.xml',
+        'report/sn_lonestatistik_report.xml',
+    ],
+    'installable': True,
+    'application': False,
 }
-
-# vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:

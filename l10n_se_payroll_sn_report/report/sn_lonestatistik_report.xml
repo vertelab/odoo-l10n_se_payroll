@@ -5,7 +5,7 @@
             <field name="name">SN Lönestatistik</field>
             <field name="model">sn.lonestatistik.wizard</field>
             <field name="report_type">qweb-pdf</field>
-            <field name="report_name">l10n_se_hr_payroll.report_sn_lonestatistik</field>
+            <field name="report_name">l10n_se_payroll_sn_report.report_sn_lonestatistik</field>
             <field name="print_report_name">'SN_Lonestatistik_%s' % (object.year)</field>
             <field name="binding_model_id" ref="model_sn_lonestatistik_wizard"/>
             <field name="binding_type">report</field>

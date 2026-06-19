@@ -23,8 +23,6 @@ from odoo.exceptions import RedirectWarning, UserError, ValidationError
 from odoo import models, fields, api, _
 from odoo.tools.safe_eval import safe_eval as eval
 from datetime import timedelta, date, datetime, time
-import random
-import dateutil.relativedelta
 import calendar
 
 import logging
@@ -51,11 +49,6 @@ class hr_salary_rule(models.Model):
     _inherit = 'hr.salary.rule'
 
     salary_art = fields.Char(string='Salary art', help="Code to interchange payslip rows with other systems")
-
-    # payslip_character = fields.Selection([
-    #     ("minus", "Minus"),
-    #     ("parentheses", "Parentheses"),
-    # ],default=False)
 
     @api.model
     def init_records(self):
@@ -97,20 +90,9 @@ class hr_contract(models.Model):
                                readonly=True,
                                help="Ange skattetabell/kolumn/ev jämkning som ligger till grund för angivet "
                                     "preleminärskatteavdrag")
-    # ~ car_company_amount = fields.Float('Bruttolöneavdrag för bil', digits_compute=dp.get_precision('Payroll'),
-    # help="Bruttolöneavdraget för företagsbil, dvs företagets kostnad för företagsbilen") ~ car_employee_deduction =
-    # fields.Float(string='Förmånsvärde för bil', digits_compute=dp.get_precision('Payroll'), help="Beräknat
-    # förmånsvärde för bil från skatteverket",) ~ car_deduction_url = fields.Char(string='Förmånsvärdesberäkning
-    # SKV', default="http://www.skatteverket.se/privat/skatter/biltrafik/bilformansberakning", readonly=True,
-    # help="Beräknat förmånsvärde för bil från skatteverket")
     vacation_days = fields.Float(string='Semesterdagar', digits='Payroll', help="Sparad semester i dagar.")
     annual_vacation_days = fields.Float(string='Årlig semesterrätt', default=25.0, help="Antal avtalade semesterdagar per år.")
     advance_vacation_days = fields.Float(string='Förskottssemesterdagar', default=0, help="Antal förskottssemesterdagar, nyanställd.")
-
-    # ~ office_fund = fields.Float(string='Office fund', digits_compute=dp.get_precision('Payroll'), help="Fund for
-    # personal office supplies",)
-
-    # hourly_employee = fields.Float(string="Hourly employee")
 
     def _get_param(self, param, value):
         if not self.env['ir.config_parameter'].get_param(param):
@@ -147,14 +129,6 @@ class hr_contract(models.Model):
             # _logger.error(f'get_leave_days: {code} {worked_days.dict}')
             # ~ _logger.error(f'get_leave_days: {line.number_of_days}')
             return line.number_of_days if line else 0.0
-
-    # def get_leave_days2(self, rule_id, worked_days): #rule_id = "sem_bet" if rule_id and rule_id == "sem_bet":
-    # _logger.warning("LOOK HERE"*100) _logger.error(f'get_leave_days: {self} {rule_id} {worked_days.dict}') code =
-    # self.env.ref(rule_id).code if len(rule_id.split('.')) == 2 else rule_id #{'WORK100': hr.payslip.worked_days(15,
-    # ), 'Legal Leaves 2022': hr.payslip.worked_days(13,), 'Legal Leaves 2023': hr.payslip.worked_days(14,)} #line =
-    # worked_days.dict.get(code,False) if rule_id and rule_id == "sem_bet": _logger.error(f'get_leave_days: {code} {
-    # worked_days.dict}') for key,val in worked_days.dict: _logger.warning(f"{key=} {val=}") if "Legal Leaves" in
-    # key: line.append(val) if len(line) == 0: line = False else: return 4 return line.number_of_days if line else 0.0
 
     def get_leave_hours(self, rule_id, worked_days):
         code = self.env.ref(rule_id).code if len(rule_id.split('.')) == 2 else rule_id
@@ -396,46 +370,6 @@ class hr_payslip(models.Model):
 
         return res
 
-    # Work in progres
-    # allocation_display = fields.Char(related='employee_id.allocation_display') #Dont know about this one?
-    # collected_vacation_days = fields.Date(string="Collected Vacation days", compute="_compute_vacation_days")
-
-    # def _compute_vacation_days(self):
-    #     year = date.strftime(date.today().year, "%Y")
-    #     _logger.error(f"{year=}")
-    #     april = date.strftime('03-01', "%m-%d").strftime('%m-%d')
-    #     employed_days = date.today()
-    #     _logger.error(f"{date.today()=}")
-    #     _logger.error(f"{employed_days=}")
-    #     allocation = self.allocation_display
-    #     _logger.error(f"{allocation=}")
-    #     step = allocation * employed_days
-    #     _logger.error(f"{self.allocation_display=}")
-    #     _logger.error(f"{step=}")
-    #     res = step/date.year
-    #     _logger.error(f"{date.year=}")
-    #     _logger.error(f"{res=}")
-    #     return res
-
-    # last_salary_payslip = fields.Boolean(string="Last Salary", readonly=False)
-
-    # @api.onchange('last_salary_payslip')
-    # def onchange_employee_last_salary(self):
-    #     # super(hr_payslip, self).onchange_employee_last_salary()
-    #     _logger.error(f"{self.last_salary_payslip=}")
-    #     if self.last_salary_payslip == True:
-    #         self.date_from = self.period_id.date_start - dateutil.relativedelta.relativedelta(months=1)
-    #         _logger.error(f"{self.date_from=}")
-    #         if self.contract_id.date_end:
-    #             self.date_to = self.contract_id.date_end
-    #         elif self.contract_id.date_end == None:
-    #             self.date_to = self.period_id.date_stop
-    #         _logger.error(f"{self.date_to=}")
-    #         self.name = _("Salary Slip of %s for %s") % (
-    #             self.employee_id.name,
-    #             self.period_id.date_start.strftime('%B-%Y') if self.period_id else 'None',
-    #         )
-
     def get_number_of_days(self):
         year = self.date_from.year
         if year % 4 == 0:
@@ -514,12 +448,6 @@ class hr_payslip(models.Model):
                 'details_by_salary_rule_category').filtered(lambda c: c.code in codes):
             res[line.code] += line.total
         return res
-        # raise Warning('Abe was here %s' % res)
-        #
-        # return sum(self.env['hr.payslip'].search(
-        #     [('employee_id', '=', self.employee_id.id), ('date_from', '>=', start_date),
-        #      ('date_to', '<=', stop_date)]).mapped('details_by_salary_rule_category').filtered(
-        #     lambda l: l.code == code).mapped('total'))
 
     def _compute_leave_days(self, contract, day_from, day_to):
         """
