@@ -22,7 +22,7 @@
         <record id="hr_asse_user" model="res.users">
             <field name="name">Asse Aronsson</field>
             <field name="partner_id" ref="hr_asse_partner" />
-            <field name="login">Asse</field>
+            <field name="login">Asse26</field>
             <field name="company_id" ref="l10n_se_hr_payroll_26.company_aronssons"/>
             <field name="company_ids" eval="[
                 (4, ref('l10n_se_hr_payroll_26.company_aronssons')),

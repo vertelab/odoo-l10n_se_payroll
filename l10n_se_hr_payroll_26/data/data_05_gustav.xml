@@ -20,7 +20,7 @@
         <record id="hr_gustav_user" model="res.users">
             <field name="name">Gustav Groth</field>
             <field name="partner_id" ref="hr_gustav_partner" />
-            <field name="login">Gustav</field>
+            <field name="login">Gustav26</field>
             <field name="company_id" ref="l10n_se_hr_payroll_26.company_aronssons"/>
             <field name="company_ids" eval="[
                 (4, ref('l10n_se_hr_payroll_26.company_aronssons')),
