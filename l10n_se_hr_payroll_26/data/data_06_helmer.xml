@@ -54,7 +54,7 @@
             <field name="job_id" ref="job_id_assembly" />
             <field name="date_start">2011-04-01</field>
             <field name="first_contract_date">2011-04-01</field>
-            <field name="resource_calendar_id" ref="l10n_se_hr_payroll_26.resource_calendar_standard_twenty_six" />
+            <field name="resource_calendar_id" ref="l10n_se_hr_payroll_26.resource_calendar_standard_26" />
             <field name="struct_id" ref="l10n_se_hr_payroll_26.hr_payroll_structure_arb_tim" />
             <field name="table_number">30</field>
             <field name="column_number" eval="'column1'" />

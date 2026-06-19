@@ -56,7 +56,7 @@
             <field name="date_end">2026-08-31</field>
             <field name="first_contract_date">2026-06-01</field>
             <field name="struct_id" ref="l10n_se_hr_payroll_26.hr_payroll_structure_arb_tim_vt" />
-            <field name="resource_calendar_id" ref="l10n_se_hr_payroll_26.resource_calendar_part_time_80_twenty_six" />
+            <field name="resource_calendar_id" ref="l10n_se_hr_payroll_26.resource_calendar_part_time_80_26" />
             <field name="table_number">30</field>
             <field name="column_number" eval="'column1'"/>
             <field name="has_tax_equalization" eval="False"/>

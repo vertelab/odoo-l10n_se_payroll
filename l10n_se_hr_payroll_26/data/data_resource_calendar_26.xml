@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
     <data noupdate="1">
-        <record id="resource_calendar_standard_twenty_six" model="resource.calendar">
+        <record id="resource_calendar_standard_26" model="resource.calendar">
             <field name="name">Standard 40 timmar - Aronssons Montage 2026 AB</field>
             <field name="company_id" ref="l10n_se_hr_payroll_26.company_aronssons" />
             <field name="hours_per_day">8</field>
@@ -31,7 +31,7 @@
 
         </record>
 
-        <record id="resource_calendar_part_time_80_twenty_six" model="resource.calendar">
+        <record id="resource_calendar_part_time_80_26" model="resource.calendar">
             <field name="name">Deltid 32 timmar (80%) - Aronssons Montage 2026 AB</field>
             <field name="company_id" ref="l10n_se_hr_payroll_26.company_aronssons" />
             <field name="hours_per_day">8</field>
@@ -56,7 +56,7 @@
             ]" />
         </record>
 
-        <record id="resource_calendar_part_time_75_twenty_six" model="resource.calendar">
+        <record id="resource_calendar_part_time_75_26" model="resource.calendar">
             <field name="name">Deltid 30 timmar (75%) - Aronssons Montage 2026 AB</field>
             <field name="company_id" ref="l10n_se_hr_payroll_26.company_aronssons" />
             <field name="hours_per_day">6</field>
@@ -86,7 +86,7 @@
         </record>
 
         <!-- Konstiga kalendrar för att få till rätt historisk sysselsättningsgrad medan fortfarande kunna följa facit: -->
-        <record id="resource_calendar_part_time_66_twenty_six" model="resource.calendar">
+        <record id="resource_calendar_part_time_66_26" model="resource.calendar">
             <field name="name">Deltid 26.67 timmar (66.67%) - Aronssons Montage 2026 AB</field>
             <field name="company_id" ref="l10n_se_hr_payroll_26.company_aronssons" />
             <field name="hours_per_day">5.33</field>
@@ -115,7 +115,7 @@
             ]" />
         </record>
 
-        <record id="resource_calendar_part_time_73_twenty_six" model="resource.calendar">
+        <record id="resource_calendar_part_time_73_26" model="resource.calendar">
             <field name="name">Deltid 29.33 timmar (73.33%) - Aronssons Montage 2026 AB</field>
             <field name="company_id" ref="l10n_se_hr_payroll_26.company_aronssons" />
             <field name="hours_per_day">5.867</field>

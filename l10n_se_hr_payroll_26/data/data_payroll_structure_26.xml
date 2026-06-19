@@ -4,7 +4,7 @@
         <!-- ============================================ -->
         <!-- GRUNDSTRUKTUR - BAS (Gemensamt för alla)     -->
         <!-- ============================================ -->
-        <record id="hr_payroll_structure_gl_twenty_six" model="hr.payroll.structure">
+        <record id="hr_payroll_structure_gl_26" model="hr.payroll.structure">
             <field name="code">bas</field>
             <field name="name">Bas för löneavtal heltid (Ska ej användas i avtal)</field>
             <field name="company_id" ref="l10n_se_hr_payroll_26.company_aronssons" />
@@ -19,7 +19,7 @@
         <record id="hr_payroll_structure_tj_base" model="hr.payroll.structure">
             <field name="code">tj_bas</field>
             <field name="name">Tjänsteman Bas</field>
-            <field name="parent_id" ref="hr_payroll_structure_gl_twenty_six" />
+            <field name="parent_id" ref="hr_payroll_structure_gl_26" />
             <field name="company_id" ref="l10n_se_hr_payroll_26.company_aronssons" />
             <field name="rule_ids" eval="[(6,0,[
                     ref('l10n_se_hr_holidays.hr_salary_rule_final_holiday_compensation'),
@@ -487,7 +487,7 @@
         <record id="hr_payroll_structure_arb_base" model="hr.payroll.structure">
             <field name="code">arb_bas</field>
             <field name="name">Arbetare bas</field>
-            <field name="parent_id" ref="hr_payroll_structure_gl_twenty_six" />
+            <field name="parent_id" ref="hr_payroll_structure_gl_26" />
             <field name="company_id" ref="l10n_se_hr_payroll_26.company_aronssons" />
             <field name="rule_ids" eval="[(6,0,[
                     ref('l10n_se_hr_holidays.hr_salary_rule_expired_saved_leaves'),

@@ -64,7 +64,7 @@
             <field name="date_start">2002-01-01</field>
             <field name="date_end">2021-12-31</field>
             <field name="first_contract_date">2002-01-01</field>
-            <field name="resource_calendar_id" ref="l10n_se_hr_payroll_26.resource_calendar_part_time_73_twenty_six" />
+            <field name="resource_calendar_id" ref="l10n_se_hr_payroll_26.resource_calendar_part_time_73_26" />
             <field name="struct_id" ref="l10n_se_hr_payroll_26.hr_payroll_structure_tj_man" />
             <field name="table_number">30</field>
             <field name="column_number" eval="'column3'"/>
@@ -87,7 +87,7 @@
             <field name="date_start">2026-01-01</field>
             <field name="date_end">2026-10-07</field>
             <field name="first_contract_date">2002-01-01</field>
-            <field name="resource_calendar_id" ref="l10n_se_hr_payroll_26.resource_calendar_standard_twenty_six" />
+            <field name="resource_calendar_id" ref="l10n_se_hr_payroll_26.resource_calendar_standard_26" />
             <field name="struct_id" ref="l10n_se_hr_payroll_26.hr_payroll_structure_tj_man" />
             <field name="table_number">30</field>
             <field name="column_number" eval="'column3'" />
