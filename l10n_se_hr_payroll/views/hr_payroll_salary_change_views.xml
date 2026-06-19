@@ -17,13 +17,17 @@
                             <field name="percentage"
                                    invisible="change_type != 'percentage'"
                                    required="change_type == 'percentage'"/>
-                            <field name="new_wage"
+                            <field name="amount_change"
                                    invisible="change_type != 'absolute'"
                                    required="change_type == 'absolute'"/>
                         </group>
-                        <group string="Anställda">
+                        <group string="Urval">
+                            <field name="department_id"
+                                   placeholder="Filtrera på avdelning..."/>
+                            <field name="job_id"
+                                   placeholder="Filtrera på befattning..."/>
                             <field name="employee_ids" widget="many2many_tags"
-                                   placeholder="Välj anställda..."/>
+                                   placeholder="Anställda (automatiskt ifyllda från filter)"/>
                         </group>
                         <group string="Förhandsvisning">
                             <field name="preview_text" nolabel="1"
@@ -50,8 +54,8 @@
 
         <menuitem id="menu_hr_payroll_salary_change"
                   name="Löneändring"
-                  parent="payroll.payroll_menu_configuration"
+                  parent="hr.menu_hr_root"
                   action="action_hr_payroll_salary_change"
-                  sequence="30"/>
+                  sequence="25"/>
     </data>
 </odoo>

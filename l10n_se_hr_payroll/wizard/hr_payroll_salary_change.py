@@ -18,23 +18,33 @@ class HrPayrollSalaryChange(models.TransientModel):
         'res.company', string='Företag', required=True,
         default=lambda self: self.env.company)
 
+    department_id = fields.Many2one(
+        'hr.department', string='Avdelning',
+        domain="[('company_id', '=', company_id)]",
+        help="Filtrera anställda på avdelning")
+
+    job_id = fields.Many2one(
+        'hr.job', string='Befattning',
+        help="Filtrera anställda på befattning")
+
     employee_ids = fields.Many2many(
         'hr.employee', string='Anställda',
         domain="[('company_id', '=', company_id)]",
-        help="Välj de anställda som ska få löneändring")
+        help="Anställda som ska få löneändring")
 
     change_type = fields.Selection([
         ('percentage', 'Procentuell förändring'),
-        ('absolute', 'Fast nytt belopp'),
+        ('absolute', 'Fast belopp +/-'),
     ], string='Typ', default='percentage', required=True)
 
     percentage = fields.Float(
         string='Procent (%)', default=2.5,
         help="Positivt = ökning. T.ex. 2.5 för 2.5% ökning")
 
-    new_wage = fields.Float(
-        string='Ny månadslön',
-        help="Samma nya lön för samtliga valda anställda")
+    amount_change = fields.Float(
+        string='Belopp (kr)',
+        default=1000.0,
+        help="Belopp att lägga till (positivt) eller dra av (negativt) på nuvarande lön")
 
     effective_date = fields.Date(
         string='Gäller fr.o.m.', required=True,
@@ -44,11 +54,26 @@ class HrPayrollSalaryChange(models.TransientModel):
         string='Förhandsvisning', readonly=True,
         compute='_compute_preview')
 
-    @api.depends('employee_ids', 'change_type', 'percentage', 'new_wage')
+    # ---- Filter employees by department/job ----
+
+    @api.onchange('department_id', 'job_id')
+    def _onchange_filter(self):
+        """Auto-select employees matching department/job filter."""
+        domain = [('company_id', '=', self.company_id.id)]
+        if self.department_id:
+            domain.append(('department_id', '=', self.department_id.id))
+        if self.job_id:
+            domain.append(('job_id', '=', self.job_id.id))
+        employees = self.env['hr.employee'].search(domain)
+        self.employee_ids = [(6, 0, employees.ids)]
+
+    # ---- Preview ----
+
+    @api.depends('employee_ids', 'change_type', 'percentage', 'amount_change')
     def _compute_preview(self):
         for wiz in self:
             if not wiz.employee_ids:
-                wiz.preview_text = 'Välj anställda för att se förhandsvisning.'
+                wiz.preview_text = 'Välj avdelning/befattning eller anställda för förhandsvisning.'
                 continue
             lines = []
             total_old = total_new = 0.0
@@ -59,20 +84,23 @@ class HrPayrollSalaryChange(models.TransientModel):
                 if wiz.change_type == 'percentage':
                     new = round(old * (1 + wiz.percentage / 100))
                 else:
-                    new = wiz.new_wage or old
+                    new = old + wiz.amount_change
                 total_old += old
                 total_new += new
                 diff = new - old
                 sign = '+' if diff >= 0 else ''
                 lines.append(
                     f'{emp.name:<{name_w}}  {old:>10,.0f}  →  {new:>10,.0f} kr  ({sign}{diff:,.0f} kr)')
+            diff_total = total_new - total_old
+            sign_total = '+' if diff_total >= 0 else ''
             lines.append('─' * (name_w + 40))
             lines.append(
-                f'{"Totalt":<{name_w}}  {total_old:>10,.0f}  →  {total_new:>10,.0f} kr  (+{total_new - total_old:,.0f} kr)')
+                f'{"Totalt":<{name_w}}  {total_old:>10,.0f}  →  {total_new:>10,.0f} kr  ({sign_total}{diff_total:,.0f} kr)')
             wiz.preview_text = '\n'.join(lines)
 
+    # ---- Apply ----
+
     def apply_salary_changes(self):
-        """Stäng gamla kontrakt och skapa nya med uppdaterad lön."""
         self.ensure_one()
         Contract = self.env['hr.contract']
         created = 0
@@ -84,7 +112,7 @@ class HrPayrollSalaryChange(models.TransientModel):
             if self.change_type == 'percentage':
                 new_wage_val = round(old.wage * (1 + self.percentage / 100))
             else:
-                new_wage_val = self.new_wage
+                new_wage_val = old.wage + self.amount_change
             if new_wage_val == old.wage:
                 continue
 
