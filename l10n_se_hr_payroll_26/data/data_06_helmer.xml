@@ -1,0 +1,1471 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <record id="hr_helmer_partner" model="res.partner">
+            <field name="company_type">person</field>
+            <field name="name">Helmer Henriksson</field>
+            <field name="street">Högvägen 34</field>
+            <field name="zip">197 00</field>
+            <field name="city">Bro</field>
+            <field name="mobile">073-800000</field>
+            <field name="function">Montör</field>
+            <field name="company_id" ref="l10n_se_hr_payroll_twenty_six.company_aronssons"/>
+        </record>
+
+        <record id="bank_helmer" model="res.partner.bank">
+            <field name="acc_number">4333-888888</field>
+            <field name="partner_id" ref="hr_helmer_partner" />
+        </record>
+
+        <record id="hr_helmer_user" model="res.users">
+            <field name="name">Helmer Henriksson</field>
+            <field name="partner_id" ref="hr_helmer_partner" />
+            <field name="login">Helmer</field>
+            <field name="company_id" ref="l10n_se_hr_payroll_twenty_six.company_aronssons"/>
+            <field name="company_ids" eval="[
+                (4, ref('l10n_se_hr_payroll_twenty_six.company_aronssons')),
+            ]" />
+        </record>
+
+        <record id="hr_helmer_employee" model="hr.employee">
+            <field name="name">Helmer Henriksson</field>
+            <field name="birthday">1968-05-22</field>
+            <field name="work_location_id" ref="main_work_location" />
+            <field name="work_phone">073-400000</field>
+            <field name="work_email">helmer.henriksson@aronssons2026.se</field>
+            <field name="identification_id">680522-9272</field>
+            <field name="registration_number">301</field>
+            <field name="job_title">Montör</field>
+            <field name="tz" eval="'Europe/Stockholm'" />
+            <field name="address_id" ref="l10n_se_hr_payroll_twenty_six.company_aronssons_partner" />
+            <field name="company_id" ref="l10n_se_hr_payroll_twenty_six.company_aronssons" />
+            <field name="work_contact_id" ref="hr_helmer_partner" />
+            <field name="user_id" ref="hr_helmer_user" />
+        </record>
+
+        <record id="contract_helmer" model="hr.contract">
+            <field name="name">Helmer Henriksson Avtal</field>
+            <field name="wage">130</field>
+            <field name="type_id" ref="hr_contract_type" />
+            <field name="employee_id" ref="l10n_se_hr_payroll_twenty_six.hr_helmer_employee" />
+            <field name="company_id" ref="l10n_se_hr_payroll_twenty_six.company_aronssons"/>
+            <field name="schedule_pay" eval="'monthly'" />
+            <field name="state" eval="'open'" />
+            <field name="job_id" ref="job_id_assembly" />
+            <field name="date_start">2011-04-01</field>
+            <field name="first_contract_date">2011-04-01</field>
+            <field name="resource_calendar_id" ref="l10n_se_hr_payroll_twenty_six.resource_calendar_standard_twenty_six" />
+            <field name="struct_id" ref="l10n_se_hr_payroll_twenty_six.hr_payroll_structure_arb_tim" />
+            <field name="table_number">30</field>
+            <field name="column_number" eval="'column1'" />
+            <field name="has_tax_equalization" eval="False"/>
+            <field name="has_one_off_tax" eval="True"/>
+            <field name="one_off_tax">0.3</field>
+            <field name="has_attachment_of_earnings" eval="True"/>
+            <field name="attachment_of_earnings_start">2026-10-01</field>
+            <field name="attachment_amount">5500.0</field>
+            <field name="protected_amount">10800.0</field>
+            <field name="annual_vacation_days">25.0</field>
+        </record>
+
+        <record id="allocation_helmer_vacation" model="hr.leave.allocation">
+            <field name="name">Initial Vacation Allocation</field>
+            <field name="employee_id" ref="hr_helmer_employee"/>
+            <field name="holiday_status_id" ref="l10n_se_hr_holidays.leave_type_vacation"/>
+            <field name="number_of_days">25</field>
+            <field name="date_from">2026-01-01</field>
+            <field name="allocation_type">regular</field>
+        </record>
+
+        <function model="hr.leave.allocation" name="action_validate">
+            <value eval="[ref('allocation_helmer_vacation')]"/>
+        </function>
+
+        <record id="timesheet_01_helmer" model="hr_timesheet.sheet">
+            <field name="name">Tidrapport Januari - Helmer</field>
+            <field name="employee_id" ref="hr_helmer_employee"/>
+            <field name="company_id" ref="l10n_se_hr_payroll_twenty_six.company_aronssons"/>
+            <field name="date_start">2026-01-01</field>
+            <field name="date_end">2026-01-31</field>
+        </record>
+
+        <record id="timesheet_02_helmer" model="hr_timesheet.sheet">
+            <field name="name">Tidrapport Februari - Helmer</field>
+            <field name="employee_id" ref="hr_helmer_employee"/>
+            <field name="company_id" ref="l10n_se_hr_payroll_twenty_six.company_aronssons"/>
+            <field name="date_start">2026-02-01</field>
+            <field name="date_end">2026-02-28</field>
+        </record>
+
+        <record id="timesheet_03_helmer" model="hr_timesheet.sheet">
+            <field name="name">Tidrapport Mars - Helmer</field>
+            <field name="employee_id" ref="hr_helmer_employee"/>
+            <field name="company_id" ref="l10n_se_hr_payroll_twenty_six.company_aronssons"/>
+            <field name="date_start">2026-03-01</field>
+            <field name="date_end">2026-03-31</field>
+        </record>
+
+        <record id="timesheet_04_helmer" model="hr_timesheet.sheet">
+            <field name="name">Tidrapport April - Helmer</field>
+            <field name="employee_id" ref="hr_helmer_employee"/>
+            <field name="company_id" ref="l10n_se_hr_payroll_twenty_six.company_aronssons"/>
+            <field name="date_start">2026-04-01</field>
+            <field name="date_end">2026-04-30</field>
+        </record>
+
+        <record id="timesheet_05_helmer" model="hr_timesheet.sheet">
+            <field name="name">Tidrapport Maj - Helmer</field>
+            <field name="employee_id" ref="hr_helmer_employee"/>
+            <field name="company_id" ref="l10n_se_hr_payroll_twenty_six.company_aronssons"/>
+            <field name="date_start">2026-05-01</field>
+            <field name="date_end">2026-05-31</field>
+        </record>
+
+        <record id="timesheet_06_helmer" model="hr_timesheet.sheet">
+            <field name="name">Tidrapport Juni - Helmer</field>
+            <field name="employee_id" ref="hr_helmer_employee"/>
+            <field name="company_id" ref="l10n_se_hr_payroll_twenty_six.company_aronssons"/>
+            <field name="date_start">2026-06-01</field>
+            <field name="date_end">2026-06-30</field>
+        </record>
+
+        <record id="timesheet_07_helmer" model="hr_timesheet.sheet">
+            <field name="name">Tidrapport Juli - Helmer</field>
+            <field name="employee_id" ref="hr_helmer_employee"/>
+            <field name="company_id" ref="l10n_se_hr_payroll_twenty_six.company_aronssons"/>
+            <field name="date_start">2026-07-01</field>
+            <field name="date_end">2026-07-31</field>
+        </record>
+
+        <record id="timesheet_08_helmer" model="hr_timesheet.sheet">
+            <field name="name">Tidrapport Augusti - Helmer</field>
+            <field name="employee_id" ref="hr_helmer_employee"/>
+            <field name="company_id" ref="l10n_se_hr_payroll_twenty_six.company_aronssons"/>
+            <field name="date_start">2026-08-01</field>
+            <field name="date_end">2026-08-31</field>
+        </record>
+
+        <record id="timesheet_09_helmer" model="hr_timesheet.sheet">
+            <field name="name">Tidrapport September - Helmer</field>
+            <field name="employee_id" ref="hr_helmer_employee"/>
+            <field name="company_id" ref="l10n_se_hr_payroll_twenty_six.company_aronssons"/>
+            <field name="date_start">2026-09-01</field>
+            <field name="date_end">2026-09-30</field>
+        </record>
+
+        <record id="timesheet_10_helmer" model="hr_timesheet.sheet">
+            <field name="name">Tidrapport Oktober - Helmer</field>
+            <field name="employee_id" ref="hr_helmer_employee"/>
+            <field name="company_id" ref="l10n_se_hr_payroll_twenty_six.company_aronssons"/>
+            <field name="date_start">2026-10-01</field>
+            <field name="date_end">2026-10-31</field>
+        </record>
+
+        <record id="timesheet_11_helmer" model="hr_timesheet.sheet">
+            <field name="name">Tidrapport November - Helmer</field>
+            <field name="employee_id" ref="hr_helmer_employee"/>
+            <field name="company_id" ref="l10n_se_hr_payroll_twenty_six.company_aronssons"/>
+            <field name="date_start">2026-11-01</field>
+            <field name="date_end">2026-11-30</field>
+        </record>
+
+        <record id="timesheet_12_helmer" model="hr_timesheet.sheet">
+            <field name="name">Tidrapport Decmber - Helmer</field>
+            <field name="employee_id" ref="hr_helmer_employee"/>
+            <field name="company_id" ref="l10n_se_hr_payroll_twenty_six.company_aronssons"/>
+            <field name="date_start">2026-12-01</field>
+            <field name="date_end">2026-12-31</field>
+        </record>
+
+        <!-- ================================ January ================================ -->
+
+        <record id="ts_helmer_01" model="account.analytic.line">
+            <field name="name">Arbetad tid Januari</field>
+            <field name="employee_id" ref="hr_helmer_employee"/>
+            <field name="project_id" ref="project_regular_work"/>
+            <field name="task_id" ref="task_regular_work"/>
+            <field name="date">2026-01-31</field>
+            <field name="unit_amount">108.0</field>
+        </record>
+
+        <!-- Sjukfrånvaro -->
+        <record id="hr_leave_helmer_101" model="hr.leave">
+            <field name="employee_id" ref="l10n_se_hr_payroll_twenty_six.hr_helmer_employee" />
+            <field name="company_id" ref="l10n_se_hr_payroll_twenty_six.company_aronssons"/>
+            <field name="date_from">2026-01-04</field>
+            <field name="date_to">2026-01-04</field>
+            <field name="request_date_from">2026-01-04</field>
+            <field name="request_date_to">2026-01-04</field>
+            <field name="request_unit_hours" eval="True"/>
+            <field name="request_hour_from">8</field>
+            <field name="request_hour_to">12</field>
+            <field name="number_of_hours">4</field>
+            <field name="sick_leave_part">50</field>
+            <field name="holiday_status_id" ref="l10n_se_hr_payroll.leave_type_sick" />
+        </record>
+
+        <record id="hr_leave_helmer_101_02" model="hr.leave">
+            <field name="employee_id" ref="l10n_se_hr_payroll_twenty_six.hr_helmer_employee" />
+            <field name="company_id" ref="l10n_se_hr_payroll_twenty_six.company_aronssons"/>
+            <field name="date_from">2026-01-05</field>
+            <field name="date_to">2026-01-05</field>
+            <field name="request_date_from">2026-01-05</field>
+            <field name="request_date_to">2026-01-05</field>
+            <field name="number_of_hours">8</field>
+            <field name="holiday_status_id" ref="l10n_se_hr_payroll.leave_type_sick" />
+        </record>
+
+        <record id="hr_leave_helmer_102" model="hr.leave">
+            <field name="employee_id" ref="l10n_se_hr_payroll_twenty_six.hr_helmer_employee" />
+            <field name="company_id" ref="l10n_se_hr_payroll_twenty_six.company_aronssons"/>
+            <field name="date_from">2026-01-12</field>
+            <field name="date_to">2026-01-14</field>
+            <field name="request_date_from">2026-01-12</field>
+            <field name="request_date_to">2026-01-14</field>
+            <field name="number_of_hours">24</field>
+            <field name="holiday_status_id" ref="l10n_se_hr_payroll.leave_type_sick" />
+        </record>
+
+        <!-- VAB -->
+        <record id="hr_leave_helmer_103" model="hr.leave">
+            <field name="employee_id" ref="l10n_se_hr_payroll_twenty_six.hr_helmer_employee" />
+            <field name="company_id" ref="l10n_se_hr_payroll_twenty_six.company_aronssons"/>
+            <field name="date_from">2026-01-25</field>
+            <field name="date_to">2026-01-26</field>
+            <field name="request_date_from">2026-01-25</field>
+            <field name="request_date_to">2026-01-26</field>
+            <field name="number_of_hours">16</field>
+            <field name="holiday_status_id" ref="l10n_se_hr_payroll.leave_type_vab" />
+        </record>
+
+        <!-- Generera lönespec (payslip)-->
+        <record id="hr_payslip_helmer_01" model="hr.payslip">
+            <field name="name">Lönespecifikation för Januari - Helmer Henriksson</field>
+            <field name="company_id" ref="l10n_se_hr_payroll_twenty_six.company_aronssons" />
+            <field name="employee_id" ref="l10n_se_hr_payroll_twenty_six.hr_helmer_employee" />
+            <field name="payslip_run_id" ref="l10n_se_hr_payroll_twenty_six.payslip_run_2026_01"/>
+            <field name="period_id" ref="l10n_se_hr_payroll_twenty_six.period_01_2026" />
+            <field name="date_from">2026-01-01</field>
+            <field name="date_to">2026-01-31</field>
+            <field name="struct_id" ref="l10n_se_hr_payroll_twenty_six.hr_payroll_structure_arb_tim" />
+        </record>
+
+        <!-- Hämta data till lönespec (frånvaro m.m.) -->
+        <function model="hr.payslip" name="onchange_employee">
+            <value eval="[ref('l10n_se_hr_payroll_twenty_six.hr_payslip_helmer_01')]"/>
+        </function>
+
+        <!-- Manuell data-inmatning -->
+
+        <!-- Lunch -->
+        <function model="hr.payslip.input" name="write">
+            <value model="hr.payslip.input" search="[('payslip_id', '=', ref('hr_payslip_helmer_01')), ('code', '=', 'lunch')]"/>
+            <value eval="{'amount_qty': 1.0}"/>
+        </function>
+
+        <!-- Bonus -->
+        <function model="hr.payslip.input" name="write">
+            <value model="hr.payslip.input" search="[('payslip_id', '=', ref('hr_payslip_helmer_01')), ('code', '=', 'bonus')]"/>
+            <value eval="{'amount_qty': 1.0, 'amount': 10000}"/>
+        </function>
+
+        <!-- Övertid 1 -->
+        <function model="hr.payslip.input" name="write">
+            <value model="hr.payslip.input" search="[('payslip_id', '=', ref('hr_payslip_helmer_01')), ('code', '=', 'otidtim')]"/>
+            <value eval="{'amount_qty': 2.0}"/>
+        </function>
+
+        <!-- Övertid 2 -->
+        <function model="hr.payslip.input" name="write">
+            <value model="hr.payslip.input" search="[('payslip_id', '=', ref('hr_payslip_helmer_01')), ('code', '=', 'kvaltim')]"/>
+            <value eval="{'amount_qty': 2.0}"/>
+        </function>
+
+        <!-- Beräkna lönespecen -->
+        <function model="hr.payslip" name="compute_sheet">
+            <value eval="[ref('l10n_se_hr_payroll_twenty_six.hr_payslip_helmer_01')]"/>
+        </function>
+
+        <!-- ================================ February ================================ -->
+
+        <record id="ts_helmer_02" model="account.analytic.line">
+            <field name="name">Arbetad tid Februari</field>
+            <field name="employee_id" ref="l10n_se_hr_payroll_twenty_six.hr_helmer_employee"/>
+            <field name="project_id" ref="project_regular_work"/>
+            <field name="task_id" ref="task_regular_work"/>
+            <field name="date">2026-02-28</field>
+            <field name="unit_amount">88.0</field>
+        </record>
+
+        <!-- Sjukfrånvaro -->
+        <record id="hr_leave_helmer_201" model="hr.leave">
+            <field name="employee_id" ref="l10n_se_hr_payroll_twenty_six.hr_helmer_employee" />
+            <field name="company_id" ref="l10n_se_hr_payroll_twenty_six.company_aronssons"/>
+            <field name="date_from">2026-02-07</field>
+            <field name="date_to">2026-02-10</field>
+            <field name="request_date_from">2026-02-07</field>
+            <field name="request_date_to">2026-02-10</field>
+            <field name="number_of_hours">32</field>
+            <field name="holiday_status_id" ref="l10n_se_hr_payroll.leave_type_sick" />
+        </record>
+
+        <!-- VAB -->
+        <record id="hr_leave_helmer_202" model="hr.leave">
+            <field name="employee_id" ref="l10n_se_hr_payroll_twenty_six.hr_helmer_employee" />
+            <field name="company_id" ref="l10n_se_hr_payroll_twenty_six.company_aronssons"/>
+            <field name="date_from">2026-02-21</field>
+            <field name="date_to">2026-02-21</field>
+            <field name="request_date_from">2026-02-21</field>
+            <field name="request_date_to">2026-02-21</field>
+            <field name="number_of_hours">8</field>
+            <field name="holiday_status_id" ref="l10n_se_hr_payroll.leave_type_vab" />
+        </record>
+
+        <!-- Tjänstledighet -->
+        <record id="hr_leave_helmer_203" model="hr.leave">
+            <field name="employee_id" ref="l10n_se_hr_payroll_twenty_six.hr_helmer_employee" />
+            <field name="company_id" ref="l10n_se_hr_payroll_twenty_six.company_aronssons"/>
+            <field name="date_from">2026-02-15</field>
+            <field name="date_to">2026-02-18</field>
+            <field name="request_date_from">2026-02-15</field>
+            <field name="request_date_to">2026-02-18</field>
+            <field name="number_of_hours">32</field>
+            <field name="holiday_status_id" ref="l10n_se_hr_payroll.leave_type_loa" />
+        </record>
+
+        <!--Validera tjänstledighet-->
+        <function model="hr.leave" name="action_validate">
+            <value eval="[ref('hr_leave_helmer_203')]"/>
+        </function>
+
+        <!-- Generera lönespec (payslip)-->
+        <record id="hr_payslip_helmer_02" model="hr.payslip">
+            <field name="name">Lönespecifikation för Februari - Helmer Henriksson</field>
+            <field name="company_id" ref="l10n_se_hr_payroll_twenty_six.company_aronssons" />
+            <field name="employee_id" ref="l10n_se_hr_payroll_twenty_six.hr_helmer_employee" />
+            <field name="payslip_run_id" ref="l10n_se_hr_payroll_twenty_six.payslip_run_2026_02"/>
+            <field name="period_id" ref="l10n_se_hr_payroll_twenty_six.period_02_2026" />
+            <field name="date_from">2026-02-01</field>
+            <field name="date_to">2026-02-28</field>
+            <field name="struct_id" ref="l10n_se_hr_payroll_twenty_six.hr_payroll_structure_arb_tim" />
+        </record>
+
+        <!-- Hämta data till lönespec (frånvaro m.m.) -->
+        <function model="hr.payslip" name="onchange_employee">
+            <value eval="[ref('l10n_se_hr_payroll_twenty_six.hr_payslip_helmer_02')]"/>
+        </function>
+
+        <!-- Manuell data-inmatning -->
+
+        <!-- Lunch -->
+        <function model="hr.payslip.input" name="write">
+            <value model="hr.payslip.input" search="[('payslip_id', '=', ref('hr_payslip_helmer_02')), ('code', '=', 'lunch')]"/>
+            <value eval="{'amount_qty': 1.0}"/>
+        </function>
+
+        <!-- Övriga utlägg -->
+        <function model="hr.payslip.input" name="write">
+            <value model="hr.payslip.input" search="[('payslip_id', '=', ref('hr_payslip_helmer_02')), ('code', '=', 'utlagg')]"/>
+            <value eval="{'name': 'Övriga nettoersättning (Kvitto gymkort)', 'amount_qty': 1, 'amount': 3500.0}"/>
+        </function>
+
+        <!-- Milersättning -->
+        <function model="hr.payslip.input" name="write">
+            <value model="hr.payslip.input" search="[('payslip_id', '=', ref('hr_payslip_helmer_02')), ('code', '=', 'mil_antal')]"/>
+            <value eval="{'amount_qty': 500}"/>
+        </function>
+
+        <!-- Övertid 1 -->
+        <function model="hr.payslip.input" name="write">
+            <value model="hr.payslip.input" search="[('payslip_id', '=', ref('hr_payslip_helmer_02')), ('code', '=', 'otidtim')]"/>
+            <value eval="{'amount_qty': 3.0}"/>
+        </function>
+
+        <!-- Övertid 2 -->
+        <function model="hr.payslip.input" name="write">
+            <value model="hr.payslip.input" search="[('payslip_id', '=', ref('hr_payslip_helmer_02')), ('code', '=', 'kvaltim')]"/>
+            <value eval="{'amount_qty': 1.0}"/>
+        </function>
+
+        <!-- Beräkna lönespecen -->
+        <function model="hr.payslip" name="compute_sheet">
+            <value eval="[ref('l10n_se_hr_payroll_twenty_six.hr_payslip_helmer_02')]"/>
+        </function>
+
+        <!-- ================================ March ================================ -->
+
+        <record id="ts_helmer_03" model="account.analytic.line">
+            <field name="name">Arbetad tid Mars</field>
+            <field name="employee_id" ref="l10n_se_hr_payroll_twenty_six.hr_helmer_employee"/>
+            <field name="project_id" ref="project_regular_work"/>
+            <field name="task_id" ref="task_regular_work"/>
+            <field name="date">2026-03-31</field>
+            <field name="unit_amount">120.0</field>
+        </record>
+
+        <!-- Sjukfrånvaro -->
+        <record id="hr_leave_helmer_301" model="hr.leave">
+            <field name="employee_id" ref="l10n_se_hr_payroll_twenty_six.hr_helmer_employee" />
+            <field name="company_id" ref="l10n_se_hr_payroll_twenty_six.company_aronssons"/>
+            <field name="date_from">2026-03-03</field>
+            <field name="date_to">2026-03-04</field>
+            <field name="request_date_from">2026-03-03</field>
+            <field name="request_date_to">2026-03-04</field>
+            <field name="number_of_hours">16</field>
+            <field name="holiday_status_id" ref="l10n_se_hr_payroll.leave_type_sick" />
+        </record>
+
+        <record id="hr_leave_helmer_302" model="hr.leave">
+            <field name="employee_id" ref="l10n_se_hr_payroll_twenty_six.hr_helmer_employee" />
+            <field name="company_id" ref="l10n_se_hr_payroll_twenty_six.company_aronssons"/>
+            <field name="date_from">2026-03-16</field>
+            <field name="date_to">2026-03-16</field>
+            <field name="request_date_from">2026-03-16</field>
+            <field name="request_date_to">2026-03-16</field>
+            <field name="number_of_hours">8</field>
+            <field name="holiday_status_id" ref="l10n_se_hr_payroll.leave_type_sick" />
+        </record>
+
+        <!-- VAB -->
+        <record id="hr_leave_helmer_303" model="hr.leave">
+            <field name="employee_id" ref="l10n_se_hr_payroll_twenty_six.hr_helmer_employee" />
+            <field name="company_id" ref="l10n_se_hr_payroll_twenty_six.company_aronssons"/>
+            <field name="date_from">2026-03-17</field>
+            <field name="date_to">2026-03-18</field>
+            <field name="request_date_from">2026-03-17</field>
+            <field name="request_date_to">2026-03-18</field>
+            <field name="number_of_hours">16</field>
+            <field name="holiday_status_id" ref="l10n_se_hr_payroll.leave_type_vab" />
+        </record>
+
+        <!-- Tjänstledighet -->
+        <record id="hr_leave_helmer_304" model="hr.leave">
+            <field name="employee_id" ref="l10n_se_hr_payroll_twenty_six.hr_helmer_employee" />
+            <field name="company_id" ref="l10n_se_hr_payroll_twenty_six.company_aronssons"/>
+            <field name="date_from">2026-03-21</field>
+            <field name="date_to">2026-03-23</field>
+            <field name="request_date_from">2026-03-21</field>
+            <field name="request_date_to">2026-03-23</field>
+            <field name="number_of_hours">24</field>
+            <field name="holiday_status_id" ref="l10n_se_hr_payroll.leave_type_loa" />
+        </record>
+
+        <!--Validera tjänstledighet-->
+        <function model="hr.leave" name="action_validate">
+            <value eval="[ref('hr_leave_helmer_304')]"/>
+        </function>
+
+        <!-- Generera lönespec (payslip)-->
+        <record id="hr_payslip_helmer_03" model="hr.payslip">
+            <field name="name">Lönespecifikation för Mars - Helmer Henriksson</field>
+            <field name="company_id" ref="l10n_se_hr_payroll_twenty_six.company_aronssons" />
+            <field name="employee_id" ref="l10n_se_hr_payroll_twenty_six.hr_helmer_employee" />
+            <field name="payslip_run_id" ref="l10n_se_hr_payroll_twenty_six.payslip_run_2026_03"/>
+            <field name="period_id" ref="l10n_se_hr_payroll_twenty_six.period_03_2026" />
+            <field name="date_from">2026-03-01</field>
+            <field name="date_to">2026-03-31</field>
+            <field name="struct_id" ref="l10n_se_hr_payroll_twenty_six.hr_payroll_structure_arb_tim" />
+        </record>
+
+        <!-- Hämta data till lönespec (frånvaro m.m.) -->
+        <function model="hr.payslip" name="onchange_employee">
+            <value eval="[ref('l10n_se_hr_payroll_twenty_six.hr_payslip_helmer_03')]"/>
+        </function>
+
+        <!-- Manuell data-inmatning -->
+
+        <!-- Lunch -->
+        <function model="hr.payslip.input" name="write">
+            <value model="hr.payslip.input" search="[('payslip_id', '=', ref('hr_payslip_helmer_03')), ('code', '=', 'lunch')]"/>
+            <value eval="{'amount_qty': 1.0}"/>
+        </function>
+
+        <!-- Milersättning -->
+        <function model="hr.payslip.input" name="write">
+            <value model="hr.payslip.input" search="[('payslip_id', '=', ref('hr_payslip_helmer_03')), ('code', '=', 'mil_antal')]"/>
+            <value eval="{'amount_qty': 300}"/>
+        </function>
+
+        <!-- Övertid 1 -->
+        <function model="hr.payslip.input" name="write">
+            <value model="hr.payslip.input" search="[('payslip_id', '=', ref('hr_payslip_helmer_03')), ('code', '=', 'otidtim')]"/>
+            <value eval="{'amount_qty': 3.0}"/>
+        </function>
+
+        <!-- Övertid 2 -->
+        <function model="hr.payslip.input" name="write">
+            <value model="hr.payslip.input" search="[('payslip_id', '=', ref('hr_payslip_helmer_03')), ('code', '=', 'kvaltim')]"/>
+            <value eval="{'amount_qty': 1.0}"/>
+        </function>
+
+        <!-- Beräkna lönespecen -->
+        <function model="hr.payslip" name="compute_sheet">
+            <value eval="[ref('l10n_se_hr_payroll_twenty_six.hr_payslip_helmer_03')]"/>
+        </function>
+
+        <!-- ================================ April ================================ -->
+
+        <record id="ts_helmer_04" model="account.analytic.line">
+            <field name="name">Arbetad tid April</field>
+            <field name="employee_id" ref="l10n_se_hr_payroll_twenty_six.hr_helmer_employee"/>
+            <field name="project_id" ref="project_regular_work"/>
+            <field name="task_id" ref="task_regular_work"/>
+            <field name="date">2026-04-30</field>
+            <field name="unit_amount">56.0</field>
+        </record>
+
+        <!-- Sjukfrånvaro -->
+        <record id="hr_leave_helmer_401" model="hr.leave">
+            <field name="employee_id" ref="l10n_se_hr_payroll_twenty_six.hr_helmer_employee" />
+            <field name="company_id" ref="l10n_se_hr_payroll_twenty_six.company_aronssons"/>
+            <field name="date_from">2026-04-01</field>
+            <field name="date_to">2026-04-20</field>
+            <field name="request_date_from">2026-04-01</field>
+            <field name="request_date_to">2026-04-20</field>
+            <field name="number_of_hours">96</field>
+            <field name="holiday_status_id" ref="l10n_se_hr_payroll.leave_type_sick" />
+        </record>
+
+        <!-- Generera lönespec (payslip)-->
+        <record id="hr_payslip_helmer_04" model="hr.payslip">
+            <field name="name">Lönespecifikation för April - Helmer Henriksson</field>
+            <field name="company_id" ref="l10n_se_hr_payroll_twenty_six.company_aronssons" />
+            <field name="employee_id" ref="l10n_se_hr_payroll_twenty_six.hr_helmer_employee" />
+            <field name="payslip_run_id" ref="l10n_se_hr_payroll_twenty_six.payslip_run_2026_04"/>
+            <field name="period_id" ref="l10n_se_hr_payroll_twenty_six.period_04_2026" />
+            <field name="date_from">2026-04-01</field>
+            <field name="date_to">2026-04-30</field>
+            <field name="struct_id" ref="l10n_se_hr_payroll_twenty_six.hr_payroll_structure_arb_tim" />
+        </record>
+
+        <!-- Hämta data till lönespec (frånvaro m.m.) -->
+        <function model="hr.payslip" name="onchange_employee">
+            <value eval="[ref('l10n_se_hr_payroll_twenty_six.hr_payslip_helmer_04')]"/>
+        </function>
+
+        <!-- Manuell data-inmatning -->
+
+        <!-- Lunch -->
+        <function model="hr.payslip.input" name="write">
+            <value model="hr.payslip.input" search="[('payslip_id', '=', ref('hr_payslip_helmer_04')), ('code', '=', 'lunch')]"/>
+            <value eval="{'amount_qty': 1.0}"/>
+        </function>
+
+        <!-- Övriga utlägg -->
+        <function model="hr.payslip.input" name="write">
+            <value model="hr.payslip.input" search="[('payslip_id', '=', ref('hr_payslip_helmer_04')), ('code', '=', 'utlagg')]"/>
+            <value eval="{'name': 'Övriga nettoersättning (Terminalglasögon)', 'amount_qty': 1, 'amount': 2500.0}"/>
+        </function>
+
+        <!-- RUT -->
+        <record id="payslip_input_rut_04" model="hr.payslip.input">
+            <field name="payslip_id" ref="hr_payslip_helmer_04"/>
+            <field name="code">rut</field>
+            <field name="name">Hushållsnära tjänster (Arbetskostnad)</field>
+            <field name="amount">1800.0</field>
+            <field name="amount_qty">1.0</field>
+            <field name="contract_id" ref="contract_helmer"/>
+        </record>
+
+        <!-- Övertid 1 -->
+        <function model="hr.payslip.input" name="write">
+            <value model="hr.payslip.input" search="[('payslip_id', '=', ref('hr_payslip_helmer_04')), ('code', '=', 'otidtim')]"/>
+            <value eval="{'amount_qty': 2.0}"/>
+        </function>
+
+        <!-- Övertid 2 -->
+        <function model="hr.payslip.input" name="write">
+            <value model="hr.payslip.input" search="[('payslip_id', '=', ref('hr_payslip_helmer_04')), ('code', '=', 'kvaltim')]"/>
+            <value eval="{'amount_qty': 2.0}"/>
+        </function>
+
+        <!-- Beräkna lönespecen -->
+        <function model="hr.payslip" name="compute_sheet">
+            <value eval="[ref('l10n_se_hr_payroll_twenty_six.hr_payslip_helmer_04')]"/>
+        </function>
+
+        <!-- ================================ May ================================ -->
+
+        <record id="ts_helmer_05" model="account.analytic.line">
+            <field name="name">Arbetad tid Maj</field>
+            <field name="employee_id" ref="l10n_se_hr_payroll_twenty_six.hr_helmer_employee"/>
+            <field name="project_id" ref="project_regular_work"/>
+            <field name="task_id" ref="task_regular_work"/>
+            <field name="date">2026-05-31</field>
+            <field name="unit_amount">132.0</field>
+        </record>
+
+        <!-- Sjukfrånvaro -->
+        <record id="hr_leave_helmer_501" model="hr.leave">
+            <field name="employee_id" ref="l10n_se_hr_payroll_twenty_six.hr_helmer_employee" />
+            <field name="company_id" ref="l10n_se_hr_payroll_twenty_six.company_aronssons"/>
+            <field name="date_from">2026-05-19</field>
+            <field name="date_to">2026-05-19</field>
+            <field name="request_date_from">2026-05-19</field>
+            <field name="request_date_to">2026-05-19</field>
+            <field name="request_unit_hours" eval="True"/>
+            <field name="request_hour_from">8</field>
+            <field name="request_hour_to">12</field>
+            <field name="number_of_hours">4</field>
+            <field name="sick_leave_part">50</field>
+            <field name="holiday_status_id" ref="l10n_se_hr_payroll.leave_type_sick" />
+        </record>
+
+        <record id="hr_leave_helmer_501_02" model="hr.leave">
+            <field name="employee_id" ref="l10n_se_hr_payroll_twenty_six.hr_helmer_employee" />
+            <field name="company_id" ref="l10n_se_hr_payroll_twenty_six.company_aronssons"/>
+            <field name="date_from">2026-05-20</field>
+            <field name="date_to">2026-05-20</field>
+            <field name="request_date_from">2026-05-20</field>
+            <field name="request_date_to">2026-05-20</field>
+            <field name="number_of_hours">8</field>
+            <field name="holiday_status_id" ref="l10n_se_hr_payroll.leave_type_sick" />
+        </record>
+
+        <record id="hr_leave_helmer_502" model="hr.leave">
+            <field name="employee_id" ref="l10n_se_hr_payroll_twenty_six.hr_helmer_employee" />
+            <field name="company_id" ref="l10n_se_hr_payroll_twenty_six.company_aronssons"/>
+            <field name="date_from">2026-05-27</field>
+            <field name="date_to">2026-05-30</field>
+            <field name="request_date_from">2026-05-27</field>
+            <field name="request_date_to">2026-05-30</field>
+            <field name="number_of_hours">16</field>
+            <field name="holiday_status_id" ref="l10n_se_hr_payroll.leave_type_sick" />
+        </record>
+
+        <!-- Tjänstledighet -->
+        <record id="hr_leave_helmer_503" model="hr.leave">
+            <field name="employee_id" ref="l10n_se_hr_payroll_twenty_six.hr_helmer_employee" />
+            <field name="company_id" ref="l10n_se_hr_payroll_twenty_six.company_aronssons"/>
+            <field name="date_from">2026-05-16</field>
+            <field name="date_to">2026-05-16</field>
+            <field name="request_date_from">2026-05-16</field>
+            <field name="request_date_to">2026-05-16</field>
+            <field name="number_of_hours">8</field>
+            <field name="holiday_status_id" ref="l10n_se_hr_payroll.leave_type_loa" />
+        </record>
+
+        <!--Validera tjänstledighet-->
+        <function model="hr.leave" name="action_validate">
+            <value eval="[ref('hr_leave_helmer_503')]"/>
+        </function>
+
+        <!-- Generera lönespec (payslip)-->
+        <record id="hr_payslip_helmer_05" model="hr.payslip">
+            <field name="name">Lönespecifikation för Maj - Helmer Henriksson</field>
+            <field name="company_id" ref="l10n_se_hr_payroll_twenty_six.company_aronssons" />
+            <field name="employee_id" ref="l10n_se_hr_payroll_twenty_six.hr_helmer_employee" />
+            <field name="payslip_run_id" ref="l10n_se_hr_payroll_twenty_six.payslip_run_2026_05"/>
+            <field name="period_id" ref="l10n_se_hr_payroll_twenty_six.period_05_2026" />
+            <field name="date_from">2026-05-01</field>
+            <field name="date_to">2026-05-31</field>
+            <field name="struct_id" ref="l10n_se_hr_payroll_twenty_six.hr_payroll_structure_arb_tim" />
+        </record>
+
+        <!-- Hämta data till lönespec (frånvaro m.m.) -->
+        <function model="hr.payslip" name="onchange_employee">
+            <value eval="[ref('l10n_se_hr_payroll_twenty_six.hr_payslip_helmer_05')]"/>
+        </function>
+
+        <!-- Manuell data-inmatning -->
+
+        <!-- Utlägg resekostnader -->
+        <function model="hr.payslip.input" name="write">
+            <value model="hr.payslip.input" search="[('payslip_id', '=', ref('hr_payslip_helmer_05')), ('code', '=', 'utlagg')]"/>
+            <value eval="{'name': 'Utlägg resekostnader', 'amount_qty': 1, 'amount': 276.25}"/>
+        </function>
+
+        <!--  Traktamente utland, natt  -->
+        <function model="hr.payslip.input" name="write">
+            <value model="hr.payslip.input" search="[('payslip_id', '=', ref('hr_payslip_helmer_05')), ('code', '=', 'trakt_utl_natt')]"/>
+            <value eval="{'amount_qty': 1.0, 'amount': 361.5}"/>
+        </function>
+
+        <!-- Traktamente utland -->
+        <function model="hr.payslip.input" name="write">
+            <value model="hr.payslip.input" search="[('payslip_id', '=', ref('hr_payslip_helmer_05')), ('code', '=', 'trakt_utl')]"/>
+            <value eval="{'amount_qty': 3.0, 'amount': 723}"/>
+        </function>
+
+        <!-- Traktamente inrikes, halvt -->
+        <function model="hr.payslip.input" name="write">
+            <value model="hr.payslip.input" search="[('payslip_id', '=', ref('hr_payslip_helmer_05')), ('code', '=', 'trakt_halv')]"/>
+            <value eval="{'amount_qty': 1.0}"/>
+        </function>
+
+        <!-- Traktamente inrikes, skattepliktigt -->
+        <function model="hr.payslip.input" name="write">
+            <value model="hr.payslip.input" search="[('payslip_id', '=', ref('hr_payslip_helmer_05')), ('code', '=', 'trakt_skatt')]"/>
+            <value eval="{'amount_qty': 0.5, 'amount': 80}"/>
+        </function>
+
+        <!-- Kostförmån lunch  -->
+        <function model="hr.payslip.input" name="write">
+            <value model="hr.payslip.input" search="[('payslip_id', '=', ref('hr_payslip_helmer_05')), ('code', '=', 'fmn_lunch')]"/>
+            <value eval="{'amount_qty': 1.0}"/>
+        </function>
+
+        <!-- Kostavdrag utland -->
+        <!-- Frukost -->
+        <function model="hr.payslip.input" name="write">
+            <value model="hr.payslip.input" search="[('payslip_id', '=', ref('hr_payslip_helmer_05')), ('code', '=', 'red_utl_frukost')]"/>
+            <value eval="{'amount_qty': 2, 'amount': 108.45}"/>
+        </function>
+
+        <!--  Lunch eller middag -->
+        <function model="hr.payslip.input" name="write">
+            <value model="hr.payslip.input" search="[('payslip_id', '=', ref('hr_payslip_helmer_05')), ('code', '=', 'red_utl_lunch')]"/>
+            <value eval="{'amount_qty': 4, 'amount': 253.05}"/>
+        </function>
+
+        <!-- Övertid 1 -->
+        <function model="hr.payslip.input" name="write">
+            <value model="hr.payslip.input" search="[('payslip_id', '=', ref('hr_payslip_helmer_05')), ('code', '=', 'otidtim')]"/>
+            <value eval="{'amount_qty': 6.0}"/>
+        </function>
+
+        <!-- Övertid 2 -->
+        <function model="hr.payslip.input" name="write">
+            <value model="hr.payslip.input" search="[('payslip_id', '=', ref('hr_payslip_helmer_05')), ('code', '=', 'kvaltim')]"/>
+            <value eval="{'amount_qty': 2.0}"/>
+        </function>
+
+        <!-- Beräkna lönespecen -->
+        <function model="hr.payslip" name="compute_sheet">
+            <value eval="[ref('l10n_se_hr_payroll_twenty_six.hr_payslip_helmer_05')]"/>
+        </function>
+
+        <!-- ================================ June ================================ -->
+
+        <record id="ts_helmer_06" model="account.analytic.line">
+            <field name="name">Arbetad tid Juni</field>
+            <field name="employee_id" ref="l10n_se_hr_payroll_twenty_six.hr_helmer_employee"/>
+            <field name="project_id" ref="project_regular_work"/>
+            <field name="task_id" ref="task_regular_work"/>
+            <field name="date">2026-06-30</field>
+            <field name="unit_amount">84.0</field>
+        </record>
+
+        <!-- Sjukfrånvaro -->
+        <record id="hr_leave_helmer_601" model="hr.leave">
+            <field name="employee_id" ref="l10n_se_hr_payroll_twenty_six.hr_helmer_employee" />
+            <field name="company_id" ref="l10n_se_hr_payroll_twenty_six.company_aronssons"/>
+            <field name="date_from">2026-06-08</field>
+            <field name="date_to">2026-06-08</field>
+            <field name="request_date_from">2026-06-08</field>
+            <field name="request_date_to">2026-06-08</field>
+            <field name="request_unit_hours" eval="True"/>
+            <field name="request_hour_from">8</field>
+            <field name="request_hour_to">12</field>
+            <field name="number_of_hours">4</field>
+            <field name="holiday_status_id" ref="l10n_se_hr_payroll.leave_type_sick" />
+        </record>
+
+        <record id="hr_leave_helmer_601_02" model="hr.leave">
+            <field name="employee_id" ref="l10n_se_hr_payroll_twenty_six.hr_helmer_employee" />
+            <field name="company_id" ref="l10n_se_hr_payroll_twenty_six.company_aronssons"/>
+            <field name="date_from">2026-06-09</field>
+            <field name="date_to">2026-06-10</field>
+            <field name="request_date_from">2026-06-09</field>
+            <field name="request_date_to">2026-06-10</field>
+            <field name="number_of_hours">16</field>
+            <field name="holiday_status_id" ref="l10n_se_hr_payroll.leave_type_sick" />
+        </record>
+
+        <record id="hr_leave_helmer_602" model="hr.leave">
+            <field name="employee_id" ref="l10n_se_hr_payroll_twenty_six.hr_helmer_employee" />
+            <field name="company_id" ref="l10n_se_hr_payroll_twenty_six.company_aronssons"/>
+            <field name="date_from">2026-06-14</field>
+            <field name="date_to">2026-06-14</field>
+            <field name="request_date_from">2026-06-14</field>
+            <field name="request_date_to">2026-06-14</field>
+            <field name="number_of_hours">8</field>
+            <field name="holiday_status_id" ref="l10n_se_hr_payroll.leave_type_sick" />
+        </record>
+
+        <!-- VAB -->
+        <record id="hr_leave_helmer_603" model="hr.leave">
+            <field name="employee_id" ref="l10n_se_hr_payroll_twenty_six.hr_helmer_employee" />
+            <field name="company_id" ref="l10n_se_hr_payroll_twenty_six.company_aronssons"/>
+            <field name="date_from">2026-06-17</field>
+            <field name="date_to">2026-06-17</field>
+            <field name="request_date_from">2026-06-17</field>
+            <field name="request_date_to">2026-06-17</field>
+            <field name="number_of_hours">8</field>
+            <field name="holiday_status_id" ref="l10n_se_hr_payroll.leave_type_vab" />
+        </record>
+
+        <!-- Semester -->
+        <record id="hr_leave_helmer_604" model="hr.leave">
+            <field name="employee_id" ref="l10n_se_hr_payroll_twenty_six.hr_helmer_employee" />
+            <field name="company_id" ref="l10n_se_hr_payroll_twenty_six.company_aronssons"/>
+            <field name="date_from">2026-06-20</field>
+            <field name="date_to">2026-06-27</field>
+            <field name="request_date_from">2026-06-20</field>
+            <field name="request_date_to">2026-06-27</field>
+            <field name="number_of_hours">40</field>
+            <field name="holiday_status_id" ref="l10n_se_hr_holidays.leave_type_vacation" />
+        </record>
+
+        <!-- Validera semester -->
+        <function model="hr.leave" name="action_validate">
+            <value eval="[ref('hr_leave_helmer_604')]"/>
+        </function>
+
+        <!-- Generera lönespec (payslip)-->
+        <record id="hr_payslip_helmer_06" model="hr.payslip">
+            <field name="name">Lönespecifikation för Juni - Helmer Henriksson</field>
+            <field name="company_id" ref="l10n_se_hr_payroll_twenty_six.company_aronssons" />
+            <field name="employee_id" ref="l10n_se_hr_payroll_twenty_six.hr_helmer_employee" />
+            <field name="payslip_run_id" ref="l10n_se_hr_payroll_twenty_six.payslip_run_2026_06"/>
+            <field name="period_id" ref="l10n_se_hr_payroll_twenty_six.period_06_2026" />
+            <field name="date_from">2026-06-01</field>
+            <field name="date_to">2026-06-30</field>
+            <field name="struct_id" ref="l10n_se_hr_payroll_twenty_six.hr_payroll_structure_arb_tim" />
+        </record>
+
+        <!-- Manuell input -->
+        <!-- Hämta data till lönespec (frånvaro m.m.) -->
+        <function model="hr.payslip" name="onchange_employee">
+            <value eval="[ref('l10n_se_hr_payroll_twenty_six.hr_payslip_helmer_06')]"/>
+        </function>
+
+        <!-- Milersättning -->
+        <function model="hr.payslip.input" name="write">
+            <value model="hr.payslip.input" search="[('payslip_id', '=', ref('hr_payslip_helmer_06')), ('code', '=', 'mil_antal')]"/>
+            <value eval="{'amount_qty': 500}"/>
+        </function>
+
+        <!-- Övertid 1 -->
+        <function model="hr.payslip.input" name="write">
+            <value model="hr.payslip.input" search="[('payslip_id', '=', ref('hr_payslip_helmer_06')), ('code', '=', 'otidtim')]"/>
+            <value eval="{'amount_qty': 6.0}"/>
+        </function>
+
+        <!-- Övertid 2 -->
+        <function model="hr.payslip.input" name="write">
+            <value model="hr.payslip.input" search="[('payslip_id', '=', ref('hr_payslip_helmer_06')), ('code', '=', 'kvaltim')]"/>
+            <value eval="{'amount_qty': 6.0}"/>
+        </function>
+
+        <!-- Beräkna lönespecen -->
+        <function model="hr.payslip" name="compute_sheet">
+            <value eval="[ref('l10n_se_hr_payroll_twenty_six.hr_payslip_helmer_06')]"/>
+        </function>
+
+        <!-- ================================ July ================================ -->
+
+        <record id="ts_helmer_07" model="account.analytic.line">
+            <field name="name">Arbetad tid Juli</field>
+            <field name="employee_id" ref="l10n_se_hr_payroll_twenty_six.hr_helmer_employee"/>
+            <field name="project_id" ref="project_regular_work"/>
+            <field name="task_id" ref="task_regular_work"/>
+            <field name="date">2026-07-31</field>
+            <field name="unit_amount">116.0</field>
+        </record>
+
+        <!-- Sjukfrånvaro -->
+        <record id="hr_leave_helmer_701" model="hr.leave">
+            <field name="employee_id" ref="l10n_se_hr_payroll_twenty_six.hr_helmer_employee" />
+            <field name="company_id" ref="l10n_se_hr_payroll_twenty_six.company_aronssons"/>
+            <field name="date_from">2026-07-07</field>
+            <field name="date_to">2026-07-07</field>
+            <field name="request_date_from">2026-07-07</field>
+            <field name="request_date_to">2026-07-07</field>
+            <field name="request_unit_hours" eval="True"/>
+            <field name="request_hour_from">8</field>
+            <field name="request_hour_to">12</field>
+            <field name="number_of_hours">4</field>
+            <field name="sick_leave_part">50</field>
+            <field name="holiday_status_id" ref="l10n_se_hr_payroll.leave_type_sick" />
+        </record>
+
+        <record id="hr_leave_helmer_701_02" model="hr.leave">
+            <field name="employee_id" ref="l10n_se_hr_payroll_twenty_six.hr_helmer_employee" />
+            <field name="company_id" ref="l10n_se_hr_payroll_twenty_six.company_aronssons"/>
+            <field name="date_from">2026-07-08</field>
+            <field name="date_to">2026-07-11</field>
+            <field name="request_date_from">2026-07-08</field>
+            <field name="request_date_to">2026-07-11</field>
+            <field name="number_of_hours">16</field>
+            <field name="holiday_status_id" ref="l10n_se_hr_payroll.leave_type_sick" />
+        </record>
+
+        <!-- Semester 4 dgr, 32 timmar -->
+        <record id="hr_leave_helmer_702" model="hr.leave">
+            <field name="employee_id" ref="l10n_se_hr_payroll_twenty_six.hr_helmer_employee" />
+            <field name="company_id" ref="l10n_se_hr_payroll_twenty_six.company_aronssons"/>
+            <field name="date_from">2026-07-18</field>
+            <field name="date_to">2026-07-21</field>
+            <field name="request_date_from">2026-07-18</field>
+            <field name="request_date_to">2026-07-21</field>
+            <field name="number_of_hours">32</field>
+            <field name="holiday_status_id" ref="l10n_se_hr_holidays.leave_type_vacation" />
+        </record>
+
+        <!-- Validera semester -->
+        <function model="hr.leave" name="action_validate">
+            <value eval="[ref('hr_leave_helmer_702')]"/>
+        </function>
+
+        <!-- Generera lönespec (payslip)-->
+        <record id="hr_payslip_helmer_07" model="hr.payslip">
+            <field name="name">Lönespecifikation för Juli - Helmer Henriksson</field>
+            <field name="company_id" ref="l10n_se_hr_payroll_twenty_six.company_aronssons" />
+            <field name="employee_id" ref="l10n_se_hr_payroll_twenty_six.hr_helmer_employee" />
+            <field name="payslip_run_id" ref="l10n_se_hr_payroll_twenty_six.payslip_run_2026_07"/>
+            <field name="period_id" ref="l10n_se_hr_payroll_twenty_six.period_07_2026" />
+            <field name="date_from">2026-07-01</field>
+            <field name="date_to">2026-07-31</field>
+            <field name="struct_id" ref="l10n_se_hr_payroll_twenty_six.hr_payroll_structure_arb_tim" />
+        </record>
+
+        <!-- Hämta data till lönespec (frånvaro m.m.) -->
+        <function model="hr.payslip" name="onchange_employee">
+            <value eval="[ref('l10n_se_hr_payroll_twenty_six.hr_payslip_helmer_07')]"/>
+        </function>
+
+        <!-- Manuell data-inmatning -->
+
+        <!-- Milersättning -->
+        <function model="hr.payslip.input" name="write">
+            <value model="hr.payslip.input" search="[('payslip_id', '=', ref('hr_payslip_helmer_07')), ('code', '=', 'mil_antal')]"/>
+            <value eval="{'amount_qty': 350}"/>
+        </function>
+
+        <!-- Bonus -->
+        <function model="hr.payslip.input" name="write">
+            <value model="hr.payslip.input" search="[('payslip_id', '=', ref('hr_payslip_helmer_07')), ('code', '=', 'bonus')]"/>
+            <value eval="{'amount_qty': 1, 'amount': 5000}"/>
+        </function>
+
+        <!-- Övertid 1 -->
+        <function model="hr.payslip.input" name="write">
+            <value model="hr.payslip.input" search="[('payslip_id', '=', ref('hr_payslip_helmer_07')), ('code', '=', 'otidtim')]"/>
+            <value eval="{'amount_qty': 6.0}"/>
+        </function>
+
+        <!-- Övertid 2 -->
+        <function model="hr.payslip.input" name="write">
+            <value model="hr.payslip.input" search="[('payslip_id', '=', ref('hr_payslip_helmer_07')), ('code', '=', 'kvaltim')]"/>
+            <value eval="{'amount_qty': 4.0}"/>
+        </function>
+
+        <!-- Beräkna lönespecen -->
+        <function model="hr.payslip" name="compute_sheet">
+            <value eval="[ref('l10n_se_hr_payroll_twenty_six.hr_payslip_helmer_07')]"/>
+        </function>
+
+        <!-- ================================ August ================================ -->
+
+        <record id="ts_helmer_08" model="account.analytic.line">
+            <field name="name">Arbetad tid Augsti</field>
+            <field name="employee_id" ref="l10n_se_hr_payroll_twenty_six.hr_helmer_employee"/>
+            <field name="project_id" ref="project_regular_work"/>
+            <field name="task_id" ref="task_regular_work"/>
+            <field name="date">2026-08-31</field>
+            <field name="unit_amount">16.0</field>
+        </record>
+
+        <!-- Sjukfrånvaro -->
+        <record id="hr_leave_helmer_801" model="hr.leave">
+            <field name="employee_id" ref="l10n_se_hr_payroll_twenty_six.hr_helmer_employee" />
+            <field name="company_id" ref="l10n_se_hr_payroll_twenty_six.company_aronssons"/>
+            <field name="date_from">2026-08-09</field>
+            <field name="date_to">2026-09-02</field>
+            <field name="request_date_from">2026-08-09</field>
+            <field name="request_date_to">2026-09-02</field>
+            <field name="number_of_hours">152</field>
+            <field name="holiday_status_id" ref="l10n_se_hr_payroll.leave_type_sick" />
+        </record>
+
+        <!-- Tjänstledighet -->
+        <record id="hr_leave_helmer_802" model="hr.leave">
+            <field name="employee_id" ref="l10n_se_hr_payroll_twenty_six.hr_helmer_employee" />
+            <field name="company_id" ref="l10n_se_hr_payroll_twenty_six.company_aronssons"/>
+            <field name="date_from">2026-08-03</field>
+            <field name="date_to">2026-08-05</field>
+            <field name="request_date_from">2026-08-03</field>
+            <field name="request_date_to">2026-08-05</field>
+            <field name="number_of_hours">24</field>
+            <field name="holiday_status_id" ref="l10n_se_hr_payroll.leave_type_loa" />
+        </record>
+
+        <!-- Semester 1 dgr, 8 timmar -->
+        <record id="hr_leave_helmer_803" model="hr.leave">
+            <field name="employee_id" ref="l10n_se_hr_payroll_twenty_six.hr_helmer_employee" />
+            <field name="company_id" ref="l10n_se_hr_payroll_twenty_six.company_aronssons"/>
+            <field name="date_from">2026-08-08</field>
+            <field name="date_to">2026-08-08</field>
+            <field name="request_date_from">2026-08-08</field>
+            <field name="request_date_to">2026-08-08</field>
+            <field name="number_of_hours">8</field>
+            <field name="holiday_status_id" ref="l10n_se_hr_holidays.leave_type_vacation" />
+        </record>
+
+        <!-- Validera tjänstledighet + semester -->
+        <function model="hr.leave" name="action_validate">
+            <value eval="[ref('hr_leave_helmer_802'), ref('hr_leave_helmer_803')]"/>
+        </function>
+
+        <!-- Generera lönespec (payslip)-->
+        <record id="hr_payslip_helmer_08" model="hr.payslip">
+            <field name="name">Lönespecifikation för Augusti - Helmer Henriksson</field>
+            <field name="company_id" ref="l10n_se_hr_payroll_twenty_six.company_aronssons" />
+            <field name="employee_id" ref="l10n_se_hr_payroll_twenty_six.hr_helmer_employee" />
+            <field name="payslip_run_id" ref="l10n_se_hr_payroll_twenty_six.payslip_run_2026_08"/>
+            <field name="period_id" ref="l10n_se_hr_payroll_twenty_six.period_08_2026" />
+            <field name="date_from">2026-08-01</field>
+            <field name="date_to">2026-08-31</field>
+            <field name="struct_id" ref="l10n_se_hr_payroll_twenty_six.hr_payroll_structure_arb_tim" />
+        </record>
+
+        <!-- Hämta data till lönespec (frånvaro m.m.) -->
+        <function model="hr.payslip" name="onchange_employee">
+            <value eval="[ref('l10n_se_hr_payroll_twenty_six.hr_payslip_helmer_08')]"/>
+        </function>
+
+        <!-- Manuell data-inmatning -->
+
+        <!-- Övertid 1 -->
+        <function model="hr.payslip.input" name="write">
+            <value model="hr.payslip.input" search="[('payslip_id', '=', ref('hr_payslip_helmer_08')), ('code', '=', 'otidtim')]"/>
+            <value eval="{'amount_qty': 4.0}"/>
+        </function>
+
+        <!-- Övertid 2 -->
+        <function model="hr.payslip.input" name="write">
+            <value model="hr.payslip.input" search="[('payslip_id', '=', ref('hr_payslip_helmer_08')), ('code', '=', 'kvaltim')]"/>
+            <value eval="{'amount_qty': 4.0}"/>
+        </function>
+
+        <!-- Beräkna lönespecen -->
+        <function model="hr.payslip" name="compute_sheet">
+            <value eval="[ref('l10n_se_hr_payroll_twenty_six.hr_payslip_helmer_08')]"/>
+        </function>
+
+        <!-- ================================ September ================================ -->
+
+        <record id="ts_helmer_09" model="account.analytic.line">
+            <field name="name">Arbetad tid September</field>
+            <field name="employee_id" ref="l10n_se_hr_payroll_twenty_six.hr_helmer_employee"/>
+            <field name="project_id" ref="project_regular_work"/>
+            <field name="task_id" ref="task_regular_work"/>
+            <field name="date">2026-09-30</field>
+            <field name="unit_amount">92.0</field>
+        </record>
+
+        <!-- VAB -->
+        <record id="hr_leave_helmer_901" model="hr.leave">
+            <field name="employee_id" ref="l10n_se_hr_payroll_twenty_six.hr_helmer_employee" />
+            <field name="company_id" ref="l10n_se_hr_payroll_twenty_six.company_aronssons"/>
+            <field name="date_from">2026-09-05</field>
+            <field name="date_to">2026-09-05</field>
+            <field name="request_date_from">2026-09-05</field>
+            <field name="request_date_to">2026-09-05</field>
+            <field name="number_of_hours">8</field>
+            <field name="holiday_status_id" ref="l10n_se_hr_payroll.leave_type_vab" />
+        </record>
+
+        <record id="hr_leave_helmer_902" model="hr.leave">
+            <field name="employee_id" ref="l10n_se_hr_payroll_twenty_six.hr_helmer_employee" />
+            <field name="company_id" ref="l10n_se_hr_payroll_twenty_six.company_aronssons"/>
+            <field name="date_from">2026-09-13</field>
+            <field name="date_to">2026-09-13</field>
+            <field name="request_date_from">2026-09-13</field>
+            <field name="request_date_to">2026-09-13</field>
+            <field name="request_unit_hours" eval="True"/>
+            <field name="request_hour_from">8</field>
+            <field name="request_hour_to">12</field>
+            <field name="number_of_hours">4</field>
+            <field name="holiday_status_id" ref="l10n_se_hr_payroll.leave_type_vab" />
+        </record>
+
+        <record id="hr_leave_helmer_902_2" model="hr.leave">
+            <field name="employee_id" ref="l10n_se_hr_payroll_twenty_six.hr_helmer_employee" />
+            <field name="company_id" ref="l10n_se_hr_payroll_twenty_six.company_aronssons"/>
+            <field name="date_from">2026-09-14</field>
+            <field name="date_to">2026-09-15</field>
+            <field name="request_date_from">2026-09-14</field>
+            <field name="request_date_to">2026-09-15</field>
+            <field name="number_of_hours">16</field>
+            <field name="holiday_status_id" ref="l10n_se_hr_payroll.leave_type_vab" />
+        </record>
+
+        <!-- Semester 4 dgr, 32 timmar -->
+        <record id="hr_leave_helmer_903" model="hr.leave">
+            <field name="employee_id" ref="l10n_se_hr_payroll_twenty_six.hr_helmer_employee" />
+            <field name="company_id" ref="l10n_se_hr_payroll_twenty_six.company_aronssons"/>
+            <field name="date_from">2026-09-19</field>
+            <field name="date_to">2026-09-22</field>
+            <field name="request_date_from">2026-09-19</field>
+            <field name="request_date_to">2026-09-22</field>
+            <field name="number_of_hours">32</field>
+            <field name="holiday_status_id" ref="l10n_se_hr_holidays.leave_type_vacation" />
+        </record>
+
+        <!-- Tjänstledighet -->
+        <record id="hr_leave_helmer_904" model="hr.leave">
+            <field name="employee_id" ref="l10n_se_hr_payroll_twenty_six.hr_helmer_employee" />
+            <field name="company_id" ref="l10n_se_hr_payroll_twenty_six.company_aronssons"/>
+            <field name="date_from">2026-09-23</field>
+            <field name="date_to">2026-09-23</field>
+            <field name="request_date_from">2026-09-23</field>
+            <field name="request_date_to">2026-09-23</field>
+            <field name="number_of_hours">8</field>
+            <field name="holiday_status_id" ref="l10n_se_hr_payroll.leave_type_loa" />
+        </record>
+
+        <!-- Validera semester + tjänstledighet -->
+        <function model="hr.leave" name="action_validate">
+            <value eval="[ref('hr_leave_helmer_903'), ref('hr_leave_helmer_904')]"/>
+        </function>
+
+        <!-- Generera lönespec (payslip)-->
+        <record id="hr_payslip_helmer_09" model="hr.payslip">
+            <field name="name">Lönespecifikation för September - Helmer Henriksson</field>
+            <field name="company_id" ref="l10n_se_hr_payroll_twenty_six.company_aronssons" />
+            <field name="employee_id" ref="l10n_se_hr_payroll_twenty_six.hr_helmer_employee" />
+            <field name="payslip_run_id" ref="l10n_se_hr_payroll_twenty_six.payslip_run_2026_09"/>
+            <field name="period_id" ref="l10n_se_hr_payroll_twenty_six.period_09_2026" />
+            <field name="date_from">2026-09-01</field>
+            <field name="date_to">2026-09-30</field>
+            <field name="struct_id" ref="l10n_se_hr_payroll_twenty_six.hr_payroll_structure_arb_tim" />
+        </record>
+
+        <!-- Hämta data till lönespec (frånvaro m.m.) -->
+        <function model="hr.payslip" name="onchange_employee">
+            <value eval="[ref('l10n_se_hr_payroll_twenty_six.hr_payslip_helmer_09')]"/>
+        </function>
+
+        <!-- Manuell data-inmatning -->
+
+        <!-- Lunch -->
+        <function model="hr.payslip.input" name="write">
+            <value model="hr.payslip.input" search="[('payslip_id', '=', ref('hr_payslip_helmer_09')), ('code', '=', 'lunch')]"/>
+            <value eval="{'amount_qty': 1.0}"/>
+        </function>
+
+        <!-- Övertid 1 -->
+        <function model="hr.payslip.input" name="write">
+            <value model="hr.payslip.input" search="[('payslip_id', '=', ref('hr_payslip_helmer_09')), ('code', '=', 'otidtim')]"/>
+            <value eval="{'amount_qty': 1.0}"/>
+        </function>
+
+        <!-- Övertid 2 -->
+        <function model="hr.payslip.input" name="write">
+            <value model="hr.payslip.input" search="[('payslip_id', '=', ref('hr_payslip_helmer_09')), ('code', '=', 'kvaltim')]"/>
+            <value eval="{'amount_qty': 1.0}"/>
+        </function>
+
+        <!-- Beräkna lönespecen -->
+        <function model="hr.payslip" name="compute_sheet">
+            <value eval="[ref('l10n_se_hr_payroll_twenty_six.hr_payslip_helmer_09')]"/>
+        </function>
+
+        <!-- ================================ October ================================ -->
+
+        <record id="ts_helmer_10" model="account.analytic.line">
+            <field name="name">Arbetad tid Oktober</field>
+            <field name="employee_id" ref="l10n_se_hr_payroll_twenty_six.hr_helmer_employee"/>
+            <field name="project_id" ref="project_regular_work"/>
+            <field name="task_id" ref="task_regular_work"/>
+            <field name="date">2026-10-31</field>
+            <field name="unit_amount">112.0</field>
+        </record>
+
+        <!-- VAB -->
+        <record id="hr_leave_helmer_1001" model="hr.leave">
+            <field name="employee_id" ref="l10n_se_hr_payroll_twenty_six.hr_helmer_employee" />
+            <field name="company_id" ref="l10n_se_hr_payroll_twenty_six.company_aronssons"/>
+            <field name="date_from">2026-10-05</field>
+            <field name="date_to">2026-10-06</field>
+            <field name="request_date_from">2026-10-05</field>
+            <field name="request_date_to">2026-10-06</field>
+            <field name="number_of_hours">16</field>
+            <field name="holiday_status_id" ref="l10n_se_hr_payroll.leave_type_vab" />
+        </record>
+
+        <!-- Tjänstledighet -->
+        <record id="hr_leave_helmer_1002" model="hr.leave">
+            <field name="employee_id" ref="l10n_se_hr_payroll_twenty_six.hr_helmer_employee" />
+            <field name="company_id" ref="l10n_se_hr_payroll_twenty_six.company_aronssons"/>
+            <field name="date_from">2026-10-24</field>
+            <field name="date_to">2026-10-25</field>
+            <field name="request_date_from">2026-10-24</field>
+            <field name="request_date_to">2026-10-25</field>
+            <field name="number_of_hours">16</field>
+            <field name="holiday_status_id" ref="l10n_se_hr_payroll.leave_type_loa" />
+        </record>
+
+        <!-- Semester 3 dgr, 24 timmar -->
+        <record id="hr_leave_helmer_1003" model="hr.leave">
+            <field name="employee_id" ref="l10n_se_hr_payroll_twenty_six.hr_helmer_employee" />
+            <field name="company_id" ref="l10n_se_hr_payroll_twenty_six.company_aronssons"/>
+            <field name="date_from">2026-10-12</field>
+            <field name="date_to">2026-10-14</field>
+            <field name="request_date_from">2026-10-12</field>
+            <field name="request_date_to">2026-10-14</field>
+            <field name="number_of_hours">24</field>
+            <field name="holiday_status_id" ref="l10n_se_hr_holidays.leave_type_vacation" />
+        </record>
+
+        <!-- Validera tjänstledighet + semester -->
+        <function model="hr.leave" name="action_validate">
+            <value eval="[ref('hr_leave_helmer_1002'), ref('hr_leave_helmer_1003')]"/>
+        </function>
+
+        <!-- Generera lönespec (payslip)-->
+        <record id="hr_payslip_helmer_10" model="hr.payslip">
+            <field name="name">Lönespecifikation för Oktober - Helmer Henriksson</field>
+            <field name="company_id" ref="l10n_se_hr_payroll_twenty_six.company_aronssons" />
+            <field name="employee_id" ref="l10n_se_hr_payroll_twenty_six.hr_helmer_employee" />
+            <field name="payslip_run_id" ref="l10n_se_hr_payroll_twenty_six.payslip_run_2026_10"/>
+            <field name="period_id" ref="l10n_se_hr_payroll_twenty_six.period_10_2026" />
+            <field name="date_from">2026-10-01</field>
+            <field name="date_to">2026-10-31</field>
+            <field name="struct_id" ref="l10n_se_hr_payroll_twenty_six.hr_payroll_structure_arb_tim" />
+        </record>
+
+        <!-- Hämta data till lönespec (frånvaro m.m.) -->
+        <function model="hr.payslip" name="onchange_employee">
+            <value eval="[ref('l10n_se_hr_payroll_twenty_six.hr_payslip_helmer_10')]"/>
+        </function>
+
+        <!-- Manuell data-inmatning -->
+
+        <!-- Övertid 1 -->
+        <function model="hr.payslip.input" name="write">
+            <value model="hr.payslip.input" search="[('payslip_id', '=', ref('hr_payslip_helmer_10')), ('code', '=', 'otidtim')]"/>
+            <value eval="{'amount_qty': 4.0}"/>
+        </function>
+
+        <!-- Övertid 2 -->
+        <function model="hr.payslip.input" name="write">
+            <value model="hr.payslip.input" search="[('payslip_id', '=', ref('hr_payslip_helmer_10')), ('code', '=', 'kvaltim')]"/>
+            <value eval="{'amount_qty': 2.0}"/>
+        </function>
+
+        <!-- Beräkna lönespecen -->
+        <function model="hr.payslip" name="compute_sheet">
+            <value eval="[ref('l10n_se_hr_payroll_twenty_six.hr_payslip_helmer_10')]"/>
+        </function>
+
+        <!-- ================================ November ================================ -->
+
+        <record id="ts_helmer_11" model="account.analytic.line">
+            <field name="name">Arbetad tid November</field>
+            <field name="employee_id" ref="l10n_se_hr_payroll_twenty_six.hr_helmer_employee"/>
+            <field name="project_id" ref="project_regular_work"/>
+            <field name="task_id" ref="task_regular_work"/>
+            <field name="date">2026-11-30</field>
+            <field name="unit_amount">76.0</field>
+        </record>
+
+        <!-- Sjukfrånvaro -->
+        <record id="hr_leave_helmer_1101" model="hr.leave">
+            <field name="employee_id" ref="l10n_se_hr_payroll_twenty_six.hr_helmer_employee" />
+            <field name="company_id" ref="l10n_se_hr_payroll_twenty_six.company_aronssons"/>
+            <field name="date_from">2026-11-11</field>
+            <field name="date_to">2026-11-11</field>
+            <field name="request_date_from">2026-11-11</field>
+            <field name="request_date_to">2026-11-11</field>
+            <field name="request_unit_hours" eval="True"/>
+            <field name="request_hour_from">8</field>
+            <field name="request_hour_to">12</field>
+            <field name="number_of_hours">4</field>
+            <field name="sick_leave_part">50</field>
+            <field name="holiday_status_id" ref="l10n_se_hr_payroll.leave_type_sick" />
+        </record>
+
+        <record id="hr_leave_helmer_1101_02" model="hr.leave">
+            <field name="employee_id" ref="l10n_se_hr_payroll_twenty_six.hr_helmer_employee" />
+            <field name="company_id" ref="l10n_se_hr_payroll_twenty_six.company_aronssons"/>
+            <field name="date_from">2026-11-12</field>
+            <field name="date_to">2026-11-18</field>
+            <field name="request_date_from">2026-11-12</field>
+            <field name="request_date_to">2026-11-18</field>
+            <field name="number_of_hours">40</field>
+            <field name="holiday_status_id" ref="l10n_se_hr_payroll.leave_type_sick" />
+        </record>
+
+        <!-- VAB -->
+        <record id="hr_leave_helmer_1102" model="hr.leave">
+            <field name="employee_id" ref="l10n_se_hr_payroll_twenty_six.hr_helmer_employee" />
+            <field name="company_id" ref="l10n_se_hr_payroll_twenty_six.company_aronssons"/>
+            <field name="date_from">2026-11-22</field>
+            <field name="date_to">2026-11-23</field>
+            <field name="request_date_from">2026-11-22</field>
+            <field name="request_date_to">2026-11-23</field>
+            <field name="number_of_hours">16</field>
+            <field name="holiday_status_id" ref="l10n_se_hr_payroll.leave_type_vab" />
+        </record>
+
+        <!-- Tjänstledighet -->
+        <record id="hr_leave_helmer_1103" model="hr.leave">
+            <field name="employee_id" ref="l10n_se_hr_payroll_twenty_six.hr_helmer_employee" />
+            <field name="company_id" ref="l10n_se_hr_payroll_twenty_six.company_aronssons"/>
+            <field name="date_from">2026-11-03</field>
+            <field name="date_to">2026-11-04</field>
+            <field name="request_date_from">2026-11-03</field>
+            <field name="request_date_to">2026-11-04</field>
+            <field name="number_of_hours">16</field>
+            <field name="holiday_status_id" ref="l10n_se_hr_payroll.leave_type_loa" />
+        </record>
+
+        <!-- Semester 2 dgr, 16 timmar -->
+        <record id="hr_leave_helmer_1104" model="hr.leave">
+            <field name="employee_id" ref="l10n_se_hr_payroll_twenty_six.hr_helmer_employee" />
+            <field name="company_id" ref="l10n_se_hr_payroll_twenty_six.company_aronssons"/>
+            <field name="date_from">2026-11-25</field>
+            <field name="date_to">2026-11-28</field>
+            <field name="request_date_from">2026-11-25</field>
+            <field name="request_date_to">2026-11-28</field>
+            <field name="number_of_hours">16</field>
+            <field name="holiday_status_id" ref="l10n_se_hr_holidays.leave_type_vacation" />
+        </record>
+
+        <!-- Föräldraledighet -->
+        <record id="hr_leave_helmer_1105" model="hr.leave">
+            <field name="employee_id" ref="l10n_se_hr_payroll_twenty_six.hr_helmer_employee" />
+            <field name="company_id" ref="l10n_se_hr_payroll_twenty_six.company_aronssons"/>
+            <field name="date_from">2026-11-02</field>
+            <field name="date_to">2026-11-02</field>
+            <field name="request_date_from">2026-11-02</field>
+            <field name="request_date_to">2026-11-02</field>
+            <field name="number_of_hours">8</field>
+            <field name="holiday_status_id" ref="l10n_se_hr_payroll.leave_type_f_led" />
+        </record>
+
+        <!-- Validera tjänstledighet, semester, föräldraledighet -->
+        <function model="hr.leave" name="action_validate">
+            <value eval="[ref('hr_leave_helmer_1103'), ref('hr_leave_helmer_1104'), ref('hr_leave_helmer_1105')]"/>
+        </function>
+
+        <!-- Generera lönespec (payslip)-->
+        <record id="hr_payslip_helmer_11" model="hr.payslip">
+            <field name="name">Lönespecifikation för November - Helmer Henriksson</field>
+            <field name="company_id" ref="l10n_se_hr_payroll_twenty_six.company_aronssons" />
+            <field name="employee_id" ref="l10n_se_hr_payroll_twenty_six.hr_helmer_employee" />
+            <field name="payslip_run_id" ref="l10n_se_hr_payroll_twenty_six.payslip_run_2026_11"/>
+            <field name="period_id" ref="l10n_se_hr_payroll_twenty_six.period_11_2026" />
+            <field name="date_from">2026-11-01</field>
+            <field name="date_to">2026-11-30</field>
+            <field name="struct_id" ref="l10n_se_hr_payroll_twenty_six.hr_payroll_structure_arb_tim" />
+        </record>
+
+        <!-- Hämta data till lönespec (frånvaro m.m.) -->
+        <function model="hr.payslip" name="onchange_employee">
+            <value eval="[ref('l10n_se_hr_payroll_twenty_six.hr_payslip_helmer_11')]"/>
+        </function>
+
+        <!-- Manuell data-input -->
+
+        <!-- Lunch -->
+        <function model="hr.payslip.input" name="write">
+            <value model="hr.payslip.input" search="[('payslip_id', '=', ref('hr_payslip_helmer_11')), ('code', '=', 'lunch')]"/>
+            <value eval="{'amount_qty': 1.0}"/>
+        </function>
+
+        <!-- Övertid 1 -->
+        <function model="hr.payslip.input" name="write">
+            <value model="hr.payslip.input" search="[('payslip_id', '=', ref('hr_payslip_helmer_11')), ('code', '=', 'otidtim')]"/>
+            <value eval="{'amount_qty': 1.0}"/>
+        </function>
+
+        <!-- Övertid 2 -->
+        <function model="hr.payslip.input" name="write">
+            <value model="hr.payslip.input" search="[('payslip_id', '=', ref('hr_payslip_helmer_11')), ('code', '=', 'kvaltim')]"/>
+            <value eval="{'amount_qty': 2.0}"/>
+        </function>
+
+        <!-- Beräkna lönespecen -->
+        <function model="hr.payslip" name="compute_sheet">
+            <value eval="[ref('l10n_se_hr_payroll_twenty_six.hr_payslip_helmer_11')]"/>
+        </function>
+
+        <!-- ================================ December ================================ -->
+
+        <record id="ts_helmer_12" model="account.analytic.line">
+            <field name="name">Arbetad tid December</field>
+            <field name="employee_id" ref="l10n_se_hr_payroll_twenty_six.hr_helmer_employee"/>
+            <field name="project_id" ref="project_regular_work"/>
+            <field name="task_id" ref="task_regular_work"/>
+            <field name="date">2026-12-31</field>
+            <field name="unit_amount">104.0</field>
+        </record>
+
+        <!-- Sjukfrånvaro -->
+        <record id="hr_leave_helmer_1201" model="hr.leave">
+            <field name="employee_id" ref="l10n_se_hr_payroll_twenty_six.hr_helmer_employee" />
+            <field name="company_id" ref="l10n_se_hr_payroll_twenty_six.company_aronssons"/>
+            <field name="date_from">2026-12-02</field>
+            <field name="date_to">2026-12-08</field>
+            <field name="request_date_from">2026-12-02</field>
+            <field name="request_date_to">2026-12-08</field>
+            <field name="number_of_hours">40</field>
+            <field name="holiday_status_id" ref="l10n_se_hr_payroll.leave_type_sick" />
+        </record>
+
+        <!-- Tjänstledighet -->
+        <record id="hr_leave_helmer_1202" model="hr.leave">
+            <field name="employee_id" ref="l10n_se_hr_payroll_twenty_six.hr_helmer_employee" />
+            <field name="company_id" ref="l10n_se_hr_payroll_twenty_six.company_aronssons"/>
+            <field name="date_from">2026-12-27</field>
+            <field name="date_to">2026-12-27</field>
+            <field name="request_date_from">2026-12-27</field>
+            <field name="request_date_to">2026-12-27</field>
+            <field name="number_of_hours">8</field>
+            <field name="holiday_status_id" ref="l10n_se_hr_payroll.leave_type_loa" />
+        </record>
+
+        <!-- Semester 2 dgr, 16 timmar -->
+        <record id="hr_leave_helmer_1203" model="hr.leave">
+            <field name="employee_id" ref="l10n_se_hr_payroll_twenty_six.hr_helmer_employee" />
+            <field name="company_id" ref="l10n_se_hr_payroll_twenty_six.company_aronssons"/>
+            <field name="date_from">2026-12-13</field>
+            <field name="date_to">2026-12-14</field>
+            <field name="request_date_from">2026-12-13</field>
+            <field name="request_date_to">2026-12-14</field>
+            <field name="number_of_hours">16</field>
+            <field name="holiday_status_id" ref="l10n_se_hr_holidays.leave_type_vacation" />
+        </record>
+
+        <!-- Validera tjänstledighet + semester -->
+        <function model="hr.leave" name="action_validate">
+            <value eval="[ref('hr_leave_helmer_1202'), ref('hr_leave_helmer_1203')]"/>
+        </function>
+
+        <!-- Generera lönespec (payslip)-->
+        <record id="hr_payslip_helmer_12" model="hr.payslip">
+            <field name="name">Lönespecifikation för December - Helmer Henriksson</field>
+            <field name="company_id" ref="l10n_se_hr_payroll_twenty_six.company_aronssons" />
+            <field name="employee_id" ref="l10n_se_hr_payroll_twenty_six.hr_helmer_employee" />
+            <field name="payslip_run_id" ref="l10n_se_hr_payroll_twenty_six.payslip_run_2026_12"/>
+            <field name="period_id" ref="l10n_se_hr_payroll_twenty_six.period_12_2026" />
+            <field name="date_from">2026-12-01</field>
+            <field name="date_to">2026-12-31</field>
+            <field name="struct_id" ref="l10n_se_hr_payroll_twenty_six.hr_payroll_structure_arb_tim" />
+        </record>
+
+        <!-- Hämta data till lönespec (frånvaro m.m.) -->
+        <function model="hr.payslip" name="onchange_employee">
+            <value eval="[ref('l10n_se_hr_payroll_twenty_six.hr_payslip_helmer_12')]"/>
+        </function>
+
+        <!-- Manuell data-inmatning -->
+
+        <!-- Lunch -->
+        <function model="hr.payslip.input" name="write">
+            <value model="hr.payslip.input" search="[('payslip_id', '=', ref('hr_payslip_helmer_12')), ('code', '=', 'lunch')]"/>
+            <value eval="{'amount_qty': 1.0}"/>
+        </function>
+
+        <!-- Beräkna lönespecen -->
+        <function model="hr.payslip" name="compute_sheet">
+            <value eval="[ref('l10n_se_hr_payroll_twenty_six.hr_payslip_helmer_12')]"/>
+        </function>
+
+    </data>
+</odoo>
+

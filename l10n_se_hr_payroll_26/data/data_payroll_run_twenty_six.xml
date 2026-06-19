@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+
+        <!-- ============================================ -->
+        <!-- LÖNEJOURNAL                                  -->
+        <!-- ============================================ -->
+        <record id="account_journal_lon_aronssons" model="account.journal">
+            <field name="name">Lönejournal</field>
+            <field name="code">LÖN</field>
+            <field name="type">general</field>
+            <field name="company_id" ref="l10n_se_hr_payroll_twenty_six.company_aronssons"/>
+        </record>
+
+        <!-- ============================================ -->
+        <!-- LÖNEKÖRNINGAR (hr.payslip.run) per månad     -->
+        <!-- ============================================ -->
+        <record id="payslip_run_2026_01" model="hr.payslip.run">
+            <field name="name">Salary batch for January-2026</field>
+            <field name="period_id" ref="l10n_se_hr_payroll_twenty_six.period_01_2026"/>
+            <field name="company_id" ref="l10n_se_hr_payroll_twenty_six.company_aronssons"/>
+            <field name="date_start">2026-01-01</field>
+            <field name="date_end">2026-01-31</field>
+            <field name="journal_id" ref="account_journal_lon_aronssons"/>
+        </record>
+
+        <record id="payslip_run_2026_02" model="hr.payslip.run">
+            <field name="name">Salary batch for February-2026</field>
+            <field name="period_id" ref="l10n_se_hr_payroll_twenty_six.period_02_2026"/>
+            <field name="company_id" ref="l10n_se_hr_payroll_twenty_six.company_aronssons"/>
+            <field name="date_start">2026-02-01</field>
+            <field name="date_end">2026-02-28</field>
+            <field name="journal_id" ref="account_journal_lon_aronssons"/>
+        </record>
+
+        <record id="payslip_run_2026_03" model="hr.payslip.run">
+            <field name="name">Salary batch for March-2026</field>
+            <field name="period_id" ref="l10n_se_hr_payroll_twenty_six.period_03_2026"/>
+            <field name="company_id" ref="l10n_se_hr_payroll_twenty_six.company_aronssons"/>
+            <field name="date_start">2026-03-01</field>
+            <field name="date_end">2026-03-31</field>
+            <field name="journal_id" ref="account_journal_lon_aronssons"/>
+        </record>
+
+        <record id="payslip_run_2026_04" model="hr.payslip.run">
+            <field name="name">Salary batch for April-2026</field>
+            <field name="period_id" ref="l10n_se_hr_payroll_twenty_six.period_04_2026"/>
+            <field name="company_id" ref="l10n_se_hr_payroll_twenty_six.company_aronssons"/>
+            <field name="date_start">2026-04-01</field>
+            <field name="date_end">2026-04-30</field>
+            <field name="journal_id" ref="account_journal_lon_aronssons"/>
+        </record>
+
+        <record id="payslip_run_2026_05" model="hr.payslip.run">
+            <field name="name">Salary batch for May-2026</field>
+            <field name="period_id" ref="l10n_se_hr_payroll_twenty_six.period_05_2026"/>
+            <field name="company_id" ref="l10n_se_hr_payroll_twenty_six.company_aronssons"/>
+            <field name="date_start">2026-05-01</field>
+            <field name="date_end">2026-05-31</field>
+            <field name="journal_id" ref="account_journal_lon_aronssons"/>
+        </record>
+
+        <record id="payslip_run_2026_06" model="hr.payslip.run">
+            <field name="name">Salary batch for June-2026</field>
+            <field name="period_id" ref="l10n_se_hr_payroll_twenty_six.period_06_2026"/>
+            <field name="company_id" ref="l10n_se_hr_payroll_twenty_six.company_aronssons"/>
+            <field name="date_start">2026-06-01</field>
+            <field name="date_end">2026-06-30</field>
+            <field name="journal_id" ref="account_journal_lon_aronssons"/>
+        </record>
+
+        <record id="payslip_run_2026_07" model="hr.payslip.run">
+            <field name="name">Salary batch for July-2026</field>
+            <field name="period_id" ref="l10n_se_hr_payroll_twenty_six.period_07_2026"/>
+            <field name="company_id" ref="l10n_se_hr_payroll_twenty_six.company_aronssons"/>
+            <field name="date_start">2026-07-01</field>
+            <field name="date_end">2026-07-31</field>
+            <field name="journal_id" ref="account_journal_lon_aronssons"/>
+        </record>
+
+        <record id="payslip_run_2026_08" model="hr.payslip.run">
+            <field name="name">Salary batch for August-2026</field>
+            <field name="period_id" ref="l10n_se_hr_payroll_twenty_six.period_08_2026"/>
+            <field name="company_id" ref="l10n_se_hr_payroll_twenty_six.company_aronssons"/>
+            <field name="date_start">2026-08-01</field>
+            <field name="date_end">2026-08-31</field>
+            <field name="journal_id" ref="account_journal_lon_aronssons"/>
+        </record>
+
+        <record id="payslip_run_2026_09" model="hr.payslip.run">
+            <field name="name">Salary batch for September-2026</field>
+            <field name="period_id" ref="l10n_se_hr_payroll_twenty_six.period_09_2026"/>
+            <field name="company_id" ref="l10n_se_hr_payroll_twenty_six.company_aronssons"/>
+            <field name="date_start">2026-09-01</field>
+            <field name="date_end">2026-09-30</field>
+            <field name="journal_id" ref="account_journal_lon_aronssons"/>
+        </record>
+
+        <record id="payslip_run_2026_10" model="hr.payslip.run">
+            <field name="name">Salary batch for October-2026</field>
+            <field name="period_id" ref="l10n_se_hr_payroll_twenty_six.period_10_2026"/>
+            <field name="company_id" ref="l10n_se_hr_payroll_twenty_six.company_aronssons"/>
+            <field name="date_start">2026-10-01</field>
+            <field name="date_end">2026-10-31</field>
+            <field name="journal_id" ref="account_journal_lon_aronssons"/>
+        </record>
+
+        <record id="payslip_run_2026_11" model="hr.payslip.run">
+            <field name="name">Salary batch for November-2026</field>
+            <field name="period_id" ref="l10n_se_hr_payroll_twenty_six.period_11_2026"/>
+            <field name="company_id" ref="l10n_se_hr_payroll_twenty_six.company_aronssons"/>
+            <field name="date_start">2026-11-01</field>
+            <field name="date_end">2026-11-30</field>
+            <field name="journal_id" ref="account_journal_lon_aronssons"/>
+        </record>
+
+        <record id="payslip_run_2026_12" model="hr.payslip.run">
+            <field name="name">Salary batch for December-2026</field>
+            <field name="period_id" ref="l10n_se_hr_payroll_twenty_six.period_12_2026"/>
+            <field name="company_id" ref="l10n_se_hr_payroll_twenty_six.company_aronssons"/>
+            <field name="date_start">2026-12-01</field>
+            <field name="date_end">2026-12-31</field>
+            <field name="journal_id" ref="account_journal_lon_aronssons"/>
+        </record>
+
+    </data>
+</odoo>

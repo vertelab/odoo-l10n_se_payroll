@@ -1,0 +1,1416 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+
+        <record id="hr_asse_partner" model="res.partner">
+            <field name="company_type">person</field>
+            <field name="name">Asse Aronsson</field>
+            <field name="street">Tjädervägen 23</field>
+            <field name="zip">175 00</field>
+            <field name="city">Järfälla</field>
+            <field name="country_id" ref="base.se"/>
+            <field name="mobile">073-500000</field>
+            <field name="function">VD och försäljningschef</field>
+            <field name="company_id" ref="l10n_se_hr_payroll_twenty_six.company_aronssons"/>
+        </record>
+
+        <record id="bank_asse" model="res.partner.bank">
+            <field name="acc_number">4333-44444433</field>
+            <field name="partner_id" ref="hr_asse_partner" />
+        </record>
+
+        <record id="hr_asse_user" model="res.users">
+            <field name="name">Asse Aronsson</field>
+            <field name="partner_id" ref="hr_asse_partner" />
+            <field name="login">Asse</field>
+            <field name="company_id" ref="l10n_se_hr_payroll_twenty_six.company_aronssons"/>
+            <field name="company_ids" eval="[
+                (4, ref('l10n_se_hr_payroll_twenty_six.company_aronssons')),
+            ]" />
+        </record>
+
+        <record id="hr_asse_employee" model="hr.employee">
+            <field name="name">Asse Aronsson</field>
+            <field name="birthday">1965-10-31</field>
+            <field name="work_location_id" ref="main_work_location" />
+            <field name="work_phone">073-400000</field>
+            <field name="work_email">asse.aronsson@aronssons2026.se</field>
+            <field name="identification_id">651031-3114</field>
+            <field name="registration_number">101</field>
+            <field name="job_title">VD och försäljningschef</field>
+            <field name="tz" eval="'Europe/Stockholm'" />
+            <field name="address_id" ref="l10n_se_hr_payroll_twenty_six.company_aronssons_partner" />
+            <field name="company_id" ref="l10n_se_hr_payroll_twenty_six.company_aronssons" />
+            <field name="work_contact_id" ref="hr_asse_partner" />
+            <field name="user_id" ref="hr_asse_user" />
+        </record>
+
+        <!-- För att få till historisk lägre sysselesättningsgrad.
+             Facit säger att han hade sysselsättninggrad 75% under
+             intjänandeåret 2021-04-01 till 2026-03-31, men alla 
+             beräkningar i facit, hans schemaläggning och grund-
+             lön på lönespecar indikerar att han jobbade heltid
+             hela 2022.  -->
+        <record id="contract_asse_1" model="hr.contract">
+            <field name="name">Asse Aronsson Deltidsavtal 1</field>
+            <field name="wage">39000</field>
+            <field name="type_id" ref="hr_contract_type" />
+            <field name="employee_id" ref="l10n_se_hr_payroll_twenty_six.hr_asse_employee" />
+            <field name="company_id" ref="l10n_se_hr_payroll_twenty_six.company_aronssons" />
+            <field name="schedule_pay" eval="'monthly'" />
+            <field name="state" eval="'close'" />
+            <field name="job_id" ref="job_id_president" />
+            <field name="date_start">2018-04-01</field>
+            <field name="date_end">2021-12-31</field>
+            <field name="first_contract_date">2018-04-01</field>
+            <field name="resource_calendar_id" ref="l10n_se_hr_payroll_twenty_six.resource_calendar_part_time_66_twenty_six" />
+            <field name="struct_id" ref="l10n_se_hr_payroll_twenty_six.hr_payroll_structure_tj_man" />
+            <field name="table_number">30</field>
+            <field name="column_number" eval="'column1'" />
+            <field name="has_tax_equalization" eval="False"/>
+            <field name="has_one_off_tax" eval="True"/>
+            <field name="one_off_tax">0.57</field>
+            <field name="annual_vacation_days">30.0</field>
+        </record>
+
+        <record id="contract_asse_2" model="hr.contract">
+            <field name="name">Asse Aronsson Heltidsavtal</field>
+            <field name="wage">52000</field>
+            <field name="wage_exchange_amount">4000</field>
+            <field name="wage_exchange_start">2026-03-01</field>
+            <field name="wage_exchange_end">2026-11-30</field>
+            <field name="type_id" ref="hr_contract_type" />
+            <field name="employee_id" ref="l10n_se_hr_payroll_twenty_six.hr_asse_employee" />
+            <field name="company_id" ref="l10n_se_hr_payroll_twenty_six.company_aronssons" />
+            <field name="schedule_pay" eval="'monthly'" />
+            <field name="state" eval="'open'" />
+            <field name="job_id" ref="job_id_president" />
+            <field name="date_start">2026-01-01</field>
+            <field name="first_contract_date">2018-04-01</field>
+            <field name="resource_calendar_id" ref="l10n_se_hr_payroll_twenty_six.resource_calendar_standard_twenty_six" />
+            <field name="struct_id" ref="l10n_se_hr_payroll_twenty_six.hr_payroll_structure_tj_man" />
+            <field name="table_number">30</field>
+            <field name="column_number" eval="'column1'" />
+            <field name="has_tax_equalization" eval="False"/>
+            <field name="has_one_off_tax" eval="True"/>
+            <field name="one_off_tax">0.57</field>
+            <field name="annual_vacation_days">30.0</field>
+        </record>
+
+
+        <!-- ## HR.CONTRACT.BENEFIT -->
+        <!-- Bilförmån 1 -->
+        <record id="hr_benefit_asse_1" model="hr.contract.benefit">
+            <field name="contract_id" ref="contract_asse_2" />
+            <field name="name" ref="l10n_se_hr_payroll_benefits.hr_benefit_carbru" />
+            <field name="desc">Tjänstebil, Volvo</field>
+            <field name="value">4391</field>
+            <field name="date_start">2026-01-01</field>
+            <field name="date_end">2026-01-31</field>
+        </record>
+        <!-- Bilförmån 2 -->
+        <record id="hr_benefit_asse_2" model="hr.contract.benefit">
+            <field name="contract_id" ref="contract_asse_2" />
+            <field name="name" ref="l10n_se_hr_payroll_benefits.hr_benefit_carbru" />
+            <field name="desc">Tjänstebil, Volvo</field>
+            <field name="value">4950</field>
+            <field name="date_start">2026-02-01</field>
+            <field name="date_end">2026-11-30</field>
+        </record>
+
+        <record id="l10n_se_hr_payroll_benefits.hr_benefit_carbru" model="hr.benefit">
+            <field name="code_id" ref="l10n_se_hr_payroll_benefits.hr_benefit_rule_carbru"/>
+        </record>
+
+        <!-- Semestertilldelning -->
+        <record id="allocation_asse_vacation" model="hr.leave.allocation">
+            <field name="name">Initial Vacation Allocation</field>
+            <field name="employee_id" ref="hr_asse_employee"/>
+            <field name="holiday_status_id" ref="l10n_se_hr_holidays.leave_type_vacation"/>
+            <field name="number_of_days">30</field>
+            <field name="date_from">2026-01-01</field>
+            <field name="allocation_type">regular</field>
+        </record>
+
+        <function model="hr.leave.allocation" name="action_validate">
+            <value eval="[ref('allocation_asse_vacation')]"/>
+        </function>
+<!-- 
+        <record id="timesheet_01_asse" model="hr_timesheet.sheet">
+            <field name="name">Tidrapport Januari - Asse</field>
+            <field name="employee_id" ref="hr_asse_employee"/>
+            <field name="company_id" ref="l10n_se_hr_payroll_twenty_six.company_aronssons"/>
+            <field name="date_start">2026-01-01</field>
+            <field name="date_end">2026-01-31</field>
+        </record>
+
+        <record id="timesheet_02_asse" model="hr_timesheet.sheet">
+            <field name="name">Tidrapport Februari - Asse</field>
+            <field name="employee_id" ref="hr_asse_employee"/>
+            <field name="company_id" ref="l10n_se_hr_payroll_twenty_six.company_aronssons"/>
+            <field name="date_start">2026-02-01</field>
+            <field name="date_end">2026-02-28</field>
+        </record>
+
+        <record id="timesheet_03_asse" model="hr_timesheet.sheet">
+            <field name="name">Tidrapport Mars - Asse</field>
+            <field name="employee_id" ref="hr_asse_employee"/>
+            <field name="company_id" ref="l10n_se_hr_payroll_twenty_six.company_aronssons"/>
+            <field name="date_start">2026-03-01</field>
+            <field name="date_end">2026-03-31</field>
+        </record>
+
+        <record id="timesheet_04_asse" model="hr_timesheet.sheet">
+            <field name="name">Tidrapport April - Asse</field>
+            <field name="employee_id" ref="hr_asse_employee"/>
+            <field name="company_id" ref="l10n_se_hr_payroll_twenty_six.company_aronssons"/>
+            <field name="date_start">2026-04-01</field>
+            <field name="date_end">2026-04-30</field>
+        </record>
+
+        <record id="timesheet_05_asse" model="hr_timesheet.sheet">
+            <field name="name">Tidrapport Maj - Asse</field>
+            <field name="employee_id" ref="hr_asse_employee"/>
+            <field name="company_id" ref="l10n_se_hr_payroll_twenty_six.company_aronssons"/>
+            <field name="date_start">2026-05-01</field>
+            <field name="date_end">2026-05-31</field>
+        </record>
+
+        <record id="timesheet_06_asse" model="hr_timesheet.sheet">
+            <field name="name">Tidrapport Juni - Asse</field>
+            <field name="employee_id" ref="hr_asse_employee"/>
+            <field name="company_id" ref="l10n_se_hr_payroll_twenty_six.company_aronssons"/>
+            <field name="date_start">2026-06-01</field>
+            <field name="date_end">2026-06-30</field>
+        </record>
+
+        <record id="timesheet_07_asse" model="hr_timesheet.sheet">
+            <field name="name">Tidrapport Juli - Asse</field>
+            <field name="employee_id" ref="hr_asse_employee"/>
+            <field name="company_id" ref="l10n_se_hr_payroll_twenty_six.company_aronssons"/>
+            <field name="date_start">2026-07-01</field>
+            <field name="date_end">2026-07-31</field>
+        </record>
+
+        <record id="timesheet_08_asse" model="hr_timesheet.sheet">
+            <field name="name">Tidrapport Augusti - Asse</field>
+            <field name="employee_id" ref="hr_asse_employee"/>
+            <field name="company_id" ref="l10n_se_hr_payroll_twenty_six.company_aronssons"/>
+            <field name="date_start">2026-08-01</field>
+            <field name="date_end">2026-08-31</field>
+        </record>
+
+        <record id="timesheet_09_asse" model="hr_timesheet.sheet">
+            <field name="name">Tidrapport September - Asse</field>
+            <field name="employee_id" ref="hr_asse_employee"/>
+            <field name="company_id" ref="l10n_se_hr_payroll_twenty_six.company_aronssons"/>
+            <field name="date_start">2026-09-01</field>
+            <field name="date_end">2026-09-30</field>
+        </record>
+
+        <record id="timesheet_10_asse" model="hr_timesheet.sheet">
+            <field name="name">Tidrapport Oktober - Asse</field>
+            <field name="employee_id" ref="hr_asse_employee"/>
+            <field name="company_id" ref="l10n_se_hr_payroll_twenty_six.company_aronssons"/>
+            <field name="date_start">2026-10-01</field>
+            <field name="date_end">2026-10-31</field>
+        </record>
+
+        <record id="timesheet_11_asse" model="hr_timesheet.sheet">
+            <field name="name">Tidrapport November - Asse</field>
+            <field name="employee_id" ref="hr_asse_employee"/>
+            <field name="company_id" ref="l10n_se_hr_payroll_twenty_six.company_aronssons"/>
+            <field name="date_start">2026-11-01</field>
+            <field name="date_end">2026-11-30</field>
+        </record>
+
+        <record id="timesheet_12_asse" model="hr_timesheet.sheet">
+            <field name="name">Tidrapport Decmber - Asse</field>
+            <field name="employee_id" ref="hr_asse_employee"/>
+            <field name="company_id" ref="l10n_se_hr_payroll_twenty_six.company_aronssons"/>
+            <field name="date_start">2026-12-01</field>
+            <field name="date_end">2026-12-31</field>
+        </record> -->
+
+
+        <!-- ================================ January ================================ -->
+
+        <!-- Sjukfrånvaro: -->
+        <record id="hr_leave_asse_101" model="hr.leave">
+            <field name="employee_id" ref="l10n_se_hr_payroll_twenty_six.hr_asse_employee" />
+            <field name="company_id" ref="l10n_se_hr_payroll_twenty_six.company_aronssons"/>
+            <field name="date_from">2026-01-07</field>
+            <field name="date_to">2026-01-07</field>
+            <field name="request_date_from">2026-01-07</field>
+            <field name="request_date_to">2026-01-07</field>
+            <field name="request_unit_hours" eval="True"/>
+            <field name="request_hour_from">8</field>
+            <field name="request_hour_to">12</field>
+            <field name="number_of_hours">4</field>
+            <field name="sick_leave_part">50</field>
+            <field name="holiday_status_id" ref="l10n_se_hr_payroll.leave_type_sick" />
+        </record>
+
+        <record id="hr_leave_asse_102" model="hr.leave">
+            <field name="employee_id" ref="l10n_se_hr_payroll_twenty_six.hr_asse_employee" />
+            <field name="company_id" ref="l10n_se_hr_payroll_twenty_six.company_aronssons"/>
+            <field name="date_from">2026-01-12</field>
+            <field name="date_to">2026-01-13</field>
+            <field name="request_date_from">2026-01-12</field>
+            <field name="request_date_to">2026-01-13</field>
+            <field name="number_of_hours">16</field>
+            <field name="holiday_status_id" ref="l10n_se_hr_payroll.leave_type_sick" />
+        </record>
+
+        <record id="hr_leave_asse_103" model="hr.leave">
+            <field name="employee_id" ref="l10n_se_hr_payroll_twenty_six.hr_asse_employee" />
+            <field name="company_id" ref="l10n_se_hr_payroll_twenty_six.company_aronssons"/>
+            <field name="date_from">2026-01-24</field>
+            <field name="date_to">2026-01-24</field>
+            <field name="request_date_from">2026-01-24</field>
+            <field name="request_date_to">2026-01-24</field>
+            <field name="number_of_hours">8</field>
+            <field name="holiday_status_id" ref="l10n_se_hr_payroll.leave_type_sick" />
+        </record>
+
+        <!-- Tjänstledighet: -->
+        <record id="hr_leave_asse_104" model="hr.leave">
+            <field name="employee_id" ref="l10n_se_hr_payroll_twenty_six.hr_asse_employee" />
+            <field name="company_id" ref="l10n_se_hr_payroll_twenty_six.company_aronssons"/>
+            <field name="date_from">2026-01-03</field>
+            <field name="date_to">2026-01-03</field>
+            <field name="request_date_from">2026-01-03</field>
+            <field name="request_date_to">2026-01-03</field>
+            <field name="request_unit_hours" eval="True"/>
+            <field name="request_hour_from">8</field>
+            <field name="request_hour_to">12</field>
+            <field name="number_of_hours">4</field>
+            <field name="holiday_status_id" ref="l10n_se_hr_payroll.leave_type_loa" />
+        </record>
+
+        <record id="hr_leave_asse_105" model="hr.leave">
+            <field name="employee_id" ref="l10n_se_hr_payroll_twenty_six.hr_asse_employee" />
+            <field name="company_id" ref="l10n_se_hr_payroll_twenty_six.company_aronssons"/>
+            <field name="date_from">2026-01-14</field>
+            <field name="date_to">2026-01-20</field>
+            <field name="request_date_from">2026-01-14</field>
+            <field name="request_date_to">2026-01-20</field>
+            <field name="number_of_hours">40</field>
+            <field name="holiday_status_id" ref="l10n_se_hr_payroll.leave_type_loa" />
+        </record>
+
+        <!-- VAB -->
+        <record id="hr_leave_asse_106" model="hr.leave">
+            <field name="employee_id" ref="l10n_se_hr_payroll_twenty_six.hr_asse_employee" />
+            <field name="company_id" ref="l10n_se_hr_payroll_twenty_six.company_aronssons"/>
+            <field name="date_from">2026-01-25</field>
+            <field name="date_to">2026-01-25</field>
+            <field name="request_date_from">2026-01-25</field>
+            <field name="request_date_to">2026-01-25</field>
+            <field name="number_of_hours">8</field>
+            <field name="holiday_status_id" ref="l10n_se_hr_payroll.leave_type_vab" />
+        </record>
+
+        <record id="hr_leave_asse_106_02" model="hr.leave">
+            <field name="employee_id" ref="l10n_se_hr_payroll_twenty_six.hr_asse_employee" />
+            <field name="company_id" ref="l10n_se_hr_payroll_twenty_six.company_aronssons"/>
+            <field name="date_from">2026-01-26</field>
+            <field name="date_to">2026-01-26</field>
+            <field name="request_date_from">2026-01-26</field>
+            <field name="request_date_to">2026-01-26</field>
+            <field name="request_unit_hours" eval="True"/>
+            <field name="request_hour_from">8</field>
+            <field name="request_hour_to">12</field>
+            <field name="number_of_hours">4</field>
+            <field name="holiday_status_id" ref="l10n_se_hr_payroll.leave_type_vab" />
+        </record>
+
+        <!-- Validera tjänstledighet/semester/föräld.led. -->
+        <function model="hr.leave" name="action_validate">
+            <value eval="[ref('hr_leave_asse_104'), ref('hr_leave_asse_105')]"/>
+        </function>
+
+        <!-- Generera lönespec (payslip) -->
+        <record id="hr_payslip_asse_01" model="hr.payslip">
+            <field name="name">Lönespecifikation för Januari - Asse Aronsson</field>
+            <field name="company_id" ref="l10n_se_hr_payroll_twenty_six.company_aronssons" />
+            <field name="employee_id" ref="l10n_se_hr_payroll_twenty_six.hr_asse_employee" />
+            <field name="payslip_run_id" ref="l10n_se_hr_payroll_twenty_six.payslip_run_2026_01"/>
+            <field name="period_id" ref="l10n_se_hr_payroll_twenty_six.period_01_2026" />
+            <field name="date_from">2026-01-01</field>
+            <field name="date_to">2026-01-31</field>
+            <field name="struct_id" ref="l10n_se_hr_payroll_twenty_six.hr_payroll_structure_tj_man" />
+        </record>
+
+        <!-- Manuella inputs: -->
+
+        <function model="hr.payslip" name="onchange_employee">
+            <value eval="[ref('hr_payslip_asse_01')]"/>
+        </function>
+
+        <!-- Förmån fritt drivmedel -->
+        <function model="hr.payslip.input" name="write">
+            <value model="hr.payslip.input" search="[('payslip_id', '=', ref('hr_payslip_asse_01')), ('code', '=', 'drivmedel')]"/>
+            <value eval="{'amount': 1007.50}"/>
+        </function>
+
+        <!-- Bonus -->
+        <function model="hr.payslip.input" name="write">
+            <value model="hr.payslip.input" search="[('payslip_id', '=', ref('hr_payslip_asse_01')), ('code', '=', 'bonus')]"/>
+            <value eval="{'amount_qty': 1.0, 'amount': 10000.0}"/>
+        </function>
+
+        <!-- Övertid 1 -->
+        <function model="hr.payslip.input" name="write">
+            <value model="hr.payslip.input" search="[('payslip_id', '=', ref('hr_payslip_asse_01')), ('code', '=', 'otidtim')]"/>
+            <value eval="{'amount_qty': 2.0}"/>
+        </function>
+
+        <!-- Övertid 2 -->
+        <function model="hr.payslip.input" name="write">
+            <value model="hr.payslip.input" search="[('payslip_id', '=', ref('hr_payslip_asse_01')), ('code', '=', 'kvaltim')]"/>
+            <value eval="{'amount_qty': 2.0}"/>
+        </function>
+
+        <function model="hr.payslip" name="compute_sheet">
+            <value eval="[ref('hr_payslip_asse_01')]"/>
+        </function>
+
+        <!-- ================================ February ================================ -->
+
+        <!-- Tjänstledighet -->
+
+        <record id="hr_leave_asse_201" model="hr.leave">
+            <field name="employee_id" ref="l10n_se_hr_payroll_twenty_six.hr_asse_employee" />
+            <field name="company_id" ref="l10n_se_hr_payroll_twenty_six.company_aronssons"/>
+            <field name="date_from">2026-02-07</field>
+            <field name="date_to">2026-02-07</field>
+            <field name="request_date_from">2026-02-07</field>
+            <field name="request_date_to">2026-02-07</field>
+            <field name="request_unit_hours" eval="True"/>
+            <field name="request_hour_from">8</field>
+            <field name="request_hour_to">11</field>
+            <field name="number_of_hours">3</field>
+            <field name="holiday_status_id" ref="l10n_se_hr_payroll.leave_type_loa" />
+        </record>
+
+        <record id="hr_leave_asse_202" model="hr.leave">
+            <field name="employee_id" ref="l10n_se_hr_payroll_twenty_six.hr_asse_employee" />
+            <field name="company_id" ref="l10n_se_hr_payroll_twenty_six.company_aronssons"/>
+            <field name="date_from">2026-02-10</field>
+            <field name="date_to">2026-02-16</field>
+            <field name="request_date_from">2026-02-10</field>
+            <field name="request_date_to">2026-02-16</field>
+            <field name="number_of_hours">40</field>
+            <field name="holiday_status_id" ref="l10n_se_hr_payroll.leave_type_loa" />
+        </record>
+
+        <!-- VAB -->
+
+        <record id="hr_leave_asse_203" model="hr.leave">
+            <field name="employee_id" ref="l10n_se_hr_payroll_twenty_six.hr_asse_employee" />
+            <field name="company_id" ref="l10n_se_hr_payroll_twenty_six.company_aronssons"/>
+            <field name="date_from">2026-02-03</field>
+            <field name="date_to">2026-02-03</field>
+            <field name="request_date_from">2026-02-03</field>
+            <field name="request_date_to">2026-02-03</field>
+            <field name="request_unit_hours" eval="True"/>
+            <field name="request_hour_from">13</field>
+            <field name="request_hour_to">17</field>
+            <field name="number_of_hours">4</field>
+            <field name="holiday_status_id" ref="l10n_se_hr_payroll.leave_type_vab" />
+        </record>
+
+        <record id="hr_leave_asse_203_02" model="hr.leave">
+            <field name="employee_id" ref="l10n_se_hr_payroll_twenty_six.hr_asse_employee" />
+            <field name="company_id" ref="l10n_se_hr_payroll_twenty_six.company_aronssons"/>
+            <field name="date_from">2026-02-04</field>
+            <field name="date_to">2026-02-04</field>
+            <field name="request_date_from">2026-02-04</field>
+            <field name="request_date_to">2026-02-04</field>
+            <field name="number_of_hours">8</field>
+            <field name="holiday_status_id" ref="l10n_se_hr_payroll.leave_type_vab" />
+        </record>
+
+        <!-- Validera tjänstledighet/semester/föräld.led. -->
+        <function model="hr.leave" name="action_validate">
+            <value eval="[ref('hr_leave_asse_201'), ref('hr_leave_asse_202')]"/>
+        </function>
+
+        <!-- Generera lönespec (payslip) -->
+        <record id="hr_payslip_asse_02" model="hr.payslip">
+            <field name="name">Lönespecifikation för Februari - Asse Aronsson</field>
+            <field name="company_id" ref="l10n_se_hr_payroll_twenty_six.company_aronssons" />
+            <field name="employee_id" ref="l10n_se_hr_payroll_twenty_six.hr_asse_employee" />
+            <field name="payslip_run_id" ref="l10n_se_hr_payroll_twenty_six.payslip_run_2026_02"/>
+            <field name="period_id" ref="l10n_se_hr_payroll_twenty_six.period_02_2026" />
+            <field name="date_from">2026-02-01</field>
+            <field name="date_to">2026-02-28</field>
+            <field name="struct_id" ref="l10n_se_hr_payroll_twenty_six.hr_payroll_structure_tj_man" />
+        </record>
+
+        <!-- Manuell input -->
+        <function model="hr.payslip" name="onchange_employee">
+            <value eval="[ref('hr_payslip_asse_02')]"/>
+        </function>
+
+        <!-- Förmån fritt drivmedel -->
+        <function model="hr.payslip.input" name="write">
+            <value model="hr.payslip.input" search="[('payslip_id', '=', ref('hr_payslip_asse_02')), ('code', '=', 'drivmedel')]"/>
+            <value eval="{'amount': 900.0}"/>
+        </function>
+
+        <!-- Övertid 1 -->
+        <function model="hr.payslip.input" name="write">
+            <value model="hr.payslip.input" search="[('payslip_id', '=', ref('hr_payslip_asse_02')), ('code', '=', 'otidtim')]"/>
+            <value eval="{'amount_qty': 4.0}"/>
+        </function>
+
+        <!-- Övertid 2 -->
+        <function model="hr.payslip.input" name="write">
+            <value model="hr.payslip.input" search="[('payslip_id', '=', ref('hr_payslip_asse_02')), ('code', '=', 'kvaltim')]"/>
+            <value eval="{'amount_qty': 3.0}"/>
+        </function>
+
+        <!-- Övriga nettoers gymkort -->
+        <function model="hr.payslip.input" name="write">
+            <value model="hr.payslip.input" search="[('payslip_id', '=', ref('hr_payslip_asse_02')), ('code', '=', 'net_avd')]"/>
+            <value eval="{'name': 'Övrig nettoavdrag (gymkort)', 'amount_qty': 1, 'amount': 1000.0}"/>
+        </function>
+
+        <function model="hr.payslip" name="compute_sheet">
+            <value eval="[ref('hr_payslip_asse_02')]"/>
+        </function>
+
+        <!-- ================================ March ================================ -->
+
+        <!-- Sjukfrånvaro -->
+        <record id="hr_leave_asse_301" model="hr.leave">
+            <field name="employee_id" ref="l10n_se_hr_payroll_twenty_six.hr_asse_employee" />
+            <field name="company_id" ref="l10n_se_hr_payroll_twenty_six.company_aronssons"/>
+            <field name="date_from">2026-03-01</field>
+            <field name="date_to">2026-03-08</field>
+            <field name="request_date_from">2026-03-01</field>
+            <field name="request_date_to">2026-03-08</field>
+            <field name="number_of_hours">48</field>
+            <field name="holiday_status_id" ref="l10n_se_hr_payroll.leave_type_sick" />
+        </record>
+
+        <record id="hr_leave_asse_301_02" model="hr.leave">
+            <field name="employee_id" ref="l10n_se_hr_payroll_twenty_six.hr_asse_employee" />
+            <field name="company_id" ref="l10n_se_hr_payroll_twenty_six.company_aronssons"/>
+            <field name="date_from">2026-03-09</field>
+            <field name="date_to">2026-03-09</field>
+            <field name="request_date_from">2026-03-09</field>
+            <field name="request_date_to">2026-03-09</field>
+            <field name="request_unit_hours" eval="True"/>
+            <field name="request_hour_from">8</field>
+            <field name="request_hour_to">12</field>
+            <field name="number_of_hours">4</field>
+            <field name="sick_leave_part">50</field>
+            <field name="holiday_status_id" ref="l10n_se_hr_payroll.leave_type_sick" />
+        </record>
+
+        <!-- Tjänstledighet -->
+        <record id="hr_leave_asse_302" model="hr.leave">
+            <field name="employee_id" ref="l10n_se_hr_payroll_twenty_six.hr_asse_employee" />
+            <field name="company_id" ref="l10n_se_hr_payroll_twenty_six.company_aronssons"/>
+            <field name="date_from">2026-03-18</field>
+            <field name="date_to">2026-03-18</field>
+            <field name="request_date_from">2026-03-18</field>
+            <field name="request_date_to">2026-03-18</field>
+            <field name="request_unit_hours" eval="True"/>
+            <field name="request_hour_from">8</field>
+            <field name="request_hour_to">12</field>
+            <field name="number_of_hours">4</field>
+            <field name="holiday_status_id" ref="l10n_se_hr_payroll.leave_type_loa" />
+        </record>
+
+        <!-- Saknas: -->
+
+        <!-- Skatt -->
+        <!-- Arbetsgivaravgift -->
+
+        <!-- Validera tjänstledighet/semester/föräld.led. -->
+        <function model="hr.leave" name="action_validate">
+            <value eval="[ref('hr_leave_asse_302')]"/>
+        </function>
+
+        <!-- Generera lönespec (payslip) -->
+        <record id="hr_payslip_asse_03" model="hr.payslip">
+            <field name="name">Lönespecifikation för Mars - Asse Aronsson</field>
+            <field name="company_id" ref="l10n_se_hr_payroll_twenty_six.company_aronssons" />
+            <field name="employee_id" ref="l10n_se_hr_payroll_twenty_six.hr_asse_employee" />
+            <field name="payslip_run_id" ref="l10n_se_hr_payroll_twenty_six.payslip_run_2026_03"/>
+            <field name="period_id" ref="l10n_se_hr_payroll_twenty_six.period_03_2026" />
+            <field name="date_from">2026-03-01</field>
+            <field name="date_to">2026-03-31</field>
+            <field name="struct_id" ref="l10n_se_hr_payroll_twenty_six.hr_payroll_structure_tj_man" />
+        </record>
+
+        <!-- Manuell input -->
+
+        <function model="hr.payslip" name="onchange_employee">
+            <value eval="[ref('hr_payslip_asse_03')]"/>
+        </function>
+
+        <!-- Restidersättning vardag-->
+        <function model="hr.payslip.input" name="write">
+            <value model="hr.payslip.input" search="[('payslip_id', '=', ref('hr_payslip_asse_03')), ('code', '=', 'res_vardag_tim')]"/>
+            <value eval="{'amount_qty': 5}"/>
+        </function>
+
+        <!-- Restidsersättning helg -->
+        <function model="hr.payslip.input" name="write">
+            <value model="hr.payslip.input" search="[('payslip_id', '=', ref('hr_payslip_asse_03')), ('code', '=', 'res_helg_tim')]"/>
+            <value eval="{'amount_qty': 1}"/>
+        </function>
+
+        <!-- Förmån fritt drivmedel -->
+        <function model="hr.payslip.input" name="write">
+            <value model="hr.payslip.input" search="[('payslip_id', '=', ref('hr_payslip_asse_03')), ('code', '=', 'drivmedel')]"/>
+            <value eval="{'amount': 775.0}"/>
+        </function>
+
+        <function model="hr.payslip" name="compute_sheet">
+            <value eval="[ref('hr_payslip_asse_03')]"/>
+        </function>
+
+        <!-- ================================ April ================================ -->
+
+        <!-- Tjänstledighet -->
+        <record id="hr_leave_asse_401" model="hr.leave">
+            <field name="employee_id" ref="l10n_se_hr_payroll_twenty_six.hr_asse_employee" />
+            <field name="company_id" ref="l10n_se_hr_payroll_twenty_six.company_aronssons"/>
+            <field name="date_from">2026-04-19</field>
+            <field name="date_to">2026-04-19</field>
+            <field name="request_date_from">2026-04-19</field>
+            <field name="request_date_to">2026-04-19</field>
+            <field name="request_unit_hours" eval="True"/>
+            <field name="request_hour_from">8</field>
+            <field name="request_hour_to">11</field>
+            <field name="number_of_hours">3</field>
+            <field name="holiday_status_id" ref="l10n_se_hr_payroll.leave_type_loa" />
+        </record>
+
+        <record id="hr_leave_asse_402" model="hr.leave">
+            <field name="employee_id" ref="l10n_se_hr_payroll_twenty_six.hr_asse_employee" />
+            <field name="company_id" ref="l10n_se_hr_payroll_twenty_six.company_aronssons"/>
+            <field name="date_from">2026-04-20</field>
+            <field name="date_to">2026-04-22</field>
+            <field name="request_date_from">2026-04-20</field>
+            <field name="request_date_to">2026-04-22</field>
+            <field name="number_of_hours">24</field>
+            <field name="holiday_status_id" ref="l10n_se_hr_payroll.leave_type_loa" />
+        </record>
+
+        <!-- Saknas: -->
+
+        <!-- Skatt -->
+        <!-- Arbetsgivaravgift -->
+
+        <!-- Validera tjänstledighet/semester/föräld.led. -->
+        <function model="hr.leave" name="action_validate">
+            <value eval="[ref('hr_leave_asse_401'), ref('hr_leave_asse_402')]"/>
+        </function>
+
+        <!-- Generera lönespec (payslip) -->
+        <record id="hr_payslip_asse_04" model="hr.payslip">
+            <field name="name">Lönespecifikation för April - Asse Aronsson</field>
+            <field name="company_id" ref="l10n_se_hr_payroll_twenty_six.company_aronssons" />
+            <field name="employee_id" ref="l10n_se_hr_payroll_twenty_six.hr_asse_employee" />
+            <field name="payslip_run_id" ref="l10n_se_hr_payroll_twenty_six.payslip_run_2026_04"/>
+            <field name="period_id" ref="l10n_se_hr_payroll_twenty_six.period_04_2026" />
+            <field name="date_from">2026-04-01</field>
+            <field name="date_to">2026-04-30</field>
+            <field name="struct_id" ref="l10n_se_hr_payroll_twenty_six.hr_payroll_structure_tj_man" />
+        </record>
+
+        <function model="hr.payslip" name="onchange_employee">
+            <value eval="[ref('hr_payslip_asse_04')]"/>
+        </function>
+
+        <!-- Manuell input -->
+
+        <!-- Förmån fritt drivmedel -->
+        <function model="hr.payslip.input" name="write">
+            <value model="hr.payslip.input" search="[('payslip_id', '=', ref('hr_payslip_asse_04')), ('code', '=', 'drivmedel')]"/>
+            <value eval="{'amount': 805.0}"/>
+        </function>
+
+        <function model="hr.payslip.input" name="write">
+            <value model="hr.payslip.input" search="[('payslip_id', '=', ref('hr_payslip_asse_04')), ('code', '=', 'otidtim')]"/>
+            <value eval="{'amount_qty': 3.0}"/>
+        </function>
+
+        <function model="hr.payslip.input" name="write">
+            <value model="hr.payslip.input" search="[('payslip_id', '=', ref('hr_payslip_asse_04')), ('code', '=', 'kvaltim')]"/>
+            <value eval="{'amount_qty': 3.0}"/>
+        </function>
+
+        <!-- Utlägg resekostnader -->
+        <function model="hr.payslip.input" name="write">
+            <value model="hr.payslip.input" search="[('payslip_id', '=', ref('hr_payslip_asse_04')), ('code', '=', 'utlagg')]"/>
+            <value eval="{'name': 'Utlägg resekostnader', 'amount_qty': 1, 'amount': 510.0}"/>
+        </function>
+
+        <!-- Restidersättning vardag-->
+        <function model="hr.payslip.input" name="write">
+            <value model="hr.payslip.input" search="[('payslip_id', '=', ref('hr_payslip_asse_04')), ('code', '=', 'res_vardag_tim')]"/>
+            <value eval="{'amount_qty': 2}"/>
+        </function>
+
+        <!-- Restidsersättning helg -->
+        <function model="hr.payslip.input" name="write">
+            <value model="hr.payslip.input" search="[('payslip_id', '=', ref('hr_payslip_asse_04')), ('code', '=', 'res_helg_tim')]"/>
+            <value eval="{'amount_qty': 2}"/>
+        </function>
+
+        <!--  Traktamente, helt  -->
+        <function model="hr.payslip.input" name="write">
+            <value model="hr.payslip.input" search="[('payslip_id', '=', ref('hr_payslip_asse_04')), ('code', '=', 'trakt_hel')]"/>
+            <value eval="{'amount_qty': 2.0}"/>
+        </function>
+
+        <!--  Traktamente, halvt  -->
+        <function model="hr.payslip.input" name="write">
+            <value model="hr.payslip.input" search="[('payslip_id', '=', ref('hr_payslip_asse_04')), ('code', '=', 'trakt_halv')]"/>
+            <value eval="{'amount_qty': 1.0}"/>
+        </function>
+
+        <!-- Kostförmån -->
+        <function model="hr.payslip.input" name="write">
+            <value model="hr.payslip.input" search="[('payslip_id', '=', ref('hr_payslip_asse_04')), ('code', '=', 'fmn_lunch')]"/>
+            <value eval="{'amount_qty': 1.0}"/>
+        </function>
+
+        <!-- Kostavdrag -->
+        <!--  Frukost -->
+        <function model="hr.payslip.input" name="write">
+            <value model="hr.payslip.input" search="[('payslip_id', '=', ref('hr_payslip_asse_04')), ('code', '=', 'red_frukost')]"/>
+            <value eval="{'amount_qty': 1.5}"/>
+        </function>
+
+        <!--  Lunch eller middag -->
+        <function model="hr.payslip.input" name="write">
+            <value model="hr.payslip.input" search="[('payslip_id', '=', ref('hr_payslip_asse_04')), ('code', '=', 'red_lunch')]"/>
+            <value eval="{'amount_qty': 3.5}"/>
+        </function>
+
+        <function model="hr.payslip" name="compute_sheet">
+            <value eval="[ref('hr_payslip_asse_04')]"/>
+        </function>
+
+
+        <!-- ================================ May ================================ -->
+
+        <!-- Sjukfrånvaro -->
+        <record id="hr_leave_asse_501" model="hr.leave">
+            <field name="employee_id" ref="l10n_se_hr_payroll_twenty_six.hr_asse_employee" />
+            <field name="company_id" ref="l10n_se_hr_payroll_twenty_six.company_aronssons"/>
+            <field name="date_from">2026-05-09</field>
+            <field name="date_to">2026-05-17</field>
+            <field name="request_date_from">2026-05-09</field>
+            <field name="request_date_to">2026-05-17</field>
+            <field name="number_of_hours">56</field>
+            <field name="holiday_status_id" ref="l10n_se_hr_payroll.leave_type_sick" />
+        </record>
+
+        <record id="hr_leave_asse_501_02" model="hr.leave">
+            <field name="employee_id" ref="l10n_se_hr_payroll_twenty_six.hr_asse_employee" />
+            <field name="company_id" ref="l10n_se_hr_payroll_twenty_six.company_aronssons"/>
+            <field name="date_from">2026-05-18</field>
+            <field name="date_to">2026-05-18</field>
+            <field name="request_date_from">2026-05-18</field>
+            <field name="request_date_to">2026-05-18</field>
+            <field name="request_unit_hours" eval="True"/>
+            <field name="request_hour_from">8</field>
+            <field name="request_hour_to">12</field>
+            <field name="number_of_hours">4</field>
+            <field name="sick_leave_part">50</field>
+            <field name="holiday_status_id" ref="l10n_se_hr_payroll.leave_type_sick" />
+        </record>
+
+        <!-- Saknas: -->
+
+        <!-- Skatt -->
+        <!-- Arbetsgivaravgift -->
+
+        <!-- Generera lönespec (payslip) -->
+        <record id="hr_payslip_asse_05" model="hr.payslip">
+            <field name="name">Lönespecifikation för Maj - Asse Aronsson</field>
+            <field name="company_id" ref="l10n_se_hr_payroll_twenty_six.company_aronssons" />
+            <field name="employee_id" ref="l10n_se_hr_payroll_twenty_six.hr_asse_employee" />
+            <field name="payslip_run_id" ref="l10n_se_hr_payroll_twenty_six.payslip_run_2026_05"/>
+            <field name="period_id" ref="l10n_se_hr_payroll_twenty_six.period_05_2026" />
+            <field name="date_from">2026-05-01</field>
+            <field name="date_to">2026-05-31</field>
+            <field name="struct_id" ref="l10n_se_hr_payroll_twenty_six.hr_payroll_structure_tj_man" />
+        </record>
+
+        <function model="hr.payslip" name="onchange_employee">
+            <value eval="[ref('hr_payslip_asse_05')]"/>
+        </function>
+
+        <!-- Manuell input -->
+
+        <!-- Förmån fritt drivmedel -->
+        <function model="hr.payslip.input" name="write">
+            <value model="hr.payslip.input" search="[('payslip_id', '=', ref('hr_payslip_asse_05')), ('code', '=', 'drivmedel')]"/>
+            <value eval="{'amount': 930.0}"/>
+        </function>
+
+        <!--  Traktamente, helt  -->
+        <function model="hr.payslip.input" name="write">
+            <value model="hr.payslip.input" search="[('payslip_id', '=', ref('hr_payslip_asse_05')), ('code', '=', 'trakt_hel')]"/>
+            <value eval="{'amount_qty': 1.0}"/>
+        </function>
+
+        <!-- Traktamente, skattepliktigt -->
+        <function model="hr.payslip.input" name="write">
+            <value model="hr.payslip.input" search="[('payslip_id', '=', ref('hr_payslip_asse_05')), ('code', '=', 'trakt_skatt')]"/>
+            <value eval="{'amount_qty': 1.0, 'amount': 80.0}"/>
+        </function>
+
+        <!-- Utlandstraktamente, ej skattepliktigt, Thailand -->
+        <function model="hr.payslip.input" name="write">
+            <value model="hr.payslip.input" search="[('payslip_id', '=', ref('hr_payslip_asse_05')), ('code', '=', 'trakt_utl')]"/>
+            <value eval="{'amount_qty': 1.0, 'amount': 2847.0}"/>
+        </function>
+
+        <!-- Kostavdrag utland -->
+        <!-- Frukost -->
+        <function model="hr.payslip.input" name="write">
+            <value model="hr.payslip.input" search="[('payslip_id', '=', ref('hr_payslip_asse_05')), ('code', '=', 'red_utl_frukost')]"/>
+            <value eval="{'amount_qty': 1, 'amount': 427 }"/>
+        </function>
+
+        <!--  Lunch eller middag -->
+        <function model="hr.payslip.input" name="write">
+            <value model="hr.payslip.input" search="[('payslip_id', '=', ref('hr_payslip_asse_05')), ('code', '=', 'red_utl_lunch')]"/>
+            <value eval="{'amount_qty': 1, 'amount': 996.45}"/>
+        </function>
+
+        <!-- Utlägg resekostnader -->
+        <function model="hr.payslip.input" name="write">
+            <value model="hr.payslip.input" search="[('payslip_id', '=', ref('hr_payslip_asse_05')), ('code', '=', 'utlagg')]"/>
+            <value eval="{'name': 'Utlägg resekostnader', 'amount_qty': 1, 'amount': 410.0}"/>
+        </function>
+
+        <!-- Kostförmån lunch + middag-->
+        <function model="hr.payslip.input" name="write">
+            <value model="hr.payslip.input" search="[('payslip_id', '=', ref('hr_payslip_asse_05')), ('code', '=', 'fmn_lunch')]"/>
+            <value eval="{'amount_qty': 4.0}"/>
+        </function>
+
+        <!-- Övertid 1 -->
+        <function model="hr.payslip.input" name="write">
+            <value model="hr.payslip.input" search="[('payslip_id', '=', ref('hr_payslip_asse_05')), ('code', '=', 'otidtim')]"/>
+            <value eval="{'amount_qty': 2.0}"/>
+        </function>
+
+        <!-- Övertid 2 -->
+        <function model="hr.payslip.input" name="write">
+            <value model="hr.payslip.input" search="[('payslip_id', '=', ref('hr_payslip_asse_05')), ('code', '=', 'kvaltim')]"/>
+            <value eval="{'amount_qty': 1.0}"/>
+        </function>
+
+        <function model="hr.payslip" name="compute_sheet">
+            <value eval="[ref('hr_payslip_asse_05')]"/>
+        </function>
+
+        <!-- ================================ June ================================ -->
+
+        <!-- Sjukfrånvaro -->
+
+        <record id="hr_leave_asse_601" model="hr.leave">
+            <field name="employee_id" ref="l10n_se_hr_payroll_twenty_six.hr_asse_employee" />
+            <field name="company_id" ref="l10n_se_hr_payroll_twenty_six.company_aronssons"/>
+            <field name="date_from">2026-06-03</field>
+            <field name="date_to">2026-06-03</field>
+            <field name="request_date_from">2026-06-03</field>
+            <field name="request_date_to">2026-06-03</field>
+            <field name="number_of_hours">8</field>
+            <field name="holiday_status_id" ref="l10n_se_hr_payroll.leave_type_sick" />
+        </record>
+
+        <record id="hr_leave_asse_601_02" model="hr.leave">
+            <field name="employee_id" ref="l10n_se_hr_payroll_twenty_six.hr_asse_employee" />
+            <field name="company_id" ref="l10n_se_hr_payroll_twenty_six.company_aronssons"/>
+            <field name="date_from">2026-06-07</field>
+            <field name="date_to">2026-06-09</field>
+            <field name="request_date_from">2026-06-07</field>
+            <field name="request_date_to">2026-06-09</field>
+            <field name="number_of_hours">24</field>
+            <field name="holiday_status_id" ref="l10n_se_hr_payroll.leave_type_sick" />
+        </record>
+
+        <!-- Tjänstledighet -->
+        <record id="hr_leave_asse_602" model="hr.leave">
+            <field name="employee_id" ref="l10n_se_hr_payroll_twenty_six.hr_asse_employee" />
+            <field name="company_id" ref="l10n_se_hr_payroll_twenty_six.company_aronssons"/>
+            <field name="date_from">2026-06-17</field>
+            <field name="date_to">2026-06-17</field>
+            <field name="request_date_from">2026-06-17</field>
+            <field name="request_date_to">2026-06-17</field>
+            <field name="request_unit_hours" eval="True"/>
+            <field name="request_hour_from">8</field>
+            <field name="request_hour_to">11</field>
+            <field name="number_of_hours">3</field>
+            <field name="holiday_status_id" ref="l10n_se_hr_payroll.leave_type_loa" />
+        </record>
+
+        <record id="hr_leave_asse_603" model="hr.leave">
+            <field name="employee_id" ref="l10n_se_hr_payroll_twenty_six.hr_asse_employee" />
+            <field name="company_id" ref="l10n_se_hr_payroll_twenty_six.company_aronssons"/>
+            <field name="date_from">2026-06-22</field>
+            <field name="date_to">2026-06-29</field>
+            <field name="request_date_from">2026-06-22</field>
+            <field name="request_date_to">2026-06-29</field>
+            <field name="number_of_hours">40</field>
+            <field name="holiday_status_id" ref="l10n_se_hr_payroll.leave_type_loa" />
+        </record>
+
+        <!-- Semester -->
+        <record id="hr_leave_asse_604" model="hr.leave">
+            <field name="employee_id" ref="l10n_se_hr_payroll_twenty_six.hr_asse_employee" />
+            <field name="company_id" ref="l10n_se_hr_payroll_twenty_six.company_aronssons"/>
+            <field name="date_from">2026-06-10</field>
+            <field name="date_to">2026-06-16</field>
+            <field name="request_date_from">2026-06-10</field>
+            <field name="request_date_to">2026-06-16</field>
+            <field name="number_of_hours">40</field>
+            <field name="holiday_status_id" ref="l10n_se_hr_holidays.leave_type_vacation" />
+        </record>
+
+        <!-- Saknas: -->
+
+        <!-- Skatt -->
+        <!-- Arbetsgivaravgift -->
+
+
+        <!-- Validera tjänstledighet/semester/föräld.led. -->
+        <function model="hr.leave" name="action_validate">
+            <value eval="[ref('hr_leave_asse_602'), ref('hr_leave_asse_603'), ref('hr_leave_asse_604')]"/>
+        </function>
+
+
+        <!-- Generera lönespec (payslip) -->
+        <record id="hr_payslip_asse_06" model="hr.payslip">
+            <field name="name">Lönespecifikation för Juni - Asse Aronsson</field>
+            <field name="company_id" ref="l10n_se_hr_payroll_twenty_six.company_aronssons" />
+            <field name="employee_id" ref="l10n_se_hr_payroll_twenty_six.hr_asse_employee" />
+            <field name="payslip_run_id" ref="l10n_se_hr_payroll_twenty_six.payslip_run_2026_06"/>
+            <field name="period_id" ref="l10n_se_hr_payroll_twenty_six.period_06_2026" />
+            <field name="date_from">2026-06-01</field>
+            <field name="date_to">2026-06-30</field>
+            <field name="struct_id" ref="l10n_se_hr_payroll_twenty_six.hr_payroll_structure_tj_man" />
+        </record>
+
+        <!-- Manuell input -->
+
+        <!-- Ingen ÖT dnna mån -->
+        <function model="hr.payslip" name="onchange_employee">
+            <value eval="[ref('hr_payslip_asse_06')]"/>
+        </function>
+
+        <!-- Förmån fritt drivmedel -->
+        <function model="hr.payslip.input" name="write">
+            <value model="hr.payslip.input" search="[('payslip_id', '=', ref('hr_payslip_asse_06')), ('code', '=', 'drivmedel')]"/>
+            <value eval="{'amount': 891.0}"/>
+        </function>
+
+        <!-- Övriga förmåner tabellskatt -->
+        <function model="hr.payslip.input" name="write">
+            <value model="hr.payslip.input" search="[('payslip_id', '=', ref('hr_payslip_asse_06')), ('code', '=', 'ovrig_fmn')]"/>
+            <value eval="{'name': 'Lån av fjällstugan', 'amount_qty': 1, 'amount': 3500.0}"/>
+        </function>
+
+        <function model="hr.payslip" name="compute_sheet">
+            <value eval="[ref('hr_payslip_asse_06')]"/>
+        </function>
+
+        <!-- ================================ July ================================ -->
+
+        <!-- Sjukfrånvaro -->
+        <record id="hr_leave_asse_701" model="hr.leave">
+            <field name="employee_id" ref="l10n_se_hr_payroll_twenty_six.hr_asse_employee" />
+            <field name="company_id" ref="l10n_se_hr_payroll_twenty_six.company_aronssons"/>
+            <field name="date_from">2026-07-18</field>
+            <field name="date_to">2026-07-25</field>
+            <field name="request_date_from">2026-07-18</field>
+            <field name="request_date_to">2026-07-25</field>
+            <field name="number_of_hours">48</field>
+            <field name="holiday_status_id" ref="l10n_se_hr_payroll.leave_type_sick" />
+        </record>
+
+        <!-- Tjänstledighet -->
+        <record id="hr_leave_asse_702" model="hr.leave">
+            <field name="employee_id" ref="l10n_se_hr_payroll_twenty_six.hr_asse_employee" />
+            <field name="company_id" ref="l10n_se_hr_payroll_twenty_six.company_aronssons"/>
+            <field name="date_from">2026-07-07</field>
+            <field name="date_to">2026-07-08</field>
+            <field name="request_date_from">2026-07-07</field>
+            <field name="request_date_to">2026-07-08</field>
+            <field name="number_of_hours">16</field>
+            <field name="holiday_status_id" ref="l10n_se_hr_payroll.leave_type_loa" />
+        </record>
+
+        <!-- VAB -->
+        <record id="hr_leave_asse_703" model="hr.leave">
+            <field name="employee_id" ref="l10n_se_hr_payroll_twenty_six.hr_asse_employee" />
+            <field name="company_id" ref="l10n_se_hr_payroll_twenty_six.company_aronssons"/>
+            <field name="date_from">2026-07-05</field>
+            <field name="date_to">2026-07-06</field>
+            <field name="request_date_from">2026-07-05</field>
+            <field name="request_date_to">2026-07-06</field>
+            <field name="number_of_hours">16</field>
+            <field name="holiday_status_id" ref="l10n_se_hr_payroll.leave_type_vab" />
+        </record>
+
+        <!-- Semester -->
+        <record id="hr_leave_asse_704" model="hr.leave">
+            <field name="employee_id" ref="l10n_se_hr_payroll_twenty_six.hr_asse_employee" />
+            <field name="company_id" ref="l10n_se_hr_payroll_twenty_six.company_aronssons"/>
+            <field name="date_from">2026-07-11</field>
+            <field name="date_to">2026-07-15</field>
+            <field name="request_date_from">2026-07-11</field>
+            <field name="request_date_to">2026-07-15</field>
+            <field name="number_of_hours">40</field>
+            <field name="holiday_status_id" ref="l10n_se_hr_holidays.leave_type_vacation" />
+        </record>
+
+        <!-- Saknas: -->
+
+        <!-- Skatt -->
+        <!-- Arbetsgivaravgift -->
+
+        <!-- Validera tjänstledighet/semester/föräld.led. -->
+        <function model="hr.leave" name="action_validate">
+            <value eval="[ref('hr_leave_asse_702'), ref('hr_leave_asse_704')]"/>
+        </function>
+
+        <!-- Generera lönespec (payslip) -->
+        <record id="hr_payslip_asse_07" model="hr.payslip">
+            <field name="name">Lönespecifikation för Juli - Asse Aronsson</field>
+            <field name="company_id" ref="l10n_se_hr_payroll_twenty_six.company_aronssons" />
+            <field name="employee_id" ref="l10n_se_hr_payroll_twenty_six.hr_asse_employee" />
+            <field name="payslip_run_id" ref="l10n_se_hr_payroll_twenty_six.payslip_run_2026_07"/>
+            <field name="period_id" ref="l10n_se_hr_payroll_twenty_six.period_07_2026" />
+            <field name="date_from">2026-07-01</field>
+            <field name="date_to">2026-07-31</field>
+            <field name="struct_id" ref="l10n_se_hr_payroll_twenty_six.hr_payroll_structure_tj_man" />
+        </record>
+
+        <function model="hr.payslip" name="onchange_employee">
+            <value eval="[ref('hr_payslip_asse_07')]"/>
+        </function>
+
+        <!-- Manuell input -->
+
+        <!-- Bonus -->
+        <function model="hr.payslip.input" name="write">
+            <value model="hr.payslip.input" search="[('payslip_id', '=', ref('hr_payslip_asse_07')), ('code', '=', 'bonus')]"/>
+            <value eval="{'amount_qty': 1.0, 'amount': 10000.0}"/>
+        </function>
+
+        <!-- Förmån fritt drivmedel -->
+        <function model="hr.payslip.input" name="write">
+            <value model="hr.payslip.input" search="[('payslip_id', '=', ref('hr_payslip_asse_07')), ('code', '=', 'drivmedel')]"/>
+            <value eval="{'amount': 642.0}"/>
+        </function>
+
+        <function model="hr.payslip.input" name="write">
+            <value model="hr.payslip.input" search="[('payslip_id', '=', ref('hr_payslip_asse_07')), ('code', '=', 'otidtim')]"/>
+            <value eval="{'amount_qty': 4.0}"/>
+        </function>
+
+        <function model="hr.payslip.input" name="write">
+            <value model="hr.payslip.input" search="[('payslip_id', '=', ref('hr_payslip_asse_07')), ('code', '=', 'kvaltim')]"/>
+            <value eval="{'amount_qty': 2.0}"/>
+        </function>
+
+        <function model="hr.payslip" name="compute_sheet">
+            <value eval="[ref('hr_payslip_asse_07')]"/>
+        </function>
+
+        <!-- ================================ August ================================ -->
+
+        <!-- Sjukfrånvaro -->
+        <record id="hr_leave_asse_801" model="hr.leave">
+            <field name="employee_id" ref="l10n_se_hr_payroll_twenty_six.hr_asse_employee" />
+            <field name="company_id" ref="l10n_se_hr_payroll_twenty_six.company_aronssons"/>
+            <field name="date_from">2026-08-12</field>
+            <field name="date_to">2026-09-01</field>
+            <field name="request_date_from">2026-08-12</field>
+            <field name="request_date_to">2026-09-01</field>
+            <field name="number_of_hours">120</field>
+            <field name="holiday_status_id" ref="l10n_se_hr_payroll.leave_type_sick" />
+        </record>
+
+        <!-- Semester -->
+        <record id="hr_leave_asse_802" model="hr.leave">
+            <field name="employee_id" ref="l10n_se_hr_payroll_twenty_six.hr_asse_employee" />
+            <field name="company_id" ref="l10n_se_hr_payroll_twenty_six.company_aronssons"/>
+            <field name="date_from">2026-08-04</field>
+            <field name="date_to">2026-08-04</field>
+            <field name="request_date_from">2026-08-04</field>
+            <field name="request_date_to">2026-08-04</field>
+            <field name="number_of_hours">8</field>
+            <field name="holiday_status_id" ref="l10n_se_hr_holidays.leave_type_vacation" />
+        </record>
+
+        <record id="hr_leave_asse_803" model="hr.leave">
+            <field name="employee_id" ref="l10n_se_hr_payroll_twenty_six.hr_asse_employee" />
+            <field name="company_id" ref="l10n_se_hr_payroll_twenty_six.company_aronssons"/>
+            <field name="date_from">2026-08-08</field>
+            <field name="date_to">2026-08-11</field>
+            <field name="request_date_from">2026-08-08</field>
+            <field name="request_date_to">2026-08-11</field>
+            <field name="number_of_hours">32</field>
+            <field name="holiday_status_id" ref="l10n_se_hr_holidays.leave_type_vacation" />
+        </record>
+
+        <!-- Saknas: -->
+
+        <!-- Skatt -->
+        <!-- Arbetsgivaravgift -->
+
+
+        <!-- Validera tjänstledighet/semester/föräld.led. -->
+        <function model="hr.leave" name="action_validate">
+            <value eval="[ref('hr_leave_asse_802'), ref('hr_leave_asse_803')]"/>
+        </function>
+
+        <!-- Generera lönespec (payslip) -->
+        <record id="hr_payslip_asse_08" model="hr.payslip">
+            <field name="name">Lönespecifikation för Augusti - Asse Aronsson</field>
+            <field name="company_id" ref="l10n_se_hr_payroll_twenty_six.company_aronssons" />
+            <field name="employee_id" ref="l10n_se_hr_payroll_twenty_six.hr_asse_employee" />
+            <field name="payslip_run_id" ref="l10n_se_hr_payroll_twenty_six.payslip_run_2026_08"/>
+            <field name="period_id" ref="l10n_se_hr_payroll_twenty_six.period_08_2026" />
+            <field name="date_from">2026-08-01</field>
+            <field name="date_to">2026-08-31</field>
+            <field name="struct_id" ref="l10n_se_hr_payroll_twenty_six.hr_payroll_structure_tj_man" />
+        </record>
+
+        <function model="hr.payslip" name="onchange_employee">
+            <value eval="[ref('hr_payslip_asse_08')]"/>
+        </function>
+
+        <!-- Manuell input -->
+
+        <!-- Förmån fritt drivmedel -->
+        <function model="hr.payslip.input" name="write">
+            <value model="hr.payslip.input" search="[('payslip_id', '=', ref('hr_payslip_asse_08')), ('code', '=', 'drivmedel')]"/>
+            <value eval="{'amount': 624.0}"/>
+        </function>
+
+        <function model="hr.payslip.input" name="write">
+            <value model="hr.payslip.input" search="[('payslip_id', '=', ref('hr_payslip_asse_08')), ('code', '=', 'otidtim')]"/>
+            <value eval="{'amount_qty': 1.0}"/>
+        </function>
+
+        <function model="hr.payslip.input" name="write">
+            <value model="hr.payslip.input" search="[('payslip_id', '=', ref('hr_payslip_asse_08')), ('code', '=', 'kvaltim')]"/>
+            <value eval="{'amount_qty': 1.0}"/>
+        </function>
+
+        <function model="hr.payslip" name="compute_sheet">
+            <value eval="[ref('hr_payslip_asse_08')]"/>
+        </function>
+
+        <!-- ================================ September ================================ -->
+
+        <!-- Sjukfrånvaro -->
+        <record id="hr_leave_asse_901" model="hr.leave">
+            <field name="employee_id" ref="l10n_se_hr_payroll_twenty_six.hr_asse_employee" />
+            <field name="company_id" ref="l10n_se_hr_payroll_twenty_six.company_aronssons"/>
+            <field name="date_from">2026-09-05</field>
+            <field name="date_to">2026-09-08</field>
+            <field name="request_date_from">2026-09-05</field>
+            <field name="request_date_to">2026-09-08</field>
+            <field name="number_of_hours">32</field>
+            <field name="holiday_status_id" ref="l10n_se_hr_payroll.leave_type_sick" />
+        </record>
+
+        <!-- Semester -->
+        <record id="hr_leave_asse_902" model="hr.leave">
+            <field name="employee_id" ref="l10n_se_hr_payroll_twenty_six.hr_asse_employee" />
+            <field name="company_id" ref="l10n_se_hr_payroll_twenty_six.company_aronssons"/>
+            <field name="date_from">2026-09-19</field>
+            <field name="date_to">2026-09-23</field>
+            <field name="request_date_from">2026-09-19</field>
+            <field name="request_date_to">2026-09-23</field>
+            <field name="number_of_hours">40</field>
+            <field name="holiday_status_id" ref="l10n_se_hr_holidays.leave_type_vacation" />
+        </record>
+
+        <!-- Saknas: -->
+
+        <!-- Skatt -->
+        <!-- Arbetsgivaravgift -->
+
+        <!-- Validera tjänstledighet/semester/föräld.led. -->
+        <function model="hr.leave" name="action_validate">
+            <value eval="[ref('hr_leave_asse_902')]"/>
+        </function>
+
+        <!-- Generera lönespec (payslip) -->
+        <record id="hr_payslip_asse_09" model="hr.payslip">
+            <field name="name">Lönespecifikation för September - Asse Aronsson</field>
+            <field name="company_id" ref="l10n_se_hr_payroll_twenty_six.company_aronssons" />
+            <field name="employee_id" ref="l10n_se_hr_payroll_twenty_six.hr_asse_employee" />
+            <field name="payslip_run_id" ref="l10n_se_hr_payroll_twenty_six.payslip_run_2026_09"/>
+            <field name="period_id" ref="l10n_se_hr_payroll_twenty_six.period_09_2026" />
+            <field name="date_from">2026-09-01</field>
+            <field name="date_to">2026-09-30</field>
+            <field name="struct_id" ref="l10n_se_hr_payroll_twenty_six.hr_payroll_structure_tj_man" />
+        </record>
+
+        <!-- Manuell input -->
+        <!-- Ingen övertid -->
+
+        <function model="hr.payslip" name="onchange_employee">
+            <value eval="[ref('hr_payslip_asse_09')]"/>
+        </function>
+
+        <!-- Förmån fritt drivmedel -->
+        <function model="hr.payslip.input" name="write">
+            <value model="hr.payslip.input" search="[('payslip_id', '=', ref('hr_payslip_asse_09')), ('code', '=', 'drivmedel')]"/>
+            <value eval="{'amount': 906.0}"/>
+        </function>
+
+        <function model="hr.payslip" name="compute_sheet">
+            <value eval="[ref('hr_payslip_asse_09')]"/>
+        </function>
+
+        <!-- ================================ October ================================ -->
+
+        <!-- Föräldraledighet -->
+        <record id="hr_leave_asse_1001" model="hr.leave">
+            <field name="employee_id" ref="l10n_se_hr_payroll_twenty_six.hr_asse_employee" />
+            <field name="company_id" ref="l10n_se_hr_payroll_twenty_six.company_aronssons"/>
+            <field name="date_from">2026-10-03</field>
+            <field name="date_to">2026-10-13</field>
+            <field name="request_date_from">2026-10-03</field>
+            <field name="request_date_to">2026-10-13</field>
+            <field name="number_of_hours">72</field>
+            <field name="holiday_status_id" ref="l10n_se_hr_payroll.leave_type_f_led" />
+        </record>
+
+
+        <!-- Tjänstledighet -->
+        <record id="hr_leave_asse_1002" model="hr.leave">
+            <field name="employee_id" ref="l10n_se_hr_payroll_twenty_six.hr_asse_employee" />
+            <field name="company_id" ref="l10n_se_hr_payroll_twenty_six.company_aronssons"/>
+            <field name="date_from">2026-10-14</field>
+            <field name="date_to">2026-10-14</field>
+            <field name="request_date_from">2026-10-14</field>
+            <field name="request_date_to">2026-10-14</field>
+            <field name="request_unit_hours" eval="True"/>
+            <field name="request_hour_from">8</field>
+            <field name="request_hour_to">12</field>
+            <field name="number_of_hours">4</field>
+            <field name="holiday_status_id" ref="l10n_se_hr_payroll.leave_type_loa" />
+        </record>
+
+        <!-- Semester -->
+        <record id="hr_leave_asse_1003" model="hr.leave">
+            <field name="employee_id" ref="l10n_se_hr_payroll_twenty_six.hr_asse_employee" />
+            <field name="company_id" ref="l10n_se_hr_payroll_twenty_six.company_aronssons"/>
+            <field name="date_from">2026-10-17</field>
+            <field name="date_to">2026-10-18</field>
+            <field name="request_date_from">2026-10-17</field>
+            <field name="request_date_to">2026-10-18</field>
+            <field name="number_of_hours">16</field>
+            <field name="holiday_status_id" ref="l10n_se_hr_holidays.leave_type_vacation" />
+        </record>
+
+        <!-- Saknas: -->
+
+        <!-- Skatt -->
+        <!-- Arbetsgivaravgift -->
+
+        <!-- Validera tjänstledighet/semester/föräld.led. -->
+        <function model="hr.leave" name="action_validate">
+            <value eval="[ref('hr_leave_asse_1001'), ref('hr_leave_asse_1002'), ref('hr_leave_asse_1003')]"/>
+        </function>
+
+        <!-- Generera lönespec (payslip) -->
+        <record id="hr_payslip_asse_10" model="hr.payslip">
+            <field name="name">Lönespecifikation för Oktober - Asse Aronsson</field>
+            <field name="company_id" ref="l10n_se_hr_payroll_twenty_six.company_aronssons" />
+            <field name="employee_id" ref="l10n_se_hr_payroll_twenty_six.hr_asse_employee" />
+            <field name="payslip_run_id" ref="l10n_se_hr_payroll_twenty_six.payslip_run_2026_10"/>
+            <field name="period_id" ref="l10n_se_hr_payroll_twenty_six.period_10_2026" />
+            <field name="date_from">2026-10-01</field>
+            <field name="date_to">2026-10-31</field>
+            <field name="struct_id" ref="l10n_se_hr_payroll_twenty_six.hr_payroll_structure_tj_man" />
+        </record>
+
+        <!-- Manuell input -->
+        <function model="hr.payslip" name="onchange_employee">
+            <value eval="[ref('hr_payslip_asse_10')]"/>
+        </function>
+
+        <!-- Förmån fritt drivmedel -->
+        <function model="hr.payslip.input" name="write">
+            <value model="hr.payslip.input" search="[('payslip_id', '=', ref('hr_payslip_asse_10')), ('code', '=', 'drivmedel')]"/>
+            <value eval="{'amount': 630.0}"/>
+        </function>
+
+        <function model="hr.payslip.input" name="write">
+            <value model="hr.payslip.input" search="[('payslip_id', '=', ref('hr_payslip_asse_10')), ('code', '=', 'otidtim')]"/>
+            <value eval="{'amount_qty': 2.0}"/>
+        </function>
+
+        <function model="hr.payslip.input" name="write">
+            <value model="hr.payslip.input" search="[('payslip_id', '=', ref('hr_payslip_asse_10')), ('code', '=', 'kvaltim')]"/>
+            <value eval="{'amount_qty': 2.0}"/>
+        </function>
+
+        <function model="hr.payslip.input" name="write">
+            <value model="hr.payslip.input" search="[('payslip_id', '=', ref('hr_payslip_asse_10')), ('code', '=', 'lunch')]"/>
+            <value eval="{'amount_qty': 1.0}"/>
+        </function>
+
+        <function model="hr.payslip" name="compute_sheet">
+            <value eval="[ref('hr_payslip_asse_10')]"/>
+        </function>
+
+        <!-- ================================ November ================================ -->
+
+        <!-- Sjukfrånvaro -->
+        <record id="hr_leave_asse_1101" model="hr.leave">
+            <field name="employee_id" ref="l10n_se_hr_payroll_twenty_six.hr_asse_employee" />
+            <field name="company_id" ref="l10n_se_hr_payroll_twenty_six.company_aronssons"/>
+            <field name="date_from">2026-11-10</field>
+            <field name="date_to">2026-11-16</field>
+            <field name="request_date_from">2026-11-10</field>
+            <field name="request_date_to">2026-11-16</field>
+            <field name="number_of_hours">40</field>
+            <field name="holiday_status_id" ref="l10n_se_hr_payroll.leave_type_sick" />
+        </record>
+
+        <record id="hr_leave_asse_1101_02" model="hr.leave">
+            <field name="employee_id" ref="l10n_se_hr_payroll_twenty_six.hr_asse_employee" />
+            <field name="company_id" ref="l10n_se_hr_payroll_twenty_six.company_aronssons"/>
+            <field name="date_from">2026-11-17</field>
+            <field name="date_to">2026-11-24</field>
+            <field name="request_date_from">2026-11-17</field>
+            <field name="request_date_to">2026-11-24</field>
+            <field name="sick_leave_part">50</field>
+            <field name="holiday_status_id" ref="l10n_se_hr_payroll.leave_type_sick" />
+        </record>
+
+        <!-- VAB -->
+        <record id="hr_leave_asse_1102" model="hr.leave">
+            <field name="employee_id" ref="l10n_se_hr_payroll_twenty_six.hr_asse_employee" />
+            <field name="company_id" ref="l10n_se_hr_payroll_twenty_six.company_aronssons"/>
+            <field name="date_from">2026-11-01</field>
+            <field name="date_to">2026-11-01</field>
+            <field name="request_date_from">2026-11-01</field>
+            <field name="request_date_to">2026-11-01</field>
+            <field name="request_unit_hours" eval="True"/>
+            <field name="request_hour_from">13</field>
+            <field name="request_hour_to">17</field>
+            <field name="number_of_hours">4</field>
+            <field name="holiday_status_id" ref="l10n_se_hr_payroll.leave_type_vab" />
+        </record>
+
+        <record id="hr_leave_asse_1102_02" model="hr.leave">
+            <field name="employee_id" ref="l10n_se_hr_payroll_twenty_six.hr_asse_employee" />
+            <field name="company_id" ref="l10n_se_hr_payroll_twenty_six.company_aronssons"/>
+            <field name="date_from">2026-11-02</field>
+            <field name="date_to">2026-11-02</field>
+            <field name="request_date_from">2026-11-02</field>
+            <field name="request_date_to">2026-11-02</field>
+            <field name="number_of_hours">8</field>
+            <field name="holiday_status_id" ref="l10n_se_hr_payroll.leave_type_vab" />
+        </record>
+
+        <!-- Saknas: -->
+
+        <!-- Skatt -->
+        <!-- Arbetsgivaravgift -->
+
+        <!-- Generera lönespec (payslip) -->
+        <record id="hr_payslip_asse_11" model="hr.payslip">
+            <field name="name">Lönespecifikation för November - Asse Aronsson</field>
+            <field name="company_id" ref="l10n_se_hr_payroll_twenty_six.company_aronssons" />
+            <field name="employee_id" ref="l10n_se_hr_payroll_twenty_six.hr_asse_employee" />
+            <field name="payslip_run_id" ref="l10n_se_hr_payroll_twenty_six.payslip_run_2026_11"/>
+            <field name="period_id" ref="l10n_se_hr_payroll_twenty_six.period_11_2026" />
+            <field name="date_from">2026-11-01</field>
+            <field name="date_to">2026-11-30</field>
+            <field name="struct_id" ref="l10n_se_hr_payroll_twenty_six.hr_payroll_structure_tj_man" />
+        </record>
+
+        <!-- Manuell input -->
+        <!-- Ingen övertid -->
+
+        <function model="hr.payslip" name="onchange_employee">
+            <value eval="[ref('hr_payslip_asse_11')]"/>
+        </function>
+
+        <!-- Förmån fritt drivmedel -->
+        <function model="hr.payslip.input" name="write">
+            <value model="hr.payslip.input" search="[('payslip_id', '=', ref('hr_payslip_asse_11')), ('code', '=', 'drivmedel')]"/>
+            <value eval="{'amount': 561.75}"/>
+        </function>
+
+        <!-- Restidersättning vardag-->
+        <function model="hr.payslip.input" name="write">
+            <value model="hr.payslip.input" search="[('payslip_id', '=', ref('hr_payslip_asse_11')), ('code', '=', 'res_vardag_tim')]"/>
+            <value eval="{'amount_qty': 1}"/>
+        </function>
+
+        <function model="hr.payslip" name="compute_sheet">
+            <value eval="[ref('hr_payslip_asse_11')]"/>
+        </function>
+
+        <!-- ================================ December ================================ -->
+
+        <!-- Föräldraledighet hel måånad -->
+        <record id="hr_leave_asse_1201" model="hr.leave">
+            <field name="employee_id" ref="l10n_se_hr_payroll_twenty_six.hr_asse_employee" />
+            <field name="company_id" ref="l10n_se_hr_payroll_twenty_six.company_aronssons"/>
+            <field name="date_from">2026-12-01</field>
+            <field name="date_to">2023-04-30</field>
+            <field name="request_date_from">2026-12-01</field>
+            <field name="request_date_to">2023-04-30</field>
+            <field name="number_of_hours">856</field>
+            <field name="holiday_status_id" ref="l10n_se_hr_payroll.leave_type_f_led" />
+        </record>
+
+        <!-- Validera tjänstledighet/semester/föräld.led. -->
+        <function model="hr.leave" name="action_validate">
+            <value eval="[ref('hr_leave_asse_1201')]"/>
+        </function>
+
+        <record id="hr_payslip_asse_12" model="hr.payslip">
+            <field name="name">Lönespecifikation för December - Asse Aronsson</field>
+            <field name="company_id" ref="l10n_se_hr_payroll_twenty_six.company_aronssons" />
+            <field name="employee_id" ref="l10n_se_hr_payroll_twenty_six.hr_asse_employee" />
+            <field name="payslip_run_id" ref="l10n_se_hr_payroll_twenty_six.payslip_run_2026_12"/>
+            <field name="period_id" ref="l10n_se_hr_payroll_twenty_six.period_12_2026" />
+            <field name="date_from">2026-12-01</field>
+            <field name="date_to">2026-12-31</field>
+            <field name="struct_id" ref="l10n_se_hr_payroll_twenty_six.hr_payroll_structure_tj_man" />
+        </record>
+
+
+        <!-- Manuell input -->
+        <!-- Ingne övertid -->
+
+        <function model="hr.payslip" name="onchange_employee">
+            <value eval="[ref('hr_payslip_asse_12')]"/>
+        </function>
+        <function model="hr.payslip" name="compute_sheet">
+            <value eval="[ref('hr_payslip_asse_12')]"/>
+        </function>
+
+
+    </data>
+</odoo>
