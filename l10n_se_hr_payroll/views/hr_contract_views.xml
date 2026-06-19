@@ -1,45 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
 <odoo>
-    <record model="ir.ui.view" id="hr_contract_view_form">
-        <field name="name">hr.contract.payday.field.form</field>
-        <field name="model">hr.contract</field>
-        <field name="inherit_id" ref="hr_contract.hr_contract_view_form" />
-        <field name="arch" type="xml">
-            <xpath expr="//group[@name='salary']" position="inside">
+    <data>
 
-                <separator string="Lönejusteringar" colspan="2"/>
-                <field name="wage_exchange_amount"/>
-                <field name="wage_exchange_start"/>
-                <field name="wage_exchange_end" placeholder="Tillsvidare..."/>
+        <!-- Contract form: add tabs for vacation, salary adjustment, accounting -->
+        <record id="view_hr_contract_form_payroll" model="ir.ui.view">
+            <field name="name">hr.contract.form.payroll</field>
+            <field name="model">hr.contract</field>
+            <field name="inherit_id" ref="hr_contract.hr_contract_view_form"/>
+            <field name="arch" type="xml">
+                <!-- Add payroll-specific fields after wage (löneväxling, utmätning) -->
+                <xpath expr="//field[@name='wage']" position="after">
+                    <field name="wage_exchange_amount" invisible="1"/>
+                    <field name="wage_exchange_start" invisible="1"/>
+                    <field name="wage_exchange_end" invisible="1"/>
+                    <field name="has_attachment_of_earnings" invisible="1"/>
+                    <field name="attachment_of_earnings_start" invisible="1"/>
+                    <field name="attachment_amount" invisible="1"/>
+                    <field name="protected_amount" invisible="1"/>
+                    <field name="vacation_days" invisible="1"/>
+                    <field name="annual_vacation_days" invisible="1"/>
+                    <field name="advance_vacation_days" invisible="1"/>
+                </xpath>
+                <!-- Add tabs after Salary Information -->
+                <xpath expr="//page[@name='information']" position="after">
+                    <page string="Semester" name="vacation">
+                        <group>
+                            <field name="vacation_days"/>
+                            <field name="annual_vacation_days"/>
+                            <field name="advance_vacation_days"/>
+                        </group>
+                    </page>
+                    <page string="Lönejustering" name="salary_adjustment">
+                        <group string="Löneväxling">
+                            <field name="wage_exchange_amount"/>
+                            <field name="wage_exchange_start"/>
+                            <field name="wage_exchange_end" placeholder="Tillsvidare..."/>
+                        </group>
+                        <group string="Löneutmätning">
+                            <field name="has_attachment_of_earnings"/>
+                            <field name="attachment_of_earnings_start"
+                                   invisible="not has_attachment_of_earnings"/>
+                            <field name="attachment_amount"
+                                   invisible="not has_attachment_of_earnings"/>
+                            <field name="protected_amount"
+                                   invisible="not has_attachment_of_earnings"/>
+                        </group>
+                    </page>
+                    <page string="Bokföring" name="accounting">
+                        <group>
+                            <field name="journal_id"/>
+                            <field name="analytic_account_id"/>
+                        </group>
+                    </page>
+                </xpath>
+            </field>
+        </record>
 
-                <field name="has_attachment_of_earnings"/>
-                <field name="attachment_of_earnings_start" placeholder="Start Date" class="oe_inline" invisible="not has_attachment_of_earnings" required="has_attachment_of_earnings"/>
-                <field name="attachment_amount" placeholder="Attachment Amount" invisible="not has_attachment_of_earnings" required="has_attachment_of_earnings"/>
-                <field name="protected_amount" placeholder="Protected Amount" invisible="not has_attachment_of_earnings" required="has_attachment_of_earnings"/>    
-                
-                <separator string="Semester" colspan="2"/>
-                <field name="vacation_days"/>
-                <field name="annual_vacation_days"/>
-                <field name="advance_vacation_days"/>
-            </xpath>
-        </field>
-    </record>
+        <!-- Payroll structure constants -->
+        <record id="view_hr_payroll_structure_const_form" model="ir.ui.view">
+            <field name="name">hr.payroll.structure.const</field>
+            <field name="model">hr.payroll.structure</field>
+            <field name="inherit_id" ref="payroll.hr_payroll_structure_view_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//notebook" position="inside">
+                    <page string="Konstanter" name="const">
+                        <field name="const_ids">
+                            <list editable="bottom">
+                                <field name="name"/>
+                                <field name="code"/>
+                                <field name="constant"/>
+                            </list>
+                        </field>
+                    </page>
+                </xpath>
+            </field>
+        </record>
 
-    <record model="ir.ui.view" id="hr_payroll_structure_view_form">
-        <field name="name">hr.payroll.structure.const</field>
-        <field name="model">hr.payroll.structure</field>
-        <field name="inherit_id" ref="payroll.hr_payroll_structure_view_form" />
-        <field name="arch" type="xml">
-            <notebook position="inside">
-                <page name="Constant" id="const">
-                    <field name="const_ids">
-                        <list editable="bottom">
-                            <field name="name" />
-                            <field name="code" />
-                            <field name="constant" />
-                        </list>
-                    </field>
-                </page>
-            </notebook>
-        </field>
-    </record>
+    </data>
 </odoo>
