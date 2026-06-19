@@ -9,7 +9,7 @@
                     <sheet>
                         <div class="oe_title"><h1>Löneändring</h1></div>
                         <group>
-                            <field name="company_id" options="{'no_create': True}"/>
+                            <field name="company_id" options="{'no_create': True}" groups="base.group_multi_company"/>
                             <field name="effective_date"/>
                         </group>
                         <group string="Typ av ändring">
