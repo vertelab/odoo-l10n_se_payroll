@@ -5,6 +5,26 @@ from odoo import models, fields, api, _
 _logger = logging.getLogger(__name__)
 
 
+class HrBenefitBudgetType(models.Model):
+    _name = 'hr.benefit.budget.type'
+    _description = 'Benefit Budget Type'
+    _order = 'sequence, name'
+
+    name = fields.Char(string='Name', required=True, translate=True)
+    code = fields.Char(string='Code', required=True)
+    sequence = fields.Integer(string='Sequence', default=10)
+    max_amount = fields.Float(string='Default Max Amount', default=5000.0)
+    salary_rule_id = fields.Many2one(
+        'hr.salary.rule', string='Salary Rule',
+        help='Salary rule for net allowance computation')
+    active = fields.Boolean(string='Active', default=True)
+    note = fields.Text(string='Description')
+
+    _sql_constraints = [
+        ('code_uniq', 'unique(code)', 'Code must be unique!'),
+    ]
+
+
 class HrBenefitBudget(models.Model):
     _name = 'hr.benefit.budget'
     _description = 'Förmånsbudget'
@@ -38,12 +58,17 @@ class HrBenefitBudget(models.Model):
         domain="[('code', '=like', 'frisk%')]",
         help='Löneregel som beräknar det skattefria nettolägget')
 
-    active = fields.Boolean(string='Aktiv', default=True)
+    type_id = fields.Many2one(
+        'hr.benefit.budget.type',
+        string='Budget Type',
+        ondelete='restrict')
+
+    active = fields.Boolean(string='Active', default=True)
 
     line_ids = fields.One2many(
         'hr.benefit.budget.line',
         'budget_id',
-        string='Anställdas budget')
+        string='Employee Budgets')
 
     company_id = fields.Many2one(
         'res.company',

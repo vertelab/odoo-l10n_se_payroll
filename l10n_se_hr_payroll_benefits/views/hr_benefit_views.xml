@@ -150,6 +150,7 @@
                             <h1><field name="name"/></h1>
                         </div>
                         <group>
+                            <field name="type_id"/>
                             <field name="code"/>
                             <field name="year"/>
                             <field name="max_amount" widget="monetary"
