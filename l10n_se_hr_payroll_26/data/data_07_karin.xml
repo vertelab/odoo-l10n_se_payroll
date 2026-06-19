@@ -9,7 +9,7 @@
             <field name="city">Sollentuna</field>
             <field name="mobile">073-980078</field>
             <field name="function">Montör</field>
-            <field name="company_id" ref="l10n_se_hr_payroll_twenty_six.company_aronssons"/>
+            <field name="company_id" ref="l10n_se_hr_payroll_26.company_aronssons"/>
         </record>
 
         <record id="bank_karin" model="res.partner.bank">
@@ -21,9 +21,9 @@
             <field name="name">Karin Kullberg</field>
             <field name="partner_id" ref="hr_karin_partner" />
             <field name="login">Karin</field>
-            <field name="company_id" ref="l10n_se_hr_payroll_twenty_six.company_aronssons"/>
+            <field name="company_id" ref="l10n_se_hr_payroll_26.company_aronssons"/>
             <field name="company_ids" eval="[
-                (4, ref('l10n_se_hr_payroll_twenty_six.company_aronssons')),
+                (4, ref('l10n_se_hr_payroll_26.company_aronssons')),
             ]" />
         </record>
 
@@ -37,8 +37,8 @@
             <field name="registration_number">302</field>
             <field name="job_title">Montör</field>
             <field name="tz" eval="'Europe/Stockholm'" />
-            <field name="address_id" ref="l10n_se_hr_payroll_twenty_six.company_aronssons_partner" />
-            <field name="company_id" ref="l10n_se_hr_payroll_twenty_six.company_aronssons" />
+            <field name="address_id" ref="l10n_se_hr_payroll_26.company_aronssons_partner" />
+            <field name="company_id" ref="l10n_se_hr_payroll_26.company_aronssons" />
             <field name="work_contact_id" ref="hr_karin_partner" />
             <field name="user_id" ref="hr_karin_user" />
         </record>
@@ -47,16 +47,16 @@
             <field name="name">Karin Kullberg Avtal</field>
             <field name="wage">115</field>
             <field name="type_id" ref="hr_contract_type" />
-            <field name="employee_id" ref="l10n_se_hr_payroll_twenty_six.hr_karin_employee" />
-            <field name="company_id" ref="l10n_se_hr_payroll_twenty_six.company_aronssons"/>
+            <field name="employee_id" ref="l10n_se_hr_payroll_26.hr_karin_employee" />
+            <field name="company_id" ref="l10n_se_hr_payroll_26.company_aronssons"/>
             <field name="schedule_pay" eval="'monthly'" />
             <field name="state" eval="'open'" />
             <field name="job_id" ref="job_id_assembly" />
             <field name="date_start">2026-06-01</field>
             <field name="date_end">2026-08-31</field>
             <field name="first_contract_date">2026-06-01</field>
-            <field name="struct_id" ref="l10n_se_hr_payroll_twenty_six.hr_payroll_structure_arb_tim_vt" />
-            <field name="resource_calendar_id" ref="l10n_se_hr_payroll_twenty_six.resource_calendar_part_time_80_twenty_six" />
+            <field name="struct_id" ref="l10n_se_hr_payroll_26.hr_payroll_structure_arb_tim_vt" />
+            <field name="resource_calendar_id" ref="l10n_se_hr_payroll_26.resource_calendar_part_time_80_twenty_six" />
             <field name="table_number">30</field>
             <field name="column_number" eval="'column1'"/>
             <field name="has_tax_equalization" eval="False"/>
@@ -70,31 +70,31 @@
         <!-- Generate payslip -->
         <record id="hr_payslip_karin_06" model="hr.payslip">
             <field name="name">Lönespecifikation för Juni - Karin Kullberg</field>
-            <field name="company_id" ref="l10n_se_hr_payroll_twenty_six.company_aronssons" />
-            <field name="employee_id" ref="l10n_se_hr_payroll_twenty_six.hr_karin_employee" />
-            <field name="payslip_run_id" ref="l10n_se_hr_payroll_twenty_six.payslip_run_2026_06"/>
-            <field name="period_id" ref="l10n_se_hr_payroll_twenty_six.period_06_2026" />
+            <field name="company_id" ref="l10n_se_hr_payroll_26.company_aronssons" />
+            <field name="employee_id" ref="l10n_se_hr_payroll_26.hr_karin_employee" />
+            <field name="payslip_run_id" ref="l10n_se_hr_payroll_26.payslip_run_2026_06"/>
+            <field name="period_id" ref="l10n_se_hr_payroll_26.period_06_2026" />
             <field name="date_from">2026-06-01</field>
             <field name="date_to">2026-06-30</field>
-            <field name="struct_id" ref="l10n_se_hr_payroll_twenty_six.hr_payroll_structure_arb_tim_vt" />
+            <field name="struct_id" ref="l10n_se_hr_payroll_26.hr_payroll_structure_arb_tim_vt" />
         </record>
 
         <!-- Manual input -->
         <!-- Ingen överitd denna månad -->
         <function model="hr.payslip" name="onchange_employee">
-            <value eval="[ref('l10n_se_hr_payroll_twenty_six.hr_payslip_karin_06')]"/>
+            <value eval="[ref('l10n_se_hr_payroll_26.hr_payslip_karin_06')]"/>
         </function>
 
         <function model="hr.payslip" name="compute_sheet">
-            <value eval="[ref('l10n_se_hr_payroll_twenty_six.hr_payslip_karin_06')]"/>
+            <value eval="[ref('l10n_se_hr_payroll_26.hr_payslip_karin_06')]"/>
         </function>
         
         <!-- ================================ July ================================ -->
 
         <!-- Sjukfrånvaro -->
         <record id="hr_leave_karin_701" model="hr.leave">
-            <field name="employee_id" ref="l10n_se_hr_payroll_twenty_six.hr_karin_employee" />
-            <field name="company_id" ref="l10n_se_hr_payroll_twenty_six.company_aronssons"/>
+            <field name="employee_id" ref="l10n_se_hr_payroll_26.hr_karin_employee" />
+            <field name="company_id" ref="l10n_se_hr_payroll_26.company_aronssons"/>
             <field name="date_from">2026-07-11</field>
             <field name="date_to">2026-07-14</field>
             <field name="request_date_from">2026-07-11</field>
@@ -106,30 +106,30 @@
         <!-- Generate payslip -->
         <record id="hr_payslip_karin_07" model="hr.payslip">
             <field name="name">Lönespecifikation för Juli - Karin Kullberg</field>
-            <field name="company_id" ref="l10n_se_hr_payroll_twenty_six.company_aronssons" />
-            <field name="employee_id" ref="l10n_se_hr_payroll_twenty_six.hr_karin_employee" />
-            <field name="payslip_run_id" ref="l10n_se_hr_payroll_twenty_six.payslip_run_2026_07"/>
-            <field name="period_id" ref="l10n_se_hr_payroll_twenty_six.period_07_2026" />
+            <field name="company_id" ref="l10n_se_hr_payroll_26.company_aronssons" />
+            <field name="employee_id" ref="l10n_se_hr_payroll_26.hr_karin_employee" />
+            <field name="payslip_run_id" ref="l10n_se_hr_payroll_26.payslip_run_2026_07"/>
+            <field name="period_id" ref="l10n_se_hr_payroll_26.period_07_2026" />
             <field name="date_from">2026-07-01</field>
             <field name="date_to">2026-07-31</field>
-            <field name="struct_id" ref="l10n_se_hr_payroll_twenty_six.hr_payroll_structure_arb_tim_vt" />
+            <field name="struct_id" ref="l10n_se_hr_payroll_26.hr_payroll_structure_arb_tim_vt" />
         </record>
 
         <!-- Manual input -->
         <function model="hr.payslip" name="onchange_employee">
-            <value eval="[ref('l10n_se_hr_payroll_twenty_six.hr_payslip_karin_07')]"/>
+            <value eval="[ref('l10n_se_hr_payroll_26.hr_payslip_karin_07')]"/>
         </function>
 
         <function model="hr.payslip" name="compute_sheet">
-            <value eval="[ref('l10n_se_hr_payroll_twenty_six.hr_payslip_karin_07')]"/>
+            <value eval="[ref('l10n_se_hr_payroll_26.hr_payslip_karin_07')]"/>
         </function>
 
         <!-- ================================ August ================================ -->
 
         <!-- Sjukfrånvaro -->
         <record id="hr_leave_karin_801" model="hr.leave">
-            <field name="employee_id" ref="l10n_se_hr_payroll_twenty_six.hr_karin_employee" />
-            <field name="company_id" ref="l10n_se_hr_payroll_twenty_six.company_aronssons"/>
+            <field name="employee_id" ref="l10n_se_hr_payroll_26.hr_karin_employee" />
+            <field name="company_id" ref="l10n_se_hr_payroll_26.company_aronssons"/>
             <field name="date_from">2026-08-08</field>
             <field name="date_to">2026-08-10</field>
             <field name="request_date_from">2026-08-08</field>
@@ -141,23 +141,23 @@
         <!-- Generate payslip -->
         <record id="hr_payslip_karin_08" model="hr.payslip">
             <field name="name">Lönespecifikation för Augusti - Karin Kullberg</field>
-            <field name="company_id" ref="l10n_se_hr_payroll_twenty_six.company_aronssons" />
-            <field name="employee_id" ref="l10n_se_hr_payroll_twenty_six.hr_karin_employee" />
-            <field name="payslip_run_id" ref="l10n_se_hr_payroll_twenty_six.payslip_run_2026_08"/>
-            <field name="period_id" ref="l10n_se_hr_payroll_twenty_six.period_08_2026" />
+            <field name="company_id" ref="l10n_se_hr_payroll_26.company_aronssons" />
+            <field name="employee_id" ref="l10n_se_hr_payroll_26.hr_karin_employee" />
+            <field name="payslip_run_id" ref="l10n_se_hr_payroll_26.payslip_run_2026_08"/>
+            <field name="period_id" ref="l10n_se_hr_payroll_26.period_08_2026" />
             <field name="date_from">2026-08-01</field>
             <field name="date_to">2026-08-31</field>
-            <field name="struct_id" ref="l10n_se_hr_payroll_twenty_six.hr_payroll_structure_arb_tim_vt" />
+            <field name="struct_id" ref="l10n_se_hr_payroll_26.hr_payroll_structure_arb_tim_vt" />
         </record>
 
         <!-- Manual input -->
         <!-- Ingen överitd denna månad -->
         <function model="hr.payslip" name="onchange_employee">
-            <value eval="[ref('l10n_se_hr_payroll_twenty_six.hr_payslip_karin_08')]"/>
+            <value eval="[ref('l10n_se_hr_payroll_26.hr_payslip_karin_08')]"/>
         </function>
 
         <function model="hr.payslip" name="compute_sheet">
-            <value eval="[ref('l10n_se_hr_payroll_twenty_six.hr_payslip_karin_08')]"/>
+            <value eval="[ref('l10n_se_hr_payroll_26.hr_payslip_karin_08')]"/>
         </function>
 
     </data>

@@ -7,7 +7,7 @@
         <record id="hr_payroll_structure_gl_twenty_six" model="hr.payroll.structure">
             <field name="code">bas</field>
             <field name="name">Bas för löneavtal heltid (Ska ej användas i avtal)</field>
-            <field name="company_id" ref="l10n_se_hr_payroll_twenty_six.company_aronssons" />
+            <field name="company_id" ref="l10n_se_hr_payroll_26.company_aronssons" />
         </record>
 
         <!-- ============================================ -->
@@ -20,7 +20,7 @@
             <field name="code">tj_bas</field>
             <field name="name">Tjänsteman Bas</field>
             <field name="parent_id" ref="hr_payroll_structure_gl_twenty_six" />
-            <field name="company_id" ref="l10n_se_hr_payroll_twenty_six.company_aronssons" />
+            <field name="company_id" ref="l10n_se_hr_payroll_26.company_aronssons" />
             <field name="rule_ids" eval="[(6,0,[
                     ref('l10n_se_hr_holidays.hr_salary_rule_final_holiday_compensation'),
                     ref('l10n_se_hr_holidays.hr_salary_rule_expired_saved_leaves'),
@@ -176,7 +176,7 @@
             <field name="code">tj_man</field>
             <field name="name">Tjänsteman månadsavlönad</field>
             <field name="parent_id" ref="hr_payroll_structure_tj_base" />
-            <field name="company_id" ref="l10n_se_hr_payroll_twenty_six.company_aronssons" />
+            <field name="company_id" ref="l10n_se_hr_payroll_26.company_aronssons" />
             <field name="rule_ids" eval="[(6,0,[
                     ref('l10n_se_hr_payroll.hr_salary_rule_sick_deduction_15_90_tj'),
                     ref('l10n_se_hr_holidays.hr_salary_rule_expired_saved_leaves'),
@@ -332,7 +332,7 @@
             <field name="code">tj_tim</field>
             <field name="name">Tjänsteman timavlönad</field>
             <field name="parent_id" ref="hr_payroll_structure_tj_base" />
-            <field name="company_id" ref="l10n_se_hr_payroll_twenty_six.company_aronssons" />
+            <field name="company_id" ref="l10n_se_hr_payroll_26.company_aronssons" />
             <field name="rule_ids" eval="[(6,0,[
                     ref('l10n_se_hr_holidays.hr_salary_rule_expired_saved_leaves'),
                     ref('l10n_se_hr_payroll.hr_salary_rule_gl_tim'),
@@ -488,7 +488,7 @@
             <field name="code">arb_bas</field>
             <field name="name">Arbetare bas</field>
             <field name="parent_id" ref="hr_payroll_structure_gl_twenty_six" />
-            <field name="company_id" ref="l10n_se_hr_payroll_twenty_six.company_aronssons" />
+            <field name="company_id" ref="l10n_se_hr_payroll_26.company_aronssons" />
             <field name="rule_ids" eval="[(6,0,[
                     ref('l10n_se_hr_holidays.hr_salary_rule_expired_saved_leaves'),
                     ref('l10n_se_hr_holidays.hr_salary_rule_final_holiday_compensation'),
@@ -641,7 +641,7 @@
             <field name="code">arb_man</field>
             <field name="name">Arbetare månadsavlönad</field>
             <field name="parent_id" ref="hr_payroll_structure_arb_base" />
-            <field name="company_id" ref="l10n_se_hr_payroll_twenty_six.company_aronssons" />
+            <field name="company_id" ref="l10n_se_hr_payroll_26.company_aronssons" />
             <field name="rule_ids" eval="[(6,0,[
                     ref('l10n_se_hr_holidays.hr_salary_rule_expired_saved_leaves'),
                     ref('l10n_se_hr_payroll.hr_salary_rule_gl'),
@@ -794,7 +794,7 @@
             <field name="code">arb_tim</field>
             <field name="name">Arbetare timavlönad</field>
             <field name="parent_id" ref="hr_payroll_structure_arb_base" />
-            <field name="company_id" ref="l10n_se_hr_payroll_twenty_six.company_aronssons" />
+            <field name="company_id" ref="l10n_se_hr_payroll_26.company_aronssons" />
             <field name="rule_ids" eval="[(6,0,[
                     ref('l10n_se_hr_holidays.hr_salary_rule_expired_saved_leaves'),
                     ref('l10n_se_hr_payroll.hr_salary_rule_gl_tim'),
@@ -944,7 +944,7 @@
             <field name="code">arb_tim_vt</field>
             <field name="name">Arbetare Visstidsanställning Timmar</field>
             <field name="parent_id" ref="hr_payroll_structure_arb_base" />
-            <field name="company_id" ref="l10n_se_hr_payroll_twenty_six.company_aronssons" />
+            <field name="company_id" ref="l10n_se_hr_payroll_26.company_aronssons" />
             <field name="rule_ids" eval="[(6,0,[
                     ref('l10n_se_hr_holidays.hr_salary_rule_expired_saved_leaves'),
                     ref('l10n_se_hr_payroll.hr_salary_rule_gl_tim'),

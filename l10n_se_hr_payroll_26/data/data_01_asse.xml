@@ -11,7 +11,7 @@
             <field name="country_id" ref="base.se"/>
             <field name="mobile">073-500000</field>
             <field name="function">VD och försäljningschef</field>
-            <field name="company_id" ref="l10n_se_hr_payroll_twenty_six.company_aronssons"/>
+            <field name="company_id" ref="l10n_se_hr_payroll_26.company_aronssons"/>
         </record>
 
         <record id="bank_asse" model="res.partner.bank">
@@ -23,9 +23,9 @@
             <field name="name">Asse Aronsson</field>
             <field name="partner_id" ref="hr_asse_partner" />
             <field name="login">Asse</field>
-            <field name="company_id" ref="l10n_se_hr_payroll_twenty_six.company_aronssons"/>
+            <field name="company_id" ref="l10n_se_hr_payroll_26.company_aronssons"/>
             <field name="company_ids" eval="[
-                (4, ref('l10n_se_hr_payroll_twenty_six.company_aronssons')),
+                (4, ref('l10n_se_hr_payroll_26.company_aronssons')),
             ]" />
         </record>
 
@@ -39,8 +39,8 @@
             <field name="registration_number">101</field>
             <field name="job_title">VD och försäljningschef</field>
             <field name="tz" eval="'Europe/Stockholm'" />
-            <field name="address_id" ref="l10n_se_hr_payroll_twenty_six.company_aronssons_partner" />
-            <field name="company_id" ref="l10n_se_hr_payroll_twenty_six.company_aronssons" />
+            <field name="address_id" ref="l10n_se_hr_payroll_26.company_aronssons_partner" />
+            <field name="company_id" ref="l10n_se_hr_payroll_26.company_aronssons" />
             <field name="work_contact_id" ref="hr_asse_partner" />
             <field name="user_id" ref="hr_asse_user" />
         </record>
@@ -55,16 +55,16 @@
             <field name="name">Asse Aronsson Deltidsavtal 1</field>
             <field name="wage">39000</field>
             <field name="type_id" ref="hr_contract_type" />
-            <field name="employee_id" ref="l10n_se_hr_payroll_twenty_six.hr_asse_employee" />
-            <field name="company_id" ref="l10n_se_hr_payroll_twenty_six.company_aronssons" />
+            <field name="employee_id" ref="l10n_se_hr_payroll_26.hr_asse_employee" />
+            <field name="company_id" ref="l10n_se_hr_payroll_26.company_aronssons" />
             <field name="schedule_pay" eval="'monthly'" />
             <field name="state" eval="'close'" />
             <field name="job_id" ref="job_id_president" />
             <field name="date_start">2018-04-01</field>
             <field name="date_end">2021-12-31</field>
             <field name="first_contract_date">2018-04-01</field>
-            <field name="resource_calendar_id" ref="l10n_se_hr_payroll_twenty_six.resource_calendar_part_time_66_twenty_six" />
-            <field name="struct_id" ref="l10n_se_hr_payroll_twenty_six.hr_payroll_structure_tj_man" />
+            <field name="resource_calendar_id" ref="l10n_se_hr_payroll_26.resource_calendar_part_time_66_twenty_six" />
+            <field name="struct_id" ref="l10n_se_hr_payroll_26.hr_payroll_structure_tj_man" />
             <field name="table_number">30</field>
             <field name="column_number" eval="'column1'" />
             <field name="has_tax_equalization" eval="False"/>
@@ -80,15 +80,15 @@
             <field name="wage_exchange_start">2026-03-01</field>
             <field name="wage_exchange_end">2026-11-30</field>
             <field name="type_id" ref="hr_contract_type" />
-            <field name="employee_id" ref="l10n_se_hr_payroll_twenty_six.hr_asse_employee" />
-            <field name="company_id" ref="l10n_se_hr_payroll_twenty_six.company_aronssons" />
+            <field name="employee_id" ref="l10n_se_hr_payroll_26.hr_asse_employee" />
+            <field name="company_id" ref="l10n_se_hr_payroll_26.company_aronssons" />
             <field name="schedule_pay" eval="'monthly'" />
             <field name="state" eval="'open'" />
             <field name="job_id" ref="job_id_president" />
             <field name="date_start">2026-01-01</field>
             <field name="first_contract_date">2018-04-01</field>
-            <field name="resource_calendar_id" ref="l10n_se_hr_payroll_twenty_six.resource_calendar_standard_twenty_six" />
-            <field name="struct_id" ref="l10n_se_hr_payroll_twenty_six.hr_payroll_structure_tj_man" />
+            <field name="resource_calendar_id" ref="l10n_se_hr_payroll_26.resource_calendar_standard_twenty_six" />
+            <field name="struct_id" ref="l10n_se_hr_payroll_26.hr_payroll_structure_tj_man" />
             <field name="table_number">30</field>
             <field name="column_number" eval="'column1'" />
             <field name="has_tax_equalization" eval="False"/>
@@ -139,7 +139,7 @@
         <record id="timesheet_01_asse" model="hr_timesheet.sheet">
             <field name="name">Tidrapport Januari - Asse</field>
             <field name="employee_id" ref="hr_asse_employee"/>
-            <field name="company_id" ref="l10n_se_hr_payroll_twenty_six.company_aronssons"/>
+            <field name="company_id" ref="l10n_se_hr_payroll_26.company_aronssons"/>
             <field name="date_start">2026-01-01</field>
             <field name="date_end">2026-01-31</field>
         </record>
@@ -147,7 +147,7 @@
         <record id="timesheet_02_asse" model="hr_timesheet.sheet">
             <field name="name">Tidrapport Februari - Asse</field>
             <field name="employee_id" ref="hr_asse_employee"/>
-            <field name="company_id" ref="l10n_se_hr_payroll_twenty_six.company_aronssons"/>
+            <field name="company_id" ref="l10n_se_hr_payroll_26.company_aronssons"/>
             <field name="date_start">2026-02-01</field>
             <field name="date_end">2026-02-28</field>
         </record>
@@ -155,7 +155,7 @@
         <record id="timesheet_03_asse" model="hr_timesheet.sheet">
             <field name="name">Tidrapport Mars - Asse</field>
             <field name="employee_id" ref="hr_asse_employee"/>
-            <field name="company_id" ref="l10n_se_hr_payroll_twenty_six.company_aronssons"/>
+            <field name="company_id" ref="l10n_se_hr_payroll_26.company_aronssons"/>
             <field name="date_start">2026-03-01</field>
             <field name="date_end">2026-03-31</field>
         </record>
@@ -163,7 +163,7 @@
         <record id="timesheet_04_asse" model="hr_timesheet.sheet">
             <field name="name">Tidrapport April - Asse</field>
             <field name="employee_id" ref="hr_asse_employee"/>
-            <field name="company_id" ref="l10n_se_hr_payroll_twenty_six.company_aronssons"/>
+            <field name="company_id" ref="l10n_se_hr_payroll_26.company_aronssons"/>
             <field name="date_start">2026-04-01</field>
             <field name="date_end">2026-04-30</field>
         </record>
@@ -171,7 +171,7 @@
         <record id="timesheet_05_asse" model="hr_timesheet.sheet">
             <field name="name">Tidrapport Maj - Asse</field>
             <field name="employee_id" ref="hr_asse_employee"/>
-            <field name="company_id" ref="l10n_se_hr_payroll_twenty_six.company_aronssons"/>
+            <field name="company_id" ref="l10n_se_hr_payroll_26.company_aronssons"/>
             <field name="date_start">2026-05-01</field>
             <field name="date_end">2026-05-31</field>
         </record>
@@ -179,7 +179,7 @@
         <record id="timesheet_06_asse" model="hr_timesheet.sheet">
             <field name="name">Tidrapport Juni - Asse</field>
             <field name="employee_id" ref="hr_asse_employee"/>
-            <field name="company_id" ref="l10n_se_hr_payroll_twenty_six.company_aronssons"/>
+            <field name="company_id" ref="l10n_se_hr_payroll_26.company_aronssons"/>
             <field name="date_start">2026-06-01</field>
             <field name="date_end">2026-06-30</field>
         </record>
@@ -187,7 +187,7 @@
         <record id="timesheet_07_asse" model="hr_timesheet.sheet">
             <field name="name">Tidrapport Juli - Asse</field>
             <field name="employee_id" ref="hr_asse_employee"/>
-            <field name="company_id" ref="l10n_se_hr_payroll_twenty_six.company_aronssons"/>
+            <field name="company_id" ref="l10n_se_hr_payroll_26.company_aronssons"/>
             <field name="date_start">2026-07-01</field>
             <field name="date_end">2026-07-31</field>
         </record>
@@ -195,7 +195,7 @@
         <record id="timesheet_08_asse" model="hr_timesheet.sheet">
             <field name="name">Tidrapport Augusti - Asse</field>
             <field name="employee_id" ref="hr_asse_employee"/>
-            <field name="company_id" ref="l10n_se_hr_payroll_twenty_six.company_aronssons"/>
+            <field name="company_id" ref="l10n_se_hr_payroll_26.company_aronssons"/>
             <field name="date_start">2026-08-01</field>
             <field name="date_end">2026-08-31</field>
         </record>
@@ -203,7 +203,7 @@
         <record id="timesheet_09_asse" model="hr_timesheet.sheet">
             <field name="name">Tidrapport September - Asse</field>
             <field name="employee_id" ref="hr_asse_employee"/>
-            <field name="company_id" ref="l10n_se_hr_payroll_twenty_six.company_aronssons"/>
+            <field name="company_id" ref="l10n_se_hr_payroll_26.company_aronssons"/>
             <field name="date_start">2026-09-01</field>
             <field name="date_end">2026-09-30</field>
         </record>
@@ -211,7 +211,7 @@
         <record id="timesheet_10_asse" model="hr_timesheet.sheet">
             <field name="name">Tidrapport Oktober - Asse</field>
             <field name="employee_id" ref="hr_asse_employee"/>
-            <field name="company_id" ref="l10n_se_hr_payroll_twenty_six.company_aronssons"/>
+            <field name="company_id" ref="l10n_se_hr_payroll_26.company_aronssons"/>
             <field name="date_start">2026-10-01</field>
             <field name="date_end">2026-10-31</field>
         </record>
@@ -219,7 +219,7 @@
         <record id="timesheet_11_asse" model="hr_timesheet.sheet">
             <field name="name">Tidrapport November - Asse</field>
             <field name="employee_id" ref="hr_asse_employee"/>
-            <field name="company_id" ref="l10n_se_hr_payroll_twenty_six.company_aronssons"/>
+            <field name="company_id" ref="l10n_se_hr_payroll_26.company_aronssons"/>
             <field name="date_start">2026-11-01</field>
             <field name="date_end">2026-11-30</field>
         </record>
@@ -227,7 +227,7 @@
         <record id="timesheet_12_asse" model="hr_timesheet.sheet">
             <field name="name">Tidrapport Decmber - Asse</field>
             <field name="employee_id" ref="hr_asse_employee"/>
-            <field name="company_id" ref="l10n_se_hr_payroll_twenty_six.company_aronssons"/>
+            <field name="company_id" ref="l10n_se_hr_payroll_26.company_aronssons"/>
             <field name="date_start">2026-12-01</field>
             <field name="date_end">2026-12-31</field>
         </record> -->
@@ -237,8 +237,8 @@
 
         <!-- Sjukfrånvaro: -->
         <record id="hr_leave_asse_101" model="hr.leave">
-            <field name="employee_id" ref="l10n_se_hr_payroll_twenty_six.hr_asse_employee" />
-            <field name="company_id" ref="l10n_se_hr_payroll_twenty_six.company_aronssons"/>
+            <field name="employee_id" ref="l10n_se_hr_payroll_26.hr_asse_employee" />
+            <field name="company_id" ref="l10n_se_hr_payroll_26.company_aronssons"/>
             <field name="date_from">2026-01-07</field>
             <field name="date_to">2026-01-07</field>
             <field name="request_date_from">2026-01-07</field>
@@ -252,8 +252,8 @@
         </record>
 
         <record id="hr_leave_asse_102" model="hr.leave">
-            <field name="employee_id" ref="l10n_se_hr_payroll_twenty_six.hr_asse_employee" />
-            <field name="company_id" ref="l10n_se_hr_payroll_twenty_six.company_aronssons"/>
+            <field name="employee_id" ref="l10n_se_hr_payroll_26.hr_asse_employee" />
+            <field name="company_id" ref="l10n_se_hr_payroll_26.company_aronssons"/>
             <field name="date_from">2026-01-12</field>
             <field name="date_to">2026-01-13</field>
             <field name="request_date_from">2026-01-12</field>
@@ -263,8 +263,8 @@
         </record>
 
         <record id="hr_leave_asse_103" model="hr.leave">
-            <field name="employee_id" ref="l10n_se_hr_payroll_twenty_six.hr_asse_employee" />
-            <field name="company_id" ref="l10n_se_hr_payroll_twenty_six.company_aronssons"/>
+            <field name="employee_id" ref="l10n_se_hr_payroll_26.hr_asse_employee" />
+            <field name="company_id" ref="l10n_se_hr_payroll_26.company_aronssons"/>
             <field name="date_from">2026-01-24</field>
             <field name="date_to">2026-01-24</field>
             <field name="request_date_from">2026-01-24</field>
@@ -275,8 +275,8 @@
 
         <!-- Tjänstledighet: -->
         <record id="hr_leave_asse_104" model="hr.leave">
-            <field name="employee_id" ref="l10n_se_hr_payroll_twenty_six.hr_asse_employee" />
-            <field name="company_id" ref="l10n_se_hr_payroll_twenty_six.company_aronssons"/>
+            <field name="employee_id" ref="l10n_se_hr_payroll_26.hr_asse_employee" />
+            <field name="company_id" ref="l10n_se_hr_payroll_26.company_aronssons"/>
             <field name="date_from">2026-01-03</field>
             <field name="date_to">2026-01-03</field>
             <field name="request_date_from">2026-01-03</field>
@@ -289,8 +289,8 @@
         </record>
 
         <record id="hr_leave_asse_105" model="hr.leave">
-            <field name="employee_id" ref="l10n_se_hr_payroll_twenty_six.hr_asse_employee" />
-            <field name="company_id" ref="l10n_se_hr_payroll_twenty_six.company_aronssons"/>
+            <field name="employee_id" ref="l10n_se_hr_payroll_26.hr_asse_employee" />
+            <field name="company_id" ref="l10n_se_hr_payroll_26.company_aronssons"/>
             <field name="date_from">2026-01-14</field>
             <field name="date_to">2026-01-20</field>
             <field name="request_date_from">2026-01-14</field>
@@ -301,8 +301,8 @@
 
         <!-- VAB -->
         <record id="hr_leave_asse_106" model="hr.leave">
-            <field name="employee_id" ref="l10n_se_hr_payroll_twenty_six.hr_asse_employee" />
-            <field name="company_id" ref="l10n_se_hr_payroll_twenty_six.company_aronssons"/>
+            <field name="employee_id" ref="l10n_se_hr_payroll_26.hr_asse_employee" />
+            <field name="company_id" ref="l10n_se_hr_payroll_26.company_aronssons"/>
             <field name="date_from">2026-01-25</field>
             <field name="date_to">2026-01-25</field>
             <field name="request_date_from">2026-01-25</field>
@@ -312,8 +312,8 @@
         </record>
 
         <record id="hr_leave_asse_106_02" model="hr.leave">
-            <field name="employee_id" ref="l10n_se_hr_payroll_twenty_six.hr_asse_employee" />
-            <field name="company_id" ref="l10n_se_hr_payroll_twenty_six.company_aronssons"/>
+            <field name="employee_id" ref="l10n_se_hr_payroll_26.hr_asse_employee" />
+            <field name="company_id" ref="l10n_se_hr_payroll_26.company_aronssons"/>
             <field name="date_from">2026-01-26</field>
             <field name="date_to">2026-01-26</field>
             <field name="request_date_from">2026-01-26</field>
@@ -333,13 +333,13 @@
         <!-- Generera lönespec (payslip) -->
         <record id="hr_payslip_asse_01" model="hr.payslip">
             <field name="name">Lönespecifikation för Januari - Asse Aronsson</field>
-            <field name="company_id" ref="l10n_se_hr_payroll_twenty_six.company_aronssons" />
-            <field name="employee_id" ref="l10n_se_hr_payroll_twenty_six.hr_asse_employee" />
-            <field name="payslip_run_id" ref="l10n_se_hr_payroll_twenty_six.payslip_run_2026_01"/>
-            <field name="period_id" ref="l10n_se_hr_payroll_twenty_six.period_01_2026" />
+            <field name="company_id" ref="l10n_se_hr_payroll_26.company_aronssons" />
+            <field name="employee_id" ref="l10n_se_hr_payroll_26.hr_asse_employee" />
+            <field name="payslip_run_id" ref="l10n_se_hr_payroll_26.payslip_run_2026_01"/>
+            <field name="period_id" ref="l10n_se_hr_payroll_26.period_01_2026" />
             <field name="date_from">2026-01-01</field>
             <field name="date_to">2026-01-31</field>
-            <field name="struct_id" ref="l10n_se_hr_payroll_twenty_six.hr_payroll_structure_tj_man" />
+            <field name="struct_id" ref="l10n_se_hr_payroll_26.hr_payroll_structure_tj_man" />
         </record>
 
         <!-- Manuella inputs: -->
@@ -381,8 +381,8 @@
         <!-- Tjänstledighet -->
 
         <record id="hr_leave_asse_201" model="hr.leave">
-            <field name="employee_id" ref="l10n_se_hr_payroll_twenty_six.hr_asse_employee" />
-            <field name="company_id" ref="l10n_se_hr_payroll_twenty_six.company_aronssons"/>
+            <field name="employee_id" ref="l10n_se_hr_payroll_26.hr_asse_employee" />
+            <field name="company_id" ref="l10n_se_hr_payroll_26.company_aronssons"/>
             <field name="date_from">2026-02-07</field>
             <field name="date_to">2026-02-07</field>
             <field name="request_date_from">2026-02-07</field>
@@ -395,8 +395,8 @@
         </record>
 
         <record id="hr_leave_asse_202" model="hr.leave">
-            <field name="employee_id" ref="l10n_se_hr_payroll_twenty_six.hr_asse_employee" />
-            <field name="company_id" ref="l10n_se_hr_payroll_twenty_six.company_aronssons"/>
+            <field name="employee_id" ref="l10n_se_hr_payroll_26.hr_asse_employee" />
+            <field name="company_id" ref="l10n_se_hr_payroll_26.company_aronssons"/>
             <field name="date_from">2026-02-10</field>
             <field name="date_to">2026-02-16</field>
             <field name="request_date_from">2026-02-10</field>
@@ -408,8 +408,8 @@
         <!-- VAB -->
 
         <record id="hr_leave_asse_203" model="hr.leave">
-            <field name="employee_id" ref="l10n_se_hr_payroll_twenty_six.hr_asse_employee" />
-            <field name="company_id" ref="l10n_se_hr_payroll_twenty_six.company_aronssons"/>
+            <field name="employee_id" ref="l10n_se_hr_payroll_26.hr_asse_employee" />
+            <field name="company_id" ref="l10n_se_hr_payroll_26.company_aronssons"/>
             <field name="date_from">2026-02-03</field>
             <field name="date_to">2026-02-03</field>
             <field name="request_date_from">2026-02-03</field>
@@ -422,8 +422,8 @@
         </record>
 
         <record id="hr_leave_asse_203_02" model="hr.leave">
-            <field name="employee_id" ref="l10n_se_hr_payroll_twenty_six.hr_asse_employee" />
-            <field name="company_id" ref="l10n_se_hr_payroll_twenty_six.company_aronssons"/>
+            <field name="employee_id" ref="l10n_se_hr_payroll_26.hr_asse_employee" />
+            <field name="company_id" ref="l10n_se_hr_payroll_26.company_aronssons"/>
             <field name="date_from">2026-02-04</field>
             <field name="date_to">2026-02-04</field>
             <field name="request_date_from">2026-02-04</field>
@@ -440,13 +440,13 @@
         <!-- Generera lönespec (payslip) -->
         <record id="hr_payslip_asse_02" model="hr.payslip">
             <field name="name">Lönespecifikation för Februari - Asse Aronsson</field>
-            <field name="company_id" ref="l10n_se_hr_payroll_twenty_six.company_aronssons" />
-            <field name="employee_id" ref="l10n_se_hr_payroll_twenty_six.hr_asse_employee" />
-            <field name="payslip_run_id" ref="l10n_se_hr_payroll_twenty_six.payslip_run_2026_02"/>
-            <field name="period_id" ref="l10n_se_hr_payroll_twenty_six.period_02_2026" />
+            <field name="company_id" ref="l10n_se_hr_payroll_26.company_aronssons" />
+            <field name="employee_id" ref="l10n_se_hr_payroll_26.hr_asse_employee" />
+            <field name="payslip_run_id" ref="l10n_se_hr_payroll_26.payslip_run_2026_02"/>
+            <field name="period_id" ref="l10n_se_hr_payroll_26.period_02_2026" />
             <field name="date_from">2026-02-01</field>
             <field name="date_to">2026-02-28</field>
-            <field name="struct_id" ref="l10n_se_hr_payroll_twenty_six.hr_payroll_structure_tj_man" />
+            <field name="struct_id" ref="l10n_se_hr_payroll_26.hr_payroll_structure_tj_man" />
         </record>
 
         <!-- Manuell input -->
@@ -486,8 +486,8 @@
 
         <!-- Sjukfrånvaro -->
         <record id="hr_leave_asse_301" model="hr.leave">
-            <field name="employee_id" ref="l10n_se_hr_payroll_twenty_six.hr_asse_employee" />
-            <field name="company_id" ref="l10n_se_hr_payroll_twenty_six.company_aronssons"/>
+            <field name="employee_id" ref="l10n_se_hr_payroll_26.hr_asse_employee" />
+            <field name="company_id" ref="l10n_se_hr_payroll_26.company_aronssons"/>
             <field name="date_from">2026-03-01</field>
             <field name="date_to">2026-03-08</field>
             <field name="request_date_from">2026-03-01</field>
@@ -497,8 +497,8 @@
         </record>
 
         <record id="hr_leave_asse_301_02" model="hr.leave">
-            <field name="employee_id" ref="l10n_se_hr_payroll_twenty_six.hr_asse_employee" />
-            <field name="company_id" ref="l10n_se_hr_payroll_twenty_six.company_aronssons"/>
+            <field name="employee_id" ref="l10n_se_hr_payroll_26.hr_asse_employee" />
+            <field name="company_id" ref="l10n_se_hr_payroll_26.company_aronssons"/>
             <field name="date_from">2026-03-09</field>
             <field name="date_to">2026-03-09</field>
             <field name="request_date_from">2026-03-09</field>
@@ -513,8 +513,8 @@
 
         <!-- Tjänstledighet -->
         <record id="hr_leave_asse_302" model="hr.leave">
-            <field name="employee_id" ref="l10n_se_hr_payroll_twenty_six.hr_asse_employee" />
-            <field name="company_id" ref="l10n_se_hr_payroll_twenty_six.company_aronssons"/>
+            <field name="employee_id" ref="l10n_se_hr_payroll_26.hr_asse_employee" />
+            <field name="company_id" ref="l10n_se_hr_payroll_26.company_aronssons"/>
             <field name="date_from">2026-03-18</field>
             <field name="date_to">2026-03-18</field>
             <field name="request_date_from">2026-03-18</field>
@@ -539,13 +539,13 @@
         <!-- Generera lönespec (payslip) -->
         <record id="hr_payslip_asse_03" model="hr.payslip">
             <field name="name">Lönespecifikation för Mars - Asse Aronsson</field>
-            <field name="company_id" ref="l10n_se_hr_payroll_twenty_six.company_aronssons" />
-            <field name="employee_id" ref="l10n_se_hr_payroll_twenty_six.hr_asse_employee" />
-            <field name="payslip_run_id" ref="l10n_se_hr_payroll_twenty_six.payslip_run_2026_03"/>
-            <field name="period_id" ref="l10n_se_hr_payroll_twenty_six.period_03_2026" />
+            <field name="company_id" ref="l10n_se_hr_payroll_26.company_aronssons" />
+            <field name="employee_id" ref="l10n_se_hr_payroll_26.hr_asse_employee" />
+            <field name="payslip_run_id" ref="l10n_se_hr_payroll_26.payslip_run_2026_03"/>
+            <field name="period_id" ref="l10n_se_hr_payroll_26.period_03_2026" />
             <field name="date_from">2026-03-01</field>
             <field name="date_to">2026-03-31</field>
-            <field name="struct_id" ref="l10n_se_hr_payroll_twenty_six.hr_payroll_structure_tj_man" />
+            <field name="struct_id" ref="l10n_se_hr_payroll_26.hr_payroll_structure_tj_man" />
         </record>
 
         <!-- Manuell input -->
@@ -580,8 +580,8 @@
 
         <!-- Tjänstledighet -->
         <record id="hr_leave_asse_401" model="hr.leave">
-            <field name="employee_id" ref="l10n_se_hr_payroll_twenty_six.hr_asse_employee" />
-            <field name="company_id" ref="l10n_se_hr_payroll_twenty_six.company_aronssons"/>
+            <field name="employee_id" ref="l10n_se_hr_payroll_26.hr_asse_employee" />
+            <field name="company_id" ref="l10n_se_hr_payroll_26.company_aronssons"/>
             <field name="date_from">2026-04-19</field>
             <field name="date_to">2026-04-19</field>
             <field name="request_date_from">2026-04-19</field>
@@ -594,8 +594,8 @@
         </record>
 
         <record id="hr_leave_asse_402" model="hr.leave">
-            <field name="employee_id" ref="l10n_se_hr_payroll_twenty_six.hr_asse_employee" />
-            <field name="company_id" ref="l10n_se_hr_payroll_twenty_six.company_aronssons"/>
+            <field name="employee_id" ref="l10n_se_hr_payroll_26.hr_asse_employee" />
+            <field name="company_id" ref="l10n_se_hr_payroll_26.company_aronssons"/>
             <field name="date_from">2026-04-20</field>
             <field name="date_to">2026-04-22</field>
             <field name="request_date_from">2026-04-20</field>
@@ -617,13 +617,13 @@
         <!-- Generera lönespec (payslip) -->
         <record id="hr_payslip_asse_04" model="hr.payslip">
             <field name="name">Lönespecifikation för April - Asse Aronsson</field>
-            <field name="company_id" ref="l10n_se_hr_payroll_twenty_six.company_aronssons" />
-            <field name="employee_id" ref="l10n_se_hr_payroll_twenty_six.hr_asse_employee" />
-            <field name="payslip_run_id" ref="l10n_se_hr_payroll_twenty_six.payslip_run_2026_04"/>
-            <field name="period_id" ref="l10n_se_hr_payroll_twenty_six.period_04_2026" />
+            <field name="company_id" ref="l10n_se_hr_payroll_26.company_aronssons" />
+            <field name="employee_id" ref="l10n_se_hr_payroll_26.hr_asse_employee" />
+            <field name="payslip_run_id" ref="l10n_se_hr_payroll_26.payslip_run_2026_04"/>
+            <field name="period_id" ref="l10n_se_hr_payroll_26.period_04_2026" />
             <field name="date_from">2026-04-01</field>
             <field name="date_to">2026-04-30</field>
-            <field name="struct_id" ref="l10n_se_hr_payroll_twenty_six.hr_payroll_structure_tj_man" />
+            <field name="struct_id" ref="l10n_se_hr_payroll_26.hr_payroll_structure_tj_man" />
         </record>
 
         <function model="hr.payslip" name="onchange_employee">
@@ -706,8 +706,8 @@
 
         <!-- Sjukfrånvaro -->
         <record id="hr_leave_asse_501" model="hr.leave">
-            <field name="employee_id" ref="l10n_se_hr_payroll_twenty_six.hr_asse_employee" />
-            <field name="company_id" ref="l10n_se_hr_payroll_twenty_six.company_aronssons"/>
+            <field name="employee_id" ref="l10n_se_hr_payroll_26.hr_asse_employee" />
+            <field name="company_id" ref="l10n_se_hr_payroll_26.company_aronssons"/>
             <field name="date_from">2026-05-09</field>
             <field name="date_to">2026-05-17</field>
             <field name="request_date_from">2026-05-09</field>
@@ -717,8 +717,8 @@
         </record>
 
         <record id="hr_leave_asse_501_02" model="hr.leave">
-            <field name="employee_id" ref="l10n_se_hr_payroll_twenty_six.hr_asse_employee" />
-            <field name="company_id" ref="l10n_se_hr_payroll_twenty_six.company_aronssons"/>
+            <field name="employee_id" ref="l10n_se_hr_payroll_26.hr_asse_employee" />
+            <field name="company_id" ref="l10n_se_hr_payroll_26.company_aronssons"/>
             <field name="date_from">2026-05-18</field>
             <field name="date_to">2026-05-18</field>
             <field name="request_date_from">2026-05-18</field>
@@ -739,13 +739,13 @@
         <!-- Generera lönespec (payslip) -->
         <record id="hr_payslip_asse_05" model="hr.payslip">
             <field name="name">Lönespecifikation för Maj - Asse Aronsson</field>
-            <field name="company_id" ref="l10n_se_hr_payroll_twenty_six.company_aronssons" />
-            <field name="employee_id" ref="l10n_se_hr_payroll_twenty_six.hr_asse_employee" />
-            <field name="payslip_run_id" ref="l10n_se_hr_payroll_twenty_six.payslip_run_2026_05"/>
-            <field name="period_id" ref="l10n_se_hr_payroll_twenty_six.period_05_2026" />
+            <field name="company_id" ref="l10n_se_hr_payroll_26.company_aronssons" />
+            <field name="employee_id" ref="l10n_se_hr_payroll_26.hr_asse_employee" />
+            <field name="payslip_run_id" ref="l10n_se_hr_payroll_26.payslip_run_2026_05"/>
+            <field name="period_id" ref="l10n_se_hr_payroll_26.period_05_2026" />
             <field name="date_from">2026-05-01</field>
             <field name="date_to">2026-05-31</field>
-            <field name="struct_id" ref="l10n_se_hr_payroll_twenty_six.hr_payroll_structure_tj_man" />
+            <field name="struct_id" ref="l10n_se_hr_payroll_26.hr_payroll_structure_tj_man" />
         </record>
 
         <function model="hr.payslip" name="onchange_employee">
@@ -824,8 +824,8 @@
         <!-- Sjukfrånvaro -->
 
         <record id="hr_leave_asse_601" model="hr.leave">
-            <field name="employee_id" ref="l10n_se_hr_payroll_twenty_six.hr_asse_employee" />
-            <field name="company_id" ref="l10n_se_hr_payroll_twenty_six.company_aronssons"/>
+            <field name="employee_id" ref="l10n_se_hr_payroll_26.hr_asse_employee" />
+            <field name="company_id" ref="l10n_se_hr_payroll_26.company_aronssons"/>
             <field name="date_from">2026-06-03</field>
             <field name="date_to">2026-06-03</field>
             <field name="request_date_from">2026-06-03</field>
@@ -835,8 +835,8 @@
         </record>
 
         <record id="hr_leave_asse_601_02" model="hr.leave">
-            <field name="employee_id" ref="l10n_se_hr_payroll_twenty_six.hr_asse_employee" />
-            <field name="company_id" ref="l10n_se_hr_payroll_twenty_six.company_aronssons"/>
+            <field name="employee_id" ref="l10n_se_hr_payroll_26.hr_asse_employee" />
+            <field name="company_id" ref="l10n_se_hr_payroll_26.company_aronssons"/>
             <field name="date_from">2026-06-07</field>
             <field name="date_to">2026-06-09</field>
             <field name="request_date_from">2026-06-07</field>
@@ -847,8 +847,8 @@
 
         <!-- Tjänstledighet -->
         <record id="hr_leave_asse_602" model="hr.leave">
-            <field name="employee_id" ref="l10n_se_hr_payroll_twenty_six.hr_asse_employee" />
-            <field name="company_id" ref="l10n_se_hr_payroll_twenty_six.company_aronssons"/>
+            <field name="employee_id" ref="l10n_se_hr_payroll_26.hr_asse_employee" />
+            <field name="company_id" ref="l10n_se_hr_payroll_26.company_aronssons"/>
             <field name="date_from">2026-06-17</field>
             <field name="date_to">2026-06-17</field>
             <field name="request_date_from">2026-06-17</field>
@@ -861,8 +861,8 @@
         </record>
 
         <record id="hr_leave_asse_603" model="hr.leave">
-            <field name="employee_id" ref="l10n_se_hr_payroll_twenty_six.hr_asse_employee" />
-            <field name="company_id" ref="l10n_se_hr_payroll_twenty_six.company_aronssons"/>
+            <field name="employee_id" ref="l10n_se_hr_payroll_26.hr_asse_employee" />
+            <field name="company_id" ref="l10n_se_hr_payroll_26.company_aronssons"/>
             <field name="date_from">2026-06-22</field>
             <field name="date_to">2026-06-29</field>
             <field name="request_date_from">2026-06-22</field>
@@ -873,8 +873,8 @@
 
         <!-- Semester -->
         <record id="hr_leave_asse_604" model="hr.leave">
-            <field name="employee_id" ref="l10n_se_hr_payroll_twenty_six.hr_asse_employee" />
-            <field name="company_id" ref="l10n_se_hr_payroll_twenty_six.company_aronssons"/>
+            <field name="employee_id" ref="l10n_se_hr_payroll_26.hr_asse_employee" />
+            <field name="company_id" ref="l10n_se_hr_payroll_26.company_aronssons"/>
             <field name="date_from">2026-06-10</field>
             <field name="date_to">2026-06-16</field>
             <field name="request_date_from">2026-06-10</field>
@@ -898,13 +898,13 @@
         <!-- Generera lönespec (payslip) -->
         <record id="hr_payslip_asse_06" model="hr.payslip">
             <field name="name">Lönespecifikation för Juni - Asse Aronsson</field>
-            <field name="company_id" ref="l10n_se_hr_payroll_twenty_six.company_aronssons" />
-            <field name="employee_id" ref="l10n_se_hr_payroll_twenty_six.hr_asse_employee" />
-            <field name="payslip_run_id" ref="l10n_se_hr_payroll_twenty_six.payslip_run_2026_06"/>
-            <field name="period_id" ref="l10n_se_hr_payroll_twenty_six.period_06_2026" />
+            <field name="company_id" ref="l10n_se_hr_payroll_26.company_aronssons" />
+            <field name="employee_id" ref="l10n_se_hr_payroll_26.hr_asse_employee" />
+            <field name="payslip_run_id" ref="l10n_se_hr_payroll_26.payslip_run_2026_06"/>
+            <field name="period_id" ref="l10n_se_hr_payroll_26.period_06_2026" />
             <field name="date_from">2026-06-01</field>
             <field name="date_to">2026-06-30</field>
-            <field name="struct_id" ref="l10n_se_hr_payroll_twenty_six.hr_payroll_structure_tj_man" />
+            <field name="struct_id" ref="l10n_se_hr_payroll_26.hr_payroll_structure_tj_man" />
         </record>
 
         <!-- Manuell input -->
@@ -934,8 +934,8 @@
 
         <!-- Sjukfrånvaro -->
         <record id="hr_leave_asse_701" model="hr.leave">
-            <field name="employee_id" ref="l10n_se_hr_payroll_twenty_six.hr_asse_employee" />
-            <field name="company_id" ref="l10n_se_hr_payroll_twenty_six.company_aronssons"/>
+            <field name="employee_id" ref="l10n_se_hr_payroll_26.hr_asse_employee" />
+            <field name="company_id" ref="l10n_se_hr_payroll_26.company_aronssons"/>
             <field name="date_from">2026-07-18</field>
             <field name="date_to">2026-07-25</field>
             <field name="request_date_from">2026-07-18</field>
@@ -946,8 +946,8 @@
 
         <!-- Tjänstledighet -->
         <record id="hr_leave_asse_702" model="hr.leave">
-            <field name="employee_id" ref="l10n_se_hr_payroll_twenty_six.hr_asse_employee" />
-            <field name="company_id" ref="l10n_se_hr_payroll_twenty_six.company_aronssons"/>
+            <field name="employee_id" ref="l10n_se_hr_payroll_26.hr_asse_employee" />
+            <field name="company_id" ref="l10n_se_hr_payroll_26.company_aronssons"/>
             <field name="date_from">2026-07-07</field>
             <field name="date_to">2026-07-08</field>
             <field name="request_date_from">2026-07-07</field>
@@ -958,8 +958,8 @@
 
         <!-- VAB -->
         <record id="hr_leave_asse_703" model="hr.leave">
-            <field name="employee_id" ref="l10n_se_hr_payroll_twenty_six.hr_asse_employee" />
-            <field name="company_id" ref="l10n_se_hr_payroll_twenty_six.company_aronssons"/>
+            <field name="employee_id" ref="l10n_se_hr_payroll_26.hr_asse_employee" />
+            <field name="company_id" ref="l10n_se_hr_payroll_26.company_aronssons"/>
             <field name="date_from">2026-07-05</field>
             <field name="date_to">2026-07-06</field>
             <field name="request_date_from">2026-07-05</field>
@@ -970,8 +970,8 @@
 
         <!-- Semester -->
         <record id="hr_leave_asse_704" model="hr.leave">
-            <field name="employee_id" ref="l10n_se_hr_payroll_twenty_six.hr_asse_employee" />
-            <field name="company_id" ref="l10n_se_hr_payroll_twenty_six.company_aronssons"/>
+            <field name="employee_id" ref="l10n_se_hr_payroll_26.hr_asse_employee" />
+            <field name="company_id" ref="l10n_se_hr_payroll_26.company_aronssons"/>
             <field name="date_from">2026-07-11</field>
             <field name="date_to">2026-07-15</field>
             <field name="request_date_from">2026-07-11</field>
@@ -993,13 +993,13 @@
         <!-- Generera lönespec (payslip) -->
         <record id="hr_payslip_asse_07" model="hr.payslip">
             <field name="name">Lönespecifikation för Juli - Asse Aronsson</field>
-            <field name="company_id" ref="l10n_se_hr_payroll_twenty_six.company_aronssons" />
-            <field name="employee_id" ref="l10n_se_hr_payroll_twenty_six.hr_asse_employee" />
-            <field name="payslip_run_id" ref="l10n_se_hr_payroll_twenty_six.payslip_run_2026_07"/>
-            <field name="period_id" ref="l10n_se_hr_payroll_twenty_six.period_07_2026" />
+            <field name="company_id" ref="l10n_se_hr_payroll_26.company_aronssons" />
+            <field name="employee_id" ref="l10n_se_hr_payroll_26.hr_asse_employee" />
+            <field name="payslip_run_id" ref="l10n_se_hr_payroll_26.payslip_run_2026_07"/>
+            <field name="period_id" ref="l10n_se_hr_payroll_26.period_07_2026" />
             <field name="date_from">2026-07-01</field>
             <field name="date_to">2026-07-31</field>
-            <field name="struct_id" ref="l10n_se_hr_payroll_twenty_six.hr_payroll_structure_tj_man" />
+            <field name="struct_id" ref="l10n_se_hr_payroll_26.hr_payroll_structure_tj_man" />
         </record>
 
         <function model="hr.payslip" name="onchange_employee">
@@ -1038,8 +1038,8 @@
 
         <!-- Sjukfrånvaro -->
         <record id="hr_leave_asse_801" model="hr.leave">
-            <field name="employee_id" ref="l10n_se_hr_payroll_twenty_six.hr_asse_employee" />
-            <field name="company_id" ref="l10n_se_hr_payroll_twenty_six.company_aronssons"/>
+            <field name="employee_id" ref="l10n_se_hr_payroll_26.hr_asse_employee" />
+            <field name="company_id" ref="l10n_se_hr_payroll_26.company_aronssons"/>
             <field name="date_from">2026-08-12</field>
             <field name="date_to">2026-09-01</field>
             <field name="request_date_from">2026-08-12</field>
@@ -1050,8 +1050,8 @@
 
         <!-- Semester -->
         <record id="hr_leave_asse_802" model="hr.leave">
-            <field name="employee_id" ref="l10n_se_hr_payroll_twenty_six.hr_asse_employee" />
-            <field name="company_id" ref="l10n_se_hr_payroll_twenty_six.company_aronssons"/>
+            <field name="employee_id" ref="l10n_se_hr_payroll_26.hr_asse_employee" />
+            <field name="company_id" ref="l10n_se_hr_payroll_26.company_aronssons"/>
             <field name="date_from">2026-08-04</field>
             <field name="date_to">2026-08-04</field>
             <field name="request_date_from">2026-08-04</field>
@@ -1061,8 +1061,8 @@
         </record>
 
         <record id="hr_leave_asse_803" model="hr.leave">
-            <field name="employee_id" ref="l10n_se_hr_payroll_twenty_six.hr_asse_employee" />
-            <field name="company_id" ref="l10n_se_hr_payroll_twenty_six.company_aronssons"/>
+            <field name="employee_id" ref="l10n_se_hr_payroll_26.hr_asse_employee" />
+            <field name="company_id" ref="l10n_se_hr_payroll_26.company_aronssons"/>
             <field name="date_from">2026-08-08</field>
             <field name="date_to">2026-08-11</field>
             <field name="request_date_from">2026-08-08</field>
@@ -1085,13 +1085,13 @@
         <!-- Generera lönespec (payslip) -->
         <record id="hr_payslip_asse_08" model="hr.payslip">
             <field name="name">Lönespecifikation för Augusti - Asse Aronsson</field>
-            <field name="company_id" ref="l10n_se_hr_payroll_twenty_six.company_aronssons" />
-            <field name="employee_id" ref="l10n_se_hr_payroll_twenty_six.hr_asse_employee" />
-            <field name="payslip_run_id" ref="l10n_se_hr_payroll_twenty_six.payslip_run_2026_08"/>
-            <field name="period_id" ref="l10n_se_hr_payroll_twenty_six.period_08_2026" />
+            <field name="company_id" ref="l10n_se_hr_payroll_26.company_aronssons" />
+            <field name="employee_id" ref="l10n_se_hr_payroll_26.hr_asse_employee" />
+            <field name="payslip_run_id" ref="l10n_se_hr_payroll_26.payslip_run_2026_08"/>
+            <field name="period_id" ref="l10n_se_hr_payroll_26.period_08_2026" />
             <field name="date_from">2026-08-01</field>
             <field name="date_to">2026-08-31</field>
-            <field name="struct_id" ref="l10n_se_hr_payroll_twenty_six.hr_payroll_structure_tj_man" />
+            <field name="struct_id" ref="l10n_se_hr_payroll_26.hr_payroll_structure_tj_man" />
         </record>
 
         <function model="hr.payslip" name="onchange_employee">
@@ -1124,8 +1124,8 @@
 
         <!-- Sjukfrånvaro -->
         <record id="hr_leave_asse_901" model="hr.leave">
-            <field name="employee_id" ref="l10n_se_hr_payroll_twenty_six.hr_asse_employee" />
-            <field name="company_id" ref="l10n_se_hr_payroll_twenty_six.company_aronssons"/>
+            <field name="employee_id" ref="l10n_se_hr_payroll_26.hr_asse_employee" />
+            <field name="company_id" ref="l10n_se_hr_payroll_26.company_aronssons"/>
             <field name="date_from">2026-09-05</field>
             <field name="date_to">2026-09-08</field>
             <field name="request_date_from">2026-09-05</field>
@@ -1136,8 +1136,8 @@
 
         <!-- Semester -->
         <record id="hr_leave_asse_902" model="hr.leave">
-            <field name="employee_id" ref="l10n_se_hr_payroll_twenty_six.hr_asse_employee" />
-            <field name="company_id" ref="l10n_se_hr_payroll_twenty_six.company_aronssons"/>
+            <field name="employee_id" ref="l10n_se_hr_payroll_26.hr_asse_employee" />
+            <field name="company_id" ref="l10n_se_hr_payroll_26.company_aronssons"/>
             <field name="date_from">2026-09-19</field>
             <field name="date_to">2026-09-23</field>
             <field name="request_date_from">2026-09-19</field>
@@ -1159,13 +1159,13 @@
         <!-- Generera lönespec (payslip) -->
         <record id="hr_payslip_asse_09" model="hr.payslip">
             <field name="name">Lönespecifikation för September - Asse Aronsson</field>
-            <field name="company_id" ref="l10n_se_hr_payroll_twenty_six.company_aronssons" />
-            <field name="employee_id" ref="l10n_se_hr_payroll_twenty_six.hr_asse_employee" />
-            <field name="payslip_run_id" ref="l10n_se_hr_payroll_twenty_six.payslip_run_2026_09"/>
-            <field name="period_id" ref="l10n_se_hr_payroll_twenty_six.period_09_2026" />
+            <field name="company_id" ref="l10n_se_hr_payroll_26.company_aronssons" />
+            <field name="employee_id" ref="l10n_se_hr_payroll_26.hr_asse_employee" />
+            <field name="payslip_run_id" ref="l10n_se_hr_payroll_26.payslip_run_2026_09"/>
+            <field name="period_id" ref="l10n_se_hr_payroll_26.period_09_2026" />
             <field name="date_from">2026-09-01</field>
             <field name="date_to">2026-09-30</field>
-            <field name="struct_id" ref="l10n_se_hr_payroll_twenty_six.hr_payroll_structure_tj_man" />
+            <field name="struct_id" ref="l10n_se_hr_payroll_26.hr_payroll_structure_tj_man" />
         </record>
 
         <!-- Manuell input -->
@@ -1189,8 +1189,8 @@
 
         <!-- Föräldraledighet -->
         <record id="hr_leave_asse_1001" model="hr.leave">
-            <field name="employee_id" ref="l10n_se_hr_payroll_twenty_six.hr_asse_employee" />
-            <field name="company_id" ref="l10n_se_hr_payroll_twenty_six.company_aronssons"/>
+            <field name="employee_id" ref="l10n_se_hr_payroll_26.hr_asse_employee" />
+            <field name="company_id" ref="l10n_se_hr_payroll_26.company_aronssons"/>
             <field name="date_from">2026-10-03</field>
             <field name="date_to">2026-10-13</field>
             <field name="request_date_from">2026-10-03</field>
@@ -1202,8 +1202,8 @@
 
         <!-- Tjänstledighet -->
         <record id="hr_leave_asse_1002" model="hr.leave">
-            <field name="employee_id" ref="l10n_se_hr_payroll_twenty_six.hr_asse_employee" />
-            <field name="company_id" ref="l10n_se_hr_payroll_twenty_six.company_aronssons"/>
+            <field name="employee_id" ref="l10n_se_hr_payroll_26.hr_asse_employee" />
+            <field name="company_id" ref="l10n_se_hr_payroll_26.company_aronssons"/>
             <field name="date_from">2026-10-14</field>
             <field name="date_to">2026-10-14</field>
             <field name="request_date_from">2026-10-14</field>
@@ -1217,8 +1217,8 @@
 
         <!-- Semester -->
         <record id="hr_leave_asse_1003" model="hr.leave">
-            <field name="employee_id" ref="l10n_se_hr_payroll_twenty_six.hr_asse_employee" />
-            <field name="company_id" ref="l10n_se_hr_payroll_twenty_six.company_aronssons"/>
+            <field name="employee_id" ref="l10n_se_hr_payroll_26.hr_asse_employee" />
+            <field name="company_id" ref="l10n_se_hr_payroll_26.company_aronssons"/>
             <field name="date_from">2026-10-17</field>
             <field name="date_to">2026-10-18</field>
             <field name="request_date_from">2026-10-17</field>
@@ -1240,13 +1240,13 @@
         <!-- Generera lönespec (payslip) -->
         <record id="hr_payslip_asse_10" model="hr.payslip">
             <field name="name">Lönespecifikation för Oktober - Asse Aronsson</field>
-            <field name="company_id" ref="l10n_se_hr_payroll_twenty_six.company_aronssons" />
-            <field name="employee_id" ref="l10n_se_hr_payroll_twenty_six.hr_asse_employee" />
-            <field name="payslip_run_id" ref="l10n_se_hr_payroll_twenty_six.payslip_run_2026_10"/>
-            <field name="period_id" ref="l10n_se_hr_payroll_twenty_six.period_10_2026" />
+            <field name="company_id" ref="l10n_se_hr_payroll_26.company_aronssons" />
+            <field name="employee_id" ref="l10n_se_hr_payroll_26.hr_asse_employee" />
+            <field name="payslip_run_id" ref="l10n_se_hr_payroll_26.payslip_run_2026_10"/>
+            <field name="period_id" ref="l10n_se_hr_payroll_26.period_10_2026" />
             <field name="date_from">2026-10-01</field>
             <field name="date_to">2026-10-31</field>
-            <field name="struct_id" ref="l10n_se_hr_payroll_twenty_six.hr_payroll_structure_tj_man" />
+            <field name="struct_id" ref="l10n_se_hr_payroll_26.hr_payroll_structure_tj_man" />
         </record>
 
         <!-- Manuell input -->
@@ -1283,8 +1283,8 @@
 
         <!-- Sjukfrånvaro -->
         <record id="hr_leave_asse_1101" model="hr.leave">
-            <field name="employee_id" ref="l10n_se_hr_payroll_twenty_six.hr_asse_employee" />
-            <field name="company_id" ref="l10n_se_hr_payroll_twenty_six.company_aronssons"/>
+            <field name="employee_id" ref="l10n_se_hr_payroll_26.hr_asse_employee" />
+            <field name="company_id" ref="l10n_se_hr_payroll_26.company_aronssons"/>
             <field name="date_from">2026-11-10</field>
             <field name="date_to">2026-11-16</field>
             <field name="request_date_from">2026-11-10</field>
@@ -1294,8 +1294,8 @@
         </record>
 
         <record id="hr_leave_asse_1101_02" model="hr.leave">
-            <field name="employee_id" ref="l10n_se_hr_payroll_twenty_six.hr_asse_employee" />
-            <field name="company_id" ref="l10n_se_hr_payroll_twenty_six.company_aronssons"/>
+            <field name="employee_id" ref="l10n_se_hr_payroll_26.hr_asse_employee" />
+            <field name="company_id" ref="l10n_se_hr_payroll_26.company_aronssons"/>
             <field name="date_from">2026-11-17</field>
             <field name="date_to">2026-11-24</field>
             <field name="request_date_from">2026-11-17</field>
@@ -1306,8 +1306,8 @@
 
         <!-- VAB -->
         <record id="hr_leave_asse_1102" model="hr.leave">
-            <field name="employee_id" ref="l10n_se_hr_payroll_twenty_six.hr_asse_employee" />
-            <field name="company_id" ref="l10n_se_hr_payroll_twenty_six.company_aronssons"/>
+            <field name="employee_id" ref="l10n_se_hr_payroll_26.hr_asse_employee" />
+            <field name="company_id" ref="l10n_se_hr_payroll_26.company_aronssons"/>
             <field name="date_from">2026-11-01</field>
             <field name="date_to">2026-11-01</field>
             <field name="request_date_from">2026-11-01</field>
@@ -1320,8 +1320,8 @@
         </record>
 
         <record id="hr_leave_asse_1102_02" model="hr.leave">
-            <field name="employee_id" ref="l10n_se_hr_payroll_twenty_six.hr_asse_employee" />
-            <field name="company_id" ref="l10n_se_hr_payroll_twenty_six.company_aronssons"/>
+            <field name="employee_id" ref="l10n_se_hr_payroll_26.hr_asse_employee" />
+            <field name="company_id" ref="l10n_se_hr_payroll_26.company_aronssons"/>
             <field name="date_from">2026-11-02</field>
             <field name="date_to">2026-11-02</field>
             <field name="request_date_from">2026-11-02</field>
@@ -1338,13 +1338,13 @@
         <!-- Generera lönespec (payslip) -->
         <record id="hr_payslip_asse_11" model="hr.payslip">
             <field name="name">Lönespecifikation för November - Asse Aronsson</field>
-            <field name="company_id" ref="l10n_se_hr_payroll_twenty_six.company_aronssons" />
-            <field name="employee_id" ref="l10n_se_hr_payroll_twenty_six.hr_asse_employee" />
-            <field name="payslip_run_id" ref="l10n_se_hr_payroll_twenty_six.payslip_run_2026_11"/>
-            <field name="period_id" ref="l10n_se_hr_payroll_twenty_six.period_11_2026" />
+            <field name="company_id" ref="l10n_se_hr_payroll_26.company_aronssons" />
+            <field name="employee_id" ref="l10n_se_hr_payroll_26.hr_asse_employee" />
+            <field name="payslip_run_id" ref="l10n_se_hr_payroll_26.payslip_run_2026_11"/>
+            <field name="period_id" ref="l10n_se_hr_payroll_26.period_11_2026" />
             <field name="date_from">2026-11-01</field>
             <field name="date_to">2026-11-30</field>
-            <field name="struct_id" ref="l10n_se_hr_payroll_twenty_six.hr_payroll_structure_tj_man" />
+            <field name="struct_id" ref="l10n_se_hr_payroll_26.hr_payroll_structure_tj_man" />
         </record>
 
         <!-- Manuell input -->
@@ -1374,8 +1374,8 @@
 
         <!-- Föräldraledighet hel måånad -->
         <record id="hr_leave_asse_1201" model="hr.leave">
-            <field name="employee_id" ref="l10n_se_hr_payroll_twenty_six.hr_asse_employee" />
-            <field name="company_id" ref="l10n_se_hr_payroll_twenty_six.company_aronssons"/>
+            <field name="employee_id" ref="l10n_se_hr_payroll_26.hr_asse_employee" />
+            <field name="company_id" ref="l10n_se_hr_payroll_26.company_aronssons"/>
             <field name="date_from">2026-12-01</field>
             <field name="date_to">2023-04-30</field>
             <field name="request_date_from">2026-12-01</field>
@@ -1391,13 +1391,13 @@
 
         <record id="hr_payslip_asse_12" model="hr.payslip">
             <field name="name">Lönespecifikation för December - Asse Aronsson</field>
-            <field name="company_id" ref="l10n_se_hr_payroll_twenty_six.company_aronssons" />
-            <field name="employee_id" ref="l10n_se_hr_payroll_twenty_six.hr_asse_employee" />
-            <field name="payslip_run_id" ref="l10n_se_hr_payroll_twenty_six.payslip_run_2026_12"/>
-            <field name="period_id" ref="l10n_se_hr_payroll_twenty_six.period_12_2026" />
+            <field name="company_id" ref="l10n_se_hr_payroll_26.company_aronssons" />
+            <field name="employee_id" ref="l10n_se_hr_payroll_26.hr_asse_employee" />
+            <field name="payslip_run_id" ref="l10n_se_hr_payroll_26.payslip_run_2026_12"/>
+            <field name="period_id" ref="l10n_se_hr_payroll_26.period_12_2026" />
             <field name="date_from">2026-12-01</field>
             <field name="date_to">2026-12-31</field>
-            <field name="struct_id" ref="l10n_se_hr_payroll_twenty_six.hr_payroll_structure_tj_man" />
+            <field name="struct_id" ref="l10n_se_hr_payroll_26.hr_payroll_structure_tj_man" />
         </record>
 
 

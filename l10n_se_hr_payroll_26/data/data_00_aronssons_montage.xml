@@ -40,9 +40,9 @@
         </record>
 
         <record id="base.user_admin" model="res.users">
-            <field name="company_id" ref="l10n_se_hr_payroll_twenty_six.company_aronssons" />
+            <field name="company_id" ref="l10n_se_hr_payroll_26.company_aronssons" />
             <field name="company_ids" eval="[
-                (4, ref('l10n_se_hr_payroll_twenty_six.company_aronssons')),
+                (4, ref('l10n_se_hr_payroll_26.company_aronssons')),
                 (4, ref('base.main_company')),
             ]" />
         </record>
@@ -71,7 +71,7 @@
         <record id="date_range_type_company_aronssons" model="date.range.type">
             <field name="name">Fiscal Year 2022</field>
             <field name="allow_overlap" eval="False"/>
-            <field name="company_id" ref="l10n_se_hr_payroll_twenty_six.company_aronssons" />
+            <field name="company_id" ref="l10n_se_hr_payroll_26.company_aronssons" />
         </record>
 
         <record id="company_aronssons_year_2026" model="account.fiscalyear">
@@ -79,12 +79,12 @@
             <field name="code">2022</field>
             <field name="date_start">2026-01-01</field>
             <field name="date_stop">2026-12-31</field>
-            <field name="company_id" ref="l10n_se_hr_payroll_twenty_six.company_aronssons" />
+            <field name="company_id" ref="l10n_se_hr_payroll_26.company_aronssons" />
         </record>
 
         <record id="period_01_2026" model="account.period">
             <field name="name">01/2022</field>
-            <field name="company_id" ref="l10n_se_hr_payroll_twenty_six.company_aronssons" />
+            <field name="company_id" ref="l10n_se_hr_payroll_26.company_aronssons" />
             <field name="date_start" eval="'2026-01-01'"/>
             <field name="date_stop" eval="'2026-01-31'"/>
             <field name="fiscalyear_id" ref="company_aronssons_year_2026" />
@@ -92,14 +92,14 @@
 
         <record id="period_02_2026" model="account.period">
             <field name="name">02/2022</field>
-            <field name="company_id" ref="l10n_se_hr_payroll_twenty_six.company_aronssons" />
+            <field name="company_id" ref="l10n_se_hr_payroll_26.company_aronssons" />
             <field name="date_start">2026-02-01</field>
             <field name="date_stop">2026-02-28</field>
             <field name="fiscalyear_id" ref="company_aronssons_year_2026" />
         </record>
 
         <record id="period_03_2026" model="account.period">
-            <field name="company_id" ref="l10n_se_hr_payroll_twenty_six.company_aronssons" />
+            <field name="company_id" ref="l10n_se_hr_payroll_26.company_aronssons" />
             <field name="fiscalyear_id" ref="company_aronssons_year_2026" />
             <field name="name">03/2022</field>
             <field name="date_start">2026-03-01</field>
@@ -108,14 +108,14 @@
 
         <record id="period_04_2026" model="account.period">
             <field name="name">04/2022</field>
-            <field name="company_id" ref="l10n_se_hr_payroll_twenty_six.company_aronssons" />
+            <field name="company_id" ref="l10n_se_hr_payroll_26.company_aronssons" />
             <field name="fiscalyear_id" ref="company_aronssons_year_2026" />
             <field name="date_start">2026-04-01</field>
             <field name="date_stop">2026-04-30</field>
         </record>
 
         <record id="period_05_2026" model="account.period">
-            <field name="company_id" ref="l10n_se_hr_payroll_twenty_six.company_aronssons" />
+            <field name="company_id" ref="l10n_se_hr_payroll_26.company_aronssons" />
             <field name="fiscalyear_id" ref="company_aronssons_year_2026" />
             <field name="name">05/2022</field>
             <field name="date_start">2026-05-01</field>
@@ -123,7 +123,7 @@
         </record>
 
         <record id="period_06_2026" model="account.period">
-            <field name="company_id" ref="l10n_se_hr_payroll_twenty_six.company_aronssons" />
+            <field name="company_id" ref="l10n_se_hr_payroll_26.company_aronssons" />
             <field name="fiscalyear_id" ref="company_aronssons_year_2026" />
             <field name="name">06/2022</field>
             <field name="date_start">2026-06-01</field>
@@ -131,7 +131,7 @@
         </record>
 
         <record id="period_07_2026" model="account.period">
-            <field name="company_id" ref="l10n_se_hr_payroll_twenty_six.company_aronssons" />
+            <field name="company_id" ref="l10n_se_hr_payroll_26.company_aronssons" />
             <field name="fiscalyear_id" ref="company_aronssons_year_2026" />
             <field name="name">07/2022</field>
             <field name="date_start">2026-07-01</field>
@@ -139,7 +139,7 @@
         </record>
 
         <record id="period_08_2026" model="account.period">
-            <field name="company_id" ref="l10n_se_hr_payroll_twenty_six.company_aronssons" />
+            <field name="company_id" ref="l10n_se_hr_payroll_26.company_aronssons" />
             <field name="fiscalyear_id" ref="company_aronssons_year_2026" />
             <field name="name">08/2022</field>
             <field name="date_start">2026-08-01</field>
@@ -147,7 +147,7 @@
         </record>
 
         <record id="period_09_2026" model="account.period">
-            <field name="company_id" ref="l10n_se_hr_payroll_twenty_six.company_aronssons" />
+            <field name="company_id" ref="l10n_se_hr_payroll_26.company_aronssons" />
             <field name="fiscalyear_id" ref="company_aronssons_year_2026" />
             <field name="name">09/2022</field>
             <field name="date_start">2026-09-01</field>
@@ -155,7 +155,7 @@
         </record>
 
         <record id="period_10_2026" model="account.period">
-            <field name="company_id" ref="l10n_se_hr_payroll_twenty_six.company_aronssons" />
+            <field name="company_id" ref="l10n_se_hr_payroll_26.company_aronssons" />
             <field name="fiscalyear_id" ref="company_aronssons_year_2026" />
             <field name="name">10/2022</field>
             <field name="date_start">2026-10-01</field>
@@ -163,7 +163,7 @@
         </record>
 
         <record id="period_11_2026" model="account.period">
-            <field name="company_id" ref="l10n_se_hr_payroll_twenty_six.company_aronssons" />
+            <field name="company_id" ref="l10n_se_hr_payroll_26.company_aronssons" />
             <field name="fiscalyear_id" ref="company_aronssons_year_2026" />
             <field name="name">11/2022</field>
             <field name="date_start">2026-11-01</field>
@@ -171,7 +171,7 @@
         </record>
 
         <record id="period_12_2026" model="account.period">
-            <field name="company_id" ref="l10n_se_hr_payroll_twenty_six.company_aronssons" />
+            <field name="company_id" ref="l10n_se_hr_payroll_26.company_aronssons" />
             <field name="fiscalyear_id" ref="company_aronssons_year_2026" />
             <field name="name">12/2022</field>
             <field name="date_start">2026-12-01</field>
@@ -183,105 +183,105 @@
         <record id="project_regular_work" model="project.project">
             <field name="name">Internt Arbete (Vanlig tid)</field>
             <field name="allow_timesheets" eval="True"/>
-            <field name="company_id" ref="l10n_se_hr_payroll_twenty_six.company_aronssons"/>
+            <field name="company_id" ref="l10n_se_hr_payroll_26.company_aronssons"/>
         </record>
 
         <record id="task_regular_work" model="project.task">
             <field name="name">Dagligt arbete</field>
             <field name="project_id" ref="project_regular_work"/>
-            <field name="company_id" ref="l10n_se_hr_payroll_twenty_six.company_aronssons"/>
+            <field name="company_id" ref="l10n_se_hr_payroll_26.company_aronssons"/>
         </record>
 
         <record id="project_time_off_internal" model="project.project">
             <field name="name">Internal / Time Off</field>
             <field name="allow_timesheets" eval="True"/>
-            <field name="company_id" ref="l10n_se_hr_payroll_twenty_six.company_aronssons"/>
+            <field name="company_id" ref="l10n_se_hr_payroll_26.company_aronssons"/>
         </record>
 
         <record id="task_time_off_vacation" model="project.task">
             <field name="name">Semester (Vacation)</field>
             <field name="project_id" ref="project_time_off_internal"/>
-            <field name="company_id" ref="l10n_se_hr_payroll_twenty_six.company_aronssons"/>
+            <field name="company_id" ref="l10n_se_hr_payroll_26.company_aronssons"/>
         </record>
 
         <record id="task_time_off_sick" model="project.task">
             <field name="name">Sjukfrånvaro (Sick Leave)</field>
             <field name="project_id" ref="project_time_off_internal"/>
-            <field name="company_id" ref="l10n_se_hr_payroll_twenty_six.company_aronssons"/>
+            <field name="company_id" ref="l10n_se_hr_payroll_26.company_aronssons"/>
         </record>
 
         <record id="task_time_off_vab" model="project.task">
             <field name="name">Vård av barn (VAB)</field>
             <field name="project_id" ref="project_time_off_internal"/>
-            <field name="company_id" ref="l10n_se_hr_payroll_twenty_six.company_aronssons"/>
+            <field name="company_id" ref="l10n_se_hr_payroll_26.company_aronssons"/>
         </record>
 
         <record id="task_time_off_f_led" model="project.task">
             <field name="name">Föräldraledighet</field>
             <field name="project_id" ref="project_time_off_internal"/>
-            <field name="company_id" ref="l10n_se_hr_payroll_twenty_six.company_aronssons"/>
+            <field name="company_id" ref="l10n_se_hr_payroll_26.company_aronssons"/>
         </record>
 
         <record id="task_time_off_loa" model="project.task">
             <field name="name">Tjänstledighet</field>
             <field name="project_id" ref="project_time_off_internal"/>
-            <field name="company_id" ref="l10n_se_hr_payroll_twenty_six.company_aronssons"/>
+            <field name="company_id" ref="l10n_se_hr_payroll_26.company_aronssons"/>
         </record>
 
         <record id="l10n_se_hr_payroll.leave_type_sick" model="hr.leave.type">
             <field name="timesheet_generate" eval="True"/>
             <field name="timesheet_project_id" ref="project_time_off_internal"/>
             <field name="timesheet_task_id" ref="task_time_off_sick"/>
-            <field name="company_id" ref="l10n_se_hr_payroll_twenty_six.company_aronssons"/>
+            <field name="company_id" ref="l10n_se_hr_payroll_26.company_aronssons"/>
         </record>
 
         <record id="l10n_se_hr_payroll.leave_type_vab" model="hr.leave.type">
             <field name="timesheet_generate" eval="True"/>
             <field name="timesheet_project_id" ref="project_time_off_internal"/>
             <field name="timesheet_task_id" ref="task_time_off_vab"/>
-            <field name="company_id" ref="l10n_se_hr_payroll_twenty_six.company_aronssons"/>
+            <field name="company_id" ref="l10n_se_hr_payroll_26.company_aronssons"/>
         </record>
 
         <record id="l10n_se_hr_payroll.leave_type_f_led" model="hr.leave.type">
             <field name="timesheet_generate" eval="True"/>
             <field name="timesheet_project_id" ref="project_time_off_internal"/>
             <field name="timesheet_task_id" ref="task_time_off_f_led"/>
-            <field name="company_id" ref="l10n_se_hr_payroll_twenty_six.company_aronssons"/>
+            <field name="company_id" ref="l10n_se_hr_payroll_26.company_aronssons"/>
         </record>
 
         <record id="l10n_se_hr_payroll.leave_type_loa" model="hr.leave.type">
             <field name="timesheet_generate" eval="True"/>
             <field name="timesheet_project_id" ref="project_time_off_internal"/>
             <field name="timesheet_task_id" ref="task_time_off_loa"/>
-            <field name="company_id" ref="l10n_se_hr_payroll_twenty_six.company_aronssons"/>
+            <field name="company_id" ref="l10n_se_hr_payroll_26.company_aronssons"/>
         </record>
 
         <record id="l10n_se_hr_holidays.leave_type_vacation" model="hr.leave.type">
             <field name="timesheet_generate" eval="True"/>
             <field name="timesheet_project_id" ref="project_time_off_internal"/>
             <field name="timesheet_task_id" ref="task_time_off_vacation"/>
-            <field name="company_id" ref="l10n_se_hr_payroll_twenty_six.company_aronssons"/>
+            <field name="company_id" ref="l10n_se_hr_payroll_26.company_aronssons"/>
         </record>
 
         <record id="l10n_se_hr_holidays.leave_type_vacation_saved" model="hr.leave.type">
             <field name="timesheet_generate" eval="True"/>
             <field name="timesheet_project_id" ref="project_time_off_internal"/>
             <field name="timesheet_task_id" ref="task_time_off_vacation"/>
-            <field name="company_id" ref="l10n_se_hr_payroll_twenty_six.company_aronssons"/>
+            <field name="company_id" ref="l10n_se_hr_payroll_26.company_aronssons"/>
         </record>
 
         <record id="l10n_se_hr_holidays.leave_type_vacation_unpaid" model="hr.leave.type">
             <field name="timesheet_generate" eval="True"/>
             <field name="timesheet_project_id" ref="project_time_off_internal"/>
             <field name="timesheet_task_id" ref="task_time_off_vacation"/>
-            <field name="company_id" ref="l10n_se_hr_payroll_twenty_six.company_aronssons"/>
+            <field name="company_id" ref="l10n_se_hr_payroll_26.company_aronssons"/>
         </record>
 
         <record id="l10n_se_hr_holidays.leave_type_vacation_advance" model="hr.leave.type">
             <field name="timesheet_generate" eval="True"/>
             <field name="timesheet_project_id" ref="project_time_off_internal"/>
             <field name="timesheet_task_id" ref="task_time_off_vacation"/>
-            <field name="company_id" ref="l10n_se_hr_payroll_twenty_six.company_aronssons"/>
+            <field name="company_id" ref="l10n_se_hr_payroll_26.company_aronssons"/>
         </record>
 
     </data>

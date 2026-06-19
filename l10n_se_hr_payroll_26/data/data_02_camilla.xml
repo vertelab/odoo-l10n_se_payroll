@@ -11,7 +11,7 @@
             <field name="city">Stockholm</field>
             <field name="mobile">073-980001</field>
             <field name="function">Logistikansvarig</field>
-            <field name="company_id" ref="l10n_se_hr_payroll_twenty_six.company_aronssons"/>
+            <field name="company_id" ref="l10n_se_hr_payroll_26.company_aronssons"/>
         </record>
 
         <record id="bank_camilla" model="res.partner.bank">
@@ -23,9 +23,9 @@
             <field name="name">Camilla Cobolt</field>
             <field name="partner_id" ref="hr_camilla_partner" />
             <field name="login">Camilla</field>
-            <field name="company_id" ref="l10n_se_hr_payroll_twenty_six.company_aronssons"/>
+            <field name="company_id" ref="l10n_se_hr_payroll_26.company_aronssons"/>
             <field name="company_ids" eval="[
-                (4, ref('l10n_se_hr_payroll_twenty_six.company_aronssons')),
+                (4, ref('l10n_se_hr_payroll_26.company_aronssons')),
             ]" />
         </record>
 
@@ -39,8 +39,8 @@
             <field name="registration_number">104</field>
             <field name="job_title">Logistikansvarig</field>
             <field name="tz" eval="'Europe/Stockholm'" />
-            <field name="address_id" ref="l10n_se_hr_payroll_twenty_six.company_aronssons_partner" />
-            <field name="company_id" ref="l10n_se_hr_payroll_twenty_six.company_aronssons" />
+            <field name="address_id" ref="l10n_se_hr_payroll_26.company_aronssons_partner" />
+            <field name="company_id" ref="l10n_se_hr_payroll_26.company_aronssons" />
             <field name="work_contact_id" ref="hr_camilla_partner" />
             <field name="user_id" ref="hr_camilla_user" />
         </record>
@@ -49,15 +49,15 @@
             <field name="name">Camilla Cobolt Avtal</field>
             <field name="wage">30000</field>
             <field name="type_id" ref="hr_contract_type" />
-            <field name="employee_id" ref="l10n_se_hr_payroll_twenty_six.hr_camilla_employee" />
-            <field name="company_id" ref="l10n_se_hr_payroll_twenty_six.company_aronssons"/>
+            <field name="employee_id" ref="l10n_se_hr_payroll_26.hr_camilla_employee" />
+            <field name="company_id" ref="l10n_se_hr_payroll_26.company_aronssons"/>
             <field name="schedule_pay" eval="'monthly'" />
             <field name="state" eval="'open'" />
             <field name="job_id" ref="job_id_logistics" />
             <field name="date_start">2026-01-10</field>
             <field name="first_contract_date">2026-01-10</field>
-            <field name="resource_calendar_id" ref="l10n_se_hr_payroll_twenty_six.resource_calendar_standard_twenty_six" />
-            <field name="struct_id" ref="l10n_se_hr_payroll_twenty_six.hr_payroll_structure_tj_man" />
+            <field name="resource_calendar_id" ref="l10n_se_hr_payroll_26.resource_calendar_standard_twenty_six" />
+            <field name="struct_id" ref="l10n_se_hr_payroll_26.hr_payroll_structure_tj_man" />
             <field name="table_number">30</field>
             <field name="column_number" eval="'column1'" />
             <field name="has_tax_equalization" eval="False"/>
@@ -102,8 +102,8 @@
 
         <!-- VAB -->
         <record id="hr_leave_camilla_101" model="hr.leave">
-            <field name="employee_id" ref="l10n_se_hr_payroll_twenty_six.hr_camilla_employee" />
-            <field name="company_id" ref="l10n_se_hr_payroll_twenty_six.company_aronssons"/>
+            <field name="employee_id" ref="l10n_se_hr_payroll_26.hr_camilla_employee" />
+            <field name="company_id" ref="l10n_se_hr_payroll_26.company_aronssons"/>
             <field name="date_from">2026-01-14</field>
             <field name="date_to">2026-01-14</field>
             <field name="request_date_from">2026-01-14</field>
@@ -113,8 +113,8 @@
         </record>
 
         <record id="hr_leave_camilla_102" model="hr.leave">
-            <field name="employee_id" ref="l10n_se_hr_payroll_twenty_six.hr_camilla_employee" />
-            <field name="company_id" ref="l10n_se_hr_payroll_twenty_six.company_aronssons"/>
+            <field name="employee_id" ref="l10n_se_hr_payroll_26.hr_camilla_employee" />
+            <field name="company_id" ref="l10n_se_hr_payroll_26.company_aronssons"/>
             <field name="date_from">2026-01-17</field>
             <field name="date_to">2026-01-17</field>
             <field name="request_date_from">2026-01-17</field>
@@ -129,18 +129,18 @@
         <!-- Generera lönespec (payslip) -->
         <record id="hr_payslip_camilla_01" model="hr.payslip">
             <field name="name">Lönespecifikation för Januari - Camilla Cobolt</field>
-            <field name="company_id" ref="l10n_se_hr_payroll_twenty_six.company_aronssons" />
-            <field name="employee_id" ref="l10n_se_hr_payroll_twenty_six.hr_camilla_employee" />
-            <field name="payslip_run_id" ref="l10n_se_hr_payroll_twenty_six.payslip_run_2026_01"/>
-            <field name="period_id" ref="l10n_se_hr_payroll_twenty_six.period_01_2026" />
+            <field name="company_id" ref="l10n_se_hr_payroll_26.company_aronssons" />
+            <field name="employee_id" ref="l10n_se_hr_payroll_26.hr_camilla_employee" />
+            <field name="payslip_run_id" ref="l10n_se_hr_payroll_26.payslip_run_2026_01"/>
+            <field name="period_id" ref="l10n_se_hr_payroll_26.period_01_2026" />
             <field name="date_from">2026-01-01</field>
             <field name="date_to">2026-01-31</field>
-            <field name="struct_id" ref="l10n_se_hr_payroll_twenty_six.hr_payroll_structure_tj_man" />
+            <field name="struct_id" ref="l10n_se_hr_payroll_26.hr_payroll_structure_tj_man" />
         </record>
 
         <!-- Hämta data till lönespec (frånvaro m.m.) -->
         <function model="hr.payslip" name="onchange_employee">
-            <value eval="[ref('l10n_se_hr_payroll_twenty_six.hr_payslip_camilla_01')]"/>
+            <value eval="[ref('l10n_se_hr_payroll_26.hr_payslip_camilla_01')]"/>
         </function>
 
         <!-- Manuell data-inmatning -->
@@ -176,15 +176,15 @@
 
         <!-- Beräkna lönespecen -->
         <function model="hr.payslip" name="compute_sheet">
-            <value eval="[ref('l10n_se_hr_payroll_twenty_six.hr_payslip_camilla_01')]"/>
+            <value eval="[ref('l10n_se_hr_payroll_26.hr_payslip_camilla_01')]"/>
         </function>
 
         <!-- ================================ February ================================ -->
 
         <!-- Sjukfrånvaro -->
         <record id="hr_leave_camilla_201" model="hr.leave">
-            <field name="employee_id" ref="l10n_se_hr_payroll_twenty_six.hr_camilla_employee" />
-            <field name="company_id" ref="l10n_se_hr_payroll_twenty_six.company_aronssons"/>
+            <field name="employee_id" ref="l10n_se_hr_payroll_26.hr_camilla_employee" />
+            <field name="company_id" ref="l10n_se_hr_payroll_26.company_aronssons"/>
             <field name="date_from">2026-02-03</field>
             <field name="date_to">2026-02-10</field>
             <field name="request_date_from">2026-02-03</field>
@@ -194,8 +194,8 @@
         </record>
 
         <record id="hr_leave_camilla_201_02" model="hr.leave">
-            <field name="employee_id" ref="l10n_se_hr_payroll_twenty_six.hr_camilla_employee" />
-            <field name="company_id" ref="l10n_se_hr_payroll_twenty_six.company_aronssons"/>
+            <field name="employee_id" ref="l10n_se_hr_payroll_26.hr_camilla_employee" />
+            <field name="company_id" ref="l10n_se_hr_payroll_26.company_aronssons"/>
             <field name="date_from">2026-02-11</field>
             <field name="date_to">2026-02-11</field>
             <field name="request_date_from">2026-02-11</field>
@@ -210,18 +210,18 @@
         <!-- Generera lönespec (payslip) -->
         <record id="hr_payslip_camilla_02" model="hr.payslip">
             <field name="name">Lönespecifikation för Februari - Camilla Cobolt</field>
-            <field name="company_id" ref="l10n_se_hr_payroll_twenty_six.company_aronssons" />
-            <field name="employee_id" ref="l10n_se_hr_payroll_twenty_six.hr_camilla_employee" />
-            <field name="payslip_run_id" ref="l10n_se_hr_payroll_twenty_six.payslip_run_2026_02"/>
-            <field name="period_id" ref="l10n_se_hr_payroll_twenty_six.period_02_2026" />
+            <field name="company_id" ref="l10n_se_hr_payroll_26.company_aronssons" />
+            <field name="employee_id" ref="l10n_se_hr_payroll_26.hr_camilla_employee" />
+            <field name="payslip_run_id" ref="l10n_se_hr_payroll_26.payslip_run_2026_02"/>
+            <field name="period_id" ref="l10n_se_hr_payroll_26.period_02_2026" />
             <field name="date_from">2026-02-01</field>
             <field name="date_to">2026-02-28</field>
-            <field name="struct_id" ref="l10n_se_hr_payroll_twenty_six.hr_payroll_structure_tj_man" />
+            <field name="struct_id" ref="l10n_se_hr_payroll_26.hr_payroll_structure_tj_man" />
         </record>
 
         <!-- Hämta data till lönespec (frånvaro m.m.) -->
         <function model="hr.payslip" name="onchange_employee">
-            <value eval="[ref('l10n_se_hr_payroll_twenty_six.hr_payslip_camilla_02')]"/>
+            <value eval="[ref('l10n_se_hr_payroll_26.hr_payslip_camilla_02')]"/>
         </function>
 
         <!-- Manuell data-inmatning -->
@@ -250,15 +250,15 @@
 
         <!-- Beräkna lönespecen -->
         <function model="hr.payslip" name="compute_sheet">
-            <value eval="[ref('l10n_se_hr_payroll_twenty_six.hr_payslip_camilla_02')]"/>
+            <value eval="[ref('l10n_se_hr_payroll_26.hr_payslip_camilla_02')]"/>
         </function>
 
         <!-- ================================ March ================================ -->
 
         <!-- VAB -->
         <record id="hr_leave_camilla_301" model="hr.leave">
-            <field name="employee_id" ref="l10n_se_hr_payroll_twenty_six.hr_camilla_employee" />
-            <field name="company_id" ref="l10n_se_hr_payroll_twenty_six.company_aronssons"/>
+            <field name="employee_id" ref="l10n_se_hr_payroll_26.hr_camilla_employee" />
+            <field name="company_id" ref="l10n_se_hr_payroll_26.company_aronssons"/>
             <field name="date_from">2026-03-10</field>
             <field name="date_to">2026-03-14</field>
             <field name="request_date_from">2026-03-10</field>
@@ -270,18 +270,18 @@
         <!-- Generera lönespec (payslip) -->
         <record id="hr_payslip_camilla_03" model="hr.payslip">
             <field name="name">Lönespecifikation för Mars - Camilla Cobolt</field>
-            <field name="company_id" ref="l10n_se_hr_payroll_twenty_six.company_aronssons" />
-            <field name="employee_id" ref="l10n_se_hr_payroll_twenty_six.hr_camilla_employee" />
-            <field name="payslip_run_id" ref="l10n_se_hr_payroll_twenty_six.payslip_run_2026_03"/>
-            <field name="period_id" ref="l10n_se_hr_payroll_twenty_six.period_03_2026" />
+            <field name="company_id" ref="l10n_se_hr_payroll_26.company_aronssons" />
+            <field name="employee_id" ref="l10n_se_hr_payroll_26.hr_camilla_employee" />
+            <field name="payslip_run_id" ref="l10n_se_hr_payroll_26.payslip_run_2026_03"/>
+            <field name="period_id" ref="l10n_se_hr_payroll_26.period_03_2026" />
             <field name="date_from">2026-03-01</field>
             <field name="date_to">2026-03-31</field>
-            <field name="struct_id" ref="l10n_se_hr_payroll_twenty_six.hr_payroll_structure_tj_man" />
+            <field name="struct_id" ref="l10n_se_hr_payroll_26.hr_payroll_structure_tj_man" />
         </record>
 
         <!-- Hämta data till lönespec (frånvaro m.m.) -->
         <function model="hr.payslip" name="onchange_employee">
-            <value eval="[ref('l10n_se_hr_payroll_twenty_six.hr_payslip_camilla_03')]"/>
+            <value eval="[ref('l10n_se_hr_payroll_26.hr_payslip_camilla_03')]"/>
         </function>
 
         <!-- Manuell data-inmatning -->
@@ -309,15 +309,15 @@
         </function>
 
         <function model="hr.payslip" name="compute_sheet">
-            <value eval="[ref('l10n_se_hr_payroll_twenty_six.hr_payslip_camilla_03')]"/>
+            <value eval="[ref('l10n_se_hr_payroll_26.hr_payslip_camilla_03')]"/>
         </function>
 
         <!-- ================================ April ================================ -->
 
         <!-- Sjukfrånvaro -->
         <record id="hr_leave_camilla_401" model="hr.leave">
-            <field name="employee_id" ref="l10n_se_hr_payroll_twenty_six.hr_camilla_employee" />
-            <field name="company_id" ref="l10n_se_hr_payroll_twenty_six.company_aronssons"/>
+            <field name="employee_id" ref="l10n_se_hr_payroll_26.hr_camilla_employee" />
+            <field name="company_id" ref="l10n_se_hr_payroll_26.company_aronssons"/>
             <field name="date_from">2026-04-19</field>
             <field name="date_to">2026-04-21</field>
             <field name="request_date_from">2026-04-19</field>
@@ -329,18 +329,18 @@
         <!-- Generera lönespec (payslip) -->
         <record id="hr_payslip_camilla_04" model="hr.payslip">
             <field name="name">Lönespecifikation för April - Camilla Cobolt</field>
-            <field name="company_id" ref="l10n_se_hr_payroll_twenty_six.company_aronssons" />
-            <field name="employee_id" ref="l10n_se_hr_payroll_twenty_six.hr_camilla_employee" />
-            <field name="payslip_run_id" ref="l10n_se_hr_payroll_twenty_six.payslip_run_2026_04"/>
-            <field name="period_id" ref="l10n_se_hr_payroll_twenty_six.period_04_2026" />
+            <field name="company_id" ref="l10n_se_hr_payroll_26.company_aronssons" />
+            <field name="employee_id" ref="l10n_se_hr_payroll_26.hr_camilla_employee" />
+            <field name="payslip_run_id" ref="l10n_se_hr_payroll_26.payslip_run_2026_04"/>
+            <field name="period_id" ref="l10n_se_hr_payroll_26.period_04_2026" />
             <field name="date_from">2026-04-01</field>
             <field name="date_to">2026-04-30</field>
-            <field name="struct_id" ref="l10n_se_hr_payroll_twenty_six.hr_payroll_structure_tj_man" />
+            <field name="struct_id" ref="l10n_se_hr_payroll_26.hr_payroll_structure_tj_man" />
         </record>
 
         <!-- Hämta data till lönespec (frånvaro m.m.) -->
         <function model="hr.payslip" name="onchange_employee">
-            <value eval="[ref('l10n_se_hr_payroll_twenty_six.hr_payslip_camilla_04')]"/>
+            <value eval="[ref('l10n_se_hr_payroll_26.hr_payslip_camilla_04')]"/>
         </function>
 
         <!-- Manuell data-inmatning -->
@@ -423,15 +423,15 @@
 
         <!-- Beräkna lönespecen -->
         <function model="hr.payslip" name="compute_sheet">
-            <value eval="[ref('l10n_se_hr_payroll_twenty_six.hr_payslip_camilla_04')]"/>
+            <value eval="[ref('l10n_se_hr_payroll_26.hr_payslip_camilla_04')]"/>
         </function>
 
         <!-- ================================ May ================================ -->
 
         <!-- Tjänstledighet -->
         <record id="hr_leave_camilla_501" model="hr.leave">
-            <field name="employee_id" ref="l10n_se_hr_payroll_twenty_six.hr_camilla_employee" />
-            <field name="company_id" ref="l10n_se_hr_payroll_twenty_six.company_aronssons"/>
+            <field name="employee_id" ref="l10n_se_hr_payroll_26.hr_camilla_employee" />
+            <field name="company_id" ref="l10n_se_hr_payroll_26.company_aronssons"/>
             <field name="date_from">2026-05-04</field>
             <field name="date_to">2026-05-10</field>
             <field name="request_date_from">2026-05-04</field>
@@ -448,18 +448,18 @@
         <!-- Generera lönespec (payslip) -->
         <record id="hr_payslip_camilla_05" model="hr.payslip">
             <field name="name">Lönespecifikation för Maj - Camilla Cobolt</field>
-            <field name="company_id" ref="l10n_se_hr_payroll_twenty_six.company_aronssons" />
-            <field name="employee_id" ref="l10n_se_hr_payroll_twenty_six.hr_camilla_employee" />
-            <field name="payslip_run_id" ref="l10n_se_hr_payroll_twenty_six.payslip_run_2026_05"/>
-            <field name="period_id" ref="l10n_se_hr_payroll_twenty_six.period_05_2026" />
+            <field name="company_id" ref="l10n_se_hr_payroll_26.company_aronssons" />
+            <field name="employee_id" ref="l10n_se_hr_payroll_26.hr_camilla_employee" />
+            <field name="payslip_run_id" ref="l10n_se_hr_payroll_26.payslip_run_2026_05"/>
+            <field name="period_id" ref="l10n_se_hr_payroll_26.period_05_2026" />
             <field name="date_from">2026-05-01</field>
             <field name="date_to">2026-05-31</field>
-            <field name="struct_id" ref="l10n_se_hr_payroll_twenty_six.hr_payroll_structure_tj_man" />
+            <field name="struct_id" ref="l10n_se_hr_payroll_26.hr_payroll_structure_tj_man" />
         </record>
 
         <!-- Hämta data till lönespec (frånvaro m.m.) -->
         <function model="hr.payslip" name="onchange_employee">
-            <value eval="[ref('l10n_se_hr_payroll_twenty_six.hr_payslip_camilla_05')]"/>
+            <value eval="[ref('l10n_se_hr_payroll_26.hr_payslip_camilla_05')]"/>
         </function>
 
         <!-- Manuell data-inmatning -->
@@ -531,15 +531,15 @@
 
         <!-- Beräkna lönespecen -->
         <function model="hr.payslip" name="compute_sheet">
-            <value eval="[ref('l10n_se_hr_payroll_twenty_six.hr_payslip_camilla_05')]"/>
+            <value eval="[ref('l10n_se_hr_payroll_26.hr_payslip_camilla_05')]"/>
         </function>
 
         <!-- ================================ June ================================ -->
 
         <!-- Sjukfrånvaro -->
         <record id="hr_leave_camilla_601" model="hr.leave">
-            <field name="employee_id" ref="l10n_se_hr_payroll_twenty_six.hr_camilla_employee" />
-            <field name="company_id" ref="l10n_se_hr_payroll_twenty_six.company_aronssons"/>
+            <field name="employee_id" ref="l10n_se_hr_payroll_26.hr_camilla_employee" />
+            <field name="company_id" ref="l10n_se_hr_payroll_26.company_aronssons"/>
             <field name="date_from">2026-06-07</field>
             <field name="date_to">2026-06-07</field>
             <field name="request_date_from">2026-06-07</field>
@@ -553,8 +553,8 @@
         </record>
 
         <record id="hr_leave_camilla_601_2" model="hr.leave">
-            <field name="employee_id" ref="l10n_se_hr_payroll_twenty_six.hr_camilla_employee" />
-            <field name="company_id" ref="l10n_se_hr_payroll_twenty_six.company_aronssons"/>
+            <field name="employee_id" ref="l10n_se_hr_payroll_26.hr_camilla_employee" />
+            <field name="company_id" ref="l10n_se_hr_payroll_26.company_aronssons"/>
             <field name="date_from">2026-06-08</field>
             <field name="date_to">2026-06-08</field>
             <field name="request_date_from">2026-06-08</field>
@@ -565,8 +565,8 @@
 
         <!-- Semester -->
         <record id="hr_leave_camilla_602" model="hr.leave">
-            <field name="employee_id" ref="l10n_se_hr_payroll_twenty_six.hr_camilla_employee" />
-            <field name="company_id" ref="l10n_se_hr_payroll_twenty_six.company_aronssons"/>
+            <field name="employee_id" ref="l10n_se_hr_payroll_26.hr_camilla_employee" />
+            <field name="company_id" ref="l10n_se_hr_payroll_26.company_aronssons"/>
             <field name="date_from">2026-06-09</field>
             <field name="date_to">2026-06-16</field>
             <field name="request_date_from">2026-06-09</field>
@@ -582,18 +582,18 @@
         <!-- Generera lönespec (payslip) -->
         <record id="hr_payslip_camilla_06" model="hr.payslip">
             <field name="name">Lönespecifikation för Juni - Camilla Cobolt</field>
-            <field name="company_id" ref="l10n_se_hr_payroll_twenty_six.company_aronssons" />
-            <field name="employee_id" ref="l10n_se_hr_payroll_twenty_six.hr_camilla_employee" />
-            <field name="payslip_run_id" ref="l10n_se_hr_payroll_twenty_six.payslip_run_2026_06"/>
-            <field name="period_id" ref="l10n_se_hr_payroll_twenty_six.period_06_2026" />
+            <field name="company_id" ref="l10n_se_hr_payroll_26.company_aronssons" />
+            <field name="employee_id" ref="l10n_se_hr_payroll_26.hr_camilla_employee" />
+            <field name="payslip_run_id" ref="l10n_se_hr_payroll_26.payslip_run_2026_06"/>
+            <field name="period_id" ref="l10n_se_hr_payroll_26.period_06_2026" />
             <field name="date_from">2026-06-01</field>
             <field name="date_to">2026-06-30</field>
-            <field name="struct_id" ref="l10n_se_hr_payroll_twenty_six.hr_payroll_structure_tj_man" />
+            <field name="struct_id" ref="l10n_se_hr_payroll_26.hr_payroll_structure_tj_man" />
         </record>
 
         <!-- Hämta data till lönespec (frånvaro m.m.) -->
         <function model="hr.payslip" name="onchange_employee">
-            <value eval="[ref('l10n_se_hr_payroll_twenty_six.hr_payslip_camilla_06')]"/>
+            <value eval="[ref('l10n_se_hr_payroll_26.hr_payslip_camilla_06')]"/>
         </function>
 
         <!-- Manuell data-inmatning -->
@@ -628,15 +628,15 @@
 
         <!-- Beräkna lönespecen -->
         <function model="hr.payslip" name="compute_sheet">
-            <value eval="[ref('l10n_se_hr_payroll_twenty_six.hr_payslip_camilla_06')]"/>
+            <value eval="[ref('l10n_se_hr_payroll_26.hr_payslip_camilla_06')]"/>
         </function>
 
         <!-- ================================ July ================================ -->
 
         <!-- Sjukfrånvaro -->
         <record id="hr_leave_camilla_701" model="hr.leave">
-            <field name="employee_id" ref="l10n_se_hr_payroll_twenty_six.hr_camilla_employee" />
-            <field name="company_id" ref="l10n_se_hr_payroll_twenty_six.company_aronssons"/>
+            <field name="employee_id" ref="l10n_se_hr_payroll_26.hr_camilla_employee" />
+            <field name="company_id" ref="l10n_se_hr_payroll_26.company_aronssons"/>
             <field name="date_from">2026-07-11</field>
             <field name="date_to">2026-07-11</field>
             <field name="request_date_from">2026-07-11</field>
@@ -646,8 +646,8 @@
         </record>
 
         <record id="hr_leave_camilla_702" model="hr.leave">
-            <field name="employee_id" ref="l10n_se_hr_payroll_twenty_six.hr_camilla_employee" />
-            <field name="company_id" ref="l10n_se_hr_payroll_twenty_six.company_aronssons"/>
+            <field name="employee_id" ref="l10n_se_hr_payroll_26.hr_camilla_employee" />
+            <field name="company_id" ref="l10n_se_hr_payroll_26.company_aronssons"/>
             <field name="date_from">2026-07-18</field>
             <field name="date_to">2026-07-18</field>
             <field name="request_date_from">2026-07-18</field>
@@ -662,8 +662,8 @@
         </record>
 
         <record id="hr_leave_camilla_702_2" model="hr.leave">
-            <field name="employee_id" ref="l10n_se_hr_payroll_twenty_six.hr_camilla_employee" />
-            <field name="company_id" ref="l10n_se_hr_payroll_twenty_six.company_aronssons"/>
+            <field name="employee_id" ref="l10n_se_hr_payroll_26.hr_camilla_employee" />
+            <field name="company_id" ref="l10n_se_hr_payroll_26.company_aronssons"/>
             <field name="date_from">2026-07-19</field>
             <field name="date_to">2026-07-19</field>
             <field name="request_date_from">2026-07-19</field>
@@ -674,8 +674,8 @@
 
         <!-- Förskottssemester -->
         <record id="hr_leave_camilla_703" model="hr.leave">
-            <field name="employee_id" ref="l10n_se_hr_payroll_twenty_six.hr_camilla_employee" />
-            <field name="company_id" ref="l10n_se_hr_payroll_twenty_six.company_aronssons"/>
+            <field name="employee_id" ref="l10n_se_hr_payroll_26.hr_camilla_employee" />
+            <field name="company_id" ref="l10n_se_hr_payroll_26.company_aronssons"/>
             <field name="date_from">2026-07-04</field>
             <field name="date_to">2026-07-08</field>
             <field name="request_date_from">2026-07-04</field>
@@ -691,18 +691,18 @@
         <!-- Generera lönespec (payslip) -->
         <record id="hr_payslip_camilla_07" model="hr.payslip">
             <field name="name">Lönespecifikation för Juli - Camilla Cobolt</field>
-            <field name="company_id" ref="l10n_se_hr_payroll_twenty_six.company_aronssons" />
-            <field name="employee_id" ref="l10n_se_hr_payroll_twenty_six.hr_camilla_employee" />
-            <field name="payslip_run_id" ref="l10n_se_hr_payroll_twenty_six.payslip_run_2026_07"/>
-            <field name="period_id" ref="l10n_se_hr_payroll_twenty_six.period_07_2026" />
+            <field name="company_id" ref="l10n_se_hr_payroll_26.company_aronssons" />
+            <field name="employee_id" ref="l10n_se_hr_payroll_26.hr_camilla_employee" />
+            <field name="payslip_run_id" ref="l10n_se_hr_payroll_26.payslip_run_2026_07"/>
+            <field name="period_id" ref="l10n_se_hr_payroll_26.period_07_2026" />
             <field name="date_from">2026-07-01</field>
             <field name="date_to">2026-07-31</field>
-            <field name="struct_id" ref="l10n_se_hr_payroll_twenty_six.hr_payroll_structure_tj_man" />
+            <field name="struct_id" ref="l10n_se_hr_payroll_26.hr_payroll_structure_tj_man" />
         </record>
 
         <!-- Hämta data till lönespec (frånvaro m.m.) -->
         <function model="hr.payslip" name="onchange_employee">
-            <value eval="[ref('l10n_se_hr_payroll_twenty_six.hr_payslip_camilla_07')]"/>
+            <value eval="[ref('l10n_se_hr_payroll_26.hr_payslip_camilla_07')]"/>
         </function>
 
 
@@ -729,15 +729,15 @@
         </function>
 
         <function model="hr.payslip" name="compute_sheet">
-            <value eval="[ref('l10n_se_hr_payroll_twenty_six.hr_payslip_camilla_07')]"/>
+            <value eval="[ref('l10n_se_hr_payroll_26.hr_payslip_camilla_07')]"/>
         </function>
 
         <!-- ================================ August ================================ -->
 
         <!-- Sjukfrånvaro -->
         <record id="hr_leave_camilla_801" model="hr.leave">
-            <field name="employee_id" ref="l10n_se_hr_payroll_twenty_six.hr_camilla_employee" />
-            <field name="company_id" ref="l10n_se_hr_payroll_twenty_six.company_aronssons"/>
+            <field name="employee_id" ref="l10n_se_hr_payroll_26.hr_camilla_employee" />
+            <field name="company_id" ref="l10n_se_hr_payroll_26.company_aronssons"/>
             <field name="date_from">2026-08-01</field>
             <field name="date_to">2026-08-01</field>
             <field name="request_date_from">2026-08-01</field>
@@ -751,8 +751,8 @@
         </record>
 
         <record id="hr_leave_camilla_801_2" model="hr.leave">
-            <field name="employee_id" ref="l10n_se_hr_payroll_twenty_six.hr_camilla_employee" />
-            <field name="company_id" ref="l10n_se_hr_payroll_twenty_six.company_aronssons"/>
+            <field name="employee_id" ref="l10n_se_hr_payroll_26.hr_camilla_employee" />
+            <field name="company_id" ref="l10n_se_hr_payroll_26.company_aronssons"/>
             <field name="date_from">2026-08-02</field>
             <field name="date_to">2026-08-25</field>
             <field name="request_date_from">2026-08-02</field>
@@ -769,18 +769,18 @@
         <!-- Generera lönespec (payslip) -->
         <record id="hr_payslip_camilla_08" model="hr.payslip">
             <field name="name">Lönespecifikation för Augusti - Camilla Cobolt</field>
-            <field name="company_id" ref="l10n_se_hr_payroll_twenty_six.company_aronssons" />
-            <field name="employee_id" ref="l10n_se_hr_payroll_twenty_six.hr_camilla_employee" />
-            <field name="payslip_run_id" ref="l10n_se_hr_payroll_twenty_six.payslip_run_2026_08"/>
-            <field name="period_id" ref="l10n_se_hr_payroll_twenty_six.period_08_2026" />
+            <field name="company_id" ref="l10n_se_hr_payroll_26.company_aronssons" />
+            <field name="employee_id" ref="l10n_se_hr_payroll_26.hr_camilla_employee" />
+            <field name="payslip_run_id" ref="l10n_se_hr_payroll_26.payslip_run_2026_08"/>
+            <field name="period_id" ref="l10n_se_hr_payroll_26.period_08_2026" />
             <field name="date_from">2026-08-01</field>
             <field name="date_to">2026-08-31</field>
-            <field name="struct_id" ref="l10n_se_hr_payroll_twenty_six.hr_payroll_structure_tj_man" />
+            <field name="struct_id" ref="l10n_se_hr_payroll_26.hr_payroll_structure_tj_man" />
         </record>
 
         <!-- Hämta data till lönespec (frånvaro m.m.) -->
         <function model="hr.payslip" name="onchange_employee">
-            <value eval="[ref('l10n_se_hr_payroll_twenty_six.hr_payslip_camilla_08')]"/>
+            <value eval="[ref('l10n_se_hr_payroll_26.hr_payslip_camilla_08')]"/>
         </function>
 
         <!-- RUT -->
@@ -795,15 +795,15 @@
 
 
         <function model="hr.payslip" name="compute_sheet">
-            <value eval="[ref('l10n_se_hr_payroll_twenty_six.hr_payslip_camilla_08')]"/>
+            <value eval="[ref('l10n_se_hr_payroll_26.hr_payslip_camilla_08')]"/>
         </function>
 
         <!-- ================================ September ================================ -->
 
         <!-- Sjukfrånvaro -->
         <record id="hr_leave_camilla_901" model="hr.leave">
-            <field name="employee_id" ref="l10n_se_hr_payroll_twenty_six.hr_camilla_employee" />
-            <field name="company_id" ref="l10n_se_hr_payroll_twenty_six.company_aronssons"/>
+            <field name="employee_id" ref="l10n_se_hr_payroll_26.hr_camilla_employee" />
+            <field name="company_id" ref="l10n_se_hr_payroll_26.company_aronssons"/>
             <field name="date_from">2026-09-01</field>
             <field name="date_to">2026-09-01</field>
             <field name="request_date_from">2026-09-01</field>
@@ -817,8 +817,8 @@
         </record>
 
         <record id="hr_leave_camilla_901_2" model="hr.leave">
-            <field name="employee_id" ref="l10n_se_hr_payroll_twenty_six.hr_camilla_employee" />
-            <field name="company_id" ref="l10n_se_hr_payroll_twenty_six.company_aronssons"/>
+            <field name="employee_id" ref="l10n_se_hr_payroll_26.hr_camilla_employee" />
+            <field name="company_id" ref="l10n_se_hr_payroll_26.company_aronssons"/>
             <field name="date_from">2026-09-02</field>
             <field name="date_to">2026-09-08</field>
             <field name="request_date_from">2026-09-02</field>
@@ -829,8 +829,8 @@
         </record>
 
         <record id="hr_leave_camilla_901_3" model="hr.leave">
-            <field name="employee_id" ref="l10n_se_hr_payroll_twenty_six.hr_camilla_employee" />
-            <field name="company_id" ref="l10n_se_hr_payroll_twenty_six.company_aronssons"/>
+            <field name="employee_id" ref="l10n_se_hr_payroll_26.hr_camilla_employee" />
+            <field name="company_id" ref="l10n_se_hr_payroll_26.company_aronssons"/>
             <field name="date_from">2026-09-09</field>
             <field name="date_to">2026-09-19</field>
             <field name="request_date_from">2026-09-09</field>
@@ -841,8 +841,8 @@
 
         <!-- Förskottssemester -->
         <record id="hr_leave_camilla_902" model="hr.leave">
-            <field name="employee_id" ref="l10n_se_hr_payroll_twenty_six.hr_camilla_employee" />
-            <field name="company_id" ref="l10n_se_hr_payroll_twenty_six.company_aronssons"/>
+            <field name="employee_id" ref="l10n_se_hr_payroll_26.hr_camilla_employee" />
+            <field name="company_id" ref="l10n_se_hr_payroll_26.company_aronssons"/>
             <field name="date_from">2026-09-26</field>
             <field name="date_to">2026-09-27</field>
             <field name="request_date_from">2026-09-26</field>
@@ -863,19 +863,19 @@
         <!-- Generera lönespec (payslip) -->
         <record id="hr_payslip_camilla_09" model="hr.payslip">
             <field name="name">Lönespecifikation för September - Camilla Cobolt</field>
-            <field name="company_id" ref="l10n_se_hr_payroll_twenty_six.company_aronssons" />
-            <field name="employee_id" ref="l10n_se_hr_payroll_twenty_six.hr_camilla_employee" />
-            <field name="payslip_run_id" ref="l10n_se_hr_payroll_twenty_six.payslip_run_2026_09"/>
-            <field name="period_id" ref="l10n_se_hr_payroll_twenty_six.period_09_2026" />
+            <field name="company_id" ref="l10n_se_hr_payroll_26.company_aronssons" />
+            <field name="employee_id" ref="l10n_se_hr_payroll_26.hr_camilla_employee" />
+            <field name="payslip_run_id" ref="l10n_se_hr_payroll_26.payslip_run_2026_09"/>
+            <field name="period_id" ref="l10n_se_hr_payroll_26.period_09_2026" />
             <field name="date_from">2026-09-01</field>
             <field name="date_to">2026-09-30</field>
-            <field name="struct_id" ref="l10n_se_hr_payroll_twenty_six.hr_payroll_structure_tj_man" />
+            <field name="struct_id" ref="l10n_se_hr_payroll_26.hr_payroll_structure_tj_man" />
         </record>
 
         <!-- Hämta data till lönespec (frånvaro m.m.) -->
 
         <function model="hr.payslip" name="onchange_employee">
-            <value eval="[ref('l10n_se_hr_payroll_twenty_six.hr_payslip_camilla_09')]"/>
+            <value eval="[ref('l10n_se_hr_payroll_26.hr_payslip_camilla_09')]"/>
         </function>
 
         <!-- RUT -->
@@ -896,15 +896,15 @@
         </function>
 
         <function model="hr.payslip" name="compute_sheet">
-            <value eval="[ref('l10n_se_hr_payroll_twenty_six.hr_payslip_camilla_09')]"/>
+            <value eval="[ref('l10n_se_hr_payroll_26.hr_payslip_camilla_09')]"/>
         </function>
 
         <!-- ================================ October ================================ -->
 
         <!-- Tjänstledighet -->
         <record id="hr_leave_camilla_1001" model="hr.leave">
-            <field name="employee_id" ref="l10n_se_hr_payroll_twenty_six.hr_camilla_employee" />
-            <field name="company_id" ref="l10n_se_hr_payroll_twenty_six.company_aronssons"/>
+            <field name="employee_id" ref="l10n_se_hr_payroll_26.hr_camilla_employee" />
+            <field name="company_id" ref="l10n_se_hr_payroll_26.company_aronssons"/>
             <field name="date_from">2026-10-03</field>
             <field name="date_to">2026-10-13</field>
             <field name="request_date_from">2026-10-03</field>
@@ -914,8 +914,8 @@
         </record>
 
         <record id="hr_leave_camilla_1002" model="hr.leave">
-            <field name="employee_id" ref="l10n_se_hr_payroll_twenty_six.hr_camilla_employee" />
-            <field name="company_id" ref="l10n_se_hr_payroll_twenty_six.company_aronssons"/>
+            <field name="employee_id" ref="l10n_se_hr_payroll_26.hr_camilla_employee" />
+            <field name="company_id" ref="l10n_se_hr_payroll_26.company_aronssons"/>
             <field name="date_from">2026-10-21</field>
             <field name="date_to">2026-10-21</field>
             <field name="request_date_from">2026-10-21</field>
@@ -925,8 +925,8 @@
         </record>
 
         <record id="hr_leave_camilla_1003" model="hr.leave">
-            <field name="employee_id" ref="l10n_se_hr_payroll_twenty_six.hr_camilla_employee" />
-            <field name="company_id" ref="l10n_se_hr_payroll_twenty_six.company_aronssons"/>
+            <field name="employee_id" ref="l10n_se_hr_payroll_26.hr_camilla_employee" />
+            <field name="company_id" ref="l10n_se_hr_payroll_26.company_aronssons"/>
             <field name="date_from">2026-10-24</field>
             <field name="date_to">2026-10-24</field>
             <field name="request_date_from">2026-10-24</field>
@@ -939,8 +939,8 @@
         </record>
 
         <record id="hr_leave_camilla_1004" model="hr.leave">
-            <field name="employee_id" ref="l10n_se_hr_payroll_twenty_six.hr_camilla_employee" />
-            <field name="company_id" ref="l10n_se_hr_payroll_twenty_six.company_aronssons"/>
+            <field name="employee_id" ref="l10n_se_hr_payroll_26.hr_camilla_employee" />
+            <field name="company_id" ref="l10n_se_hr_payroll_26.company_aronssons"/>
             <field name="date_from">2026-10-25</field>
             <field name="date_to">2026-10-25</field>
             <field name="request_date_from">2026-10-25</field>
@@ -966,19 +966,19 @@
         <!-- Generera lönespec (payslip) -->
         <record id="hr_payslip_camilla_10" model="hr.payslip">
             <field name="name">Lönespecifikation för Oktober - Camilla Cobolt</field>
-            <field name="company_id" ref="l10n_se_hr_payroll_twenty_six.company_aronssons" />
-            <field name="employee_id" ref="l10n_se_hr_payroll_twenty_six.hr_camilla_employee" />
-            <field name="payslip_run_id" ref="l10n_se_hr_payroll_twenty_six.payslip_run_2026_10"/>
-            <field name="period_id" ref="l10n_se_hr_payroll_twenty_six.period_10_2026" />
+            <field name="company_id" ref="l10n_se_hr_payroll_26.company_aronssons" />
+            <field name="employee_id" ref="l10n_se_hr_payroll_26.hr_camilla_employee" />
+            <field name="payslip_run_id" ref="l10n_se_hr_payroll_26.payslip_run_2026_10"/>
+            <field name="period_id" ref="l10n_se_hr_payroll_26.period_10_2026" />
             <field name="date_from">2026-10-01</field>
             <field name="date_to">2026-10-31</field>
-            <field name="struct_id" ref="l10n_se_hr_payroll_twenty_six.hr_payroll_structure_tj_man" />
+            <field name="struct_id" ref="l10n_se_hr_payroll_26.hr_payroll_structure_tj_man" />
         </record>
 
         <!-- Hämta data till lönespec (frånvaro m.m.) -->
 
         <function model="hr.payslip" name="onchange_employee">
-            <value eval="[ref('l10n_se_hr_payroll_twenty_six.hr_payslip_camilla_10')]"/>
+            <value eval="[ref('l10n_se_hr_payroll_26.hr_payslip_camilla_10')]"/>
         </function>
 
         <!-- RUT -->
@@ -999,15 +999,15 @@
         </function>
 
         <function model="hr.payslip" name="compute_sheet">
-            <value eval="[ref('l10n_se_hr_payroll_twenty_six.hr_payslip_camilla_10')]"/>
+            <value eval="[ref('l10n_se_hr_payroll_26.hr_payslip_camilla_10')]"/>
         </function>
 
         <!-- ================================ November ================================ -->
 
         <!-- Sjukfrånvaro -->
         <record id="hr_leave_camilla_1101" model="hr.leave">
-            <field name="employee_id" ref="l10n_se_hr_payroll_twenty_six.hr_camilla_employee" />
-            <field name="company_id" ref="l10n_se_hr_payroll_twenty_six.company_aronssons"/>
+            <field name="employee_id" ref="l10n_se_hr_payroll_26.hr_camilla_employee" />
+            <field name="company_id" ref="l10n_se_hr_payroll_26.company_aronssons"/>
             <field name="date_from">2026-11-01</field>
             <field name="date_to">2026-12-02</field>
             <field name="request_date_from">2026-11-01</field>
@@ -1023,18 +1023,18 @@
         <!-- Generera lönespec (payslip) -->
         <record id="hr_payslip_camilla_11" model="hr.payslip">
             <field name="name">Lönespecifikation för November - Camilla Cobolt</field>
-            <field name="company_id" ref="l10n_se_hr_payroll_twenty_six.company_aronssons" />
-            <field name="employee_id" ref="l10n_se_hr_payroll_twenty_six.hr_camilla_employee" />
-            <field name="payslip_run_id" ref="l10n_se_hr_payroll_twenty_six.payslip_run_2026_11"/>
-            <field name="period_id" ref="l10n_se_hr_payroll_twenty_six.period_11_2026" />
+            <field name="company_id" ref="l10n_se_hr_payroll_26.company_aronssons" />
+            <field name="employee_id" ref="l10n_se_hr_payroll_26.hr_camilla_employee" />
+            <field name="payslip_run_id" ref="l10n_se_hr_payroll_26.payslip_run_2026_11"/>
+            <field name="period_id" ref="l10n_se_hr_payroll_26.period_11_2026" />
             <field name="date_from">2026-11-01</field>
             <field name="date_to">2026-11-30</field>
-            <field name="struct_id" ref="l10n_se_hr_payroll_twenty_six.hr_payroll_structure_tj_man" />
+            <field name="struct_id" ref="l10n_se_hr_payroll_26.hr_payroll_structure_tj_man" />
         </record>
 
         <!-- Hämta data till lönespec (frånvaro m.m.) -->
         <function model="hr.payslip" name="onchange_employee">
-            <value eval="[ref('l10n_se_hr_payroll_twenty_six.hr_payslip_camilla_11')]"/>
+            <value eval="[ref('l10n_se_hr_payroll_26.hr_payslip_camilla_11')]"/>
         </function>
 
         <!-- RUT -->
@@ -1062,7 +1062,7 @@
 
 
         <function model="hr.payslip" name="compute_sheet">
-            <value eval="[ref('l10n_se_hr_payroll_twenty_six.hr_payslip_camilla_11')]"/>
+            <value eval="[ref('l10n_se_hr_payroll_26.hr_payslip_camilla_11')]"/>
         </function>
 
         <!-- ================================ December ================================ -->
@@ -1070,8 +1070,8 @@
         <!-- Denna record lite off pga inga röda dagar än, men blir korrekt i uträkning -->
         <!-- Sjukfrånvaro -->
         <record id="hr_leave_camilla_1201" model="hr.leave">
-            <field name="employee_id" ref="l10n_se_hr_payroll_twenty_six.hr_camilla_employee" />
-            <field name="company_id" ref="l10n_se_hr_payroll_twenty_six.company_aronssons"/>
+            <field name="employee_id" ref="l10n_se_hr_payroll_26.hr_camilla_employee" />
+            <field name="company_id" ref="l10n_se_hr_payroll_26.company_aronssons"/>
             <field name="date_from">2026-12-06</field>
             <field name="date_to">2026-12-31</field>
             <field name="request_date_from">2026-12-06</field>
@@ -1089,18 +1089,18 @@
         <!-- Generera lönespec (payslip) -->
         <record id="hr_payslip_camilla_12" model="hr.payslip">
             <field name="name">Lönespecifikation för December - Camilla Cobolt</field>
-            <field name="company_id" ref="l10n_se_hr_payroll_twenty_six.company_aronssons" />
-            <field name="employee_id" ref="l10n_se_hr_payroll_twenty_six.hr_camilla_employee" />
-            <field name="payslip_run_id" ref="l10n_se_hr_payroll_twenty_six.payslip_run_2026_12"/>
-            <field name="period_id" ref="l10n_se_hr_payroll_twenty_six.period_12_2026" />
+            <field name="company_id" ref="l10n_se_hr_payroll_26.company_aronssons" />
+            <field name="employee_id" ref="l10n_se_hr_payroll_26.hr_camilla_employee" />
+            <field name="payslip_run_id" ref="l10n_se_hr_payroll_26.payslip_run_2026_12"/>
+            <field name="period_id" ref="l10n_se_hr_payroll_26.period_12_2026" />
             <field name="date_from">2026-12-01</field>
             <field name="date_to">2026-12-31</field>
-            <field name="struct_id" ref="l10n_se_hr_payroll_twenty_six.hr_payroll_structure_tj_man" />
+            <field name="struct_id" ref="l10n_se_hr_payroll_26.hr_payroll_structure_tj_man" />
         </record>
 
         <!-- Hämta data till lönespec (frånvaro m.m.) -->
         <function model="hr.payslip" name="onchange_employee">
-            <value eval="[ref('l10n_se_hr_payroll_twenty_six.hr_payslip_camilla_12')]"/>
+            <value eval="[ref('l10n_se_hr_payroll_26.hr_payslip_camilla_12')]"/>
         </function>
 
         <!-- RUT -->
@@ -1114,7 +1114,7 @@
         </record>
 
         <function model="hr.payslip" name="compute_sheet">
-            <value eval="[ref('l10n_se_hr_payroll_twenty_six.hr_payslip_camilla_12')]"/>
+            <value eval="[ref('l10n_se_hr_payroll_26.hr_payslip_camilla_12')]"/>
         </function>
 
     </data>

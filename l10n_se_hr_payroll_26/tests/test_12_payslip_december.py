@@ -14,12 +14,12 @@ _logger = logging.getLogger(__name__)
 # $ sudo service odoo stop
 # $ sudo su odoo
 
-# odoo --database payroll_run_tests --config /etc/odoo/odoo.conf --init l10n_se_hr_payroll_twenty_six --test-tags january --test-enable --log-level test --stop-after-init -p 4443 --logfile /var/log/odoo/twenty_six_test_jan.log
+# odoo --database payroll_run_tests --config /etc/odoo/odoo.conf --init l10n_se_hr_payroll_26 --test-tags january --test-enable --log-level test --stop-after-init -p 4443 --logfile /var/log/odoo/twenty_six_test_jan.log
 
 
 
 # $ odoo --test-tags /l10n_se_payroll_twenty_six -c /etc/odoo/odoo.conf
-# $ odoo -c /etc/odoo/odoo.conf -d DATABASNAMN -i l10n_se_hr_payroll_twenty_six --test-enable
+# $ odoo -c /etc/odoo/odoo.conf -d DATABASNAMN -i l10n_se_hr_payroll_26 --test-enable
 # $ odoo -c /etc/odoo/odoo.conf -d odoo-twenty_six -i --test-enable
 #
 
@@ -28,7 +28,7 @@ class TestPayslipDecember(TransactionCase):
     ## Test 1
     def test_asse_net(self):   
 
-        payslip = self.env.ref('l10n_se_hr_payroll_twenty_six.hr_payslip_asse_12')
+        payslip = self.env.ref('l10n_se_hr_payroll_26.hr_payslip_asse_12')
 
         net_line = payslip.line_ids.filtered(lambda l: l.code == 'nl')
 
@@ -42,7 +42,7 @@ class TestPayslipDecember(TransactionCase):
     ## Test 2
     def test_doris_net(self):
 
-        payslip = self.env.ref('l10n_se_hr_payroll_twenty_six.hr_payslip_doris_12')
+        payslip = self.env.ref('l10n_se_hr_payroll_26.hr_payslip_doris_12')
 
         net_line = payslip.line_ids.filtered(lambda l: l.code == 'nl')
 
@@ -54,7 +54,7 @@ class TestPayslipDecember(TransactionCase):
     ## Test 3
     def test_camilla_net(self):
 
-        payslip = self.env.ref('l10n_se_hr_payroll_twenty_six.hr_payslip_camilla_12')
+        payslip = self.env.ref('l10n_se_hr_payroll_26.hr_payslip_camilla_12')
 
         net_line = payslip.line_ids.filtered(lambda l: l.code == 'nl')
 
@@ -67,7 +67,7 @@ class TestPayslipDecember(TransactionCase):
     ## Test 4
     def test_gustav_net(self):
 
-        payslip = self.env.ref('l10n_se_hr_payroll_twenty_six.hr_payslip_gustav_12')
+        payslip = self.env.ref('l10n_se_hr_payroll_26.hr_payslip_gustav_12')
 
         net_line = payslip.line_ids.filtered(lambda l: l.code == 'nl')
 
@@ -79,7 +79,7 @@ class TestPayslipDecember(TransactionCase):
     ## Test 5
     def test_helmer_net(self):
 
-        payslip = self.env.ref('l10n_se_hr_payroll_twenty_six.hr_payslip_helmer_12')
+        payslip = self.env.ref('l10n_se_hr_payroll_26.hr_payslip_helmer_12')
 
         net_line = payslip.line_ids.filtered(lambda l: l.code == 'nl')
 

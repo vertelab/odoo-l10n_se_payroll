@@ -30,7 +30,7 @@
 We create test data to seven employees, to use while developing our own code. To validare that it all turns out correct.
     """,
     'author': 'Vertel AB',
-    'website': 'https://vertel.se/apps/odoo-l10n_se_payroll/l10n_se_hr_payroll_twenty_six',
+    'website': 'https://vertel.se/apps/odoo-l10n_se_payroll/l10n_se_hr_payroll_26',
     'images': ['static/description/banner.png'],
     'license': 'AGPL-3',
     'contributor': '',
@@ -48,10 +48,10 @@ We create test data to seven employees, to use while developing our own code. To
     ],
     'data':[
         'data/data_00_aronssons_montage.xml',
-        'data/data_resource_calendar_twenty_six.xml',
-        'data/data_payroll_structure_twenty_six.xml',
-        'data/data_payroll_run_twenty_six.xml',
-        #'data/data_payroll_twenty_six.xml',
+        'data/data_resource_calendar_26.xml',
+        'data/data_payroll_structure_26.xml',
+        'data/data_payroll_run_26.xml',
+        #'data/data_payroll_26.xml',
         'data/data_01_asse.xml',
         'data/data_02_camilla.xml',
         'data/data_03_doris.xml',
