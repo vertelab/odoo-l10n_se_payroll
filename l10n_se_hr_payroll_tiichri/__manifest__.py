@@ -58,7 +58,7 @@ We create test data to seven employees, to use while developing our own code. To
         'data/data_04_frans.xml',
         'data/data_05_gustav.xml',
         'data/data_06_helmer.xml',
-        #'data/data_07_karin.xml',
+        'data/data_07_karin.xml',
     ],
     'auto_install': False,
     # 'post_init_hook': 'try_load_k2',

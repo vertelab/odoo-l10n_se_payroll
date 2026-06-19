@@ -131,6 +131,7 @@
             <field name="name">Lönespecifikation för Januari - Camilla Cobolt</field>
             <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons" />
             <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_camilla_employee" />
+            <field name="payslip_run_id" ref="l10n_se_hr_payroll_tiichri.payslip_run_2022_01"/>
             <field name="period_id" ref="l10n_se_hr_payroll_tiichri.period_01_2022" />
             <field name="date_from">2022-01-01</field>
             <field name="date_to">2022-01-31</field>
@@ -211,6 +212,7 @@
             <field name="name">Lönespecifikation för Februari - Camilla Cobolt</field>
             <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons" />
             <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_camilla_employee" />
+            <field name="payslip_run_id" ref="l10n_se_hr_payroll_tiichri.payslip_run_2022_02"/>
             <field name="period_id" ref="l10n_se_hr_payroll_tiichri.period_02_2022" />
             <field name="date_from">2022-02-01</field>
             <field name="date_to">2022-02-28</field>
@@ -270,6 +272,7 @@
             <field name="name">Lönespecifikation för Mars - Camilla Cobolt</field>
             <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons" />
             <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_camilla_employee" />
+            <field name="payslip_run_id" ref="l10n_se_hr_payroll_tiichri.payslip_run_2022_03"/>
             <field name="period_id" ref="l10n_se_hr_payroll_tiichri.period_03_2022" />
             <field name="date_from">2022-03-01</field>
             <field name="date_to">2022-03-31</field>
@@ -328,6 +331,7 @@
             <field name="name">Lönespecifikation för April - Camilla Cobolt</field>
             <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons" />
             <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_camilla_employee" />
+            <field name="payslip_run_id" ref="l10n_se_hr_payroll_tiichri.payslip_run_2022_04"/>
             <field name="period_id" ref="l10n_se_hr_payroll_tiichri.period_04_2022" />
             <field name="date_from">2022-04-01</field>
             <field name="date_to">2022-04-30</field>
@@ -446,6 +450,7 @@
             <field name="name">Lönespecifikation för Maj - Camilla Cobolt</field>
             <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons" />
             <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_camilla_employee" />
+            <field name="payslip_run_id" ref="l10n_se_hr_payroll_tiichri.payslip_run_2022_05"/>
             <field name="period_id" ref="l10n_se_hr_payroll_tiichri.period_05_2022" />
             <field name="date_from">2022-05-01</field>
             <field name="date_to">2022-05-31</field>
@@ -579,6 +584,7 @@
             <field name="name">Lönespecifikation för Juni - Camilla Cobolt</field>
             <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons" />
             <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_camilla_employee" />
+            <field name="payslip_run_id" ref="l10n_se_hr_payroll_tiichri.payslip_run_2022_06"/>
             <field name="period_id" ref="l10n_se_hr_payroll_tiichri.period_06_2022" />
             <field name="date_from">2022-06-01</field>
             <field name="date_to">2022-06-30</field>
@@ -687,6 +693,7 @@
             <field name="name">Lönespecifikation för Juli - Camilla Cobolt</field>
             <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons" />
             <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_camilla_employee" />
+            <field name="payslip_run_id" ref="l10n_se_hr_payroll_tiichri.payslip_run_2022_07"/>
             <field name="period_id" ref="l10n_se_hr_payroll_tiichri.period_07_2022" />
             <field name="date_from">2022-07-01</field>
             <field name="date_to">2022-07-31</field>
@@ -764,6 +771,7 @@
             <field name="name">Lönespecifikation för Augusti - Camilla Cobolt</field>
             <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons" />
             <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_camilla_employee" />
+            <field name="payslip_run_id" ref="l10n_se_hr_payroll_tiichri.payslip_run_2022_08"/>
             <field name="period_id" ref="l10n_se_hr_payroll_tiichri.period_08_2022" />
             <field name="date_from">2022-08-01</field>
             <field name="date_to">2022-08-31</field>
@@ -857,6 +865,7 @@
             <field name="name">Lönespecifikation för September - Camilla Cobolt</field>
             <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons" />
             <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_camilla_employee" />
+            <field name="payslip_run_id" ref="l10n_se_hr_payroll_tiichri.payslip_run_2022_09"/>
             <field name="period_id" ref="l10n_se_hr_payroll_tiichri.period_09_2022" />
             <field name="date_from">2022-09-01</field>
             <field name="date_to">2022-09-30</field>
@@ -959,6 +968,7 @@
             <field name="name">Lönespecifikation för Oktober - Camilla Cobolt</field>
             <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons" />
             <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_camilla_employee" />
+            <field name="payslip_run_id" ref="l10n_se_hr_payroll_tiichri.payslip_run_2022_10"/>
             <field name="period_id" ref="l10n_se_hr_payroll_tiichri.period_10_2022" />
             <field name="date_from">2022-10-01</field>
             <field name="date_to">2022-10-31</field>
@@ -1015,6 +1025,7 @@
             <field name="name">Lönespecifikation för November - Camilla Cobolt</field>
             <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons" />
             <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_camilla_employee" />
+            <field name="payslip_run_id" ref="l10n_se_hr_payroll_tiichri.payslip_run_2022_11"/>
             <field name="period_id" ref="l10n_se_hr_payroll_tiichri.period_11_2022" />
             <field name="date_from">2022-11-01</field>
             <field name="date_to">2022-11-30</field>
@@ -1080,6 +1091,7 @@
             <field name="name">Lönespecifikation för December - Camilla Cobolt</field>
             <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons" />
             <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_camilla_employee" />
+            <field name="payslip_run_id" ref="l10n_se_hr_payroll_tiichri.payslip_run_2022_12"/>
             <field name="period_id" ref="l10n_se_hr_payroll_tiichri.period_12_2022" />
             <field name="date_from">2022-12-01</field>
             <field name="date_to">2022-12-31</field>
