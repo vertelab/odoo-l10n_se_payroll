@@ -69,6 +69,11 @@ class HrContractBenefit(models.Model):
         required=True,
         ondelete='cascade')
 
+    currency_id = fields.Many2one(
+        'res.currency',
+        related='contract_id.company_id.currency_id',
+        string="Valuta")
+
     name = fields.Many2one(
         comodel_name='hr.benefit',
         string="Förmånstyp",
