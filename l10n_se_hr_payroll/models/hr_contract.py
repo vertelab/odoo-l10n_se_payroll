@@ -29,6 +29,17 @@ _logger = logging.getLogger(__name__)
 class hr_contract(models.Model):
     _inherit = "hr.contract"
 
+    correction_ids = fields.One2many(
+        'hr.payroll.correction',
+        compute='_compute_correction_ids',
+        string='Lönekorrigeringar')
+
+    def _compute_correction_ids(self):
+        for contract in self:
+            contract.correction_ids = self.env['hr.payroll.correction'].search([
+                ('employee_id', '=', contract.employee_id.id),
+            ]) if contract.employee_id else False
+
     wage_exchange_amount = fields.Float(string="Löneväxlingssumma", default=0.0)
     wage_exchange_start = fields.Date(string="Startdatum löneväxling")
     wage_exchange_end = fields.Date(string="Slutdatum löneväxling", help="Lämna tom om växlingen är pågående")

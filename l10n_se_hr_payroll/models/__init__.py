@@ -30,3 +30,4 @@ from . import resource_calendar
 from . import hr_employee
 from . import hr_job
 from . import hr_nyk
+from . import hr_payroll_correction

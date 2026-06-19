@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <!-- hr.payroll.correction list view -->
+        <record id="view_hr_payroll_correction_list" model="ir.ui.view">
+            <field name="name">hr.payroll.correction.list</field>
+            <field name="model">hr.payroll.correction</field>
+            <field name="arch" type="xml">
+                <list string="Lönekorrigeringar" editable="bottom" multi_edit="1">
+                    <field name="employee_id" widget="many2one_avatar_employee"/>
+                    <field name="salary_rule_id"/>
+                    <field name="amount" widget="monetary"
+                           options="{'currency_field': 'currency_id'}"/>
+                    <field name="date_from"/>
+                    <field name="date_to"/>
+                    <field name="state" widget="badge"
+                           decoration-success="state == 'done'"
+                           decoration-warning="state == 'draft'"/>
+                    <field name="reason"/>
+                </list>
+            </field>
+        </record>
+
+        <!-- hr.payroll.correction form view -->
+        <record id="view_hr_payroll_correction_form" model="ir.ui.view">
+            <field name="name">hr.payroll.correction.form</field>
+            <field name="model">hr.payroll.correction</field>
+            <field name="arch" type="xml">
+                <form string="Lönekorrigering">
+                    <sheet>
+                        <div class="oe_title">
+                            <h1><field name="name"/></h1>
+                        </div>
+                        <group>
+                            <field name="employee_id"/>
+                            <field name="salary_rule_id"/>
+                            <field name="amount" widget="monetary"
+                                   options="{'currency_field': 'currency_id'}"/>
+                            <field name="date_from"/>
+                            <field name="date_to"/>
+                            <field name="state" widget="statusbar"/>
+                        </group>
+                        <group string="Detaljer">
+                            <field name="reason"/>
+                            <field name="note"/>
+                        </group>
+                        <group string="Resultat" invisible="state != 'done'">
+                            <field name="payslip_id"/>
+                            <field name="applied_date"/>
+                        </group>
+                    </sheet>
+                    <chatter/>
+                </form>
+            </field>
+        </record>
+
+        <!-- hr.payroll.correction search view -->
+        <record id="view_hr_payroll_correction_search" model="ir.ui.view">
+            <field name="name">hr.payroll.correction.search</field>
+            <field name="model">hr.payroll.correction</field>
+            <field name="arch" type="xml">
+                <search>
+                    <field name="employee_id"/>
+                    <field name="salary_rule_id"/>
+                    <field name="reason"/>
+                    <filter name="draft" string="Utkast"
+                            domain="[('state', '=', 'draft')]"/>
+                    <filter name="done" string="Utförda"
+                            domain="[('state', '=', 'done')]"/>
+                </search>
+            </field>
+        </record>
+
+        <!-- Contract form: add Lönekorrigeringar tab -->
+        <record id="view_hr_contract_form_corrections" model="ir.ui.view">
+            <field name="name">hr.contract.form.corrections</field>
+            <field name="model">hr.contract</field>
+            <field name="inherit_id" ref="view_hr_contract_form_payroll"/>
+            <field name="arch" type="xml">
+                <xpath expr="//page[@name='accounting']" position="after">
+                    <page string="Lönekorrigeringar" name="corrections">
+                        <field name="employee_id" invisible="1"/>
+                        <field name="correction_ids"
+                               domain="[('employee_id', '=', employee_id)]"
+                               context="{'default_employee_id': employee_id}">
+                            <list editable="bottom">
+                                <field name="salary_rule_id"/>
+                                <field name="amount" widget="monetary"
+                                       options="{'currency_field': 'currency_id'}"/>
+                                <field name="date_from"/>
+                                <field name="date_to"/>
+                                <field name="state" widget="badge"/>
+                                <field name="reason"/>
+                            </list>
+                        </field>
+                    </page>
+                </xpath>
+            </field>
+        </record>
+
+        <!-- Action window -->
+        <record id="action_hr_payroll_correction" model="ir.actions.act_window">
+            <field name="name">Lönekorrigeringar</field>
+            <field name="res_model">hr.payroll.correction</field>
+            <field name="view_mode">list,form</field>
+            <field name="search_view_id" ref="view_hr_payroll_correction_search"/>
+        </record>
+
+        <!-- Menu -->
+        <menuitem id="menu_hr_payroll_correction"
+                  name="Lönekorrigeringar"
+                  parent="payroll.payroll_menu_configuration"
+                  action="action_hr_payroll_correction"
+                  sequence="35"/>
+
+    </data>
+</odoo>

@@ -62,8 +62,19 @@ class hr_payslip(models.Model):
 
     def compute_sheet(self):
         res = super().compute_sheet()
+        self._apply_corrections()
         self._compute_amounts()
         return res
+
+    def _apply_corrections(self):
+        """Apply pending corrections as payslip inputs."""
+        for slip in self:
+            if not slip.employee_id:
+                continue
+            corrections = self.env['hr.payroll.correction']._get_pending_corrections(
+                slip.employee_id, slip.date_from, slip.date_to)
+            if corrections:
+                corrections._apply_to_payslip(slip)
 
     def action_payslip_done(self):
         res = super().action_payslip_done()
