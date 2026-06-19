@@ -1,0 +1,376 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+
+        <!-- Asse Aronsson — 2023 -->
+        <record id="contract_asse_2023" model="hr.contract">
+            <field name="name">Asse Aronsson Avtal 2023</field>
+            <field name="wage">52000</field>
+            <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_asse_employee"/>
+            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons"/>
+            <field name="schedule_pay" eval="'monthly'"/>
+            <field name="state" eval="'close'"/>
+            <field name="date_start">2023-01-01</field>
+            <field name="date_end">2023-12-31</field>
+            <field name="first_contract_date">2018-04-01</field>
+            <field name="struct_id" ref="l10n_se_hr_payroll_tiichri.hr_payroll_structure_tj_man"/>
+        </record>
+
+        <!-- Asse Aronsson — 2024 -->
+        <record id="contract_asse_2024" model="hr.contract">
+            <field name="name">Asse Aronsson Avtal 2024</field>
+            <field name="wage">53040</field>
+            <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_asse_employee"/>
+            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons"/>
+            <field name="schedule_pay" eval="'monthly'"/>
+            <field name="state" eval="'close'"/>
+            <field name="date_start">2024-01-01</field>
+            <field name="date_end">2024-12-31</field>
+            <field name="struct_id" ref="l10n_se_hr_payroll_tiichri.hr_payroll_structure_tj_man"/>
+        </record>
+
+        <!-- Asse Aronsson — 2025 -->
+        <record id="contract_asse_2025" model="hr.contract">
+            <field name="name">Asse Aronsson Avtal 2025</field>
+            <field name="wage">54631</field>
+            <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_asse_employee"/>
+            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons"/>
+            <field name="schedule_pay" eval="'monthly'"/>
+            <field name="state" eval="'close'"/>
+            <field name="date_start">2025-01-01</field>
+            <field name="date_end">2025-12-31</field>
+            <field name="struct_id" ref="l10n_se_hr_payroll_tiichri.hr_payroll_structure_tj_man"/>
+        </record>
+
+        <!-- Asse Aronsson — 2026 -->
+        <record id="contract_asse_2026" model="hr.contract">
+            <field name="name">Asse Aronsson Avtal 2026</field>
+            <field name="wage">55997</field>
+            <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_asse_employee"/>
+            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons"/>
+            <field name="schedule_pay" eval="'monthly'"/>
+            <field name="state" eval="'close'"/>
+            <field name="date_start">2026-01-01</field>
+            <field name="date_end">2026-12-31</field>
+            <field name="struct_id" ref="l10n_se_hr_payroll_tiichri.hr_payroll_structure_tj_man"/>
+        </record>
+
+        <!-- Camilla Cobolt — 2023 -->
+        <record id="contract_camilla_2023" model="hr.contract">
+            <field name="name">Camilla Cobolt Avtal 2023</field>
+            <field name="wage">30000</field>
+            <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_camilla_employee"/>
+            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons"/>
+            <field name="schedule_pay" eval="'monthly'"/>
+            <field name="state" eval="'close'"/>
+            <field name="date_start">2023-01-01</field>
+            <field name="date_end">2023-12-31</field>
+            <field name="first_contract_date">2018-04-01</field>
+            <field name="struct_id" ref="l10n_se_hr_payroll_tiichri.hr_payroll_structure_tj_man"/>
+        </record>
+
+        <!-- Camilla Cobolt — 2024 -->
+        <record id="contract_camilla_2024" model="hr.contract">
+            <field name="name">Camilla Cobolt Avtal 2024</field>
+            <field name="wage">30600</field>
+            <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_camilla_employee"/>
+            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons"/>
+            <field name="schedule_pay" eval="'monthly'"/>
+            <field name="state" eval="'close'"/>
+            <field name="date_start">2024-01-01</field>
+            <field name="date_end">2024-12-31</field>
+            <field name="struct_id" ref="l10n_se_hr_payroll_tiichri.hr_payroll_structure_tj_man"/>
+        </record>
+
+        <!-- Camilla Cobolt — 2025 -->
+        <record id="contract_camilla_2025" model="hr.contract">
+            <field name="name">Camilla Cobolt Avtal 2025</field>
+            <field name="wage">31518</field>
+            <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_camilla_employee"/>
+            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons"/>
+            <field name="schedule_pay" eval="'monthly'"/>
+            <field name="state" eval="'close'"/>
+            <field name="date_start">2025-01-01</field>
+            <field name="date_end">2025-12-31</field>
+            <field name="struct_id" ref="l10n_se_hr_payroll_tiichri.hr_payroll_structure_tj_man"/>
+        </record>
+
+        <!-- Camilla Cobolt — 2026 -->
+        <record id="contract_camilla_2026" model="hr.contract">
+            <field name="name">Camilla Cobolt Avtal 2026</field>
+            <field name="wage">32306</field>
+            <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_camilla_employee"/>
+            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons"/>
+            <field name="schedule_pay" eval="'monthly'"/>
+            <field name="state" eval="'close'"/>
+            <field name="date_start">2026-01-01</field>
+            <field name="date_end">2026-12-31</field>
+            <field name="struct_id" ref="l10n_se_hr_payroll_tiichri.hr_payroll_structure_tj_man"/>
+        </record>
+
+        <!-- Doris Dahlin — 2023 -->
+        <record id="contract_doris_2023" model="hr.contract">
+            <field name="name">Doris Dahlin Avtal 2023</field>
+            <field name="wage">17600</field>
+            <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_doris_employee"/>
+            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons"/>
+            <field name="schedule_pay" eval="'monthly'"/>
+            <field name="state" eval="'close'"/>
+            <field name="date_start">2023-01-01</field>
+            <field name="date_end">2023-12-31</field>
+            <field name="first_contract_date">2018-04-01</field>
+            <field name="struct_id" ref="l10n_se_hr_payroll_tiichri.hr_payroll_structure_tj_man"/>
+        </record>
+
+        <!-- Doris Dahlin — 2024 -->
+        <record id="contract_doris_2024" model="hr.contract">
+            <field name="name">Doris Dahlin Avtal 2024</field>
+            <field name="wage">17952</field>
+            <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_doris_employee"/>
+            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons"/>
+            <field name="schedule_pay" eval="'monthly'"/>
+            <field name="state" eval="'close'"/>
+            <field name="date_start">2024-01-01</field>
+            <field name="date_end">2024-12-31</field>
+            <field name="struct_id" ref="l10n_se_hr_payroll_tiichri.hr_payroll_structure_tj_man"/>
+        </record>
+
+        <!-- Doris Dahlin — 2025 -->
+        <record id="contract_doris_2025" model="hr.contract">
+            <field name="name">Doris Dahlin Avtal 2025</field>
+            <field name="wage">18491</field>
+            <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_doris_employee"/>
+            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons"/>
+            <field name="schedule_pay" eval="'monthly'"/>
+            <field name="state" eval="'close'"/>
+            <field name="date_start">2025-01-01</field>
+            <field name="date_end">2025-12-31</field>
+            <field name="struct_id" ref="l10n_se_hr_payroll_tiichri.hr_payroll_structure_tj_man"/>
+        </record>
+
+        <!-- Doris Dahlin — 2026 -->
+        <record id="contract_doris_2026" model="hr.contract">
+            <field name="name">Doris Dahlin Avtal 2026</field>
+            <field name="wage">18953</field>
+            <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_doris_employee"/>
+            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons"/>
+            <field name="schedule_pay" eval="'monthly'"/>
+            <field name="state" eval="'close'"/>
+            <field name="date_start">2026-01-01</field>
+            <field name="date_end">2026-12-31</field>
+            <field name="struct_id" ref="l10n_se_hr_payroll_tiichri.hr_payroll_structure_tj_man"/>
+        </record>
+
+        <!-- Frans Filipsson — 2023 -->
+        <record id="contract_frans_2023" model="hr.contract">
+            <field name="name">Frans Filipsson Avtal 2023</field>
+            <field name="wage">26000</field>
+            <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_frans_employee"/>
+            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons"/>
+            <field name="schedule_pay" eval="'monthly'"/>
+            <field name="state" eval="'close'"/>
+            <field name="date_start">2023-01-01</field>
+            <field name="date_end">2023-12-31</field>
+            <field name="first_contract_date">2018-04-01</field>
+            <field name="struct_id" ref="l10n_se_hr_payroll_tiichri.hr_payroll_structure_tj_man"/>
+        </record>
+
+        <!-- Frans Filipsson — 2024 -->
+        <record id="contract_frans_2024" model="hr.contract">
+            <field name="name">Frans Filipsson Avtal 2024</field>
+            <field name="wage">26520</field>
+            <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_frans_employee"/>
+            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons"/>
+            <field name="schedule_pay" eval="'monthly'"/>
+            <field name="state" eval="'close'"/>
+            <field name="date_start">2024-01-01</field>
+            <field name="date_end">2024-12-31</field>
+            <field name="struct_id" ref="l10n_se_hr_payroll_tiichri.hr_payroll_structure_tj_man"/>
+        </record>
+
+        <!-- Frans Filipsson — 2025 -->
+        <record id="contract_frans_2025" model="hr.contract">
+            <field name="name">Frans Filipsson Avtal 2025</field>
+            <field name="wage">27316</field>
+            <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_frans_employee"/>
+            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons"/>
+            <field name="schedule_pay" eval="'monthly'"/>
+            <field name="state" eval="'close'"/>
+            <field name="date_start">2025-01-01</field>
+            <field name="date_end">2025-12-31</field>
+            <field name="struct_id" ref="l10n_se_hr_payroll_tiichri.hr_payroll_structure_tj_man"/>
+        </record>
+
+        <!-- Frans Filipsson — 2026 -->
+        <record id="contract_frans_2026" model="hr.contract">
+            <field name="name">Frans Filipsson Avtal 2026</field>
+            <field name="wage">27999</field>
+            <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_frans_employee"/>
+            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons"/>
+            <field name="schedule_pay" eval="'monthly'"/>
+            <field name="state" eval="'close'"/>
+            <field name="date_start">2026-01-01</field>
+            <field name="date_end">2026-12-31</field>
+            <field name="struct_id" ref="l10n_se_hr_payroll_tiichri.hr_payroll_structure_tj_man"/>
+        </record>
+
+        <!-- Gustav Groth — 2023 -->
+        <record id="contract_gustav_2023" model="hr.contract">
+            <field name="name">Gustav Groth Avtal 2023</field>
+            <field name="wage">25000</field>
+            <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_gustav_employee"/>
+            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons"/>
+            <field name="schedule_pay" eval="'monthly'"/>
+            <field name="state" eval="'close'"/>
+            <field name="date_start">2023-01-01</field>
+            <field name="date_end">2023-12-31</field>
+            <field name="first_contract_date">2018-04-01</field>
+            <field name="struct_id" ref="l10n_se_hr_payroll_tiichri.hr_payroll_structure_tj_man"/>
+        </record>
+
+        <!-- Gustav Groth — 2024 -->
+        <record id="contract_gustav_2024" model="hr.contract">
+            <field name="name">Gustav Groth Avtal 2024</field>
+            <field name="wage">25500</field>
+            <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_gustav_employee"/>
+            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons"/>
+            <field name="schedule_pay" eval="'monthly'"/>
+            <field name="state" eval="'close'"/>
+            <field name="date_start">2024-01-01</field>
+            <field name="date_end">2024-12-31</field>
+            <field name="struct_id" ref="l10n_se_hr_payroll_tiichri.hr_payroll_structure_tj_man"/>
+        </record>
+
+        <!-- Gustav Groth — 2025 -->
+        <record id="contract_gustav_2025" model="hr.contract">
+            <field name="name">Gustav Groth Avtal 2025</field>
+            <field name="wage">26265</field>
+            <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_gustav_employee"/>
+            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons"/>
+            <field name="schedule_pay" eval="'monthly'"/>
+            <field name="state" eval="'close'"/>
+            <field name="date_start">2025-01-01</field>
+            <field name="date_end">2025-12-31</field>
+            <field name="struct_id" ref="l10n_se_hr_payroll_tiichri.hr_payroll_structure_tj_man"/>
+        </record>
+
+        <!-- Gustav Groth — 2026 -->
+        <record id="contract_gustav_2026" model="hr.contract">
+            <field name="name">Gustav Groth Avtal 2026</field>
+            <field name="wage">26922</field>
+            <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_gustav_employee"/>
+            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons"/>
+            <field name="schedule_pay" eval="'monthly'"/>
+            <field name="state" eval="'close'"/>
+            <field name="date_start">2026-01-01</field>
+            <field name="date_end">2026-12-31</field>
+            <field name="struct_id" ref="l10n_se_hr_payroll_tiichri.hr_payroll_structure_tj_man"/>
+        </record>
+
+        <!-- Helmer Henriksson — 2023 -->
+        <record id="contract_helmer_2023" model="hr.contract">
+            <field name="name">Helmer Henriksson Avtal 2023</field>
+            <field name="wage">130</field>
+            <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_helmer_employee"/>
+            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons"/>
+            <field name="schedule_pay" eval="'monthly'"/>
+            <field name="state" eval="'close'"/>
+            <field name="date_start">2023-01-01</field>
+            <field name="date_end">2023-12-31</field>
+            <field name="first_contract_date">2018-04-01</field>
+            <field name="struct_id" ref="l10n_se_hr_payroll_tiichri.hr_payroll_structure_arb_tim_vt"/>
+        </record>
+
+        <!-- Helmer Henriksson — 2024 -->
+        <record id="contract_helmer_2024" model="hr.contract">
+            <field name="name">Helmer Henriksson Avtal 2024</field>
+            <field name="wage">133</field>
+            <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_helmer_employee"/>
+            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons"/>
+            <field name="schedule_pay" eval="'monthly'"/>
+            <field name="state" eval="'close'"/>
+            <field name="date_start">2024-01-01</field>
+            <field name="date_end">2024-12-31</field>
+            <field name="struct_id" ref="l10n_se_hr_payroll_tiichri.hr_payroll_structure_arb_tim_vt"/>
+        </record>
+
+        <!-- Helmer Henriksson — 2025 -->
+        <record id="contract_helmer_2025" model="hr.contract">
+            <field name="name">Helmer Henriksson Avtal 2025</field>
+            <field name="wage">137</field>
+            <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_helmer_employee"/>
+            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons"/>
+            <field name="schedule_pay" eval="'monthly'"/>
+            <field name="state" eval="'close'"/>
+            <field name="date_start">2025-01-01</field>
+            <field name="date_end">2025-12-31</field>
+            <field name="struct_id" ref="l10n_se_hr_payroll_tiichri.hr_payroll_structure_arb_tim_vt"/>
+        </record>
+
+        <!-- Helmer Henriksson — 2026 -->
+        <record id="contract_helmer_2026" model="hr.contract">
+            <field name="name">Helmer Henriksson Avtal 2026</field>
+            <field name="wage">140</field>
+            <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_helmer_employee"/>
+            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons"/>
+            <field name="schedule_pay" eval="'monthly'"/>
+            <field name="state" eval="'close'"/>
+            <field name="date_start">2026-01-01</field>
+            <field name="date_end">2026-12-31</field>
+            <field name="struct_id" ref="l10n_se_hr_payroll_tiichri.hr_payroll_structure_arb_tim_vt"/>
+        </record>
+
+        <!-- Karin Kullberg — 2023 -->
+        <record id="contract_karin_2023" model="hr.contract">
+            <field name="name">Karin Kullberg Avtal 2023</field>
+            <field name="wage">115</field>
+            <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_karin_employee"/>
+            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons"/>
+            <field name="schedule_pay" eval="'monthly'"/>
+            <field name="state" eval="'close'"/>
+            <field name="date_start">2023-01-01</field>
+            <field name="date_end">2023-12-31</field>
+            <field name="first_contract_date">2018-04-01</field>
+            <field name="struct_id" ref="l10n_se_hr_payroll_tiichri.hr_payroll_structure_arb_tim_vt"/>
+        </record>
+
+        <!-- Karin Kullberg — 2024 -->
+        <record id="contract_karin_2024" model="hr.contract">
+            <field name="name">Karin Kullberg Avtal 2024</field>
+            <field name="wage">117</field>
+            <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_karin_employee"/>
+            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons"/>
+            <field name="schedule_pay" eval="'monthly'"/>
+            <field name="state" eval="'close'"/>
+            <field name="date_start">2024-01-01</field>
+            <field name="date_end">2024-12-31</field>
+            <field name="struct_id" ref="l10n_se_hr_payroll_tiichri.hr_payroll_structure_arb_tim_vt"/>
+        </record>
+
+        <!-- Karin Kullberg — 2025 -->
+        <record id="contract_karin_2025" model="hr.contract">
+            <field name="name">Karin Kullberg Avtal 2025</field>
+            <field name="wage">121</field>
+            <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_karin_employee"/>
+            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons"/>
+            <field name="schedule_pay" eval="'monthly'"/>
+            <field name="state" eval="'close'"/>
+            <field name="date_start">2025-01-01</field>
+            <field name="date_end">2025-12-31</field>
+            <field name="struct_id" ref="l10n_se_hr_payroll_tiichri.hr_payroll_structure_arb_tim_vt"/>
+        </record>
+
+        <!-- Karin Kullberg — 2026 -->
+        <record id="contract_karin_2026" model="hr.contract">
+            <field name="name">Karin Kullberg Avtal 2026</field>
+            <field name="wage">124</field>
+            <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_karin_employee"/>
+            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons"/>
+            <field name="schedule_pay" eval="'monthly'"/>
+            <field name="state" eval="'close'"/>
+            <field name="date_start">2026-01-01</field>
+            <field name="date_end">2026-12-31</field>
+            <field name="struct_id" ref="l10n_se_hr_payroll_tiichri.hr_payroll_structure_arb_tim_vt"/>
+        </record>
+    </data>
+</odoo>

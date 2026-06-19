@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+
+        <!-- Fiscal Year 2026 -->
+        <record id="company_aronssons_year_2026" model="account.fiscalyear">
+            <field name="name">Fiscal Year 2026</field>
+            <field name="date_start">2026-01-01</field>
+            <field name="date_stop">2026-12-31</field>
+            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons"/>
+        </record>
+
+        <!-- Monthly periods -->
+        <record id="period_01_2026" model="account.period">
+            <field name="name">01/2026</field>
+            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons"/>
+            <field name="date_start" eval="'2026-01-01'"/>
+            <field name="date_stop" eval="'2026-01-31'"/>
+            <field name="fiscalyear_id" ref="company_aronssons_year_2026"/>
+        </record>
+        <record id="period_02_2026" model="account.period">
+            <field name="name">02/2026</field>
+            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons"/>
+            <field name="date_start" eval="'2026-02-01'"/>
+            <field name="date_stop" eval="'2026-02-28'"/>
+            <field name="fiscalyear_id" ref="company_aronssons_year_2026"/>
+        </record>
+        <record id="period_03_2026" model="account.period">
+            <field name="name">03/2026</field>
+            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons"/>
+            <field name="date_start" eval="'2026-03-01'"/>
+            <field name="date_stop" eval="'2026-03-31'"/>
+            <field name="fiscalyear_id" ref="company_aronssons_year_2026"/>
+        </record>
+        <record id="period_04_2026" model="account.period">
+            <field name="name">04/2026</field>
+            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons"/>
+            <field name="date_start" eval="'2026-04-01'"/>
+            <field name="date_stop" eval="'2026-04-30'"/>
+            <field name="fiscalyear_id" ref="company_aronssons_year_2026"/>
+        </record>
+        <record id="period_05_2026" model="account.period">
+            <field name="name">05/2026</field>
+            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons"/>
+            <field name="date_start" eval="'2026-05-01'"/>
+            <field name="date_stop" eval="'2026-05-31'"/>
+            <field name="fiscalyear_id" ref="company_aronssons_year_2026"/>
+        </record>
+        <record id="period_06_2026" model="account.period">
+            <field name="name">06/2026</field>
+            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons"/>
+            <field name="date_start" eval="'2026-06-01'"/>
+            <field name="date_stop" eval="'2026-06-30'"/>
+            <field name="fiscalyear_id" ref="company_aronssons_year_2026"/>
+        </record>
+        <record id="period_07_2026" model="account.period">
+            <field name="name">07/2026</field>
+            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons"/>
+            <field name="date_start" eval="'2026-07-01'"/>
+            <field name="date_stop" eval="'2026-07-31'"/>
+            <field name="fiscalyear_id" ref="company_aronssons_year_2026"/>
+        </record>
+        <record id="period_08_2026" model="account.period">
+            <field name="name">08/2026</field>
+            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons"/>
+            <field name="date_start" eval="'2026-08-01'"/>
+            <field name="date_stop" eval="'2026-08-31'"/>
+            <field name="fiscalyear_id" ref="company_aronssons_year_2026"/>
+        </record>
+        <record id="period_09_2026" model="account.period">
+            <field name="name">09/2026</field>
+            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons"/>
+            <field name="date_start" eval="'2026-09-01'"/>
+            <field name="date_stop" eval="'2026-09-30'"/>
+            <field name="fiscalyear_id" ref="company_aronssons_year_2026"/>
+        </record>
+        <record id="period_10_2026" model="account.period">
+            <field name="name">10/2026</field>
+            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons"/>
+            <field name="date_start" eval="'2026-10-01'"/>
+            <field name="date_stop" eval="'2026-10-31'"/>
+            <field name="fiscalyear_id" ref="company_aronssons_year_2026"/>
+        </record>
+        <record id="period_11_2026" model="account.period">
+            <field name="name">11/2026</field>
+            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons"/>
+            <field name="date_start" eval="'2026-11-01'"/>
+            <field name="date_stop" eval="'2026-11-30'"/>
+            <field name="fiscalyear_id" ref="company_aronssons_year_2026"/>
+        </record>
+        <record id="period_12_2026" model="account.period">
+            <field name="name">12/2026</field>
+            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons"/>
+            <field name="date_start" eval="'2026-12-01'"/>
+            <field name="date_stop" eval="'2026-12-31'"/>
+            <field name="fiscalyear_id" ref="company_aronssons_year_2026"/>
+        </record>
+
+    </data>
+</odoo>
