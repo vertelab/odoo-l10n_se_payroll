@@ -112,7 +112,109 @@
             </field>
         </record>
 
+        <!-- ============================================ -->
+        <!-- BUDGET FÖRMÅNER (Friskvård, etc)            -->
+        <!-- ============================================ -->
+
+        <!-- hr.benefit.budget list view -->
+        <record id="view_hr_benefit_budget_list" model="ir.ui.view">
+            <field name="name">hr.benefit.budget.list</field>
+            <field name="model">hr.benefit.budget</field>
+            <field name="arch" type="xml">
+                <list string="Förmånsbudgetar">
+                    <field name="name"/>
+                    <field name="year"/>
+                    <field name="max_amount" widget="monetary"
+                           options="{'currency_field': 'currency_id'}"/>
+                    <field name="salary_rule_id"/>
+                    <field name="active"/>
+                </list>
+            </field>
+        </record>
+
+        <!-- hr.benefit.budget form view -->
+        <record id="view_hr_benefit_budget_form" model="ir.ui.view">
+            <field name="name">hr.benefit.budget.form</field>
+            <field name="model">hr.benefit.budget</field>
+            <field name="arch" type="xml">
+                <form string="Förmånsbudget">
+                    <header>
+                        <button name="action_generate_lines" type="object"
+                                string="Generera anställdas rader"
+                                class="btn-primary"/>
+                        <button name="action_recompute_used" type="object"
+                                string="Uppdatera utnyttjat"/>
+                    </header>
+                    <sheet>
+                        <div class="oe_title">
+                            <h1><field name="name"/></h1>
+                        </div>
+                        <group>
+                            <field name="code"/>
+                            <field name="year"/>
+                            <field name="max_amount" widget="monetary"
+                                   options="{'currency_field': 'currency_id'}"/>
+                            <field name="salary_rule_id"/>
+                            <field name="active"/>
+                        </group>
+                        <group string="Anställdas budget">
+                            <field name="line_ids">
+                                <list editable="bottom">
+                                    <field name="employee_id"
+                                           widget="many2one_avatar_employee"/>
+                                    <field name="allocated_amount" widget="monetary"
+                                           options="{'currency_field': 'currency_id'}"/>
+                                    <field name="used_amount" widget="monetary"
+                                           options="{'currency_field': 'currency_id'}"/>
+                                    <field name="remaining_amount" widget="monetary"
+                                           options="{'currency_field': 'currency_id'}"/>
+                                </list>
+                            </field>
+                        </group>
+                    </sheet>
+                    <chatter/>
+                </form>
+            </field>
+        </record>
+
+        <!-- hr.benefit.budget action -->
+        <record id="action_hr_benefit_budget" model="ir.actions.act_window">
+            <field name="name">Förmånsbudgetar</field>
+            <field name="res_model">hr.benefit.budget</field>
+            <field name="view_mode">list,form</field>
+        </record>
+
+        <!-- Employee form: add budget tab -->
+        <record id="view_hr_employee_form_budget" model="ir.ui.view">
+            <field name="name">hr.employee.form.budget</field>
+            <field name="model">hr.employee</field>
+            <field name="inherit_id" ref="hr.view_employee_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//page[@name='hr_settings']" position="after">
+                    <page string="Förmånsbudget" name="benefit_budget">
+                        <field name="benefit_budget_line_ids">
+                            <list>
+                                <field name="budget_id"/>
+                                <field name="allocated_amount" widget="monetary"
+                                       options="{'currency_field': 'currency_id'}"/>
+                                <field name="used_amount" widget="monetary"
+                                       options="{'currency_field': 'currency_id'}"/>
+                                <field name="remaining_amount" widget="monetary"
+                                       options="{'currency_field': 'currency_id'}"/>
+                            </list>
+                        </field>
+                    </page>
+                </xpath>
+            </field>
+        </record>
+
         <!-- Menus -->
+        <menuitem id="menu_hr_benefit_budget"
+                  name="Benefit Budgets"
+                  parent="payroll.payroll_menu_configuration"
+                  action="action_hr_benefit_budget"
+                  sequence="22"/>
+
         <menuitem id="menu_hr_benefit"
                   name="Förmånstyper"
                   parent="payroll.payroll_menu_configuration"
