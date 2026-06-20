@@ -51,6 +51,7 @@
         'data/ir_config.xml',
         'data/ir_server_action.xml',
         'data/hr_salary_rule_tax_data.xml',
+        'data/ir_cron.xml',
     ],
     'installable': True
 }

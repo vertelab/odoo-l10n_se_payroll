@@ -95,3 +95,43 @@ msgstr "NYK-kod"
 #: model:ir.model.fields,field_description:l10n_se_hr_payroll.field_hr_payslip__job_id
 msgid "Job"
 msgstr "Tjänst"
+
+#. module: l10n_se_hr_payroll
+#: model:ir.model.fields,field_description:l10n_se_hr_payroll.field_hr_contract__wage_unit
+msgid "Wage Unit"
+msgstr "Löneenhet"
+
+#. module: l10n_se_hr_payroll
+#: model:ir.model.fields,field_description:l10n_se_hr_payroll.field_hr_contract__wage_monthly
+msgid "Monthly Wage"
+msgstr "Månadslön"
+
+#. module: l10n_se_hr_payroll
+#: model:ir.model.fields.selection,name:l10n_se_hr_payroll.selection__hr_contract__wage_unit__hourly
+msgid "Per hour"
+msgstr "Per timme"
+
+#. module: l10n_se_hr_payroll
+#: model:ir.model.fields.selection,name:l10n_se_hr_payroll.selection__hr_contract__wage_unit__daily
+msgid "Per day"
+msgstr "Per dag"
+
+#. module: l10n_se_hr_payroll
+#: model:ir.model.fields.selection,name:l10n_se_hr_payroll.selection__hr_contract__wage_unit__weekly
+msgid "Per week"
+msgstr "Per vecka"
+
+#. module: l10n_se_hr_payroll
+#: model:ir.model.fields.selection,name:l10n_se_hr_payroll.selection__hr_contract__wage_unit__bi-weekly
+msgid "Per 2 weeks"
+msgstr "Per 2 veckor"
+
+#. module: l10n_se_hr_payroll
+#: model:ir.model.fields.selection,name:l10n_se_hr_payroll.selection__hr_contract__wage_unit__monthly
+msgid "Per month"
+msgstr "Per månad"
+
+#. module: l10n_se_hr_payroll
+#: model:ir.model.fields.selection,name:l10n_se_hr_payroll.selection__hr_contract__wage_unit__yearly
+msgid "Per year"
+msgstr "Per år"

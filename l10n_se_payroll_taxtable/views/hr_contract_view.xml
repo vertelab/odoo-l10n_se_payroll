@@ -11,6 +11,7 @@
                     <div class="o_row">
                         <field name="table_number" nolabel="0" required="1" />
                         <field name="column_number" nolabel="0" class="oe_inline" required="1" />
+                        <field name="pay_period_days" nolabel="0" class="oe_inline" required="1" />
                     </div>
                     <label for="tax_equalization" class="XXXoe_edit_only" />
                     <div class="o_row">

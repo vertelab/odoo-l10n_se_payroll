@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="view_arbetsgivarintyg_list" model="ir.ui.view">
+            <field name="name">l10n_se.arbetsgivarintyg.list</field>
+            <field name="model">l10n_se.arbetsgivarintyg</field>
+            <field name="arch" type="xml">
+                <list>
+                    <field name="name"/>
+                    <field name="employee_id"/>
+                    <field name="at_personnummer"/>
+                    <field name="befattning"/>
+                    <field name="anstallning_start"/>
+                    <field name="anstallning_slut"/>
+                    <field name="state" widget="badge"/>
+                    <field name="skickat_tidpunkt" optional="hide"/>
+                </list>
+            </field>
+        </record>
+
+        <record id="view_arbetsgivarintyg_search" model="ir.ui.view">
+            <field name="name">l10n_se.arbetsgivarintyg.search</field>
+            <field name="model">l10n_se.arbetsgivarintyg</field>
+            <field name="arch" type="xml">
+                <search>
+                    <field name="name"/>
+                    <field name="employee_id"/>
+                    <field name="at_personnummer"/>
+                    <filter name="draft" string="Draft" domain="[('state', '=', 'draft')]"/>
+                    <filter name="populated" string="Populated" domain="[('state', '=', 'populated')]"/>
+                    <filter name="sent" string="Sent" domain="[('state', '=', 'sent')]"/>
+                    <filter name="done" string="Done" domain="[('state', '=', 'done')]"/>
+                    <filter name="error" string="Error" domain="[('state', '=', 'error')]"/>
+                    <separator/>
+                    <group string="Group By">
+                        <filter name="group_state" string="State" domain="[]" context="{'group_by': 'state'}"/>
+                        <filter name="group_employee" string="Employee" domain="[]" context="{'group_by': 'employee_id'}"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+
+        <record id="view_arbetsgivarintyg_form" model="ir.ui.view">
+            <field name="name">l10n_se.arbetsgivarintyg.form</field>
+            <field name="model">l10n_se.arbetsgivarintyg</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <div class="oe_title">
+                            <label for="name"/>
+                            <h1><field name="name"/></h1>
+                        </div>
+                        <field name="state" widget="statusbar"/>
+                        <notebook>
+                            <page string="Employee" name="parties">
+                                <group>
+                                    <field name="employee_id"/>
+                                    <field name="at_fornamn"/>
+                                    <field name="at_efternamn"/>
+                                    <field name="at_personnummer"/>
+                                    <field name="samtycke"/>
+                                    <field name="at_epost"/>
+                                    <field name="at_telefon"/>
+                                </group>
+                                <group string="Arbetsgivare">
+                                    <field name="ag_namn"/>
+                                    <field name="ag_orgnummer"/>
+                                    <field name="ag_ort"/>
+                                    <field name="anvand_registrerad_info"/>
+                                </group>
+                            </page>
+                            <page string="Employment" name="anstallning">
+                                <group>
+                                    <field name="contract_id"/>
+                                    <field name="befattning"/>
+                                    <field name="anstallningsform"/>
+                                    <field name="anstallning_start"/>
+                                    <field name="anstallning_slut"/>
+                                    <field name="fortfarande_anstalld"/>
+                                    <field name="arbetstid_typ"/>
+                                    <field name="arbetstid_procent"/>
+                                </group>
+                                <group string="Uppsagning">
+                                    <field name="upphorandeorsak"/>
+                                    <field name="beskedsdatum"/>
+                                    <field name="avgangsvederlag_avtal"/>
+                                </group>
+                            </page>
+                            <page string="Salary" name="lon">
+                                <group>
+                                    <field name="lon_typ"/>
+                                    <field name="lon_belopp"/>
+                                    <field name="lon_ar"/>
+                                    <field name="lon_overtid"/>
+                                    <field name="lon_mertid"/>
+                                    <field name="lon_extra"/>
+                                </group>
+                                <group string="Lonetillagg">
+                                    <field name="lonetillagg_ids" nolabel="1" colspan="2">
+                                        <list editable="bottom">
+                                            <field name="ar"/>
+                                            <field name="manad"/>
+                                            <field name="lonetillaggstyp"/>
+                                            <field name="belopp"/>
+                                            <field name="timmar"/>
+                                            <field name="beskrivning"/>
+                                        </list>
+                                    </field>
+                                </group>
+                            </page>
+                            <page string="Worked Time" name="arbetad_tid">
+                                <group>
+                                    <field name="arbetad_tid_start"/>
+                                    <field name="arbetad_tid_slut"/>
+                                    <field name="undervisningstid"/>
+                                    <field name="undervisningstimmar"/>
+                                    <field name="tjanstledig"/>
+                                </group>
+                                <group string="Arbetad tid per manad">
+                                    <field name="arbetad_tid_ids" nolabel="1" colspan="2">
+                                        <list editable="bottom">
+                                            <field name="ar"/>
+                                            <field name="manad"/>
+                                            <field name="arbetade_timmar"/>
+                                            <field name="franvaro"/>
+                                            <field name="overtid"/>
+                                            <field name="mertid"/>
+                                        </list>
+                                    </field>
+                                </group>
+                                <group string="Tjanstledigheter">
+                                    <field name="tjanstledighet_ids" nolabel="1" colspan="2">
+                                        <list editable="bottom">
+                                            <field name="start"/>
+                                            <field name="slut"/>
+                                            <field name="omfattning_procent"/>
+                                            <field name="orsak"/>
+                                        </list>
+                                    </field>
+                                </group>
+                            </page>
+                            <page string="Teacher" name="lararlon">
+                                <group>
+                                    <field name="ferielon"/>
+                                    <field name="ferielon_dagar"/>
+                                    <field name="ferielon_belopp"/>
+                                    <field name="uppehallslon"/>
+                                    <field name="uppehallslon_belopp"/>
+                                </group>
+                            </page>
+                            <page string="Other" name="ovrigt">
+                                <field name="ovrig_upplysning" nolabel="1"/>
+                            </page>
+                            <page string="API" name="api" groups="payroll.group_payroll_manager">
+                                <group>
+                                    <field name="skickat_tidpunkt"/>
+                                    <field name="api_result_code"/>
+                                    <field name="api_result_message"/>
+                                </group>
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_arbetsgivarintyg_list" model="ir.actions.act_window">
+            <field name="name">Arbetsgivarintyg</field>
+            <field name="res_model">l10n_se.arbetsgivarintyg</field>
+            <field name="view_mode">list,form</field>
+            <field name="search_view_id" ref="view_arbetsgivarintyg_search"/>
+        </record>
+
+    </data>
+</odoo>

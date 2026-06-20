@@ -46,9 +46,37 @@ class hr_contract(models.Model):
 
     day_of_pay = fields.Integer(string="Lönedag", default=25)
 
+    wage_unit = fields.Selection(
+        [('hourly', 'Per hour'), ('daily', 'Per day'), ('weekly', 'Per week'),
+         ('bi-weekly', 'Per 2 weeks'), ('monthly', 'Per month'), ('yearly', 'Per year')],
+        string="Wage Unit",
+        default='monthly',
+        required=True,
+        help="What time period the wage field represents.\n"
+             "Used to calculate monthly equivalent for salary statistics.")
+    wage_monthly = fields.Float(
+        string="Monthly Wage",
+        compute='_compute_wage_monthly',
+        help="Wage converted to monthly equivalent for salary statistics (SN).")
+
     #löneutmätning på engelska = attachment of earnings
     has_attachment_of_earnings = fields.Boolean(string="Löneutmätning", default=False)
     attachment_of_earnings_start = fields.Date(string="Startdatum löneutmätning")
+
+    @api.depends('wage', 'wage_unit')
+    def _compute_wage_monthly(self):
+        """Convert wage to monthly equivalent for salary statistics (SN)."""
+        factors = {
+            'hourly': 174.0,
+            'daily': 21.67,
+            'weekly': 4.345,
+            'bi-weekly': 2.173,
+            'monthly': 1.0,
+            'yearly': 1.0 / 12.0,
+        }
+        for contract in self:
+            factor = factors.get(contract.wage_unit, 1.0)
+            contract.wage_monthly = (contract.wage or 0.0) * factor
 
     attachment_amount = fields.Float(string="Utmätningsbelopp", help="Det fasta belopp Kronofogden beslutat ska dras per månad.")
     protected_amount = fields.Float(string="Förbehållsbelopp", help="Det individuella belopp den anställde måste få behålla (bestäms av Kronofogden).")

@@ -15,6 +15,14 @@ class HRContract(models.Model):
     _inherit = 'hr.contract'
 
     table_number = fields.Integer(string="Tax Table")
+    pay_period_days = fields.Selection(
+        [('1', 'Daily (1 day)'), ('7', 'Weekly (7 days)'), ('14', 'Bi-weekly (14 days)'), ('31', 'Monthly (31 days)')],
+        string="Pay Period",
+        default='31',
+        required=True,
+        help="Tax table period. Must match the employee's pay frequency.\n"
+             "Monthly employees use 31, weekly use 7, etc.\n"
+             "Using the wrong period gives incorrect tax withholding.")
     is_church_deductible = fields.Boolean(string="Church Deductible")
     column_number = fields.Selection(
         [('column1', "Column 1"), ('column2', "Column 2"), ('column3', "Column 3"), ('column4', "Column 4"),
@@ -27,25 +35,18 @@ class HRContract(models.Model):
     has_one_off_tax = fields.Boolean(string="Has One-off Tax")
     one_off_tax = fields.Float(string="One-off Tax")
 
-    def action_sync_taxable(self):
-        return {
-            'type': 'ir.actions.act_window',
-            'res_model': 'payroll.taxtable.wizard',
-            'view_type': 'form',
-            'view_mode': 'form',
-            'view_id': self.env.ref('l10_se_payroll_taxtable.view_payroll_taxtable_wizard_form').id,
-            'target': 'new',
-        }
-
     def l10_sum_columns_one_off_tax(self, wage):
         if self.has_one_off_tax:
             return wage * self.one_off_tax
 
     def fetch_taxtable_data(self):
-        all_payslips_for_employee = self.env["hr.payslip"].search([('employee_id', '=', self.employee_id.id), ])
-
-        for payslip in all_payslips_for_employee:
-            self.fetch_entire_tablenumber_SKV_data(payslip.date_from.year)
+        all_payslips_for_employee = self.env["hr.payslip"].search([
+            ('employee_id', '=', self.employee_id.id),
+        ])
+        # Deduplicate: fetch each unique year only once
+        years = set(p.date_from.year for p in all_payslips_for_employee)
+        for year in sorted(years):
+            self.fetch_entire_tablenumber_SKV_data(year)
 
     def l10_sum_columns_taxtable_line(self, payslip, wage):
 
@@ -60,18 +61,19 @@ class HRContract(models.Model):
             _logger.warning(f"Please fill these values{fails}")
             return
 
-        year = payslip.period_id.date_start.year
+        year = str(payslip.period_id.date_start.year)
+        period_days = str(self.pay_period_days or '31')
 
         taxtable_name = f"Skattetabell {year}"
         taxtable_id = self.env['payroll.taxtable'].search([('name', 'like', f'%{year}%')])
 
         taxtable_line = self.env['payroll.taxtable.line'].search([
-            #('payroll_taxable_id.name', 'like', f'%{year}%'),
-            ('year','ilike', year),
+            ('year', '=', year),
+            ('number_of_days', '=', period_days),
             ('table_number', '=', self.table_number),
             ('income_from', '<=', float(wage)),
             ('income_to', '>=', float(wage)),
-        ])
+        ], limit=1)
 
         if not taxtable_line:
             taxtable_line = self.do_api_call(taxtable_id, taxtable_name, wage, year, payslip)
@@ -85,12 +87,14 @@ class HRContract(models.Model):
 
         self.fetch_entire_tablenumber_SKV_data(year)
 
+        period_days = str(self.pay_period_days or '31')
         taxtable_line = self.env['payroll.taxtable.line'].search([
-            ('payroll_taxable_id.name', 'like', f'%{year}%'),
+            ('year', '=', str(year)),
+            ('number_of_days', '=', period_days),
             ('table_number', '=', self.table_number),
             ('income_from', '<=', float(wage)),
             ('income_to', '>=', float(wage)),
-        ])
+        ], limit=1)
 
         return taxtable_line
 
@@ -99,54 +103,52 @@ class HRContract(models.Model):
         income_from, income_to, columns = self.fetch_SKV_data(wage, year)
 
         worked_day_lines = payslip.get_worked_day_lines(payslip.contract_id, payslip.date_from, payslip.date_to)
-
+        number_of_days = 31
         for line in worked_day_lines:
-            number_of_days = line['number_of_days']
+            if line.get('number_of_days'):
+                number_of_days = int(line['number_of_days'])
+                break
 
         # --check to see if we get the tax columns in percentage, if so convert to currency.
         if wage > 80000:
             for index, tax_amount in enumerate(columns):
-
-                # --Column 7 is an empty string before 2023.
                 if tax_amount == "":
                     tax_amount = 0
                 else:
                     tax_amount = float(tax_amount)
-
                 if tax_amount < 100:
                     percentage = tax_amount / 100
                     columns[index] = wage * percentage
 
         return self.env['payroll.taxtable.line'].create({
-
-            'year': year,
-            'number_of_days': number_of_days,
+            'year': str(year),
+            'number_of_days': str(number_of_days),
             'table_number': self.table_number,
             'income_from': income_from,
             'income_to': income_to,
-            'column1': columns[0],
-            'column2': columns[1],
-            'column3': columns[2],
-            'column4': columns[3],
-            'column5': columns[4],
-            'column6': columns[5],
-            'column7': columns[6],
+            'column1': float(columns[0] or 0),
+            'column2': float(columns[1] or 0),
+            'column3': float(columns[2] or 0),
+            'column4': float(columns[3] or 0),
+            'column5': float(columns[4] or 0),
+            'column6': float(columns[5] or 0),
+            'column7': float(columns[6] or 0),
             'payroll_taxable_id': taxtable_id,
         })
 
     def url_open(self, request_url):
-
         try:
-            response = urllib.request.urlopen(request_url)
+            response = urllib.request.urlopen(request_url, timeout=30)
         except HTTPError as e:
             raise UserError(
-                f"felkod: {e.code}, self.table_number: {self.table_number}, reg_ex_income_to: {reg_ex_income_to}, year: {year}, reg_ex_income_from: {reg_ex_income_from}")
+                _("Skatteverket API error: HTTP %(code)s — table %(table)s, URL: %(url)s",
+                  code=e.code, table=self.table_number, url=request_url))
         except URLError as e:
             raise UserError(
-                f"felkod: {e.reason}, self.table_number: {self.table_number}, reg_ex_income_to: {reg_ex_income_to}, year: {year}, reg_ex_income_from: {reg_ex_income_from}")
+                _("Skatteverket API unreachable: %(reason)s — table %(table)s, URL: %(url)s",
+                  reason=e.reason, table=self.table_number, url=request_url))
         else:
-            response = response.read()
-            return json.loads(response)
+            return json.loads(response.read())
 
     def fetch_entire_tablenumber_SKV_data(self, year):
 
@@ -196,35 +198,27 @@ class HRContract(models.Model):
                                 int(float(item['inkomst fr.o.m.']) * float(item[f'kolumn {index}']) / 100))
 
                 taxtable_line = self.env['payroll.taxtable.line'].search([
-                    ('year', '=', item['år']),
-                    ('number_of_days', '=', item['antal dgr']),
-                    ('table_number', '=', item['tabellnr']),
-                    ('income_from', '=', item['inkomst fr.o.m.']),
-                    ('income_to', '=', item['inkomst t.o.m.']),
-                    ('column1', '=', item['kolumn 1']),
-                    ('column2', '=', item['kolumn 2']),
-                    ('column3', '=', item['kolumn 3']),
-                    ('column4', '=', item['kolumn 4']),
-                    ('column5', '=', item['kolumn 5']),
-                    ('column6', '=', item['kolumn 6']),
-                    ('column7', '=', item['kolumn 7']),
+                    ('year', '=', str(item['år'])),
+                    ('number_of_days', '=', str(item['antal dgr'])),
+                    ('table_number', '=', int(item['tabellnr'])),
+                    ('income_from', '=', float(item['inkomst fr.o.m.'])),
                 ])
 
                 if not taxtable_line:
                     self.env['payroll.taxtable.line'].create({
 
-                        'year': item['år'],
-                        'number_of_days': item['antal dgr'],
-                        'table_number': item['tabellnr'],
-                        'income_from': item['inkomst fr.o.m.'],
-                        'income_to': item['inkomst t.o.m.'],
-                        'column1': item['kolumn 1'],
-                        'column2': item['kolumn 2'],
-                        'column3': item['kolumn 3'],
-                        'column4': item['kolumn 4'],
-                        'column5': item['kolumn 5'],
-                        'column6': item['kolumn 6'],
-                        'column7': item['kolumn 7'],
+                        'year': str(item['år']),
+                        'number_of_days': str(item['antal dgr']),
+                        'table_number': int(item['tabellnr']),
+                        'income_from': float(item['inkomst fr.o.m.']),
+                        'income_to': float(item['inkomst t.o.m.'] or 999999999),
+                        'column1': float(item['kolumn 1']),
+                        'column2': float(item['kolumn 2']),
+                        'column3': float(item['kolumn 3']),
+                        'column4': float(item['kolumn 4']),
+                        'column5': float(item['kolumn 5']),
+                        'column6': float(item['kolumn 6']),
+                        'column7': float(item.get('kolumn 7') or 0),
                         'payroll_taxable_id': taxtable_id.id,
                     })
 

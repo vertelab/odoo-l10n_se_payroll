@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- Flextidsansökan: listvy -->
+        <record id="view_hr_flex_request_tree" model="ir.ui.view">
+            <field name="name">hr.flex.request.tree</field>
+            <field name="model">hr.flex.request</field>
+            <field name="arch" type="xml">
+                <tree string="Flextidsansökningar">
+                    <field name="name"/>
+                    <field name="employee_id"/>
+                    <field name="request_type"/>
+                    <field name="hours"/>
+                    <field name="state"/>
+                    <field name="create_date"/>
+                </tree>
+            </field>
+        </record>
+
+        <!-- Flextidsansökan: formvy -->
+        <record id="view_hr_flex_request_form" model="ir.ui.view">
+            <field name="name">hr.flex.request.form</field>
+            <field name="model">hr.flex.request</field>
+            <field name="arch" type="xml">
+                <form string="Flextidsansökan">
+                    <header>
+                        <button name="action_submit" string="Skicka in" type="object"
+                                states="draft" class="btn-primary"/>
+                        <button name="action_approve" string="Godkänn" type="object"
+                                states="submitted" class="btn-primary"/>
+                        <button name="action_reject" string="Neka" type="object"
+                                states="submitted" class="btn-danger"/>
+                        <button name="action_draft" string="Återställ" type="object"
+                                states="rejected"/>
+                        <field name="state" widget="statusbar"/>
+                    </header>
+                    <sheet>
+                        <div class="oe_title">
+                            <h1><field name="name"/></h1>
+                        </div>
+                        <group>
+                            <group>
+                                <field name="employee_id"/>
+                                <field name="request_type"/>
+                                <field name="hours"/>
+                                <field name="available_hours"/>
+                            </group>
+                            <group>
+                                <field name="bank_id"/>
+                                <field name="company_id"/>
+                            </group>
+                        </group>
+                        <group string="Ledighet" attrs="{'invisible': [('request_type', '!=', 'leave')]}">
+                            <field name="date_from"/>
+                            <field name="date_to"/>
+                        </group>
+                        <group string="Löneutbetalning" attrs="{'invisible': [('request_type', '!=', 'salary')]}">
+                            <field name="salary_payout_amount"/>
+                            <field name="salary_rule_id"/>
+                        </group>
+                        <group string="Resultat">
+                            <field name="leave_id" attrs="{'invisible': [('leave_id', '=', False)]}"/>
+                            <field name="correction_id" attrs="{'invisible': [('correction_id', '=', False)]}"/>
+                        </group>
+                        <group>
+                            <field name="note"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!-- Actions -->
+        <record id="action_hr_flex_request" model="ir.actions.act_window">
+            <field name="name">Flextidsansökningar</field>
+            <field name="res_model">hr.flex.request</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <menuitem id="menu_hr_flex_request"
+                  name="Flextidsansökningar"
+                  parent="hr.menu_hr_root"
+                  action="action_hr_flex_request"
+                  sequence="41"/>
+    </data>
+</odoo>

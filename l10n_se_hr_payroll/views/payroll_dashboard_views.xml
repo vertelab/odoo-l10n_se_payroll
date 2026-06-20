@@ -9,7 +9,6 @@
             <field name="arch" type="xml">
                 <pivot string="Payroll Dashboard" disable_linking="1">
                     <field name="employee_id" type="row"/>
-                    <field name="department_id" type="col"/>
                     <field name="date_from" type="col" interval="month"/>
                     <field name="gl_amount" type="measure" widget="monetary"/>
                     <field name="bl_amount" type="measure" widget="monetary"/>

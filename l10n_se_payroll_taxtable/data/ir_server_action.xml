@@ -1,12 +1,29 @@
 <odoo>
     <data>
+        <!-- Server action on hr.contract form: sync tax tables for this contract's table number -->
         <record id="model_payroll_taxable_action" model="ir.actions.server">
             <field name="name">Sync Taxable</field>
             <field name="model_id" ref="hr_contract.model_hr_contract"/>
             <field name="binding_model_id" ref="hr_contract.model_hr_contract"/>
             <field name="binding_view_types">form</field>
             <field name="state">code</field>
-            <field name="code">action = records.action_sync_taxable()</field>
+            <field name="code">action = record.fetch_taxtable_data()</field>
+        </record>
+
+        <!-- Server action on Payslip: sync tax table for the employee's contract -->
+        <record id="action_sync_taxtable_payslip" model="ir.actions.server">
+            <field name="name">Hämta skattetabell</field>
+            <field name="model_id" ref="payroll.model_hr_payslip"/>
+            <field name="binding_model_id" ref="payroll.model_hr_payslip"/>
+            <field name="binding_view_types">form,list</field>
+            <field name="state">code</field>
+            <field name="code">
+for slip in records:
+    contract = slip.contract_id
+    if contract and contract.table_number:
+        year = slip.date_from.year
+        contract.fetch_entire_tablenumber_SKV_data(year)
+            </field>
         </record>
     </data>
 </odoo>

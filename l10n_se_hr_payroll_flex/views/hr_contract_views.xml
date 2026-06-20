@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- Utökar kontraktsvyn med flextidsinställningar -->
+        <record id="view_hr_contract_form_inherit_flex" model="ir.ui.view">
+            <field name="name">hr.contract.form.inherit.flex</field>
+            <field name="model">hr.contract</field>
+            <field name="inherit_id" ref="hr_contract.hr_contract_view_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//notebook" position="inside">
+                    <page string="Flextid" name="flex_time">
+                        <group>
+                            <field name="flex_overtime_rate"/>
+                            <field name="flex_ordered_overtime_rate"/>
+                        </group>
+                    </page>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="action_hr_flex_report" model="ir.actions.act_window">
+            <field name="name">Flexsaldo-rapport</field>
+            <field name="res_model">hr.flex.bank</field>
+            <field name="view_mode">pivot,graph</field>
+        </record>
+    </data>
+</odoo>

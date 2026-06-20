@@ -22,8 +22,8 @@
                         </group>
                         <field name="taxable_lines" nolabel="1">
                             <list editable="bottom" create="false" edit="false" delete="false">
-                                <field name="year" invisible="1"/>
-                                <field name="number_of_days" invisible="1"/>
+                                <field name="year" />
+                                <field name="number_of_days" />
                                 <field name="table_number" />
                                 <field name="income_from" />
                                 <field name="income_to" />
@@ -51,30 +51,15 @@
         </record>
 
         <menuitem id="menu_payroll_taxtable" name="Taxtable" parent="hr.menu_human_resources_configuration" action="action_payroll_taxtable" sequence="50" />
-        <record model="ir.ui.view" id="view_payroll_taxtable_wizard_form">
-            <field name="name">payroll.taxtable.wizard</field>
-            <field name="model">payroll.taxtable.wizard</field>
-            <field name="arch" type="xml">
-                <form string="Add URL">
-                    <group>
-                        <field name="taxable_url" />
-                    </group>
-                    <footer>
-                        <button name="action_sync_taxable" string="Sync" class="btn btn-primary" type="object" />
-                        <button special="cancel" string="Close" class="btn btn-danger" />
-                    </footer>
-                </form>
-            </field>
+        <!-- Server action: trigger cron sync on demand, available in gear menu (kugghjulet) -->
+        <record id="action_sync_taxtable" model="ir.actions.server">
+            <field name="name">Sync TaxTable</field>
+            <field name="model_id" ref="l10n_se_payroll_taxtable.model_payroll_taxtable"/>
+            <field name="binding_model_id" ref="l10n_se_payroll_taxtable.model_payroll_taxtable"/>
+            <field name="binding_view_types">form,list</field>
+            <field name="state">code</field>
+            <field name="code">model._cron_sync_all_taxtables()</field>
         </record>
-
-        <record id="action_payroll_taxtable_wizard_action" model="ir.actions.act_window">
-            <field name="name">Payroll Taxtable Wizard Action</field>
-            <field name="res_model">payroll.taxtable.wizard</field>
-            <field name="view_mode">form</field>
-            <field name="target">new</field>
-        </record>
-
-        <menuitem id="hr_menu_payroll_taxtable_wizard" name="Sync TaxTable" parent="hr.menu_human_resources_configuration" sequence="100" action="action_payroll_taxtable_wizard_action" />
     </data>
 </odoo>
 

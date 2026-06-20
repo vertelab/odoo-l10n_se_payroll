@@ -1,0 +1,8 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_hr_flex_bank_user,hr.flex.bank.user,model_hr_flex_bank,hr.group_hr_user,1,0,0,0
+access_hr_flex_bank_manager,hr.flex.bank.manager,model_hr_flex_bank,hr.group_hr_manager,1,1,1,1
+access_hr_flex_bank_line_user,hr.flex.bank.line.user,model_hr_flex_bank_line,hr.group_hr_user,1,0,0,0
+access_hr_flex_bank_line_manager,hr.flex.bank.line.manager,model_hr_flex_bank_line,hr.group_hr_manager,1,1,1,1
+access_hr_flex_request_user,hr.flex.request.user,model_hr_flex_request,hr.group_hr_user,1,1,1,0
+access_hr_flex_request_manager,hr.flex.request.manager,model_hr_flex_request,hr.group_hr_manager,1,1,1,1
+access_hr_flex_request_employee,hr.flex.request.employee,model_hr_flex_request,base.group_user,1,1,1,0

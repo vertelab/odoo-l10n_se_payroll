@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- Utökar anställd-vyn med flextidsinformation -->
+        <record id="view_hr_employee_form_inherit_flex" model="ir.ui.view">
+            <field name="name">hr.employee.form.inherit.flex</field>
+            <field name="model">hr.employee</field>
+            <field name="inherit_id" ref="hr.view_employee_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//notebook" position="inside">
+                    <page string="Flextid" name="flex_time">
+                        <group>
+                            <field name="flex_balance_hours"/>
+                        </group>
+                        <field name="flex_bank_ids" nolabel="1">
+                            <tree>
+                                <field name="name"/>
+                                <field name="balance_hours"/>
+                                <field name="accrued_hours"/>
+                                <field name="used_hours"/>
+                                <field name="state"/>
+                                <field name="date_from"/>
+                                <field name="date_to"/>
+                            </tree>
+                        </field>
+                    </page>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

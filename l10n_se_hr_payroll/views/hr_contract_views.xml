@@ -8,7 +8,18 @@
             <field name="model">hr.contract</field>
             <field name="inherit_id" ref="hr_contract.hr_contract_view_form"/>
             <field name="arch" type="xml">
-                <!-- Add payroll-specific fields after wage (löneväxling, utmätning) -->
+                <!-- Widen the wage row so wage_unit + wage_monthly fit -->
+                <xpath expr="//div[@name='wage']" position="attributes">
+                    <attribute name="class">o_row mw-100</attribute>
+                </xpath>
+                <!-- Replace hardcoded /month label with wage_unit + wage_monthly -->
+                <xpath expr="//div[@name='wage_period_label']" position="replace">
+                    <field name="wage_unit" class="oe_inline me-3" nolabel="1"/>
+                    <span class="oe_inline me-1" invisible="wage_unit == 'monthly'">(</span>
+                    <field name="wage_monthly" class="oe_inline" nolabel="1" invisible="wage_unit == 'monthly'"/>
+                    <span class="oe_inline" invisible="wage_unit == 'monthly'">)</span>
+                </xpath>
+                <!-- Add payroll-specific fields after wage -->
                 <xpath expr="//field[@name='wage']" position="after">
                     <field name="wage_exchange_amount" invisible="1"/>
                     <field name="wage_exchange_start" invisible="1"/>
@@ -30,13 +41,13 @@
                             <field name="advance_vacation_days"/>
                         </group>
                     </page>
-                    <page string="Lönejustering" name="salary_adjustment">
-                        <group string="Löneväxling">
+                    <page string="Salary Adjustment" name="salary_adjustment">
+                        <group string="Wage Exchange">
                             <field name="wage_exchange_amount"/>
                             <field name="wage_exchange_start"/>
                             <field name="wage_exchange_end" placeholder="Tillsvidare..."/>
                         </group>
-                        <group string="Löneutmätning">
+                        <group string="Attachement of earnings">
                             <field name="has_attachment_of_earnings"/>
                             <field name="attachment_of_earnings_start"
                                    invisible="not has_attachment_of_earnings"/>
@@ -46,7 +57,7 @@
                                    invisible="not has_attachment_of_earnings"/>
                         </group>
                     </page>
-                    <page string="Bokföring" name="accounting">
+                    <page string="Accounting" name="accounting">
                         <group>
                             <field name="journal_id"/>
                             <field name="analytic_account_id"/>
@@ -63,7 +74,7 @@
             <field name="inherit_id" ref="payroll.hr_payroll_structure_view_form"/>
             <field name="arch" type="xml">
                 <xpath expr="//notebook" position="inside">
-                    <page string="Konstanter" name="const">
+                    <page string="Constants" name="const">
                         <field name="const_ids">
                             <list editable="bottom">
                                 <field name="name"/>

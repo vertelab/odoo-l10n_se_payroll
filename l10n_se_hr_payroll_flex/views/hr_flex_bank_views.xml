@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- Timpott: listvy -->
+        <record id="view_hr_flex_bank_tree" model="ir.ui.view">
+            <field name="name">hr.flex.bank.tree</field>
+            <field name="model">hr.flex.bank</field>
+            <field name="arch" type="xml">
+                <tree string="Flextidspotter">
+                    <field name="name"/>
+                    <field name="employee_id"/>
+                    <field name="balance_hours"/>
+                    <field name="accrued_hours"/>
+                    <field name="used_hours"/>
+                    <field name="state"/>
+                    <field name="date_from"/>
+                    <field name="date_to"/>
+                </tree>
+            </field>
+        </record>
+
+        <!-- Timpott: formvy -->
+        <record id="view_hr_flex_bank_form" model="ir.ui.view">
+            <field name="name">hr.flex.bank.form</field>
+            <field name="model">hr.flex.bank</field>
+            <field name="arch" type="xml">
+                <form string="Flextidspott">
+                    <header>
+                        <button name="action_activate" string="Aktivera" type="object"
+                                states="draft" class="btn-primary"/>
+                        <button name="action_close" string="Stäng" type="object"
+                                states="active"/>
+                        <button name="action_expire" string="Utgången" type="object"
+                                states="active"/>
+                        <field name="state" widget="statusbar"/>
+                    </header>
+                    <sheet>
+                        <div class="oe_title">
+                            <h1><field name="name"/></h1>
+                        </div>
+                        <group>
+                            <group>
+                                <field name="employee_id"/>
+                                <field name="company_id"/>
+                            </group>
+                            <group>
+                                <field name="date_from"/>
+                                <field name="date_to"/>
+                            </group>
+                        </group>
+                        <group string="Saldo">
+                            <group>
+                                <field name="balance_hours"/>
+                                <field name="max_hours"/>
+                            </group>
+                            <group>
+                                <field name="accrued_hours"/>
+                                <field name="used_hours"/>
+                            </group>
+                        </group>
+                        <group string="Regler">
+                            <field name="overtime_rate"/>
+                            <field name="ordered_overtime_rate"/>
+                        </group>
+                        <notebook>
+                            <page string="Transaktioner">
+                                <field name="line_ids">
+                                    <tree editable="bottom">
+                                        <field name="date"/>
+                                        <field name="hours"/>
+                                        <field name="transaction_type"/>
+                                        <field name="rate_factor"/>
+                                        <field name="note"/>
+                                    </tree>
+                                </field>
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!-- Actions -->
+        <record id="action_hr_flex_bank" model="ir.actions.act_window">
+            <field name="name">Flextidspotter</field>
+            <field name="res_model">hr.flex.bank</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <menuitem id="menu_hr_flex_bank"
+                  name="Flextidspotter"
+                  parent="hr.menu_hr_root"
+                  action="action_hr_flex_bank"
+                  sequence="40"/>
+    </data>
+</odoo>
