@@ -6,3 +6,5 @@ access_hr_flex_bank_line_manager,hr.flex.bank.line.manager,model_hr_flex_bank_li
 access_hr_flex_request_user,hr.flex.request.user,model_hr_flex_request,hr.group_hr_user,1,1,1,0
 access_hr_flex_request_manager,hr.flex.request.manager,model_hr_flex_request,hr.group_hr_manager,1,1,1,1
 access_hr_flex_request_employee,hr.flex.request.employee,model_hr_flex_request,base.group_user,1,1,1,0
+access_hr_flex_request_wizard,hr.flex.request.wizard.access,model_hr_flex_request_wizard,base.group_user,1,1,1,0
+access_hr_timesheet_sheet_overtime_line,hr.timesheet.sheet.overtime.line.access,model_hr_timesheet_sheet_overtime_line,base.group_user,1,1,1,1

@@ -13,7 +13,7 @@
                         <field name="hours"/>
                         <field name="available_hours"/>
                     </group>
-                    <group string="Ledighet" attrs="{'invisible': [('request_type', '!=', 'leave')]}">
+                    <group string="Ledighet" invisible="request_type != 'leave'">
                         <field name="date_from"/>
                         <field name="date_to"/>
                     </group>

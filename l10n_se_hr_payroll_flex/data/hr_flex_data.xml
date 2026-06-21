@@ -2,25 +2,33 @@
 <odoo>
     <data noupdate="0">
 
-        <!-- Arbetstyp för flextidsledighet -->
+        <!-- Arbetstyp för flextid -->
         <record model="hr.work.entry.type" id="work_entry_type_flex">
-            <field name="name" eval="'Flextidsledighet'"/>
-            <field name="code">flex_ledig</field>
-            <field name="external_code" eval="'l10n_se_hr_payroll_flex.flex_ledig'"/>
+            <field name="name" eval="'Flextid'"/>
+            <field name="code">flex</field>
+            <field name="external_code" eval="'l10n_se_hr_payroll_flex.flex'"/>
             <field name="color">7</field>
             <field name="is_leave" eval="True"/>
             <field name="country_id" ref="base.se"/>
         </record>
 
-        <!-- Frånvarotyp för flextidsledighet -->
+        <!-- Frånvarotyp: Flextid — fungerar som semester, med tilldelning och ansökan -->
+        <!-- leave_validation_type: "hr" = måste godkännas, "no_validation" = auto-godkänd -->
         <record model="hr.leave.type" id="leave_type_flex">
-            <field name="name">Flextidsledighet</field>
+            <field name="name">Flextid</field>
             <field name="work_entry_type_id" ref="work_entry_type_flex"/>
             <field name="color">7</field>
-            <field name="leave_validation_type">no_validation</field>
+            <field name="request_unit">hour</field>
+            <field name="leave_validation_type">hr</field>
             <field name="active" eval="True"/>
             <field name="requires_allocation">no</field>
+            <field name="employee_requests">yes</field>
+            <field name="company_id" eval="False"/>
         </record>
+
+    </data>
+
+    <data noupdate="1">
 
         <!-- Standardinställningar för flextid -->
         <record id="flex_default_settings" model="ir.config_parameter">

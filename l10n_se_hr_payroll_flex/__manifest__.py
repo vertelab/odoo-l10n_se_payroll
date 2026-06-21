@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 {
     'name': 'Swedish Payroll — Flextid / Timpott',
-    'version': '1.0',
+    'version': '18.0.1.2',
     'summary': 'Flextidsbank: övertid/undertid, beordrad övertid, timpott, uttag som ledighet eller lön',
     'category': 'Payroll Localization',
     'description': """

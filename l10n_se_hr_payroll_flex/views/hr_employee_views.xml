@@ -13,7 +13,7 @@
                             <field name="flex_balance_hours"/>
                         </group>
                         <field name="flex_bank_ids" nolabel="1">
-                            <tree>
+                            <list>
                                 <field name="name"/>
                                 <field name="balance_hours"/>
                                 <field name="accrued_hours"/>
@@ -21,7 +21,7 @@
                                 <field name="state"/>
                                 <field name="date_from"/>
                                 <field name="date_to"/>
-                            </tree>
+                            </list>
                         </field>
                     </page>
                 </xpath>

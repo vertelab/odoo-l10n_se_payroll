@@ -7,17 +7,25 @@
             <field name="model">hr_timesheet.sheet</field>
             <field name="inherit_id" ref="hr_timesheet_sheet.hr_timesheet_sheet_form"/>
             <field name="arch" type="xml">
-                <xpath expr="//sheet" position="inside">
-                    <group string="Flextid" name="flex_group">
+                <xpath expr="//notebook" position="inside">
+                    <page string="Overtime" name="overtime_page">
                         <group>
+                            <field name="expected_hours"/>
                             <field name="overtime_hours"/>
                             <field name="undertime_hours"/>
                         </group>
-                        <group>
-                            <field name="expected_hours"/>
-                            <field name="is_overtime_ordered"/>
+                        <group string="Övertidsrader (per projekt och dag)">
+                            <field name="flex_overtime_line_ids" nolabel="1">
+                                <list editable="bottom">
+                                    <field name="date"/>
+                                    <field name="project_id"/>
+                                    <field name="task_id" optional="show"/>
+                                    <field name="overtime_hours"/>
+                                    <field name="is_ordered"/>
+                                </list>
+                            </field>
                         </group>
-                    </group>
+                    </page>
                 </xpath>
             </field>
         </record>

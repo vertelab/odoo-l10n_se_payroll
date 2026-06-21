@@ -267,7 +267,8 @@ class HrFlexRequest(models.Model):
             'number_of_days': 0,  # sätts av leave-modellen
         }
         leave = self.env['hr.leave'].create(leave_vals)
-        leave.action_validate()
+        # Flextidsansökan är redan godkänd — validera ledigheten direkt
+        leave.sudo().action_validate()
 
         # Debitera potten
         self.bank_id.deduct_hours(

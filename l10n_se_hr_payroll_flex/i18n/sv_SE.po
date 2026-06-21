@@ -1,0 +1,92 @@
+# Translation of l10n_se_hr_payroll_flex (Swedish)
+msgid ""
+msgstr ""
+"Project-Id-Version: l10n_se_hr_payroll_flex 18.0.1.2\n"
+"Language: sv_SE\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+
+#. module: l10n_se_hr_payroll_flex
+#. model: ir.model,name
+msgid "Flextidspott"
+msgstr "Flextidspott"
+
+#. module: l10n_se_hr_payroll_flex
+#. model: ir.model,name
+msgid "Flextidstransaktion"
+msgstr "Flextidstransaktion"
+
+#. module: l10n_se_hr_payroll_flex
+#. model: ir.model,name
+msgid "Flextidsansökan"
+msgstr "Flextidsansökan"
+
+#. module: l10n_se_hr_payroll_flex
+#. model: ir.model,name
+msgid "Ansök om flextidsuttag"
+msgstr "Ansök om flextidsuttag"
+
+#. module: l10n_se_hr_payroll_flex
+#. model: ir.model,name
+msgid "Övertidsrad på tidrapport"
+msgstr "Övertidsrad på tidrapport"
+
+#. module: l10n_se_hr_payroll_flex
+#: model:ir.ui.view,arch_db:l10n_se_hr_payroll_flex.view_hr_timesheet_sheet_form_inherit_flex
+msgid "Overtime"
+msgstr "Övertid"
+
+#. module: l10n_se_hr_payroll_flex
+#: model:ir.ui.view,arch_db:l10n_se_hr_payroll_flex.view_hr_timesheet_sheet_form_inherit_flex
+msgid "Overtime Lines (per project and day)"
+msgstr "Övertidsrader (per projekt och dag)"
+
+#. module: l10n_se_hr_payroll_flex
+#: model:ir.model.fields,field_description:l10n_se_hr_payroll_flex.field_hr_timesheet_sheet_overtime_line__date
+msgid "Date"
+msgstr "Datum"
+
+#. module: l10n_se_hr_payroll_flex
+#: model:ir.model.fields,field_description:l10n_se_hr_payroll_flex.field_hr_timesheet_sheet_overtime_line__project_id
+msgid "Project"
+msgstr "Projekt"
+
+#. module: l10n_se_hr_payroll_flex
+#: model:ir.model.fields,field_description:l10n_se_hr_payroll_flex.field_hr_timesheet_sheet_overtime_line__task_id
+msgid "Task"
+msgstr "Uppgift"
+
+#. module: l10n_se_hr_payroll_flex
+#: model:ir.model.fields,field_description:l10n_se_hr_payroll_flex.field_hr_timesheet_sheet_overtime_line__overtime_hours
+msgid "Overtime Hours"
+msgstr "Övertidstimmar"
+
+#. module: l10n_se_hr_payroll_flex
+#: model:ir.model.fields,field_description:l10n_se_hr_payroll_flex.field_hr_timesheet_sheet_overtime_line__is_ordered
+msgid "Ordered"
+msgstr "Beordrad"
+
+#. module: l10n_se_hr_payroll_flex
+#: model:ir.model.fields,help:l10n_se_hr_payroll_flex.field_hr_timesheet_sheet_overtime_line__is_ordered
+msgid "Mark for ordered overtime (bonus to time bank)."
+msgstr "Markera för beordrad övertid (bonus till timpotten)."
+
+#. module: l10n_se_hr_payroll_flex
+#: model:ir.model.fields,field_description:l10n_se_hr_payroll_flex.field_hr_timesheet_sheet__overtime_hours
+msgid "Overtime (hours)"
+msgstr "Övertid (timmar)"
+
+#. module: l10n_se_hr_payroll_flex
+#: model:ir.model.fields,field_description:l10n_se_hr_payroll_flex.field_hr_timesheet_sheet__undertime_hours
+msgid "Undertime (hours)"
+msgstr "Undertid (timmar)"
+
+#. module: l10n_se_hr_payroll_flex
+#: model:ir.model.fields,field_description:l10n_se_hr_payroll_flex.field_hr_timesheet_sheet__expected_hours
+msgid "Expected Hours"
+msgstr "Förväntad tid"
+
+#. module: l10n_se_hr_payroll_flex
+#: model:ir.model.fields,field_description:l10n_se_hr_payroll_flex.field_hr_timesheet_sheet__is_overtime_ordered
+msgid "Ordered Overtime"
+msgstr "Beordrad övertid"

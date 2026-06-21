@@ -6,14 +6,14 @@
             <field name="name">hr.flex.request.tree</field>
             <field name="model">hr.flex.request</field>
             <field name="arch" type="xml">
-                <tree string="Flextidsansökningar">
+                <list string="Flextidsansökningar">
                     <field name="name"/>
                     <field name="employee_id"/>
                     <field name="request_type"/>
                     <field name="hours"/>
                     <field name="state"/>
                     <field name="create_date"/>
-                </tree>
+                </list>
             </field>
         </record>
 
@@ -25,13 +25,13 @@
                 <form string="Flextidsansökan">
                     <header>
                         <button name="action_submit" string="Skicka in" type="object"
-                                states="draft" class="btn-primary"/>
+                                invisible="state not in ['draft']" class="btn-primary"/>
                         <button name="action_approve" string="Godkänn" type="object"
-                                states="submitted" class="btn-primary"/>
+                                invisible="state not in ['submitted']" class="btn-primary"/>
                         <button name="action_reject" string="Neka" type="object"
-                                states="submitted" class="btn-danger"/>
+                                invisible="state not in ['submitted']" class="btn-danger"/>
                         <button name="action_draft" string="Återställ" type="object"
-                                states="rejected"/>
+                                invisible="state not in ['rejected']"/>
                         <field name="state" widget="statusbar"/>
                     </header>
                     <sheet>
@@ -50,17 +50,17 @@
                                 <field name="company_id"/>
                             </group>
                         </group>
-                        <group string="Ledighet" attrs="{'invisible': [('request_type', '!=', 'leave')]}">
+                        <group string="Ledighet" invisible="request_type != 'leave'">
                             <field name="date_from"/>
                             <field name="date_to"/>
                         </group>
-                        <group string="Löneutbetalning" attrs="{'invisible': [('request_type', '!=', 'salary')]}">
+                        <group string="Löneutbetalning" invisible="request_type != 'salary'">
                             <field name="salary_payout_amount"/>
                             <field name="salary_rule_id"/>
                         </group>
                         <group string="Resultat">
-                            <field name="leave_id" attrs="{'invisible': [('leave_id', '=', False)]}"/>
-                            <field name="correction_id" attrs="{'invisible': [('correction_id', '=', False)]}"/>
+                            <field name="leave_id" invisible="not leave_id"/>
+                            <field name="correction_id" invisible="not correction_id"/>
                         </group>
                         <group>
                             <field name="note"/>
@@ -74,7 +74,7 @@
         <record id="action_hr_flex_request" model="ir.actions.act_window">
             <field name="name">Flextidsansökningar</field>
             <field name="res_model">hr.flex.request</field>
-            <field name="view_mode">tree,form</field>
+            <field name="view_mode">list,form</field>
         </record>
 
         <menuitem id="menu_hr_flex_request"
