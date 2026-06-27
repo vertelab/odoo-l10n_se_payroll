@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+
+        <function model="l10n_se_payroll_growth_support.vaxa_demo_generator"
+                  name="generate_demo_data"/>
+
+    </data>
+</odoo>

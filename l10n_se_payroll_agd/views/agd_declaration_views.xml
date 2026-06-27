@@ -1,0 +1,238 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <!-- =============================================================
+        Form view
+        ============================================================= -->
+        <record id="view_agd_declaration_form" model="ir.ui.view">
+            <field name="name">agd.declaration.form</field>
+            <field name="model">account.agd.declaration</field>
+            <field name="arch" type="xml">
+                <form string="Arbetsgivardeklaration">
+                    <header>
+                        <button class="oe_highlight"
+                            invisible="state not in ['draft']"
+                            name="calculate" string="Beräkna" type="object"/>
+                        <button class="oe_highlight"
+                            invisible="state not in ['confirmed','done'] or skv_api_status not in ['draft','error']"
+                            name="action_send_to_skv" string="Skicka till Skatteverket" type="object"/>
+                        <button class="oe_highlight"
+                            invisible="state not in ['done','confirmed','canceled']"
+                            name="do_draft" string="Draft" type="object"/>
+                        <button class="oe_highlight"
+                            invisible="state not in ['confirmed']"
+                            name="do_done" string="Done" type="object"/>
+                        <button class="oe_highlight"
+                            invisible="state not in ['confirmed','done']"
+                            name="do_cancel" string="Cancel" type="object"/>
+                        <field name="state" widget="statusbar"/>
+                        <field name="skv_api_status"
+                            invisible="skv_api_status == 'draft'"
+                            widget="badge"
+                            decoration-success="skv_api_status == 'accepted'"
+                            decoration-danger="skv_api_status == 'error'"
+                            decoration-warning="skv_api_status == 'submitted'"/>
+                    </header>
+                    <sheet>
+                        <div class="oe_button_box" name="button_box">
+                            <button class="oe_stat_button" icon="fa-users"
+                                name="action_view_payslips" type="object"
+                                help="Visa lönespecar i denna lönekörning">
+                                <div class="o_form_field o_stat_info">
+                                    <span class="o_stat_value">
+                                        <field name="employee_count"/>
+                                    </span>
+                                    <span class="o_stat_text">Anställda</span>
+                                </div>
+                            </button>
+                            <button class="oe_stat_button" icon="fa-download"
+                                name="action_download_agd_file" type="object"
+                                string="Ladda ner"
+                                invisible="state == 'draft' or not agd_file"
+                                help="Ladda ner AGD-fil (eSKD XML)"/>
+                            <button class="oe_stat_button" icon="fa-calendar"
+                                name="action_open_calendar_event" type="object"
+                                string="Kalender" invisible="not event_id"
+                                help="Öppna kalenderhändelse för deadline"/>
+                        </div>
+
+                        <div class="oe_title">
+                            <label class="oe_edit_only" for="name"/>
+                            <h1><field name="name"/></h1>
+                        </div>
+
+                        <group>
+                            <group>
+                                <field name="company_id" groups="base.group_multi_company"/>
+                                <field name="payslip_run_id"
+                                    domain="[('state', '=', 'done')]"
+                                    readonly="not state"
+                                    string="Lönekörning"/>
+                                <field name="date"/>
+                            </group>
+                            <group>
+                                <field name="date_start" string="Period fr.o.m."
+                                    widget="daterange"
+                                    options="{'end_date_field': 'date_stop'}"
+                                    readonly="not state"/>
+                                <field name="date_stop" invisible="1"/>
+                            </group>
+                        </group>
+
+                        <group string="Sammanfattning">
+                            <group>
+                                <field name="total_salary" widget="monetary"
+                                    string="Total bruttolön"/>
+                                <field name="total_employer_fee" widget="monetary"
+                                    string="Total arbetsgivaravgift"/>
+                            </group>
+                            <group>
+                                <field name="total_tax_withheld" widget="monetary"
+                                    string="Total avdragen skatt"/>
+                                <field name="total_to_pay" widget="monetary"
+                                    string="Att betala totalt"/>
+                            </group>
+                        </group>
+
+                        <notebook>
+                            <page string="Inställningar">
+                                <group>
+                                    <field name="target_move" readonly="not state"/>
+                                    <field name="agd_file" filename="agd_file_name" invisible="1"/>
+                                    <field name="agd_file_name" invisible="1"/>
+                                </group>
+                            </page>
+
+                            <page string="Anställda">
+                                <field name="line_ids" nolabel="1">
+                                    <list create="0" delete="0" edit="0" default_order="employee_id">
+                                        <field name="employee_id"/>
+                                        <field name="personal_number"/>
+                                        <field name="r50_bruttolon" sum="Total bruttolön"/>
+                                        <field name="r56_full_avg" sum="Total avgift"/>
+                                        <field name="r82_avdragen_skatt" sum="Total skatt"/>
+                                    </list>
+                                </field>
+                            </page>
+
+                            <page string="Detaljer">
+                                <field name="line_ids" nolabel="1">
+                                    <list create="0" delete="0" edit="0" default_order="employee_id">
+                                        <field name="employee_id"/>
+                                        <field name="personal_number"/>
+                                        <field name="r50_bruttolon"/>
+                                        <field name="r51_formaner"/>
+                                        <field name="r52_avdrag"/>
+                                        <field name="r55_full_avg_underlag"/>
+                                        <field name="r56_full_avg"/>
+                                        <field name="r57_vaxa_underlag"/>
+                                        <field name="r58_vaxa_avg"/>
+                                        <field name="r59_aldersp_underlag"/>
+                                        <field name="r60_aldersp_avg"/>
+                                        <field name="r61_sl_aldre_underlag"/>
+                                        <field name="r62_sl_aldre_avg"/>
+                                        <field name="r81_skatteavdrag_underlag"/>
+                                        <field name="r82_avdragen_skatt"/>
+                                    </list>
+                                </field>
+                            </page>
+
+                            <page string="Upplysningstext">
+                                <field name="free_text" nolabel="1" readonly="not state"/>
+                            </page>
+
+                            <page string="Skatteverket API"
+                                invisible="skv_api_status == 'draft' and not skv_response">
+                                <group>
+                                    <field name="skv_api_status"/>
+                                    <field name="skv_submitted_date"/>
+                                    <field name="skv_response" nolabel="1"
+                                        invisible="skv_api_status != 'error'"/>
+                                </group>
+                            </page>
+                        </notebook>
+                    </sheet>
+                    <chatter/>
+                </form>
+            </field>
+        </record>
+
+        <!-- =============================================================
+        Search view
+        ============================================================= -->
+        <record id="view_agd_filter" model="ir.ui.view">
+            <field name="name">agd.declaration.filter</field>
+            <field name="model">account.agd.declaration</field>
+            <field name="arch" type="xml">
+                <search string="Search AGD">
+                    <field name="name"/>
+                    <field name="date_start"/>
+                    <field name="date_stop"/>
+                    <field name="date" string="Deadline"/>
+                    <field name="state"/>
+                    <separator/>
+                    <group expand="0" string="Group By">
+                        <filter context="{'group_by': 'state'}" name="State" string="State"/>
+                        <filter context="{'group_by': 'date_start'}" name="Period" string="Period"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+
+        <!-- =============================================================
+        List view
+        ============================================================= -->
+        <record id="view_agd_tree" model="ir.ui.view">
+            <field name="name">agd.declaration.tree</field>
+            <field name="model">account.agd.declaration</field>
+            <field name="arch" type="xml">
+                <list string="Arbetsgivardeklaration">
+                    <field name="name"/>
+                    <field name="date"/>
+                    <field name="company_id" groups="base.group_multi_company"/>
+                    <field name="date_start"/>
+                    <field name="date_stop"/>
+                    <field name="employee_count"/>
+                    <field name="total_to_pay" widget="monetary"/>
+                    <field name="state"/>
+                    <field name="skv_api_status" widget="badge"
+                        decoration-success="skv_api_status == 'accepted'"
+                        decoration-danger="skv_api_status == 'error'"/>
+                </list>
+            </field>
+        </record>
+
+        <!-- =============================================================
+        Calendar view
+        ============================================================= -->
+        <record id="view_agd_calendar" model="ir.ui.view">
+            <field name="name">agd.declaration.calendar</field>
+            <field name="model">account.agd.declaration</field>
+            <field name="arch" type="xml">
+                <calendar date_start="date" string="AGD">
+                    <field name="name"/>
+                    <field name="date_start"/>
+                    <field name="state"/>
+                </calendar>
+            </field>
+        </record>
+
+        <!-- =============================================================
+        Action + Menu
+        ============================================================= -->
+        <record id="action_agd_declaration" model="ir.actions.act_window">
+            <field name="name">Arbetsgivardeklaration</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">account.agd.declaration</field>
+            <field name="view_mode">list,form,calendar</field>
+            <field name="search_view_id" ref="view_agd_filter"/>
+        </record>
+
+        <!-- Try to add under l10n_se_tax_report's authorities menu, or fallback to payroll menu -->
+        <menuitem action="action_agd_declaration"
+                  id="menu_agd_declaration"
+                  name="Arbetsgivardeklaration"
+                  parent="l10n_se_tax_report.menu_report_authorities"/>
+    </data>
+</odoo>
