@@ -1,0 +1,226 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <!-- ===== Union Organization ===== -->
+        <record id="view_union_form" model="ir.ui.view">
+            <field name="name">hr.union.form</field>
+            <field name="model">hr.union</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <div class="oe_title"><h1><field name="name"/></h1></div>
+                        <group>
+                            <group>
+                                <field name="code"/>
+                                <field name="union_type"/>
+                                <field name="active"/>
+                            </group>
+                            <group>
+                                <field name="bankgiro"/>
+                                <field name="plusgiro"/>
+                                <field name="bank_account"/>
+                            </group>
+                        </group>
+                        <group string="Defaultavgift">
+                            <group>
+                                <field name="default_fee_type"/>
+                                <field name="default_fee_amount" widget="monetary"
+                                    invisible="default_fee_type != 'fixed'"/>
+                                <field name="default_fee_percent"
+                                    invisible="default_fee_type != 'percent'"/>
+                            </group>
+                            <group>
+                                <field name="max_fee" widget="monetary"/>
+                                <field name="report_format"/>
+                            </group>
+                        </group>
+                        <group string="Kontakt">
+                            <field name="contact_name"/>
+                            <field name="contact_email"/>
+                            <field name="contact_phone"/>
+                        </group>
+                        <group string="Notering">
+                            <field name="note" nolabel="1"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="view_union_tree" model="ir.ui.view">
+            <field name="name">hr.union.tree</field>
+            <field name="model">hr.union</field>
+            <field name="arch" type="xml">
+                <list>
+                    <field name="name"/>
+                    <field name="code"/>
+                    <field name="union_type"/>
+                    <field name="default_fee_type"/>
+                </list>
+            </field>
+        </record>
+
+        <record id="action_union" model="ir.actions.act_window">
+            <field name="name">Fackförbund</field>
+            <field name="res_model">hr.union</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <menuitem action="action_union"
+                  id="menu_union"
+                  name="Fackförbund"
+                  parent="payroll.payroll_menu_configuration"
+                  sequence="30"/>
+
+        <!-- ===== Union Membership ===== -->
+        <record id="view_union_membership_form" model="ir.ui.view">
+            <field name="name">hr.union.membership.form</field>
+            <field name="model">hr.union.membership</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <div class="oe_title"><h1><field name="name"/></h1></div>
+                        <group>
+                            <group>
+                                <field name="employee_id"/>
+                                <field name="union_id"/>
+                                <field name="member_number"/>
+                            </group>
+                            <group>
+                                <field name="date_start"/>
+                                <field name="date_end"/>
+                                <field name="active" invisible="1"/>
+                                <field name="payment_method"/>
+                            </group>
+                        </group>
+                        <group string="Avgiftsinställningar">
+                            <field name="fee_type"/>
+                            <field name="fee_amount" widget="monetary"
+                                invisible="fee_type != 'fixed'"/>
+                            <field name="fee_percent"
+                                invisible="fee_type != 'percent'"/>
+                        </group>
+                        <group string="Avgiftshistorik">
+                            <field name="fee_ids" nolabel="1">
+                                <list create="0" delete="0" edit="0">
+                                    <field name="date"/>
+                                    <field name="amount" widget="monetary"/>
+                                    <field name="payslip_id"/>
+                                    <field name="is_paid"/>
+                                </list>
+                            </field>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="view_union_membership_tree" model="ir.ui.view">
+            <field name="name">hr.union.membership.tree</field>
+            <field name="model">hr.union.membership</field>
+            <field name="arch" type="xml">
+                <list>
+                    <field name="employee_id"/>
+                    <field name="union_id"/>
+                    <field name="member_number"/>
+                    <field name="date_start"/>
+                    <field name="active"/>
+                </list>
+            </field>
+        </record>
+
+        <record id="action_union_membership" model="ir.actions.act_window">
+            <field name="name">Fackmedlemskap</field>
+            <field name="res_model">hr.union.membership</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <menuitem action="action_union_membership"
+                  id="menu_union_membership"
+                  name="Fackmedlemskap"
+                  parent="payroll.payroll_menu_root"
+                  sequence="45"/>
+
+        <!-- ===== Union Report ===== -->
+        <record id="view_union_report_form" model="ir.ui.view">
+            <field name="name">hr.union.report.form</field>
+            <field name="model">hr.union.report</field>
+            <field name="arch" type="xml">
+                <form>
+                    <header>
+                        <button name="generate_report" string="Generera rapport"
+                            type="object" class="oe_highlight"
+                            invisible="state not in ['draft']"/>
+                        <field name="state" widget="statusbar"/>
+                    </header>
+                    <sheet>
+                        <div class="oe_title"><h1><field name="name"/></h1></div>
+                        <group>
+                            <group>
+                                <field name="union_id"/>
+                                <field name="period_type"/>
+                                <field name="date_start"/>
+                                <field name="date_stop"/>
+                            </group>
+                            <group>
+                                <field name="date"/>
+                                <field name="total_amount" widget="monetary"/>
+                            </group>
+                        </group>
+                        <group string="Medlemmar">
+                            <field name="line_ids" nolabel="1">
+                                <list create="0" delete="0" edit="0">
+                                    <field name="employee_id"/>
+                                    <field name="personal_number"/>
+                                    <field name="member_number"/>
+                                    <field name="amount" widget="monetary"/>
+                                </list>
+                            </field>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_union_report" model="ir.actions.act_window">
+            <field name="name">Fackavgiftsrapport</field>
+            <field name="res_model">hr.union.report</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <menuitem action="action_union_report"
+                  id="menu_union_report"
+                  name="Fackavgiftsrapport"
+                  parent="payroll.payroll_menu_root"
+                  sequence="46"/>
+
+        <!-- ===== Extend Employee ===== -->
+        <record id="view_employee_form_union" model="ir.ui.view">
+            <field name="name">hr.employee.form.union</field>
+            <field name="model">hr.employee</field>
+            <field name="inherit_id" ref="hr.view_employee_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//notebook" position="inside">
+                    <page string="Fack" groups="base.group_user">
+                        <group>
+                            <field name="active_union_ids" widget="many2many_tags"/>
+                        </group>
+                        <group string="Medlemskap">
+                            <field name="union_membership_ids" nolabel="1">
+                                <list>
+                                    <field name="union_id"/>
+                                    <field name="member_number"/>
+                                    <field name="date_start"/>
+                                    <field name="date_end"/>
+                                    <field name="active"/>
+                                </list>
+                            </field>
+                        </group>
+                    </page>
+                </xpath>
+            </field>
+        </record>
+
+    </data>
+</odoo>

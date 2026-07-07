@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <!-- ===== KU Form ===== -->
+        <record id="view_ku_form" model="ir.ui.view">
+            <field name="name">account.ku.declaration.form</field>
+            <field name="model">account.ku.declaration</field>
+            <field name="arch" type="xml">
+                <form string="Kontrolluppgift">
+                    <header>
+                        <button class="oe_highlight"
+                            invisible="state not in ['draft']"
+                            name="calculate" string="Beräkna" type="object"/>
+                        <button class="oe_highlight"
+                            invisible="state not in ['confirmed','done']"
+                            name="action_send_to_skv"
+                            string="Skicka till Skatteverket" type="object"/>
+                        <field name="state" widget="statusbar"/>
+                    </header>
+                    <sheet>
+                        <div class="oe_button_box">
+                            <button class="oe_stat_button" icon="fa-download"
+                                name="action_download_ku_file" type="object"
+                                invisible="state == 'draft' or not ku_file"/>
+                        </div>
+                        <div class="oe_title"><h1><field name="name"/></h1></div>
+                        <group>
+                            <group>
+                                <field name="company_id" groups="base.group_multi_company"/>
+                                <field name="ku_type"/>
+                                <field name="year"/>
+                            </group>
+                            <group>
+                                <field name="date_start" invisible="1"/>
+                                <field name="date_stop" invisible="1"/>
+                                <field name="date"/>
+                            </group>
+                        </group>
+                        <group string="Sammanfattning">
+                            <group>
+                                <field name="employee_count"/>
+                                <field name="total_salary" widget="monetary"/>
+                                <field name="total_benefits" widget="monetary"/>
+                            </group>
+                            <group>
+                                <field name="total_tax" widget="monetary"/>
+                                <field name="total_pension" widget="monetary"/>
+                            </group>
+                        </group>
+                        <notebook>
+                            <page string="Anställda">
+                                <field name="line_ids" nolabel="1">
+                                    <list create="0" delete="0" edit="0">
+                                        <field name="employee_id"/>
+                                        <field name="personal_number"/>
+                                        <field name="salary_amount" sum="Total lön"/>
+                                        <field name="benefit_amount" sum="Total förmån"/>
+                                        <field name="tax_amount" sum="Total skatt"/>
+                                        <field name="pension_amount" sum="Total pension"/>
+                                        <field name="slip_count"/>
+                                    </list>
+                                </field>
+                            </page>
+                            <page string="Detaljer">
+                                <field name="line_ids" nolabel="1">
+                                    <list create="0" delete="0" edit="0">
+                                        <field name="employee_id"/>
+                                        <field name="salary_amount"/>
+                                        <field name="benefit_amount"/>
+                                        <field name="pension_amount"/>
+                                        <field name="pension_premium_amount"/>
+                                        <field name="tax_amount"/>
+                                    </list>
+                                </field>
+                            </page>
+                            <page string="Skatteverket API">
+                                <group>
+                                    <field name="skv_api_status"/>
+                                    <field name="skv_submitted_date"/>
+                                    <field name="skv_response"/>
+                                </group>
+                            </page>
+                        </notebook>
+                    </sheet>
+                    <chatter/>
+                </form>
+            </field>
+        </record>
+
+        <!-- ===== KU Search ===== -->
+        <record id="view_ku_filter" model="ir.ui.view">
+            <field name="name">account.ku.declaration.filter</field>
+            <field name="model">account.ku.declaration</field>
+            <field name="arch" type="xml">
+                <search>
+                    <field name="name"/>
+                    <field name="year"/>
+                    <field name="ku_type"/>
+                    <field name="state"/>
+                    <group expand="0" string="Group By">
+                        <filter context="{'group_by': 'ku_type'}" name="group_ku_type" string="KU-typ"/>
+                        <filter context="{'group_by': 'year'}" name="group_year" string="År"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+
+        <!-- ===== KU List ===== -->
+        <record id="view_ku_tree" model="ir.ui.view">
+            <field name="name">account.ku.declaration.tree</field>
+            <field name="model">account.ku.declaration</field>
+            <field name="arch" type="xml">
+                <list>
+                    <field name="name"/>
+                    <field name="ku_type"/>
+                    <field name="year"/>
+                    <field name="employee_count"/>
+                    <field name="total_salary" widget="monetary"/>
+                    <field name="state"/>
+                    <field name="skv_api_status" widget="badge"
+                        decoration-success="skv_api_status == 'accepted'"
+                        decoration-danger="skv_api_status == 'error'"/>
+                </list>
+            </field>
+        </record>
+
+        <!-- ===== Menu ===== -->
+        <record id="action_ku_declaration" model="ir.actions.act_window">
+            <field name="name">Kontrolluppgifter</field>
+            <field name="res_model">account.ku.declaration</field>
+            <field name="view_mode">tree,form</field>
+            <field name="search_view_id" ref="view_ku_filter"/>
+        </record>
+
+        <menuitem action="action_ku_declaration"
+                  id="menu_ku_declaration"
+                  name="Kontrolluppgifter (KU)"
+                  parent="l10n_se_tax_report.menu_report_authorities"
+                  sequence="20"/>
+
+    </data>
+</odoo>

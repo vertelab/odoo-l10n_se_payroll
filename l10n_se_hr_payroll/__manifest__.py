@@ -62,6 +62,7 @@ Swedish Payroll Rules.
     'auto_install': False,
     'data': [
         'data/hr_payroll_data.xml',
+        'data/ir_cron_data_automatic.xml',
         'views/hr_payroll_view.xml',
         'report/hr_payroll_payslip_report.xml',
         #
@@ -76,7 +77,7 @@ Swedish Payroll Rules.
         'views/hr_job_views.xml',
         'views/hr_payslip_template.xml',
         'views/hr_payslip_run_views.xml',
-        # 'views/res_config_settings_views.xml',
+        'views/res_config_settings_views.xml',
         'views/user_payslip_views.xml',
         'views/hr_contract_views.xml',
         #'views/hr_leave_views.xml',

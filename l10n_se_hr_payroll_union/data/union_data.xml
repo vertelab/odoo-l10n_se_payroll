@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+
+        <!-- IF Metall -->
+        <record id="union_if_metall" model="hr.union">
+            <field name="name">IF Metall</field>
+            <field name="code">IFMET</field>
+            <field name="union_type">lo</field>
+            <field name="default_fee_type">percent</field>
+            <field name="default_fee_percent">1.7</field>
+            <field name="max_fee" eval="340"/>
+        </record>
+
+        <!-- Kommunal -->
+        <record id="union_kommunal" model="hr.union">
+            <field name="name">Kommunal</field>
+            <field name="code">KOMMUNAL</field>
+            <field name="union_type">lo</field>
+            <field name="default_fee_type">fixed</field>
+            <field name="default_fee_amount" eval="295"/>
+        </record>
+
+        <!-- Unionen -->
+        <record id="union_unionen" model="hr.union">
+            <field name="name">Unionen</field>
+            <field name="code">UNIONEN</field>
+            <field name="union_type">tco</field>
+            <field name="default_fee_type">percent</field>
+            <field name="default_fee_percent">1.4</field>
+            <field name="max_fee" eval="290"/>
+        </record>
+
+        <!-- Sveriges Ingenjörer -->
+        <record id="union_sveriges_ingenjorer" model="hr.union">
+            <field name="name">Sveriges Ingenjörer</field>
+            <field name="code">INGENJ</field>
+            <field name="union_type">saco</field>
+            <field name="default_fee_type">fixed</field>
+            <field name="default_fee_amount" eval="330"/>
+        </record>
+
+    </data>
+</odoo>

@@ -5,9 +5,9 @@
         <record id="view_hr_contract_form_collective" model="ir.ui.view">
             <field name="name">hr.contract.form.collective</field>
             <field name="model">hr.contract</field>
-            <field name="inherit_id" ref="l10n_se_hr_payroll.view_hr_contract_form_payroll"/>
+            <field name="inherit_id" ref="hr_contract.hr_contract_view_form"/>
             <field name="arch" type="xml">
-                <xpath expr="//page[@name='accounting']" position="after">
+                <xpath expr="//notebook" position="inside">
                     <page string="Collective Agreement" name="collective">
                         <group>
                             <field name="collective_agreement_id"/>

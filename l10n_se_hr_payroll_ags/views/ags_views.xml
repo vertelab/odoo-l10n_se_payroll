@@ -1,0 +1,233 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <!-- ===== Sick Leave Record ===== -->
+        <record id="view_sick_leave_form" model="ir.ui.view">
+            <field name="name">hr.sick.leave.record.form</field>
+            <field name="model">hr.sick.leave.record</field>
+            <field name="arch" type="xml">
+                <form>
+                    <header>
+                        <button name="action_create_ags_claim" string="Skapa AGS-ärende"
+                            type="object" class="oe_highlight"
+                            invisible="not is_ags_qualified or ags_claim_id"/>
+                        <button name="action_close" string="Avsluta"
+                            type="object" invisible="is_ongoing == False"/>
+                        <field name="state" widget="statusbar"/>
+                    </header>
+                    <sheet>
+                        <div class="oe_title"><h1><field name="name"/></h1></div>
+                        <group>
+                            <group>
+                                <field name="employee_id"/>
+                                <field name="leave_type"/>
+                                <field name="date_start"/>
+                                <field name="date_end" required="not is_ongoing"/>
+                                <field name="is_ongoing"/>
+                            </group>
+                            <group>
+                                <field name="contract_id"/>
+                                <field name="collective_agreement_id"/>
+                                <field name="sick_days"/>
+                                <field name="is_ags_qualified" widget="boolean_toggle"/>
+                                <field name="company_id" groups="base.group_multi_company"/>
+                            </group>
+                        </group>
+
+                        <group string="FK Integration">
+                            <group>
+                                <field name="fk_leave_id"/>
+                                <field name="fk_case_number"/>
+                            </group>
+                            <group>
+                                <field name="sgi_amount" widget="monetary"/>
+                                <field name="fk_daily_amount" widget="monetary"/>
+                                <field name="ags_daily_amount" widget="monetary"/>
+                            </group>
+                        </group>
+
+                        <group string="AGS Claim" invisible="not ags_claim_id">
+                            <field name="ags_claim_id" nolabel="1"/>
+                        </group>
+
+                        <group string="TFA (Work Injury)" invisible="not is_work_related">
+                            <field name="is_work_related"/>
+                            <field name="tfa_case_id" invisible="not tfa_case_id"/>
+                        </group>
+
+                        <group string="Notes">
+                            <field name="note" nolabel="1"/>
+                        </group>
+                    </sheet>
+                    <chatter/>
+                </form>
+            </field>
+        </record>
+
+        <record id="view_sick_leave_tree" model="ir.ui.view">
+            <field name="name">hr.sick.leave.record.tree</field>
+            <field name="model">hr.sick.leave.record</field>
+            <field name="arch" type="xml">
+                <list>
+                    <field name="employee_id"/>
+                    <field name="leave_type"/>
+                    <field name="date_start"/>
+                    <field name="date_end"/>
+                    <field name="sick_days"/>
+                    <field name="is_ags_qualified"/>
+                    <field name="state"/>
+                </list>
+            </field>
+        </record>
+
+        <record id="action_sick_leave" model="ir.actions.act_window">
+            <field name="name">Sjukperioder</field>
+            <field name="res_model">hr.sick.leave.record</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <menuitem action="action_sick_leave"
+                  name="Sjukperioder" id="menu_sick_leave"
+                  parent="hr_holidays.menu_hr_holidays_root"
+                  sequence="10"/>
+
+        <!-- ===== AGS Claim ===== -->
+        <record id="view_ags_claim_form" model="ir.ui.view">
+            <field name="name">hr.ags.claim.form</field>
+            <field name="model">hr.ags.claim</field>
+            <field name="arch" type="xml">
+                <form>
+                    <header>
+                        <button name="action_submit" string="Skicka"
+                            type="object" class="oe_highlight"
+                            invisible="state != 'draft'"/>
+                        <button name="action_approve" string="Godkänn"
+                            type="object" invisible="state != 'submitted'"/>
+                        <button name="action_pay" string="Utbetald"
+                            type="object" invisible="state != 'approved'"/>
+                        <field name="state" widget="statusbar"/>
+                    </header>
+                    <sheet>
+                        <div class="oe_title"><h1><field name="name"/></h1></div>
+                        <group>
+                            <group>
+                                <field name="employee_id"/>
+                                <field name="collective_agreement_id"/>
+                                <field name="date_start"/>
+                                <field name="date_end"/>
+                            </group>
+                            <group>
+                                <field name="sick_days_total"/>
+                                <field name="ags_qualifying_days"/>
+                                <field name="daily_amount" widget="monetary"/>
+                                <field name="total_amount" widget="monetary"/>
+                            </group>
+                        </group>
+                        <group string="AFA Försäkring">
+                            <field name="afa_case_number"/>
+                            <field name="afa_submitted_date"/>
+                            <field name="afa_decision_date"/>
+                        </group>
+                    </sheet>
+                    <chatter/>
+                </form>
+            </field>
+        </record>
+
+        <record id="view_ags_claim_tree" model="ir.ui.view">
+            <field name="name">hr.ags.claim.tree</field>
+            <field name="model">hr.ags.claim</field>
+            <field name="arch" type="xml">
+                <list>
+                    <field name="employee_id"/>
+                    <field name="date_start"/>
+                    <field name="ags_qualifying_days"/>
+                    <field name="total_amount" widget="monetary"/>
+                    <field name="state"/>
+                </list>
+            </field>
+        </record>
+
+        <record id="action_ags_claim" model="ir.actions.act_window">
+            <field name="name">AGS-ärenden</field>
+            <field name="res_model">hr.ags.claim</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <menuitem action="action_ags_claim"
+                  name="AGS-ärenden" id="menu_ags_claim"
+                  parent="payroll.payroll_menu_root"
+                  sequence="40"/>
+
+        <!-- ===== TFA Case ===== -->
+        <record id="view_tfa_case_form" model="ir.ui.view">
+            <field name="name">hr.tfa.case.form</field>
+            <field name="model">hr.tfa.case</field>
+            <field name="arch" type="xml">
+                <form>
+                    <header>
+                        <field name="state" widget="statusbar"/>
+                    </header>
+                    <sheet>
+                        <div class="oe_title"><h1><field name="name"/></h1></div>
+                        <group>
+                            <group>
+                                <field name="employee_id"/>
+                                <field name="injury_date"/>
+                                <field name="injury_type"/>
+                            </group>
+                            <group>
+                                <field name="sick_leave_id"/>
+                                <field name="tfa_type"/>
+                                <field name="company_id" groups="base.group_multi_company"/>
+                            </group>
+                        </group>
+                        <group string="Injury Description">
+                            <field name="injury_description" nolabel="1"/>
+                        </group>
+                        <group string="Compensation">
+                            <field name="claimed_amount" widget="monetary"/>
+                            <field name="awarded_amount" widget="monetary"/>
+                        </group>
+                        <group string="Reporting">
+                            <field name="is_reported_to_afa"/>
+                            <field name="is_reported_to_arbetsmiljoverket"/>
+                            <field name="afa_case_number"/>
+                        </group>
+                    </sheet>
+                    <chatter/>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_tfa_case" model="ir.actions.act_window">
+            <field name="name">TFA-ärenden</field>
+            <field name="res_model">hr.tfa.case</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <menuitem action="action_tfa_case"
+                  name="TFA-ärenden" id="menu_tfa_case"
+                  parent="payroll.payroll_menu_root"
+                  sequence="41"/>
+
+        <!-- ===== Extend Employee Form ===== -->
+        <record id="view_employee_form_ags" model="ir.ui.view">
+            <field name="name">hr.employee.form.ags</field>
+            <field name="model">hr.employee</field>
+            <field name="inherit_id" ref="hr.view_employee_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//notebook" position="inside">
+                    <page string="Sjuk &amp; AGS" groups="base.group_user">
+                        <group>
+                            <field name="total_sick_days_ytd"/>
+                            <field name="current_ags_qualified"/>
+                        </group>
+                    </page>
+                </xpath>
+            </field>
+        </record>
+
+    </data>
+</odoo>

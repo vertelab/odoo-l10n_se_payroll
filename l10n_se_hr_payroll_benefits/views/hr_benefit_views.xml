@@ -259,17 +259,17 @@
         </record>
 
         <!-- Menus -->
-        <menuitem id="menu_hr_benefit_budget_generate"
-                  name="Generate Budget"
-                  parent="menu_hr_benefit_budget"
-                  action="action_hr_benefit_budget_generate"
-                  sequence="10"/>
-
         <menuitem id="menu_hr_benefit_budget"
                   name="Benefit Budgets"
                   parent="payroll.payroll_menu_configuration"
                   action="action_hr_benefit_budget"
                   sequence="22"/>
+
+        <menuitem id="menu_hr_benefit_budget_generate"
+                  name="Generate Budget"
+                  parent="menu_hr_benefit_budget"
+                  action="action_hr_benefit_budget_generate"
+                  sequence="10"/>
 
         <menuitem id="menu_hr_benefit"
                   name="Förmånstyper"

@@ -1,0 +1,7 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_hr_pension_plan,hr.pension.plan,model_hr_pension_plan,base.group_user,1,1,0,0
+access_hr_pension_plan_admin,hr.pension.plan admin,model_hr_pension_plan,base.group_erp_manager,1,1,1,1
+access_hr_pension_bracket,hr.pension.bracket,model_hr_pension_bracket,base.group_user,1,0,0,0
+access_hr_pension_bracket_admin,hr.pension.bracket admin,model_hr_pension_bracket,base.group_erp_manager,1,1,1,1
+access_hr_pension_entry,hr.pension.entry,model_hr_pension_entry,base.group_user,1,1,1,1
+access_hr_pension_yearly_summary,hr.pension.yearly.summary,model_hr_pension_yearly_summary,base.group_user,1,1,1,1

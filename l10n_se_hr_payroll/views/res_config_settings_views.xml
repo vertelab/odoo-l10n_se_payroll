@@ -8,21 +8,40 @@
         <field name="inherit_id" ref="base.res_config_settings_view_form" />
         <field name="arch" type="xml">
             <xpath expr="//div[hasclass('settings')]" position="inside">
-                <!-- <div
+                <div
                     class="app_settings_block"
                     data-string="Payroll"
-                    string="Payslip"
+                    string="Payroll"
                     data-key="payroll"
                     groups="payroll.group_payroll_manager"
-                > -->
-                <!-- <h2>Payslip</h2>
-                    <div class="row mt16 o_settings_container" id="payroll_payslip_post">
+                >
+                    <h2>Payroll</h2>
+                    <div class="row mt16 o_settings_container">
+                        <!-- Automatic Payroll -->
                         <div class="col-lg-6 col-12 o_setting_box">
-                                <field name="choose_date_method"></field>
+                            <div class="o_setting_left_pane">
+                                <field name="automatic_payroll_enabled"/>
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label string="Automatic Payroll" for="automatic_payroll_enabled"/>
+                                <div class="text-muted">
+                                    Automatically generate payslip batches and payslips each month
+                                </div>
+                                <div class="content-group mt8"
+                                     attrs="{'invisible': [('automatic_payroll_enabled', '=', False)]}">
+                                    <label for="automatic_payroll_day" string="Generation Day"/>
+                                    <field name="automatic_payroll_day"
+                                           string="Day of month"
+                                           class="o_light_label"
+                                           required="automatic_payroll_enabled"/>
+                                    <div class="text-muted">
+                                        Day of the month when payslips are generated (1-28). Default: 25.
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                    </div> -->
-                <!-- </div> -->
+                    </div>
+                </div>
             </xpath>
         </field>
     </record>

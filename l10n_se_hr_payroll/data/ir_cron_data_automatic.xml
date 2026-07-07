@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Scheduled cron job for automatic payslip batch generation -->
+    <record id="ir_cron_automatic_payslip_generation" model="ir.cron">
+        <field name="name">Payroll: Automatic payslip batch generation</field>
+        <field name="model_id" ref="payroll.model_hr_payslip_run"/>
+        <field name="state">code</field>
+        <field name="code">model._cron_generate_payslips()</field>
+        <field name="interval_number">1</field>
+        <field name="interval_type">days</field>
+        <field name="numbercall">-1</field>
+        <field name="active" eval="True"/>
+    </record>
+</odoo>

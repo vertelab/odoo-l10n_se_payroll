@@ -1,0 +1,250 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <!-- ===== Pension Plan ===== -->
+        <record id="view_pension_plan_form" model="ir.ui.view">
+            <field name="name">hr.pension.plan.form</field>
+            <field name="model">hr.pension.plan</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <div class="oe_title"><h1><field name="name"/></h1></div>
+                        <group>
+                            <group>
+                                <field name="code"/>
+                                <field name="pension_type"/>
+                                <field name="sequence"/>
+                                <field name="active"/>
+                            </group>
+                            <group>
+                                <field name="company_id" groups="base.group_multi_company"/>
+                            </group>
+                        </group>
+                        <group string="Premieinställningar">
+                            <group>
+                                <field name="basic_rate" string="Grundpremie (%)"/>
+                                <field name="high_rate" string="Högpremie (%)"
+                                    invisible="pension_type in ['saflo', 'akap']"/>
+                            </group>
+                            <group>
+                                <field name="saf_lo_flex_rate"
+                                    invisible="pension_type != 'saflo'"/>
+                                <field name="akap_variable_rate"
+                                    invisible="pension_type != 'akap'"/>
+                            </group>
+                        </group>
+                        <group string="Löneintervall">
+                            <field name="bracket_ids" nolabel="1">
+                                <list editable="bottom">
+                                    <field name="sequence" widget="handle"/>
+                                    <field name="name"/>
+                                    <field name="code"/>
+                                    <field name="wage_from"/>
+                                    <field name="wage_to"/>
+                                    <field name="rate"/>
+                                </list>
+                            </field>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="view_pension_plan_tree" model="ir.ui.view">
+            <field name="name">hr.pension.plan.tree</field>
+            <field name="model">hr.pension.plan</field>
+            <field name="arch" type="xml">
+                <list>
+                    <field name="sequence" widget="handle"/>
+                    <field name="name"/>
+                    <field name="code"/>
+                    <field name="pension_type"/>
+                    <field name="basic_rate"/>
+                    <field name="active"/>
+                </list>
+            </field>
+        </record>
+
+        <record id="action_pension_plan" model="ir.actions.act_window">
+            <field name="name">Pensionsplaner</field>
+            <field name="res_model">hr.pension.plan</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <menuitem action="action_pension_plan"
+                  id="menu_pension_plan"
+                  name="Pensionsplaner"
+                  parent="payroll.payroll_menu_configuration"
+                  sequence="25"/>
+
+        <!-- ===== Monthly Pension Entry ===== -->
+        <record id="view_pension_entry_form" model="ir.ui.view">
+            <field name="name">hr.pension.entry.form</field>
+            <field name="model">hr.pension.entry</field>
+            <field name="arch" type="xml">
+                <form>
+                    <header>
+                        <button name="calculate" string="Beräkna"
+                            type="object" class="oe_highlight"
+                            invisible="state not in ['draft']"/>
+                        <field name="state" widget="statusbar"/>
+                    </header>
+                    <sheet>
+                        <div class="oe_title"><h1><field name="name"/></h1></div>
+                        <group>
+                            <group>
+                                <field name="employee_id"/>
+                                <field name="date"/>
+                                <field name="plan_id"/>
+                            </group>
+                            <group>
+                                <field name="payslip_id"/>
+                                <field name="contract_id"/>
+                                <field name="company_id" groups="base.group_multi_company"/>
+                            </group>
+                        </group>
+                        <group string="Lön &amp; Premie">
+                            <group>
+                                <field name="wage_basis" widget="monetary"/>
+                                <field name="exchanged_amount" widget="monetary"/>
+                            </group>
+                            <group>
+                                <field name="premium_basic" widget="monetary"/>
+                                <field name="premium_high" widget="monetary"
+                                    invisible="not premium_high"/>
+                                <field name="premium_flex" widget="monetary"
+                                    invisible="not premium_flex"/>
+                                <field name="premium_variable" widget="monetary"
+                                    invisible="not premium_variable"/>
+                                <field name="premium_total" widget="monetary"/>
+                            </group>
+                        </group>
+                        <group string="Löneintervall" invisible="not wage_basic">
+                            <field name="wage_basic"/>
+                            <field name="wage_high" invisible="not wage_high"/>
+                            <field name="wage_low" invisible="not wage_low"/>
+                            <field name="wage_mid" invisible="not wage_mid"/>
+                        </group>
+                        <group string="Notering">
+                            <field name="note" nolabel="1"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="view_pension_entry_tree" model="ir.ui.view">
+            <field name="name">hr.pension.entry.tree</field>
+            <field name="model">hr.pension.entry</field>
+            <field name="arch" type="xml">
+                <list>
+                    <field name="date"/>
+                    <field name="employee_id"/>
+                    <field name="plan_id"/>
+                    <field name="wage_basis" widget="monetary"/>
+                    <field name="premium_total" widget="monetary"/>
+                    <field name="state"/>
+                </list>
+            </field>
+        </record>
+
+        <record id="action_pension_entry" model="ir.actions.act_window">
+            <field name="name">Pensionsposter</field>
+            <field name="res_model">hr.pension.entry</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <menuitem action="action_pension_entry"
+                  id="menu_pension_entry"
+                  name="Pensionsposter"
+                  parent="payroll.payroll_menu_root"
+                  sequence="35"/>
+
+        <!-- ===== Yearly Summary ===== -->
+        <record id="view_pension_yearly_form" model="ir.ui.view">
+            <field name="name">hr.pension.yearly.summary.form</field>
+            <field name="model">hr.pension.yearly.summary</field>
+            <field name="arch" type="xml">
+                <form>
+                    <header>
+                        <button name="calculate_summary" string="Beräkna"
+                            type="object" class="oe_highlight"/>
+                        <field name="state" widget="statusbar"/>
+                    </header>
+                    <sheet>
+                        <div class="oe_title"><h1><field name="employee_id"/> — <field name="year"/></h1></div>
+                        <group>
+                            <group>
+                                <field name="plan_id"/>
+                                <field name="contract_id"/>
+                            </group>
+                            <group>
+                                <field name="entry_count"/>
+                                <field name="company_id" groups="base.group_multi_company"/>
+                            </group>
+                        </group>
+                        <group string="Årssummering">
+                            <field name="total_wage_basis" widget="monetary"/>
+                            <field name="total_exchanged" widget="monetary"/>
+                            <field name="total_premium" widget="monetary"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_pension_yearly" model="ir.actions.act_window">
+            <field name="name">Årssummering Pension</field>
+            <field name="res_model">hr.pension.yearly.summary</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <menuitem action="action_pension_yearly"
+                  id="menu_pension_yearly"
+                  name="Årsbesked Pension"
+                  parent="payroll.payroll_menu_root"
+                  sequence="36"/>
+
+        <!-- ===== Extend Contract Form ===== -->
+        <record id="view_contract_form_pension" model="ir.ui.view">
+            <field name="name">hr.contract.form.pension</field>
+            <field name="model">hr.contract</field>
+            <field name="inherit_id" ref="hr_contract.hr_contract_view_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//notebook" position="inside">
+                    <page string="Pension">
+                        <group>
+                            <field name="pension_plan_id"/>
+                        </group>
+                        <group string="Löneväxling">
+                            <field name="enable_salary_exchange"/>
+                            <field name="salary_exchange_percent"
+                                invisible="not enable_salary_exchange"/>
+                            <field name="salary_exchange_max"
+                                invisible="not enable_salary_exchange"/>
+                        </group>
+                    </page>
+                </xpath>
+            </field>
+        </record>
+
+        <!-- ===== Extend Employee Form ===== -->
+        <record id="view_employee_form_pension" model="ir.ui.view">
+            <field name="name">hr.employee.form.pension</field>
+            <field name="model">hr.employee</field>
+            <field name="inherit_id" ref="hr.view_employee_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//notebook" position="inside">
+                    <page string="Pension" groups="base.group_user">
+                        <group string="SAF-LO Flex">
+                            <field name="saf_lo_flex_rate"
+                                invisible="contract_id.collective_agreement_id.pension_type != 'saflo'"/>
+                        </group>
+                    </page>
+                </xpath>
+            </field>
+        </record>
+
+    </data>
+</odoo>
