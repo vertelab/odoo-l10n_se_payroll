@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Bonus Request Form View -->
+    <record id="bonus_request_view_form" model="ir.ui.view">
+        <field name="name">bonus.request.form</field>
+        <field name="model">bonus.request</field>
+        <field name="arch" type="xml">
+            <form string="Bonus Request">
+                <header>
+                    <field name="state" widget="statusbar"
+                           statusbar_visible="draft,submitted,department_approved,manager_approved,accounting"/>
+                    <button name="action_submit" string="Submit" type="object"
+                            class="btn-primary"
+                            attrs="{'invisible': [('state', '!=', 'draft')]}"/>
+                    <button name="action_department_approve" string="Department Approve"
+                            type="object" class="btn-primary"
+                            attrs="{'invisible': [('state', '!=', 'submitted')]}"
+                            groups="hr.group_hr_manager"/>
+                    <button name="action_manager_approve" string="Manager Approve"
+                            type="object" class="btn-primary"
+                            attrs="{'invisible': [('state', '!=', 'department_approved')]}"
+                            groups="hr.group_hr_manager"/>
+                    <button name="action_post_journal_entry" string="Post Journal Entry"
+                            type="object" class="btn-primary"
+                            attrs="{'invisible': [('state', '!=', 'manager_approved')]}"
+                            groups="account.group_account_invoice"/>
+                    <button name="action_reject" string="Reject"
+                            type="object" class="btn-secondary"
+                            attrs="{'invisible': [('state', 'in', ['rejected', 'accounting'])]}"/>
+                    <button name="action_reset_to_draft" string="Reset to Draft"
+                            type="object"
+                            attrs="{'invisible': [('state', 'in', ['draft', 'accounting'])]}"/>
+                </header>
+                <sheet>
+                    <div class="oe_title">
+                        <h1><field name="reference" readonly="1"/></h1>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="employee_id"
+                                   attrs="{'readonly': [('state', '!=', 'draft')]}"
+                                   options="{'no_quick_create': True, 'no_create_edit': True}"/>
+                            <field name="bonus_reason_id"
+                                   attrs="{'readonly': [('state', '!=', 'draft')]}"/>
+                            <field name="bonus_amount"
+                                   attrs="{'readonly': [('state', '!=', 'draft')]}"/>
+                            <field name="name"
+                                   attrs="{'readonly': [('state', '!=', 'draft')]}"
+                                   placeholder="Optional description"/>
+                        </group>
+                        <group>
+                            <field name="department_id" readonly="1"/>
+                            <field name="job_id" readonly="1"/>
+                            <field name="company_id" invisible="1"/>
+                        </group>
+                    </group>
+                    <group string="Accounting"
+                           attrs="{'invisible': [('state', 'not in', ['manager_approved', 'accounting'])]}">
+                        <group>
+                            <field name="journal_id"
+                                   attrs="{'readonly': [('state', '=', 'accounting')]}"/>
+                            <field name="debit_account_id"
+                                   attrs="{'readonly': [('state', '=', 'accounting')]}"/>
+                            <field name="credit_account_id"
+                                   attrs="{'readonly': [('state', '=', 'accounting')]}"/>
+                        </group>
+                        <group>
+                            <field name="move_id" readonly="1"
+                                   attrs="{'invisible': [('move_id', '=', False)]}"/>
+                            <button name="action_view_journal_entry"
+                                    string="View Journal Entry" type="object"
+                                    class="btn-secondary"
+                                    attrs="{'invisible': [('move_id', '=', False)]}"/>
+                        </group>
+                    </group>
+                    <group string="Approval History"
+                           attrs="{'invisible': [('state', '=', 'draft')]}">
+                        <group>
+                            <field name="confirmed_user_id" readonly="1"/>
+                            <field name="confirmed_date" readonly="1"/>
+                        </group>
+                        <group>
+                            <field name="department_manager_id" readonly="1"/>
+                            <field name="department_approved_date" readonly="1"/>
+                            <field name="hr_manager_id" readonly="1"/>
+                            <field name="manager_approved_date" readonly="1"/>
+                        </group>
+                    </group>
+                </sheet>
+                <chatter/>
+            </form>
+        </field>
+    </record>
+
+    <!-- Bonus Request Tree View -->
+    <record id="bonus_request_view_tree" model="ir.ui.view">
+        <field name="name">bonus.request.tree</field>
+        <field name="model">bonus.request</field>
+        <field name="arch" type="xml">
+            <tree string="Bonus Requests">
+                <field name="reference"/>
+                <field name="employee_id"/>
+                <field name="bonus_reason_id"/>
+                <field name="bonus_amount"/>
+                <field name="state" widget="badge"/>
+                <field name="confirmed_date"/>
+                <field name="manager_approved_date"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- Bonus Request Search View -->
+    <record id="bonus_request_view_search" model="ir.ui.view">
+        <field name="name">bonus.request.search</field>
+        <field name="model">bonus.request</field>
+        <field name="arch" type="xml">
+            <search string="Search Bonus Requests">
+                <field name="employee_id"/>
+                <field name="bonus_reason_id"/>
+                <field name="reference"/>
+                <filter string="Draft" name="state_draft"
+                        domain="[('state', '=', 'draft')]"/>
+                <filter string="Submitted" name="state_submitted"
+                        domain="[('state', '=', 'submitted')]"/>
+                <filter string="Approved" name="state_approved"
+                        domain="[('state', 'in', ['department_approved','manager_approved','accounting'])]"/>
+                <separator/>
+                <filter string="My Team" name="filter_my_team"
+                        domain="[('department_id.manager_id.user_id', '=', uid)]"/>
+                <group expand="0" string="Group By">
+                    <filter string="Employee" name="group_employee"
+                            domain="[]" context="{'group_by': 'employee_id'}"/>
+                    <filter string="State" name="group_state"
+                            domain="[]" context="{'group_by': 'state'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <!-- Bonus Request Kanban View -->
+    <record id="bonus_request_view_kanban" model="ir.ui.view">
+        <field name="name">bonus.request.kanban</field>
+        <field name="model">bonus.request</field>
+        <field name="arch" type="xml">
+            <kanban default_group_by="state">
+                <field name="state"/>
+                <field name="employee_id"/>
+                <field name="bonus_amount"/>
+                <templates>
+                    <t t-name="kanban-box">
+                        <div class="oe_kanban_global_click">
+                            <div class="o_kanban_record_top">
+                                <strong><field name="employee_id"/></strong>
+                            </div>
+                            <div class="o_kanban_record_body">
+                                <div><field name="bonus_amount"/> SEK</div>
+                            </div>
+                        </div>
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>
+
+    <!-- Action -->
+    <record id="bonus_request_action" model="ir.actions.act_window">
+        <field name="name">Bonus Requests</field>
+        <field name="res_model">bonus.request</field>
+        <field name="view_mode">tree,kanban,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create a bonus request
+            </p>
+            <p>
+                Bonus requests go through an approval workflow:
+                Draft → Submitted → Department → Manager → Accounting.
+                Approved bonuses flow into the payslip automatically.
+            </p>
+        </field>
+    </record>
+
+    <!-- Menu Item -->
+    <menuitem id="menu_bonus_requests"
+              name="Bonus Requests"
+              parent="payroll.payroll_menu_root"
+              action="bonus_request_action"
+              sequence="30"
+              groups="hr.group_hr_user"/>
+</odoo>

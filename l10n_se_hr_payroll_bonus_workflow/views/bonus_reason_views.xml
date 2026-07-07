@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Bonus Reason Tree View -->
+    <record id="bonus_reason_view_tree" model="ir.ui.view">
+        <field name="name">bonus.reason.tree</field>
+        <field name="model">bonus.reason</field>
+        <field name="arch" type="xml">
+            <tree string="Bonus Reasons" editable="bottom">
+                <field name="name"/>
+                <field name="description"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- Bonus Reason Form View -->
+    <record id="bonus_reason_view_form" model="ir.ui.view">
+        <field name="name">bonus.reason.form</field>
+        <field name="model">bonus.reason</field>
+        <field name="arch" type="xml">
+            <form string="Bonus Reason">
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                        <field name="description"/>
+                        <field name="active"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Action -->
+    <record id="bonus_reason_action" model="ir.actions.act_window">
+        <field name="name">Bonus Reasons</field>
+        <field name="res_model">bonus.reason</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <!-- Menu Item -->
+    <menuitem id="menu_bonus_reasons"
+              name="Bonus Reasons"
+              parent="payroll.menu_payroll_configuration"
+              action="bonus_reason_action"
+              sequence="20"/>
+</odoo>
