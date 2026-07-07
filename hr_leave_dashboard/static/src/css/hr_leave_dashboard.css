@@ -1,0 +1,19 @@
+.o_hr_leave_dashboard .card {
+    border-radius: 8px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+.o_hr_leave_dashboard .card-header {
+    background: #f8f9fa;
+    border-bottom: 1px solid #dee2e6;
+}
+.o_hr_leave_dashboard .absentee-item,
+.o_hr_leave_dashboard .holiday-item,
+.o_hr_leave_dashboard .approval-item {
+    padding: 6px 0;
+    border-bottom: 1px solid #eee;
+}
+.o_hr_leave_dashboard .absentee-item:last-child,
+.o_hr_leave_dashboard .holiday-item:last-child,
+.o_hr_leave_dashboard .approval-item:last-child {
+    border-bottom: none;
+}
