@@ -47,6 +47,9 @@ class hr_payslip(models.Model):
     nl_amount = fields.Monetary(string="Nettolön", currency_field='currency_id')
     total_skatt_amount = fields.Monetary(string="Skatt", currency_field='currency_id')
     sa_amount = fields.Monetary(string="Arbetsgivaravgift", currency_field='currency_id')
+    late_check_in_ids = fields.Many2many(
+        'late.check.in', string='Late Check-ins',
+        help='Late check-in records for this payslip period')
 
     def _compute_amounts(self):
         salary_rule_codes = {"gl": "gl_amount", "bl": "bl_amount", "nl": "nl_amount",
@@ -76,7 +79,34 @@ class hr_payslip(models.Model):
             if corrections:
                 corrections._apply_to_payslip(slip)
 
+    def get_inputs(self, contracts, date_from, date_to):
+        res = super().get_inputs(contracts, date_from, date_to)
+        config = self.env['ir.config_parameter'].sudo()
+        enabled = config.get_param('l10n_se_hr_payroll.late_checkin_enabled', default='False')
+        if enabled != 'True' or not self.employee_id:
+            return res
+
+        late_check_ins = self.env['late.check.in'].search([
+            ('employee_id', '=', self.employee_id.id),
+            ('date', '>=', self.date_from),
+            ('date', '<=', self.date_to),
+            ('state', '=', 'approved'),
+        ])
+        if late_check_ins:
+            self.late_check_in_ids = late_check_ins
+            total_penalty = sum(late_check_ins.mapped('penalty_amount'))
+            res.append({
+                'name': _('Late Check-in Deduction'),
+                'code': 'LC',
+                'amount': total_penalty,
+                'contract_id': self.contract_id.id,
+            })
+        return res
+
     def action_payslip_done(self):
+        # Mark late check-in records as deducted
+        if self.late_check_in_ids:
+            self.late_check_in_ids.write({'state': 'deducted'})
         res = super().action_payslip_done()
         self._compute_amounts()
         if self.payslip_run_id:

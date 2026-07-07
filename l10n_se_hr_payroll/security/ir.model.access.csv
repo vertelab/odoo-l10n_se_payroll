@@ -14,3 +14,4 @@ access_hr_payroll_structure_const,access_hr_payroll_structure_const,model_hr_pay
 access_vacation_debt_report_wizard,vacation.debt.report.wizard,model_vacation_debt_report_wizard,base.group_user,1,1,1,1
 access_hr_payroll_salary_change,hr.payroll.salary.change,model_hr_payroll_salary_change,base.group_user,1,1,1,1
 access_hr_payroll_correction,hr.payroll.correction,model_hr_payroll_correction,base.group_user,1,1,1,1
+access_late_check_in,late.check.in,model_late_check_in,base.group_user,1,1,1,1

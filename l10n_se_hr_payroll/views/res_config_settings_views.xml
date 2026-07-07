@@ -40,6 +40,36 @@
                                 </div>
                             </div>
                         </div>
+                        <!-- Late Check-in -->
+                        <div class="col-lg-6 col-12 o_setting_box">
+                            <div class="o_setting_left_pane">
+                                <field name="late_checkin_enabled"/>
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label string="Late Check-in Tracking" for="late_checkin_enabled"/>
+                                <div class="text-muted">
+                                    Track late employee arrivals and deduct from payslip
+                                </div>
+                                <div class="content-group mt8"
+                                     attrs="{'invisible': [('late_checkin_enabled', '=', False)]}">
+                                    <group>
+                                        <field name="late_checkin_deduction_type" widget="radio"/>
+                                    </group>
+                                    <group>
+                                        <label for="late_checkin_deduction_amount"/>
+                                        <field name="late_checkin_deduction_amount"/>
+                                    </group>
+                                    <group>
+                                        <label for="late_checkin_minutes_after"/>
+                                        <field name="late_checkin_minutes_after"/>
+                                    </group>
+                                    <group>
+                                        <label for="late_checkin_max_minutes"/>
+                                        <field name="late_checkin_max_minutes"/>
+                                    </group>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </xpath>

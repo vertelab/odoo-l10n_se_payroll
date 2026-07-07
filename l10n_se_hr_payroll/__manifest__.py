@@ -34,6 +34,7 @@
     'repository': 'https://github.com/vertelab/odoo-l10n_se_payroll',
     'depends': [
         'payroll',
+        'hr_attendance',
         'account_period_vrtl', 
         'hr_timesheet_sheet',
         'hr_work_entry',
@@ -63,6 +64,7 @@ Swedish Payroll Rules.
     'data': [
         'data/hr_payroll_data.xml',
         'data/ir_cron_data_automatic.xml',
+        'data/ir_cron_data_late_checkin.xml',
         'views/hr_payroll_view.xml',
         'report/hr_payroll_payslip_report.xml',
         #
@@ -91,6 +93,7 @@ Swedish Payroll Rules.
         'views/hr_payroll_salary_change_views.xml',
         'views/hr_payroll_correction_views.xml',
         'views/payroll_dashboard_views.xml',
+        'views/late_check_in_views.xml',
         'report/hr_vacation_debt_report.xml',
 
     ],
