@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data noupdate="1">
+        <!-- Work Anniversary Mail Template -->
+        <record id="email_template_work_anniversary" model="mail.template">
+            <field name="name">Work Anniversary Greeting</field>
+            <field name="subject">Happy Work Anniversary, <t t-out="object.name"/>!</field>
+            <field name="model_id" ref="hr.model_hr_employee"/>
+            <field name="email_from">{{ user.company_id.email or user.email }}</field>
+            <field name="email_to">{{ object.work_email }}</field>
+            <field name="auto_delete" eval="True"/>
+            <field name="body_html" type="html">
+                <div style="padding: 20px; font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
+                    <div style="background-color: #2c3e50; padding: 30px; text-align: center; border-radius: 8px 8px 0 0;">
+                        <h2 style="color: #ffffff; margin: 0; font-size: 28px;">
+                            Happy Work Anniversary!
+                        </h2>
+                    </div>
+                    <div style="background-color: #ffffff; padding: 30px; border: 1px solid #e0e0e0; border-top: none; border-radius: 0 0 8px 8px;">
+                        <p style="font-size: 16px; color: #333;">
+                            Dear <strong t-out="object.name"/>,
+                        </p>
+                        <p style="font-size: 14px; color: #555; line-height: 1.6;">
+                            Congratulations on your work anniversary! We appreciate your
+                            dedication and contributions to our team.
+                        </p>
+                        <p style="font-size: 12px; color: #999; margin-top: 20px;">
+                            Joined: <t t-out="object.joining_date"/>
+                        </p>
+                    </div>
+                </div>
+            </field>
+        </record>
+    </data>
+</odoo>
