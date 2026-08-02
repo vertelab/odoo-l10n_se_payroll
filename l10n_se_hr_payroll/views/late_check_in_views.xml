@@ -93,7 +93,7 @@
     <record id="late_check_in_action" model="ir.actions.act_window">
         <field name="name">Late Check-ins</field>
         <field name="res_model">late.check.in</field>
-        <field name="view_mode">tree,form</field>
+        <field name="view_mode">list,form</field>
         <field name="context">{'search_default_group_employee': 1}</field>
     </record>
 

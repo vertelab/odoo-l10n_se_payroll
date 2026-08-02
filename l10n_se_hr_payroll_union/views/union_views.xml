@@ -64,7 +64,7 @@
         <record id="action_union" model="ir.actions.act_window">
             <field name="name">Fackförbund</field>
             <field name="res_model">hr.union</field>
-            <field name="view_mode">tree,form</field>
+            <field name="view_mode">list,form</field>
         </record>
 
         <menuitem action="action_union"
@@ -133,7 +133,7 @@
         <record id="action_union_membership" model="ir.actions.act_window">
             <field name="name">Fackmedlemskap</field>
             <field name="res_model">hr.union.membership</field>
-            <field name="view_mode">tree,form</field>
+            <field name="view_mode">list,form</field>
         </record>
 
         <menuitem action="action_union_membership"
@@ -186,7 +186,7 @@
         <record id="action_union_report" model="ir.actions.act_window">
             <field name="name">Fackavgiftsrapport</field>
             <field name="res_model">hr.union.report</field>
-            <field name="view_mode">tree,form</field>
+            <field name="view_mode">list,form</field>
         </record>
 
         <menuitem action="action_union_report"

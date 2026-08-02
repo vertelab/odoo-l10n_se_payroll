@@ -84,7 +84,7 @@
         <record id="action_sick_leave" model="ir.actions.act_window">
             <field name="name">Sjukperioder</field>
             <field name="res_model">hr.sick.leave.record</field>
-            <field name="view_mode">tree,form</field>
+            <field name="view_mode">list,form</field>
         </record>
 
         <menuitem action="action_sick_leave"
@@ -152,7 +152,7 @@
         <record id="action_ags_claim" model="ir.actions.act_window">
             <field name="name">AGS-ärenden</field>
             <field name="res_model">hr.ags.claim</field>
-            <field name="view_mode">tree,form</field>
+            <field name="view_mode">list,form</field>
         </record>
 
         <menuitem action="action_ags_claim"
@@ -204,7 +204,7 @@
         <record id="action_tfa_case" model="ir.actions.act_window">
             <field name="name">TFA-ärenden</field>
             <field name="res_model">hr.tfa.case</field>
-            <field name="view_mode">tree,form</field>
+            <field name="view_mode">list,form</field>
         </record>
 
         <menuitem action="action_tfa_case"
