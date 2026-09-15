@@ -1,2 +1,15 @@
+# Odoo l10n_se_payroll (vertelab/odoo-l10n_se_payroll) — Python dependencies
+#
+# Installeras av repo_apply (salt odoo.repo_apply) — se odoo-ai/requirements.txt
+# for bakgrund om varfor verifiering och versionstak finns.
+#
+# OBS: `odoo-test-helper` och `odoo_test_helper` ar SAMMA paket — pip-normalisering
+# gor att bada stavningarna matchar samma distribution. Att lista bada (som
+# tidigare gjordes i nagra repon) ger dubbelarbete i verifieringen, inte ett
+# fel. Anvand den kanoniska stavningen med bindestreck.
+#
+# odoo-test-helper: endast nodvandig for att kora modulernas enhetstester
+#   (checkmodule -t / repo_test). Kravs inte i drift for att modulen ska
+#   fungera, men den ar billig och gor att tester kan koras utan extra steg.
 odoo-test-helper
 zeep
