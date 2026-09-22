@@ -14,7 +14,7 @@ Swedish collective agreement (kollektivavtal) support for l10n_se_payroll:
 - Agreement-based pension contributions
     """,
     'author': 'Vertel AB',
-    'website': 'https://vertel.se',
+    'website': 'https://vertel.se/apps/odoo-l10n_se_payroll/l10n_se_hr_payroll_collective',
     'license': 'AGPL-3',
     'maintainer': 'Vertel AB',
     'repository': 'https://github.com/vertelab/odoo-l10n-se-payroll',

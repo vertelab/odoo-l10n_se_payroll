@@ -17,7 +17,7 @@
     'summary': 'Manager dashboard for leave — subordinates, absentees, approvals.',
     'category': 'Human Resources',
     'author': 'Vertel AB',
-    'website': 'https://vertel.se/',
+    'website': 'https://vertel.se/apps/odoo-l10n_se_payroll/hr_leave_dashboard',
     'license': 'AGPL-3',
     'depends': ['hr_holidays'],
     'data': [

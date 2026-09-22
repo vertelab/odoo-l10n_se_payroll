@@ -25,7 +25,7 @@
     'summary': 'Swedish Loss of Pay — deductible leave adjacent to public holidays.',
     'category': 'Payroll Localization',
     'author': 'Vertel AB',
-    'website': 'https://vertel.se/',
+    'website': 'https://vertel.se/apps/odoo-l10n_se_payroll/l10n_se_hr_payroll_lop',
     'license': 'AGPL-3',
     'depends': [
         'l10n_se_hr_payroll',

@@ -14,7 +14,7 @@ Swedish Social Insurance Agency (Försäkringskassan) integration for l10n_se_pa
 - Reports for FK submission
     """,
     'author': 'Vertel AB',
-    'website': 'https://vertel.se',
+    'website': 'https://vertel.se/apps/odoo-l10n_se_payroll/l10n_se_hr_payroll_fk',
     'license': 'AGPL-3',
     'maintainer': 'Vertel AB',
     'repository': 'https://github.com/vertelab/odoo-l10n-se-payroll',

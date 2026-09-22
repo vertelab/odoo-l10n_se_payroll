@@ -17,7 +17,7 @@
     'summary': 'Automatic email greetings on employee work anniversaries.',
     'category': 'Human Resources',
     'author': 'Vertel AB',
-    'website': 'https://vertel.se/',
+    'website': 'https://vertel.se/apps/odoo-l10n_se_payroll/hr_work_anniversary_reminder',
     'license': 'AGPL-3',
     'depends': ['hr', 'mail', 'hr_contract'],
     'data': [

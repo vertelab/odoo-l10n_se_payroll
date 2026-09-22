@@ -12,7 +12,7 @@
     'summary': 'Swedish tax statements (Kontrolluppgifter KU20/KU25) to Skatteverket',
     'category': 'Payroll Localization',
     'author': 'Vertel AB',
-    'website': 'https://vertel.se',
+    'website': 'https://vertel.se/apps/odoo-l10n_se_payroll/l10n_se_hr_payroll_kontrolluppgift',
     'license': 'AGPL-3',
     'maintainer': 'Vertel AB',
     'repository': 'https://github.com/vertelab/odoo-l10n-se-payroll',

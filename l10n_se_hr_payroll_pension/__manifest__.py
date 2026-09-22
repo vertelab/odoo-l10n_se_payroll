@@ -12,7 +12,7 @@
     'summary': 'Detailed Swedish occupational pension calculation (ITP1, ITP2, SAF-LO, AKAP-KL)',
     'category': 'Payroll Localization',
     'author': 'Vertel AB',
-    'website': 'https://vertel.se',
+    'website': 'https://vertel.se/apps/odoo-l10n_se_payroll/l10n_se_hr_payroll_pension',
     'license': 'AGPL-3',
     'maintainer': 'Vertel AB',
     'repository': 'https://github.com/vertelab/odoo-l10n-se-payroll',

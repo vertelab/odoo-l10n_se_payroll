@@ -17,7 +17,7 @@
     'summary': 'Bonus request approval workflow integrated with Swedish payroll.',
     'category': 'Payroll Localization',
     'author': 'Vertel AB',
-    'website': 'https://vertel.se/',
+    'website': 'https://vertel.se/apps/odoo-l10n_se_payroll/l10n_se_hr_payroll_bonus_workflow',
     'license': 'AGPL-3',
     'depends': [
         'l10n_se_hr_payroll',
