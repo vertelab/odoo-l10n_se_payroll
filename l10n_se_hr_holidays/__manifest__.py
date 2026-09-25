@@ -21,8 +21,8 @@
 
 {
     'name': 'l10n_se_payroll: Holidays',
-    'version': '0.1',
-    'summary': 'Swedish Holiday Rules',
+    'version': '18.0.1.0.0',
+    'summary': 'Swedish Holiday Rules.',
     'category': 'Payroll Localization',
     'author': 'Vertel AB',
     'website': 'https://vertel.se/apps/odoo-l10n_se_payroll/l10n_se_hr_holidays',
@@ -41,27 +41,22 @@
         # 'payroll',
     ],
     'licence': 'AGPL-3',
-    'description': """
-Swedish Holidays Rules
-======================
+    'description': '''
+Holidays
+========
 
-* Add holidays earning rules to payroll (hr.holiday)
-* Add hr.holiday.earning to hr.employee
-* Add holiday year to hr.holiday
+    This module depends on OCA:
+      git@github.com:OCA/payroll.git
+      git@github.com:OCA/timesheet.git
+      git@github.com:OCA/web.git
 
-* hr.holiday.earning can be used for flextime and normal leaves days
-* Holiday earning rules can add days to an employees hr.holidays.earning
-  from hr.payslip
+    Features:
 
-
-  This module depends on OCA:
-  git@github.com:OCA/payroll.git
-  git@github.com:OCA/timesheet.git
-  git@github.com:OCA/web.git
-  
-  
-
-""",
+        - Automation: Scheduled jobs: HR: Uppdatera semesterår.
+        - Reports: Adds printable reports.
+        - UI Integration: Extends 3 view(s) in the Odoo interface.
+        - Extends Odoo: Builds on hr.employee, hr.leave, hr.leave.type, hr.payslip.
+    ''',
     'auto_install': False,
     'data': [
         'data/hr_holidays_override.xml',

@@ -9,31 +9,35 @@
 {
     'name': 'l10n_se_hr_payroll_ags: AGS & TFA Insurance',
     'version': '18.0.1.0.0',
-    'summary': 'AGS (sick pay insurance) and TFA (work injury) — tracking & reporting',
+    'summary': 'AGS (sick pay insurance) and TFA (work injury) — tracking & reporting.',
     'category': 'Payroll Localization',
     'author': 'Vertel AB',
     'website': 'https://vertel.se/apps/odoo-l10n_se_payroll/l10n_se_hr_payroll_ags',
     'license': 'AGPL-3',
     'maintainer': 'Vertel AB',
     'repository': 'https://github.com/vertelab/odoo-l10n-se-payroll',
-    'description': """
-AGS (Avtalsgruppsjukförsäkring) & TFA Insurance
-===============================================
+    'description': '''
+AGS & TFA Insurance
+===================
 
-AGS complements the Swedish social insurance (FK) for long-term sick leave
-(day 91+). TFA covers work-related injuries.
+    AGS complements the Swedish social insurance (FK) for long-term sick leave
+    (day 91+). TFA covers work-related injuries.
 
-Features:
----------
-* Track sick leave periods per employee (from hr.holidays / FK)
-* Calculate AGS eligibility and amounts
-* Day 91+ tracking with AGS qualification
-* AGS compensation: complements FK sjukpenning
-* TFA injury case tracking
-* Integration with FK (Försäkringskassan) module
-* Monthly premium basis for AFA Försäkring reporting
-* Historical sick leave register
-    """,
+    Features:
+    * Track sick leave periods per employee (from hr.holidays / FK)
+    * Calculate AGS eligibility and amounts
+    * Day 91+ tracking with AGS qualification
+    * AGS compensation: complements FK sjukpenning
+    * TFA injury case tracking
+    * Integration with FK (Försäkringskassan) module
+    * Monthly premium basis for AFA Försäkring reporting
+    * Historical sick leave register
+
+    Features:
+
+        - UI Integration: Extends 1 view(s) in the Odoo interface.
+        - Extends Odoo: Builds on hr.ags.claim, hr.employee, hr.sick.leave.record, hr.tfa.case.
+    ''',
     'depends': [
         'l10n_se_hr_payroll',
         'l10n_se_hr_payroll_collective',

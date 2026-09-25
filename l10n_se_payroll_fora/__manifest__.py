@@ -22,46 +22,50 @@
 {
     'name': 'l10n_se_payroll_fora: FORA Premium Reporting',
     'version': '18.0.1.0.0',
-    'summary': 'FORA — Swedish collective insurance & pension premium reporting',
+    'summary': 'FORA — Swedish collective insurance & pension premium reporting.',
     'category': 'Payroll Localization',
     'author': 'Vertel AB',
     'website': 'https://vertel.se/apps/odoo-l10n_se_payroll/l10n_se_payroll_fora',
     'license': 'AGPL-3',
     'maintainer': 'Vertel AB',
     'repository': 'https://github.com/vertelab/odoo-l10n-se-payroll',
-    'description': """
-FORA — Collective Insurance & Pension Premium Reporting
-=======================================================
+    'description': '''
+FORA Premium Reporting
+======================
 
-FORA (Försäkringsbranschens Arbetsgivarorganisation) is the central
-administrator for collective agreement insurance and pension in Sweden.
+    FORA (Försäkringsbranschens Arbetsgivarorganisation) is the central
+    administrator for collective agreement insurance and pension in Sweden.
 
-This module enables monthly/quarterly reporting of wage data to FORA
-for calculation of insurance and pension premiums.
+    This module enables monthly/quarterly reporting of wage data to FORA
+    for calculation of insurance and pension premiums.
 
-Features:
----------
-* Aggregate payroll data per employee per collective agreement per period
-* Map salary rule codes to FORA premium categories:
-  - TGL (Group Life Insurance) basis
-  - TFA (Work Injury Insurance) basis
-  - AGS (Sick Pay Insurance) basis
-  - Avtalspension basis (ITP1, ITP2, SAF-LO, AKAP-KL)
-* Compute FORA premiums per employee per insurance type
-* Age-group segmentation for correct premium rates
-* Generate FORA XML file (industry-standard format)
-* Track FORA case numbers and submission status
-* Auto-create monthly FORA declarations via cron
-* Calendar integration for FORA deadline tracking
+    Features:
+    * Aggregate payroll data per employee per collective agreement per period
+    * Map salary rule codes to FORA premium categories:
+      - TGL (Group Life Insurance) basis
+      - TFA (Work Injury Insurance) basis
+      - AGS (Sick Pay Insurance) basis
+      - Avtalspension basis (ITP1, ITP2, SAF-LO, AKAP-KL)
+    * Compute FORA premiums per employee per insurance type
+    * Age-group segmentation for correct premium rates
+    * Generate FORA XML file (industry-standard format)
+    * Track FORA case numbers and submission status
+    * Auto-create monthly FORA declarations via cron
+    * Calendar integration for FORA deadline tracking
 
-Dependencies:
--------------
-* l10n_se_hr_payroll — Swedish payroll rules
-* l10n_se_hr_payroll_collective — Collective agreement definitions
-* l10n_se_payroll_agd — Employer declaration (shares wage aggregation)
-* l10n_se_tax_report — Declaration base class
-* payroll, hr — Core modules
-    """,
+    Dependencies:
+    * l10n_se_hr_payroll — Swedish payroll rules
+    * l10n_se_hr_payroll_collective — Collective agreement definitions
+    * l10n_se_payroll_agd — Employer declaration (shares wage aggregation)
+    * l10n_se_tax_report — Declaration base class
+    * payroll, hr — Core modules
+
+    Features:
+
+        - Automation: Scheduled jobs: FORA: create declaration for latest payslip run.
+        - UI Integration: Extends 2 view(s) in the Odoo interface.
+        - Extends Odoo: Builds on account.declaration, account.fora.declaration, account.fora.declaration.line, hr.collective.agreement.
+    ''',
     'depends': [
         'l10n_se_hr_payroll',
         'l10n_se_hr_payroll_collective',

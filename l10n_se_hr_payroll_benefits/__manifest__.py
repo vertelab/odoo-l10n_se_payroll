@@ -21,12 +21,21 @@
 
 {
     'name': 'l10n_se_payroll: Payroll with Benefits',
-    'version': '1.1',
-    'summary': 'Swedish Payslip additions for Benefits',
+    'version': '18.0.1.1.0',
+    'summary': 'Swedish Payslip additions for Benefits.',
     'category': 'Payroll Localization',
-    'description': """
-Swedish Payslip additions for Benefits
-    """,
+    'description': '''
+Payroll with Benefits
+=====================
+
+    Swedish Payslip additions for Benefits.
+
+    Features:
+
+        - Guided Wizards: Step-by-step dialogs for data entry.
+        - UI Integration: Extends 2 view(s) in the Odoo interface.
+        - Extends Odoo: Builds on contract_id, hr.benefit, hr.benefit.budget, hr.benefit.budget.line.
+    ''',
     'author': 'Vertel AB',
     'website': 'https://vertel.se/apps/odoo-l10n_se_payroll/l10n_se_hr_payroll_benefits',
     'images': ['static/description/banner.png'],

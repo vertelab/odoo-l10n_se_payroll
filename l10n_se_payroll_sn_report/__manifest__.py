@@ -22,7 +22,20 @@
 {
     'name': 'l10n_se_payroll_sn_report: (SN Lönestatistik & NYK-koder)',
     'version': '18.0.1.0.0',
-    'summary': 'SN Lönestatistik rapport och NYK-koder för Svenskt Näringsliv',
+    'summary': "Generates the SN payroll statistics report with NyK codes.",
+    'description': '''
+(SN Lönestatistik & NYK-koder)
+==============================
+
+    Generates the SN payroll statistics report with NyK codes.
+
+    Features:
+
+        - Guided Wizards: Step-by-step dialogs for data entry.
+        - Reports: Adds printable reports.
+        - UI Integration: Extends 1 view(s) in the Odoo interface.
+        - Extends Odoo: Builds on hr.nyk.
+    ''',
     'category': 'Payroll Localization',
     'author': 'Vertel AB',
     'website': 'https://vertel.se/apps/odoo-l10n_se_payroll/l10n_se_payroll_sn_report',

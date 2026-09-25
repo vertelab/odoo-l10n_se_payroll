@@ -22,36 +22,40 @@
 {
     'name': 'l10n_se_payroll_agd: Arbetsgivardeklaration',
     'version': '18.0.1.0.0',
-    'summary': 'Swedish employer declaration (arbetsgivardeklaration) on individual level',
+    'summary': 'Swedish employer declaration (arbetsgivardeklaration) on individual level.',
     'category': 'Payroll Localization',
     'author': 'Vertel AB',
     'website': 'https://vertel.se/apps/odoo-l10n_se_payroll/l10n_se_payroll_agd',
     'license': 'AGPL-3',
     'maintainer': 'Vertel AB',
     'repository': 'https://github.com/vertelab/odoo-l10n_se_payroll',
-    'description': """
-Swedish Employer Declaration (Arbetsgivardeklaration)
-=====================================================
+    'description': '''
+Arbetsgivardeklaration
+======================
 
-Monthly tax declaration for employers. Aggregates payroll data per employee
-and submits to Skatteverket via the eSKD API.
+    Monthly tax declaration for employers. Aggregates payroll data per employee
+    and submits to Skatteverket via the eSKD API.
 
-Features:
----------
-* Aggregate salary lines from hr.payslip per employee per month
-* Map salary rule codes to SKV form fields (ruta 50-88)
-* Automatic age-based employer contribution rates (31,42% / 16,36% / 6,15%)
-* Generate eSKD XML (same DTD 6.0 as VAT declarations)
-* Submit to Skatteverket via API with certificate authentication
-* Auto-create monthly declarations via cron
-* Calendar integration for declaration deadlines
+    Features:
+    * Aggregate salary lines from hr.payslip per employee per month
+    * Map salary rule codes to SKV form fields (ruta 50-88)
+    * Automatic age-based employer contribution rates (31,42% / 16,36% / 6,15%)
+    * Generate eSKD XML (same DTD 6.0 as VAT declarations)
+    * Submit to Skatteverket via API with certificate authentication
+    * Auto-create monthly declarations via cron
+    * Calendar integration for declaration deadlines
 
-Dependencies:
--------------
-* l10n_se_hr_payroll — Swedish payroll rules
-* l10n_se_tax_report — Declaration base class + SKV API infrastructure
-* l10n_se_tax_account — Skatteverket partner configuration
-    """,
+    Dependencies:
+    * l10n_se_hr_payroll — Swedish payroll rules
+    * l10n_se_tax_report — Declaration base class + SKV API infrastructure
+    * l10n_se_tax_account — Skatteverket partner configuration
+
+    Features:
+
+        - Automation: Scheduled jobs: AGD: create for latest payslip run.
+        - UI Integration: Extends 1 view(s) in the Odoo interface.
+        - Extends Odoo: Builds on account.agd.declaration, account.agd.declaration.line, account.declaration, hr.payslip.
+    ''',
     'depends': [
         'l10n_se_hr_payroll',
         'l10n_se_tax_report',

@@ -23,12 +23,19 @@
 
 {
     'name': 'l10n_se_payroll: Tiichri',
-    'version': '1.1',
-    'summary': 'Generate test data for Swedish accounting',
+    'version': '18.0.1.1.0',
+    'summary': 'Generate test data for Swedish accounting.',
     'category': 'Payroll Localization',
-    'description': """
-We create test data to seven employees, to use while developing our own code. To validare that it all turns out correct.
-    """,
+    'description': '''
+Tiichri
+=======
+
+    We create test data to seven employees, to use while developing our own code. To validare that it all turns out correct.
+
+    Features:
+
+        - Extends Odoo: Builds on resource.calendar.
+    ''',
     'author': 'Vertel AB',
     'website': 'https://vertel.se/apps/odoo-l10n_se_payroll/l10n_se_hr_payroll_tiichri',
     'images': ['static/description/banner.png'],

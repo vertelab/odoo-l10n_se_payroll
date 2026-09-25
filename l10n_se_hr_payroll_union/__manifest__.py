@@ -9,30 +9,34 @@
 {
     'name': 'l10n_se_hr_payroll_union: Union Fees (Fackavgifter)',
     'version': '18.0.1.0.0',
-    'summary': 'Swedish union fee management — automatic deduction and reporting',
+    'summary': 'Swedish union fee management — automatic deduction and reporting.',
     'category': 'Payroll Localization',
     'author': 'Vertel AB',
     'website': 'https://vertel.se/apps/odoo-l10n_se_payroll/l10n_se_hr_payroll_union',
     'license': 'AGPL-3',
     'maintainer': 'Vertel AB',
     'repository': 'https://github.com/vertelab/odoo-l10n-se-payroll',
-    'description': """
-Swedish Union Fee Management (Fackavgifter)
-===========================================
+    'description': '''
+Union Fees (Fackavgifter)
+=========================
 
-Manage union membership fees automatically deducted from salary
-and reported to union organizations.
+    Manage union membership fees automatically deducted from salary
+    and reported to union organizations.
 
-Features:
----------
-* Union registry (IF Metall, Kommunal, Unionen, Sveriges Ingenjörer, etc.)
-* Employee → union linkage
-* Monthly union fee deduction from payslips
-* Fee calculation: fixed amount or % of salary
-* Union reporting: monthly/quarterly file per union
-* Bankgiro/Plusgiro payment tracking
-* Historical fee register per employee
-    """,
+    Features:
+    * Union registry (IF Metall, Kommunal, Unionen, Sveriges Ingenjörer, etc.)
+    * Employee → union linkage
+    * Monthly union fee deduction from payslips
+    * Fee calculation: fixed amount or % of salary
+    * Union reporting: monthly/quarterly file per union
+    * Bankgiro/Plusgiro payment tracking
+    * Historical fee register per employee
+
+    Features:
+
+        - UI Integration: Extends 1 view(s) in the Odoo interface.
+        - Extends Odoo: Builds on hr.employee, hr.payslip, hr.union, hr.union.fee.
+    ''',
     'depends': [
         'l10n_se_hr_payroll',
         'payroll', 'hr', 'hr_contract',

@@ -21,7 +21,7 @@
 
 {
     'name': 'l10n_se_payroll: Holiday Pay with Accounting',
-    'version': '0.1',
+    'version': '18.0.1.0.0',
     # Version ledger: XX.0 = Odoo version. 1 = Major. Non regressionable code. 2 = Minor. New features that are regressionable. 3 = Bug fixes
     'summary': 'Accounting Data for Swedish Holiday Pay Rules.',
     'category': 'Payroll Localization',
@@ -34,16 +34,19 @@
     'maintainer': 'Vertel AB',
     'repository': 'https://github.com/vertelab/odoo-l10n_se_payroll',
     'depends': ['l10n_se_hr_holidays', 'l10n_se_hr_payroll_account'],
-    'description': """
-Accounting Data for Swedish Holiday Pay Rules.
-==============================================
+    'description': '''
+Holiday Pay with Accounting
+===========================
 
-  This module depends on OCA:
-  git@github.com:OCA/payroll.git
-  git@github.com:OCA/timesheet.git
-  git@github.com:OCA/web.git
-  
-    """,
+    This module depends on OCA:
+      git@github.com:OCA/payroll.git
+      git@github.com:OCA/timesheet.git
+      git@github.com:OCA/web.git
+
+    Features:
+
+        - Demo Data: Ships pre-configured demo data for the industry.
+    ''',
 
     'auto_install': False,
     'demo': [],

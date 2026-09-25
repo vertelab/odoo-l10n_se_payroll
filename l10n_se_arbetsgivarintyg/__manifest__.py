@@ -21,8 +21,8 @@
 
 {
     'name': 'Swedish Payroll — Arbetsgivarintyg (Employer Certificate)',
-    'version': '1.0',
-    'summary': 'Digital employer certificate (arbetsgivarintyg) for Swedish a-kassa, '
+    'version': '18.0.1.0.0',
+    'summary': 'Digital employer certificate (arbetsgivarintyg) for Swedish a-kassa, SOAP API integration with arbetsgivarintyg.nu.'
                'SOAP API integration with arbetsgivarintyg.nu.',
     'category': 'Payroll Localization',
     'author': 'Vertel AB',
@@ -30,32 +30,13 @@
     'license': 'AGPL-3',
     'maintainer': 'Vertel AB',
     'repository': 'https://github.com/vertelab/odoo-l10n_se_payroll',
-    'description': """
-Swedish Employer Certificate (Arbetsgivarintyg)
-===============================================
+    'description': '''
+Swedish Payroll — Arbetsgivarintyg (Employer Certificate)
+=========================================================
 
-Digital hantering av arbetsgivarintyg enligt Sveriges a-kassors specifikation.
-
-Features:
----------
-* Create and manage employer certificates for employees
-* Auto-populate data from employee, contract, and payslip records
-* Track employment details, salary, worked time, leave of absence
-* Send certificates via SOAP API to arbetsgivarintyg.nu
-* Test and production endpoint support
-* Full workflow: draft → populated → sent → signed → done
-
-API Integration:
-----------------
-* SOAP web service (arbetsgivarintyg.nu)
-* ApiNyckel + ArbetsgivarId authentication
-* ResultCode/ResultMessage response handling
-
-Specifikation:
---------------
-Baseras på "Teknisk specifikation arbetsgivarintyg.nu" från Sveriges a-kassor.
-https://stsakassa.se/sites/default/files/2018-11/Teknisk%20specifikation%20arbetsgivarintyg.nu_.pdf
-    """,
+    Digital handling of employer certificates according to the specification of
+the Swedish unemployment funds (a-kassor).
+    ''',
     'depends': [
         'l10n_se_hr_payroll',
         'hr',

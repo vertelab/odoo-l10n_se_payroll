@@ -21,8 +21,8 @@
 
 {
     'name': 'l10n_se_payroll: Payroll Tax Table',
-    'version': '0.1',
-    'summary': 'https://skatteverket.entryscape.net/store/9/resource/1534',
+    'version': '18.0.1.0.0',
+    'summary': 'Https://skatteverket.entryscape.net/store/9/resource/1534.',
     'category': 'Payroll Localization',
     'author': 'Vertel AB',
     'website': 'https://vertel.se/apps/odoo-l10n_se_payroll/l10n_se_payroll_taxtable',
@@ -31,17 +31,24 @@
     'maintainer': 'Vertel AB',
     'repository': 'https://github.com/vertelab/odoo-l10n_se_payroll',
     'depends': ['l10n_se_extended', 'hr_contract', 'l10n_se_hr_payroll'],
-    'description': """
-        'Compute Sheet' will fetch any data not already present in the database
-        through Skatteverket API, Taxtable lines will be gathered by year.
+    'description': '''
+Payroll Tax Table
+=================
 
+    'Compute Sheet' will fetch any data not already present in the database
+            through Skatteverket API, Taxtable lines will be gathered by year.
 
-      This module depends on OCA:
-      git@github.com:OCA/payroll.git
-      git@github.com:OCA/timesheet.git
-      git@github.com:OCA/web.git
-      
-    """,
+    This module depends on OCA:
+          git@github.com:OCA/payroll.git
+          git@github.com:OCA/timesheet.git
+          git@github.com:OCA/web.git
+
+    Features:
+
+        - Automation: Scheduled jobs: Payroll: Sync Swedish Tax Tables (Skatteverket).
+        - UI Integration: Extends 2 view(s) in the Odoo interface.
+        - Extends Odoo: Builds on hr.contract, payroll.taxtable, payroll.taxtable.line, payroll.taxtable.wizard.
+    ''',
     'auto_install': False,
     'demo': [],
     'data': [

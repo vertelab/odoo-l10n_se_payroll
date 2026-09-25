@@ -21,7 +21,7 @@
 
 {
     'name': 'l10n_se_payroll: (Swedish Payroll)',
-    'version': '0.1',
+    'version': '18.0.1.0.0',
     # Version ledger: XX.0 = Odoo version. 1 = Major. Non regressionable code. 2 = Minor. New features that are regressionable. 3 = Bug fixes
     'summary': 'Swedish Payroll Rules.',
     'category': 'Payroll Localization',
@@ -41,25 +41,23 @@
         'hr_work_entry_contract',
         'base_recompute_field',
     ],
-    'description': """
-Swedish Payroll Rules.
-======================
-
-    * Employee Details
-    * Employee Contracts
-    * Allowances/Deductions
-    * Allow to configure Basic/Gross/Net Salary
-    * Employee Payslip
-    * Monthly Payroll Register
-    * Integrated with Holiday Management
-
+    'description': '''
+(Swedish Payroll)
+=================
 
     This module depends on OCA:
-    git@github.com:OCA/payroll.git
-    git@github.com:OCA/timesheet.git
-    git@github.com:OCA/web.git
-    
-    """,
+        git@github.com:OCA/payroll.git
+        git@github.com:OCA/timesheet.git
+        git@github.com:OCA/web.git
+
+    Features:
+
+        - Automation: Scheduled jobs: Attendance: Late Check-in Detection, Payroll: Automatic payslip batch generation.
+        - Guided Wizards: Step-by-step dialogs for data entry.
+        - Reports: Adds printable reports.
+        - UI Integration: Extends 17 view(s) in the Odoo interface.
+        - Extends Odoo: Builds on account.account, account.journal, account.period, hr.attendance.
+    ''',
     'auto_install': False,
     'data': [
         'data/hr_payroll_data.xml',

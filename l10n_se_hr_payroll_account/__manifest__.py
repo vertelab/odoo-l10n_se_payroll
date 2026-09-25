@@ -21,21 +21,24 @@
 
 {
     'name': 'l10n_se_payroll: Payroll with Accounting',
-    'version': '0.1',
+    'version': '18.0.1.0.0',
     # Version ledger: XX.0 = Odoo version. 1 = Major. Non regressionable code. 2 = Minor. New features that are regressionable. 3 = Bug fixes
     'summary': 'Accounting Data for Swedish Payroll Rules.',
     'category': 'Payroll Localization',
-    'description': """
-Accounting Data for Swedish Payroll Rules.
-==========================================
+    'description': '''
+Payroll with Accounting
+=======================
 
+    This module depends on OCA:
+      git@github.com:OCA/payroll.git
+      git@github.com:OCA/timesheet.git
+      git@github.com:OCA/web.git
 
-  This module depends on OCA:
-  git@github.com:OCA/payroll.git
-  git@github.com:OCA/timesheet.git
-  git@github.com:OCA/web.git
-  
-    """,
+    Features:
+
+        - UI Integration: Extends 1 view(s) in the Odoo interface.
+        - Extends Odoo: Builds on hr.payslip, hr.salary.rule.
+    ''',
     #'sequence': '1'
     'author': 'Vertel AB',
     'website': 'https://vertel.se/apps/odoo-l10n_se_payroll/l10n_se_hr_payroll_account',

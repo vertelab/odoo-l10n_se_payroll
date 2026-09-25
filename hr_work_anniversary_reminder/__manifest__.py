@@ -13,8 +13,19 @@
 
 {
     'name': 'HR Work Anniversary Reminder',
-    'version': '0.1',
+    'version': '18.0.1.0.0',
     'summary': 'Automatic email greetings on employee work anniversaries.',
+    'description': '''
+HR Work Anniversary Reminder
+============================
+
+    Automatic email greetings on employee work anniversaries.
+
+    Features:
+
+        - Automation: Scheduled jobs: HR: Work Anniversary Reminder.
+        - Extends Odoo: Builds on hr.employee.
+    ''',
     'category': 'Human Resources',
     'author': 'Vertel AB',
     'website': 'https://vertel.se/apps/odoo-l10n_se_payroll/hr_work_anniversary_reminder',

@@ -29,34 +29,38 @@
     'license': 'AGPL-3',
     'maintainer': 'Vertel AB',
     'repository': 'https://github.com/vertelab/odoo-l10n_se_payroll',
-    'description': """
-Swedish Growth Support (Växa-stöd)
-==================================
+    'description': '''
+Växa-stöd
+=========
 
-From January 2026, employers pay full employer contributions (31.42%) and apply
-separately for reimbursement of the difference (31.42% - 10.21% = 21.21%) for
-their first and second employees.
+    From January 2026, employers pay full employer contributions (31.42%) and apply
+    separately for reimbursement of the difference (31.42% - 10.21% = 21.21%) for
+    their first and second employees.
 
-Features:
----------
-* Calculate växa-stöd reimbursement per employee per month
-* Link to payslip runs and AGD declarations for salary data
-* Auto-determine salary cap (25 000 or 35 000 SEK) based on hire date
-* Track 24-month limit per employee
-* EU de minimis aid tracking (max €300 000 in 3 years)
-* Generate downloadable summary for Skatteverket e-service
-* Ready for Skatteverket API submission when available
-* Auto-create monthly applications via cron
-* Calendar integration for application deadlines
+    Features:
+    * Calculate växa-stöd reimbursement per employee per month
+    * Link to payslip runs and AGD declarations for salary data
+    * Auto-determine salary cap (25 000 or 35 000 SEK) based on hire date
+    * Track 24-month limit per employee
+    * EU de minimis aid tracking (max €300 000 in 3 years)
+    * Generate downloadable summary for Skatteverket e-service
+    * Ready for Skatteverket API submission when available
+    * Auto-create monthly applications via cron
+    * Calendar integration for application deadlines
 
-Dependencies:
--------------
-* l10n_se_hr_payroll — Swedish payroll rules
-* l10n_se_tax_report — Declaration base class + SKV API infrastructure
-* l10n_se_payroll_agd — Employer declaration for salary data
-* payroll — Core payroll (hr.payslip, hr.payslip.run)
-* hr — HR module (hr.employee, hr.contract)
-    """,
+    Dependencies:
+    * l10n_se_hr_payroll — Swedish payroll rules
+    * l10n_se_tax_report — Declaration base class + SKV API infrastructure
+    * l10n_se_payroll_agd — Employer declaration for salary data
+    * payroll — Core payroll (hr.payslip, hr.payslip.run)
+    * hr — HR module (hr.employee, hr.contract)
+
+    Features:
+
+        - Automation: Scheduled jobs: Växa-stöd: create for latest AGD/payslip run.
+        - UI Integration: Extends 1 view(s) in the Odoo interface.
+        - Extends Odoo: Builds on account.agd.declaration, account.declaration, account.vaxa.support, account.vaxa.support.line.
+    ''',
     'depends': [
         'l10n_se_hr_payroll',
         'l10n_se_tax_report',

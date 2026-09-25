@@ -21,8 +21,19 @@
 
 {
     'name': 'l10n_se_payroll: Loss of Pay (LOP)',
-    'version': '0.1',
+    'version': '18.0.1.0.0',
     'summary': 'Swedish Loss of Pay — deductible leave adjacent to public holidays.',
+    'description': '''
+Loss of Pay (LOP)
+=================
+
+    Swedish Loss of Pay — deductible leave adjacent to public holidays.
+
+    Features:
+
+        - UI Integration: Extends 1 view(s) in the Odoo interface.
+        - Extends Odoo: Builds on hr.leave.lop, hr.payslip, mail.thread.
+    ''',
     'category': 'Payroll Localization',
     'author': 'Vertel AB',
     'website': 'https://vertel.se/apps/odoo-l10n_se_payroll/l10n_se_hr_payroll_lop',
