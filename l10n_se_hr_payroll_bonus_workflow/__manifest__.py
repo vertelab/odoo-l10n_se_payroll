@@ -13,7 +13,7 @@
 
 {
     'name': 'l10n_se_payroll: Bonus Workflow',
-    'version': '18.0.1.0.0',
+    'version': '18.0.1.0.1',
     'summary': 'Bonus request approval workflow integrated with Swedish payroll.',
     'description': '''
 Bonus Workflow

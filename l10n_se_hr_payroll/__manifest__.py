@@ -21,7 +21,7 @@
 
 {
     'name': 'l10n_se_payroll: (Swedish Payroll)',
-    'version': '18.0.1.0.0',
+    'version': '18.0.1.0.1',
     # Version ledger: XX.0 = Odoo version. 1 = Major. Non regressionable code. 2 = Minor. New features that are regressionable. 3 = Bug fixes
     'summary': 'Swedish Payroll Rules.',
     'category': 'Payroll Localization',
@@ -77,7 +77,6 @@
         'views/hr_job_views.xml',
         'views/hr_payslip_template.xml',
         'views/hr_payslip_run_views.xml',
-        'views/res_config_settings_views.xml',
         'views/user_payslip_views.xml',
         'views/hr_contract_views.xml',
         #'views/hr_leave_views.xml',

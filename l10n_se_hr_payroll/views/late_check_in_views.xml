@@ -37,11 +37,11 @@
                            statusbar_visible="draft,approved"/>
                     <button name="action_approve" string="Approve"
                             type="object" class="btn-primary"
-                            attrs="{'invisible': [('state', '!=', 'draft')]}"
+                            invisible="state != 'draft'"
                             groups="hr.group_hr_manager"/>
                     <button name="action_refuse" string="Refuse"
                             type="object" class="btn-secondary"
-                            attrs="{'invisible': [('state', '!=', 'draft')]}"
+                            invisible="state != 'draft'"
                             groups="hr.group_hr_manager"/>
                 </header>
                 <sheet>

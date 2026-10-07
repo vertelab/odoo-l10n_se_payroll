@@ -5,10 +5,10 @@
         <field name="name">bonus.reason.tree</field>
         <field name="model">bonus.reason</field>
         <field name="arch" type="xml">
-            <tree string="Bonus Reasons" editable="bottom">
+            <list string="Bonus Reasons" editable="bottom">
                 <field name="name"/>
                 <field name="description"/>
-            </tree>
+            </list>
         </field>
     </record>
 

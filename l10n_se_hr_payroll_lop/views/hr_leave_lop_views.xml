@@ -36,14 +36,11 @@
                         </group>
                         <group>
                             <field name="no_of_days"
-                                   attrs="{'invisible': [('leave_type', '=', 'between_holidays')],
-                                           'required': [('leave_type', '!=', 'between_holidays')]}"/>
+                                   invisible="leave_type == 'between_holidays'" required="leave_type != 'between_holidays'"/>
                             <field name="no_of_days_before"
-                                   attrs="{'invisible': [('leave_type', '!=', 'between_holidays')],
-                                           'required': [('leave_type', '=', 'between_holidays')]}"/>
+                                   invisible="leave_type != 'between_holidays'" required="leave_type == 'between_holidays'"/>
                             <field name="no_of_days_after"
-                                   attrs="{'invisible': [('leave_type', '!=', 'between_holidays')],
-                                           'required': [('leave_type', '=', 'between_holidays')]}"/>
+                                   invisible="leave_type != 'between_holidays'" required="leave_type == 'between_holidays'"/>
                         </group>
                     </group>
                 </sheet>

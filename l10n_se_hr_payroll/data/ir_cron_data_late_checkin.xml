@@ -8,7 +8,6 @@
         <field name="code">model._cron_late_check_in_records()</field>
         <field name="interval_number">1</field>
         <field name="interval_type">days</field>
-        <field name="numbercall">-1</field>
         <field name="active" eval="True"/>
     </record>
 </odoo>
