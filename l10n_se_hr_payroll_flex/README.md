@@ -1,6 +1,6 @@
 # l10n_se_hr_payroll_flex — Flextid / Timpott
 
-Svensk flextidsmodul för Odoo, utvecklad av Vertel AB.
+Svensk flextidsmodul för Odoo, utvecklad av Vertel Sverige AB.
 
 ## Funktionalitet
 

@@ -2,7 +2,7 @@
 ##############################################################################
 #
 #    Odoo SA, Open Source Management Solution, third party addon
-#    Copyright (C) 2024- Vertel AB (<https://vertel.se>).
+#    Copyright (C) 2024- Vertel Sverige AB (<https://vertel.se>).
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as
@@ -13,22 +13,11 @@
 
 {
     'name': 'l10n_se_payroll: Bonus Workflow',
-    'version': '18.0.1.0.1',
+    'version': '0.1',
     'summary': 'Bonus request approval workflow integrated with Swedish payroll.',
-    'description': '''
-Bonus Workflow
-==============
-
-    Bonus request approval workflow integrated with Swedish payroll.
-
-    Features:
-
-        - UI Integration: Extends 2 view(s) in the Odoo interface.
-        - Extends Odoo: Builds on bonus.reason, bonus.request, hr.payslip, mail.thread.
-    ''',
     'category': 'Payroll Localization',
-    'author': 'Vertel AB',
-    'website': 'https://vertel.se/apps/odoo-l10n_se_payroll/l10n_se_hr_payroll_bonus_workflow',
+    'author': 'Vertel Sverige AB',
+    'website': 'https://vertel.se/',
     'license': 'AGPL-3',
     'depends': [
         'l10n_se_hr_payroll',

@@ -2,7 +2,7 @@
 ##############################################################################
 #
 #    Odoo SA, Open Source Management Solution, third party addon
-#    Copyright (C) 2024- Vertel AB (<https://vertel.se>).
+#    Copyright (C) 2024- Vertel Sverige AB (<https://vertel.se>).
 #
 ##############################################################################
 
@@ -325,7 +325,7 @@ class Arbetsgivarintyg(models.Model):
     # === SOFTWARE INFO ======================================================
     software_supplier = fields.Char(
         string='Leverantör',
-        default='Vertel AB',
+        default='Vertel Sverige AB',
     )
     software_name = fields.Char(
         string='Mjukvarunamn',

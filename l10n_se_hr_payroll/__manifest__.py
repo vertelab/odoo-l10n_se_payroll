@@ -2,7 +2,7 @@
 ##############################################################################
 #
 #    Odoo SA, Open Source Management Solution, third party addon
-#    Copyright (C) 2024- Vertel AB (<https://vertel.se>).
+#    Copyright (C) 2024- Vertel Sverige AB (<https://vertel.se>).
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as
@@ -21,16 +21,16 @@
 
 {
     'name': 'l10n_se_payroll: (Swedish Payroll)',
-    'version': '18.0.1.0.1',
+    'version': '0.1',
     # Version ledger: XX.0 = Odoo version. 1 = Major. Non regressionable code. 2 = Minor. New features that are regressionable. 3 = Bug fixes
     'summary': 'Swedish Payroll Rules.',
     'category': 'Payroll Localization',
-    'author': 'Vertel AB',
-    'website': 'https://vertel.se/apps/odoo-l10n_se_payroll/l10n_se_hr_payroll',
+    'author': 'Vertel Sverige AB',
+    'website': 'https://vertel.se/apps/odoo-l10n_se_payroll/l10n_se_hr_holidays_account',
     'images': ['static/description/banner.png'],  # 560x280 px.
     'license': 'AGPL-3',
     'contributor': '',
-    'maintainer': 'Vertel AB',
+    'maintainer': 'Vertel Sverige AB',
     'repository': 'https://github.com/vertelab/odoo-l10n_se_payroll',
     'depends': [
         'payroll',
@@ -41,23 +41,25 @@
         'hr_work_entry_contract',
         'base_recompute_field',
     ],
-    'description': '''
-(Swedish Payroll)
-=================
+    'description': """
+Swedish Payroll Rules.
+======================
+
+    * Employee Details
+    * Employee Contracts
+    * Allowances/Deductions
+    * Allow to configure Basic/Gross/Net Salary
+    * Employee Payslip
+    * Monthly Payroll Register
+    * Integrated with Holiday Management
+
 
     This module depends on OCA:
-        git@github.com:OCA/payroll.git
-        git@github.com:OCA/timesheet.git
-        git@github.com:OCA/web.git
-
-    Features:
-
-        - Automation: Scheduled jobs: Attendance: Late Check-in Detection, Payroll: Automatic payslip batch generation.
-        - Guided Wizards: Step-by-step dialogs for data entry.
-        - Reports: Adds printable reports.
-        - UI Integration: Extends 17 view(s) in the Odoo interface.
-        - Extends Odoo: Builds on account.account, account.journal, account.period, hr.attendance.
-    ''',
+    git@github.com:OCA/payroll.git
+    git@github.com:OCA/timesheet.git
+    git@github.com:OCA/web.git
+    
+    """,
     'auto_install': False,
     'data': [
         'data/hr_payroll_data.xml',
@@ -77,6 +79,7 @@
         'views/hr_job_views.xml',
         'views/hr_payslip_template.xml',
         'views/hr_payslip_run_views.xml',
+        'views/res_config_settings_views.xml',
         'views/user_payslip_views.xml',
         'views/hr_contract_views.xml',
         #'views/hr_leave_views.xml',
@@ -100,3 +103,5 @@
     #],
     'installable': True
 }
+
+# vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:

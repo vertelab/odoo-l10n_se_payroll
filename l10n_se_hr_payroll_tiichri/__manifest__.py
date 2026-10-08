@@ -2,7 +2,7 @@
 ##############################################################################
 #
 #    Odoo SA, Open Source Management Solution, third party addon
-#    Copyright (C) 2021- Vertel AB (<https://vertel.se>).
+#    Copyright (C) 2021- Vertel Sverige AB (<https://vertel.se>).
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as
@@ -23,25 +23,18 @@
 
 {
     'name': 'l10n_se_payroll: Tiichri',
-    'version': '18.0.1.1.0',
-    'summary': 'Generate test data for Swedish accounting.',
+    'version': '1.1',
+    'summary': 'Generate test data for Swedish accounting',
     'category': 'Payroll Localization',
-    'description': '''
-Tiichri
-=======
-
-    We create test data to seven employees, to use while developing our own code. To validare that it all turns out correct.
-
-    Features:
-
-        - Extends Odoo: Builds on resource.calendar.
-    ''',
-    'author': 'Vertel AB',
+    'description': """
+We create test data to seven employees, to use while developing our own code. To validare that it all turns out correct.
+    """,
+    'author': 'Vertel Sverige AB',
     'website': 'https://vertel.se/apps/odoo-l10n_se_payroll/l10n_se_hr_payroll_tiichri',
     'images': ['static/description/banner.png'],
     'license': 'AGPL-3',
     'contributor': '',
-    'maintainer': 'Vertel AB',
+    'maintainer': 'Vertel Sverige AB',
     'repository': 'https://github.com/vertelab/odoo-l10n-se-payroll',
     'depends': [
         'l10n_se_hr_payroll_benefits',

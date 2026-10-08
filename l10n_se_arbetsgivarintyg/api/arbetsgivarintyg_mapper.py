@@ -2,7 +2,7 @@
 ##############################################################################
 #
 #    Odoo SA, Open Source Management Solution, third party addon
-#    Copyright (C) 2024- Vertel AB (<https://vertel.se>).
+#    Copyright (C) 2024- Vertel Sverige AB (<https://vertel.se>).
 #
 ##############################################################################
 
@@ -247,7 +247,7 @@ def map_intyg_to_request(intyg):
         },
         'SoftwareInfo': {
             'Build': intyg.software_build or '',
-            'Supplier': intyg.software_supplier or 'Vertel AB',
+            'Supplier': intyg.software_supplier or 'Vertel Sverige AB',
             'Version': intyg.software_version or '1.0',
         },
     }

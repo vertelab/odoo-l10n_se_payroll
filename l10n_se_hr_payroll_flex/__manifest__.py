@@ -1,32 +1,40 @@
 # -*- coding: utf-8 -*-
 {
     'name': 'Swedish Payroll — Flextid / Timpott',
-    'version': '18.0.1.2.0',
+    'version': '18.0.1.2',
     'summary': 'Flextidsbank: övertid/undertid, beordrad övertid, timpott, uttag som ledighet eller lön',
     'category': 'Payroll Localization',
-    'description': '''
-Swedish Payroll — Flextid / Timpott
-===================================
+    'description': """
+Swedish Flexitime Bank (Timpott) for l10n_se_payroll
+=====================================================
 
-    Full flexitime management integrated with timesheets and payroll:
+Full flexitime management integrated with timesheets and payroll:
 
-    Dependencies:
-    - OCA hr_timesheet_sheet (timesheet reporting)
-    - OCA payroll (salary rules engine)
-    - l10n_se_hr_payroll (Swedish payroll core)
-    - l10n_se_hr_holidays (optional, for leave integration)
+- **Overtime/Undertime detection**: Compares reported time against
+  work schedule (resource.calendar) on the weekly timesheet
+- **Ordered overtime**: Manager-designated overtime earns bonus
+  hours (50% or 100% extra) into the time bank
+- **Flexitime Bank (Timpott)**: Accumulates flex hours with full
+  transaction history — similar to holiday allocations
+- **Leave withdrawal**: Flex hours can be taken as time off,
+  creating proper leave records that appear on the timesheet
+- **Salary payout**: Employee requests conversion of flex hours
+  to salary, creating a payroll correction on the next payslip
+- **Project-linked overtime**: Overtime hours are associated with
+  the project they were reported on
+- **Flex year rollover**: Configurable flex year with carry-over
+  rules (similar to holiday year handling)
 
-    Features:
-
-        - Guided Wizards: Step-by-step dialogs for data entry.
-        - Reports: Adds printable reports.
-        - UI Integration: Extends 6 view(s) in the Odoo interface.
-        - Extends Odoo: Builds on description, hr.contract, hr.employee, hr.flex.bank.
-    ''',
-    'author': 'Vertel AB',
-    'website': 'https://vertel.se/apps/odoo-l10n_se_payroll/l10n_se_hr_payroll_flex',
+Dependencies:
+- OCA hr_timesheet_sheet (timesheet reporting)
+- OCA payroll (salary rules engine)
+- l10n_se_hr_payroll (Swedish payroll core)
+- l10n_se_hr_holidays (optional, for leave integration)
+    """,
+    'author': 'Vertel Sverige AB',
+    'website': 'https://vertel.se',
     'license': 'AGPL-3',
-    'maintainer': 'Vertel AB',
+    'maintainer': 'Vertel Sverige AB',
     'repository': 'https://github.com/vertelab/odoo-l10n-se-payroll',
     'depends': [
         'l10n_se_hr_payroll',

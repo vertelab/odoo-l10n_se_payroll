@@ -1,24 +1,22 @@
 # -*- coding: utf-8 -*-
 {
     'name': 'Swedish Payroll — Collective Agreements',
-    'version': '18.0.1.0.0',
-    'summary': 'Collective agreement support: OB, overtime, vacation supplement, contractual pension.',
+    'version': '1.0',
+    'summary': 'Collective agreement support: OB, overtime, vacation supplement, contractual pension',
     'category': 'Payroll Localization',
-    'description': '''
-Swedish Payroll — Collective Agreements
-=======================================
+    'description': """
+Swedish collective agreement (kollektivavtal) support for l10n_se_payroll:
 
-    Swedish collective agreement (kollektivavtal) support for l10n_se_payroll:
-
-    Features:
-
-        - UI Integration: Extends 2 view(s) in the Odoo interface.
-        - Extends Odoo: Builds on hr.collective.agreement, hr.contract.
-    ''',
-    'author': 'Vertel AB',
-    'website': 'https://vertel.se/apps/odoo-l10n_se_payroll/l10n_se_hr_payroll_collective',
+- Define agreement types (ITP, SAF-LO, Kommunal, etc.)
+- Link agreements to employees/contracts
+- Auto-calculate OB-tillägg, overtime, semestertillägg
+- Salary rule templates per agreement type
+- Agreement-based pension contributions
+    """,
+    'author': 'Vertel Sverige AB',
+    'website': 'https://vertel.se',
     'license': 'AGPL-3',
-    'maintainer': 'Vertel AB',
+    'maintainer': 'Vertel Sverige AB',
     'repository': 'https://github.com/vertelab/odoo-l10n-se-payroll',
     'depends': ['l10n_se_hr_payroll', 'l10n_se_hr_payroll_benefits'],
     'data': [
