@@ -2,7 +2,7 @@ import datetime
 import logging
 
 import requests
-from ics import Calendar
+from icalendar import Calendar
 
 from odoo import _, api, models
 from odoo.exceptions import UserError
@@ -54,18 +54,31 @@ class ImportSwedishHolidays(models.Model):
             raise UserError(_(
                 "No holiday calendar URL is configured. Set it in Settings "
                 "(parameter 'holiday.url.ics') before importing holidays."))
-        calendar = Calendar(requests.get(url, timeout=30).text)
-        responsible = self.env['res.users'].search([('login', '=', 'holidays')], limit=1)
-        if not responsible:
+        try:
+            response = requests.get(url, timeout=30)
+            response.raise_for_status()
+        except requests.RequestException as exc:
             raise UserError(_(
-                "The calendar-owning user 'holidays' does not exist. Create it "
-                "before importing holidays."))
+                "Could not read the holiday calendar at %(url)s: %(error)s",
+                url=url, error=exc)) from exc
+        # python-ics 0.7.3 recurses until the stack blows on this file, so the
+        # calendar is read with icalendar instead.
+        calendar = Calendar.from_ical(response.content)
+        # The 'holidays' user is module data in ics_import_holidays
+        # (data/users.xml), which this module depends on.
+        responsible = self.env.ref('ics_import_holidays.user_holidays')
 
-        for event in list(calendar.timeline):
-            eve_name = EVES.get(_strip_prefix(event.name))
+        for component in calendar.walk('VEVENT'):
+            name = str(component.get('SUMMARY') or '').strip()
+            if not name:
+                continue
+            eve_name = EVES.get(_strip_prefix(name))
             if not eve_name:
                 continue
-            eve_date = event.begin.date() - datetime.timedelta(days=1)
+            begin = component.get('DTSTART').dt
+            if isinstance(begin, datetime.datetime):
+                begin = begin.date()
+            eve_date = begin - datetime.timedelta(days=1)
 
             # Calendar event for the eve itself.
             eve_xmlid = '%s.calendar_%s_%s' % (
@@ -88,12 +101,16 @@ class ImportSwedishHolidays(models.Model):
             # Leave on every working schedule, so the eve is not planned as
             # working time. Date range is [eve_date, eve_date + 1 day).
             for resource_calendar in self.env['resource.calendar'].search([]):
-                hours_week = resource_calendar.hours_per_day * 5
-                leave_xmlid = '%s.leaves_eve_%s' % (IMPORT, ('%s_%s_%s' % (
-                    hours_week,
+                # Key the leave on the calendar id: two schedules can share
+                # the same hours_per_day, and keying on the hours would make
+                # them collide on one xmlid so the second schedule silently
+                # never got its leave.
+                leave_name = 'leaves_eve_cal%s_%s_%s' % (
+                    resource_calendar.id,
                     eve_name.replace(' ', '_'),
                     eve_date.strftime('%Y-%m-%d'),
-                )).replace('.', '_'))
+                )
+                leave_xmlid = '%s.%s' % (IMPORT, leave_name.replace('.', '_'))
                 if self.env.ref(leave_xmlid, raise_if_not_found=False):
                     continue
                 leave = self.env['resource.calendar.leaves'].create({

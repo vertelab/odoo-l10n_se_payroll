@@ -16,17 +16,3 @@ class ResCalendarSettings(models.TransientModel):
         default='https://www.webcal.guru/sv-SE/ladda_ner_kalendern?calendar_instance_id=86',
         help="Holiday calendar to derive the Swedish eves from.",
     )
-
-    @api.model
-    def create(self, vals_list):
-        res = super().create(vals_list)
-        if vals_list.get('ics_url_eve') and not self.env['res.users'].search(
-                [('login', '=', 'holidays')], limit=1):
-            # Scheduling lives in data/cron_tasks.xml (cron.task), not here:
-            # a cron created at settings-save time cannot be verified against
-            # the code and duplicates on every save.
-            self.env['res.users'].sudo().create({
-                'name': 'Holidays',
-                'login': 'holidays',
-            })
-        return res
