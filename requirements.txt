@@ -13,3 +13,11 @@
 #   fungera, men den ar billig och gor att tester kan koras utan extra steg.
 odoo-test-helper
 zeep
+
+# ── Saknade beroenden — inventering 2026-11-13 ──────────────────────────────
+# l10n_se_hr_holidays — pandas på modulnivå (semesterberäkning i DataFrame)
+pandas
+
+# l10n_se_payroll_fora — workalendar.europe.Sweden (svenska helgdagar).
+# Importeras i try/except; FORA-beräkningen tystnar utan paketet.
+workalendar
