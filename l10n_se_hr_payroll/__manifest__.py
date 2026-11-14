@@ -35,7 +35,7 @@
     'depends': [
         'payroll',
         'hr_attendance',
-        'account_period_vrtl', 
+        'account_fiscal_year_vrtl', 
         'hr_timesheet_sheet',
         'hr_work_entry',
         'hr_work_entry_contract',
@@ -79,7 +79,6 @@ Swedish Payroll Rules.
         'views/hr_job_views.xml',
         'views/hr_payslip_template.xml',
         'views/hr_payslip_run_views.xml',
-        'views/res_config_settings_views.xml',
         'views/user_payslip_views.xml',
         'views/hr_contract_views.xml',
         #'views/hr_leave_views.xml',

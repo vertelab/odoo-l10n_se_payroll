@@ -15,14 +15,14 @@
         <field name="name">late.check.in.tree</field>
         <field name="model">late.check.in</field>
         <field name="arch" type="xml">
-            <tree string="Late Check-ins" editable="bottom">
+            <list string="Late Check-ins" editable="bottom">
                 <field name="name"/>
                 <field name="employee_id"/>
                 <field name="date"/>
                 <field name="late_minutes"/>
                 <field name="penalty_amount"/>
                 <field name="state" widget="badge"/>
-            </tree>
+            </list>
         </field>
     </record>
 
