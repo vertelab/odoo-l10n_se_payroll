@@ -36,7 +36,11 @@ Payroll with Accounting
 
     Features:
 
-        - UI Integration: Extends 1 view(s) in the Odoo interface.
+        - Accounting entries are created by OCA's payroll_account module.
+        - This module adds the Swedish parts: account/tax validation on
+          salary rules, account codes stored as char until the company
+          exists, the account.period assignment (when the period module
+          is installed) and the payroll_account_post setting.
         - Extends Odoo: Builds on hr.payslip, hr.salary.rule.
     ''',
     #'sequence': '1'

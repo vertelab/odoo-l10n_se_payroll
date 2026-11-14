@@ -1,8 +1,6 @@
-from datetime import timedelta, date, datetime
-from odoo import models, fields, api, _
-from odoo.exceptions import UserError
-
 import logging
+
+from odoo import api, fields, models
 
 _logger = logging.getLogger(__name__)
 
@@ -11,130 +9,57 @@ class HrPayslip(models.Model):
     _inherit = "hr.payslip"
 
     def action_payslip_done(self):
-        self.compute_sheet()
-        res = self.write({'state': 'done'})
+        """Odoo 18: the accounting entry is created by OCA's payroll_account.
 
-        for slip in self:
-            line_ids = []
-            debit_sum = 0.0
-            credit_sum = 0.0
-            date = datetime.now()
-            currency = slip.company_id.currency_id
-
-            name = _('Payslip of %s') % (slip.employee_id.name)
-            move_dict = {
-                'narration': name,
-                'ref': f"{slip.number} {slip.employee_id.name}",
-                'journal_id': slip.journal_id.id,
-                'date': date,
-            }
-
-            move = self.env['account.move'].create(move_dict)
-            move.period_id.date2period(move.date)
-            move.message_post(body=_(
-                "This was created from:") + f"<a href=# data-oe-model=hr.payslip data-oe-id={slip.id}>{slip.name}</a>")
-            for line in slip.details_by_salary_rule_category:
-                amount = currency.round(slip.credit_note and -line.total or line.total)
-                if currency.is_zero(amount):
-                    continue
-
-                # Hitta kontot för nyvarande företag
-                debit_account_id = line.salary_rule_id.account_debit.id
-                credit_account_id = line.salary_rule_id.account_credit.id
-
-                if debit_account_id:
-                    values = {
-                        'move_id': move.id,
-                        'name': line.name,
-                        'partner_id': line._get_partner_id(credit_account=False),
-                        'account_id': debit_account_id,
-                        'journal_id': slip.journal_id.id,
-                        'date': date,
-                        'debit': amount > 0.0 and amount or 0.0,
-                        'credit': amount < 0.0 and -amount or 0.0,
-                        'analytic_account_id': line.salary_rule_id.analytic_account_id.id,
-                        # ~ 'tax_line_id': line.salary_rule_id.account_tax_id.id,
-                    }
-                    context_copy = self.env.context.copy()
-                    context_copy.update({'check_move_validity': False})
-                    new_line = self.with_context(context_copy).env['account.move.line'].create(values)
-                    new_line.write({
-                                       'tax_line_id': line.salary_rule_id.account_tax_id.id})  # ~ won't set the correct tax_line_id if i try to set it during create
-
-                    debit_sum += values['debit'] - values['credit']
-                if credit_account_id:
-                    values = {
-                        'move_id': move.id,
-                        'name': line.name,
-                        'partner_id': line._get_partner_id(credit_account=True),
-                        'account_id': credit_account_id,
-                        'journal_id': slip.journal_id.id,
-                        'date': date,
-                        'debit': amount < 0.0 and -amount or 0.0,
-                        'credit': amount > 0.0 and amount or 0.0,
-                        'analytic_account_id': line.salary_rule_id.analytic_account_id.id,
-                        # ~ 'tax_line_id': line.salary_rule_id.account_tax_id.id,
-                    }
-                    context_copy = self.env.context.copy()
-                    context_copy.update({'check_move_validity': False})
-                    new_line = self.with_context(context_copy).env['account.move.line'].create(values)
-                    new_line.write({
-                                       'tax_line_id': line.salary_rule_id.account_tax_id.id})  # ~ won't set the correct tax_line_id if i try to set it during create
-                    credit_sum += values['credit'] - values['debit']
-
-            if currency.compare_amounts(credit_sum, debit_sum) == -1:
-                acc_id = slip.journal_id.default_credit_account_id.id
-                if not acc_id:
-                    raise UserError(_('The Expense Journal "%s" has not properly configured the Credit Account!') % (
-                        slip.journal_id.name))
-                values = {
-                    'move_id': move.id,
-                    'name': _('Adjustment Entry'),
-                    'partner_id': False,
-                    'account_id': acc_id,
-                    'journal_id': slip.journal_id.id,
-                    'date': date,
-                    'debit': 0.0,
-                    'credit': currency.round(debit_sum - credit_sum),
-                }
-                context_copy = self.env.context.copy()
-                context_copy.update({'check_move_validity': False})
-                new_line = self.with_context(context_copy).env['account.move.line'].create(values)
-                new_line.write({
-                                   'tax_line_id': line.salary_rule_id.account_tax_id.id})  # ~ won't set the correct tax_line_id if i try to set it during create
-
-
-            elif currency.compare_amounts(debit_sum, credit_sum) == -1:
-                acc_id = slip.journal_id.default_debit_account_id.id
-                if not acc_id:
-                    raise UserError(_('The Expense Journal "%s" has not properly configured the Debit Account!') % (
-                        slip.journal_id.name))
-                values = {
-                    'move_id': move.id,
-                    'name': _('Adjustment Entry'),
-                    'partner_id': False,
-                    'account_id': acc_id,
-                    'journal_id': slip.journal_id.id,
-                    'date': date,
-                    'debit': currency.round(credit_sum - debit_sum),
-                    'credit': 0.0,
-                }
-                context_copy = self.env.context.copy()
-                context_copy.update({'check_move_validity': False})
-                new_line = self.with_context(context_copy).env['account.move.line'].create(values)
-                new_line.write({
-                                   'tax_line_id': line.salary_rule_id.account_tax_id.id})  # ~ won't set the correct tax_line_id if i try to set it during create
-
-            # ~ move_dict['line_ids'] = line_ids
-            # ~ move = self.env['account.move'].create(move_dict)
-            slip.write({'move_id': move.id, 'date': date})
-            if not move.line_ids:
-                raise UserError(_("As you installed the payroll accounting module you have to choose Debit and Credit"
-                                  " account for at least one salary rule in the choosen Salary Structure."))
-
-            if self.env["ir.config_parameter"].sudo().get_param("l10n_se_hr_payroll_account.payroll_account_post"):
-                move.post()
+        This module used to duplicate that logic (written for Odoo 14) and
+        never called super(), so OCA's implementation never ran and the
+        local copy crashed on `period_id`, `move.post()` and
+        `details_by_salary_rule_category`. The Swedish contribution is the
+        account/tax validation on hr.salary.rule, not the posting itself.
+        """
+        res = super().action_payslip_done()
+        self._l10n_se_set_period_on_moves()
+        self._l10n_se_apply_post_setting()
         return res
+
+    def _l10n_se_apply_post_setting(self):
+        """Honour payroll_account_post (OCA always posts).
+
+        OCA's implementation calls action_post() unconditionally. When the
+        Swedish setting is off the entry must stay in draft, so reset it to
+        draft afterwards.
+        """
+        post = self.env['ir.config_parameter'].sudo().get_param(
+            'l10n_se_hr_payroll_account.payroll_account_post')
+        if post:
+            return
+        for slip in self.filtered('move_id'):
+            move = slip.move_id
+            if move.state == 'posted':
+                move.button_draft()
+
+    def _l10n_se_set_period_on_moves(self):
+        """Set account.period when the period module is installed.
+
+        `account.period` comes from account_fiscal_year_vrtl. Without it
+        there is no period model and nothing to set.
+        """
+        if 'account.period' not in self.env.registry:
+            return
+        if 'period_id' not in self.env['account.move']._fields:
+            return
+        Period = self.env['account.period']
+        for slip in self.filtered('move_id'):
+            move_date = slip.date or slip.date_to
+            if not move_date:
+                continue
+            period = Period.search([
+                ('date_start', '<=', move_date),
+                ('date_stop', '>=', move_date),
+                ('company_id', 'in', [False, slip.company_id.id]),
+            ], limit=1)
+            if period:
+                slip.move_id.period_id = period
 
 
 class HrSalaryRule(models.Model):
@@ -144,13 +69,10 @@ class HrSalaryRule(models.Model):
     account_debit_char = fields.Char()  # Used to save account code until we know which company it is.
     account_credit_char = fields.Char()  # Used to save account code until we know which company it is.
 
-    analytic_account_id = fields.Many2one(
-        "account.analytic.account", "Analytic Account", domain="[('company_id','=',company_id)]")
-    account_tax_id = fields.Many2one("account.tax", "Tax", domain="[('company_id','=',company_id)]")
-    account_debit = fields.Many2one("account.account", "Debit Account",
-                                    domain="[('deprecated', '=', False),('company_id','=',company_id)]")
-    account_credit = fields.Many2one("account.account", "Credit Account",
-                                     domain="[('deprecated', '=', False),('company_id','=',company_id)]")
+    # account_debit, account_credit, account_tax_id and analytic_account_id
+    # are declared by OCA's payroll_account. Do not redeclare them here —
+    # the local declarations used to shadow OCA's fields (and their
+    # company_dependent behaviour).
 
     def write(self, vals_list):
         res = super().write(vals_list)
@@ -166,22 +88,35 @@ class HrSalaryRule(models.Model):
         return res
 
     def check_company_fields(self):
+        """Warn when a salary rule points at another company's account/tax.
+
+        account.account has company_ids (many2many), account.tax has
+        company_id (many2one). The previous version compared a many2one
+        against a many2many, which is always true and produced no useful
+        warning.
+        """
         all_errors = ""
         for record in self:
             error = ""
-            if record.company_id and record.account_debit and record.company_id != record.account_debit.company_ids:
-                error = error + f"Salary rule {record.name} has a debit account from a different company. {record.account_debit.code}. \n"
+            if record.company_id and record.account_debit \
+                    and record.company_id not in record.account_debit.company_ids:
+                error += (f"Salary rule {record.name} has a debit account from a "
+                          f"different company. {record.account_debit.code}. \n")
 
-            if record.company_id and record.account_credit and record.company_id != record.account_credit.company_ids:
-                error = error + f"Salary rule {record.name} has a credit account from a different company. {record.account_credit.code}. \n"
+            if record.company_id and record.account_credit \
+                    and record.company_id not in record.account_credit.company_ids:
+                error += (f"Salary rule {record.name} has a credit account from a "
+                          f"different company. {record.account_credit.code}. \n")
 
-            if record.company_id and record.account_tax_id and record.company_id != record.account_tax_id.company_id:
-                error = error + f"Salary rule {record.name} has a tax from a different company. {record.account_tax_id.name}. \n"
-            if len(error) > 0:
-                all_errors = all_errors + error + "\n"
-        if len(all_errors) > 0:
-            _logger.warning(f"{all_errors=}")
-            # raise UserError(all_errors)
+            if record.company_id and record.account_tax_id \
+                    and record.account_tax_id.company_id \
+                    and record.company_id != record.account_tax_id.company_id:
+                error += (f"Salary rule {record.name} has a tax from a different "
+                          f"company. {record.account_tax_id.name}. \n")
+            if error:
+                all_errors += error + "\n"
+        if all_errors:
+            _logger.warning(all_errors)
 
     @api.model
     def set_account_tax_using_char_fields(self):
