@@ -48,6 +48,28 @@ class HRContract(models.Model):
         for year in sorted(years):
             self.fetch_entire_tablenumber_SKV_data(year)
 
+    def _l10n_se_table_column_key(self, wage=None):
+        """The value SKV stores in number_of_days for this contract.
+
+        Skatteverket's table data splits on income: '30B' holds the table
+        columns up to 80 000 kr, '30%' holds the percentage column above
+        it. The field is named number_of_days but holds this variant, not
+        a period length.
+        """
+        self.ensure_one()
+        table = self.table_number or 30
+        if wage is not None and float(wage) > 80000:
+            return f'{table}%'
+        return f'{table}B'
+
+    def _l10n_se_tax_year(self, payslip):
+        """Income year for the lookup, from the payslip date."""
+        date = payslip.date_from or payslip.date_to
+        if not date:
+            period = payslip.period_id
+            date = period.date_start if period else None
+        return str(date.year) if date else None
+
     def l10_sum_columns_taxtable_line(self, payslip, wage):
 
         if self.has_tax_equalization and self.tax_equalization_start <= payslip.date_from <= self.tax_equalization_end:
@@ -61,24 +83,40 @@ class HRContract(models.Model):
             _logger.warning(f"Please fill these values{fails}")
             return
 
-        year = str(payslip.period_id.date_start.year)
-        period_days = str(self.pay_period_days or '31')
+        year = self._l10n_se_tax_year(payslip)
+        if not year:
+            _logger.warning(
+                'taxtable: payslip %s has no date, cannot look up tax',
+                payslip.name)
+            return 0.0
 
+        column_key = self._l10n_se_table_column_key(wage)
         taxtable_name = f"Skattetabell {year}"
-        taxtable_id = self.env['payroll.taxtable'].search([('name', 'like', f'%{year}%')])
+        taxtable_id = self.env['payroll.taxtable'].search(
+            [('name', 'like', f'%{year}%')])
 
         taxtable_line = self.env['payroll.taxtable.line'].search([
             ('year', '=', year),
-            ('number_of_days', '=', period_days),
+            ('number_of_days', '=', column_key),
             ('table_number', '=', self.table_number),
             ('income_from', '<=', float(wage)),
             ('income_to', '>=', float(wage)),
         ], limit=1)
 
         if not taxtable_line:
-            taxtable_line = self.do_api_call(taxtable_id, taxtable_name, wage, year, payslip)
+            taxtable_line = self.do_api_call(
+                taxtable_id, taxtable_name, wage, year, payslip)
 
-        return getattr(taxtable_line, self.column_number)
+        if not taxtable_line:
+            # Never fall back to 0 silently: a zero tax withholding is a
+            # wrong payslip, and the caller cannot tell it from a real 0.
+            _logger.warning(
+                'taxtable: no line for year=%s table=%s column=%s income=%s '
+                '(%s) — tax withholding will be 0',
+                year, self.table_number, column_key, wage, payslip.name)
+            return 0.0
+
+        return getattr(taxtable_line, self.column_number) or 0.0
 
     def do_api_call(self, taxtable_id, taxtable_name, wage, year, payslip):
 
@@ -87,10 +125,10 @@ class HRContract(models.Model):
 
         self.fetch_entire_tablenumber_SKV_data(year)
 
-        period_days = str(self.pay_period_days or '31')
+        column_key = self._l10n_se_table_column_key(wage)
         taxtable_line = self.env['payroll.taxtable.line'].search([
             ('year', '=', str(year)),
-            ('number_of_days', '=', period_days),
+            ('number_of_days', '=', column_key),
             ('table_number', '=', self.table_number),
             ('income_from', '<=', float(wage)),
             ('income_to', '>=', float(wage)),
