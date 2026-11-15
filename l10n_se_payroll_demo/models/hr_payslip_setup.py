@@ -248,6 +248,13 @@ class HrPayslip(models.Model):
             _logger.warning('payroll_demo: accounts missing from the chart: %s',
                             sorted(missing))
 
+        # The net wage liability has to allow reconciliation: the payment
+        # settles it, and Odoo refuses to reconcile on a non-reconcilable
+        # account. se_K2 ships 2890 without the flag.
+        liability = self._payroll_demo_account(NET_WAGE_ACCOUNT)
+        if liability and not liability.reconcile:
+            liability.reconcile = True
+
     @api.model
     def _payroll_demo_structure(self, code):
         """The demo company's salary structure, created on first use.

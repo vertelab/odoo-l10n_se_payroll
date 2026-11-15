@@ -101,6 +101,11 @@ class HrPayslip(models.Model):
                         len(payload.get('months', [])))
 
         company = self._payroll_demo_company()
+        # The demo posts its payroll entries: a payslip that stays in draft
+        # cannot be reconciled against the wage payment, and the demo exists
+        # to exercise the whole flow.
+        self.env['ir.config_parameter'].sudo().set_param(
+            'l10n_se_hr_payroll_account.payroll_account_post', True)
         self._payroll_demo_set_rule_accounts()
         contracts = self._payroll_demo_create_contracts(payload, company)
         self._payroll_demo_create_leaves(payload, company)
@@ -115,6 +120,12 @@ class HrPayslip(models.Model):
     def _payroll_demo_create_contracts(self, payload, company):
         """Create the contracts of the quarter. Returns {employee: contract}."""
         Contract = self.env['hr.contract']
+        # OCA relates slip.journal_id to contract_id.journal_id, so the
+        # contract must carry the payroll journal or nothing can be posted.
+        payroll_journal = self.env['account.journal'].search([
+            ('code', '=', 'LÖN'),
+            ('company_id', '=', company.id),
+        ], limit=1)
         by_employee = {}
         for data in payload.get('contracts', []):
             employee = self._payroll_demo_employee(data['employee'])
@@ -145,6 +156,7 @@ class HrPayslip(models.Model):
                 'wage_exchange_amount': data.get('wage_exchange_amount', 0.0),
                 'wage_exchange_start': data.get('wage_exchange_start') or False,
                 'wage_exchange_end': data.get('wage_exchange_end') or False,
+                'journal_id': payroll_journal.id if payroll_journal else False,
             }
             contract = Contract.search([
                 ('employee_id', '=', employee.id),
@@ -226,11 +238,48 @@ class HrPayslip(models.Model):
                 vals['number_of_hours'] = data['number_of_hours']
             if data.get('sick_leave_part'):
                 vals['sick_leave_part'] = data['sick_leave_part']
+            # Odoo refuses a leave without an allocation for the type.
+            self._payroll_demo_ensure_allocation(
+                employee, leave_type, data['date_from'])
             created |= Leave.create(vals)
         for leave in created:
             if leave.state in ('confirm', 'validate1'):
                 leave.action_validate()
         return created
+
+    @api.model
+    def _payroll_demo_ensure_allocation(self, employee, leave_type, date):
+        """Give the employee an allocation for the leave type if missing.
+
+        Odoo validates that a leave fits inside an allocation. The demo
+        grants a generous one so the planned leaves can be taken.
+        """
+        Allocation = self.env['hr.leave.allocation']
+        existing = Allocation.search([
+            ('employee_id', '=', employee.id),
+            ('holiday_status_id', '=', leave_type.id),
+            ('state', '=', 'validate'),
+            ('date_from', '<=', date),
+            ('date_to', '>=', date),
+        ], limit=1)
+        if existing:
+            return existing
+        year = int(str(date)[:4])
+        # The allocation must cover the leave request, so it starts with the
+        # employee's employment rather than at the calendar year.
+        start = min(f'{year}-01-01',
+                    str(employee.first_contract_date or f'{year}-01-01'))
+        allocation = Allocation.create({
+            'name': f'{leave_type.name} {year}',
+            'employee_id': employee.id,
+            'holiday_status_id': leave_type.id,
+            'number_of_days': 120,
+            'date_from': start,
+            'date_to': f'{year}-12-31',
+            'allocation_type': 'regular',
+        })
+        allocation.action_validate()
+        return allocation
 
     @api.model
     def _payroll_demo_load_month(self, month, contracts, company):
@@ -307,8 +356,11 @@ class HrPayslip(models.Model):
             slips |= slip
 
         if slips:
-            slips.compute_sheet()
-            slips.action_payslip_done()
+            # OCA's action_payslip_done reads self.prevent_compute_on_confirm
+            # without looping, so it only works one payslip at a time.
+            for slip in slips:
+                slip.compute_sheet()
+                slip.action_payslip_done()
             self._payroll_demo_pay(slips, month, company)
         return len(slips)
 
@@ -340,7 +392,10 @@ class HrPayslip(models.Model):
         payment.action_post()
         # Match the payment against the net wage liability of the payslips'
         # entries, so the liability is settled like a real wage payment.
-        lines = slips.move_id.line_ids.filtered(
+        # Only posted entries can be reconciled; if the payslip entries are
+        # still draft the payment stays unreconciled.
+        posted_slips = slips.filtered(lambda s: s.move_id.state == 'posted')
+        lines = posted_slips.move_id.line_ids.filtered(
             lambda l: l.account_id == liability and l.credit)
         if lines:
             (lines + payment.move_id.line_ids.filtered(
