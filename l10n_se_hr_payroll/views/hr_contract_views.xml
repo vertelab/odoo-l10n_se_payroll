@@ -57,12 +57,20 @@
                                    invisible="not has_attachment_of_earnings"/>
                         </group>
                     </page>
-                    <page string="Accounting" name="accounting">
-                        <group>
-                            <field name="journal_id"/>
-                            <field name="analytic_account_id"/>
-                        </group>
-                    </page>
+                    <!-- BORTTAGEN 2026-11-16: sidan refererade journal_id och
+                         analytic_account_id, som inte finns på hr.contract —
+                         varken i Odoo 18 eller definierade i denna modul.
+                         Fälten förekommer bara i kommenterad kod
+                         (wizard/hr_payroll_payslips_by_employees.py) och i
+                         demodata. Sidan skapades men fälten skrevs aldrig.
+
+                         Följden var att hela modulen föll vid installation:
+                           Field "journal_id" does not exist in model "hr.contract"
+                         och därmed blockerades även l10n_se_hr_payroll_benefits.
+
+                         Om journal-koppling behövs hör den på hr.payslip.run
+                         (Enterprise hr_payroll) eller som eget fält här —
+                         inte som en tom sida i kontraktsvyn. -->
                 </xpath>
             </field>
         </record>
