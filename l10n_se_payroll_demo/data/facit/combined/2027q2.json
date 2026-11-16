@@ -1,0 +1,16 @@
+{
+ "quarter": "2027Q2",
+ "kind": "combined",
+ "note": "frozen result; requires both demo sources loaded",
+ "balance_sheet": {
+  "assets": -6942813.0,
+  "liabilities": 1055044.34,
+  "equity": 0
+ },
+ "profit_and_loss": {
+  "income": 0,
+  "expense": 7997857.34,
+  "result": -7997857.34
+ },
+ "wage_liability": -6942813.0
+}

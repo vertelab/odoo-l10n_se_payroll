@@ -1,0 +1,283 @@
+{
+ "quarter": "2025Q4",
+ "kind": "payroll",
+ "note": "frozen result of the payslip calculation",
+ "payslips": [
+  {
+   "employee": "Asse Aronsson",
+   "month": "2025-10",
+   "gross": 51166.59,
+   "benefits": 4950.0,
+   "tax": 13421.0,
+   "contributions": 17631.83,
+   "net": 37746.0,
+   "net_deductions": 0
+  },
+  {
+   "employee": "Camilla Cobolt",
+   "month": "2025-10",
+   "gross": 31826.88,
+   "benefits": 3908.0,
+   "tax": 6993.0,
+   "contributions": 11227.9,
+   "net": 24834.0,
+   "net_deductions": 0
+  },
+  {
+   "employee": "Doris Dahlin",
+   "month": "2025-10",
+   "gross": 18671.77,
+   "benefits": 6960.0,
+   "tax": 4555.0,
+   "contributions": 8053.5,
+   "net": 14117.0,
+   "net_deductions": 0
+  },
+  {
+   "employee": "Frans Filipsson",
+   "month": "2025-10",
+   "gross": 22066.64,
+   "benefits": 0.0,
+   "tax": 3684.0,
+   "contributions": 2253.0,
+   "net": 18383.0,
+   "net_deductions": 0
+  },
+  {
+   "employee": "Gustav Groth",
+   "month": "2025-10",
+   "gross": 26522.4,
+   "benefits": 0.0,
+   "tax": 4750.0,
+   "contributions": 8333.34,
+   "net": 21773.0,
+   "net_deductions": 0
+  },
+  {
+   "employee": "Helmer Henriksson",
+   "month": "2025-10",
+   "gross": 137.92,
+   "benefits": 0.0,
+   "tax": -0.0,
+   "contributions": 43.33,
+   "net": 138.0,
+   "net_deductions": 0
+  },
+  {
+   "employee": "Karin Kullberg",
+   "month": "2025-10",
+   "gross": 4122.0,
+   "benefits": 0.0,
+   "tax": 1360.0,
+   "contributions": 1295.13,
+   "net": 2762.0,
+   "net_deductions": 0
+  },
+  {
+   "employee": "Oskar Lindvall",
+   "month": "2025-10",
+   "gross": 25461.5,
+   "benefits": 0.0,
+   "tax": 4507.0,
+   "contributions": 8000.0,
+   "net": 20955.0,
+   "net_deductions": 0
+  },
+  {
+   "employee": "Petra Sandell",
+   "month": "2025-10",
+   "gross": 33948.67,
+   "benefits": 0.0,
+   "tax": 6554.0,
+   "contributions": 10666.67,
+   "net": 27395.0,
+   "net_deductions": 0
+  },
+  {
+   "employee": "Asse Aronsson",
+   "month": "2025-11",
+   "gross": 51166.59,
+   "benefits": 4950.0,
+   "tax": 13421.0,
+   "contributions": 17631.83,
+   "net": 37746.0,
+   "net_deductions": 0
+  },
+  {
+   "employee": "Camilla Cobolt",
+   "month": "2025-11",
+   "gross": 31826.88,
+   "benefits": 3908.0,
+   "tax": 6993.0,
+   "contributions": 11227.9,
+   "net": 24834.0,
+   "net_deductions": 0
+  },
+  {
+   "employee": "Doris Dahlin",
+   "month": "2025-11",
+   "gross": 18671.77,
+   "benefits": 6960.0,
+   "tax": 4555.0,
+   "contributions": 8053.5,
+   "net": 14117.0,
+   "net_deductions": 0
+  },
+  {
+   "employee": "Frans Filipsson",
+   "month": "2025-11",
+   "gross": 22066.64,
+   "benefits": 0.0,
+   "tax": 3684.0,
+   "contributions": 2253.0,
+   "net": 18383.0,
+   "net_deductions": 0
+  },
+  {
+   "employee": "Gustav Groth",
+   "month": "2025-11",
+   "gross": 26522.4,
+   "benefits": 0.0,
+   "tax": 4750.0,
+   "contributions": 8333.34,
+   "net": 21773.0,
+   "net_deductions": 0
+  },
+  {
+   "employee": "Helmer Henriksson",
+   "month": "2025-11",
+   "gross": 137.92,
+   "benefits": 0.0,
+   "tax": -0.0,
+   "contributions": 43.33,
+   "net": 138.0,
+   "net_deductions": 0
+  },
+  {
+   "employee": "Karin Kullberg",
+   "month": "2025-11",
+   "gross": 122.0,
+   "benefits": 0.0,
+   "tax": -0.0,
+   "contributions": 38.33,
+   "net": 122.0,
+   "net_deductions": 0
+  },
+  {
+   "employee": "Oskar Lindvall",
+   "month": "2025-11",
+   "gross": 25461.5,
+   "benefits": 0.0,
+   "tax": 4507.0,
+   "contributions": 8000.0,
+   "net": 20955.0,
+   "net_deductions": 0
+  },
+  {
+   "employee": "Petra Sandell",
+   "month": "2025-11",
+   "gross": 33948.67,
+   "benefits": 0.0,
+   "tax": 6554.0,
+   "contributions": 10666.67,
+   "net": 27395.0,
+   "net_deductions": 0
+  },
+  {
+   "employee": "Asse Aronsson",
+   "month": "2025-12",
+   "gross": 51166.59,
+   "benefits": 4950.0,
+   "tax": 13421.0,
+   "contributions": 17631.83,
+   "net": 37746.0,
+   "net_deductions": 0
+  },
+  {
+   "employee": "Camilla Cobolt",
+   "month": "2025-12",
+   "gross": 31826.88,
+   "benefits": 3908.0,
+   "tax": 6993.0,
+   "contributions": 11227.9,
+   "net": 24834.0,
+   "net_deductions": 0
+  },
+  {
+   "employee": "Doris Dahlin",
+   "month": "2025-12",
+   "gross": 18671.77,
+   "benefits": 6960.0,
+   "tax": 4555.0,
+   "contributions": 8053.5,
+   "net": 14117.0,
+   "net_deductions": 0
+  },
+  {
+   "employee": "Frans Filipsson",
+   "month": "2025-12",
+   "gross": 22066.64,
+   "benefits": 0.0,
+   "tax": 3684.0,
+   "contributions": 2253.0,
+   "net": 18383.0,
+   "net_deductions": 0
+  },
+  {
+   "employee": "Gustav Groth",
+   "month": "2025-12",
+   "gross": 26522.4,
+   "benefits": 0.0,
+   "tax": 4750.0,
+   "contributions": 8333.34,
+   "net": 21773.0,
+   "net_deductions": 0
+  },
+  {
+   "employee": "Helmer Henriksson",
+   "month": "2025-12",
+   "gross": 137.92,
+   "benefits": 0.0,
+   "tax": -0.0,
+   "contributions": 43.33,
+   "net": 138.0,
+   "net_deductions": 0
+  },
+  {
+   "employee": "Karin Kullberg",
+   "month": "2025-12",
+   "gross": 122.0,
+   "benefits": 0.0,
+   "tax": -0.0,
+   "contributions": 38.33,
+   "net": 122.0,
+   "net_deductions": 0
+  },
+  {
+   "employee": "Oskar Lindvall",
+   "month": "2025-12",
+   "gross": 25461.5,
+   "benefits": 0.0,
+   "tax": 4507.0,
+   "contributions": 8000.0,
+   "net": 20955.0,
+   "net_deductions": 0
+  },
+  {
+   "employee": "Petra Sandell",
+   "month": "2025-12",
+   "gross": 33948.67,
+   "benefits": 0.0,
+   "tax": 6554.0,
+   "contributions": 10666.67,
+   "net": 27395.0,
+   "net_deductions": 0
+  }
+ ],
+ "totals": {
+  "gross": 633773.11,
+  "tax": 134752.0,
+  "contributions": 200000.5,
+  "net": 499029.0
+ }
+}

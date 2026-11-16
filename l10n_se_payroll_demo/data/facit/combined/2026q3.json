@@ -1,0 +1,16 @@
+{
+ "quarter": "2026Q3",
+ "kind": "combined",
+ "note": "frozen result; requires both demo sources loaded",
+ "balance_sheet": {
+  "assets": -5522831.0,
+  "liabilities": 642054.63,
+  "equity": 0
+ },
+ "profit_and_loss": {
+  "income": 0,
+  "expense": 6164885.63,
+  "result": -6164885.63
+ },
+ "wage_liability": -5522831.0
+}

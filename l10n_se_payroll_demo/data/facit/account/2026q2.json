@@ -1,0 +1,26 @@
+{
+ "quarter": "2026Q2",
+ "kind": "account",
+ "note": "frozen result of the ledger",
+ "saldobalans": {
+  "1934": -461548.0,
+  "2440": 461548.0,
+  "2710": 123007.0,
+  "2731": -198572.76,
+  "2890": -461548.0,
+  "7090": -305453.9,
+  "7210": 596540.9,
+  "7385": 47454.0,
+  "7510": 198572.76
+ },
+ "vat": {
+  "ruta_10_utgaende_25": 0,
+  "ruta_11_utgaende_12": 0,
+  "ruta_12_utgaende_6": 0,
+  "ruta_20_ingaende": 0
+ },
+ "open_items": {
+  "receivable": 0.0,
+  "payable": 5131808.0
+ }
+}

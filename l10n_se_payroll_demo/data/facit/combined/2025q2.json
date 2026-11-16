@@ -1,0 +1,16 @@
+{
+ "quarter": "2025Q2",
+ "kind": "combined",
+ "note": "frozen result; requires both demo sources loaded",
+ "balance_sheet": {
+  "assets": -3208021.0,
+  "liabilities": 299648.44,
+  "equity": 0
+ },
+ "profit_and_loss": {
+  "income": 0,
+  "expense": 3507669.44,
+  "result": -3507669.44
+ },
+ "wage_liability": -3208021.0
+}

@@ -1,0 +1,26 @@
+{
+ "quarter": "2027Q4",
+ "kind": "account",
+ "note": "frozen result of the ledger",
+ "saldobalans": {
+  "1934": -516288.0,
+  "2440": 516288.0,
+  "2710": 2380.0,
+  "2731": -177872.5,
+  "2890": -516288.0,
+  "7090": -64204.34,
+  "7210": 530658.34,
+  "7385": 47454.0,
+  "7510": 177872.5
+ },
+ "vat": {
+  "ruta_10_utgaende_25": 0,
+  "ruta_11_utgaende_12": 0,
+  "ruta_12_utgaende_6": 0,
+  "ruta_20_ingaende": 0
+ },
+ "open_items": {
+  "receivable": 0.0,
+  "payable": 7970769.0
+ }
+}

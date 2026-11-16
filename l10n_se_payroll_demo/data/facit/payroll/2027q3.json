@@ -1,0 +1,223 @@
+{
+ "quarter": "2027Q3",
+ "kind": "payroll",
+ "note": "frozen result of the payslip calculation",
+ "payslips": [
+  {
+   "employee": "Asse Aronsson",
+   "month": "2027-07",
+   "gross": 54242.13,
+   "benefits": 4950.0,
+   "tax": -0.0,
+   "contributions": 18598.17,
+   "net": 54243.0,
+   "net_deductions": 0
+  },
+  {
+   "employee": "Camilla Cobolt",
+   "month": "2027-07",
+   "gross": 33601.23,
+   "benefits": 3908.0,
+   "tax": -0.0,
+   "contributions": 11785.4,
+   "net": 33602.0,
+   "net_deductions": 0
+  },
+  {
+   "employee": "Doris Dahlin",
+   "month": "2027-07",
+   "gross": 19712.72,
+   "benefits": 6960.0,
+   "tax": -0.0,
+   "contributions": 8380.57,
+   "net": 19713.0,
+   "net_deductions": 0
+  },
+  {
+   "employee": "Helmer Henriksson",
+   "month": "2027-07",
+   "gross": 145.61,
+   "benefits": 0.0,
+   "tax": -0.0,
+   "contributions": 45.75,
+   "net": 146.0,
+   "net_deductions": 0
+  },
+  {
+   "employee": "Karin Kullberg",
+   "month": "2027-07",
+   "gross": 128.8,
+   "benefits": 0.0,
+   "tax": -0.0,
+   "contributions": 40.47,
+   "net": 129.0,
+   "net_deductions": 0
+  },
+  {
+   "employee": "Oskar Lindvall",
+   "month": "2027-07",
+   "gross": 26880.98,
+   "benefits": 0.0,
+   "tax": -0.0,
+   "contributions": 8446.0,
+   "net": 26881.0,
+   "net_deductions": 0
+  },
+  {
+   "employee": "Petra Sandell",
+   "month": "2027-07",
+   "gross": 35841.31,
+   "benefits": 0.0,
+   "tax": -0.0,
+   "contributions": 11261.34,
+   "net": 35842.0,
+   "net_deductions": 0
+  },
+  {
+   "employee": "Asse Aronsson",
+   "month": "2027-08",
+   "gross": 54242.13,
+   "benefits": 4950.0,
+   "tax": -0.0,
+   "contributions": 18598.17,
+   "net": 54243.0,
+   "net_deductions": 0
+  },
+  {
+   "employee": "Camilla Cobolt",
+   "month": "2027-08",
+   "gross": 33601.23,
+   "benefits": 3908.0,
+   "tax": -0.0,
+   "contributions": 11785.4,
+   "net": 33602.0,
+   "net_deductions": 0
+  },
+  {
+   "employee": "Doris Dahlin",
+   "month": "2027-08",
+   "gross": 19712.72,
+   "benefits": 6960.0,
+   "tax": -0.0,
+   "contributions": 8380.57,
+   "net": 19713.0,
+   "net_deductions": 0
+  },
+  {
+   "employee": "Helmer Henriksson",
+   "month": "2027-08",
+   "gross": 145.61,
+   "benefits": 0.0,
+   "tax": -0.0,
+   "contributions": 45.75,
+   "net": 146.0,
+   "net_deductions": 0
+  },
+  {
+   "employee": "Karin Kullberg",
+   "month": "2027-08",
+   "gross": 128.8,
+   "benefits": 0.0,
+   "tax": -0.0,
+   "contributions": 40.47,
+   "net": 129.0,
+   "net_deductions": 0
+  },
+  {
+   "employee": "Oskar Lindvall",
+   "month": "2027-08",
+   "gross": 26880.98,
+   "benefits": 0.0,
+   "tax": -0.0,
+   "contributions": 8446.0,
+   "net": 26881.0,
+   "net_deductions": 0
+  },
+  {
+   "employee": "Petra Sandell",
+   "month": "2027-08",
+   "gross": 35841.31,
+   "benefits": 0.0,
+   "tax": -0.0,
+   "contributions": 11261.34,
+   "net": 35842.0,
+   "net_deductions": 0
+  },
+  {
+   "employee": "Asse Aronsson",
+   "month": "2027-09",
+   "gross": 54242.13,
+   "benefits": 4950.0,
+   "tax": -0.0,
+   "contributions": 18598.17,
+   "net": 54243.0,
+   "net_deductions": 0
+  },
+  {
+   "employee": "Camilla Cobolt",
+   "month": "2027-09",
+   "gross": 33601.23,
+   "benefits": 3908.0,
+   "tax": -0.0,
+   "contributions": 11785.4,
+   "net": 33602.0,
+   "net_deductions": 0
+  },
+  {
+   "employee": "Doris Dahlin",
+   "month": "2027-09",
+   "gross": 19712.72,
+   "benefits": 6960.0,
+   "tax": -0.0,
+   "contributions": 8380.57,
+   "net": 19713.0,
+   "net_deductions": 0
+  },
+  {
+   "employee": "Helmer Henriksson",
+   "month": "2027-09",
+   "gross": 145.61,
+   "benefits": 0.0,
+   "tax": -0.0,
+   "contributions": 45.75,
+   "net": 146.0,
+   "net_deductions": 0
+  },
+  {
+   "employee": "Karin Kullberg",
+   "month": "2027-09",
+   "gross": 128.8,
+   "benefits": 0.0,
+   "tax": -0.0,
+   "contributions": 40.47,
+   "net": 129.0,
+   "net_deductions": 0
+  },
+  {
+   "employee": "Oskar Lindvall",
+   "month": "2027-09",
+   "gross": 26880.98,
+   "benefits": 0.0,
+   "tax": -0.0,
+   "contributions": 8446.0,
+   "net": 26881.0,
+   "net_deductions": 0
+  },
+  {
+   "employee": "Petra Sandell",
+   "month": "2027-09",
+   "gross": 35841.31,
+   "benefits": 0.0,
+   "tax": -0.0,
+   "contributions": 11261.34,
+   "net": 35842.0,
+   "net_deductions": 0
+  }
+ ],
+ "totals": {
+  "gross": 511658.34,
+  "tax": 0.0,
+  "contributions": 175673.1,
+  "net": 511668.0
+ }
+}

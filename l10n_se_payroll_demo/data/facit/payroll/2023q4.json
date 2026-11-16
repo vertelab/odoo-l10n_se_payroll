@@ -1,0 +1,223 @@
+{
+ "quarter": "2023Q4",
+ "kind": "payroll",
+ "note": "frozen result of the payslip calculation",
+ "payslips": [
+  {
+   "employee": "Asse Aronsson",
+   "month": "2023-10",
+   "gross": 60000.0,
+   "benefits": 0.0,
+   "tax": 17228.0,
+   "contributions": 18852.0,
+   "net": 42772.0,
+   "net_deductions": 0
+  },
+  {
+   "employee": "Camilla Cobolt",
+   "month": "2023-10",
+   "gross": 30000.0,
+   "benefits": 0.0,
+   "tax": 6092.0,
+   "contributions": 9426.0,
+   "net": 23908.0,
+   "net_deductions": 0
+  },
+  {
+   "employee": "Doris Dahlin",
+   "month": "2023-10",
+   "gross": 17600.0,
+   "benefits": 0.0,
+   "tax": 2856.0,
+   "contributions": 5529.92,
+   "net": 14744.0,
+   "net_deductions": 0
+  },
+  {
+   "employee": "Frans Filipsson",
+   "month": "2023-10",
+   "gross": 20800.0,
+   "benefits": 0.0,
+   "tax": 3675.0,
+   "contributions": 2123.68,
+   "net": 17125.0,
+   "net_deductions": 0
+  },
+  {
+   "employee": "Gustav Groth",
+   "month": "2023-10",
+   "gross": 25000.0,
+   "benefits": 0.0,
+   "tax": 4771.0,
+   "contributions": 7855.0,
+   "net": 20229.0,
+   "net_deductions": 0
+  },
+  {
+   "employee": "Helmer Henriksson",
+   "month": "2023-10",
+   "gross": 130.0,
+   "benefits": 0.0,
+   "tax": -0.0,
+   "contributions": 40.85,
+   "net": 130.0,
+   "net_deductions": 0
+  },
+  {
+   "employee": "Karin Kullberg",
+   "month": "2023-10",
+   "gross": 115.0,
+   "benefits": 0.0,
+   "tax": -0.0,
+   "contributions": 36.13,
+   "net": 115.0,
+   "net_deductions": 0
+  },
+  {
+   "employee": "Asse Aronsson",
+   "month": "2023-11",
+   "gross": 52000.0,
+   "benefits": 0.0,
+   "tax": 12668.0,
+   "contributions": 16338.4,
+   "net": 39332.0,
+   "net_deductions": 0
+  },
+  {
+   "employee": "Camilla Cobolt",
+   "month": "2023-11",
+   "gross": 32109.93,
+   "benefits": 0.0,
+   "tax": 6674.0,
+   "contributions": 10088.94,
+   "net": 25436.0,
+   "net_deductions": 0
+  },
+  {
+   "employee": "Doris Dahlin",
+   "month": "2023-11",
+   "gross": 17600.0,
+   "benefits": 0.0,
+   "tax": 2856.0,
+   "contributions": 5529.92,
+   "net": 14744.0,
+   "net_deductions": 0
+  },
+  {
+   "employee": "Frans Filipsson",
+   "month": "2023-11",
+   "gross": 20800.0,
+   "benefits": 0.0,
+   "tax": 3675.0,
+   "contributions": 2123.68,
+   "net": 17125.0,
+   "net_deductions": 0
+  },
+  {
+   "employee": "Gustav Groth",
+   "month": "2023-11",
+   "gross": 25000.0,
+   "benefits": 0.0,
+   "tax": 4771.0,
+   "contributions": 7855.0,
+   "net": 20229.0,
+   "net_deductions": 0
+  },
+  {
+   "employee": "Helmer Henriksson",
+   "month": "2023-11",
+   "gross": 130.0,
+   "benefits": 0.0,
+   "tax": -0.0,
+   "contributions": 40.85,
+   "net": 130.0,
+   "net_deductions": 0
+  },
+  {
+   "employee": "Karin Kullberg",
+   "month": "2023-11",
+   "gross": 115.0,
+   "benefits": 0.0,
+   "tax": -0.0,
+   "contributions": 36.13,
+   "net": 115.0,
+   "net_deductions": 0
+  },
+  {
+   "employee": "Asse Aronsson",
+   "month": "2023-12",
+   "gross": 52000.0,
+   "benefits": 0.0,
+   "tax": 12668.0,
+   "contributions": 16338.4,
+   "net": 39332.0,
+   "net_deductions": 0
+  },
+  {
+   "employee": "Camilla Cobolt",
+   "month": "2023-12",
+   "gross": 30000.0,
+   "benefits": 0.0,
+   "tax": 6092.0,
+   "contributions": 9426.0,
+   "net": 23908.0,
+   "net_deductions": 0
+  },
+  {
+   "employee": "Doris Dahlin",
+   "month": "2023-12",
+   "gross": 17600.0,
+   "benefits": 0.0,
+   "tax": 2856.0,
+   "contributions": 5529.92,
+   "net": 14744.0,
+   "net_deductions": 0
+  },
+  {
+   "employee": "Frans Filipsson",
+   "month": "2023-12",
+   "gross": 20800.0,
+   "benefits": 0.0,
+   "tax": 3675.0,
+   "contributions": 2123.68,
+   "net": 17125.0,
+   "net_deductions": 0
+  },
+  {
+   "employee": "Gustav Groth",
+   "month": "2023-12",
+   "gross": 25000.0,
+   "benefits": 0.0,
+   "tax": 4771.0,
+   "contributions": 7855.0,
+   "net": 20229.0,
+   "net_deductions": 0
+  },
+  {
+   "employee": "Helmer Henriksson",
+   "month": "2023-12",
+   "gross": 130.0,
+   "benefits": 0.0,
+   "tax": -0.0,
+   "contributions": 40.85,
+   "net": 130.0,
+   "net_deductions": 0
+  },
+  {
+   "employee": "Karin Kullberg",
+   "month": "2023-12",
+   "gross": 115.0,
+   "benefits": 0.0,
+   "tax": -0.0,
+   "contributions": 36.13,
+   "net": 115.0,
+   "net_deductions": 0
+  }
+ ],
+ "totals": {
+  "gross": 447044.93,
+  "tax": 95328.0,
+  "contributions": 127226.48,
+  "net": 351717.0
+ }
+}

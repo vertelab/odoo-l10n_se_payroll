@@ -324,10 +324,13 @@ class HrPayslip(models.Model):
             # The Swedish leave types validate on create, and a leave that
             # lands on a public holiday is rejected. Keep the data: the
             # payslip inputs are what the facit depends on.
+            # A leave that violates a date constraint aborts the whole
+            # transaction. A savepoint keeps the rest of the quarter.
             try:
-                leave = Leave.create(vals)
-                created |= leave
-                created_hours.append((leave, data.get('number_of_hours')))
+                with self.env.cr.savepoint():
+                    leave = Leave.create(vals)
+                    created |= leave
+                    created_hours.append((leave, data.get('number_of_hours')))
             except Exception as exc:  # noqa: BLE001
                 _logger.info(
                     'payroll_demo: leave %s %s not created: %s',

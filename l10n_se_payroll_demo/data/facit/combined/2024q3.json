@@ -1,0 +1,16 @@
+{
+ "quarter": "2024Q3",
+ "kind": "combined",
+ "note": "frozen result; requires both demo sources loaded",
+ "balance_sheet": {
+  "assets": -1811062.0,
+  "liabilities": 130321.87,
+  "equity": 0
+ },
+ "profit_and_loss": {
+  "income": 0,
+  "expense": 1941383.87,
+  "result": -1941383.87
+ },
+ "wage_liability": -1811062.0
+}

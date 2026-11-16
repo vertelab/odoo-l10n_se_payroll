@@ -1,0 +1,25 @@
+{
+ "quarter": "2023Q4",
+ "kind": "account",
+ "note": "frozen result of the ledger",
+ "saldobalans": {
+  "1934": -351717.0,
+  "2440": 351717.0,
+  "2710": 95328.0,
+  "2731": -127226.48,
+  "2890": -351717.0,
+  "7090": -190655.94,
+  "7210": 447044.94,
+  "7510": 127226.48
+ },
+ "vat": {
+  "ruta_10_utgaende_25": 0,
+  "ruta_11_utgaende_12": 0,
+  "ruta_12_utgaende_6": 0,
+  "ruta_20_ingaende": 0
+ },
+ "open_items": {
+  "receivable": 0.0,
+  "payable": 351717.0
+ }
+}

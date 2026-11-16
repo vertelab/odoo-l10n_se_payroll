@@ -1,0 +1,26 @@
+{
+ "quarter": "2025Q1",
+ "kind": "account",
+ "note": "frozen result of the ledger",
+ "saldobalans": {
+  "1934": -501893.0,
+  "2440": 501893.0,
+  "2710": 135920.0,
+  "2731": -201267.2,
+  "2890": -501893.0,
+  "7090": -331285.59,
+  "7210": 649804.59,
+  "7385": 47454.0,
+  "7510": 201267.2
+ },
+ "vat": {
+  "ruta_10_utgaende_25": 0,
+  "ruta_11_utgaende_12": 0,
+  "ruta_12_utgaende_6": 0,
+  "ruta_20_ingaende": 0
+ },
+ "open_items": {
+  "receivable": 0.0,
+  "payable": 2711632.0
+ }
+}

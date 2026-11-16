@@ -1,0 +1,16 @@
+{
+ "quarter": "2023Q4",
+ "kind": "combined",
+ "note": "frozen result; requires both demo sources loaded",
+ "balance_sheet": {
+  "assets": -351717.0,
+  "liabilities": 31898.48,
+  "equity": 0
+ },
+ "profit_and_loss": {
+  "income": 0,
+  "expense": 383615.48,
+  "result": -383615.48
+ },
+ "wage_liability": -351717.0
+}
