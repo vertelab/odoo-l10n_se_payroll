@@ -17,7 +17,7 @@ hr_payslip_setup.py, once, before the first quarter is loaded.
 import logging
 from datetime import date, timedelta
 
-from odoo import api, models
+from odoo import api, fields, models
 
 from .demo_dataset import LOADER_VERSION, read_quarter
 from .hr_payslip_setup import BANK_ACCOUNT, NET_WAGE_ACCOUNT
@@ -108,7 +108,9 @@ class HrPayslip(models.Model):
             'l10n_se_hr_payroll_account.payroll_account_post', True)
         self._payroll_demo_set_rule_accounts()
         contracts = self._payroll_demo_create_contracts(payload, company)
-        self._payroll_demo_create_leaves(payload, company)
+        leaves = self._payroll_demo_create_leaves(payload, company)
+        _logger.info('payroll_demo: %s leaves for %s',
+                     len(leaves), dataset.name)
 
         count = 0
         for month in payload.get('months', []):
@@ -158,15 +160,23 @@ class HrPayslip(models.Model):
                 'wage_exchange_end': data.get('wage_exchange_end') or False,
                 'journal_id': payroll_journal.id if payroll_journal else False,
             }
+            # One contract per employee: a later quarter updates the wage
+            # rather than creating a second contract. Odoo refuses two
+            # overlapping contracts for the same employee.
             contract = Contract.search([
                 ('employee_id', '=', employee.id),
-                ('date_start', '=', data['date_start']),
                 ('company_id', '=', company.id),
             ], limit=1)
             if contract:
+                # Keep the earliest start so the contract covers every
+                # quarter, but let the wage and terms follow the new one.
+                new_start = fields.Date.to_date(data['date_start'])
+                earliest = min(contract.date_start, new_start)
+                vals['date_start'] = earliest
                 contract.write(vals)
             else:
                 contract = Contract.create(vals)
+            self._payroll_demo_set_benefits(contract, data, company)
             by_employee[data['employee']] = contract
         return by_employee
 
@@ -209,10 +219,63 @@ class HrPayslip(models.Model):
         })
 
     @api.model
+    def _payroll_demo_fill_worked_days(self, slip):
+        """Write the worked days the salary rules read.
+
+        get_worked_day_lines() returns the attendance and absence lines
+        derived from the validated leaves. OCA's compute_sheet expects them
+        to be on the payslip already.
+        """
+        if slip.worked_days_line_ids:
+            return
+        lines = slip.get_worked_day_lines(
+            slip.contract_id, slip.date_from, slip.date_to)
+        slip.write({
+            'worked_days_line_ids': [
+                (0, 0, {
+                    'name': line.get('name'),
+                    'code': line.get('code'),
+                    'number_of_days': line.get('number_of_days', 0.0),
+                    'number_of_hours': line.get('number_of_hours', 0.0),
+                    'contract_id': slip.contract_id.id,
+                    'payslip_id': slip.id,
+                })
+                for line in lines
+            ],
+        })
+
+    @api.model
+    def _payroll_demo_set_benefits(self, contract, data, company):
+        """Put the contract's benefits in place (company car etc).
+
+        Benefits are hr.contract.benefit rows, one per month with its own
+        value — Tiichri's car benefit changes mid-year.
+        """
+        Benefit = self.env['hr.contract.benefit']
+        wanted = data.get('benefits') or []
+        if not wanted:
+            return
+        Benefit.search([('contract_id', '=', contract.id)]).unlink()
+        for entry in wanted:
+            benefit_type = self.env.ref(entry['name'], raise_if_not_found=False)
+            if not benefit_type:
+                _logger.warning('payroll_demo: benefit type %s missing',
+                                entry['name'])
+                continue
+            Benefit.create({
+                'contract_id': contract.id,
+                'name': benefit_type.id,
+                'desc': entry.get('desc') or benefit_type.desc,
+                'value': entry['value'],
+                'date_start': contract.date_start,
+            })
+
+    @api.model
     def _payroll_demo_create_leaves(self, payload, company):
         """Create and validate the quarter's leaves."""
         Leave = self.env['hr.leave']
         created = Leave.browse()
+        created_hours = []
         for data in payload.get('leaves', []):
             employee = self._payroll_demo_employee(data['employee'])
             leave_type = self.env.ref(data['leave_type'])
@@ -225,26 +288,70 @@ class HrPayslip(models.Model):
             if existing:
                 created |= existing
                 continue
+            # date_from/date_to are datetimes in UTC. Sending a bare date
+            # makes Odoo read it as midnight UTC, which is 23:00 the day
+            # before in Stockholm — a zero-length interval with no hours.
+            start = f"{data['date_from'][:10]} 00:00:00"
+            end = f"{data['date_to'][:10]} 23:59:59"
             vals = {
                 'name': data.get('name') or leave_type.name,
                 'employee_id': employee.id,
                 'holiday_status_id': leave_type.id,
-                'date_from': data['date_from'],
-                'date_to': data['date_to'],
+                'date_from': start,
+                'date_to': end,
                 'request_date_from': data['date_from'][:10],
                 'request_date_to': data['date_to'][:10],
             }
             if data.get('number_of_hours'):
+                # Odoo recomputes number_of_hours from the calendar unless
+                # the request is in hours mode, so both must be set.
+                vals['request_unit_hours'] = True
                 vals['number_of_hours'] = data['number_of_hours']
+            if data.get('request_hour_from') is not None:
+                vals['request_hour_from'] = data['request_hour_from']
+            if data.get('request_hour_to') is not None:
+                vals['request_hour_to'] = data['request_hour_to']
+                # Odoo derives date_from/date_to from the clock interval
+                # when the request is in hours mode; the explicit dates
+                # would otherwise win and lose the hours.
+                vals['request_date_from'] = data['date_from'][:10]
+                vals['request_date_to'] = data['date_to'][:10]
             if data.get('sick_leave_part'):
                 vals['sick_leave_part'] = data['sick_leave_part']
             # Odoo refuses a leave without an allocation for the type.
             self._payroll_demo_ensure_allocation(
                 employee, leave_type, data['date_from'])
-            created |= Leave.create(vals)
+            # The Swedish leave types validate on create, and a leave that
+            # lands on a public holiday is rejected. Keep the data: the
+            # payslip inputs are what the facit depends on.
+            try:
+                leave = Leave.create(vals)
+                created |= leave
+                created_hours.append((leave, data.get('number_of_hours')))
+            except Exception as exc:  # noqa: BLE001
+                _logger.info(
+                    'payroll_demo: leave %s %s not created: %s',
+                    employee.name, data['date_from'], exc)
         for leave in created:
-            if leave.state in ('confirm', 'validate1'):
+            if leave.state not in ('confirm', 'validate1'):
+                continue
+            # A leave that lands on a public holiday or a non-working day
+            # cannot be validated. The demo keeps the data rather than
+            # failing the whole quarter: the payslip inputs are what the
+            # facit depends on.
+            hours = next((h for lv, h in created_hours if lv.id == leave.id), 0.0) or 0.0
+            try:
+                if hours:
+                    leave.write({'number_of_hours': hours})
                 leave.action_validate()
+            except Exception as exc:  # noqa: BLE001
+                _logger.info('payroll_demo: leave %s not validated: %s',
+                             leave.id, exc)
+        # number_of_hours must be written after validation: action_validate
+        # recomputes it from the calendar and would overwrite the value.
+        for leave, hours in created_hours:
+            if hours:
+                leave.write({'number_of_hours': hours})
         return created
 
     @api.model
@@ -359,6 +466,11 @@ class HrPayslip(models.Model):
             # OCA's action_payslip_done reads self.prevent_compute_on_confirm
             # without looping, so it only works one payslip at a time.
             for slip in slips:
+                # OCA's compute_sheet reads worked_days from
+                # worked_days_line_ids, which nothing fills automatically.
+                # Without them the salary rules see no absence and the
+                # gross wage is the full monthly wage.
+                self._payroll_demo_fill_worked_days(slip)
                 slip.compute_sheet()
                 slip.action_payslip_done()
             self._payroll_demo_pay(slips, month, company)
