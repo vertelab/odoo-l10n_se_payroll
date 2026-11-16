@@ -78,11 +78,12 @@
             <field name="model">hr.contract</field>
             <field name="inherit_id" ref="view_hr_contract_form_payroll"/>
             <field name="arch" type="xml">
-                <!-- Ankaret var //page[@name='accounting'] — den sidan togs bort
-                     2026-11-16 (den refererade fält som inte finns). Vi hänger
-                     Lönekorrigeringar efter Constants i stället, som är sista
-                     sidan i kontraktsvyn. -->
-                <xpath expr="//page[@name='const']" position="after">
+                <!-- Ankaret var //page[@name='accounting'], som togs bort
+                     2026-11-16 (den refererade fält som inte finns).
+                     Vi hänger Lönekorrigeringar efter Semester i stället —
+                     den sidan läggs till av view_hr_contract_form_payroll,
+                     som är vår inherit_id, så den finns garanterat. -->
+                <xpath expr="//page[@name='vacation']" position="after">
                     <page string="Lönekorrigeringar" name="corrections">
                         <field name="employee_id" invisible="1"/>
                         <field name="correction_ids"
