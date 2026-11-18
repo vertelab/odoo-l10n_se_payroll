@@ -270,6 +270,29 @@ class HrPayslip(models.Model):
                 'date_start': contract.date_start,
             })
 
+    # hr_holidays' own leave types are deactivated by l10n_se_hr_holidays
+    # (data/hr_holidays_override.xml) because they collide with the Swedish
+    # ones. The generated JSON still names them, so map them to the Swedish
+    # types instead of resolving an xmlid that is either gone or inactive.
+    LEAVE_TYPE_MAP = {
+        # Föräldraledighet -> Tjänstledighet. Ingen svensk föräldraledighetstyp
+        # finns i l10n_se_hr_payroll; lönen hanteras av lönereglerna, inte av
+        # frånvarotypen.
+        'hr_holidays.hr_holiday_status_dv': 'l10n_se_hr_payroll.leave_type_loa',
+        # Betald semester -> Semester (l10n_se_hr_holidays).
+        'hr_holidays.holiday_status_cl': 'l10n_se_hr_holidays.leave_type_vacation',
+        # Sjuk -> Sjukfrånvaro (l10n_se_hr_payroll).
+        'hr_holidays.holiday_status_sl': 'l10n_se_hr_payroll.leave_type_sick',
+    }
+
+    @api.model
+    def _payroll_demo_leave_type(self, xmlid):
+        """Resolve a leave type xmlid, falling back to the Swedish type."""
+        mapped = self.LEAVE_TYPE_MAP.get(xmlid, xmlid)
+        if mapped != xmlid:
+            _logger.info('payroll_demo: %s -> %s', xmlid, mapped)
+        return self.env.ref(mapped)
+
     @api.model
     def _payroll_demo_create_leaves(self, payload, company):
         """Create and validate the quarter's leaves."""
@@ -278,7 +301,7 @@ class HrPayslip(models.Model):
         created_hours = []
         for data in payload.get('leaves', []):
             employee = self._payroll_demo_employee(data['employee'])
-            leave_type = self.env.ref(data['leave_type'])
+            leave_type = self._payroll_demo_leave_type(data['leave_type'])
             existing = Leave.search([
                 ('employee_id', '=', employee.id),
                 ('date_from', '=', data['date_from']),
