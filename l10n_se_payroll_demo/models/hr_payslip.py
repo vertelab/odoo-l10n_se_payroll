@@ -485,10 +485,21 @@ class HrPayslip(models.Model):
         total = sum(slips.mapped('nl_amount'))
         if not total:
             return self.env['account.payment']
+        # The payroll demo pays from its own bank journal. Sharing BNK1 with
+        # the accounting demo made the two sources collide on the move name
+        # sequence, so payroll could not be loaded after accounting.
         bank_journal = self.env['account.journal'].search([
-            ('code', '=', 'BNK1'),
+            ('code', '=', 'LÖNB'),
             ('company_id', '=', company.id),
         ], limit=1)
+        if not bank_journal:
+            _logger.warning(
+                'payroll_demo: LÖNB journal missing, falling back to BNK1 — '
+                'upgrade l10n_se_demo_company to create it')
+            bank_journal = self.env['account.journal'].search([
+                ('code', '=', 'BNK1'),
+                ('company_id', '=', company.id),
+            ], limit=1)
         liability = self._payroll_demo_account(NET_WAGE_ACCOUNT)
         if not (bank_journal and liability):
             _logger.warning('payroll_demo: cannot pay %s, bank or liability '
