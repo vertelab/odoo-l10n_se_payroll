@@ -19,6 +19,27 @@ falskt grönt.
 Manifestet heter `__manifest__.p.py` och anger `'version': '1.0'` **utan**
 utgåveprefix; Odoo lägger själv till serien (`adapt_version`: `1.0` → `18.0.1.0`).
 
+### P-filerna är identiska på alla grenar
+
+En p-fil är **samma fil** på `18.0`, `19.0` och `20.0`. Utgåveskillnaden bor i
+`# #if`-direktiven, aldrig i filinnehållet. Att lägga ett villkor bara på den
+gren där felet upptäcktes är den vanligaste och mest kostsamma fällan — nästa
+`pfiles-sync` rapporterar drift, och den gren som "låg före" blir källan till
+sanningen utan att någon bestämt det.
+
+```bash
+# Mät drift — före commit, inte efter
+python3 .github/pfiles-sync.py --check
+#   p-files per branch: 18.0=82, 19.0=82, 20.0=82
+#   Same file, different content (27): ...
+```
+
+Reparerar gör `--apply --from <gren>`: den kopierar **unionen** och expanderar
+varje gren med **den grenens** `VERSION`. ⚠ Fällan 33: `--apply` committar i en
+temporär worktree på detached HEAD — **flytta grenen efteråt**
+(`git branch -f <gren> <sha>`), annars blir commiten oåtkomlig och synken ser ut
+att ha lyckats utan att något hänt.
+
 ## Porteringsstatus
 
 Mätt 2026-11-26 mot `pfile_18.0`, `pfile_19.0`, `pfile_20.0`. Status är
@@ -28,9 +49,9 @@ Mätt 2026-11-26 mot `pfile_18.0`, `pfile_19.0`, `pfile_20.0`. Status är
 |---|---|---|---|---|
 | `hr_leave_dashboard` | installed | installed | installed | — |
 | `hr_work_anniversary_reminder` | installed | installed | installed | — (migrerad till `hr.version`) |
-| `l10n_se_hr_payroll` | installed | uninstalled | uninstalled | migrerad; `cron_tick` (uppströms, `expand` i `<search>`) |
-| `l10n_se_hr_payroll_benefits` | uninstalled | uninstalled | uninstalled | `l10n_se_hr_payroll` |
-| `l10n_se_hr_payroll_collective` | uninstalled | uninstalled | uninstalled | `l10n_se_hr_payroll` |
+| `l10n_se_hr_payroll` | installed | **installed** | uninstalled | migrerad |
+| `l10n_se_hr_payroll_benefits` | uninstalled | **installed** | uninstalled | migrerad |
+| `l10n_se_hr_payroll_collective` | uninstalled | **installed** | uninstalled | migrerad |
 | `l10n_se_hr_payroll_fk` | uninstalled | uninstalled | uninstalled | `l10n_se_hr_payroll` |
 | `l10n_se_hr_payroll_lop` | uninstalled | uninstalled | uninstalled | `l10n_se_hr_payroll` |
 | `l10n_se_hr_payroll_bonus_workflow` | uninstalled | uninstalled | uninstalled | `l10n_se_hr_payroll` |
@@ -39,17 +60,17 @@ Mätt 2026-11-26 mot `pfile_18.0`, `pfile_19.0`, `pfile_20.0`. Status är
 | `l10n_se_hr_payroll_account` | uninstalled | uninstalled | uninstalled | `l10n_se_hr_payroll`, `payroll_account` (klass 2) |
 | `l10n_se_hr_payroll_ags` | uninstalled | uninstalled | uninstalled | `l10n_se_hr_payroll`, `payroll` |
 | `l10n_se_hr_payroll_pension` | uninstalled | uninstalled | uninstalled | migrerad; `l10n_se_hr_payroll` → `cron_tick` |
-| `l10n_se_hr_payroll_union` | uninstalled | uninstalled | uninstalled | migrerad; `l10n_se_hr_payroll` → `cron_tick` |
-| `l10n_se_hr_payroll_flex` | uninstalled | uninstalled | uninstalled | migrerad; `l10n_se_hr_payroll` → `cron_tick` |
+| `l10n_se_hr_payroll_union` | uninstalled | **installed** | uninstalled | migrerad |
+| `l10n_se_hr_payroll_flex` | uninstalled | **installed** | uninstalled | migrerad |
 | `l10n_se_hr_payroll_kontrolluppgift` | uninstalled | uninstalled | uninstalled | `l10n_se_hr_payroll`, `payroll` |
 | `l10n_se_payroll_agd` | uninstalled | uninstalled | uninstalled | `l10n_se_hr_payroll`, `payroll` |
 | `l10n_se_payroll_fora` | uninstalled | uninstalled | uninstalled | `l10n_se_hr_payroll`, `payroll` |
 | `l10n_se_payroll_growth_support` | uninstalled | uninstalled | uninstalled | `l10n_se_hr_payroll`, `payroll` |
-| `l10n_se_payroll_sn_report` | uninstalled | uninstalled | uninstalled | `l10n_se_hr_payroll` |
+| `l10n_se_payroll_sn_report` | uninstalled | **installed** | uninstalled | migrerad |
 | `l10n_se_payroll_taxtable` | uninstalled | uninstalled | uninstalled | migrerad; `l10n_se_hr_payroll` → `cron_tick` |
-| `l10n_se_hr_holidays` | uninstalled | uninstalled | uninstalled | `l10n_se_hr_payroll`, `hr_work_entry_holidays` (klass 3, 20.0) |
+| `l10n_se_hr_holidays` | uninstalled | **installed** | uninstalled | migrerad |
 | `l10n_se_hr_holidays_account` | uninstalled | uninstalled | uninstalled | `l10n_se_hr_holidays` |
-| `l10n_se_arbetsgivarintyg` | uninstalled | uninstalled | uninstalled | migrerad; `l10n_se_hr_payroll` → `cron_tick` |
+| `l10n_se_arbetsgivarintyg` | uninstalled | **installed** | uninstalled | migrerad |
 | `l10n_se_payroll_demo` | uninstalled | uninstalled | uninstalled | `l10n_se_demo_company` (klass 2), `l10n_se_hr_payroll_account` |
 | `l10n_se_resource_calendar_leaves_import` | uninstalled | uninstalled | uninstalled | `cron_tick` (uppströms), `ics_import_holidays` |
 
@@ -75,6 +96,7 @@ Dessa blockerar installation men ägs inte av `odoo-l10n_se_payroll`:
 | `payroll_driving_record` | `odoo-payroll` (19.0) | `security/ir_rule.xml` ParseError |
 | `communication_center_sip` | (20.0) | `res_users_views.xml` ParseError |
 | `payroll` | `OCA/payroll` | 20.0-grenen är tom (0 moduler) — klass 1 |
+| `odoo-l10n_se` | `vertelab/odoo-l10n_se` | **19.0-grenen är 18.0-kod** — 0 p-filer, alla manifest säger `18.0.x`. Blockerar `l10n_se_payroll_agd` → `_fora`, `_ags`, `_pension`, `_kontrolluppgift` |
 | `hr_timesheet_sheet` | `OCA/timesheet` | saknas i 20.0-grenen — klass 1 |
 
 ### `expand` på `<group>` i `<search>`
@@ -84,6 +106,30 @@ egna vyer bar det; de är nu p-filade så att `expand="0"` bara emitteras för
 18.0. Samma fel finns kvar i externa moduler (`cron_tick` i `odoo-base`,
 `account_billing`, `account_commodity_price`, …) och är därför en
 systemomfattande uppströmsfråga.
+
+### Fältdiff — vad som flyttade i 19.0
+
+Migrationen krävde mer än modellnamnet. Verifierat mot kärnkällan:
+
+| 18.0 | 19.0 | Åtgärd |
+|---|---|---|
+| `hr.employee.contract_id` | `current_version_id` | döps |
+| `hr.employee.contract_ids` | `version_ids` | döps |
+| `hr.employee.gender` | **borttagen** | könräkning nollställs, related-fält villkoras bort |
+| `hr.contract.state` | `is_current` / `is_past` / `is_future` | tidsbaserat |
+| `hr.contract.first_contract_date` | `hr.version.date_start` | härleds |
+| `account.account.deprecated` | **borttagen** | domän töms |
+| `odoo.addons.decimal_precision` | **borttagen** | död import villkoras bort |
+| `<group expand="0" string="...">` i `<search>` | **båda attributen borta** | villkoras |
+| `<odoo><data>` | ogiltigt i alla utgåvor | wrappern borttagen |
+
+### `account_codes_formula` — kommalistor fungerar inte
+
+`account_codes_formula` är ett **kärnfält** i 19.0 (`account.report.line`), och
+kärnans `_check_formula` godkänner bara `+`/`-`, inte kommalistor. Två rader i
+`account_dynamic_reports/data/balance_sheet.xml` använde `16,17,18` och
+`10,11,12`; de är ändrade till `16+17+18` och `10+11+12` — samma fix som redan
+fanns på 20.0-grenen (commit `41f92af1`).
 
 ### Vad som bevisats
 
