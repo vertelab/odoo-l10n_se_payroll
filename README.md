@@ -28,9 +28,9 @@ Mätt 2026-11-26 mot `pfile_18.0`, `pfile_19.0`, `pfile_20.0`. Status är
 |---|---|---|---|---|
 | `hr_leave_dashboard` | installed | installed | installed | — |
 | `hr_work_anniversary_reminder` | installed | installed | installed | — (migrerad till `hr.version`) |
-| `l10n_se_hr_payroll` | installed | uninstalled | uninstalled | migrerad; `cron_tick` (uppströms, `expand` i `<search>`) |
-| `l10n_se_hr_payroll_benefits` | uninstalled | uninstalled | uninstalled | `l10n_se_hr_payroll` |
-| `l10n_se_hr_payroll_collective` | uninstalled | uninstalled | uninstalled | `l10n_se_hr_payroll` |
+| `l10n_se_hr_payroll` | installed | **installed** | uninstalled | migrerad |
+| `l10n_se_hr_payroll_benefits` | uninstalled | **installed** | uninstalled | migrerad |
+| `l10n_se_hr_payroll_collective` | uninstalled | **installed** | uninstalled | migrerad |
 | `l10n_se_hr_payroll_fk` | uninstalled | uninstalled | uninstalled | `l10n_se_hr_payroll` |
 | `l10n_se_hr_payroll_lop` | uninstalled | uninstalled | uninstalled | `l10n_se_hr_payroll` |
 | `l10n_se_hr_payroll_bonus_workflow` | uninstalled | uninstalled | uninstalled | `l10n_se_hr_payroll` |
@@ -39,7 +39,7 @@ Mätt 2026-11-26 mot `pfile_18.0`, `pfile_19.0`, `pfile_20.0`. Status är
 | `l10n_se_hr_payroll_account` | uninstalled | uninstalled | uninstalled | `l10n_se_hr_payroll`, `payroll_account` (klass 2) |
 | `l10n_se_hr_payroll_ags` | uninstalled | uninstalled | uninstalled | `l10n_se_hr_payroll`, `payroll` |
 | `l10n_se_hr_payroll_pension` | uninstalled | uninstalled | uninstalled | migrerad; `l10n_se_hr_payroll` → `cron_tick` |
-| `l10n_se_hr_payroll_union` | uninstalled | uninstalled | uninstalled | migrerad; `l10n_se_hr_payroll` → `cron_tick` |
+| `l10n_se_hr_payroll_union` | uninstalled | **installed** | uninstalled | migrerad |
 | `l10n_se_hr_payroll_flex` | uninstalled | uninstalled | uninstalled | migrerad; `l10n_se_hr_payroll` → `cron_tick` |
 | `l10n_se_hr_payroll_kontrolluppgift` | uninstalled | uninstalled | uninstalled | `l10n_se_hr_payroll`, `payroll` |
 | `l10n_se_payroll_agd` | uninstalled | uninstalled | uninstalled | `l10n_se_hr_payroll`, `payroll` |
@@ -49,7 +49,7 @@ Mätt 2026-11-26 mot `pfile_18.0`, `pfile_19.0`, `pfile_20.0`. Status är
 | `l10n_se_payroll_taxtable` | uninstalled | uninstalled | uninstalled | migrerad; `l10n_se_hr_payroll` → `cron_tick` |
 | `l10n_se_hr_holidays` | uninstalled | uninstalled | uninstalled | `l10n_se_hr_payroll`, `hr_work_entry_holidays` (klass 3, 20.0) |
 | `l10n_se_hr_holidays_account` | uninstalled | uninstalled | uninstalled | `l10n_se_hr_holidays` |
-| `l10n_se_arbetsgivarintyg` | uninstalled | uninstalled | uninstalled | migrerad; `l10n_se_hr_payroll` → `cron_tick` |
+| `l10n_se_arbetsgivarintyg` | uninstalled | **installed** | uninstalled | migrerad |
 | `l10n_se_payroll_demo` | uninstalled | uninstalled | uninstalled | `l10n_se_demo_company` (klass 2), `l10n_se_hr_payroll_account` |
 | `l10n_se_resource_calendar_leaves_import` | uninstalled | uninstalled | uninstalled | `cron_tick` (uppströms), `ics_import_holidays` |
 
@@ -84,6 +84,22 @@ egna vyer bar det; de är nu p-filade så att `expand="0"` bara emitteras för
 18.0. Samma fel finns kvar i externa moduler (`cron_tick` i `odoo-base`,
 `account_billing`, `account_commodity_price`, …) och är därför en
 systemomfattande uppströmsfråga.
+
+### Fältdiff — vad som flyttade i 19.0
+
+Migrationen krävde mer än modellnamnet. Verifierat mot kärnkällan:
+
+| 18.0 | 19.0 | Åtgärd |
+|---|---|---|
+| `hr.employee.contract_id` | `current_version_id` | döps |
+| `hr.employee.contract_ids` | `version_ids` | döps |
+| `hr.employee.gender` | **borttagen** | könräkning nollställs, related-fält villkoras bort |
+| `hr.contract.state` | `is_current` / `is_past` / `is_future` | tidsbaserat |
+| `hr.contract.first_contract_date` | `hr.version.date_start` | härleds |
+| `account.account.deprecated` | **borttagen** | domän töms |
+| `odoo.addons.decimal_precision` | **borttagen** | död import villkoras bort |
+| `<group expand="0" string="...">` i `<search>` | **båda attributen borta** | villkoras |
+| `<odoo><data>` | ogiltigt i alla utgåvor | wrappern borttagen |
 
 ### Vad som bevisats
 
