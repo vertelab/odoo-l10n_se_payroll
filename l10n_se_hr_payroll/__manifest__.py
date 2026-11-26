@@ -82,6 +82,10 @@ Swedish Payroll Rules.
         'views/hr_payslip_template.xml',
         'views/hr_payslip_run_views.xml',
         'views/user_payslip_views.xml',
+        # hr_contract_views.xml now carries a 19.0 branch: the contract form is
+        # the employee form's Payroll page. hr_payroll_correction_views.xml
+        # inherits view_hr_contract_form_payroll from it, so it must load here.
+        'views/hr_contract_views.xml',
         #'views/hr_leave_views.xml',
         'views/hr_payslip_views.xml',
         'security/ir.model.access.csv',

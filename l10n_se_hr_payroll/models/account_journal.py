@@ -43,8 +43,8 @@ class account_journal(models.Model):
 
     default_credit_account_id = fields.Many2one(comodel_name='account.account', check_company=True, copy=False,
                                                 ondelete='restrict', string='Default Credit Account',
-                                                 # account.account.deprecated was removed in 19.0.
-                                                 domain=[],
+                                                # account.account.deprecated was removed in 19.0.
+                                                domain=[],
                                                 help="It acts as a default account for credit amount, is used for the "
                                                      "general journal type, so that we can confirm a payslip since "
                                                      "its function wants a default_credit_account_id")

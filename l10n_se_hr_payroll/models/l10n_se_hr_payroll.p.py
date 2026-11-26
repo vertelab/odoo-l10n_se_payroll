@@ -219,7 +219,18 @@ class hr_employee(models.Model):
             for c in contracts:
                 start = c.date_start or '?'
                 end = c.date_end or 'ongoing'
+                # #if VERSION >= "19.0"
+                # hr.version has no state; the period is what the state
+                # used to describe.
+                if c.is_current:
+                    state = 'open'
+                elif c.is_future:
+                    state = 'draft'
+                else:
+                    state = 'close'
+                # #else
                 state = dict(c._fields['state'].selection).get(c.state, c.state)
+                # #endif
                 lines.append(f"{start} → {end}  |  {c.wage:>10,.0f} kr  |  {state}")
             emp.contract_history = '\n'.join(lines)
 

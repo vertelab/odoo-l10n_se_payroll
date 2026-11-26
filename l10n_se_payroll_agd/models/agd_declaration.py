@@ -531,16 +531,18 @@ class AgdDemoGenerator(models.AbstractModel):
             return False
 
         # Find a contract for the employee
-        contract = self.env['hr.contract'].search(
+        # hr.contract is replaced by hr.version in 19.0; the version carries
+        # the wage, the structure and the start date, and there is no state.
+        contract = self.env['hr.version'].search(
             [('employee_id', '=', employee.id)], limit=1)
         if not contract:
-            contract = self.env['hr.contract'].create({
+            contract = self.env['hr.version'].create({
                 'name': 'Demo Contract',
                 'employee_id': employee.id,
                 'wage': 35000.0,
                 'struct_id': structure.id,
-                'date_start': fields.Date.today().replace(day=1),
-                'state': 'open',
+                'date_version': fields.Date.today().replace(day=1),
+                'contract_date_start': fields.Date.today().replace(day=1),
             })
 
         # Create a payslip run for current month

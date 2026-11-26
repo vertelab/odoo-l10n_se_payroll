@@ -43,11 +43,12 @@ class HrSickLeaveRecord(models.Model):
 
     name = fields.Char(compute='_compute_name', store=True)
     employee_id = fields.Many2one('hr.employee', required=True)
-    contract_id = fields.Many2one('hr.contract',
-                                  related='employee_id.contract_id', store=True)
+    # hr.employee.contract_id -> current_version_id in 19.0.
+    contract_id = fields.Many2one('hr.version',
+                                  related='employee_id.current_version_id', store=True)
     collective_agreement_id = fields.Many2one(
         'hr.collective.agreement',
-        related='employee_id.contract_id.collective_agreement_id', store=True)
+        related='employee_id.current_version_id.collective_agreement_id', store=True)
 
     date_start = fields.Date(required=True)
     date_end = fields.Date()
@@ -221,9 +222,10 @@ class HrAgsClaim(models.Model):
     employee_id = fields.Many2one('hr.employee', required=True)
     sick_leave_id = fields.Many2one('hr.sick.leave.record',
                                     string='Sick Leave Record')
+    # hr.employee.contract_id -> current_version_id in 19.0.
     collective_agreement_id = fields.Many2one(
         'hr.collective.agreement',
-        related='employee_id.contract_id.collective_agreement_id', store=True)
+        related='employee_id.current_version_id.collective_agreement_id', store=True)
 
     date_start = fields.Date(required=True)
     date_end = fields.Date(required=True)

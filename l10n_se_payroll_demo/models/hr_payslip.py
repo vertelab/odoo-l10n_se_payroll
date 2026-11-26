@@ -121,7 +121,8 @@ class HrPayslip(models.Model):
     @api.model
     def _payroll_demo_create_contracts(self, payload, company):
         """Create the contracts of the quarter. Returns {employee: contract}."""
-        Contract = self.env['hr.contract']
+        # hr.contract is replaced by hr.version in 19.0.
+        Contract = self.env['hr.version']
         # OCA relates slip.journal_id to contract_id.journal_id, so the
         # contract must carry the payroll journal or nothing can be posted.
         payroll_journal = self.env['account.journal'].search([
@@ -136,20 +137,22 @@ class HrPayslip(models.Model):
                 _logger.warning('payroll_demo: structure %s missing',
                                 data['structure'])
                 continue
+            # The version carries the same terms, but the dates are
+            # contract_date_start/contract_date_end and there is no state.
+            # first_contract_date has no hr.version equivalent: the earliest
+            # version of the employee is the hire date.
             vals = {
                 'name': data['name'],
                 'employee_id': employee.id,
                 'company_id': company.id,
                 'wage': data['wage'],
                 'wage_unit': data.get('wage_unit', 'monthly'),
-                'date_start': data['date_start'],
-                'date_end': data.get('date_end') or False,
-                'first_contract_date': data.get('first_contract_date')
-                or data['date_start'],
+                'date_version': data['date_start'],
+                'contract_date_start': data['date_start'],
+                'contract_date_end': data.get('date_end') or False,
                 'struct_id': structure.id,
                 'resource_calendar_id': self._payroll_demo_calendar(
                     data.get('calendar', 'standard')).id,
-                'state': 'open',
                 'table_number': data.get('table_number', 30),
                 'column_number': data.get('column_number', 'column1'),
                 'has_one_off_tax': data.get('has_one_off_tax', True),
@@ -172,7 +175,7 @@ class HrPayslip(models.Model):
                 # quarter, but let the wage and terms follow the new one.
                 new_start = fields.Date.to_date(data['date_start'])
                 earliest = min(contract.date_start, new_start)
-                vals['date_start'] = earliest
+                vals['contract_date_start'] = earliest
                 contract.write(vals)
             else:
                 contract = Contract.create(vals)
@@ -400,8 +403,10 @@ class HrPayslip(models.Model):
         year = int(str(date)[:4])
         # The allocation must cover the leave request, so it starts with the
         # employee's employment rather than at the calendar year.
-        start = min(f'{year}-01-01',
-                    str(employee.first_contract_date or f'{year}-01-01'))
+        # hr.employee.first_contract_date was removed in 19.0; the earliest
+        # version's start date is the same information.
+        first_start = min(employee.version_ids.mapped('date_start') or [False])
+        start = min(f'{year}-01-01', str(first_start or f'{year}-01-01'))
         allocation = Allocation.create({
             'name': f'{leave_type.name} {year}',
             'employee_id': employee.id,

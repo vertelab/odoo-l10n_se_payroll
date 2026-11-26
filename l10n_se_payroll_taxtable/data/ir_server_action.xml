@@ -3,8 +3,9 @@
         <!-- Server action on hr.contract form: sync tax tables for this contract's table number -->
         <record id="model_payroll_taxable_action" model="ir.actions.server">
             <field name="name">Sync Taxable</field>
-            <field name="model_id" ref="hr_contract.model_hr_contract"/>
-            <field name="binding_model_id" ref="hr_contract.model_hr_contract"/>
+            <!-- hr.contract is replaced by hr.version in 19.0. -->
+            <field name="model_id" ref="hr.model_hr_version"/>
+            <field name="binding_model_id" ref="hr.model_hr_version"/>
             <field name="binding_view_types">form</field>
             <field name="state">code</field>
             <field name="code">action = record.fetch_taxtable_data()</field>

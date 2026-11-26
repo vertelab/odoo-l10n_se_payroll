@@ -51,18 +51,18 @@
              beräkningar i facit, hans schemaläggning och grund-
              lön på lönespecar indikerar att han jobbade heltid
              hela 2022.  -->
-        <record id="contract_asse_1" model="hr.contract">
+        <!-- hr.contract is replaced by hr.version in 19.0. -->
+        <record id="contract_asse_1" model="hr.version">
             <field name="name">Asse Aronsson Deltidsavtal 1</field>
             <field name="wage">39000</field>
-            <field name="type_id" ref="hr_contract_type" />
+            <field name="contract_type_id" ref="hr_contract_type" />
             <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_asse_employee" />
             <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons" />
             <field name="schedule_pay" eval="'monthly'" />
-            <field name="state" eval="'close'" />
             <field name="job_id" ref="job_id_president" />
-            <field name="date_start">2018-04-01</field>
-            <field name="date_end">2021-12-31</field>
-            <field name="first_contract_date">2018-04-01</field>
+            <field name="date_version">2018-04-01</field>
+            <field name="contract_date_start">2018-04-01</field>
+            <field name="contract_date_end">2021-12-31</field>
             <field name="resource_calendar_id" ref="l10n_se_hr_payroll_tiichri.resource_calendar_part_time_66_tiichri" />
             <field name="struct_id" ref="l10n_se_hr_payroll_tiichri.hr_payroll_structure_tj_man" />
             <field name="table_number">30</field>
@@ -73,20 +73,20 @@
             <field name="annual_vacation_days">30.0</field>
         </record>
 
-        <record id="contract_asse_2" model="hr.contract">
+        <!-- hr.contract is replaced by hr.version in 19.0. -->
+        <record id="contract_asse_2" model="hr.version">
             <field name="name">Asse Aronsson Heltidsavtal</field>
             <field name="wage">52000</field>
             <field name="wage_exchange_amount">4000</field>
             <field name="wage_exchange_start">2022-03-01</field>
             <field name="wage_exchange_end">2022-11-30</field>
-            <field name="type_id" ref="hr_contract_type" />
+            <field name="contract_type_id" ref="hr_contract_type" />
             <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_asse_employee" />
             <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons" />
             <field name="schedule_pay" eval="'monthly'" />
-            <field name="state" eval="'open'" />
             <field name="job_id" ref="job_id_president" />
-            <field name="date_start">2022-01-01</field>
-            <field name="first_contract_date">2018-04-01</field>
+            <field name="date_version">2022-01-01</field>
+            <field name="contract_date_start">2022-01-01</field>
             <field name="resource_calendar_id" ref="l10n_se_hr_payroll_tiichri.resource_calendar_standard_tiichri" />
             <field name="struct_id" ref="l10n_se_hr_payroll_tiichri.hr_payroll_structure_tj_man" />
             <field name="table_number">30</field>
