@@ -4,6 +4,7 @@
 from odoo import api, models, fields, _
 # Intervals moved from resource.models.utils to odoo.tools.intervals in 19.0.
 from odoo.tools.intervals import Intervals
+from odoo.tools.float_utils import float_round
 
 import datetime
 from dateutil import rrule
