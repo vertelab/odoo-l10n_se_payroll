@@ -19,6 +19,27 @@ falskt grönt.
 Manifestet heter `__manifest__.p.py` och anger `'version': '1.0'` **utan**
 utgåveprefix; Odoo lägger själv till serien (`adapt_version`: `1.0` → `18.0.1.0`).
 
+### P-filerna är identiska på alla grenar
+
+En p-fil är **samma fil** på `18.0`, `19.0` och `20.0`. Utgåveskillnaden bor i
+`# #if`-direktiven, aldrig i filinnehållet. Att lägga ett villkor bara på den
+gren där felet upptäcktes är den vanligaste och mest kostsamma fällan — nästa
+`pfiles-sync` rapporterar drift, och den gren som "låg före" blir källan till
+sanningen utan att någon bestämt det.
+
+```bash
+# Mät drift — före commit, inte efter
+python3 .github/pfiles-sync.py --check
+#   p-files per branch: 18.0=82, 19.0=82, 20.0=82
+#   Same file, different content (27): ...
+```
+
+Reparerar gör `--apply --from <gren>`: den kopierar **unionen** och expanderar
+varje gren med **den grenens** `VERSION`. ⚠ Fällan 33: `--apply` committar i en
+temporär worktree på detached HEAD — **flytta grenen efteråt**
+(`git branch -f <gren> <sha>`), annars blir commiten oåtkomlig och synken ser ut
+att ha lyckats utan att något hänt.
+
 ## Porteringsstatus
 
 Mätt 2026-11-26 mot `pfile_18.0`, `pfile_19.0`, `pfile_20.0`. Status är
