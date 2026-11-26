@@ -77,7 +77,7 @@
                 />
                 <field name="employee_id" />
                 <field name="payslip_run_id" />
-                <group expand="0" string="Group By">
+                <group string="Group By">
                     <filter
                         string="Employees"
                         name="employee_id"

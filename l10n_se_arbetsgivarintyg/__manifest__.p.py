@@ -59,7 +59,10 @@ https://stsakassa.se/sites/default/files/2018-11/Teknisk%20specifikation%20arbet
     'depends': [
         'l10n_se_hr_payroll',
         'hr',
+        # hr_contract was removed after 18.0; hr.contract is replaced by hr.version.
+        # #if VERSION < "19.0"
         'hr_contract',
+        # #endif
         'hr_holidays',
         'mail',
     ],

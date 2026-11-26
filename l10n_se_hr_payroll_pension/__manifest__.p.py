@@ -46,7 +46,10 @@ Features:
         'l10n_se_payroll_fora',
         'payroll',
         'hr',
+        # hr_contract was removed after 18.0; hr.contract is replaced by hr.version.
+        # #if VERSION < "19.0"
         'hr_contract',
+        # #endif
     ],
     'data': [
         'security/ir.model.access.csv',

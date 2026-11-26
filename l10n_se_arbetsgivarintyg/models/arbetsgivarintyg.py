@@ -58,8 +58,9 @@ class Arbetsgivarintyg(models.Model):
         string='Employee',
         required=True,
     )
+    # hr.contract is replaced by hr.version in 19.0.
     contract_id = fields.Many2one(
-        'hr.contract',
+        'hr.version',
         string='Contract',
         domain="[('employee_id', '=', employee_id)]",
     )
@@ -377,7 +378,7 @@ class Arbetsgivarintyg(models.Model):
         """Auto-populate certificate data from Odoo employee/contract/payslip."""
         self.ensure_one()
         employee = self.employee_id
-        contract = self.contract_id or employee.contract_id
+        contract = self.contract_id or employee.current_version_id
         company = self.company_id
 
         if not employee:

@@ -79,7 +79,7 @@
                         domain="[('state', '=', 'draft')]"/>
                 <filter string="Approved" name="state_approved"
                         domain="[('state', '=', 'approved')]"/>
-                <group expand="0" string="Group By">
+                <group string="Group By">
                     <filter string="Employee" name="group_employee"
                             domain="[]" context="{'group_by': 'employee_id'}"/>
                     <filter string="Date" name="group_date"

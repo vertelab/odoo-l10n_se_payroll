@@ -226,7 +226,7 @@
                     <filter name="annual" string="Årsrapport"
                         domain="[('fora_report_type', '=', 'annual')]"/>
                     <separator/>
-                    <group expand="0" string="Group By">
+                    <group string="Group By">
                         <filter context="{'group_by': 'state'}"
                             name="group_state" string="State"/>
                         <filter context="{'group_by': 'date_start'}"
