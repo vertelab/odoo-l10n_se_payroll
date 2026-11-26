@@ -2,7 +2,7 @@
     'name': 'l10n_se: Payroll Demo Data',
     'author': 'Vertel Sverige AB',
     'website': 'https://vertel.se/apps/odoo-l10n_se_payroll/l10n_se_payroll_demo',
-    'version': '18.0.1.0.0',
+    'version': '1.0',
     'category': 'Payroll Localization',
     'license': 'AGPL-3',
     'summary': 'Quarterly payroll demo runs 2023Q4-2027Q4 for the shared demo company.',

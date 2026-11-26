@@ -21,7 +21,7 @@
 
 {
     'name': 'l10n_se_payroll_fora: FORA Premium Reporting',
-    'version': '18.0.1.0.0',
+    'version': '1.0',
     'summary': 'FORA — Swedish collective insurance & pension premium reporting.',
     'category': 'Payroll Localization',
     'author': 'Vertel Sverige AB',

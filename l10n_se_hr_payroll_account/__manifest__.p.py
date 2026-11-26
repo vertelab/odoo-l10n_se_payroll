@@ -1,0 +1,67 @@
+# -*- coding: utf-8 -*-
+##############################################################################
+#
+#    Odoo SA, Open Source Management Solution, third party addon
+#    Copyright (C) 2024- Vertel Sverige AB (<https://vertel.se>).
+#
+#    This program is free software: you can redistribute it and/or modify
+#    it under the terms of the GNU Affero General Public License as
+#    published by the Free Software Foundation, either version 3 of the
+#    License, or (at your option) any later version.
+#
+#    This program is distributed in the hope that it will be useful,
+#    but WITHOUT ANY WARRANTY; without even the implied warranty of
+#    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#    GNU Affero General Public License for more details.
+#
+#    You should have received a copy of the GNU Affero General Public License
+#    along with this program. If not, see <http://www.gnu.org/licenses/>.
+#
+##############################################################################
+
+{
+    'name': 'l10n_se_payroll: Payroll with Accounting',
+    'version': '1.0',
+    # Version ledger: XX.0 = Odoo version. 1 = Major. Non regressionable code. 2 = Minor. New features that are regressionable. 3 = Bug fixes
+    'summary': 'Accounting Data for Swedish Payroll Rules.',
+    'category': 'Payroll Localization',
+    'description': '''
+Payroll with Accounting
+=======================
+
+    This module depends on OCA:
+      git@github.com:OCA/payroll.git
+      git@github.com:OCA/timesheet.git
+      git@github.com:OCA/web.git
+
+    Features:
+
+        - Accounting entries are created by OCA's payroll_account module.
+        - This module adds the Swedish parts: account/tax validation on
+          salary rules, account codes stored as char until the company
+          exists, the account.period assignment (when the period module
+          is installed) and the payroll_account_post setting.
+        - Extends Odoo: Builds on hr.payslip, hr.salary.rule.
+    ''',
+    #'sequence': '1'
+    'author': 'Vertel Sverige AB',
+    'website': 'https://vertel.se/apps/odoo-l10n_se_payroll/l10n_se_hr_payroll_account',
+    'images': ['static/description/banner.png'], # 560x280 px.
+    'license': 'AGPL-3',
+    'contributor': '',
+    'maintainer': 'Vertel Sverige AB',
+    'repository': 'https://github.com/vertelab/odoo-l10n_se_payroll',
+    'depends': ['l10n_se_hr_payroll', 'payroll_account', 'l10n_se', 'payroll', 'l10n_se_extended'],
+    'auto_install': False,
+    'demo': [],
+    'data':[
+        #~ 'data/l10n_se_wizard.yml', # Leif
+        # 'data/l10n_se_hr_salary_rule_data.xml',
+        'views/l10n_se_hr_payroll_account_view.xml',
+        #'views/res_config_settings_views.xml',
+
+        # 'data/l10n_se_hr_payroll_account_data.xml',
+        # 'data/hr.salary.rule.csv', # Leif
+    ],
+    'installable': True
+}

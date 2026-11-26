@@ -8,7 +8,7 @@
 
 {
     'name': 'l10n_se_hr_payroll_pension: Tjänstepensionsberäkning',
-    'version': '18.0.1.0.0',
+    'version': '1.0',
     'summary': 'Detailed Swedish occupational pension calculation (ITP1, ITP2, SAF-LO, AKAP-KL)',
     'category': 'Payroll Localization',
     'author': 'Vertel Sverige AB',

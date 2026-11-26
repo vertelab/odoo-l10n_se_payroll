@@ -21,7 +21,7 @@
 
 {
     'name': 'l10n_se_payroll: (Swedish Payroll)',
-    'version': '0.1',
+    'version': '1.0',
     # Version ledger: XX.0 = Odoo version. 1 = Major. Non regressionable code. 2 = Minor. New features that are regressionable. 3 = Bug fixes
     'summary': 'Swedish Payroll Rules.',
     'category': 'Payroll Localization',
@@ -38,7 +38,11 @@
         'account_fiscal_year_vrtl', 
         'hr_timesheet_sheet',
         'hr_work_entry',
+        # hr_work_entry_contract och hr_contract finns bara t.o.m. 18.0.
+        # I 19.0 är hr.contract ersatt av hr.version och hr_work_entry_contract
+        # har slagits in i hr_work_entry (som nu ärver hr.version).
         'hr_work_entry_contract',
+        'hr_contract',
         'base_recompute_field',
     ],
     'description': """

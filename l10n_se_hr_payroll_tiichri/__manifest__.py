@@ -23,7 +23,7 @@
 
 {
     'name': 'l10n_se_payroll: Tiichri',
-    'version': '1.1',
+    'version': '1.0',
     'summary': 'Generate test data for Swedish accounting',
     'category': 'Payroll Localization',
     'description': """

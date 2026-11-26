@@ -8,7 +8,7 @@
 
 {
     'name': 'l10n_se_hr_payroll_union: Union Fees (Fackavgifter)',
-    'version': '18.0.1.0.0',
+    'version': '1.0',
     'summary': 'Swedish union fee management — automatic deduction and reporting',
     'category': 'Payroll Localization',
     'author': 'Vertel Sverige AB',

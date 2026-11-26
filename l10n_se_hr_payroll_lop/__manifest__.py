@@ -21,7 +21,7 @@
 
 {
     'name': 'l10n_se_payroll: Loss of Pay (LOP)',
-    'version': '0.1',
+    'version': '1.0',
     'summary': 'Swedish Loss of Pay — deductible leave adjacent to public holidays.',
     'category': 'Payroll Localization',
     'author': 'Vertel Sverige AB',

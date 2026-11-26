@@ -13,7 +13,7 @@
 
 {
     'name': 'HR Leave Dashboard',
-    'version': '0.1',
+    'version': '1.0',
     'summary': 'Manager dashboard for leave — subordinates, absentees, approvals.',
     'category': 'Human Resources',
     'author': 'Vertel Sverige AB',

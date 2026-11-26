@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="hr_salary_rule_form" model="ir.ui.view">
+            <field name="name">hr.salary.rule.form.inherit.l10n_se.payroll</field>
+            <field name="model">hr.salary.rule</field>
+            <field name="inherit_id" ref="payroll.hr_salary_rule_view_form" />
+            <field name="arch" type="xml">
+                <field name="name" position="before">
+                    <field name="salary_art" />
+                </field>
+
+                <page position="replace">
+                    <page string="General">
+                        <group>
+                            <field name="condition_select"/>
+                            <field name="condition_python" invisible="condition_select != 'python'" required="condition_select == 'python'" widget="ace" options="{'mode': 'python'}" id="condition_python"/>
+                            <field name="condition_range" invisible="condition_select != 'range'" required="condition_select == 'range'"/>
+                            <label string="Condition Range" invisible="condition_select != 'range'" required="condition_select == 'range'" for="condition_range_min"/>
+                            <div invisible="condition_select != 'range'" required="condition_select == 'range'">
+                                <strong>Between </strong>
+                                <field name="condition_range_min" class="oe_inline" invisible="condition_select != 'range'" required="condition_select == 'range'"/>
+                                <strong> and </strong>
+                                <field name="condition_range_max" class="oe_inline" invisible="condition_select != 'range'" required="condition_select == 'range'"/>
+                            </div>
+                            <separator string="Company Contribution"/>
+                            <field name="register_id"/>
+                            <field name="amount_select"/>
+                            <field name="amount_percentage_base" invisible="amount_select != 'percentage'" required="amount_select == 'percentage'"/>
+                            <field name="quantity" invisible="amount_select == 'code'" required="amount_select != 'code'"/>
+                            <field name="amount_fix" invisible="amount_select != 'fix'" required="amount_select == 'fix'"/>
+                            <field name="amount_python_compute" invisible="amount_select != 'code'" required="amount_select == 'code'" widget="ace" options="{'mode': 'python'}" id="amount_python_compute"/>
+                            <field name="amount_percentage" invisible="amount_select != 'percentage'" required="amount_select == 'percentage'"/>
+                            <separator string="Notes"/>
+                            <field name="note" placeholder="Write salary rule notes or observations here..."/>
+                        </group>
+                    </page>
+                </page>
+            </field>
+        </record>
+
+        <record id="hr_salary_rule_list" model="ir.ui.view">
+            <field name="name">hr.salary.rule.list.inherit.l10n_se.payroll</field>
+            <field name="model">hr.salary.rule</field>
+            <field name="inherit_id" ref="payroll.hr_salary_rule_view_tree" />
+            <field name="arch" type="xml">
+                <field name="code" position="before">
+                    <field name="salary_art" />
+                </field>
+            </field>
+        </record>
+        <record id="view_hr_rule_filter" model="ir.ui.view">
+            <field name="name">hr.salary.rule.select.inherit.l10n_se.payroll</field>
+            <field name="model">hr.salary.rule</field>
+            <field name="inherit_id" ref="payroll.hr_salary_rule_view_search" />
+            <field name="arch" type="xml">
+                <field name="condition_range_min" position="after">
+                    <field name="appears_on_payslip" />
+                    <field name="parent_rule_id" />
+                    <field name="child_ids" />
+                    <filter string="Appears On Payslip" name="appears_on_payslip" domain="[('appears_on_payslip','=',True)]" />
+                    <filter string="Hide Children Rules" name="parent_rule_id" domain="[('parent_rule_id','=',False)]" />
+                </field>
+            </field>
+        </record>
+
+
+        <!-- record id="last_salary_view_form" model="ir.ui.view">
+            <field name="name">last_salary</field>
+            <field name="model">hr.payslip</field>
+            <field name="inherit_id" ref="payroll.hr_payslip_view_form" />
+            <field name="arch" type="xml">
+                <field name="number" position="before">
+                </field>
+            </field>
+        </record -->
+
+        <record id="payroll_hr_payslip_view_tree" model="ir.ui.view">
+            <field name="name">hr.payslip.tree</field>
+            <field name="model">hr.payslip</field>
+            <field name="inherit_id" ref="payroll.hr_payslip_view_tree"/>
+            <field name="arch" type="xml">
+                <field name="state" position="after">
+                    <field name="period_id" optional="show"/>
+                    <field name="deviation_period_label" optional="show"/>
+                    <field name="payday_date" optional="show"/>
+                </field>
+            </field>
+        </record>
+
+
+
+        <record id="hr_payslip_view_form" model="ir.ui.view">
+            <field name="name">notebook</field>
+            <field name="model">hr.payslip</field>
+            <field name="inherit_id" ref="payroll.hr_payslip_view_form" />
+            <field name="arch" type="xml">
+                <field name="employee_id" position="after">
+                    <field name="period_id"/>
+                    <field name="deviation_period_label" readonly="1"/>
+                    <field name="payday_date" readonly="1"/>
+                    <field name="payday_policy_used" readonly="1"/>
+                </field>
+                <notebook position="inside">
+                    <page string="Salary Details">
+                        <field name="details_by_salary_rule_category"/>
+                    </page>
+                </notebook>
+            </field>
+
+        </record>
+
+
+
+        <record id="payroll.action_salary_rule_form" model="ir.actions.act_window">
+            <field name="domain">[]</field>
+        </record>
+
+        <record id="hr_contract_form_inherit" model="ir.ui.view">
+            <field name="name">hr.contract.form.inherit</field>
+            <field name="model">hr.contract</field>
+            <field name="priority">20</field>
+            <field name="inherit_id" ref="hr_contract.hr_contract_view_form" />
+            <field name="arch" type="xml">
+                <xpath expr="//group[@name='salary_info']" position="inside">
+                    <group>
+                        <field name="type_id"/>
+                        <field name="prel_tax_amount" />
+                        <field name="wage_tax_base" />
+                        <field name="prel_tax_tabel" placeholder="SKATTETABELL 31/Kolumn 1/Ingen jämkning" />
+                        <field name="prel_tax_url" widget="url" filename="name" colspan="1" readonly="True" />
+                    </group>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

@@ -21,7 +21,7 @@
 
 {
     'name': 'l10n_se_payroll_agd: Arbetsgivardeklaration',
-    'version': '18.0.1.0.0',
+    'version': '1.0',
     'summary': 'Swedish employer declaration (arbetsgivardeklaration) on individual level.',
     'category': 'Payroll Localization',
     'author': 'Vertel Sverige AB',

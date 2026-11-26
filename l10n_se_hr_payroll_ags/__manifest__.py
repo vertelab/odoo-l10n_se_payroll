@@ -8,7 +8,7 @@
 
 {
     'name': 'l10n_se_hr_payroll_ags: AGS & TFA Insurance',
-    'version': '18.0.1.0.0',
+    'version': '1.0',
     'summary': 'AGS (sick pay insurance) and TFA (work injury) — tracking & reporting',
     'category': 'Payroll Localization',
     'author': 'Vertel Sverige AB',

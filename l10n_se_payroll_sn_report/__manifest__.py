@@ -21,7 +21,7 @@
 
 {
     'name': 'l10n_se_payroll_sn_report: (SN Lönestatistik & NYK-koder)',
-    'version': '18.0.1.0.0',
+    'version': '1.0',
     'summary': "Generates the SN payroll statistics report with NyK codes.",
     'description': '''
 (SN Lönestatistik & NYK-koder)

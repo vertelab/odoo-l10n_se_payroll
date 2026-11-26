@@ -13,7 +13,7 @@
 
 {
     'name': 'HR Work Anniversary Reminder',
-    'version': '0.1',
+    'version': '1.0',
     'summary': 'Automatic email greetings on employee work anniversaries.',
     'category': 'Human Resources',
     'author': 'Vertel Sverige AB',

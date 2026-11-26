@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<odoo>
-    <data noupdate="1">
+<odoo noupdate="1">
         <!-- Daily cron for work anniversary emails -->
         <record id="cron_work_anniversary_reminder" model="ir.cron">
             <field name="name">HR: Work Anniversary Reminder</field>
@@ -11,5 +10,4 @@
             <field name="code">model._cron_work_anniversary_reminder()</field>
             <field name="active" eval="True"/>
         </record>
-    </data>
 </odoo>

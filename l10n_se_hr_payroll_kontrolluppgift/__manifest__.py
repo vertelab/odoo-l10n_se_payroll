@@ -8,7 +8,7 @@
 
 {
     'name': 'l10n_se_hr_payroll_kontrolluppgift: Tax Statements (KU)',
-    'version': '18.0.1.0.0',
+    'version': '1.0',
     'summary': 'Swedish tax statements (Kontrolluppgifter KU20/KU25) to Skatteverket',
     'category': 'Payroll Localization',
     'author': 'Vertel Sverige AB',

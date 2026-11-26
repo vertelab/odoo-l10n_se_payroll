@@ -13,7 +13,7 @@
 
 {
     'name': 'l10n_se_payroll: Bonus Workflow',
-    'version': '0.1',
+    'version': '1.0',
     'summary': 'Bonus request approval workflow integrated with Swedish payroll.',
     'category': 'Payroll Localization',
     'author': 'Vertel Sverige AB',

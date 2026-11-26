@@ -1,14 +1,96 @@
 # odoo-l10n_payroll
 Swedish payroll and accounting module
 
-Ported modules:
+## P-filer
 
-Module name |Description
---- | ---
- l10n_se_hr_payroll         | Ported
- l10n_se_hr_holidays        | 
- l10n_se_hr_payroll_account | Ported
- l10n_se_hr_holidays_account| 
+Modulerna är p-filade. `*.p.py` / `*.p.xml` är **originalet** och finns på alla
+utgåvegrenar; den genererade filen (`*.py` / `*.xml`) committas per gren och
+redigeras aldrig för hand.
+
+```bash
+# Expandera för den utgåva du testar — bara den
+rm -f modul/models/x.py && preprocess -f -D VERSION=19.0 -o modul/models/x.py modul/models/x.p.py
+```
+
+Använd alltid `-D VERSION=<utgåva>`. `preprocess --version` skriver verktygets
+egen version och expanderar ingenting — en STALE-kontroll skriven så ger
+falskt grönt.
+
+Manifestet heter `__manifest__.p.py` och anger `'version': '1.0'` **utan**
+utgåveprefix; Odoo lägger själv till serien (`adapt_version`: `1.0` → `18.0.1.0`).
+
+## Porteringsstatus
+
+Mätt 2026-11-26 mot `pfile_18.0`, `pfile_19.0`, `pfile_20.0`. Status är
+`ir_module_module.state` — aldrig grennamn. `installed` = porterad och testad.
+
+| Modul | 18.0 | 19.0 | 20.0 | Blockerare |
+|---|---|---|---|---|
+| `hr_leave_dashboard` | installed | installed | installed | — |
+| `hr_work_anniversary_reminder` | installed | installed | installed | — (migrerad till `hr.version`) |
+| `l10n_se_hr_payroll` | installed | uninstalled | uninstalled | `payroll` (klass 1/2), `hr_timesheet_sheet` (klass 1), `cron_tick` (uppströms) |
+| `l10n_se_hr_payroll_benefits` | uninstalled | uninstalled | uninstalled | `l10n_se_hr_payroll` |
+| `l10n_se_hr_payroll_collective` | uninstalled | uninstalled | uninstalled | `l10n_se_hr_payroll` |
+| `l10n_se_hr_payroll_fk` | uninstalled | uninstalled | uninstalled | `l10n_se_hr_payroll` |
+| `l10n_se_hr_payroll_lop` | uninstalled | uninstalled | uninstalled | `l10n_se_hr_payroll` |
+| `l10n_se_hr_payroll_bonus_workflow` | uninstalled | uninstalled | uninstalled | `l10n_se_hr_payroll` |
+| `l10n_se_hr_payroll_tiichri` | uninstalled | uninstalled | uninstalled | `l10n_se_hr_payroll_benefits` |
+| `l10n_se_hr_payroll_tiichri_26` | uninstalled | uninstalled | uninstalled | `l10n_se_hr_payroll_tiichri` |
+| `l10n_se_hr_payroll_account` | uninstalled | uninstalled | uninstalled | `l10n_se_hr_payroll`, `payroll_account` (klass 2) |
+| `l10n_se_hr_payroll_ags` | uninstalled | uninstalled | uninstalled | `l10n_se_hr_payroll`, `payroll` |
+| `l10n_se_hr_payroll_pension` | uninstalled | uninstalled | uninstalled | `l10n_se_hr_payroll`, `payroll` |
+| `l10n_se_hr_payroll_union` | uninstalled | uninstalled | uninstalled | `l10n_se_hr_payroll`, `payroll` |
+| `l10n_se_hr_payroll_flex` | uninstalled | uninstalled | uninstalled | `l10n_se_hr_payroll`, `hr_timesheet_sheet` |
+| `l10n_se_hr_payroll_kontrolluppgift` | uninstalled | uninstalled | uninstalled | `l10n_se_hr_payroll`, `payroll` |
+| `l10n_se_payroll_agd` | uninstalled | uninstalled | uninstalled | `l10n_se_hr_payroll`, `payroll` |
+| `l10n_se_payroll_fora` | uninstalled | uninstalled | uninstalled | `l10n_se_hr_payroll`, `payroll` |
+| `l10n_se_payroll_growth_support` | uninstalled | uninstalled | uninstalled | `l10n_se_hr_payroll`, `payroll` |
+| `l10n_se_payroll_sn_report` | uninstalled | uninstalled | uninstalled | `l10n_se_hr_payroll` |
+| `l10n_se_payroll_taxtable` | uninstalled | uninstalled | uninstalled | `l10n_se_hr_payroll` |
+| `l10n_se_hr_holidays` | uninstalled | uninstalled | uninstalled | `l10n_se_hr_payroll`, `hr_work_entry_holidays` (klass 3, 20.0) |
+| `l10n_se_hr_holidays_account` | uninstalled | uninstalled | uninstalled | `l10n_se_hr_holidays` |
+| `l10n_se_arbetsgivarintyg` | uninstalled | uninstalled | uninstalled | `l10n_se_hr_payroll` |
+| `l10n_se_payroll_demo` | uninstalled | uninstalled | uninstalled | `l10n_se_demo_company` (klass 2), `l10n_se_hr_payroll_account` |
+| `l10n_se_resource_calendar_leaves_import` | uninstalled | uninstalled | uninstalled | `cron_tick` (uppströms), `ics_import_holidays` |
+
+### Blockerarklasser
+
+En blockerare är inte "något som fattas i vår kod". Klassningen avgör vem som
+äger åtgärden:
+
+| Klass | Betydelse | Exempel |
+|---|---|---|
+| **1** | Grenen finns men innehållet är en tomstubbe | `payroll` (OCA/payroll 20.0: **0 moduler**), `hr_timesheet_sheet` (OCA/timesheet 20.0 saknar modulen) |
+| **2** | Gren eller modul saknas | `payroll_account`, `l10n_se_demo_company` |
+| **3** | Kärnmodul borttagen eller ersatt | `hr_contract` → `hr.version`; `hr_work_entry_contract` → in i `hr_work_entry`; `hr_work_entry_holidays` (borta i 20.0) |
+
+### Miljöfel utanför detta repo
+
+Dessa blockerar installation men ägs inte av `odoo-l10n_se_payroll`:
+
+| Modul | Repo | Fel |
+|---|---|---|
+| `cron_tick` | `odoo-base` (19.0) | `type='json'` borttaget i 19.0 → ImportError. Blockerar `account_fiscal_year_vrtl` → `l10n_se_hr_payroll` |
+| `hr_payroll_employeefund` | `odoo-payroll` (19.0) | kraschar vid laddning |
+| `payroll_driving_record` | `odoo-payroll` (19.0) | `security/ir_rule.xml` ParseError |
+| `communication_center_sip` | (20.0) | `res_users_views.xml` ParseError |
+| `payroll` | `OCA/payroll` | 20.0-grenen är tom (0 moduler) — klass 1 |
+| `hr_timesheet_sheet` | `OCA/timesheet` | saknas i 20.0-grenen — klass 1 |
+
+### Vad som bevisats
+
+`hr_leave_dashboard` och `hr_work_anniversary_reminder` är installerade i alla
+tre utgåvor. De bevisar att p-fils-arbetet och `hr_contract` → `hr.version`-
+migreringen fungerar. Resten är blockerat av beroenden som inte är våra.
+
+Två riktiga buggar hittades och fixades på vägen:
+
+- `hr_work_anniversary_reminder` hade `<odoo><data>` i två XML-filer. Den
+  strukturen är **ogiltig även i 18.0** — modulen hade aldrig kunnat
+  installeras. Wrappern är borttagen (giltigt i alla utgåvor).
+- Samma moduls `subject`-fält innehöll `<t t-out="..."/>`, vilket RelaxNG-
+  schemat inte tillåter i ett textfält. Personaliseringen finns kvar i
+  `body_html`.
 
 ## Demo data
 

@@ -21,7 +21,7 @@
 
 {
     'name': 'l10n_se_payroll: Payroll with Benefits',
-    'version': '1.1',
+    'version': '1.0',
     'summary': 'Swedish Payslip additions for Benefits',
     'category': 'Payroll Localization',
     'description': """

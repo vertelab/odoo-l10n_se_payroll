@@ -21,7 +21,7 @@
 
 {
     'name': 'l10n_se_payroll_growth_support: Växa-stöd',
-    'version': '18.0.1.0.0',
+    'version': '1.0',
     'summary': 'Swedish growth support (växa-stöd) — reimbursement application for employer contributions',
     'category': 'Payroll Localization',
     'author': 'Vertel Sverige AB',
