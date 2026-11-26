@@ -41,8 +41,6 @@
         # hr_work_entry_contract och hr_contract finns bara t.o.m. 18.0.
         # I 19.0 är hr.contract ersatt av hr.version och hr_work_entry_contract
         # har slagits in i hr_work_entry (som nu ärver hr.version).
-        'hr_work_entry_contract',
-        'hr_contract',
         'base_recompute_field',
     ],
     'description': """
@@ -84,7 +82,6 @@ Swedish Payroll Rules.
         'views/hr_payslip_template.xml',
         'views/hr_payslip_run_views.xml',
         'views/user_payslip_views.xml',
-        'views/hr_contract_views.xml',
         #'views/hr_leave_views.xml',
         'views/hr_payslip_views.xml',
         'security/ir.model.access.csv',

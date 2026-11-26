@@ -21,7 +21,7 @@
     'license': 'AGPL-3',
     'depends': ['hr_holidays'],
     'data': [
-        'security/ir.model.access.csv',
+        'security/ir.access.csv',
         'views/hr_leave_dashboard_views.xml',
     ],
     'assets': {

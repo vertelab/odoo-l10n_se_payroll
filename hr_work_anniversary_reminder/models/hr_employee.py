@@ -16,10 +16,11 @@ class HrEmployee(models.Model):
         store=True,
         help="Employee's first contract start date (joining date).")
 
-    @api.depends('contract_ids.date_start')
+    # hr.contract is replaced by hr.version in 19.0 (hr_contract module removed).
+    @api.depends('version_ids.date_start')
     def _compute_joining_date(self):
         for rec in self:
-            dates = rec.contract_ids.mapped('date_start')
+            dates = rec.version_ids.mapped('date_start')
             rec.joining_date = min(dates) if dates else False
 
     @api.model

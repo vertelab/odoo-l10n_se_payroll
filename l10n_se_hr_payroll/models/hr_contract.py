@@ -26,8 +26,9 @@ _logger = logging.getLogger(__name__)
 # 6. Om anställd är sjuk på en helg(dag) räknas det som sjukdag om den föregås eller följs av en sjukdag OM det är fler än 15 dagar
 # 7. Om en anställd blir sjuk under en semester räknas det som sjukdag och inte semesterdag
 
+# hr.contract is replaced by hr.version in 19.0 (hr_contract module removed).
 class hr_contract(models.Model):
-    _inherit = "hr.contract"
+    _inherit = "hr.version"
 
     correction_ids = fields.One2many(
         'hr.payroll.correction',
@@ -494,7 +495,7 @@ class hr_contract(models.Model):
             earning_year_start = date(current_date.year - 2, 4, 1)
             earning_year_end = date(current_date.year - 1, 3, 31)
 
-        contracts = self.env['hr.contract'].search([
+        contracts = self.env['hr.version'].search([
             ('employee_id', '=', self.employee_id.id),
             ('date_start', '<=', earning_year_end),
             '|', ('date_end', '>=', earning_year_start), ('date_end', '=', False),

@@ -19,7 +19,7 @@
     'author': 'Vertel Sverige AB',
     'website': 'https://vertel.se/',
     'license': 'AGPL-3',
-    'depends': ['hr', 'mail', 'hr_contract'],
+    'depends': ['hr', 'mail'],
     'data': [
         'data/mail_template_data.xml',
         'data/ir_cron_data.xml',
