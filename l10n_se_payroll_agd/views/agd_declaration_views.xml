@@ -172,7 +172,7 @@
                     <field name="date" string="Deadline"/>
                     <field name="state"/>
                     <separator/>
-                    <group string="Group By">
+                    <group>
                         <filter context="{'group_by': 'state'}" name="State" string="State"/>
                         <filter context="{'group_by': 'date_start'}" name="Period" string="Period"/>
                     </group>

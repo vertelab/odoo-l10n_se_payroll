@@ -116,6 +116,7 @@
             <field name="domain">[]</field>
         </record>
 
+        <!-- #if VERSION <= "18.0" -->
         <record id="hr_contract_form_inherit" model="ir.ui.view">
             <field name="name">hr.contract.form.inherit</field>
             <field name="model">hr.contract</field>
@@ -133,5 +134,6 @@
                 </xpath>
             </field>
         </record>
+        <!-- #endif -->
     </data>
 </odoo>

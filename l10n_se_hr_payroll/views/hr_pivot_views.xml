@@ -32,18 +32,6 @@
         </field>
     </record>
 
-    <!-- hr.contract pivot -->
-    <record id="hr_contract_view_pivot" model="ir.ui.view">
-        <field name="name">hr.contract.pivot</field>
-        <field name="model">hr.contract</field>
-        <field name="arch" type="xml">
-            <pivot string="Contracts">
-                <field name="employee_id" type="row"/>
-                <field name="struct_id" type="col"/>
-                <field name="wage" type="measure"/>
-            </pivot>
-        </field>
-    </record>
 
     <record id="payroll.hr_payslip_action" model="ir.actions.act_window">
         <field name="view_mode">list,kanban,form,pivot</field>
@@ -54,8 +42,5 @@
     <record id="payroll.hr_payslip_run_action" model="ir.actions.act_window">
         <field name="name">Lönekörning</field>
         <field name="view_mode">list,kanban,form,pivot</field>
-    </record>
-    <record id="hr_contract.action_hr_contract" model="ir.actions.act_window">
-        <field name="view_mode">list,kanban,form,activity,pivot</field>
     </record>
 </odoo>

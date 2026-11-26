@@ -39,7 +39,6 @@ class hr_payslip(models.Model):
     _inherit = 'hr.payslip'
 
     currency_id = fields.Many2one("res.currency", related="company_id.currency_id")
-    gender = fields.Selection(related="employee_id.gender", string="Kön", store=True)
     nyk_id = fields.Many2one(related="employee_id.nyk_id", string="NYK-kod", store=True)
     job_id = fields.Many2one(related="contract_id.job_id", string="Tjänst", store=True)
     gl_amount = fields.Monetary(string="Grundlön", currency_field='currency_id')

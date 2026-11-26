@@ -118,7 +118,11 @@ class HrPayslipRun(models.Model):
             return
 
         # Find employees with active contracts
+        # #if VERSION >= "19.0"
+        active_contracts = self.env['hr.version'].search([('is_current', '=', True)])
+        # #else
         active_contracts = self.env['hr.contract'].search([('state', '=', 'open')])
+        # #endif
         employee_ids = active_contracts.mapped('employee_id').filtered('active')
         if not employee_ids:
             _logger.info("No active employees with open contracts found.")

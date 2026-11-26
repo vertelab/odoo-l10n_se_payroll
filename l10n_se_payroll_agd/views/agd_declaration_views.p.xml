@@ -172,10 +172,10 @@
                     <field name="date" string="Deadline"/>
                     <field name="state"/>
                     <separator/>
-                    <!-- #if VERSION >= "19.0" -->
-                    <group string="Group By">
-                    <!-- #else -->
+                    <!-- #if VERSION <= "18.0" -->
                     <group expand="0" string="Group By">
+                    <!-- #else -->
+                    <group>
                     <!-- #endif -->
                         <filter context="{'group_by': 'state'}" name="State" string="State"/>
                         <filter context="{'group_by': 'date_start'}" name="Period" string="Period"/>

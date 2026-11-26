@@ -33,7 +33,7 @@
                     <filter name="done" string="Done" domain="[('state', '=', 'done')]"/>
                     <filter name="error" string="Error" domain="[('state', '=', 'error')]"/>
                     <separator/>
-                    <group string="Group By">
+                    <group>
                         <filter name="group_state" string="State" domain="[]" context="{'group_by': 'state'}"/>
                         <filter name="group_employee" string="Employee" domain="[]" context="{'group_by': 'employee_id'}"/>
                     </group>

@@ -73,6 +73,7 @@
         </record>
 
         <!-- Contract form: add Lönekorrigeringar tab -->
+        <!-- #if VERSION <= "18.0" -->
         <record id="view_hr_contract_form_corrections" model="ir.ui.view">
             <field name="name">hr.contract.form.corrections</field>
             <field name="model">hr.contract</field>
@@ -103,6 +104,7 @@
                 </xpath>
             </field>
         </record>
+        <!-- #endif -->
 
         <!-- Action window -->
         <record id="action_hr_payroll_correction" model="ir.actions.act_window">

@@ -102,11 +102,11 @@ class HrPayrollSalaryChange(models.TransientModel):
 
     def apply_salary_changes(self):
         self.ensure_one()
-        Contract = self.env['hr.contract']
+        Contract = self.env['hr.version']
         created = 0
 
         for employee in self.employee_ids:
-            old = employee.contract_id
+            old = employee.current_version_id
             if not old:
                 continue
             if self.change_type == 'percentage':
