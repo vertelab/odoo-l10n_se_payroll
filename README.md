@@ -40,14 +40,14 @@ Mätt 2026-11-26 mot `pfile_18.0`, `pfile_19.0`, `pfile_20.0`. Status är
 | `l10n_se_hr_payroll_ags` | uninstalled | uninstalled | uninstalled | `l10n_se_hr_payroll`, `payroll` |
 | `l10n_se_hr_payroll_pension` | uninstalled | uninstalled | uninstalled | migrerad; `l10n_se_hr_payroll` → `cron_tick` |
 | `l10n_se_hr_payroll_union` | uninstalled | **installed** | uninstalled | migrerad |
-| `l10n_se_hr_payroll_flex` | uninstalled | uninstalled | uninstalled | migrerad; `l10n_se_hr_payroll` → `cron_tick` |
+| `l10n_se_hr_payroll_flex` | uninstalled | **installed** | uninstalled | migrerad |
 | `l10n_se_hr_payroll_kontrolluppgift` | uninstalled | uninstalled | uninstalled | `l10n_se_hr_payroll`, `payroll` |
 | `l10n_se_payroll_agd` | uninstalled | uninstalled | uninstalled | `l10n_se_hr_payroll`, `payroll` |
 | `l10n_se_payroll_fora` | uninstalled | uninstalled | uninstalled | `l10n_se_hr_payroll`, `payroll` |
 | `l10n_se_payroll_growth_support` | uninstalled | uninstalled | uninstalled | `l10n_se_hr_payroll`, `payroll` |
-| `l10n_se_payroll_sn_report` | uninstalled | uninstalled | uninstalled | `l10n_se_hr_payroll` |
+| `l10n_se_payroll_sn_report` | uninstalled | **installed** | uninstalled | migrerad |
 | `l10n_se_payroll_taxtable` | uninstalled | uninstalled | uninstalled | migrerad; `l10n_se_hr_payroll` → `cron_tick` |
-| `l10n_se_hr_holidays` | uninstalled | uninstalled | uninstalled | `l10n_se_hr_payroll`, `hr_work_entry_holidays` (klass 3, 20.0) |
+| `l10n_se_hr_holidays` | uninstalled | **installed** | uninstalled | migrerad |
 | `l10n_se_hr_holidays_account` | uninstalled | uninstalled | uninstalled | `l10n_se_hr_holidays` |
 | `l10n_se_arbetsgivarintyg` | uninstalled | **installed** | uninstalled | migrerad |
 | `l10n_se_payroll_demo` | uninstalled | uninstalled | uninstalled | `l10n_se_demo_company` (klass 2), `l10n_se_hr_payroll_account` |
@@ -75,6 +75,7 @@ Dessa blockerar installation men ägs inte av `odoo-l10n_se_payroll`:
 | `payroll_driving_record` | `odoo-payroll` (19.0) | `security/ir_rule.xml` ParseError |
 | `communication_center_sip` | (20.0) | `res_users_views.xml` ParseError |
 | `payroll` | `OCA/payroll` | 20.0-grenen är tom (0 moduler) — klass 1 |
+| `account_dynamic_reports` | (19.0) | `balance_sheet.xml`: `Invalid formula for expression 'balance' of line 'Other Current Assets': 16,17,18`. Blockerar `l10n_se_payroll_agd` → `_fora`, `_ags`, `_pension`, `_kontrolluppgift` |
 | `hr_timesheet_sheet` | `OCA/timesheet` | saknas i 20.0-grenen — klass 1 |
 
 ### `expand` på `<group>` i `<search>`
