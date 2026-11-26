@@ -75,7 +75,7 @@ Dessa blockerar installation men ägs inte av `odoo-l10n_se_payroll`:
 | `payroll_driving_record` | `odoo-payroll` (19.0) | `security/ir_rule.xml` ParseError |
 | `communication_center_sip` | (20.0) | `res_users_views.xml` ParseError |
 | `payroll` | `OCA/payroll` | 20.0-grenen är tom (0 moduler) — klass 1 |
-| `account_dynamic_reports` | (19.0) | `balance_sheet.xml`: `Invalid formula for expression 'balance' of line 'Other Current Assets': 16,17,18`. Blockerar `l10n_se_payroll_agd` → `_fora`, `_ags`, `_pension`, `_kontrolluppgift` |
+| `odoo-l10n_se` | `vertelab/odoo-l10n_se` | **19.0-grenen är 18.0-kod** — 0 p-filer, alla manifest säger `18.0.x`. Blockerar `l10n_se_payroll_agd` → `_fora`, `_ags`, `_pension`, `_kontrolluppgift` |
 | `hr_timesheet_sheet` | `OCA/timesheet` | saknas i 20.0-grenen — klass 1 |
 
 ### `expand` på `<group>` i `<search>`
@@ -101,6 +101,14 @@ Migrationen krävde mer än modellnamnet. Verifierat mot kärnkällan:
 | `odoo.addons.decimal_precision` | **borttagen** | död import villkoras bort |
 | `<group expand="0" string="...">` i `<search>` | **båda attributen borta** | villkoras |
 | `<odoo><data>` | ogiltigt i alla utgåvor | wrappern borttagen |
+
+### `account_codes_formula` — kommalistor fungerar inte
+
+`account_codes_formula` är ett **kärnfält** i 19.0 (`account.report.line`), och
+kärnans `_check_formula` godkänner bara `+`/`-`, inte kommalistor. Två rader i
+`account_dynamic_reports/data/balance_sheet.xml` använde `16,17,18` och
+`10,11,12`; de är ändrade till `16+17+18` och `10+11+12` — samma fix som redan
+fanns på 20.0-grenen (commit `41f92af1`).
 
 ### Vad som bevisats
 
