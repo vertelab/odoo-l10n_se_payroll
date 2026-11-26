@@ -30,7 +30,14 @@
     'license': 'AGPL-3',
     'maintainer': 'Vertel Sverige AB',
     'repository': 'https://github.com/vertelab/odoo-l10n_se_payroll',
-    'depends': ['l10n_se_extended', 'hr_contract', 'l10n_se_hr_payroll'],
+    'depends': [
+        'l10n_se_extended',
+        # hr_contract was removed after 18.0; hr.contract is replaced by hr.version.
+        # #if VERSION < "19.0"
+        'hr_contract',
+        # #endif
+        'l10n_se_hr_payroll',
+    ],
     'description': '''
 Payroll Tax Table
 =================
@@ -54,7 +61,10 @@ Payroll Tax Table
     'data': [
         'security/ir.model.access.csv',
         'views/payroll_taxtable_view.xml',
+        # hr.contract views exist only up to 18.0.
+        # #if VERSION < "19.0"
         'views/hr_contract_view.xml',
+        # #endif
         'data/ir_config.xml',
         'data/ir_server_action.xml',
         'data/hr_salary_rule_tax_data.xml',

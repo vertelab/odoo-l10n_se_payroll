@@ -39,7 +39,7 @@ Dependencies:
     'depends': [
         'l10n_se_hr_payroll',
         'hr_timesheet_sheet',
-        'hr_work_entry_contract',
+        # hr_work_entry_contract was folded into hr_work_entry after 18.0.
         'hr_holidays',  # for leave withdrawal integration
     ],
     'data': [

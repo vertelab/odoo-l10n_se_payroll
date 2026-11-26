@@ -11,8 +11,9 @@ import logging
 _logger = logging.getLogger(__name__)
 
 
+# hr.contract is replaced by hr.version in 19.0.
 class HRContract(models.Model):
-    _inherit = 'hr.contract'
+    _inherit = 'hr.version'
 
     table_number = fields.Integer(string="Tax Table")
     pay_period_days = fields.Selection(

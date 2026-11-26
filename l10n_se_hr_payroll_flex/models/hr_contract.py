@@ -4,8 +4,9 @@
 from odoo import fields, models
 
 
+# hr.contract is replaced by hr.version in 19.0.
 class HrContract(models.Model):
-    _inherit = 'hr.contract'
+    _inherit = 'hr.version'
 
     flex_overtime_rate = fields.Float(
         string='Övertidsfaktor (flextid)',

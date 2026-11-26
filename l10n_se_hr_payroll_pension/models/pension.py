@@ -212,10 +212,10 @@ class HrPensionEntry(models.Model):
 
     name = fields.Char(compute='_compute_name', store=True)
     employee_id = fields.Many2one('hr.employee', required=True)
-    contract_id = fields.Many2one('hr.contract',
-                                  related='employee_id.contract_id', store=True)
+    contract_id = fields.Many2one('hr.version',
+                                  related='employee_id.current_version_id', store=True)
     plan_id = fields.Many2one(
-        'hr.pension.plan', related='employee_id.contract_id.pension_plan_id', store=True)
+        'hr.pension.plan', related='employee_id.current_version_id.pension_plan_id', store=True)
     payslip_id = fields.Many2one('hr.payslip',
                                  string='Lönespec',
                                  ondelete='set null')
@@ -316,10 +316,10 @@ class HrPensionYearlySummary(models.Model):
     employee_id = fields.Many2one('hr.employee', required=True)
     year = fields.Integer(required=True,
                           default=lambda self: date.today().year)
-    contract_id = fields.Many2one('hr.contract',
-                                  related='employee_id.contract_id', store=True)
+    contract_id = fields.Many2one('hr.version',
+                                  related='employee_id.current_version_id', store=True)
     plan_id = fields.Many2one(
-        'hr.pension.plan', related='employee_id.contract_id.pension_plan_id', store=True)
+        'hr.pension.plan', related='employee_id.current_version_id.pension_plan_id', store=True)
 
     total_wage_basis = fields.Monetary(string='Årets lönebas',
                                        currency_field='currency_id')
@@ -371,8 +371,9 @@ class HrPensionYearlySummary(models.Model):
 
 # ---- Model extensions ----
 
+# hr.contract is replaced by hr.version in 19.0.
 class HrContract(models.Model):
-    _inherit = 'hr.contract'
+    _inherit = 'hr.version'
 
     pension_plan_id = fields.Many2one(
         'hr.pension.plan', string='Pension Plan',

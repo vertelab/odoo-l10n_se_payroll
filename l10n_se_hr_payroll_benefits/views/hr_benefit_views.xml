@@ -60,7 +60,7 @@
                             domain="[('category', '=', 'housing')]"/>
                     <filter name="category_meal" string="Måltider"
                             domain="[('category', '=', 'meal')]"/>
-                    <group expand="0" string="Kategori">
+                    <group string="Kategori">
                         <filter name="cat_vehicle" string="Bil / Motorfordon"
                                 domain="[('category', '=', 'vehicle')]"/>
                         <filter name="cat_housing" string="Bostad"

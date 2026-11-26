@@ -189,7 +189,7 @@
                     <field name="state"/>
                     <field name="skv_api_status"/>
                     <separator/>
-                    <group expand="0" string="Group By">
+                    <group string="Group By">
                         <filter context="{'group_by': 'state'}"
                             name="State" string="Status"/>
                         <filter context="{'group_by': 'date_start'}"
