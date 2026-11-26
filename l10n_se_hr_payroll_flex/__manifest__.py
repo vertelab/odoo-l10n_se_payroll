@@ -39,6 +39,7 @@ Dependencies:
     'depends': [
         'l10n_se_hr_payroll',
         'hr_timesheet_sheet',
+        # hr_work_entry_contract was folded into hr_work_entry after 18.0.
         'hr_work_entry_contract',
         'hr_holidays',  # for leave withdrawal integration
     ],
@@ -50,6 +51,7 @@ Dependencies:
         'views/hr_flex_request_views.xml',
         'views/hr_employee_views.xml',
         'views/hr_timesheet_sheet_views.xml',
+        # hr.contract views exist only up to 18.0.
         'views/hr_contract_views.xml',
         'views/res_config_settings_views.xml',
         'wizard/hr_flex_request_wizard_views.xml',

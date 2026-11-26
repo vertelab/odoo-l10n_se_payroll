@@ -421,12 +421,22 @@ class HrEmployee(models.Model):
     saf_lo_flex_rate = fields.Float(
         string='SAF-LO Flex Rate (%)',
         help='Optional flex part for SAF-LO pension. 0.0-1.0%.')
+    # #if VERSION >= "19.0"
+    # hr.employee.contract_id -> current_version_id in 19.0.
+    enable_salary_exchange = fields.Boolean(
+        related='current_version_id.enable_salary_exchange', readonly=False)
+    salary_exchange_percent = fields.Float(
+        related='current_version_id.salary_exchange_percent', readonly=False)
+    salary_exchange_max = fields.Float(
+        related='current_version_id.salary_exchange_max', readonly=False)
+    # #else
     enable_salary_exchange = fields.Boolean(
         related='contract_id.enable_salary_exchange', readonly=False)
     salary_exchange_percent = fields.Float(
         related='contract_id.salary_exchange_percent', readonly=False)
     salary_exchange_max = fields.Float(
         related='contract_id.salary_exchange_max', readonly=False)
+    # #endif
 
 
 class HrPayslip(models.Model):

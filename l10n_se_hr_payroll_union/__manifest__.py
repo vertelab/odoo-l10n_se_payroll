@@ -35,7 +35,10 @@ Features:
     """,
     'depends': [
         'l10n_se_hr_payroll',
-        'payroll', 'hr', 'hr_contract',
+        'payroll', 'hr',
+        # hr_contract was removed after 18.0; hr.contract is replaced by
+        # hr.version. This module does not reference the model directly.
+        'hr_contract',
     ],
     'data': [
         'security/ir.model.access.csv',

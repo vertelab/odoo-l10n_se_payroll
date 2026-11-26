@@ -4,7 +4,7 @@
     <record id="res_users_view_form" model="ir.ui.view">
         <field name="name">user.preferences.payslip</field>
         <field name="model">res.users</field>
-        <field name="inherit_id" ref="hr.res_users_view_form_simple_modif"/> 
+        <field name="inherit_id" ref="hr.res_users_view_form_simple_modif"/>
         <field name="arch" type="xml">
             <div name="button_box" position="inside">
                 <button name="payslip_action"
@@ -19,11 +19,9 @@
                     </div>
                 </button>
             </div>
-
         </field>
     </record>
-    
-    
+
     <record id="user_payslip_view_tree" model="ir.ui.view">
         <field name="name">user.payslip.tree</field>
         <field name="model">user.payslip</field>

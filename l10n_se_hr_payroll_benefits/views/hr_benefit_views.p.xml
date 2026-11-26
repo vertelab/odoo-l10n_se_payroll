@@ -60,10 +60,10 @@
                             domain="[('category', '=', 'housing')]"/>
                     <filter name="category_meal" string="Måltider"
                             domain="[('category', '=', 'meal')]"/>
-                    <!-- #if VERSION >= "19.0" -->
-                    <group string="Kategori">
-                    <!-- #else -->
+                    <!-- #if VERSION <= "18.0" -->
                     <group expand="0" string="Kategori">
+                    <!-- #else -->
+                    <group>
                     <!-- #endif -->
                         <filter name="cat_vehicle" string="Bil / Motorfordon"
                                 domain="[('category', '=', 'vehicle')]"/>
@@ -88,6 +88,7 @@
             <field name="search_view_id" ref="view_hr_benefit_search"/>
         </record>
 
+        <!-- #if VERSION <= "18.0" -->
         <!-- Contract form: add benefits tab -->
         <record id="view_hr_contract_form_benefits" model="ir.ui.view">
             <field name="name">hr.contract.form.benefits</field>
@@ -115,6 +116,7 @@
                 </xpath>
             </field>
         </record>
+        <!-- #endif -->
 
         <!-- ============================================ -->
         <!-- BUDGET FÖRMÅNER (Friskvård, etc)            -->

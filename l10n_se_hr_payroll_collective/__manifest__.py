@@ -23,6 +23,7 @@ Swedish collective agreement (kollektivavtal) support for l10n_se_payroll:
         'security/ir.model.access.csv',
         'data/collective_agreement_data.xml',
         'views/collective_agreement_views.xml',
+        # hr.contract views exist only up to 18.0.
         'views/hr_contract_views.xml',
     ],
     'auto_install': False,

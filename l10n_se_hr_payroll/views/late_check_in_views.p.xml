@@ -79,10 +79,10 @@
                         domain="[('state', '=', 'draft')]"/>
                 <filter string="Approved" name="state_approved"
                         domain="[('state', '=', 'approved')]"/>
-                <!-- #if VERSION >= "19.0" -->
-                <group string="Group By">
-                <!-- #else -->
+                <!-- #if VERSION <= "18.0" -->
                 <group expand="0" string="Group By">
+                <!-- #else -->
+                <group>
                 <!-- #endif -->
                     <filter string="Employee" name="group_employee"
                             domain="[]" context="{'group_by': 'employee_id'}"/>
