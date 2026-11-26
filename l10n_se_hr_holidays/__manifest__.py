@@ -59,7 +59,8 @@ Holidays
     ''',
     'auto_install': False,
     'data': [
-        'data/hr_holidays_override.xml',
+        # The leave types this file deactivates (holiday_status_sl/_unpaid/
+        # _cl/_comp) were removed from hr_holidays in 19.0.
         'data/hr_salary_rule_data_holiday.xml',
         #'views/hr_employee_view.xml',
         'views/hr_holidays_view.xml',

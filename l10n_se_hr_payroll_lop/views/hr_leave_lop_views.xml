@@ -5,7 +5,7 @@
         <field name="name">hr.leave.lop.tree</field>
         <field name="model">hr.leave.lop</field>
         <field name="arch" type="xml">
-            <tree string="LOP Rules" editable="bottom">
+            <list string="LOP Rules" editable="bottom">
                 <field name="name"/>
                 <field name="leave_type"/>
                 <field name="no_of_days"
@@ -15,7 +15,7 @@
                 <field name="no_of_days_after"
                        column_invisible="parent.leave_type != 'between_holidays'"/>
                 <field name="deduction_amount"/>
-            </tree>
+            </list>
         </field>
     </record>
 
@@ -83,7 +83,7 @@
     <!-- Menu Item -->
     <menuitem id="hr_leave_lop_menu"
               action="hr_leave_lop_action"
-              parent="payroll.menu_payroll_configuration"
+              parent="payroll.payroll_menu_configuration"
               name="LOP Rules"
               sequence="30"/>
 </odoo>
