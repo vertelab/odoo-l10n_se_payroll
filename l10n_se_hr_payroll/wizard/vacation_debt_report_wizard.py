@@ -22,7 +22,7 @@ class VacationDebtReportWizard(models.TransientModel):
         total_employer_fee = 0.0
 
         for employee in employees:
-            contract = employee.contract_id
+            contract = employee.current_version_id
             if not contract or not contract.wage:
                 continue
             saved_days = employee.vacation_saved_remaining

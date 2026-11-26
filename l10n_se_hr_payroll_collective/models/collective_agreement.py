@@ -78,7 +78,8 @@ class HrCollectiveAgreement(models.Model):
 
 
 class HrContract(models.Model):
-    _inherit = 'hr.contract'
+    # hr.contract is replaced by hr.version in 19.0.
+    _inherit = 'hr.version'
 
     collective_agreement_id = fields.Many2one(
         'hr.collective.agreement',

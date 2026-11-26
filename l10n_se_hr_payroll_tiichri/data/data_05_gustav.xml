@@ -43,17 +43,17 @@
             <field name="user_id" ref="hr_gustav_user" />
         </record>
 
-        <record id="contract_gustav" model="hr.contract">
+        <!-- hr.contract is replaced by hr.version in 19.0. -->
+        <record id="contract_gustav" model="hr.version">
             <field name="name">Gustav Groth Avtal</field>
             <field name="wage">25000</field>
-            <field name="type_id" ref="hr_contract_type" />
+            <field name="contract_type_id" ref="hr_contract_type" />
             <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_gustav_employee" />
             <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons"/>
             <field name="schedule_pay" eval="'monthly'" />
-            <field name="state" eval="'open'" />
             <field name="job_id" ref="job_id_assembly" />
-            <field name="date_start">2011-04-01</field>
-            <field name="first_contract_date">2011-04-01</field>
+            <field name="date_version">2011-04-01</field>
+            <field name="contract_date_start">2011-04-01</field>
             <field name="resource_calendar_id" ref="l10n_se_hr_payroll_tiichri.resource_calendar_standard_tiichri" />
             <field name="struct_id" ref="l10n_se_hr_payroll_tiichri.hr_payroll_structure_arb_man" />
             <field name="table_number">30</field>

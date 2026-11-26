@@ -1,29 +1,7 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <odoo>
 
-    <record id="res_users_view_form" model="ir.ui.view">
-        <field name="name">user.preferences.payslip</field>
-        <field name="model">res.users</field>
-        <field name="inherit_id" ref="hr.res_users_view_form_simple_modif"/> 
-        <field name="arch" type="xml">
-            <div name="button_box" position="inside">
-                <button name="payslip_action"
-                        type="object"
-                        class="oe_stat_button"
-                        icon="fa-money"
-                        help="Payslips">
-                    <div class="o_field_widget o_stat_info">
-                        <span class="o_stat_value">
-                            <field name="payslip_nbr" widget="statinfo" string="Payslips"/>
-                        </span>
-                    </div>
-                </button>
-            </div>
 
-        </field>
-    </record>
-    
-    
     <record id="user_payslip_view_tree" model="ir.ui.view">
         <field name="name">user.payslip.tree</field>
         <field name="model">user.payslip</field>
@@ -77,7 +55,7 @@
                 />
                 <field name="employee_id" />
                 <field name="payslip_run_id" />
-                <group string="Group By">
+                <group>
                     <filter
                         string="Employees"
                         name="employee_id"

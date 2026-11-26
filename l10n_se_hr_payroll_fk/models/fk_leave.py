@@ -10,8 +10,9 @@ class HrFkLeave(models.Model):
 
     employee_id = fields.Many2one(
         'hr.employee', string='Employee', required=True)
+    # hr.contract is replaced by hr.version in 19.0.
     contract_id = fields.Many2one(
-        'hr.contract', string='Contract',
+        'hr.version', string='Contract',
         compute='_compute_contract', store=True)
 
     leave_type = fields.Selection([

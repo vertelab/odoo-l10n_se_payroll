@@ -19,8 +19,9 @@ class HrPayrollCorrection(models.Model):
         required=True,
         domain="[('company_id', '=', company_id)]")
 
+    # hr.contract is replaced by hr.version in 19.0.
     contract_id = fields.Many2one(
-        'hr.contract',
+        'hr.version',
         string='Kontrakt',
         compute='_compute_contract',
         store=True)

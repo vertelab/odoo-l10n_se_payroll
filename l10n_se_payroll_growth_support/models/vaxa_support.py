@@ -231,7 +231,9 @@ class AccountVaxaSupport(models.Model):
         """Find the active contract for an employee at the given date."""
         if isinstance(date_stop, str):
             date_stop = fields.Date.from_string(date_stop)
-        contract = self.env['hr.contract'].search([
+        # hr.contract is replaced by hr.version in 19.0; the dates live on
+        # date_start/date_end, which are computed from contract_date_*.
+        contract = self.env['hr.version'].search([
             ('employee_id', '=', employee.id),
             ('date_start', '<=', date_stop),
             '|',
@@ -254,7 +256,8 @@ class AccountVaxaSupport(models.Model):
             return prev_lines.employee_number
 
         # Otherwise determine from hire date of all employees
-        contracts = self.env['hr.contract'].search([
+        # hr.contract is replaced by hr.version in 19.0.
+        contracts = self.env['hr.version'].search([
             ('employee_id', '!=', False),
             ('company_id', '=', self.company_id.id),
             ('date_start', '!=', False),
@@ -558,8 +561,9 @@ class AccountVaxaSupportLine(models.Model):
     personal_number = fields.Char(
         string='Personnummer',
         help="Swedish personal identity number (personnummer).")
+    # hr.contract is replaced by hr.version in 19.0.
     contract_id = fields.Many2one(
-        'hr.contract', string='Anställningsavtal',
+        'hr.version', string='Anställningsavtal',
         help="The active contract during this period.")
     hire_date = fields.Date(
         string='Anställningsdatum',
@@ -685,17 +689,20 @@ class VaxaDemoGenerator(models.AbstractModel):
             return False
 
         # Find or create contract (hired after April 2024 for 35k cap)
-        contract = self.env['hr.contract'].search(
+        # hr.contract is replaced by hr.version in 19.0; the version carries
+        # the wage, the structure and the start date, and there is no state.
+        contract = self.env['hr.version'].search(
             [('employee_id', '=', employee.id)], limit=1)
         if not contract:
-            contract = self.env['hr.contract'].create({
+            contract = self.env['hr.version'].create({
                 'name': 'Demo Contract Växa',
                 'employee_id': employee.id,
                 'wage': 35000.0,
                 'struct_id': structure.id,
-                'date_start': fields.Date.today().replace(
+                'date_version': fields.Date.today().replace(
                     year=2024, month=6, day=1),
-                'state': 'open',
+                'contract_date_start': fields.Date.today().replace(
+                    year=2024, month=6, day=1),
             })
 
         # Create payslip run for current month

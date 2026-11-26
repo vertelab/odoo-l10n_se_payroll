@@ -86,7 +86,9 @@ class HrPayslipRun(models.Model):
             "view_mode": "list",
             "view_id": view.id,
             "target": "current",
-            "domain": [("active", "=", True), ('contract_id.state', '=', 'open')],
+            # hr.employee.contract_id -> current_version_id, and hr.version has
+            # no state: an open contract is the employee's current version.
+            "domain": [("active", "=", True), ('current_version_id', '!=', False)],
             "context": {
                 "active_payslip_run_id": self.id,
                 "create": False,
@@ -118,7 +120,16 @@ class HrPayslipRun(models.Model):
             return
 
         # Find employees with active contracts
-        active_contracts = self.env['hr.contract'].search([('state', '=', 'open')])
+        # hr.version.is_current is not stored, so it cannot be searched. The
+        # current version is the last one whose period covers today, which is
+        # what hr.employee.current_version_id holds.
+        active_contracts = self.env['hr.version'].search([
+            ('active', '=', True),
+            ('contract_date_start', '!=', False),
+            '|',
+            ('contract_date_end', '=', False),
+            ('contract_date_end', '>=', today),
+        ]).filtered(lambda v: v.is_current)
         employee_ids = active_contracts.mapped('employee_id').filtered('active')
         if not employee_ids:
             _logger.info("No active employees with open contracts found.")
@@ -135,7 +146,7 @@ class HrPayslipRun(models.Model):
         # Generate payslips for each employee
         payslips = self.env['hr.payslip']
         for employee in employee_ids:
-            contract = employee.contract_id
+            contract = employee.current_version_id
             slip_vals = self.env['hr.payslip'].get_payslip_vals(
                 date_from=current_period.date_start,
                 date_to=current_period.date_stop,

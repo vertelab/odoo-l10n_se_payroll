@@ -207,24 +207,22 @@
                   sequence="36"/>
 
         <!-- ===== Extend Contract Form ===== -->
+        <!-- hr.contract is replaced by hr.version in 19.0, and the version
+             fields are edited on the employee form's Payroll page. -->
         <record id="view_contract_form_pension" model="ir.ui.view">
-            <field name="name">hr.contract.form.pension</field>
-            <field name="model">hr.contract</field>
-            <field name="inherit_id" ref="hr_contract.hr_contract_view_form"/>
+            <field name="name">hr.employee.form.pension.contract</field>
+            <field name="model">hr.employee</field>
+            <field name="inherit_id" ref="hr.view_employee_form"/>
             <field name="arch" type="xml">
-                <xpath expr="//notebook" position="inside">
-                    <page string="Pension">
-                        <group>
-                            <field name="pension_plan_id"/>
-                        </group>
-                        <group string="Löneväxling">
-                            <field name="enable_salary_exchange"/>
-                            <field name="salary_exchange_percent"
-                                invisible="not enable_salary_exchange"/>
-                            <field name="salary_exchange_max"
-                                invisible="not enable_salary_exchange"/>
-                        </group>
-                    </page>
+                <xpath expr="//page[@name='payroll_information']" position="inside">
+                    <group string="Pension" name="pension">
+                        <field name="pension_plan_id"/>
+                        <field name="enable_salary_exchange"/>
+                        <field name="salary_exchange_percent"
+                            invisible="not enable_salary_exchange"/>
+                        <field name="salary_exchange_max"
+                            invisible="not enable_salary_exchange"/>
+                    </group>
                 </xpath>
             </field>
         </record>
@@ -239,7 +237,7 @@
                     <page string="Pension" groups="base.group_user">
                         <group string="SAF-LO Flex">
                             <field name="saf_lo_flex_rate"
-                                invisible="contract_id.collective_agreement_id.pension_type != 'saflo'"/>
+                                invisible="current_version_id.collective_agreement_id.pension_type != 'saflo'"/>
                         </group>
                     </page>
                 </xpath>

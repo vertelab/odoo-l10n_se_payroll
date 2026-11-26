@@ -127,7 +127,7 @@
                 <separator/>
                 <filter string="My Team" name="filter_my_team"
                         domain="[('department_id.manager_id.user_id', '=', uid)]"/>
-                <group string="Group By">
+                <group>
                     <filter string="Employee" name="group_employee"
                             domain="[]" context="{'group_by': 'employee_id'}"/>
                     <filter string="State" name="group_state"

@@ -60,7 +60,7 @@
                             domain="[('category', '=', 'housing')]"/>
                     <filter name="category_meal" string="Måltider"
                             domain="[('category', '=', 'meal')]"/>
-                    <group string="Kategori">
+                    <group>
                         <filter name="cat_vehicle" string="Bil / Motorfordon"
                                 domain="[('category', '=', 'vehicle')]"/>
                         <filter name="cat_housing" string="Bostad"
@@ -84,33 +84,6 @@
             <field name="search_view_id" ref="view_hr_benefit_search"/>
         </record>
 
-        <!-- Contract form: add benefits tab -->
-        <record id="view_hr_contract_form_benefits" model="ir.ui.view">
-            <field name="name">hr.contract.form.benefits</field>
-            <field name="model">hr.contract</field>
-            <field name="inherit_id" ref="hr_contract.hr_contract_view_form"/>
-            <field name="arch" type="xml">
-                <xpath expr="//notebook" position="inside">
-                    <page string="Förmåner" name="benefits">
-                        <group invisible="not benefit_summary">
-                            <field name="benefit_summary" nolabel="1"
-                                   colspan="2"/>
-                        </group>
-                        <field name="benefit_ids">
-                            <list editable="bottom">
-                                <field name="name"/>
-                                <field name="desc"/>
-                                <field name="value" widget="monetary"
-                                       options="{'currency_field': 'currency_id'}"/>
-                                <field name="date_start"/>
-                                <field name="date_end"/>
-                                <field name="note"/>
-                            </list>
-                        </field>
-                    </page>
-                </xpath>
-            </field>
-        </record>
 
         <!-- ============================================ -->
         <!-- BUDGET FÖRMÅNER (Friskvård, etc)            -->

@@ -189,10 +189,10 @@
                     <field name="state"/>
                     <field name="skv_api_status"/>
                     <separator/>
-                    <!-- #if VERSION >= "19.0" -->
-                    <group string="Group By">
-                    <!-- #else -->
+                    <!-- #if VERSION <= "18.0" -->
                     <group expand="0" string="Group By">
+                    <!-- #else -->
+                    <group>
                     <!-- #endif -->
                         <filter context="{'group_by': 'state'}"
                             name="State" string="Status"/>

@@ -3,24 +3,28 @@
     <data>
 
         <!-- Contract form: add tabs for vacation, salary adjustment, accounting -->
+        <!-- hr.contract is replaced by hr.version in 19.0, and the version
+             fields are edited on the employee form's Payroll page. The wage
+             row there has no wage_period_label, so the /month label is
+             replaced through the field instead. -->
         <record id="view_hr_contract_form_payroll" model="ir.ui.view">
-            <field name="name">hr.contract.form.payroll</field>
-            <field name="model">hr.contract</field>
-            <field name="inherit_id" ref="hr_contract.hr_contract_view_form"/>
+            <field name="name">hr.employee.form.payroll</field>
+            <field name="model">hr.employee</field>
+            <field name="inherit_id" ref="hr.view_employee_form"/>
             <field name="arch" type="xml">
                 <!-- Widen the wage row so wage_unit + wage_monthly fit -->
                 <xpath expr="//div[@name='wage']" position="attributes">
                     <attribute name="class">o_row mw-100</attribute>
                 </xpath>
-                <!-- Replace hardcoded /month label with wage_unit + wage_monthly -->
-                <xpath expr="//div[@name='wage_period_label']" position="replace">
+                <!-- Add wage_unit + wage_monthly next to the wage field -->
+                <xpath expr="//div[@name='wage']/field[@name='wage']" position="after">
                     <field name="wage_unit" class="oe_inline me-3" nolabel="1"/>
                     <span class="oe_inline me-1" invisible="wage_unit == 'monthly'">(</span>
                     <field name="wage_monthly" class="oe_inline" nolabel="1" invisible="wage_unit == 'monthly'"/>
                     <span class="oe_inline" invisible="wage_unit == 'monthly'">)</span>
                 </xpath>
                 <!-- Add payroll-specific fields after wage -->
-                <xpath expr="//field[@name='wage']" position="after">
+                <xpath expr="//div[@name='wage']" position="after">
                     <field name="wage_exchange_amount" invisible="1"/>
                     <field name="wage_exchange_start" invisible="1"/>
                     <field name="wage_exchange_end" invisible="1"/>
@@ -33,7 +37,7 @@
                     <field name="advance_vacation_days" invisible="1"/>
                 </xpath>
                 <!-- Add tabs after Salary Information -->
-                <xpath expr="//page[@name='information']" position="after">
+                <xpath expr="//page[@name='payroll_information']" position="after">
                     <page string="Semester" name="vacation">
                         <group>
                             <field name="vacation_days"/>
@@ -57,20 +61,6 @@
                                    invisible="not has_attachment_of_earnings"/>
                         </group>
                     </page>
-                    <!-- BORTTAGEN 2026-11-16: sidan refererade journal_id och
-                         analytic_account_id, som inte finns på hr.contract —
-                         varken i Odoo 18 eller definierade i denna modul.
-                         Fälten förekommer bara i kommenterad kod
-                         (wizard/hr_payroll_payslips_by_employees.py) och i
-                         demodata. Sidan skapades men fälten skrevs aldrig.
-
-                         Följden var att hela modulen föll vid installation:
-                           Field "journal_id" does not exist in model "hr.contract"
-                         och därmed blockerades även l10n_se_hr_payroll_benefits.
-
-                         Om journal-koppling behövs hör den på hr.payslip.run
-                         (Enterprise hr_payroll) eller som eget fält här —
-                         inte som en tom sida i kontraktsvyn. -->
                 </xpath>
             </field>
         </record>

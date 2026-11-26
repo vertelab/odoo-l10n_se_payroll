@@ -98,7 +98,7 @@
                     <field name="year"/>
                     <field name="ku_type"/>
                     <field name="state"/>
-                    <group string="Group By">
+                    <group>
                         <filter context="{'group_by': 'ku_type'}" name="group_ku_type" string="KU-typ"/>
                         <filter context="{'group_by': 'year'}" name="group_year" string="År"/>
                     </group>

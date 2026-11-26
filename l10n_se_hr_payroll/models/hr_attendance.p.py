@@ -18,16 +18,29 @@ class HrAttendance(models.Model):
         store=True,
         help="Duration of employee's tardiness for this attendance record")
 
+    # #if VERSION >= "19.0"
+    # hr.employee.contract_id -> current_version_id in 19.0.
+    @api.depends('check_in', 'employee_id', 'employee_id.current_version_id.resource_calendar_id')
+    # #else
     @api.depends('check_in', 'employee_id', 'employee_id.contract_id.resource_calendar_id')
+    # #endif
     def _compute_late_check_in(self):
         """Calculate late check-in minutes based on the employee's contract
         schedule. Compares actual check-in time against the scheduled start
         time for the employee's working calendar."""
         for rec in self:
             rec.late_check_in = 0
+            # #if VERSION >= "19.0"
+            if not rec.employee_id or not rec.employee_id.current_version_id:
+            # #else
             if not rec.employee_id or not rec.employee_id.contract_id:
+            # #endif
                 continue
+            # #if VERSION >= "19.0"
+            contract = rec.employee_id.current_version_id
+            # #else
             contract = rec.employee_id.contract_id
+            # #endif
             if not contract.resource_calendar_id:
                 continue
             for schedule in contract.resource_calendar_id.attendance_ids:

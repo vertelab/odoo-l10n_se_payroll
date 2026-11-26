@@ -73,6 +73,35 @@
         </record>
 
         <!-- Contract form: add Lönekorrigeringar tab -->
+        <!-- #if VERSION >= "19.0" -->
+        <!-- hr.contract is replaced by hr.version in 19.0, and the version
+             fields are edited on the employee form. -->
+        <record id="view_hr_contract_form_corrections" model="ir.ui.view">
+            <field name="name">hr.employee.form.corrections</field>
+            <field name="model">hr.employee</field>
+            <field name="inherit_id" ref="view_hr_contract_form_payroll"/>
+            <field name="arch" type="xml">
+                <xpath expr="//page[@name='vacation']" position="after">
+                    <page string="Lönekorrigeringar" name="corrections">
+                        <field name="employee_id" invisible="1"/>
+                        <field name="correction_ids"
+                               domain="[('employee_id', '=', employee_id)]"
+                               context="{'default_employee_id': employee_id}">
+                            <list editable="bottom">
+                                <field name="salary_rule_id"/>
+                                <field name="amount" widget="monetary"
+                                       options="{'currency_field': 'currency_id'}"/>
+                                <field name="date_from"/>
+                                <field name="date_to"/>
+                                <field name="state" widget="badge"/>
+                                <field name="reason"/>
+                            </list>
+                        </field>
+                    </page>
+                </xpath>
+            </field>
+        </record>
+        <!-- #else -->
         <record id="view_hr_contract_form_corrections" model="ir.ui.view">
             <field name="name">hr.contract.form.corrections</field>
             <field name="model">hr.contract</field>
@@ -103,6 +132,7 @@
                 </xpath>
             </field>
         </record>
+        <!-- #endif -->
 
         <!-- Action window -->
         <record id="action_hr_payroll_correction" model="ir.actions.act_window">

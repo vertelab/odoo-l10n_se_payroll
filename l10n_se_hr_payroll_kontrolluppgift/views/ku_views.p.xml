@@ -98,10 +98,10 @@
                     <field name="year"/>
                     <field name="ku_type"/>
                     <field name="state"/>
-                    <!-- #if VERSION >= "19.0" -->
-                    <group string="Group By">
-                    <!-- #else -->
+                    <!-- #if VERSION <= "18.0" -->
                     <group expand="0" string="Group By">
+                    <!-- #else -->
+                    <group>
                     <!-- #endif -->
                         <filter context="{'group_by': 'ku_type'}" name="group_ku_type" string="KU-typ"/>
                         <filter context="{'group_by': 'year'}" name="group_year" string="År"/>

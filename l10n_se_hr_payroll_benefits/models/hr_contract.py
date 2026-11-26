@@ -6,7 +6,8 @@ _logger = logging.getLogger(__name__)
 
 
 class HrContract(models.Model):
-    _inherit = 'hr.contract'
+    # hr.contract is replaced by hr.version in 19.0.
+    _inherit = 'hr.version'
 
     benefit_ids = fields.One2many(
         comodel_name="hr.contract.benefit",
@@ -64,7 +65,7 @@ class HrContractBenefit(models.Model):
     _description = 'Kontraktsförmån'
 
     contract_id = fields.Many2one(
-        comodel_name="hr.contract",
+        comodel_name="hr.version",
         string="Kontrakt",
         required=True,
         ondelete='cascade')

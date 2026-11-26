@@ -81,14 +81,17 @@ class TestPayslipAccounting(TransactionCase):
             'name': 'Test Employee',
             'company_id': cls.company.id,
         })
-        cls.contract = cls.env['hr.contract'].create({
+        # hr.contract is replaced by hr.version in 19.0; the version carries
+        # the wage, the structure and the contract dates.
+        cls.contract = cls.env['hr.version'].create({
             'name': 'Test Contract',
             'employee_id': cls.employee.id,
             'wage': 1000.0,
             'company_id': cls.company.id,
             'struct_id': cls.structure.id,
             'journal_id': cls.journal.id,
-            'date_start': '2026-03-01',
+            'date_version': '2026-03-01',
+            'contract_date_start': '2026-03-01',
         })
 
     def _make_payslip(self):

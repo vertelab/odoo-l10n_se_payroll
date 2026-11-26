@@ -53,7 +53,10 @@ Dependencies:
         'views/hr_flex_request_views.xml',
         'views/hr_employee_views.xml',
         'views/hr_timesheet_sheet_views.xml',
+        # hr.contract views exist only up to 18.0.
+        # #if VERSION <= "18.0"
         'views/hr_contract_views.xml',
+        # #endif
         'views/res_config_settings_views.xml',
         'wizard/hr_flex_request_wizard_views.xml',
         'report/hr_flex_report.xml',

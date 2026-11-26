@@ -62,12 +62,22 @@ class HrJob(models.Model):
         compute='_compute_statistics', store=True,
         help='Procentuell löneförändring senaste året (baserat på kontrakt)')
 
+    # #if VERSION >= "19.0"
+    # hr.employee.contract_id -> current_version_id, and gender was removed, in 19.0.
+    @api.depends('employee_ids', 'employee_ids.current_version_id', 'employee_ids.current_version_id.wage',
+                 'employee_ids.birthday', 'employee_ids.current_version_id.date_start')
+    # #else
     @api.depends('employee_ids', 'employee_ids.contract_id', 'employee_ids.contract_id.wage',
                  'employee_ids.gender', 'employee_ids.birthday', 'employee_ids.contract_id.date_start')
+    # #endif
     def _compute_statistics(self):
         for job in self:
             employees = job.employee_ids.filtered(lambda e: e.active)
+            # #if VERSION >= "19.0"
+            contracts = employees.mapped('current_version_id').filtered(lambda c: c.active)
+            # #else
             contracts = employees.mapped('contract_id').filtered(lambda c: c.active)
+            # #endif
 
             job.employee_count = len(employees)
             if contracts:
@@ -78,9 +88,16 @@ class HrJob(models.Model):
             else:
                 job.avg_wage = job.min_wage = job.max_wage = 0.0
 
+            # #if VERSION >= "19.0"
+            # hr.employee.gender was removed in 19.0; the breakdown cannot be computed.
+            job.male_count = 0
+            job.female_count = 0
+            job.other_gender_count = 0
+            # #else
             job.male_count = len(employees.filtered(lambda e: e.gender == 'male'))
             job.female_count = len(employees.filtered(lambda e: e.gender == 'female'))
             job.other_gender_count = len(employees.filtered(lambda e: e.gender not in ('male', 'female')))
+            # #endif
 
             ages = []
             seniorities = []
@@ -89,7 +106,12 @@ class HrJob(models.Model):
                 if emp.birthday:
                     age = (today - emp.birthday).days / 365.25
                     ages.append(age)
+                # #if VERSION >= "19.0"
+                # first_contract_date has no hr.version equivalent; use the earliest version.
+                first_contract = emp.current_version_id.date_start
+                # #else
                 first_contract = emp.contract_id.first_contract_date or emp.contract_id.date_start
+                # #endif
                 if first_contract:
                     seniorities.append((today - first_contract).days)
 
@@ -100,9 +122,15 @@ class HrJob(models.Model):
             trend = 0.0
             if contracts:
                 for emp in employees:
+                    # #if VERSION >= "19.0"
+                    all_contracts = self.env['hr.version'].search([
+                        ('employee_id', '=', emp.id),
+                    ], order='date_start')
+                    # #else
                     all_contracts = self.env['hr.contract'].search([
                         ('employee_id', '=', emp.id),
                     ], order='date_start')
+                    # #endif
                     if len(all_contracts) >= 2:
                         oldest_wage = all_contracts[0].wage
                         current_wage = all_contracts[-1].wage

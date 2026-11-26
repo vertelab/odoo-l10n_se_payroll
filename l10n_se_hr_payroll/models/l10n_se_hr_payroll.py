@@ -67,8 +67,9 @@ class hr_salary_rule(models.Model):
         })
 
 
+# hr.contract is replaced by hr.version in 19.0.
 class hr_contract(models.Model):
-    _inherit = 'hr.contract'
+    _inherit = 'hr.version'
 
     prel_tax_amount = fields.Float(string="Prel skatt kr", digits='Payroll', help="Ange preleminär skatt i kronor")
 
@@ -193,10 +194,11 @@ class hr_employee(models.Model):
         compute='_compute_contract_history',
     )
 
-    @api.depends('contract_ids', 'contract_ids.date_start', 'contract_ids.date_end', 'contract_ids.wage')
+    # hr.employee.contract_ids -> version_ids in 19.0.
+    @api.depends('version_ids', 'version_ids.date_start', 'version_ids.date_end', 'version_ids.wage')
     def _compute_contract_history(self):
         for emp in self:
-            contracts = emp.contract_ids.sorted('date_start')
+            contracts = emp.version_ids.sorted('date_start')
             if not contracts:
                 emp.contract_history = ''
                 continue
@@ -204,7 +206,14 @@ class hr_employee(models.Model):
             for c in contracts:
                 start = c.date_start or '?'
                 end = c.date_end or 'ongoing'
-                state = dict(c._fields['state'].selection).get(c.state, c.state)
+                # hr.version has no state; the period is what the state
+                # used to describe.
+                if c.is_current:
+                    state = 'open'
+                elif c.is_future:
+                    state = 'draft'
+                else:
+                    state = 'close'
                 lines.append(f"{start} → {end}  |  {c.wage:>10,.0f} kr  |  {state}")
             emp.contract_history = '\n'.join(lines)
 
@@ -457,10 +466,10 @@ class hr_payslip(models.Model):
         date_from = run.period_id.prev().date_start
         date_to = run.period_id.prev().date_stop
 
-        contract_ids = employee.contract_id.ids
+        contract_ids = employee.current_version_id.ids
 
-        contract = self.env["hr.contract"].browse(contract_ids[0])
-        contracts = self.env["hr.contract"].browse(contract_ids)
+        contract = self.env["hr.version"].browse(contract_ids[0])
+        contracts = self.env["hr.version"].browse(contract_ids)
         return {
             "employee_id": employee.id,
             'period_id': run.period_id.id,

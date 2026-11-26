@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<odoo>
+    <data>
+        <record id="account_journal-lon-DEMO" model="account.journal">
+            <field name="name">Lön till bokföringen (DEMO)</field>
+            <field name="code">Lönskuld</field>
+            <field name="type">general</field>
+            <field name="default_debit_account_id" search="[('code', '=', '2821')]" />
+            <field name="default_credit_account_id" search="[('code', '=', '2821')]" />
+        </record>
+
+        <!-- #if VERSION >= "19.0" -->
+        <!-- hr.contract is replaced by hr.version in 19.0. The demo contract
+             is the employee's version, so the journal goes there. -->
+        <record id="l10n_se_hr_payroll.hr_contract-LY" model="hr.version">
+            <field name="journal_id" ref="account_journal-lon-DEMO" />
+        </record>
+        <!-- #else -->
+        <record id="l10n_se_hr_payroll.hr_contract-LY" model="hr.contract">
+            <field name="journal_id" ref="account_journal-lon-DEMO" />
+        </record>
+        <!-- #endif -->
+    </data>
+</odoo>
+
