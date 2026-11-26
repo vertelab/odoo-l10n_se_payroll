@@ -28,7 +28,7 @@ Mätt 2026-11-26 mot `pfile_18.0`, `pfile_19.0`, `pfile_20.0`. Status är
 |---|---|---|---|---|
 | `hr_leave_dashboard` | installed | installed | installed | — |
 | `hr_work_anniversary_reminder` | installed | installed | installed | — (migrerad till `hr.version`) |
-| `l10n_se_hr_payroll` | installed | uninstalled | uninstalled | `payroll` (klass 1/2), `hr_timesheet_sheet` (klass 1), `cron_tick` (uppströms) |
+| `l10n_se_hr_payroll` | installed | uninstalled | uninstalled | migrerad; `cron_tick` (uppströms, `expand` i `<search>`) |
 | `l10n_se_hr_payroll_benefits` | uninstalled | uninstalled | uninstalled | `l10n_se_hr_payroll` |
 | `l10n_se_hr_payroll_collective` | uninstalled | uninstalled | uninstalled | `l10n_se_hr_payroll` |
 | `l10n_se_hr_payroll_fk` | uninstalled | uninstalled | uninstalled | `l10n_se_hr_payroll` |
@@ -38,18 +38,18 @@ Mätt 2026-11-26 mot `pfile_18.0`, `pfile_19.0`, `pfile_20.0`. Status är
 | `l10n_se_hr_payroll_tiichri_26` | uninstalled | uninstalled | uninstalled | `l10n_se_hr_payroll_tiichri` |
 | `l10n_se_hr_payroll_account` | uninstalled | uninstalled | uninstalled | `l10n_se_hr_payroll`, `payroll_account` (klass 2) |
 | `l10n_se_hr_payroll_ags` | uninstalled | uninstalled | uninstalled | `l10n_se_hr_payroll`, `payroll` |
-| `l10n_se_hr_payroll_pension` | uninstalled | uninstalled | uninstalled | `l10n_se_hr_payroll`, `payroll` |
-| `l10n_se_hr_payroll_union` | uninstalled | uninstalled | uninstalled | `l10n_se_hr_payroll`, `payroll` |
-| `l10n_se_hr_payroll_flex` | uninstalled | uninstalled | uninstalled | `l10n_se_hr_payroll`, `hr_timesheet_sheet` |
+| `l10n_se_hr_payroll_pension` | uninstalled | uninstalled | uninstalled | migrerad; `l10n_se_hr_payroll` → `cron_tick` |
+| `l10n_se_hr_payroll_union` | uninstalled | uninstalled | uninstalled | migrerad; `l10n_se_hr_payroll` → `cron_tick` |
+| `l10n_se_hr_payroll_flex` | uninstalled | uninstalled | uninstalled | migrerad; `l10n_se_hr_payroll` → `cron_tick` |
 | `l10n_se_hr_payroll_kontrolluppgift` | uninstalled | uninstalled | uninstalled | `l10n_se_hr_payroll`, `payroll` |
 | `l10n_se_payroll_agd` | uninstalled | uninstalled | uninstalled | `l10n_se_hr_payroll`, `payroll` |
 | `l10n_se_payroll_fora` | uninstalled | uninstalled | uninstalled | `l10n_se_hr_payroll`, `payroll` |
 | `l10n_se_payroll_growth_support` | uninstalled | uninstalled | uninstalled | `l10n_se_hr_payroll`, `payroll` |
 | `l10n_se_payroll_sn_report` | uninstalled | uninstalled | uninstalled | `l10n_se_hr_payroll` |
-| `l10n_se_payroll_taxtable` | uninstalled | uninstalled | uninstalled | `l10n_se_hr_payroll` |
+| `l10n_se_payroll_taxtable` | uninstalled | uninstalled | uninstalled | migrerad; `l10n_se_hr_payroll` → `cron_tick` |
 | `l10n_se_hr_holidays` | uninstalled | uninstalled | uninstalled | `l10n_se_hr_payroll`, `hr_work_entry_holidays` (klass 3, 20.0) |
 | `l10n_se_hr_holidays_account` | uninstalled | uninstalled | uninstalled | `l10n_se_hr_holidays` |
-| `l10n_se_arbetsgivarintyg` | uninstalled | uninstalled | uninstalled | `l10n_se_hr_payroll` |
+| `l10n_se_arbetsgivarintyg` | uninstalled | uninstalled | uninstalled | migrerad; `l10n_se_hr_payroll` → `cron_tick` |
 | `l10n_se_payroll_demo` | uninstalled | uninstalled | uninstalled | `l10n_se_demo_company` (klass 2), `l10n_se_hr_payroll_account` |
 | `l10n_se_resource_calendar_leaves_import` | uninstalled | uninstalled | uninstalled | `cron_tick` (uppströms), `ics_import_holidays` |
 
@@ -70,12 +70,20 @@ Dessa blockerar installation men ägs inte av `odoo-l10n_se_payroll`:
 
 | Modul | Repo | Fel |
 |---|---|---|
-| `cron_tick` | `odoo-base` (19.0) | `type='json'` borttaget i 19.0 → ImportError. Blockerar `account_fiscal_year_vrtl` → `l10n_se_hr_payroll` |
+| `cron_tick` | `odoo-base` (19.0) | `views/cron_task_views.xml` har `<group expand="0">` i `<search>`. Attributet togs bort i 19.0 (`common.rng`) → `RELAXNG_ERR_INVALIDATTR`, ParseError. Blockerar `account_fiscal_year_vrtl` → `l10n_se_hr_payroll` → alla 24 löpande moduler. **Hård blockerare.** |
 | `hr_payroll_employeefund` | `odoo-payroll` (19.0) | kraschar vid laddning |
 | `payroll_driving_record` | `odoo-payroll` (19.0) | `security/ir_rule.xml` ParseError |
 | `communication_center_sip` | (20.0) | `res_users_views.xml` ParseError |
 | `payroll` | `OCA/payroll` | 20.0-grenen är tom (0 moduler) — klass 1 |
 | `hr_timesheet_sheet` | `OCA/timesheet` | saknas i 20.0-grenen — klass 1 |
+
+### `expand` på `<group>` i `<search>`
+
+Attributet finns i 18.0 och togs bort i **19.0** (`common.rng`). Åtta av våra
+egna vyer bar det; de är nu p-filade så att `expand="0"` bara emitteras för
+18.0. Samma fel finns kvar i externa moduler (`cron_tick` i `odoo-base`,
+`account_billing`, `account_commodity_price`, …) och är därför en
+systemomfattande uppströmsfråga.
 
 ### Vad som bevisats
 
