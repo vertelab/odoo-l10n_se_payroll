@@ -22,7 +22,8 @@ from dataclasses import field
 import odoo.exceptions
 from odoo import models, fields, api, _
 import datetime
-from datetime import timedelta, date, datetime
+# `time` is needed by the local float_to_time fallback below.
+from datetime import timedelta, date, datetime, time
 from dateutil.relativedelta import relativedelta
 from odoo.exceptions import AccessError, UserError, ValidationError
 
@@ -35,7 +36,16 @@ from odoo.tools.float_utils import float_round
 
 _logger = logging.getLogger(__name__)
 
-from odoo.addons.resource.models.utils import float_to_time, HOURS_PER_DAY
+# float_to_time was removed from resource.models.utils in 19.0.
+from odoo.addons.resource.models.utils import HOURS_PER_DAY
+
+
+def float_to_time(hours):
+    """Convert a number of hours into a time object."""
+    if hours == 24.0:
+        return time.max
+    fractional, integral = math.modf(hours)
+    return time(int(integral), int(float_round(60 * fractional, precision_digits=0)), 0)
 
 # Used to agglomerate the attendances in order to find the hour_from and hour_to
 # See _compute_date_from_to

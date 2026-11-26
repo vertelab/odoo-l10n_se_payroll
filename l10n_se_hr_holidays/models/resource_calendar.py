@@ -2,7 +2,9 @@
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 
 from odoo import api, models, fields, _
-from odoo.addons.resource.models.utils import Intervals
+# Intervals moved from resource.models.utils to odoo.tools.intervals in 19.0.
+from odoo.tools.intervals import Intervals
+from odoo.tools.float_utils import float_round
 
 import datetime
 from dateutil import rrule
@@ -16,7 +18,16 @@ from dateutil.rrule import rrule, DAILY, WEEKLY, MONTHLY
 from functools import partial
 from itertools import chain
 from pytz import timezone, utc
-from odoo.addons.resource.models.utils import float_to_time
+# float_to_time was removed from resource.models.utils in 19.0.
+from odoo.addons.resource.models.utils import HOURS_PER_DAY as _CORE_HOURS_PER_DAY
+
+
+def float_to_time(hours):
+    """Convert a number of hours into a time object."""
+    if hours == 24.0:
+        return time.max
+    fractional, integral = math.modf(hours)
+    return time(int(integral), int(float_round(60 * fractional, precision_digits=0)), 0)
 from odoo.osv import expression
 
 import logging
