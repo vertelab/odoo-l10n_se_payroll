@@ -1,0 +1,17 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_user_payslip,user.payslip,model_user_payslip,base.group_user,1,1,1,1
+access_user_payslip_line,user.payslip.line,model_user_payslip_line,base.group_user,1,1,1,1
+user_salary_rule,user.salary.rule,model_user_salary_rule,base.group_user,1,1,1,1
+user_salary_rule_category,user.salary.rule.category,model_user_salary_rule_category,base.group_user,1,1,1,1
+user_contract,user.contract,model_user_contract,base.group_user,1,1,1,1
+user_calendar,user.calendar,model_user_calendar,base.group_user,1,1,1,1
+user_payslip_worked_days,user.payslip.worked_days,model_user_payslip_worked_days,base.group_user,1,1,1,1
+user_leave,user.leave,model_user_leave,base.group_user,1,1,1,1
+user_holiday_status,user.holiday.status,model_user_holiday_status,base.group_user,1,1,1,1
+report_salary_task,report_salary_task,model_report_salary_task,base.group_user,1,1,1,1
+access_user_workdays,access_user_workdays,model_user_workdays,base.group_user,1,1,1,1
+access_hr_payroll_structure_const,access_hr_payroll_structure_const,model_hr_payroll_structure_const,base.group_user,1,1,1,1
+access_vacation_debt_report_wizard,vacation.debt.report.wizard,model_vacation_debt_report_wizard,base.group_user,1,1,1,1
+access_hr_payroll_salary_change,hr.payroll.salary.change,model_hr_payroll_salary_change,base.group_user,1,1,1,1
+access_hr_payroll_correction,hr.payroll.correction,model_hr_payroll_correction,base.group_user,1,1,1,1
+access_late_check_in,late.check.in,model_late_check_in,base.group_user,1,1,1,1

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="view_arbetsgivarintyg_send_wizard" model="ir.ui.view">
+            <field name="name">l10n_se.arbetsgivarintyg.send.wizard.form</field>
+            <field name="model">l10n_se.arbetsgivarintyg.send.wizard</field>
+            <field name="arch" type="xml">
+                <form>
+                    <div class="alert alert-info" role="alert">
+                        <strong>Skicka arbetsgivarintyg till arbetsgivarintyg.nu</strong>
+                        <p>Intyget kommer att skickas via SOAP API.</p>
+                    </div>
+                    <group string="Sammanfattning">
+                        <field name="summary" nolabel="1" colspan="2"/>
+                    </group>
+                    <group string="API-inställningar">
+                        <field name="api_url"/>
+                        <field name="test_mode"/>
+                    </group>
+                    <footer>
+                        <button name="action_confirm_send"
+                                string="Skicka"
+                                type="object"
+                                class="btn-success"/>
+                        <button string="Avbryt"
+                                class="btn-secondary"
+                                special="cancel"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+    </data>
+</odoo>

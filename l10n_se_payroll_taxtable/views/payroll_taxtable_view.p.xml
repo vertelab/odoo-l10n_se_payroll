@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="payroll_taxtable_tree_view" model="ir.ui.view">
+            <field name="name">payroll.taxtable</field>
+            <field name="model">payroll.taxtable</field>
+            <field name="arch" type="xml">
+                <list>
+                    <field name="name" />
+                </list>
+            </field>
+        </record>
+
+        <record id="payroll_taxtable_form_view" model="ir.ui.view">
+            <field name="name">payroll.taxtable</field>
+            <field name="model">payroll.taxtable</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+                            <field name="name" />
+                        </group>
+                        <field name="taxable_lines" nolabel="1">
+                            <list editable="bottom" create="false" edit="false" delete="false">
+                                <field name="year" />
+                                <field name="number_of_days" />
+                                <field name="table_number" />
+                                <field name="income_from" />
+                                <field name="income_to" />
+                                <field name="column1" />
+                                <field name="column2" />
+                                <field name="column3" />
+                                <field name="column4" />
+                                <field name="column5" />
+                                <field name="column6" />
+                                <field name="column7"  />
+                            </list>
+                        </field>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_payroll_taxtable" model="ir.actions.act_window">
+            <field name="name">Payroll Taxtable</field>
+            <field name="res_model">payroll.taxtable</field>
+            <field name="view_mode">list,form</field>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">Create a new Payroll Taxable</p>
+            </field>
+        </record>
+
+        <menuitem id="menu_payroll_taxtable" name="Taxtable" parent="hr.menu_human_resources_configuration" action="action_payroll_taxtable" sequence="50" />
+        <!-- Server action: trigger cron sync on demand, available in gear menu (kugghjulet) -->
+        <record id="action_sync_taxtable" model="ir.actions.server">
+            <field name="name">Sync TaxTable</field>
+            <field name="model_id" ref="l10n_se_payroll_taxtable.model_payroll_taxtable"/>
+            <field name="binding_model_id" ref="l10n_se_payroll_taxtable.model_payroll_taxtable"/>
+            <field name="binding_view_types">form,list</field>
+            <field name="state">code</field>
+            <field name="code">model._cron_sync_all_taxtables()</field>
+        </record>
+    </data>
+</odoo>
+

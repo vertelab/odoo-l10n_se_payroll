@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+
+        <!-- Löneartskategori: Flextid -->
+        <record id="hr_salary_rule_category_FLEX" model="hr.salary.rule.category">
+            <field name="code">FLEX</field>
+            <field name="name">Flextid</field>
+            <field name="note">Flextidsuttag och utbetalningar</field>
+            <field name="company_id" eval="False"/>
+        </record>
+
+        <!-- Löneart: Flextidsutbetalning (bruttotillägg) -->
+        <record id="salary_rule_flex_payout" model="hr.salary.rule">
+            <field name="category_id" ref="l10n_se_hr_payroll.hr_salary_rule_category_BRUTIL"/>
+            <field name="company_id" eval="False"/>
+            <field name="code">FLEXP</field>
+            <field name="name">Flextidsutbetalning</field>
+            <field name="sequence">310</field>
+            <field name="appears_on_payslip" eval="True"/>
+            <field name="condition_select">python</field>
+            <field name="condition_python">
+# Kontrollera om det finns en godkänd flextidsansökan för utbetalning
+result = False
+flex_requests = env['hr.flex.request'].search([
+    ('employee_id', '=', employee.id),
+    ('request_type', '=', 'salary'),
+    ('state', '=', 'approved'),
+])
+result = len(flex_requests) > 0
+            </field>
+            <field name="amount_select">code</field>
+            <field name="amount_python_compute">
+# Summera belopp från godkända flextidsansökningar
+result = 0.0
+flex_requests = env['hr.flex.request'].search([
+    ('employee_id', '=', employee.id),
+    ('request_type', '=', 'salary'),
+    ('state', '=', 'approved'),
+])
+for req in flex_requests:
+    result += req.salary_payout_amount
+            </field>
+            <field name="note">
+Flextidsutbetalning: Konverterar flextimmar till löneutbetalning.
+Skapas automatiskt när en anställds ansökan om flextidsuttag som lön
+godkänns och nästa lönespec beräknas.
+            </field>
+        </record>
+
+    </data>
+</odoo>

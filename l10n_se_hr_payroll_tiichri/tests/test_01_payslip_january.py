@@ -9,7 +9,6 @@ from datetime import date, datetime, time
 from odoo import fields
 from odoo.tests import Form, tagged
 from odoo.tests.common import TransactionCase
-from odoo.tests.common import tagged
 
 import logging
 _logger = logging.getLogger(__name__)

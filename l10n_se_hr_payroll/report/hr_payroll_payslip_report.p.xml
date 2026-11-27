@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <template id="l10n_se_hr_payroll.external_layout_header">
+            <div class="header">
+                <table style="width: 100%; height: 100%; min-height: 30mm;">
+                    <tr>
+                        <td style="width: 50%; vertical-align: middle;">
+                            <img t-if="company.logo" t-att-src="image_data_uri(company.logo)" alt="Logo" style="width: 130px; max-height: 90px; object-fit: contain;"/>
+                        </td>
+                        <td style="width: 50%; vertical-align: middle; text-align: right;">
+                            <span t-field="o.name" style="font-weight:bold; font-size:12px; color: #666;"/>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </template>
+
+        <template id="l10n_se_hr_payroll.external_layout_footer">
+            <div class="footer">
+                <div class="row" style="font-family: Arial, sans-serif; font-size: 11px;">
+                    <div class="col-3">
+                        <strong>Adress</strong>
+                        <br/>
+                        <span t-field="company.name"/>
+                        <br/>
+                        <span t-field="company.street"/>
+                        <br/>
+                        <span t-field="company.zip"/>
+                        <span t-field="company.city"/>
+                    </div>
+                    <div class="col-3">
+                        <strong>Telefon</strong>
+                        <br/>
+                        <span t-field="company.phone"/>
+                    </div>
+                    <div class="col-3">
+                        <strong>Org.nr</strong>
+                        <br/>
+                        <span t-field="company.company_registry"/>
+                        <br/>
+                        <br/>
+                        <strong>E-post</strong>
+                        <br/>
+                        <span t-field="company.email"/>
+                    </div>
+                    <div class="col-3 text-right">
+                    </div>
+                </div>
+            </div>
+        </template>
+
+        <template id="l10n_se_hr_payroll.external_layout">
+            <div class="article o_report_layout_standard" t-att-data-oe-model="o and o._name" t-att-data-oe-id="o and o.id" style="position: relative; min-height: 100%;">
+                <t t-if="o and 'company_id' in o">
+                    <t t-set="company" t-value="o.company_id"/>
+                </t>
+                <t t-if="not o or not 'company_id' in o">
+                    <t t-set="company" t-value="res_company"/>
+                </t>
+                <t t-call="l10n_se_hr_payroll.external_layout_header"/>
+                <t t-raw="0"/>
+                <t t-call="l10n_se_hr_payroll.external_layout_footer"/>
+            </div>
+        </template>
+
+        <record id="payslip_pdf_format" model="report.paperformat">
+            <field name="name">Payslip pdf format</field>
+            <field name="format">A4</field>
+            <field name="orientation">Portrait</field>
+            <field name="margin_top">30</field>
+            <field name="margin_bottom">30</field>
+            <field name="margin_left">7</field>
+            <field name="margin_right">7</field>
+            <field name="header_spacing">20</field>
+            <field name="dpi">90</field>
+        </record>
+
+    </data>
+</odoo>

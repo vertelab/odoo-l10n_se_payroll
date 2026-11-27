@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <!-- The Swedish module owns exactly one scheduled task: the eve
+             derivation it defines itself. Holiday import stays with
+             ics_import_holidays, which already schedules it. See design D7. -->
+
+        <record id="cron_task_se_holiday_eves" model="cron.task">
+            <field name="name">Swedish holidays: eves</field>
+            <field name="technical_name">se_holiday_eves</field>
+            <field name="model_name">calendar.event</field>
+            <field name="method_name">eves_conf</field>
+            <field name="cadence">month</field>
+            <field name="module">l10n_se_resource_calendar_leaves_import</field>
+        </record>
+    </data>
+</odoo>
