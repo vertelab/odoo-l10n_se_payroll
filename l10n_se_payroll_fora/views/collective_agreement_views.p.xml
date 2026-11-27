@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <!-- Extend collective agreement form with FORA rate overrides -->
+        <record id="view_collective_agreement_form_fora" model="ir.ui.view">
+            <field name="name">hr.collective.agreement.form.fora</field>
+            <field name="model">hr.collective.agreement</field>
+            <field name="inherit_id" ref="l10n_se_hr_payroll_collective.view_collective_agreement_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//page[2]" position="after">
+                    <page string="FORA" name="fora">
+                        <group string="FORA Premiesatser (%)">
+                            <group>
+                                <field name="fora_tgl_rate"
+                                    help="Override TGL-premie (%). Default från kollektivavtal."/>
+                                <field name="fora_tfa_rate"
+                                    help="Override TFA-premie (%). Default från kollektivavtal."/>
+                            </group>
+                            <group>
+                                <field name="fora_ags_rate"
+                                    help="Override AGS-premie (%). Default från kollektivavtal."/>
+                                <field name="fora_agb_rate"
+                                    help="Override AGB-premie (%). Default från kollektivavtal."/>
+                            </group>
+                            <group>
+                                <field name="fora_pension_rate"
+                                    help="Override Pensionspremie (%). 0 = use standard rate."/>
+                            </group>
+                        </group>
+                    </page>
+                </xpath>
+            </field>
+        </record>
+
+        <!-- Extend collective agreement list with FORA pension info -->
+        <record id="view_collective_agreement_list_fora" model="ir.ui.view">
+            <field name="name">hr.collective.agreement.list.fora</field>
+            <field name="model">hr.collective.agreement</field>
+            <field name="inherit_id" ref="l10n_se_hr_payroll_collective.view_collective_agreement_list"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='pension_type']" position="after">
+                    <field name="pension_premium_pct" optional="show"/>
+                    <field name="fora_pension_rate" optional="hide"/>
+                </xpath>
+            </field>
+        </record>
+
+    </data>
+</odoo>

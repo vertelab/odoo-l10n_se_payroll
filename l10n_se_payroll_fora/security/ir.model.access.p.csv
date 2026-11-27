@@ -1,0 +1,3 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_account_fora_declaration,account.fora.declaration access,model_account_fora_declaration,base.group_user,1,1,1,1
+access_account_fora_declaration_line,account.fora.declaration.line access,model_account_fora_declaration_line,base.group_user,1,1,1,1

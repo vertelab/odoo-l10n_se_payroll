@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="payslip_papper_format" model="report.paperformat">
+            <field name="name">Payslip Swedish Papper Format</field>
+            <field name="format">A4</field>
+            <field name="orientation">Portrait</field>
+            <field name="margin_top">40</field>
+            <field name="margin_bottom">80</field>
+            <field name="margin_left">7</field>
+            <field name="margin_right">7</field>
+            <field name="header_spacing">35</field>
+            <field name="dpi">90</field>
+        </record>
+
+        <record id="mail_activity_payslip" model="mail.activity.type">
+            <field name="name">Lönespec</field>
+            <field name="icon">fa-envelope</field>
+            <field name="sequence">3</field>
+        </record>
+    </data>
+</odoo>

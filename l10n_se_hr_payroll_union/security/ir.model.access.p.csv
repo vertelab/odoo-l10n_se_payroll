@@ -1,0 +1,7 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_hr_union,hr.union,model_hr_union,base.group_user,1,0,0,0
+access_hr_union_admin,hr.union admin,model_hr_union,base.group_erp_manager,1,1,1,1
+access_hr_union_membership,hr.union.membership,model_hr_union_membership,base.group_user,1,1,1,1
+access_hr_union_fee,hr.union.fee,model_hr_union_fee,base.group_user,1,1,1,1
+access_hr_union_report,hr.union.report,model_hr_union_report,base.group_user,1,1,1,1
+access_hr_union_report_line,hr.union.report.line,model_hr_union_report_line,base.group_user,1,1,1,1

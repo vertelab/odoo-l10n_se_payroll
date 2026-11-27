@@ -1,0 +1,681 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+
+        <!-- ============================================ -->
+        <!-- Långsiktiga förmåner                         -->
+        <!-- ============================================ -->
+
+        <!-- Bilförmån -->
+        <record id="hr_benefit_rule_carbru" model="hr.salary.rule">
+            <field name="category_id" ref="l10n_se_hr_payroll.hr_salary_rule_category_FORMAN" />
+            <field name="company_id" eval="False"/>
+            <field name="code">forman_carbru</field>
+            <field name="name">Bilförmån (Beskattningsvärde)</field>
+            <field name="sequence">6</field>
+            <field name="appears_on_payslip" eval="True" />
+            <field name="condition_select">python</field>
+            <field name="condition_python">result = contract.benefit_value('forman_carbru', payslip.date_from, payslip.date_to) &gt; 0</field>
+            <field name="amount_select">code</field>
+            <field name="amount_python_compute">
+result = contract.benefit_value('forman_carbru', payslip.date_from, payslip.date_to)
+            </field>
+        </record>
+
+        <record id="hr_benefit_carbru" model="hr.benefit">
+            <field name="name">forman_carbru</field>
+            <field name="desc">Bilförmån brutto</field>
+            <field name="code_id" ref="hr_benefit_rule_carbru"/>
+            <field name="note" />
+        </record>
+
+        <!-- Bostadsförmån -->
+        <record id="hr_benefit_rule_home" model="hr.salary.rule">
+            <field name="category_id" ref="l10n_se_hr_payroll.hr_salary_rule_category_FORMAN" />
+            <field name="company_id" eval="False"/>
+            <field name="code">forman_bost</field>
+            <field name="salary_art">550</field>
+            <field name="name">Bostadsförmån (Beskattningsvärde)</field>
+            <field name="sequence">7</field>
+            <field name="appears_on_payslip" eval="True" />
+            <field name="condition_select">python</field>
+            <field name="condition_python">result = contract.benefit_value('forman_bost', payslip.date_from, payslip.date_to) &gt; 0</field>
+            <field name="amount_select">code</field>
+            <field name="amount_python_compute">
+result = contract.benefit_value('forman_bost', payslip.date_from, payslip.date_to)
+            </field>
+        </record>
+        <record id="hr_benefit_home" model="hr.benefit">
+            <field name="name">forman_bost</field>
+            <field name="desc">Bostadsförmån</field>
+            <field name="note" />
+        </record>
+
+        <!-- Bostadsförmån ej småhus -->
+        <record id="hr_benefit_rule_home_not_small" model="hr.salary.rule">
+            <field name="category_id" ref="l10n_se_hr_payroll.hr_salary_rule_category_FORMAN" />
+            <field name="company_id" eval="False"/>
+            <field name="code">forman_bost_not_small</field>
+            <field name="salary_art">550</field>
+            <field name="name">Bostadsförmån ej småhus (Beskattningsvärde)</field>
+            <field name="sequence">7</field>
+            <field name="appears_on_payslip" eval="True" />
+            <field name="condition_select">python</field>
+            <field name="condition_python">result = inputs.bost_ej_sm and inputs.bost_ej_sm.amount &gt; 0</field>
+            <field name="amount_select">code</field>
+            <field name="amount_python_compute">
+result_qty = 1
+result = inputs.bost_ej_sm.amount
+            </field>
+        </record>
+
+        <record id="hr_rule_input_bost_ej_sm" model="hr.rule.input">
+            <field name="code">bost_ej_sm</field>
+            <field name="name">Bostadsförmån ej småhus</field>
+            <field name="input_id" ref="hr_benefit_rule_home_not_small" />
+        </record>
+
+        <!-- Förmån fritt drivmedel -->
+        <record id="hr_benefit_rule_drivmedel" model="hr.salary.rule">
+            <field name="category_id" ref="l10n_se_hr_payroll.hr_salary_rule_category_FORMAN" />
+            <field name="company_id" eval="False"/>
+            <field name="code">drivmedel_fmn</field>
+            <field name="name">Drivmedelsförmån (x1.2)</field>
+            <field name="sequence">8</field>
+            <field name="appears_on_payslip" eval="True" />
+            <field name="condition_select">python</field>
+            <field name="condition_python">result = inputs.drivmedel and inputs.drivmedel.amount &gt; 0</field>
+            <field name="amount_select">code</field>
+            <field name="amount_python_compute">
+DRIV_UH = payslip.struct_id.get_constant('DRIV_UH') or 1.2
+result = inputs.drivmedel.amount * DRIV_UH
+            </field>
+        </record>
+        <record id="hr_benefit_driv" model="hr.benefit">
+            <field name="name">forman_driv</field>
+            <field name="desc">Drivmedelsförmån</field>
+            <field name="note">Styrs via input 'drivmedel' på lönespec</field>
+        </record>
+
+        <record id="hr_rule_input_drivmedel" model="hr.rule.input">
+            <field name="code">drivmedel</field>
+            <field name="name">Marknadsvärde fritt drivmedel</field>
+            <field name="input_id" ref="hr_benefit_rule_drivmedel" />
+        </record>
+
+        <!-- ============================================ -->
+        <!-- TRAKTAMENTEN                                 -->
+        <!-- ============================================ -->
+
+        <!-- Förälder -->
+        <record id="hr_salary_rule_trakt_parent" model="hr.salary.rule">
+            <field name="category_id" ref="l10n_se_hr_payroll.hr_salary_rule_category_PARENT" />
+            <field name="company_id" eval="False"/>
+            <field name="code">trakt_grp</field>
+            <field name="name">Traktamente och kost (totalt)</field>
+            <field name="sequence">79</field>
+            <field name="appears_on_payslip" eval="True"/>
+            <field name="condition_select">python</field>
+            <field name="condition_python">
+result = (inputs.trakt_hel and inputs.trakt_hel.amount_qty &gt; 0) or \
+         (inputs.trakt_halv and inputs.trakt_halv.amount_qty &gt; 0) or \
+         (inputs.trakt_natt and inputs.trakt_natt.amount_qty &gt; 0) or \
+         (inputs.trakt_skatt and inputs.trakt_skatt.amount_qty &gt; 0) or \
+         (inputs.fmn_frukost and inputs.fmn_frukost.amount_qty &gt; 0) or \
+         (inputs.fmn_lunch and inputs.fmn_lunch.amount_qty &gt; 0) or \
+         (inputs.fmn_fri and inputs.fmn_fri.amount_qty &gt; 0) or \
+         (inputs.red_frukost and inputs.red_frukost.amount_qty &gt; 0) or \
+         (inputs.red_lunch and inputs.red_lunch.amount_qty &gt; 0) or \
+         (inputs.red_fri and inputs.red_fri.amount_qty &gt; 0) or \
+         (inputs.trakt_utl and inputs.trakt_utl.amount_qty &gt; 0) or \
+         (inputs.trakt_utl_natt and inputs.trakt_utl_natt.amount_qty &gt; 0) or \
+         (inputs.red_utl_frukost and inputs.red_utl_frukost.amount_qty &gt; 0) or \
+         (inputs.red_utl_lunch and inputs.red_utl_lunch.amount_qty &gt; 0) or \
+         (inputs.red_utl_fri and inputs.red_utl_fri.amount_qty &gt; 0)
+            </field>
+            <field name="amount_select">code</field>
+            <field name="amount_python_compute">
+# Inrikes
+v_hel = result_rules.trakt_hel.total if result_rules.trakt_hel else 0.0
+v_halv = result_rules.trakt_halv.total if result_rules.trakt_halv else 0.0
+v_natt = result_rules.trakt_natt.total if result_rules.trakt_natt else 0.0
+
+# Utland
+v_utl = result_rules.trakt_utl.total if result_rules.trakt_utl else 0.0
+v_utl_natt = result_rules.trakt_utl_natt.total if result_rules.trakt_utl_natt else 0.0
+
+# Inrikes reduceringar
+v_red_frukost = result_rules.trakt_red_frukost.total if result_rules.trakt_red_frukost else 0.0
+v_red_lunch = result_rules.trakt_red_lunch.total if result_rules.trakt_red_lunch else 0.0
+v_red_fri = result_rules.trakt_red_fri.total if result_rules.trakt_red_fri else 0.0
+
+# Utland reduceringar
+v_red_utl_frukost = result_rules.trakt_red_utl_frukost.total if result_rules.trakt_red_utl_frukost else 0.0
+v_red_utl_lunch = result_rules.trakt_red_utl_lunch.total if result_rules.trakt_red_utl_lunch else 0.0
+v_red_utl_fri = result_rules.trakt_red_utl_fri.total if result_rules.trakt_red_utl_fri else 0.0
+
+# Summera allt
+result = v_hel + v_halv + v_natt + v_utl + \
+         v_red_frukost + v_red_lunch + v_red_fri + \
+         v_red_utl_frukost + v_red_utl_lunch + v_red_utl_fri
+            </field>
+        </record>
+
+        <!-- Helt, inrikes -->
+        <record id="hr_salary_rule_trakt_hel" model="hr.salary.rule">
+            <field name="category_id" ref="l10n_se_hr_payroll.hr_salary_rule_category_NETTIL" />
+            <field name="parent_rule_id" ref="hr_salary_rule_trakt_parent" />
+            <field name="company_id" eval="False"/>
+            <field name="code">trakt_hel</field>
+            <field name="name">Traktamente Heldag (Inrikes)</field>
+            <field name="sequence">60</field>
+            <field name="condition_select">python</field>
+            <field name="condition_python">result = inputs.trakt_hel and inputs.trakt_hel.amount_qty &gt; 0</field>
+            <field name="amount_select">code</field>
+            <field name="amount_python_compute">
+result = payslip.struct_id.get_constant('TRAKT_HEL') or 240.0
+result_qty = inputs.trakt_hel.amount_qty
+            </field>
+        </record>
+
+        <record id="hr_rule_input_trakt_hel" model="hr.rule.input">
+            <field name="code">trakt_hel</field>
+            <field name="name">Traktamente Inrikes Heldag (Antal)</field>
+            <field name="input_id" ref="hr_salary_rule_trakt_hel" />
+        </record>
+
+        <!-- Halvt, inrikes -->
+        <record id="hr_salary_rule_trakt_halv" model="hr.salary.rule">
+            <field name="category_id" ref="l10n_se_hr_payroll.hr_salary_rule_category_NETTIL" />
+            <field name="parent_rule_id" ref="hr_salary_rule_trakt_parent" />
+            <field name="company_id" eval="False"/>
+            <field name="code">trakt_halv</field>
+            <field name="name">Traktamente Halvdag (Inrikes)</field>
+            <field name="sequence">61</field>
+            <field name="condition_select">python</field>
+            <field name="condition_python">result = inputs.trakt_halv and inputs.trakt_halv.amount_qty &gt; 0</field>
+            <field name="amount_select">code</field>
+            <field name="amount_python_compute">
+result = payslip.struct_id.get_constant('TRAKT_HALV') or 120.0
+result_qty = inputs.trakt_halv.amount_qty
+            </field>
+        </record>
+
+        <record id="hr_rule_input_trakt_halv" model="hr.rule.input">
+            <field name="code">trakt_halv</field>
+            <field name="name">Traktamente Inrikes Halvdag (Antal)</field>
+            <field name="input_id" ref="hr_salary_rule_trakt_halv" />
+        </record>
+
+        <!-- Natt, inrikes -->
+        <record id="hr_salary_rule_trakt_natt" model="hr.salary.rule">
+            <field name="category_id" ref="l10n_se_hr_payroll.hr_salary_rule_category_NETTIL" />
+            <field name="parent_rule_id" ref="hr_salary_rule_trakt_parent" />
+            <field name="company_id" eval="False"/>
+            <field name="code">trakt_natt</field>
+            <field name="name">Traktamente Natt (Inrikes)</field>
+            <field name="sequence">62</field>
+            <field name="condition_select">python</field>
+            <field name="condition_python">result = inputs.trakt_natt and inputs.trakt_natt.amount_qty &gt; 0</field>
+            <field name="amount_select">code</field>
+            <field name="amount_python_compute">
+result = payslip.struct_id.get_constant('TRAKT_NATT') or 120.0
+result_qty = inputs.trakt_natt.amount_qty
+            </field>
+        </record>
+
+        <record id="hr_rule_input_trakt_natt" model="hr.rule.input">
+            <field name="code">trakt_natt</field>
+            <field name="name">Traktamente Inrikes Natt (Antal)</field>
+            <field name="input_id" ref="hr_salary_rule_trakt_natt" />
+        </record>
+
+        <!-- Traktamente, utrikes -->
+        <record id="hr_salary_rule_trakt_utland" model="hr.salary.rule">
+            <field name="category_id" ref="l10n_se_hr_payroll.hr_salary_rule_category_NETTIL" />
+            <field name="parent_rule_id" ref="hr_salary_rule_trakt_parent" />
+            <field name="company_id" eval="False"/>
+            <field name="code">trakt_utl</field>
+            <field name="name">Traktamente Utland</field>
+            <field name="sequence">63</field>
+            <field name="condition_select">python</field>
+            <field name="condition_python">result = inputs.trakt_utl and inputs.trakt_utl.amount_qty &gt; 0</field>
+            <field name="amount_select">code</field>
+            <field name="amount_python_compute">
+result = inputs.trakt_utl.amount
+result_qty = inputs.trakt_utl.amount_qty
+            </field>
+        </record>
+
+        <record id="hr_rule_input_trakt_utl" model="hr.rule.input">
+            <field name="code">trakt_utl</field>
+            <field name="name">Traktamente Utland (Antal + Summa)</field>
+            <field name="input_id" ref="hr_salary_rule_trakt_utland" />
+        </record>
+
+        <!-- Natt, utrikes -->
+        <record id="hr_salary_rule_trakt_utland_natt" model="hr.salary.rule">
+            <field name="category_id" ref="l10n_se_hr_payroll.hr_salary_rule_category_NETTIL" />
+            <field name="parent_rule_id" ref="hr_salary_rule_trakt_parent" />
+            <field name="company_id" eval="False"/>
+            <field name="code">trakt_utl_natt</field>
+            <field name="name">Traktamente Natt (Utrikes)</field>
+            <field name="sequence">63</field>
+            <field name="condition_select">python</field>
+            <field name="condition_python">result = inputs.trakt_utl_natt and inputs.trakt_utl_natt.amount_qty &gt; 0</field>
+            <field name="amount_select">code</field>
+            <field name="amount_python_compute">
+result = inputs.trakt_utl_natt.amount
+result_qty = inputs.trakt_utl_natt.amount_qty
+            </field>
+        </record>
+
+        <record id="hr_rule_input_trakt_utl_natt" model="hr.rule.input">
+            <field name="code">trakt_utl_natt</field>
+            <field name="name">Traktamente Utland (Antal + Summa)</field>
+            <field name="input_id" ref="hr_salary_rule_trakt_utland_natt" />
+        </record>
+
+        <!-- Skattepliktigt tillägg till traktamente -->
+        <record id="hr_salary_rule_trakt_inrikes_skatt" model="hr.salary.rule">
+            <field name="category_id" ref="l10n_se_hr_payroll.hr_salary_rule_category_BRUTIL" />
+            <field name="parent_rule_id" ref="hr_salary_rule_trakt_parent" />
+            <field name="company_id" eval="False"/>
+            <field name="code">trakt_skatt</field>
+            <field name="name">Tillägg traktamente (Skattepliktigt)</field>
+            <field name="sequence">69</field>
+            <field name="condition_select">python</field>
+            <field name="condition_python">result = inputs.trakt_skatt and inputs.trakt_skatt.amount &gt; 0</field>
+            <field name="amount_select">code</field>
+            <field name="amount_python_compute">
+result = inputs.trakt_skatt.amount
+result_qty = inputs.trakt_skatt.amount_qty
+            </field>
+        </record>
+
+        <record id="hr_rule_input_trakt_skatt" model="hr.rule.input">
+            <field name="code">trakt_skatt</field>
+            <field name="name">Traktamente Inrikes Skattepliktigt (Summa)</field>
+            <field name="input_id" ref="hr_salary_rule_trakt_inrikes_skatt" />
+        </record>
+
+        <!-- Kostförmån, frukost -->
+        <record id="hr_benefit_rule_kost_frukost" model="hr.salary.rule">
+            <field name="category_id" ref="l10n_se_hr_payroll.hr_salary_rule_category_FORMAN" />
+            <field name="company_id" eval="False"/>
+            <field name="parent_rule_id" ref="hr_salary_rule_trakt_parent" />
+            <field name="code">kost_fmn_frukost</field>
+            <field name="name">Kostförmån Frukost</field>
+            <field name="sequence">70</field>
+            <field name="appears_on_payslip" eval="True"/>
+            <field name="condition_select">python</field>
+            <field name="condition_python">result = inputs.fmn_frukost and inputs.fmn_frukost.amount_qty &gt; 0</field>
+            <field name="amount_select">code</field>
+            <field name="amount_python_compute">
+result = payslip.struct_id.get_constant('KOST_FRUKOST') or 50.0
+result_qty = inputs.fmn_frukost.amount_qty
+            </field>
+        </record>
+
+        <record id="hr_rule_input_fmn_frukost" model="hr.rule.input">
+            <field name="code">fmn_frukost</field>
+            <field name="name">Förmån frukost (Antal)</field>
+            <field name="input_id" ref="hr_benefit_rule_kost_frukost" />
+        </record>
+
+        <!-- Kostförmån, lunch -->
+        <record id="hr_benefit_rule_kost_lunch" model="hr.salary.rule">
+            <field name="category_id" ref="l10n_se_hr_payroll.hr_salary_rule_category_FORMAN" />
+            <field name="company_id" eval="False"/>
+            <field name="parent_rule_id" ref="hr_salary_rule_trakt_parent" />
+            <field name="code">kost_fmn_lunch</field>
+            <field name="name">Kostförmån Lunch/Middag</field>
+            <field name="sequence">71</field>
+            <field name="appears_on_payslip" eval="True"/>
+            <field name="condition_select">python</field>
+            <field name="condition_python">result = inputs.fmn_lunch and inputs.fmn_lunch.amount_qty &gt; 0</field>
+            <field name="amount_select">code</field>
+            <field name="amount_python_compute">
+result = payslip.struct_id.get_constant('KOST_LUNCH') or 100.0
+result_qty = inputs.fmn_lunch.amount_qty
+            </field>
+        </record>
+
+        <record id="hr_rule_input_fmn_lunch" model="hr.rule.input">
+            <field name="code">fmn_lunch</field>
+            <field name="name">Förmån lunch/middag (Antal)</field>
+            <field name="input_id" ref="hr_benefit_rule_kost_lunch" />
+        </record>
+
+        <!-- Kostförmån, fri kost -->
+        <record id="hr_benefit_rule_kost_fri" model="hr.salary.rule">
+            <field name="category_id" ref="l10n_se_hr_payroll.hr_salary_rule_category_FORMAN" />
+            <field name="company_id" eval="False"/>
+            <field name="parent_rule_id" ref="hr_salary_rule_trakt_parent" />
+            <field name="code">kost_fmn_fri</field>
+            <field name="name">Kostförmån Fri kost</field>
+            <field name="sequence">72</field>
+            <field name="appears_on_payslip" eval="True"/>
+            <field name="condition_select">python</field>
+            <field name="condition_python">result = inputs.fmn_fri and inputs.fmn_fri.amount_qty &gt; 0</field>
+            <field name="amount_select">code</field>
+            <field name="amount_python_compute">
+result = payslip.struct_id.get_constant('KOST_FRI') or 250.0
+result_qty = inputs.fmn_fri.amount_qty
+            </field>
+        </record>
+
+        <record id="hr_rule_input_fmn_fri" model="hr.rule.input">
+            <field name="code">fmn_fri</field>
+            <field name="name">Förmån fri kost (Antal)</field>
+            <field name="input_id" ref="hr_benefit_rule_kost_fri" />
+        </record>
+
+        <!-- Reducering av traktamente, frukost -->
+        <record id="hr_salary_rule_trakt_red_frukost" model="hr.salary.rule">
+            <field name="category_id" ref="l10n_se_hr_payroll.hr_salary_rule_category_NETAVG" />
+            <field name="parent_rule_id" ref="hr_salary_rule_trakt_parent" />
+            <field name="company_id" eval="False"/>
+            <field name="code">trakt_red_frukost</field>
+            <field name="name">Kostavdrag Frukost</field>
+            <field name="sequence">73</field>
+            <field name="appears_on_payslip" eval="True"/>
+            <field name="condition_select">python</field>
+            <field name="condition_python">result = inputs.red_frukost and inputs.red_frukost.amount_qty &gt; 0</field>
+            <field name="amount_select">code</field>
+            <field name="amount_python_compute">
+result = payslip.struct_id.get_constant('RED_FRUKOST') or 48.0
+result_qty = inputs.red_frukost.amount_qty * -1
+            </field>
+        </record>
+
+        <record id="hr_rule_input_red_frukost" model="hr.rule.input">
+            <field name="code">red_frukost</field>
+            <field name="name">Reducering Frukost (Antal)</field>
+            <field name="input_id" ref="hr_salary_rule_trakt_red_frukost" />
+        </record>
+
+        <!-- Reducering av traktamente, lunch/middag -->
+        <record id="hr_salary_rule_trakt_red_lunch" model="hr.salary.rule">
+            <field name="category_id" ref="l10n_se_hr_payroll.hr_salary_rule_category_NETAVG" />
+            <field name="parent_rule_id" ref="hr_salary_rule_trakt_parent" />
+            <field name="company_id" eval="False"/>
+            <field name="code">trakt_red_lunch</field>
+            <field name="name">Kostavdrag Lunch/Middag/Båda</field>
+            <field name="sequence">74</field>
+            <field name="appears_on_payslip" eval="True"/>
+            <field name="condition_select">python</field>
+            <field name="condition_python">result = inputs.red_lunch and inputs.red_lunch.amount_qty &gt; 0</field>
+            <field name="amount_select">code</field>
+            <field name="amount_python_compute">
+result = payslip.struct_id.get_constant('RED_LUNCH') or 84.0
+result_qty = inputs.red_lunch.amount_qty * -1
+            </field>
+        </record>
+
+        <record id="hr_rule_input_red_lunch" model="hr.rule.input">
+            <field name="code">red_lunch</field>
+            <field name="name">Reducering Lunch/Middag (Antal)</field>
+            <field name="input_id" ref="hr_salary_rule_trakt_red_lunch" />
+        </record>
+
+        <!-- Reducering av traktamente, fri kost -->
+        <record id="hr_salary_rule_trakt_red_fri" model="hr.salary.rule">
+            <field name="category_id" ref="l10n_se_hr_payroll.hr_salary_rule_category_NETAVG" />
+            <field name="parent_rule_id" ref="hr_salary_rule_trakt_parent" />
+            <field name="company_id" eval="False"/>
+            <field name="code">trakt_red_fri</field>
+            <field name="name">Kostavdrag Fria måltider</field>
+            <field name="sequence">75</field>
+            <field name="appears_on_payslip" eval="True"/>
+            <field name="condition_select">python</field>
+            <field name="condition_python">result = inputs.red_fri and inputs.red_fri.amount_qty &gt; 0</field>
+            <field name="amount_select">code</field>
+            <field name="amount_python_compute">
+result = payslip.struct_id.get_constant('RED_FRI') or 216.0
+result_qty = inputs.red_fri.amount_qty * -1
+            </field>
+        </record>
+
+        <record id="hr_rule_input_red_fri" model="hr.rule.input">
+            <field name="code">red_fri</field>
+            <field name="name">Reducering Fria Måltider (Antal)</field>
+            <field name="input_id" ref="hr_salary_rule_trakt_red_fri" />
+        </record>
+
+        <!-- Reducering av traktamente, utland, frukost -->
+        <record id="hr_salary_rule_red_utl_frukost" model="hr.salary.rule">
+            <field name="category_id" ref="l10n_se_hr_payroll.hr_salary_rule_category_NETAVG" />
+            <field name="parent_rule_id" ref="hr_salary_rule_trakt_parent" />
+            <field name="company_id" eval="False"/>
+            <field name="code">trakt_red_utl_frukost</field>
+            <field name="name">Kostavdrag Utland 15% Frukost</field>
+            <field name="sequence">76</field>
+            <field name="appears_on_payslip" eval="True"/>
+            <field name="condition_select">python</field>
+            <field name="condition_python">result = inputs.red_utl_frukost and inputs.red_utl_frukost.amount_qty &gt; 0</field>
+            <field name="amount_select">code</field>
+            <field name="amount_python_compute">
+result = inputs.red_utl_frukost.amount
+result_qty = inputs.red_utl_frukost.amount_qty * -1
+            </field>
+        </record>
+
+        <record id="hr_rule_input_red_utl_frukost" model="hr.rule.input">
+            <field name="code">red_utl_frukost</field>
+            <field name="name">Kostavdrag Utland Frukost 15% (Belopp)</field>
+            <field name="input_id" ref="hr_salary_rule_red_utl_frukost" />
+        </record>
+
+        <!-- Reducering av traktamente, utland, lunch/middag-->
+        <record id="hr_salary_rule_trakt_red_utl_lunch" model="hr.salary.rule">
+            <field name="category_id" ref="l10n_se_hr_payroll.hr_salary_rule_category_NETAVG" />
+            <field name="parent_rule_id" ref="hr_salary_rule_trakt_parent" />
+            <field name="company_id" eval="False"/>
+            <field name="code">trakt_red_utl_lunch</field>
+            <field name="name">Kostavdrag Utland 35% Lunch/Middag/Båda</field>
+            <field name="sequence">77</field>
+            <field name="appears_on_payslip" eval="True"/>
+            <field name="condition_select">python</field>
+            <field name="condition_python">result = inputs.red_utl_lunch and inputs.red_utl_lunch.amount_qty &gt; 0</field>
+            <field name="amount_select">code</field>
+            <field name="amount_python_compute">
+result = inputs.red_utl_lunch.amount
+result_qty = inputs.red_utl_lunch.amount_qty * -1
+            </field>
+        </record>
+
+        <record id="hr_rule_input_red_utl_lunch" model="hr.rule.input">
+            <field name="code">red_utl_lunch</field>
+            <field name="name">Kostavdrag Utland Lunch/Middag 35% (Belopp)</field>
+            <field name="input_id" ref="hr_salary_rule_trakt_red_utl_lunch" />
+        </record>
+
+        <!-- Reducering av traktamente, utland, fri kost -->
+        <record id="hr_salary_rule_trakt_red_utl_fri" model="hr.salary.rule">
+            <field name="category_id" ref="l10n_se_hr_payroll.hr_salary_rule_category_NETAVG" />
+            <field name="parent_rule_id" ref="hr_salary_rule_trakt_parent" />
+            <field name="company_id" eval="False"/>
+            <field name="code">trakt_red_utl_fri</field>
+            <field name="name">Kostavdrag Utland 85% Fria måltider</field>
+            <field name="sequence">78</field>
+            <field name="appears_on_payslip" eval="True"/>
+            <field name="condition_select">python</field>
+            <field name="condition_python">result = inputs.red_utl_fri and inputs.red_utl_fri.amount_qty &gt; 0</field>
+            <field name="amount_select">code</field>
+            <field name="amount_python_compute">
+result = inputs.red_utl_fri.amount
+result_qty = inputs.red_utl_fri.amount_qty * -1
+            </field>
+        </record>
+
+        <record id="hr_rule_input_red_utl_fri" model="hr.rule.input">
+            <field name="code">red_utl_fri</field>
+            <field name="name">Kostavdrag Fria Måtider 85% (Belopp)</field>
+            <field name="input_id" ref="hr_salary_rule_trakt_red_utl_fri" />
+        </record>
+
+        <!-- ============================================ -->
+        <!-- LUNCHKUPONGER                                -->
+        <!-- ============================================ -->
+
+        <!-- Lunchkuponger, parent -->
+        <record id="hr_salary_rule_lunch_parent" model="hr.salary.rule">
+            <field name="category_id" ref="l10n_se_hr_payroll.hr_salary_rule_category_PARENT" />
+            <field name="company_id" eval="False"/>
+            <field name="code">lunch_grp</field>
+            <field name="name">Lunchkuponger</field>
+            <field name="sequence">82</field>
+            <field name="appears_on_payslip" eval="True"/>
+            <field name="condition_select">python</field>
+            <field name="condition_python">
+result = inputs.lunch and inputs.lunch.amount_qty &gt; 0
+            </field>
+            <field name="amount_select">fix</field>
+            <field name="amount_fix">0.0</field>
+        </record>
+
+        <!-- Lunchkuponger, avdragsvärde -->
+        <record id="hr_salary_rule_lunch_kupong" model="hr.salary.rule">
+            <field name="category_id" ref="l10n_se_hr_payroll.hr_salary_rule_category_NETAVG" />
+            <field name="parent_rule_id" ref="hr_salary_rule_lunch_parent" />
+            <field name="company_id" eval="False"/>
+            <field name="code">lunch_kupong</field>
+            <field name="name">Lunchkuponger (Avdragsvärde)</field>
+            <field name="sequence">80</field>
+            <field name="appears_on_payslip" eval="True"/>
+            <field name="condition_select">python</field>
+            <field name="condition_python">result = inputs.lunch and inputs.lunch.amount_qty &gt; 0</field>
+            <field name="amount_select">code</field>
+            <field name="amount_python_compute">
+PRIS = payslip.struct_id.get_constant('PRIS') or 900.0
+result = -1 * PRIS
+result_qty = inputs.lunch.amount_qty
+            </field>
+        </record>
+
+        <record id="hr_rule_input_lunch" model="hr.rule.input">
+            <field name="code">lunch</field>
+            <field name="name">Lunchkuponger (Antal häften)</field>
+            <field name="input_id" ref="hr_salary_rule_lunch_kupong" />
+        </record>
+
+        <!-- Lunchkuponger, Beskattningsvärde -->
+        <record id="hr_salary_rule_lunch_kupong_fmn" model="hr.salary.rule">
+            <field name="category_id" ref="l10n_se_hr_payroll.hr_salary_rule_category_FORMAN" />
+            <field name="parent_rule_id" ref="hr_salary_rule_lunch_parent" />
+            <field name="company_id" eval="False"/>
+            <field name="code">lunch_kupong_fmn</field>
+            <field name="name">Lunchkuponger (Beskattningsvärde)</field>
+            <field name="sequence">81</field>
+            <field name="appears_on_payslip" eval="True"/>
+            <field name="condition_select">python</field>
+            <field name="condition_python">result = inputs.lunch and inputs.lunch.amount_qty &gt; 0</field>
+            <field name="amount_select">code</field>
+            <field name="amount_python_compute">
+VARDE = payslip.struct_id.get_constant('VARDE') or 600.0 
+result = VARDE
+result_qty = inputs.lunch.amount_qty
+            </field>
+        </record>
+        
+        <!-- ============================================ -->
+        <!-- ÖVRIGA FÖRMÅNER                              -->
+        <!-- ============================================ -->
+
+        <!-- Beskattningsvärde vid t.ex. övrig nettoersätnting, när det är applicerbart -->
+        <record id="hr_salary_rule_ovrig_fmn_skatt" model="hr.salary.rule">
+            <field name="category_id" ref="l10n_se_hr_payroll.hr_salary_rule_category_FORMAN" />
+            <field name="company_id" eval="False"/>
+            <field name="code">ovrig_fmn</field>
+            <field name="name">Övriga förmåner (Beskattningsvärde)</field>
+            <field name="sequence">89</field>
+            <field name="appears_on_payslip" eval="True"/>
+            <field name="condition_select">python</field>
+            <field name="condition_python">result = inputs.ovrig_fmn and inputs.ovrig_fmn.amount_qty &gt; 0</field>
+            <field name="amount_select">code</field>
+            <field name="amount_python_compute">
+result =  inputs.ovrig_fmn.amount
+result_qty = inputs.ovrig_fmn.amount_qty
+            </field>
+        </record>
+
+        <record id="hr_rule_input_ovrig_fmn" model="hr.rule.input">
+            <field name="code">ovrig_fmn</field>
+            <field name="name">Övriga förmåner (Belopp)</field>
+            <field name="input_id" ref="hr_salary_rule_ovrig_fmn_skatt" />
+        </record>
+
+        <!-- RUT-förälder -->
+        <record id="hr_salary_rule_rut_parent" model="hr.salary.rule">
+            <field name="category_id" ref="l10n_se_hr_payroll.hr_salary_rule_category_PARENT" />
+            <field name="company_id" eval="False"/>
+            <field name="code">rut_grp</field>
+            <field name="name">Hushållsnära tjänster</field>
+            <field name="sequence">92</field>
+            <field name="appears_on_payslip" eval="True"/>
+            <field name="condition_select">python</field>
+            <field name="condition_python">
+result = inputs.rut and inputs.rut.amount &gt; 0
+            </field>
+            <field name="amount_select">fix</field>
+            <field name="amount_fix">0.0</field>
+        </record>
+
+        <!-- Skattereduktion RUT -->
+        <record id="hr_salary_rule_rut_red" model="hr.salary.rule">
+            <field name="category_id" ref="l10n_se_hr_payroll.hr_salary_rule_category_SKV" />
+            <field name="parent_rule_id" ref="hr_salary_rule_rut_parent" />
+            <field name="company_id" eval="False"/>
+            <field name="code">rut_red</field>
+            <field name="name">Skattereduktion hushållsnära tjänster</field>
+            <field name="sequence">1595</field>
+            <field name="appears_on_payslip" eval="True"/>
+            <field name="condition_select">python</field>
+            <field name="condition_python">result = inputs.rut and inputs.rut.amount_qty &gt; 0</field>
+            <field name="amount_select">code</field>
+            <field name="amount_python_compute">
+result = 0.5 * inputs.rut.amount
+            </field>
+        </record>
+
+        <record id="hr_rule_input_rut_fmn" model="hr.rule.input">
+            <field name="code">rut</field>
+            <field name="name">Hushållsnära tjänster (Arbetskostnad)</field>
+            <field name="input_id" ref="hr_salary_rule_rut_red"/>
+        </record>
+
+        <!-- RUT-värde -->
+        <record id="hr_salary_rule_rut_fmn" model="hr.salary.rule">
+            <field name="category_id" ref="l10n_se_hr_payroll.hr_salary_rule_category_FORMAN" />
+            <field name="parent_rule_id" ref="hr_salary_rule_rut_parent" />
+            <field name="company_id" eval="False"/>
+            <field name="code">rut_fmn</field>
+            <field name="name">Hushållsnära tjänster (Beskattningsvärde)</field>
+            <field name="sequence">91</field>
+            <field name="appears_on_payslip" eval="True"/>
+            <field name="condition_select">python</field>
+            <field name="condition_python">result = inputs.rut and inputs.rut.amount &gt; 0</field>
+            <field name="amount_select">code</field>
+            <field name="amount_python_compute">
+result = inputs.rut.amount
+            </field>
+        </record>
+
+        <record id="hr_salary_rule_forman_parent" model="hr.salary.rule">
+            <field name="category_id" ref="l10n_se_hr_payroll.hr_salary_rule_category_PARENT" />
+            <field name="company_id" eval="False"/>
+            <field name="code">fmn_total</field>
+            <field name="name">Skattepliktiga förmåner (Totalt)</field>
+            <field name="sequence">1500</field>
+            <field name="appears_on_payslip" eval="True"/>
+            <field name="condition_select">python</field>
+            <field name="condition_python">result = categories.FORMAN != 0.0</field>
+            <field name="amount_select">code</field>
+            <field name="amount_python_compute">
+result = categories.FORMAN
+            </field>
+        </record>
+
+    </data>
+</odoo>

@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <!-- payslip runs -->
+    <record id="hr_payslip_run_view_search" model="ir.ui.view">
+        <field name="name">hr.payslip.run.period_id</field>
+        <field name="inherit_id" ref="payroll.hr_payslip_run_view_search"/>
+        <field name="model">hr.payslip.run</field>
+        <field name="arch" type="xml">
+            <field name="date_start" position="before">
+                <field name="period_id"/>
+            </field>
+        </field>
+    </record>
+
+    <record id="hr_payslip_run_view_tree" model="ir.ui.view">
+        <field name="name">hr.payslip.run.period</field>
+        <field name="inherit_id" ref="payroll.hr_payslip_run_view_tree"/>
+        <field name="model">hr.payslip.run</field>
+        <field name="arch" type="xml">
+            <field name="name" position="after">
+                <field name="period_id"/>
+            </field>
+        </field>
+    </record>
+
+    <record id="hr_payslip_run_view_tree_amounts" model="ir.ui.view">
+        <field name="name">hr.payslip.run.tree.amounts</field>
+        <field name="model">hr.payslip.run</field>
+        <field name="inherit_id" ref="payroll.hr_payslip_run_view_tree"/>
+        <field name="arch" type="xml">
+            <field name="state" position="after">
+                <field name="gl_amount" sum="Grundlön" optional="hide"/>
+                <field name="bl_amount" sum="Bruttolön" optional="show"/>
+                <field name="total_skatt_amount" sum="Skatt" optional="show"/>
+                <field name="nl_amount" sum="Nettolön" optional="show"/>
+                <field name="sa_amount" sum="Arbetsgivaravgift" optional="hide"/>
+            </field>
+        </field>
+    </record>
+
+    <record id="hr_payslip_run_view_form" model="ir.ui.view">
+        <field name="name">hr.payslip.run.period</field>
+        <field name="model">hr.payslip.run</field>
+        <field name="inherit_id" ref="payroll.hr_payslip_run_view_form"/>
+        <field name="arch" type="xml">
+            <button name="%(payroll.action_hr_payslip_by_employees)d" position="replace">
+                <button
+                    name="action_open_employees_for_payslip"
+                    type="object"
+                    string="Generate Payslips"
+                    invisible="state != 'draft'"
+                    class="oe_highlight"
+                />
+            </button>
+
+            <xpath expr="//field[@name='name']" position="attributes">
+                <attribute name="readonly">state != 'draft'</attribute>
+            </xpath>
+
+            <field name="date_start" position="before">
+                <field name="period_id" readonly="state != 'draft'"/>
+            </field>
+
+            <field name="date_start" position="attributes">
+                <attribute name="class">oe_read_only</attribute>
+            </field>
+
+            <xpath expr="//sheet" position="inside">
+                <div name="button_box" class="oe_button_box">
+                    <button
+                        name="action_view_payslips"
+                        type="object"
+                        class="oe_stat_button"
+                        icon="fa-list"
+                        invisible="slip_ids_count == 0"
+                    >
+                        <field name="slip_ids_count" string="Payslips" widget="statinfo"/>
+                    </button>
+                </div>
+            </xpath>
+
+            <xpath expr="//sheet" position="after">
+                <chatter/>
+            </xpath>
+
+            <xpath expr="//group[@name='other']" position="after">
+                <group string="Löneöversikt">
+                    <group>
+                        <field name="gl_amount" widget="monetary"/>
+                        <field name="bl_amount" widget="monetary"/>
+                        <field name="total_skatt_amount" widget="monetary"/>
+                    </group>
+                    <group>
+                        <field name="nl_amount" widget="monetary"/>
+                        <field name="sa_amount" widget="monetary"/>
+                    </group>
+                </group>
+            </xpath>
+
+            <separator position="attributes">
+                <attribute name="invisible">1</attribute>
+            </separator>
+            <field name="slip_ids" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </field>
+        </field>
+    </record>
+</odoo>

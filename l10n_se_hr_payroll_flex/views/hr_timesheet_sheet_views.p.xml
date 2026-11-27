@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- Utökar tidrapport-vyn -->
+        <record id="view_hr_timesheet_sheet_form_inherit_flex" model="ir.ui.view">
+            <field name="name">hr.timesheet.sheet.form.inherit.flex</field>
+            <field name="model">hr_timesheet.sheet</field>
+            <field name="inherit_id" ref="hr_timesheet_sheet.hr_timesheet_sheet_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//notebook" position="inside">
+                    <page string="Overtime" name="overtime_page">
+                        <group>
+                            <field name="expected_hours"/>
+                            <field name="overtime_hours"/>
+                            <field name="undertime_hours"/>
+                        </group>
+                        <group string="Övertidsrader (per projekt och dag)">
+                            <field name="flex_overtime_line_ids" nolabel="1">
+                                <list editable="bottom">
+                                    <field name="date"/>
+                                    <field name="project_id"/>
+                                    <field name="task_id" optional="show"/>
+                                    <field name="overtime_hours"/>
+                                    <field name="is_ordered"/>
+                                </list>
+                            </field>
+                        </group>
+                    </page>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

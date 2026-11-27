@@ -1,0 +1,819 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+
+        <!-- Asse Aronsson — Januari 2026 -->
+        <record id="hr_payslip_asse_2026_01" model="hr.payslip">
+            <field name="name">Lönespecifikation för Januari - Asse Aronsson</field>
+            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons"/>
+            <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_asse_employee"/>
+            <field name="payslip_run_id" ref="l10n_se_hr_payroll_tiichri_26.payslip_run_2026_01"/>
+            <field name="period_id" ref="l10n_se_hr_payroll_tiichri_26.period_01_2026"/>
+            <field name="date_from">2026-01-01</field>
+            <field name="date_to">2026-01-31</field>
+        </record>
+
+        <!-- Asse Aronsson — Februari 2026 -->
+        <record id="hr_payslip_asse_2026_02" model="hr.payslip">
+            <field name="name">Lönespecifikation för Februari - Asse Aronsson</field>
+            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons"/>
+            <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_asse_employee"/>
+            <field name="payslip_run_id" ref="l10n_se_hr_payroll_tiichri_26.payslip_run_2026_02"/>
+            <field name="period_id" ref="l10n_se_hr_payroll_tiichri_26.period_02_2026"/>
+            <field name="date_from">2026-02-01</field>
+            <field name="date_to">2026-02-28</field>
+        </record>
+
+        <!-- Asse Aronsson — Mars 2026 -->
+        <record id="hr_payslip_asse_2026_03" model="hr.payslip">
+            <field name="name">Lönespecifikation för Mars - Asse Aronsson</field>
+            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons"/>
+            <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_asse_employee"/>
+            <field name="payslip_run_id" ref="l10n_se_hr_payroll_tiichri_26.payslip_run_2026_03"/>
+            <field name="period_id" ref="l10n_se_hr_payroll_tiichri_26.period_03_2026"/>
+            <field name="date_from">2026-03-01</field>
+            <field name="date_to">2026-03-31</field>
+        </record>
+
+        <!-- Asse Aronsson — April 2026 -->
+        <record id="hr_payslip_asse_2026_04" model="hr.payslip">
+            <field name="name">Lönespecifikation för April - Asse Aronsson</field>
+            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons"/>
+            <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_asse_employee"/>
+            <field name="payslip_run_id" ref="l10n_se_hr_payroll_tiichri_26.payslip_run_2026_04"/>
+            <field name="period_id" ref="l10n_se_hr_payroll_tiichri_26.period_04_2026"/>
+            <field name="date_from">2026-04-01</field>
+            <field name="date_to">2026-04-30</field>
+        </record>
+
+        <!-- Asse Aronsson — Maj 2026 -->
+        <record id="hr_payslip_asse_2026_05" model="hr.payslip">
+            <field name="name">Lönespecifikation för Maj - Asse Aronsson</field>
+            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons"/>
+            <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_asse_employee"/>
+            <field name="payslip_run_id" ref="l10n_se_hr_payroll_tiichri_26.payslip_run_2026_05"/>
+            <field name="period_id" ref="l10n_se_hr_payroll_tiichri_26.period_05_2026"/>
+            <field name="date_from">2026-05-01</field>
+            <field name="date_to">2026-05-31</field>
+        </record>
+
+        <!-- Asse Aronsson — Juni 2026 -->
+        <record id="hr_payslip_asse_2026_06" model="hr.payslip">
+            <field name="name">Lönespecifikation för Juni - Asse Aronsson</field>
+            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons"/>
+            <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_asse_employee"/>
+            <field name="payslip_run_id" ref="l10n_se_hr_payroll_tiichri_26.payslip_run_2026_06"/>
+            <field name="period_id" ref="l10n_se_hr_payroll_tiichri_26.period_06_2026"/>
+            <field name="date_from">2026-06-01</field>
+            <field name="date_to">2026-06-30</field>
+        </record>
+
+        <!-- Asse Aronsson — Juli 2026 -->
+        <record id="hr_payslip_asse_2026_07" model="hr.payslip">
+            <field name="name">Lönespecifikation för Juli - Asse Aronsson</field>
+            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons"/>
+            <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_asse_employee"/>
+            <field name="payslip_run_id" ref="l10n_se_hr_payroll_tiichri_26.payslip_run_2026_07"/>
+            <field name="period_id" ref="l10n_se_hr_payroll_tiichri_26.period_07_2026"/>
+            <field name="date_from">2026-07-01</field>
+            <field name="date_to">2026-07-31</field>
+        </record>
+
+        <!-- Asse Aronsson — Augusti 2026 -->
+        <record id="hr_payslip_asse_2026_08" model="hr.payslip">
+            <field name="name">Lönespecifikation för Augusti - Asse Aronsson</field>
+            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons"/>
+            <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_asse_employee"/>
+            <field name="payslip_run_id" ref="l10n_se_hr_payroll_tiichri_26.payslip_run_2026_08"/>
+            <field name="period_id" ref="l10n_se_hr_payroll_tiichri_26.period_08_2026"/>
+            <field name="date_from">2026-08-01</field>
+            <field name="date_to">2026-08-31</field>
+        </record>
+
+        <!-- Asse Aronsson — September 2026 -->
+        <record id="hr_payslip_asse_2026_09" model="hr.payslip">
+            <field name="name">Lönespecifikation för September - Asse Aronsson</field>
+            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons"/>
+            <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_asse_employee"/>
+            <field name="payslip_run_id" ref="l10n_se_hr_payroll_tiichri_26.payslip_run_2026_09"/>
+            <field name="period_id" ref="l10n_se_hr_payroll_tiichri_26.period_09_2026"/>
+            <field name="date_from">2026-09-01</field>
+            <field name="date_to">2026-09-30</field>
+        </record>
+
+        <!-- Asse Aronsson — Oktober 2026 -->
+        <record id="hr_payslip_asse_2026_10" model="hr.payslip">
+            <field name="name">Lönespecifikation för Oktober - Asse Aronsson</field>
+            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons"/>
+            <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_asse_employee"/>
+            <field name="payslip_run_id" ref="l10n_se_hr_payroll_tiichri_26.payslip_run_2026_10"/>
+            <field name="period_id" ref="l10n_se_hr_payroll_tiichri_26.period_10_2026"/>
+            <field name="date_from">2026-10-01</field>
+            <field name="date_to">2026-10-31</field>
+        </record>
+
+        <!-- Asse Aronsson — November 2026 -->
+        <record id="hr_payslip_asse_2026_11" model="hr.payslip">
+            <field name="name">Lönespecifikation för November - Asse Aronsson</field>
+            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons"/>
+            <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_asse_employee"/>
+            <field name="payslip_run_id" ref="l10n_se_hr_payroll_tiichri_26.payslip_run_2026_11"/>
+            <field name="period_id" ref="l10n_se_hr_payroll_tiichri_26.period_11_2026"/>
+            <field name="date_from">2026-11-01</field>
+            <field name="date_to">2026-11-30</field>
+        </record>
+
+        <!-- Asse Aronsson — December 2026 -->
+        <record id="hr_payslip_asse_2026_12" model="hr.payslip">
+            <field name="name">Lönespecifikation för December - Asse Aronsson</field>
+            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons"/>
+            <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_asse_employee"/>
+            <field name="payslip_run_id" ref="l10n_se_hr_payroll_tiichri_26.payslip_run_2026_12"/>
+            <field name="period_id" ref="l10n_se_hr_payroll_tiichri_26.period_12_2026"/>
+            <field name="date_from">2026-12-01</field>
+            <field name="date_to">2026-12-31</field>
+        </record>
+
+        <!-- Camilla Cobolt — Januari 2026 -->
+        <record id="hr_payslip_camilla_2026_01" model="hr.payslip">
+            <field name="name">Lönespecifikation för Januari - Camilla Cobolt</field>
+            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons"/>
+            <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_camilla_employee"/>
+            <field name="payslip_run_id" ref="l10n_se_hr_payroll_tiichri_26.payslip_run_2026_01"/>
+            <field name="period_id" ref="l10n_se_hr_payroll_tiichri_26.period_01_2026"/>
+            <field name="date_from">2026-01-01</field>
+            <field name="date_to">2026-01-31</field>
+        </record>
+
+        <!-- Camilla Cobolt — Februari 2026 -->
+        <record id="hr_payslip_camilla_2026_02" model="hr.payslip">
+            <field name="name">Lönespecifikation för Februari - Camilla Cobolt</field>
+            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons"/>
+            <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_camilla_employee"/>
+            <field name="payslip_run_id" ref="l10n_se_hr_payroll_tiichri_26.payslip_run_2026_02"/>
+            <field name="period_id" ref="l10n_se_hr_payroll_tiichri_26.period_02_2026"/>
+            <field name="date_from">2026-02-01</field>
+            <field name="date_to">2026-02-28</field>
+        </record>
+
+        <!-- Camilla Cobolt — Mars 2026 -->
+        <record id="hr_payslip_camilla_2026_03" model="hr.payslip">
+            <field name="name">Lönespecifikation för Mars - Camilla Cobolt</field>
+            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons"/>
+            <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_camilla_employee"/>
+            <field name="payslip_run_id" ref="l10n_se_hr_payroll_tiichri_26.payslip_run_2026_03"/>
+            <field name="period_id" ref="l10n_se_hr_payroll_tiichri_26.period_03_2026"/>
+            <field name="date_from">2026-03-01</field>
+            <field name="date_to">2026-03-31</field>
+        </record>
+
+        <!-- Camilla Cobolt — April 2026 -->
+        <record id="hr_payslip_camilla_2026_04" model="hr.payslip">
+            <field name="name">Lönespecifikation för April - Camilla Cobolt</field>
+            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons"/>
+            <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_camilla_employee"/>
+            <field name="payslip_run_id" ref="l10n_se_hr_payroll_tiichri_26.payslip_run_2026_04"/>
+            <field name="period_id" ref="l10n_se_hr_payroll_tiichri_26.period_04_2026"/>
+            <field name="date_from">2026-04-01</field>
+            <field name="date_to">2026-04-30</field>
+        </record>
+
+        <!-- Camilla Cobolt — Maj 2026 -->
+        <record id="hr_payslip_camilla_2026_05" model="hr.payslip">
+            <field name="name">Lönespecifikation för Maj - Camilla Cobolt</field>
+            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons"/>
+            <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_camilla_employee"/>
+            <field name="payslip_run_id" ref="l10n_se_hr_payroll_tiichri_26.payslip_run_2026_05"/>
+            <field name="period_id" ref="l10n_se_hr_payroll_tiichri_26.period_05_2026"/>
+            <field name="date_from">2026-05-01</field>
+            <field name="date_to">2026-05-31</field>
+        </record>
+
+        <!-- Camilla Cobolt — Juni 2026 -->
+        <record id="hr_payslip_camilla_2026_06" model="hr.payslip">
+            <field name="name">Lönespecifikation för Juni - Camilla Cobolt</field>
+            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons"/>
+            <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_camilla_employee"/>
+            <field name="payslip_run_id" ref="l10n_se_hr_payroll_tiichri_26.payslip_run_2026_06"/>
+            <field name="period_id" ref="l10n_se_hr_payroll_tiichri_26.period_06_2026"/>
+            <field name="date_from">2026-06-01</field>
+            <field name="date_to">2026-06-30</field>
+        </record>
+
+        <!-- Camilla Cobolt — Juli 2026 -->
+        <record id="hr_payslip_camilla_2026_07" model="hr.payslip">
+            <field name="name">Lönespecifikation för Juli - Camilla Cobolt</field>
+            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons"/>
+            <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_camilla_employee"/>
+            <field name="payslip_run_id" ref="l10n_se_hr_payroll_tiichri_26.payslip_run_2026_07"/>
+            <field name="period_id" ref="l10n_se_hr_payroll_tiichri_26.period_07_2026"/>
+            <field name="date_from">2026-07-01</field>
+            <field name="date_to">2026-07-31</field>
+        </record>
+
+        <!-- Camilla Cobolt — Augusti 2026 -->
+        <record id="hr_payslip_camilla_2026_08" model="hr.payslip">
+            <field name="name">Lönespecifikation för Augusti - Camilla Cobolt</field>
+            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons"/>
+            <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_camilla_employee"/>
+            <field name="payslip_run_id" ref="l10n_se_hr_payroll_tiichri_26.payslip_run_2026_08"/>
+            <field name="period_id" ref="l10n_se_hr_payroll_tiichri_26.period_08_2026"/>
+            <field name="date_from">2026-08-01</field>
+            <field name="date_to">2026-08-31</field>
+        </record>
+
+        <!-- Camilla Cobolt — September 2026 -->
+        <record id="hr_payslip_camilla_2026_09" model="hr.payslip">
+            <field name="name">Lönespecifikation för September - Camilla Cobolt</field>
+            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons"/>
+            <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_camilla_employee"/>
+            <field name="payslip_run_id" ref="l10n_se_hr_payroll_tiichri_26.payslip_run_2026_09"/>
+            <field name="period_id" ref="l10n_se_hr_payroll_tiichri_26.period_09_2026"/>
+            <field name="date_from">2026-09-01</field>
+            <field name="date_to">2026-09-30</field>
+        </record>
+
+        <!-- Camilla Cobolt — Oktober 2026 -->
+        <record id="hr_payslip_camilla_2026_10" model="hr.payslip">
+            <field name="name">Lönespecifikation för Oktober - Camilla Cobolt</field>
+            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons"/>
+            <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_camilla_employee"/>
+            <field name="payslip_run_id" ref="l10n_se_hr_payroll_tiichri_26.payslip_run_2026_10"/>
+            <field name="period_id" ref="l10n_se_hr_payroll_tiichri_26.period_10_2026"/>
+            <field name="date_from">2026-10-01</field>
+            <field name="date_to">2026-10-31</field>
+        </record>
+
+        <!-- Camilla Cobolt — November 2026 -->
+        <record id="hr_payslip_camilla_2026_11" model="hr.payslip">
+            <field name="name">Lönespecifikation för November - Camilla Cobolt</field>
+            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons"/>
+            <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_camilla_employee"/>
+            <field name="payslip_run_id" ref="l10n_se_hr_payroll_tiichri_26.payslip_run_2026_11"/>
+            <field name="period_id" ref="l10n_se_hr_payroll_tiichri_26.period_11_2026"/>
+            <field name="date_from">2026-11-01</field>
+            <field name="date_to">2026-11-30</field>
+        </record>
+
+        <!-- Camilla Cobolt — December 2026 -->
+        <record id="hr_payslip_camilla_2026_12" model="hr.payslip">
+            <field name="name">Lönespecifikation för December - Camilla Cobolt</field>
+            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons"/>
+            <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_camilla_employee"/>
+            <field name="payslip_run_id" ref="l10n_se_hr_payroll_tiichri_26.payslip_run_2026_12"/>
+            <field name="period_id" ref="l10n_se_hr_payroll_tiichri_26.period_12_2026"/>
+            <field name="date_from">2026-12-01</field>
+            <field name="date_to">2026-12-31</field>
+        </record>
+
+        <!-- Doris Dahlin — Januari 2026 -->
+        <record id="hr_payslip_doris_2026_01" model="hr.payslip">
+            <field name="name">Lönespecifikation för Januari - Doris Dahlin</field>
+            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons"/>
+            <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_doris_employee"/>
+            <field name="payslip_run_id" ref="l10n_se_hr_payroll_tiichri_26.payslip_run_2026_01"/>
+            <field name="period_id" ref="l10n_se_hr_payroll_tiichri_26.period_01_2026"/>
+            <field name="date_from">2026-01-01</field>
+            <field name="date_to">2026-01-31</field>
+        </record>
+
+        <!-- Doris Dahlin — Februari 2026 -->
+        <record id="hr_payslip_doris_2026_02" model="hr.payslip">
+            <field name="name">Lönespecifikation för Februari - Doris Dahlin</field>
+            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons"/>
+            <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_doris_employee"/>
+            <field name="payslip_run_id" ref="l10n_se_hr_payroll_tiichri_26.payslip_run_2026_02"/>
+            <field name="period_id" ref="l10n_se_hr_payroll_tiichri_26.period_02_2026"/>
+            <field name="date_from">2026-02-01</field>
+            <field name="date_to">2026-02-28</field>
+        </record>
+
+        <!-- Doris Dahlin — Mars 2026 -->
+        <record id="hr_payslip_doris_2026_03" model="hr.payslip">
+            <field name="name">Lönespecifikation för Mars - Doris Dahlin</field>
+            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons"/>
+            <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_doris_employee"/>
+            <field name="payslip_run_id" ref="l10n_se_hr_payroll_tiichri_26.payslip_run_2026_03"/>
+            <field name="period_id" ref="l10n_se_hr_payroll_tiichri_26.period_03_2026"/>
+            <field name="date_from">2026-03-01</field>
+            <field name="date_to">2026-03-31</field>
+        </record>
+
+        <!-- Doris Dahlin — April 2026 -->
+        <record id="hr_payslip_doris_2026_04" model="hr.payslip">
+            <field name="name">Lönespecifikation för April - Doris Dahlin</field>
+            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons"/>
+            <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_doris_employee"/>
+            <field name="payslip_run_id" ref="l10n_se_hr_payroll_tiichri_26.payslip_run_2026_04"/>
+            <field name="period_id" ref="l10n_se_hr_payroll_tiichri_26.period_04_2026"/>
+            <field name="date_from">2026-04-01</field>
+            <field name="date_to">2026-04-30</field>
+        </record>
+
+        <!-- Doris Dahlin — Maj 2026 -->
+        <record id="hr_payslip_doris_2026_05" model="hr.payslip">
+            <field name="name">Lönespecifikation för Maj - Doris Dahlin</field>
+            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons"/>
+            <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_doris_employee"/>
+            <field name="payslip_run_id" ref="l10n_se_hr_payroll_tiichri_26.payslip_run_2026_05"/>
+            <field name="period_id" ref="l10n_se_hr_payroll_tiichri_26.period_05_2026"/>
+            <field name="date_from">2026-05-01</field>
+            <field name="date_to">2026-05-31</field>
+        </record>
+
+        <!-- Doris Dahlin — Juni 2026 -->
+        <record id="hr_payslip_doris_2026_06" model="hr.payslip">
+            <field name="name">Lönespecifikation för Juni - Doris Dahlin</field>
+            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons"/>
+            <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_doris_employee"/>
+            <field name="payslip_run_id" ref="l10n_se_hr_payroll_tiichri_26.payslip_run_2026_06"/>
+            <field name="period_id" ref="l10n_se_hr_payroll_tiichri_26.period_06_2026"/>
+            <field name="date_from">2026-06-01</field>
+            <field name="date_to">2026-06-30</field>
+        </record>
+
+        <!-- Doris Dahlin — Juli 2026 -->
+        <record id="hr_payslip_doris_2026_07" model="hr.payslip">
+            <field name="name">Lönespecifikation för Juli - Doris Dahlin</field>
+            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons"/>
+            <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_doris_employee"/>
+            <field name="payslip_run_id" ref="l10n_se_hr_payroll_tiichri_26.payslip_run_2026_07"/>
+            <field name="period_id" ref="l10n_se_hr_payroll_tiichri_26.period_07_2026"/>
+            <field name="date_from">2026-07-01</field>
+            <field name="date_to">2026-07-31</field>
+        </record>
+
+        <!-- Doris Dahlin — Augusti 2026 -->
+        <record id="hr_payslip_doris_2026_08" model="hr.payslip">
+            <field name="name">Lönespecifikation för Augusti - Doris Dahlin</field>
+            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons"/>
+            <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_doris_employee"/>
+            <field name="payslip_run_id" ref="l10n_se_hr_payroll_tiichri_26.payslip_run_2026_08"/>
+            <field name="period_id" ref="l10n_se_hr_payroll_tiichri_26.period_08_2026"/>
+            <field name="date_from">2026-08-01</field>
+            <field name="date_to">2026-08-31</field>
+        </record>
+
+        <!-- Doris Dahlin — September 2026 -->
+        <record id="hr_payslip_doris_2026_09" model="hr.payslip">
+            <field name="name">Lönespecifikation för September - Doris Dahlin</field>
+            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons"/>
+            <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_doris_employee"/>
+            <field name="payslip_run_id" ref="l10n_se_hr_payroll_tiichri_26.payslip_run_2026_09"/>
+            <field name="period_id" ref="l10n_se_hr_payroll_tiichri_26.period_09_2026"/>
+            <field name="date_from">2026-09-01</field>
+            <field name="date_to">2026-09-30</field>
+        </record>
+
+        <!-- Doris Dahlin — Oktober 2026 -->
+        <record id="hr_payslip_doris_2026_10" model="hr.payslip">
+            <field name="name">Lönespecifikation för Oktober - Doris Dahlin</field>
+            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons"/>
+            <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_doris_employee"/>
+            <field name="payslip_run_id" ref="l10n_se_hr_payroll_tiichri_26.payslip_run_2026_10"/>
+            <field name="period_id" ref="l10n_se_hr_payroll_tiichri_26.period_10_2026"/>
+            <field name="date_from">2026-10-01</field>
+            <field name="date_to">2026-10-31</field>
+        </record>
+
+        <!-- Doris Dahlin — November 2026 -->
+        <record id="hr_payslip_doris_2026_11" model="hr.payslip">
+            <field name="name">Lönespecifikation för November - Doris Dahlin</field>
+            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons"/>
+            <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_doris_employee"/>
+            <field name="payslip_run_id" ref="l10n_se_hr_payroll_tiichri_26.payslip_run_2026_11"/>
+            <field name="period_id" ref="l10n_se_hr_payroll_tiichri_26.period_11_2026"/>
+            <field name="date_from">2026-11-01</field>
+            <field name="date_to">2026-11-30</field>
+        </record>
+
+        <!-- Doris Dahlin — December 2026 -->
+        <record id="hr_payslip_doris_2026_12" model="hr.payslip">
+            <field name="name">Lönespecifikation för December - Doris Dahlin</field>
+            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons"/>
+            <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_doris_employee"/>
+            <field name="payslip_run_id" ref="l10n_se_hr_payroll_tiichri_26.payslip_run_2026_12"/>
+            <field name="period_id" ref="l10n_se_hr_payroll_tiichri_26.period_12_2026"/>
+            <field name="date_from">2026-12-01</field>
+            <field name="date_to">2026-12-31</field>
+        </record>
+
+        <!-- Frans Filipsson — Januari 2026 -->
+        <record id="hr_payslip_frans_2026_01" model="hr.payslip">
+            <field name="name">Lönespecifikation för Januari - Frans Filipsson</field>
+            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons"/>
+            <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_frans_employee"/>
+            <field name="payslip_run_id" ref="l10n_se_hr_payroll_tiichri_26.payslip_run_2026_01"/>
+            <field name="period_id" ref="l10n_se_hr_payroll_tiichri_26.period_01_2026"/>
+            <field name="date_from">2026-01-01</field>
+            <field name="date_to">2026-01-31</field>
+        </record>
+
+        <!-- Frans Filipsson — Februari 2026 -->
+        <record id="hr_payslip_frans_2026_02" model="hr.payslip">
+            <field name="name">Lönespecifikation för Februari - Frans Filipsson</field>
+            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons"/>
+            <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_frans_employee"/>
+            <field name="payslip_run_id" ref="l10n_se_hr_payroll_tiichri_26.payslip_run_2026_02"/>
+            <field name="period_id" ref="l10n_se_hr_payroll_tiichri_26.period_02_2026"/>
+            <field name="date_from">2026-02-01</field>
+            <field name="date_to">2026-02-28</field>
+        </record>
+
+        <!-- Frans Filipsson — Mars 2026 -->
+        <record id="hr_payslip_frans_2026_03" model="hr.payslip">
+            <field name="name">Lönespecifikation för Mars - Frans Filipsson</field>
+            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons"/>
+            <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_frans_employee"/>
+            <field name="payslip_run_id" ref="l10n_se_hr_payroll_tiichri_26.payslip_run_2026_03"/>
+            <field name="period_id" ref="l10n_se_hr_payroll_tiichri_26.period_03_2026"/>
+            <field name="date_from">2026-03-01</field>
+            <field name="date_to">2026-03-31</field>
+        </record>
+
+        <!-- Frans Filipsson — April 2026 -->
+        <record id="hr_payslip_frans_2026_04" model="hr.payslip">
+            <field name="name">Lönespecifikation för April - Frans Filipsson</field>
+            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons"/>
+            <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_frans_employee"/>
+            <field name="payslip_run_id" ref="l10n_se_hr_payroll_tiichri_26.payslip_run_2026_04"/>
+            <field name="period_id" ref="l10n_se_hr_payroll_tiichri_26.period_04_2026"/>
+            <field name="date_from">2026-04-01</field>
+            <field name="date_to">2026-04-30</field>
+        </record>
+
+        <!-- Frans Filipsson — Maj 2026 -->
+        <record id="hr_payslip_frans_2026_05" model="hr.payslip">
+            <field name="name">Lönespecifikation för Maj - Frans Filipsson</field>
+            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons"/>
+            <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_frans_employee"/>
+            <field name="payslip_run_id" ref="l10n_se_hr_payroll_tiichri_26.payslip_run_2026_05"/>
+            <field name="period_id" ref="l10n_se_hr_payroll_tiichri_26.period_05_2026"/>
+            <field name="date_from">2026-05-01</field>
+            <field name="date_to">2026-05-31</field>
+        </record>
+
+        <!-- Frans Filipsson — Juni 2026 -->
+        <record id="hr_payslip_frans_2026_06" model="hr.payslip">
+            <field name="name">Lönespecifikation för Juni - Frans Filipsson</field>
+            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons"/>
+            <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_frans_employee"/>
+            <field name="payslip_run_id" ref="l10n_se_hr_payroll_tiichri_26.payslip_run_2026_06"/>
+            <field name="period_id" ref="l10n_se_hr_payroll_tiichri_26.period_06_2026"/>
+            <field name="date_from">2026-06-01</field>
+            <field name="date_to">2026-06-30</field>
+        </record>
+
+        <!-- Frans Filipsson — Juli 2026 -->
+        <record id="hr_payslip_frans_2026_07" model="hr.payslip">
+            <field name="name">Lönespecifikation för Juli - Frans Filipsson</field>
+            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons"/>
+            <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_frans_employee"/>
+            <field name="payslip_run_id" ref="l10n_se_hr_payroll_tiichri_26.payslip_run_2026_07"/>
+            <field name="period_id" ref="l10n_se_hr_payroll_tiichri_26.period_07_2026"/>
+            <field name="date_from">2026-07-01</field>
+            <field name="date_to">2026-07-31</field>
+        </record>
+
+        <!-- Frans Filipsson — Augusti 2026 -->
+        <record id="hr_payslip_frans_2026_08" model="hr.payslip">
+            <field name="name">Lönespecifikation för Augusti - Frans Filipsson</field>
+            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons"/>
+            <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_frans_employee"/>
+            <field name="payslip_run_id" ref="l10n_se_hr_payroll_tiichri_26.payslip_run_2026_08"/>
+            <field name="period_id" ref="l10n_se_hr_payroll_tiichri_26.period_08_2026"/>
+            <field name="date_from">2026-08-01</field>
+            <field name="date_to">2026-08-31</field>
+        </record>
+
+        <!-- Frans Filipsson — September 2026 -->
+        <record id="hr_payslip_frans_2026_09" model="hr.payslip">
+            <field name="name">Lönespecifikation för September - Frans Filipsson</field>
+            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons"/>
+            <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_frans_employee"/>
+            <field name="payslip_run_id" ref="l10n_se_hr_payroll_tiichri_26.payslip_run_2026_09"/>
+            <field name="period_id" ref="l10n_se_hr_payroll_tiichri_26.period_09_2026"/>
+            <field name="date_from">2026-09-01</field>
+            <field name="date_to">2026-09-30</field>
+        </record>
+
+        <!-- Frans Filipsson — Oktober 2026 -->
+        <record id="hr_payslip_frans_2026_10" model="hr.payslip">
+            <field name="name">Lönespecifikation för Oktober - Frans Filipsson</field>
+            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons"/>
+            <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_frans_employee"/>
+            <field name="payslip_run_id" ref="l10n_se_hr_payroll_tiichri_26.payslip_run_2026_10"/>
+            <field name="period_id" ref="l10n_se_hr_payroll_tiichri_26.period_10_2026"/>
+            <field name="date_from">2026-10-01</field>
+            <field name="date_to">2026-10-31</field>
+        </record>
+
+        <!-- Frans Filipsson — November 2026 -->
+        <record id="hr_payslip_frans_2026_11" model="hr.payslip">
+            <field name="name">Lönespecifikation för November - Frans Filipsson</field>
+            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons"/>
+            <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_frans_employee"/>
+            <field name="payslip_run_id" ref="l10n_se_hr_payroll_tiichri_26.payslip_run_2026_11"/>
+            <field name="period_id" ref="l10n_se_hr_payroll_tiichri_26.period_11_2026"/>
+            <field name="date_from">2026-11-01</field>
+            <field name="date_to">2026-11-30</field>
+        </record>
+
+        <!-- Gustav Groth — Januari 2026 -->
+        <record id="hr_payslip_gustav_2026_01" model="hr.payslip">
+            <field name="name">Lönespecifikation för Januari - Gustav Groth</field>
+            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons"/>
+            <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_gustav_employee"/>
+            <field name="payslip_run_id" ref="l10n_se_hr_payroll_tiichri_26.payslip_run_2026_01"/>
+            <field name="period_id" ref="l10n_se_hr_payroll_tiichri_26.period_01_2026"/>
+            <field name="date_from">2026-01-01</field>
+            <field name="date_to">2026-01-31</field>
+        </record>
+
+        <!-- Gustav Groth — Februari 2026 -->
+        <record id="hr_payslip_gustav_2026_02" model="hr.payslip">
+            <field name="name">Lönespecifikation för Februari - Gustav Groth</field>
+            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons"/>
+            <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_gustav_employee"/>
+            <field name="payslip_run_id" ref="l10n_se_hr_payroll_tiichri_26.payslip_run_2026_02"/>
+            <field name="period_id" ref="l10n_se_hr_payroll_tiichri_26.period_02_2026"/>
+            <field name="date_from">2026-02-01</field>
+            <field name="date_to">2026-02-28</field>
+        </record>
+
+        <!-- Gustav Groth — Mars 2026 -->
+        <record id="hr_payslip_gustav_2026_03" model="hr.payslip">
+            <field name="name">Lönespecifikation för Mars - Gustav Groth</field>
+            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons"/>
+            <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_gustav_employee"/>
+            <field name="payslip_run_id" ref="l10n_se_hr_payroll_tiichri_26.payslip_run_2026_03"/>
+            <field name="period_id" ref="l10n_se_hr_payroll_tiichri_26.period_03_2026"/>
+            <field name="date_from">2026-03-01</field>
+            <field name="date_to">2026-03-31</field>
+        </record>
+
+        <!-- Gustav Groth — April 2026 -->
+        <record id="hr_payslip_gustav_2026_04" model="hr.payslip">
+            <field name="name">Lönespecifikation för April - Gustav Groth</field>
+            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons"/>
+            <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_gustav_employee"/>
+            <field name="payslip_run_id" ref="l10n_se_hr_payroll_tiichri_26.payslip_run_2026_04"/>
+            <field name="period_id" ref="l10n_se_hr_payroll_tiichri_26.period_04_2026"/>
+            <field name="date_from">2026-04-01</field>
+            <field name="date_to">2026-04-30</field>
+        </record>
+
+        <!-- Gustav Groth — Maj 2026 -->
+        <record id="hr_payslip_gustav_2026_05" model="hr.payslip">
+            <field name="name">Lönespecifikation för Maj - Gustav Groth</field>
+            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons"/>
+            <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_gustav_employee"/>
+            <field name="payslip_run_id" ref="l10n_se_hr_payroll_tiichri_26.payslip_run_2026_05"/>
+            <field name="period_id" ref="l10n_se_hr_payroll_tiichri_26.period_05_2026"/>
+            <field name="date_from">2026-05-01</field>
+            <field name="date_to">2026-05-31</field>
+        </record>
+
+        <!-- Gustav Groth — Juni 2026 -->
+        <record id="hr_payslip_gustav_2026_06" model="hr.payslip">
+            <field name="name">Lönespecifikation för Juni - Gustav Groth</field>
+            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons"/>
+            <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_gustav_employee"/>
+            <field name="payslip_run_id" ref="l10n_se_hr_payroll_tiichri_26.payslip_run_2026_06"/>
+            <field name="period_id" ref="l10n_se_hr_payroll_tiichri_26.period_06_2026"/>
+            <field name="date_from">2026-06-01</field>
+            <field name="date_to">2026-06-30</field>
+        </record>
+
+        <!-- Gustav Groth — Juli 2026 -->
+        <record id="hr_payslip_gustav_2026_07" model="hr.payslip">
+            <field name="name">Lönespecifikation för Juli - Gustav Groth</field>
+            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons"/>
+            <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_gustav_employee"/>
+            <field name="payslip_run_id" ref="l10n_se_hr_payroll_tiichri_26.payslip_run_2026_07"/>
+            <field name="period_id" ref="l10n_se_hr_payroll_tiichri_26.period_07_2026"/>
+            <field name="date_from">2026-07-01</field>
+            <field name="date_to">2026-07-31</field>
+        </record>
+
+        <!-- Gustav Groth — Augusti 2026 -->
+        <record id="hr_payslip_gustav_2026_08" model="hr.payslip">
+            <field name="name">Lönespecifikation för Augusti - Gustav Groth</field>
+            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons"/>
+            <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_gustav_employee"/>
+            <field name="payslip_run_id" ref="l10n_se_hr_payroll_tiichri_26.payslip_run_2026_08"/>
+            <field name="period_id" ref="l10n_se_hr_payroll_tiichri_26.period_08_2026"/>
+            <field name="date_from">2026-08-01</field>
+            <field name="date_to">2026-08-31</field>
+        </record>
+
+        <!-- Gustav Groth — September 2026 -->
+        <record id="hr_payslip_gustav_2026_09" model="hr.payslip">
+            <field name="name">Lönespecifikation för September - Gustav Groth</field>
+            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons"/>
+            <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_gustav_employee"/>
+            <field name="payslip_run_id" ref="l10n_se_hr_payroll_tiichri_26.payslip_run_2026_09"/>
+            <field name="period_id" ref="l10n_se_hr_payroll_tiichri_26.period_09_2026"/>
+            <field name="date_from">2026-09-01</field>
+            <field name="date_to">2026-09-30</field>
+        </record>
+
+        <!-- Gustav Groth — Oktober 2026 -->
+        <record id="hr_payslip_gustav_2026_10" model="hr.payslip">
+            <field name="name">Lönespecifikation för Oktober - Gustav Groth</field>
+            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons"/>
+            <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_gustav_employee"/>
+            <field name="payslip_run_id" ref="l10n_se_hr_payroll_tiichri_26.payslip_run_2026_10"/>
+            <field name="period_id" ref="l10n_se_hr_payroll_tiichri_26.period_10_2026"/>
+            <field name="date_from">2026-10-01</field>
+            <field name="date_to">2026-10-31</field>
+        </record>
+
+        <!-- Gustav Groth — November 2026 -->
+        <record id="hr_payslip_gustav_2026_11" model="hr.payslip">
+            <field name="name">Lönespecifikation för November - Gustav Groth</field>
+            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons"/>
+            <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_gustav_employee"/>
+            <field name="payslip_run_id" ref="l10n_se_hr_payroll_tiichri_26.payslip_run_2026_11"/>
+            <field name="period_id" ref="l10n_se_hr_payroll_tiichri_26.period_11_2026"/>
+            <field name="date_from">2026-11-01</field>
+            <field name="date_to">2026-11-30</field>
+        </record>
+
+        <!-- Gustav Groth — December 2026 -->
+        <record id="hr_payslip_gustav_2026_12" model="hr.payslip">
+            <field name="name">Lönespecifikation för December - Gustav Groth</field>
+            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons"/>
+            <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_gustav_employee"/>
+            <field name="payslip_run_id" ref="l10n_se_hr_payroll_tiichri_26.payslip_run_2026_12"/>
+            <field name="period_id" ref="l10n_se_hr_payroll_tiichri_26.period_12_2026"/>
+            <field name="date_from">2026-12-01</field>
+            <field name="date_to">2026-12-31</field>
+        </record>
+
+        <!-- Helmer Henriksson — Januari 2026 -->
+        <record id="hr_payslip_helmer_2026_01" model="hr.payslip">
+            <field name="name">Lönespecifikation för Januari - Helmer Henriksson</field>
+            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons"/>
+            <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_helmer_employee"/>
+            <field name="payslip_run_id" ref="l10n_se_hr_payroll_tiichri_26.payslip_run_2026_01"/>
+            <field name="period_id" ref="l10n_se_hr_payroll_tiichri_26.period_01_2026"/>
+            <field name="date_from">2026-01-01</field>
+            <field name="date_to">2026-01-31</field>
+        </record>
+
+        <!-- Helmer Henriksson — Februari 2026 -->
+        <record id="hr_payslip_helmer_2026_02" model="hr.payslip">
+            <field name="name">Lönespecifikation för Februari - Helmer Henriksson</field>
+            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons"/>
+            <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_helmer_employee"/>
+            <field name="payslip_run_id" ref="l10n_se_hr_payroll_tiichri_26.payslip_run_2026_02"/>
+            <field name="period_id" ref="l10n_se_hr_payroll_tiichri_26.period_02_2026"/>
+            <field name="date_from">2026-02-01</field>
+            <field name="date_to">2026-02-28</field>
+        </record>
+
+        <!-- Helmer Henriksson — Mars 2026 -->
+        <record id="hr_payslip_helmer_2026_03" model="hr.payslip">
+            <field name="name">Lönespecifikation för Mars - Helmer Henriksson</field>
+            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons"/>
+            <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_helmer_employee"/>
+            <field name="payslip_run_id" ref="l10n_se_hr_payroll_tiichri_26.payslip_run_2026_03"/>
+            <field name="period_id" ref="l10n_se_hr_payroll_tiichri_26.period_03_2026"/>
+            <field name="date_from">2026-03-01</field>
+            <field name="date_to">2026-03-31</field>
+        </record>
+
+        <!-- Helmer Henriksson — April 2026 -->
+        <record id="hr_payslip_helmer_2026_04" model="hr.payslip">
+            <field name="name">Lönespecifikation för April - Helmer Henriksson</field>
+            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons"/>
+            <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_helmer_employee"/>
+            <field name="payslip_run_id" ref="l10n_se_hr_payroll_tiichri_26.payslip_run_2026_04"/>
+            <field name="period_id" ref="l10n_se_hr_payroll_tiichri_26.period_04_2026"/>
+            <field name="date_from">2026-04-01</field>
+            <field name="date_to">2026-04-30</field>
+        </record>
+
+        <!-- Helmer Henriksson — Maj 2026 -->
+        <record id="hr_payslip_helmer_2026_05" model="hr.payslip">
+            <field name="name">Lönespecifikation för Maj - Helmer Henriksson</field>
+            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons"/>
+            <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_helmer_employee"/>
+            <field name="payslip_run_id" ref="l10n_se_hr_payroll_tiichri_26.payslip_run_2026_05"/>
+            <field name="period_id" ref="l10n_se_hr_payroll_tiichri_26.period_05_2026"/>
+            <field name="date_from">2026-05-01</field>
+            <field name="date_to">2026-05-31</field>
+        </record>
+
+        <!-- Helmer Henriksson — Juni 2026 -->
+        <record id="hr_payslip_helmer_2026_06" model="hr.payslip">
+            <field name="name">Lönespecifikation för Juni - Helmer Henriksson</field>
+            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons"/>
+            <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_helmer_employee"/>
+            <field name="payslip_run_id" ref="l10n_se_hr_payroll_tiichri_26.payslip_run_2026_06"/>
+            <field name="period_id" ref="l10n_se_hr_payroll_tiichri_26.period_06_2026"/>
+            <field name="date_from">2026-06-01</field>
+            <field name="date_to">2026-06-30</field>
+        </record>
+
+        <!-- Helmer Henriksson — Juli 2026 -->
+        <record id="hr_payslip_helmer_2026_07" model="hr.payslip">
+            <field name="name">Lönespecifikation för Juli - Helmer Henriksson</field>
+            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons"/>
+            <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_helmer_employee"/>
+            <field name="payslip_run_id" ref="l10n_se_hr_payroll_tiichri_26.payslip_run_2026_07"/>
+            <field name="period_id" ref="l10n_se_hr_payroll_tiichri_26.period_07_2026"/>
+            <field name="date_from">2026-07-01</field>
+            <field name="date_to">2026-07-31</field>
+        </record>
+
+        <!-- Helmer Henriksson — Augusti 2026 -->
+        <record id="hr_payslip_helmer_2026_08" model="hr.payslip">
+            <field name="name">Lönespecifikation för Augusti - Helmer Henriksson</field>
+            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons"/>
+            <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_helmer_employee"/>
+            <field name="payslip_run_id" ref="l10n_se_hr_payroll_tiichri_26.payslip_run_2026_08"/>
+            <field name="period_id" ref="l10n_se_hr_payroll_tiichri_26.period_08_2026"/>
+            <field name="date_from">2026-08-01</field>
+            <field name="date_to">2026-08-31</field>
+        </record>
+
+        <!-- Helmer Henriksson — September 2026 -->
+        <record id="hr_payslip_helmer_2026_09" model="hr.payslip">
+            <field name="name">Lönespecifikation för September - Helmer Henriksson</field>
+            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons"/>
+            <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_helmer_employee"/>
+            <field name="payslip_run_id" ref="l10n_se_hr_payroll_tiichri_26.payslip_run_2026_09"/>
+            <field name="period_id" ref="l10n_se_hr_payroll_tiichri_26.period_09_2026"/>
+            <field name="date_from">2026-09-01</field>
+            <field name="date_to">2026-09-30</field>
+        </record>
+
+        <!-- Helmer Henriksson — Oktober 2026 -->
+        <record id="hr_payslip_helmer_2026_10" model="hr.payslip">
+            <field name="name">Lönespecifikation för Oktober - Helmer Henriksson</field>
+            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons"/>
+            <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_helmer_employee"/>
+            <field name="payslip_run_id" ref="l10n_se_hr_payroll_tiichri_26.payslip_run_2026_10"/>
+            <field name="period_id" ref="l10n_se_hr_payroll_tiichri_26.period_10_2026"/>
+            <field name="date_from">2026-10-01</field>
+            <field name="date_to">2026-10-31</field>
+        </record>
+
+        <!-- Helmer Henriksson — November 2026 -->
+        <record id="hr_payslip_helmer_2026_11" model="hr.payslip">
+            <field name="name">Lönespecifikation för November - Helmer Henriksson</field>
+            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons"/>
+            <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_helmer_employee"/>
+            <field name="payslip_run_id" ref="l10n_se_hr_payroll_tiichri_26.payslip_run_2026_11"/>
+            <field name="period_id" ref="l10n_se_hr_payroll_tiichri_26.period_11_2026"/>
+            <field name="date_from">2026-11-01</field>
+            <field name="date_to">2026-11-30</field>
+        </record>
+
+        <!-- Helmer Henriksson — December 2026 -->
+        <record id="hr_payslip_helmer_2026_12" model="hr.payslip">
+            <field name="name">Lönespecifikation för December - Helmer Henriksson</field>
+            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons"/>
+            <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_helmer_employee"/>
+            <field name="payslip_run_id" ref="l10n_se_hr_payroll_tiichri_26.payslip_run_2026_12"/>
+            <field name="period_id" ref="l10n_se_hr_payroll_tiichri_26.period_12_2026"/>
+            <field name="date_from">2026-12-01</field>
+            <field name="date_to">2026-12-31</field>
+        </record>
+
+        <!-- Karin Kullberg — Juni 2026 -->
+        <record id="hr_payslip_karin_2026_06" model="hr.payslip">
+            <field name="name">Lönespecifikation för Juni - Karin Kullberg</field>
+            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons"/>
+            <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_karin_employee"/>
+            <field name="payslip_run_id" ref="l10n_se_hr_payroll_tiichri_26.payslip_run_2026_06"/>
+            <field name="period_id" ref="l10n_se_hr_payroll_tiichri_26.period_06_2026"/>
+            <field name="date_from">2026-06-01</field>
+            <field name="date_to">2026-06-30</field>
+        </record>
+
+        <!-- Karin Kullberg — Juli 2026 -->
+        <record id="hr_payslip_karin_2026_07" model="hr.payslip">
+            <field name="name">Lönespecifikation för Juli - Karin Kullberg</field>
+            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons"/>
+            <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_karin_employee"/>
+            <field name="payslip_run_id" ref="l10n_se_hr_payroll_tiichri_26.payslip_run_2026_07"/>
+            <field name="period_id" ref="l10n_se_hr_payroll_tiichri_26.period_07_2026"/>
+            <field name="date_from">2026-07-01</field>
+            <field name="date_to">2026-07-31</field>
+        </record>
+
+        <!-- Karin Kullberg — Augusti 2026 -->
+        <record id="hr_payslip_karin_2026_08" model="hr.payslip">
+            <field name="name">Lönespecifikation för Augusti - Karin Kullberg</field>
+            <field name="company_id" ref="l10n_se_hr_payroll_tiichri.company_aronssons"/>
+            <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_karin_employee"/>
+            <field name="payslip_run_id" ref="l10n_se_hr_payroll_tiichri_26.payslip_run_2026_08"/>
+            <field name="period_id" ref="l10n_se_hr_payroll_tiichri_26.period_08_2026"/>
+            <field name="date_from">2026-08-01</field>
+            <field name="date_to">2026-08-31</field>
+        </record>
+    </data>
+</odoo>

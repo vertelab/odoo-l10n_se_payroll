@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- Företagsinställningar för flextid -->
+        <record id="view_res_config_settings_inherit_flex" model="ir.ui.view">
+            <field name="name">res.config.settings.inherit.flex</field>
+            <field name="model">res.config.settings</field>
+            <field name="inherit_id" ref="hr.res_config_settings_view_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//app[@name='hr']" position="inside">
+                    <block title="Flextid" name="flex_setting_container">
+                        <setting help="Aktivera flextidsbank för anställda. Kräver modulen l10n_se_hr_payroll_flex.">
+                            <field name="flex_enabled"/>
+                        </setting>
+                    </block>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>
