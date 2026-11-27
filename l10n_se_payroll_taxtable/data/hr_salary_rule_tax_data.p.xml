@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<odoo>
+    <data noupdate="0">
+
+        <!-- Skattesummering -->
+        <record id="hr_salary_rule_total_tax_display" model="hr.salary.rule">
+            <field name="category_id" ref="l10n_se_hr_payroll.hr_salary_rule_category_PARENT"/>
+            <field name="company_id" eval="False"/>
+            <field name="code">total_skatt</field>
+            <field name="name">Totalt avdragen skatt</field>
+            <field name="sequence">1950</field>
+            <field name="appears_on_payslip" eval="True"/>
+            <field name="condition_select">none</field>
+            <field name="amount_select">code</field>
+            <field name="amount_python_compute">
+result = categories.SKV
+            </field>
+        </record>
+
+        <!-- Preliminärskatt -->
+        <record id="hr_salary_rule_prel_tax_table" model="hr.salary.rule">
+            <field name="category_id" ref="l10n_se_hr_payroll.hr_salary_rule_category_SKV" />
+            <field name="parent_rule_id" ref="hr_salary_rule_total_tax_display" />
+            <field name="company_id" eval="False"/>
+            <field name="code">skatt_tabell</field>
+            <field name="name">Preliminärskatt (Tabell)</field>
+            <field name="sequence">1600</field>
+            <field name="appears_on_payslip" eval="True"/>
+            <field name="condition_select">python</field>
+            <field name="condition_python">
+result = categories.BRUTTO &gt; 0 or categories.FORMAN &gt; 0
+            </field>
+            <field name="amount_select">code</field>
+            <field name="amount_python_compute">
+gross = categories.BRUTTO or 0.0
+benefits = categories.FORMAN or 0.0
+one_off = categories.ENGANG or 0.0
+
+if contract.has_tax_equalization:
+    taxable_income = gross + benefits
+else:
+    taxable_income = (gross - one_off) + benefits
+
+if taxable_income &gt; 0:
+    tax_amount = contract.l10_sum_columns_taxtable_line(payslip, taxable_income)
+    result = round(tax_amount or 0.0) * -1
+else:
+    result = 0.0
+            </field>
+        </record>
+
+        <!-- Engångsskatt vid t.ex. bonus. -->
+        <record id="hr_salary_rule_one_off_tax" model="hr.salary.rule">
+            <field name="category_id" ref="l10n_se_hr_payroll.hr_salary_rule_category_SKV" />
+            <field name="parent_rule_id" ref="hr_salary_rule_total_tax_display" />
+            <field name="company_id" eval="False"/>
+            <field name="code">skatt_engang</field>
+            <field name="name">Engångsskatt</field>
+            <field name="sequence">1605</field>
+            <field name="appears_on_payslip" eval="True"/>
+            <field name="condition_select">python</field>
+            <field name="condition_python">
+result = (categories.ENGANG and categories.ENGANG &gt; 0) and not contract.has_tax_equalization
+            </field>
+            <field name="amount_select">code</field>
+            <field name="amount_python_compute">
+one_off_amount = categories.ENGANG or 0.0
+
+tax_amount = contract.l10_sum_columns_one_off_tax(one_off_amount)
+
+result = result = round(tax_amount or 0.0) * -1
+            </field>
+        </record>
+
+    </data>
+</odoo>

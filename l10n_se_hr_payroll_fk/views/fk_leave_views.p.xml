@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="view_hr_fk_leave_list" model="ir.ui.view">
+            <field name="name">hr.fk.leave.list</field>
+            <field name="model">hr.fk.leave</field>
+            <field name="arch" type="xml">
+                <list string="FK Leave Periods">
+                    <field name="employee_id" widget="many2one_avatar_employee"/>
+                    <field name="leave_type" widget="badge"/>
+                    <field name="date_start"/>
+                    <field name="date_end"/>
+                    <field name="employer_days"/>
+                    <field name="fk_days"/>
+                    <field name="fk_amount" widget="monetary"
+                           options="{'currency_field': 'currency_id'}"/>
+                    <field name="state" widget="badge"
+                           decoration-success="state == 'reimbursed'"
+                           decoration-warning="state == 'draft'"
+                           decoration-info="state == 'reported'"/>
+                </list>
+            </field>
+        </record>
+
+        <record id="view_hr_fk_leave_form" model="ir.ui.view">
+            <field name="name">hr.fk.leave.form</field>
+            <field name="model">hr.fk.leave</field>
+            <field name="arch" type="xml">
+                <form string="FK Leave Period">
+                    <header>
+                        <field name="state" widget="statusbar"/>
+                    </header>
+                    <sheet>
+                        <group>
+                            <field name="employee_id"/>
+                            <field name="leave_type"/>
+                            <field name="date_start"/>
+                            <field name="date_end"/>
+                            <field name="karens_day"/>
+                        </group>
+                        <group string="Days &amp; Amounts">
+                            <field name="employer_days"/>
+                            <field name="fk_days"/>
+                            <field name="employer_amount" widget="monetary"
+                                   options="{'currency_field': 'currency_id'}"/>
+                            <field name="fk_amount" widget="monetary"
+                                   options="{'currency_field': 'currency_id'}"/>
+                            <field name="fk_reimbursed" widget="monetary"
+                                   options="{'currency_field': 'currency_id'}"/>
+                        </group>
+                        <group string="Notes">
+                            <field name="note" nolabel="1"/>
+                        </group>
+                    </sheet>
+                    <chatter/>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_hr_fk_leave" model="ir.actions.act_window">
+            <field name="name">FK Leave Periods</field>
+            <field name="res_model">hr.fk.leave</field>
+            <field name="view_mode">list,form</field>
+        </record>
+
+        <menuitem id="menu_hr_fk_leave"
+                  name="FK Leave"
+                  parent="payroll.payroll_menu_root"
+                  action="action_hr_fk_leave"
+                  sequence="40"/>
+
+    </data>
+</odoo>

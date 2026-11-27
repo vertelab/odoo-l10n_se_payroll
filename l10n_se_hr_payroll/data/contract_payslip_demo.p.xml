@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="abigail_contract_1" model="res.partner">
+            <field name = "name">abigail_contract_1</field>
+            <field name="employee_id" ref="hr.employee_hne"/>
+        </record>
+    </data>
+</odoo>

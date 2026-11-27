@@ -1,0 +1,55 @@
+<odoo>
+
+    <record id="hr_payslip_view_tree_inherit" model="ir.ui.view">
+        <field name="name">hr.payslip.list.amounts</field>
+        <field name="model">hr.payslip</field>
+        <field name="inherit_id" ref="payroll.hr_payslip_view_tree"/>
+        <field name="arch" type="xml">
+            <field name="state" position="after">
+                <field name="gl_amount" optional="hide"/>
+                <field name="bl_amount" optional="show"/>
+                <field name="total_skatt_amount" optional="show"/>
+                <field name="nl_amount" optional="show"/>
+                <field name="sa_amount" optional="hide"/>
+            </field>
+        </field>
+    </record>
+
+    <record id="hr_payslip_view_form_inherit" model="ir.ui.view">
+        <field name="name">hr.payslip.form.amounts</field>
+        <field name="model">hr.payslip</field>
+        <field name="inherit_id" ref="payroll.hr_payslip_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//group[@name='right']" position="after">
+                <group string="Löneöversikt">
+                    <group>
+                        <field name="gl_amount" widget="monetary"/>
+                        <field name="bl_amount" widget="monetary"/>
+                        <field name="total_skatt_amount" widget="monetary"/>
+                    </group>
+                    <group>
+                        <field name="nl_amount" widget="monetary"/>
+                        <field name="sa_amount" widget="monetary"/>
+                    </group>
+                </group>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="work_entry_search" model="ir.ui.view">
+        <field name="name">work.entry.search</field>
+        <field name="model">hr.work.entry.type</field>
+        <field name="arch" type="xml">
+            <search string="Sök Uppgifter">
+
+            </search>
+        </field>
+    </record>
+
+    <record id="hr_payroll_work_entry_type_action" model="ir.actions.act_window">
+        <field name="name">Work Entry Types</field>
+        <field name="res_model">hr.work.entry.type</field>
+        <field name="view_mode">list,kanban,form</field>
+    </record>
+    <menuitem id="hr_payroll_work_entry_type" action="hr_payroll_work_entry_type_action" parent="payroll.payroll_menu_configuration" sequence="10" />
+</odoo>

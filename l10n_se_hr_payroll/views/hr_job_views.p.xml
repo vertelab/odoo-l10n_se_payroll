@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="view_hr_job_form_inherit" model="ir.ui.view">
+            <field name="name">hr.job.form.inherit.l10n_se_payroll</field>
+            <field name="model">hr.job</field>
+            <field name="inherit_id" ref="hr.view_hr_job_form"/>
+            <field name="arch" type="xml">
+                <!-- Add nyk_id after department -->
+                <xpath expr="//field[@name='department_id']" position="after">
+                    <field name="nyk_id"/>
+                </xpath>
+                <!-- Add chatter -->
+                <xpath expr="//sheet" position="after">
+                    <chatter/>
+                </xpath>
+                <!-- Add statistics page to existing notebook -->
+                <xpath expr="//page[@name='recruitment_page']" position="after">
+                    <page string="Lönestatistik" name="salary_stats_page">
+                        <group string="Anställda">
+                            <field name="employee_count"/>
+                            <button name="action_view_employees"
+                                    string="Visa anställda" type="object"
+                                    class="btn-secondary"/>
+                        </group>
+                        <group string="Lön">
+                            <field name="avg_wage" widget="monetary"
+                                   options="{'currency_field': 'company_currency_id'}"/>
+                            <field name="min_wage" widget="monetary"
+                                   options="{'currency_field': 'company_currency_id'}"/>
+                            <field name="max_wage" widget="monetary"
+                                   options="{'currency_field': 'company_currency_id'}"/>
+                            <field name="wage_trend"/>
+                        </group>
+                        <group string="Könsfördelning">
+                            <field name="male_count"/>
+                            <field name="female_count"/>
+                            <field name="other_gender_count"/>
+                        </group>
+                        <group string="Erfarenhet">
+                            <field name="avg_age"/>
+                            <field name="avg_seniority_days"/>
+                        </group>
+                    </page>
+                </xpath>
+
+            </field>
+        </record>
+    </data>
+</odoo>

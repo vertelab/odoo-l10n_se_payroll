@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Client action for the dashboard -->
+    <record id="action_hr_leave_dashboard" model="ir.actions.client">
+        <field name="name">Leave Dashboard</field>
+        <field name="tag">hr_leave_dashboard</field>
+    </record>
+
+    <!-- Menu item -->
+    <menuitem id="menu_hr_leave_dashboard"
+              name="Leave Dashboard"
+              parent="hr_holidays.menu_hr_holidays_root"
+              action="action_hr_leave_dashboard"
+              sequence="10"
+              groups="hr.group_hr_manager"/>
+
+    <!-- Dashboard QWeb template -->
+    <template id="hr_leave_dashboard_template" name="Leave Dashboard">
+        <t t-name="hr_leave_dashboard.template">
+            <div class="o_hr_leave_dashboard container-fluid">
+                <!-- Header -->
+                <div class="row mb-4">
+                    <div class="col-12">
+                        <h2>
+                            <t t-esc="dashboard_data.current_employee.name or 'Leave Dashboard'"/>
+                            <small class="text-muted ms-2" t-if="dashboard_data.current_employee.department">
+                                <t t-esc="dashboard_data.current_employee.department"/>
+                            </small>
+                        </h2>
+                        <p class="text-muted" t-if="dashboard_data.current_employee.subordinate_count">
+                            Managing <strong><t t-esc="dashboard_data.current_employee.subordinate_count"/></strong>
+                            direct subordinates
+                        </p>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <!-- Today's Absentees -->
+                    <div class="col-lg-6 mb-4">
+                        <div class="card">
+                            <div class="card-header">
+                                <h5 class="mb-0">
+                                    <i class="fa fa-user-times me-1"/> Today's Absentees
+                                    <span class="badge bg-warning ms-2" t-if="dashboard_data.today_absentees">
+                                        <t t-esc="len(dashboard_data.today_absentees)"/>
+                                    </span>
+                                </h5>
+                            </div>
+                            <div class="card-body">
+                                <t t-if="not dashboard_data.today_absentees">
+                                    <p class="text-muted">No absentees today.</p>
+                                </t>
+                                <t t-else="">
+                                    <t t-foreach="dashboard_data.today_absentees" t-as="absentee">
+                                        <div class="absentee-item d-flex justify-content-between mb-2">
+                                            <div>
+                                                <strong><t t-esc="absentee.employee_name"/></strong>
+                                                <span class="badge bg-info ms-2" t-esc="absentee.leave_type"/>
+                                            </div>
+                                            <div class="text-muted small">
+                                                <t t-esc="absentee.from_date"/>
+                                                <t t-if="absentee.from_date != absentee.to_date">
+                                                    → <t t-esc="absentee.to_date"/>
+                                                </t>
+                                            </div>
+                                        </div>
+                                    </t>
+                                </t>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Upcoming Public Holidays -->
+                    <div class="col-lg-6 mb-4">
+                        <div class="card">
+                            <div class="card-header">
+                                <h5 class="mb-0">
+                                    <i class="fa fa-calendar me-1"/> Upcoming Holidays
+                                </h5>
+                            </div>
+                            <div class="card-body">
+                                <t t-if="not dashboard_data.upcoming_holidays">
+                                    <p class="text-muted">No upcoming holidays.</p>
+                                </t>
+                                <t t-else="">
+                                    <t t-foreach="dashboard_data.upcoming_holidays" t-as="holiday">
+                                        <div class="holiday-item d-flex justify-content-between mb-2">
+                                            <strong><t t-esc="holiday.name"/></strong>
+                                            <span class="text-muted small">
+                                                <t t-esc="holiday.date_from"/>
+                                                <t t-if="holiday.date_from != holiday.date_to">
+                                                    → <t t-esc="holiday.date_to"/>
+                                                </t>
+                                            </span>
+                                        </div>
+                                    </t>
+                                </t>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <!-- Pending Approvals -->
+                    <div class="col-lg-6 mb-4">
+                        <div class="card">
+                            <div class="card-header">
+                                <h5 class="mb-0">
+                                    <i class="fa fa-clock-o me-1"/> Pending Approvals
+                                    <span class="badge bg-danger ms-2" t-if="dashboard_data.pending_approvals">
+                                        <t t-esc="len(dashboard_data.pending_approvals)"/>
+                                    </span>
+                                </h5>
+                            </div>
+                            <div class="card-body">
+                                <t t-if="not dashboard_data.pending_approvals">
+                                    <p class="text-muted">No pending approvals.</p>
+                                </t>
+                                <t t-else="">
+                                    <t t-foreach="dashboard_data.pending_approvals" t-as="approval">
+                                        <div class="approval-item d-flex justify-content-between mb-2">
+                                            <div>
+                                                <strong><t t-esc="approval.employee_name"/></strong>
+                                                <span class="badge bg-info ms-2" t-esc="approval.leave_type"/>
+                                                <span class="badge bg-secondary ms-1" t-esc="approval.state"/>
+                                            </div>
+                                            <div class="text-muted small">
+                                                <t t-esc="approval.from_date"/> → <t t-esc="approval.to_date"/>
+                                                (<t t-esc="approval.days"/> days)
+                                            </div>
+                                        </div>
+                                    </t>
+                                </t>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Subordinates Overview -->
+                    <div class="col-lg-6 mb-4">
+                        <div class="card">
+                            <div class="card-header">
+                                <h5 class="mb-0">
+                                    <i class="fa fa-users me-1"/> Subordinates
+                                </h5>
+                            </div>
+                            <div class="card-body">
+                                <t t-if="not dashboard_data.subordinates">
+                                    <p class="text-muted">No subordinates.</p>
+                                </t>
+                                <t t-else="">
+                                    <t t-foreach="dashboard_data.subordinates" t-as="sub">
+                                        <div class="subordinate-item mb-3 p-2 border rounded">
+                                            <div class="d-flex justify-content-between">
+                                                <strong>
+                                                    <t t-esc="sub.name"/>
+                                                    <t t-if="sub.is_absent_today">
+                                                        <span class="badge bg-warning ms-2">Absent today</span>
+                                                    </t>
+                                                </strong>
+                                                <small class="text-muted" t-esc="sub.job_title"/>
+                                            </div>
+                                            <div class="mt-1" t-if="sub.leave_balances">
+                                                <t t-foreach="sub.leave_balances" t-as="bal">
+                                                    <span class="badge bg-light text-dark me-1">
+                                                        <t t-esc="bal.type"/>: <t t-esc="bal.remaining"/> / <t t-esc="bal.allocated"/>
+                                                    </span>
+                                                </t>
+                                            </div>
+                                        </div>
+                                    </t>
+                                </t>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </t>
+    </template>
+</odoo>

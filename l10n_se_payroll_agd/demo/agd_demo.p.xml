@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <!-- ============================================================
+        Demo AGD: Creates employee, payslip run, and calculates AGD.
+        Uses function tag for complex data generation.
+        ============================================================ -->
+        <function model="l10n_se_payroll_agd.agd_demo_generator" name="generate_demo_data"/>
+
+    </data>
+</odoo>

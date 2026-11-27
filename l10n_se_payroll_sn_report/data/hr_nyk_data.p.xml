@@ -1,0 +1,299 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <record id="nyk_112000" model="hr.nyk">
+            <field name="code">112000</field>
+            <field name="name">Verkställande direktörer, generaldirektörer m.fl.</field>
+            <field name="category">Ledning</field>
+            <field name="description">Högsta företagsledning / VD</field>
+        </record>
+        <record id="nyk_121110" model="hr.nyk">
+            <field name="code">121110</field>
+            <field name="name">Ekonomichefer / Finanschefer (Nivå 1)</field>
+            <field name="category">Ekonomi</field>
+            <field name="description">Strategisk funktionschef med personalansvar för andra chefer</field>
+        </record>
+        <record id="nyk_121120" model="hr.nyk">
+            <field name="code">121120</field>
+            <field name="name">Ekonomichefer / Finanschefer (Nivå 2)</field>
+            <field name="category">Ekonomi</field>
+            <field name="description">Operativ avdelnings- eller sektionschef</field>
+        </record>
+        <record id="nyk_121210" model="hr.nyk">
+            <field name="code">121210</field>
+            <field name="name">Personal- och HR-chefer (Nivå 1)</field>
+            <field name="category">HR &amp; Administration</field>
+            <field name="description">Övergripande HR-chef för koncern eller större bolag</field>
+        </record>
+        <record id="nyk_121220" model="hr.nyk">
+            <field name="code">121220</field>
+            <field name="name">Personal- och HR-chefer (Nivå 2)</field>
+            <field name="category">HR &amp; Administration</field>
+            <field name="description">Operativ personalchef på mellannivå</field>
+        </record>
+        <record id="nyk_121300" model="hr.nyk">
+            <field name="code">121300</field>
+            <field name="name">Informations-, kommunikations- och PR-chefer</field>
+            <field name="category">Marknad &amp; PR</field>
+            <field name="description">Ansvarig för extern och intern kommunikation och varumärke</field>
+        </record>
+        <record id="nyk_121910" model="hr.nyk">
+            <field name="code">121910</field>
+            <field name="name">Administrativa chefer m.fl. (Nivå 1)</field>
+            <field name="category">HR &amp; Administration</field>
+            <field name="description">Övergripande chef för internservice, växel och kontor</field>
+        </record>
+        <record id="nyk_122110" model="hr.nyk">
+            <field name="code">122110</field>
+            <field name="name">Försäljnings- och marknadschefer (Nivå 1)</field>
+            <field name="category">Försäljning &amp; Marknad</field>
+            <field name="description">Strategiskt ansvarig för säljorganisation och budget</field>
+        </record>
+        <record id="nyk_122120" model="hr.nyk">
+            <field name="code">122120</field>
+            <field name="name">Försäljnings- och marknadschefer (Nivå 2)</field>
+            <field name="category">Försäljning &amp; Marknad</field>
+            <field name="description">Regional säljchef eller teamledare inom sälj</field>
+        </record>
+        <record id="nyk_125100" model="hr.nyk">
+            <field name="code">125100</field>
+            <field name="name">IT-chefer / CIO</field>
+            <field name="category">IT &amp; Teknik</field>
+            <field name="description">Övergripande ansvarig för IT-infrastruktur och digitalisering</field>
+        </record>
+        <record id="nyk_132100" model="hr.nyk">
+            <field name="code">132100</field>
+            <field name="name">Driftschefer inom bygg, anläggning och gruva</field>
+            <field name="category">Bygg &amp; Produktion</field>
+            <field name="description">Platschef eller produktionsledare på större byggen</field>
+        </record>
+        <record id="nyk_132400" model="hr.nyk">
+            <field name="code">132400</field>
+            <field name="name">Driftschefer inom logistik, transport och lager</field>
+            <field name="category">Logistik</field>
+            <field name="description">Lagerchef eller transportledare med personalansvar</field>
+        </record>
+        <record id="nyk_211100" model="hr.nyk">
+            <field name="code">211100</field>
+            <field name="name">Fysiker och astronomer</field>
+            <field name="category">FoU</field>
+            <field name="description">Forsknings- och utvecklingsarbete inom akademi/industri</field>
+        </record>
+        <record id="nyk_211300" model="hr.nyk">
+            <field name="code">211300</field>
+            <field name="name">Kemister</field>
+            <field name="category">FoU</field>
+            <field name="description">Laboratoriearbete, kvalitetskontroll och kemisk utveckling</field>
+        </record>
+        <record id="nyk_214200" model="hr.nyk">
+            <field name="code">214200</field>
+            <field name="name">Civilingenjörsyrken inom bygg och anläggning</field>
+            <field name="category">Bygg &amp; Produktion</field>
+            <field name="description">Konstruktörer, projektörer och kvalificerade projektledare</field>
+        </record>
+        <record id="nyk_214400" model="hr.nyk">
+            <field name="code">214400</field>
+            <field name="name">Civilingenjörsyrken inom maskinteknik</field>
+            <field name="category">IT &amp; Teknik</field>
+            <field name="description">Produktutveckling, beräkning och konstruktion inom industri</field>
+        </record>
+        <record id="nyk_214500" model="hr.nyk">
+            <field name="code">214500</field>
+            <field name="name">Civilingenjörsyrken inom elektroteknik</field>
+            <field name="category">IT &amp; Teknik</field>
+            <field name="description">Hårdvaruutveckling, elnätsprojektering och automation</field>
+        </record>
+        <record id="nyk_241105" model="hr.nyk">
+            <field name="code">241105</field>
+            <field name="name">Controllers (Business / Financial)</field>
+            <field name="category">Ekonomi</field>
+            <field name="description">Kvalificerad ekonomisk analys, budgetering och uppföljning</field>
+        </record>
+        <record id="nyk_241110" model="hr.nyk">
+            <field name="code">241110</field>
+            <field name="name">Revisorer</field>
+            <field name="category">Ekonomi</field>
+            <field name="description">Auktoriserade och godkända revisorer samt revisionsmedarbetare</field>
+        </record>
+        <record id="nyk_241300" model="hr.nyk">
+            <field name="code">241300</field>
+            <field name="name">Finansanalytiker och fondförvaltare m.fl.</field>
+            <field name="category">Ekonomi</field>
+            <field name="description">Investeringsanalys, kapitalförvaltning och trading</field>
+        </record>
+        <record id="nyk_242100" model="hr.nyk">
+            <field name="code">242100</field>
+            <field name="name">Organisationsutvecklare, utredare m.fl.</field>
+            <field name="category">HR &amp; Administration</field>
+            <field name="description">Managementkonsulter, processledare och interna utredare</field>
+        </record>
+        <record id="nyk_242200" model="hr.nyk">
+            <field name="code">242200</field>
+            <field name="name">HR-specialister, rekryterare och personalvetare</field>
+            <field name="category">HR &amp; Administration</field>
+            <field name="description">Arbete med talent acquisition, arbetsrätt och kompetensutveckling</field>
+        </record>
+        <record id="nyk_243100" model="hr.nyk">
+            <field name="code">243100</field>
+            <field name="name">Marknadsanalytiker och marknadsförare</field>
+            <field name="category">Försäljning &amp; Marknad</field>
+            <field name="description">Digitala strateger, SEO-specialister och marknadsanalytiker</field>
+        </record>
+        <record id="nyk_243200" model="hr.nyk">
+            <field name="code">243200</field>
+            <field name="name">PR-specialister och kommunikatörer</field>
+            <field name="category">Marknad &amp; PR</field>
+            <field name="description">Pressansvariga, copywriters och interna kommunikatörer</field>
+        </record>
+        <record id="nyk_251100" model="hr.nyk">
+            <field name="code">251100</field>
+            <field name="name">Systemanalytiker, IT-arkitekter och kravanalytiker</field>
+            <field name="category">IT &amp; Teknik</field>
+            <field name="description">Lösningsarkitekter, infrastrukturarkitekter och kravställare</field>
+        </record>
+        <record id="nyk_251210" model="hr.nyk">
+            <field name="code">251210</field>
+            <field name="name">Systemutvecklare / Mjukvaruutvecklare (Senior/Specialist)</field>
+            <field name="category">IT &amp; Teknik</field>
+            <field name="description">Seniora utvecklare, tech leads och mjukvaruarkitekter</field>
+        </record>
+        <record id="nyk_251220" model="hr.nyk">
+            <field name="code">251220</field>
+            <field name="name">Systemutvecklare / Mjukvaruutvecklare (Junior/Normal)</field>
+            <field name="category">IT &amp; Teknik</field>
+            <field name="description">Fullstack-, frontend- och backendutvecklare</field>
+        </record>
+        <record id="nyk_251230" model="hr.nyk">
+            <field name="code">251230</field>
+            <field name="name">Projektledare (IT / Systemutveckling)</field>
+            <field name="category">IT &amp; Teknik</field>
+            <field name="description">Kvalificerade projektledare med ansvar för leverans och budget</field>
+        </record>
+        <record id="nyk_251400" model="hr.nyk">
+            <field name="code">251400</field>
+            <field name="name">Testledare och systemtestare</field>
+            <field name="category">IT &amp; Teknik</field>
+            <field name="description">Kvalitetssäkring, automatiserade tester och QA-engineering</field>
+        </record>
+        <record id="nyk_251500" model="hr.nyk">
+            <field name="code">251500</field>
+            <field name="name">Systemadministratörer / DevOps</field>
+            <field name="category">IT &amp; Teknik</field>
+            <field name="description">Driftstekniker, cloud-arkitekter (AWS/Azure) och nätverksansvariga</field>
+        </record>
+        <record id="nyk_251900" model="hr.nyk">
+            <field name="code">251900</field>
+            <field name="name">IT-specialister (övriga ej klassificerade)</field>
+            <field name="category">IT &amp; Teknik</field>
+            <field name="description">Databasadministratörer, UX-designers, Scrum Masters</field>
+        </record>
+        <record id="nyk_311200" model="hr.nyk">
+            <field name="code">311200</field>
+            <field name="name">Byggnadstekniker och ingenjörer</field>
+            <field name="category">Bygg &amp; Produktion</field>
+            <field name="description">Arbetsledare, kalkylatorer och ritare inom bygg</field>
+        </record>
+        <record id="nyk_311500" model="hr.nyk">
+            <field name="code">311500</field>
+            <field name="name">Maskintekniker och maskiningenjörer</field>
+            <field name="category">IT &amp; Teknik</field>
+            <field name="description">Produktionsplanering, serviceingenjörer och automationstekniker</field>
+        </record>
+        <record id="nyk_331100" model="hr.nyk">
+            <field name="code">331100</field>
+            <field name="name">Placeringsrådgivare och finansiella säljare</field>
+            <field name="category">Ekonomi</field>
+            <field name="description">Banktjänstemän, försäkringsrådgivare och lånehandläggare</field>
+        </record>
+        <record id="nyk_331300" model="hr.nyk">
+            <field name="code">331300</field>
+            <field name="name">Redovisningsekonomer, bokförare m.fl.</field>
+            <field name="category">Ekonomi</field>
+            <field name="description">Löpande bokföring, kund- och leverantörsreskontra, bokslut</field>
+        </record>
+        <record id="nyk_332210" model="hr.nyk">
+            <field name="code">332210</field>
+            <field name="name">Key Account Managers (KAM) / Storkundssäljare</field>
+            <field name="category">Försäljning &amp; Marknad</field>
+            <field name="description">Ansvar för företagets strategiskt viktigaste kundkonton</field>
+        </record>
+        <record id="nyk_332220" model="hr.nyk">
+            <field name="code">332220</field>
+            <field name="name">Företagssäljare / B2B-säljare</field>
+            <field name="category">Försäljning &amp; Marknad</field>
+            <field name="description">Uppsökande och bearbetande försäljning mot företag</field>
+        </record>
+        <record id="nyk_333300" model="hr.nyk">
+            <field name="code">333300</field>
+            <field name="name">Inköpare och upphandlare</field>
+            <field name="category">Logistik</field>
+            <field name="description">Strategiskt inköp, leverantörsförhandlingar och materialförsörjning</field>
+        </record>
+        <record id="nyk_334100" model="hr.nyk">
+            <field name="code">334100</field>
+            <field name="name">Ledningssekreterare och chefsassistenter</field>
+            <field name="category">HR &amp; Administration</field>
+            <field name="description">Kvalificerat administrativt stöd till VD och ledningsgrupp</field>
+        </record>
+        <record id="nyk_411100" model="hr.nyk">
+            <field name="code">411100</field>
+            <field name="name">Kontorsassistenter och dataregistrerare</field>
+            <field name="category">HR &amp; Administration</field>
+            <field name="description">Allmän kontorsadministration, posthantering, arkivering</field>
+        </record>
+        <record id="nyk_422200" model="hr.nyk">
+            <field name="code">422200</field>
+            <field name="name">Kundtjänstpersonal / Supporttekniker First Line</field>
+            <field name="category">IT &amp; Teknik</field>
+            <field name="description">Mottagning av felanmälningar, kundsupport via telefon/mejl</field>
+        </record>
+        <record id="nyk_422400" model="hr.nyk">
+            <field name="code">422400</field>
+            <field name="name">Receptionister m.fl.</field>
+            <field name="category">HR &amp; Administration</field>
+            <field name="description">Bemannande av växel, besöksmottagning och konferensservice</field>
+        </record>
+        <record id="nyk_431100" model="hr.nyk">
+            <field name="code">431100</field>
+            <field name="name">Löneassistenter och löneadministratörer</field>
+            <field name="category">HR &amp; Administration</field>
+            <field name="description">Löneberedning, tidrapportering och systemförvaltning lön</field>
+        </record>
+        <record id="nyk_522300" model="hr.nyk">
+            <field name="code">522300</field>
+            <field name="name">Butikssäljare och fackhandelsbiträden</field>
+            <field name="category">Försäljning &amp; Marknad</field>
+            <field name="description">Försäljning och kassaarbete inom detaljhandeln</field>
+        </record>
+        <record id="nyk_524200" model="hr.nyk">
+            <field name="code">524200</field>
+            <field name="name">Telefonförsäljare och mötesbokare</field>
+            <field name="category">Försäljning &amp; Marknad</field>
+            <field name="description">Utgående samtal för direktförsäljning eller B2B-bokning</field>
+        </record>
+        <record id="nyk_741100" model="hr.nyk">
+            <field name="code">741100</field>
+            <field name="name">Elektriker (installation och service)</field>
+            <field name="category">Bygg &amp; Produktion</field>
+            <field name="description">Elinstallationer i fastigheter och industriservice</field>
+        </record>
+        <record id="nyk_752300" model="hr.nyk">
+            <field name="code">752300</field>
+            <field name="name">Verktygsmakare, reparatörer och CNC-operatörer</field>
+            <field name="category">Bygg &amp; Produktion</field>
+            <field name="description">Ställning och övervakning av datorstyrda metallbearbetningsmaskiner</field>
+        </record>
+        <record id="nyk_818200" model="hr.nyk">
+            <field name="code">818200</field>
+            <field name="name">Lagerarbetare, materialhanterare m.fl.</field>
+            <field name="category">Logistik</field>
+            <field name="description">Plock, pack, truckkörning och godsmottagning</field>
+        </record>
+        <record id="nyk_833200" model="hr.nyk">
+            <field name="code">833200</field>
+            <field name="name">Lastbilschaufförer och transportförare</field>
+            <field name="category">Logistik</field>
+            <field name="description">Fjärrtransport, distribution och tung lastbil med släp</field>
+        </record>
+    </data>
+</odoo>

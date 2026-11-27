@@ -1,0 +1,5 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_account_vaxa_support_user,account.vaxa.support.user,model_account_vaxa_support,account.group_account_user,1,1,1,1
+access_account_vaxa_support_manager,account.vaxa.support.manager,model_account_vaxa_support,account.group_account_manager,1,1,1,1
+access_account_vaxa_support_line_user,account.vaxa.support.line.user,model_account_vaxa_support_line,account.group_account_user,1,1,1,1
+access_account_vaxa_support_line_manager,account.vaxa.support.line.manager,model_account_vaxa_support_line,account.group_account_manager,1,1,1,1

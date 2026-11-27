@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <!-- Wizard view -->
+        <record id="view_benefit_budget_report_wizard_form" model="ir.ui.view">
+            <field name="name">benefit.budget.report.wizard.form</field>
+            <field name="model">benefit.budget.report.wizard</field>
+            <field name="arch" type="xml">
+                <form string="Benefit Budget Report">
+                    <group>
+                        <field name="company_id" options="{'no_create': True}"/>
+                        <field name="budget_id"/>
+                        <field name="date_to"/>
+                    </group>
+                    <footer>
+                        <button name="action_print_report" string="Generate"
+                                type="object" class="btn-primary"/>
+                        <button string="Cancel" class="btn-secondary" special="cancel"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <!-- Wizard action -->
+        <record id="action_benefit_budget_report_wizard" model="ir.actions.act_window">
+            <field name="name">Benefit Budget Report</field>
+            <field name="res_model">benefit.budget.report.wizard</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+        </record>
+
+        <!-- Report template -->
+        <template id="report_benefit_budget_template">
+            <t t-call="web.html_container">
+                <t t-foreach="docs" t-as="doc">
+                    <t t-call="web.external_layout">
+                        <div class="page">
+                            <h2>Benefit Budget Report</h2>
+                            <p>
+                                <strong>Company:</strong> <t t-esc="data['company']"/><br/>
+                                <strong>Budget:</strong> <t t-esc="data['budget']"/><br/>
+                                <strong>Date:</strong> <t t-esc="data['date_to']"/>
+                            </p>
+                            <table class="table table-condensed" style="width:100%">
+                                <thead>
+                                    <tr>
+                                        <th>Budget</th>
+                                        <th>Employee</th>
+                                        <th style="text-align:right">Allocated</th>
+                                        <th style="text-align:right">Used</th>
+                                        <th style="text-align:right">Remaining</th>
+                                        <th style="text-align:right">% Used</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <t t-foreach="data['lines']" t-as="line">
+                                        <tr t-att-style="'font-weight:bold;border-top:2px solid #333' if line['employee'] == 'TOTAL' else ''">
+                                            <td><t t-esc="line['budget']"/></td>
+                                            <td><t t-esc="line['employee']"/></td>
+                                            <td style="text-align:right"><t t-esc="'{:,.0f}'.format(line['allocated'])"/></td>
+                                            <td style="text-align:right"><t t-esc="'{:,.0f}'.format(line['used'])"/></td>
+                                            <td style="text-align:right"><t t-esc="'{:,.0f}'.format(line['remaining'])"/></td>
+                                            <td style="text-align:right"><t t-esc="line['pct_used']"/>%</td>
+                                        </tr>
+                                    </t>
+                                </tbody>
+                            </table>
+                        </div>
+                    </t>
+                </t>
+            </t>
+        </template>
+
+        <!-- Report action -->
+        <record id="action_report_benefit_budget" model="ir.actions.report">
+            <field name="name">Benefit Budget Report</field>
+            <field name="model">benefit.budget.report.wizard</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="report_name">l10n_se_hr_payroll_benefits.report_benefit_budget_template</field>
+            <field name="report_file">l10n_se_hr_payroll_benefits.report_benefit_budget_template</field>
+            <field name="print_report_name">'Benefit Budget Report - %s' % object.date_to</field>
+        </record>
+
+        <!-- Menu -->
+        <menuitem id="menu_benefit_budget_report"
+                  name="Benefit Budget Report"
+                  parent="menu_hr_benefit_budget"
+                  action="action_benefit_budget_report_wizard"
+                  sequence="99"/>
+
+    </data>
+</odoo>

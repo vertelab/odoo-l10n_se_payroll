@@ -1,0 +1,4 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_hr_sick_leave_record,hr.sick.leave.record,model_hr_sick_leave_record,base.group_user,1,1,1,1
+access_hr_ags_claim,hr.ags.claim,model_hr_ags_claim,base.group_user,1,1,1,1
+access_hr_tfa_case,hr.tfa.case,model_hr_tfa_case,base.group_user,1,1,1,1

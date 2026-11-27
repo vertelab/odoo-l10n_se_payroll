@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+
+        <!-- ============================================ -->
+        <!-- TESTKORRIGERINGAR FÖR 2026                   -->
+        <!-- Dessa plockas upp automatiskt av             -->
+        <!-- compute_sheet via _apply_corrections()       -->
+        <!-- ============================================ -->
+
+        <!-- Asse: Retroaktiv bonus för Q4 2025, betalas ut januari 2026 -->
+        <record id="correction_asse_bonus_01" model="hr.payroll.correction">
+            <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_asse_employee"/>
+            <field name="salary_rule_id" ref="l10n_se_hr_payroll.hr_salary_rule_bonus"/>
+            <field name="amount">10000</field>
+            <field name="date_from">2026-01-01</field>
+            <field name="date_to">2026-01-31</field>
+            <field name="reason">Retroaktiv bonus för Q4 2025</field>
+        </record>
+
+        <!-- Camilla: Glömd drivmedelsförmån februari, korrigeras retroaktivt -->
+        <record id="correction_camilla_driv_02" model="hr.payroll.correction">
+            <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_camilla_employee"/>
+            <field name="salary_rule_id" ref="l10n_se_hr_payroll_benefits.hr_benefit_rule_drivmedel"/>
+            <field name="amount">1500</field>
+            <field name="date_from">2026-02-01</field>
+            <field name="date_to">2026-02-28</field>
+            <field name="reason">Glömd drivmedelsförmån februari — korrigeras</field>
+        </record>
+
+        <!-- Doris: Missad övertidsersättning, korrigeras med övrig förmån -->
+        <record id="correction_doris_ot_03" model="hr.payroll.correction">
+            <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_doris_employee"/>
+            <field name="salary_rule_id" ref="l10n_se_hr_payroll_benefits.hr_salary_rule_ovrig_fmn_skatt"/>
+            <field name="amount">2000</field>
+            <field name="date_from">2026-03-01</field>
+            <field name="date_to">2026-03-31</field>
+            <field name="reason">Missad övertidsersättning mars — korrigeras</field>
+        </record>
+
+        <!-- Gustav: Felaktigt nettoavdrag april, återbetalas -->
+        <record id="correction_gustav_net_04" model="hr.payroll.correction">
+            <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_gustav_employee"/>
+            <field name="salary_rule_id" ref="l10n_se_hr_payroll.hr_salary_rule_ovrig_netto_avd"/>
+            <field name="amount">500</field>
+            <field name="date_from">2026-04-01</field>
+            <field name="date_to">2026-04-30</field>
+            <field name="reason">Återbetalning av felaktigt nettoavdrag april</field>
+        </record>
+
+        <!-- Frans: Extra lön juni (engångsbelopp) -->
+        <record id="correction_frans_extra_06" model="hr.payroll.correction">
+            <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_frans_employee"/>
+            <field name="salary_rule_id" ref="l10n_se_hr_payroll.hr_salary_rule_bonus"/>
+            <field name="amount">7500</field>
+            <field name="date_from">2026-06-01</field>
+            <field name="date_to">2026-06-30</field>
+            <field name="reason">Extra ersättning för projektarbete juni</field>
+        </record>
+
+        <!-- Helmer: Lönejustering juli (höjning med 3 kr/tim retroaktivt från april) -->
+        <record id="correction_helmer_wage_07" model="hr.payroll.correction">
+            <field name="employee_id" ref="l10n_se_hr_payroll_tiichri.hr_helmer_employee"/>
+            <field name="salary_rule_id" ref="l10n_se_hr_payroll_benefits.hr_salary_rule_ovrig_fmn_skatt"/>
+            <field name="amount">528</field>
+            <field name="date_from">2026-07-01</field>
+            <field name="date_to">2026-07-31</field>
+            <field name="reason">Retroaktiv lönejustering apr–jun (3 kr/tim × 176 tim)</field>
+        </record>
+
+    </data>
+</odoo>

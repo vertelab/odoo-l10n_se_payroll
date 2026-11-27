@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <menuitem id="menu_arbetsgivarintyg_root"
+                  name="Arbetsgivarintyg"
+                  parent="payroll.payroll_menu_root"
+                  sequence="50"
+                  groups="hr.group_hr_user"/>
+
+        <menuitem id="menu_arbetsgivarintyg_list"
+                  name="Arbetsgivarintyg"
+                  parent="menu_arbetsgivarintyg_root"
+                  sequence="10"
+                  action="action_arbetsgivarintyg_list"
+                  groups="hr.group_hr_user"/>
+
+    </data>
+</odoo>
